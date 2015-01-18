@@ -1,4 +1,6 @@
-﻿using BatteryCommander.Common.Models;
+﻿using BatteryCommander.Common;
+using BatteryCommander.Common.Models;
+using BatteryCommander.Common.Services.Notifications;
 using BatteryCommander.Common.Services.Users;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -6,7 +8,6 @@ using Microsoft.Owin.Security;
 using SimpleInjector;
 using SimpleInjector.Integration.Web.Mvc;
 using System.Reflection;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -33,11 +34,13 @@ namespace BatteryCommander.Web
         {
             var container = new Container();
 
+            container.Register<DataContext>();
+
             container.Register<IUserStore<AppUser, int>, UserService>();
 
             container.Register<UserManager<AppUser, int>, AppUserManager>();
 
-            container.Register<IIdentityMessageService, MsgService>();
+            container.Register<IIdentityMessageService, SMSService>();
 
             container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
 
@@ -46,16 +49,6 @@ namespace BatteryCommander.Web
             container.RegisterPerWebRequest<SignInManager<AppUser, int>>();
 
             DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
-        }
-
-        private class MsgService : IIdentityMessageService
-        {
-            // TODO Fix me
-
-            public Task SendAsync(IdentityMessage message)
-            {
-                throw new System.NotImplementedException();
-            }
         }
 
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)

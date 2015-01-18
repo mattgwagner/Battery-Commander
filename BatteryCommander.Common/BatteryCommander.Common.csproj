@@ -60,6 +60,8 @@
     <Compile Include="Models\Soldier.cs" />
     <Compile Include="Models\WorkItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Notifications\EmailService.cs" />
+    <Compile Include="Services\Notifications\SMSService.cs" />
     <Compile Include="Services\Users\UserManager.cs" />
     <Compile Include="Services\Users\UserService.cs" />
   </ItemGroup>
