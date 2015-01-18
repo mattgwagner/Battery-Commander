@@ -1,4 +1,14 @@
-﻿using System.Web.Mvc;
+﻿using BatteryCommander.Common.Models;
+using BatteryCommander.Common.Services.Users;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using SimpleInjector;
+using SimpleInjector.Integration.Web.Mvc;
+using System.Reflection;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
@@ -8,10 +18,44 @@ namespace BatteryCommander.Web
     {
         protected void Application_Start()
         {
+            RegisterIoc();
+
             AreaRegistration.RegisterAllAreas();
+
             RegisterGlobalFilters(GlobalFilters.Filters);
+
             RegisterRoutes(RouteTable.Routes);
+
             RegisterBundles(BundleTable.Bundles);
+        }
+
+        public static void RegisterIoc()
+        {
+            var container = new Container();
+
+            container.Register<IUserStore<AppUser, int>, UserService>();
+
+            container.Register<UserManager<AppUser, int>, AppUserManager>();
+
+            container.Register<IIdentityMessageService, MsgService>();
+
+            container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
+
+            container.RegisterPerWebRequest<IAuthenticationManager>(() => HttpContext.Current.GetOwinContext().Authentication);
+
+            container.RegisterPerWebRequest<SignInManager<AppUser, int>>();
+
+            DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
+        }
+
+        private class MsgService : IIdentityMessageService
+        {
+            // TODO Fix me
+
+            public Task SendAsync(IdentityMessage message)
+            {
+                throw new System.NotImplementedException();
+            }
         }
 
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)

@@ -21,7 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BatteryCommander.Build", "BatteryCommander.Build", "{0E576BA3-AC1B-41E1-A3D3-E262C541DB1F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{0E576BA3-AC1B-41E1-A3D3-E262C541DB1F}"
 	ProjectSection(SolutionItems) = preProject
 		BatteryCommander.Build\bootstrap.ps1 = BatteryCommander.Build\bootstrap.ps1
 		build.bat = build.bat
