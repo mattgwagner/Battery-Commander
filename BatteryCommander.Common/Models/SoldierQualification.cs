@@ -15,12 +15,20 @@ namespace BatteryCommander.Common.Models
 
         public virtual Soldier Soldier { get; set; }
 
-        // TODO Qual status - UNQUAL, PASS, FAIl
+        [Required]
+        public QualificationStatus Status { get; set; }
 
+        [Required]
         [DataType(DataType.Date)]
         public DateTime QualificationDate { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime? ExpirationDate { get; set; }
+
+        public SoldierQualification()
+        {
+            this.Status = QualificationStatus.Unknown;
+            this.QualificationDate = DateTime.Today;
+        }
     }
 }

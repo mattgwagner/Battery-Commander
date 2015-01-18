@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -25,10 +27,14 @@ namespace BatteryCommander.Common.Models
 
         // TODO MOS & Duty MOSQ'd
 
+        public virtual ICollection<SoldierQualification> Qualifications { get; set; }
+
         public Soldier()
         {
             this.Rank = Rank.E1;
             this.Status = SoldierStatus.Active;
+
+            this.Qualifications = new List<SoldierQualification>();
         }
     }
 }
