@@ -21,17 +21,14 @@ namespace BatteryCommander.Common.Models
 
         public SoldierStatus Status { get; set; }
 
+        // TODO Position - PL, FDO, Section Chief, etc.
+
+        // TODO MOS & Duty MOSQ'd
+
         public Soldier()
         {
             this.Rank = Rank.E1;
             this.Status = SoldierStatus.Active;
         }
-    }
-
-    public enum SoldierStatus
-    {
-        Active,
-
-        Inactive
     }
 }

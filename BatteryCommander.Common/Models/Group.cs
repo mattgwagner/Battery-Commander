@@ -14,6 +14,12 @@ namespace BatteryCommander.Common.Models
         [Required, StringLength(50)]
         public String Name { get; set; }
 
+        // TODO Group hierarchy? i.e. Unit <- 1 PLT <- 1st SQUAD
+
+        public int? LeaderId { get; set; }
+
+        public virtual Soldier Leader { get; set; }
+
         public virtual ICollection<Soldier> Soldiers { get; set; }
 
         public Group()
