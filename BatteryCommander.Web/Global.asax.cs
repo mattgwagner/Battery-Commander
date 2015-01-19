@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using SimpleInjector;
 using SimpleInjector.Integration.Web.Mvc;
+using System.Configuration;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
@@ -40,7 +41,30 @@ namespace BatteryCommander.Web
 
             container.Register<UserManager<AppUser, int>, AppUserManager>();
 
+            container.Register<SMSService.Config>(() =>
+                {
+                    return new SMSService.Config
+                    {
+                        TwilioAccountSid = ConfigurationManager.AppSettings["Twilio.AccountSid"],
+                        TwilioAuthToken = ConfigurationManager.AppSettings["Twilio.AuthToken"],
+                        TwilioFromNumber = ConfigurationManager.AppSettings["Twilio.FromNumber"]
+                    };
+                });
+
             container.Register<IIdentityMessageService, SMSService>();
+
+            container.Register<EmailService.Config>(() =>
+                {
+                    return new EmailService.Config
+                    {
+                        Host = ConfigurationManager.AppSettings["MAILGUN_SMTP_SERVER"],
+                        Port = int.Parse(ConfigurationManager.AppSettings["MAILGUN_SMTP_PORT"] ?? "25"),
+                        Username = ConfigurationManager.AppSettings["MAILGUN_SMTP_LOGIN"],
+                        Password = ConfigurationManager.AppSettings["MAILGUN_SMTP_PASSWORD"]
+                    };
+                });
+
+            container.Register<EmailService>();
 
             container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
 
