@@ -173,6 +173,7 @@
     <Compile Include="Models\AlertModels.cs" />
     <Compile Include="Models\AuthModels.cs" />
     <Compile Include="Models\BattleRosterModels.cs" />
+    <Compile Include="Models\QualificationModels.cs" />
     <Compile Include="Models\RequireHttpsAttribute.cs" />
     <Compile Include="Models\SoldierModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -219,6 +220,8 @@
     <Content Include="Views\Soldier\View.cshtml" />
     <Content Include="Views\Soldier\Edit.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Soldier.cshtml" />
+    <Content Include="Views\Qualification\List.cshtml" />
+    <Content Include="Views\Qualification\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\BattleRoster\" />
