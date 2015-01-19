@@ -22,7 +22,7 @@ namespace BatteryCommander.Common.Migrations
 
                 // Field Artillery Qual Events
 
-                new Qualification { Name = "FA Safety" },
+                new Qualification { Name = "FA Safety", Description = "BN Safety Test" },
                 new Qualification { Name = "ASPT", Description = "Artillery Skills Proficiency Test" },
                 new Qualification { Name = "GQT", Description = "Gunner's Qualification Test" },
                 new Qualification { Name = "LDR VAL", Description = "Leader's Validation" },
