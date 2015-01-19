@@ -6,42 +6,19 @@
 
 <h2>@ViewBag.Title</h2>
 
-    <table class="table">
+<table class="table">
+    <tr>
+        <th>
+            Soldier
+        </th>
+    </tr>
+
+    @foreach (var soldier in Model)
+    {
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().Rank)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().Status)
-            </th>
-            <th></th>
+            <td>
+                @Html.DisplayFor(m => soldier)
+            </td>
         </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Rank)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { soldierId = item.Id })
-                </td>
-            </tr>
-        }
-
-    </table>
+    }
+</table>
