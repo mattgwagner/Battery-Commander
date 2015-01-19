@@ -1,0 +1,31 @@
+﻿@model IEnumerable<BatteryCommander.Common.Models.AppUser>
+
+@{
+    ViewBag.Title = "Users";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table table-bordered">
+
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(u => u.FirstOrDefault().UserName)</th>
+            <th>@Html.DisplayNameFor(u => u.FirstOrDefault().AccessFailedCount)</th>
+            <th>@Html.DisplayNameFor(u => u.FirstOrDefault().LockoutEndDate)</th>
+            <th>@Html.DisplayNameFor(u => u.FirstOrDefault().TwoFactorEnabled)</th>
+            <th>@Html.DisplayNameFor(u => u.FirstOrDefault().Role)</th>
+        </tr>
+    </thead>
+
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(u => user.UserName)</td>
+            <td>@Html.DisplayFor(u => user.AccessFailedCount)</td>
+            <td>@Html.DisplayFor(u => user.LockoutEndDate)</td>
+            <td>@Html.DisplayFor(u => user.TwoFactorEnabled)</td>
+            <td>@Html.DisplayFor(u => user.Role)</td>
+        </tr>
+    }
+</table>

@@ -212,6 +212,7 @@
     <Content Include="Views\Auth\Login.cshtml" />
     <Content Include="Views\Soldier\List.cshtml" />
     <Content Include="Views\Group\List.cshtml" />
+    <Content Include="Views\Users\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\BattleRoster\" />
