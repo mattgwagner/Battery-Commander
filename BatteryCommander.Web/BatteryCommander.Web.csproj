@@ -158,6 +158,7 @@
   <ItemGroup>
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\BattleRosterController.cs" />
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\QualificationController.cs" />
@@ -210,6 +211,7 @@
     <Content Include="Views\Group\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Views\BattleRoster\" />
     <Folder Include="Views\Task\" />
   </ItemGroup>
   <ItemGroup>
