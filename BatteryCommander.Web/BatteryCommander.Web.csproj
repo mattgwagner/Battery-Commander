@@ -158,6 +158,7 @@
   <ItemGroup>
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\AlertController.cs" />
     <Compile Include="Controllers\BattleRosterController.cs" />
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -169,7 +170,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="IdentityConfig.cs" />
+    <Compile Include="Models\AlertModels.cs" />
     <Compile Include="Models\AuthModels.cs" />
+    <Compile Include="Models\BattleRosterModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
