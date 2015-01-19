@@ -1,11 +1,11 @@
 ﻿using BatteryCommander.Common;
 using BatteryCommander.Common.Models;
+using BatteryCommander.Web.Models;
 using Microsoft.AspNet.Identity;
 using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using System.Linq;
-using BatteryCommander.Web.Models;
 
 namespace BatteryCommander.Web.Controllers
 {
@@ -19,7 +19,8 @@ namespace BatteryCommander.Web.Controllers
             _db = db;
         }
 
-        public async Task<ActionResult> Roster()
+        [Route("BattleRoster")]
+        public async Task<ActionResult> Show()
         {
             var roster_items =
                 _db
