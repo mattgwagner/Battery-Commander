@@ -46,6 +46,7 @@ namespace BatteryCommander.Common.Migrations
                 new AppUser
                 {
                     UserName = "mattgwagner@gmail.com",
+                    Password = "AAFQO/7w4afWBCkdBYKVX+MmmFYneGIQv6W8cPYAU/S16yLKYkkR3zQbudWmqIvXag==",
                     EmailAddressConfirmed = true,
                     PhoneNumber = "8134136839",
                     PhoneNumberConfirmed = true
