@@ -48,6 +48,14 @@ namespace BatteryCommander.Web.Controllers
             }
         }
 
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Logout()
+        {
+            SignInManager.AuthenticationManager.SignOut();
+
+            return RedirectToAction("Index", "Home");
+        }
+
         // TODO - SendCode
 
         private ActionResult RedirectToLocal(string returnUrl)
