@@ -173,6 +173,7 @@
     <Compile Include="Models\AlertModels.cs" />
     <Compile Include="Models\AuthModels.cs" />
     <Compile Include="Models\BattleRosterModels.cs" />
+    <Compile Include="Models\RequireHttpsAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
