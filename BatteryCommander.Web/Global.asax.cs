@@ -53,17 +53,6 @@ namespace BatteryCommander.Web
 
             container.Register<IIdentityMessageService, SMSService>();
 
-            container.Register<EmailService.Config>(() =>
-                {
-                    return new EmailService.Config
-                    {
-                        Host = ConfigurationManager.AppSettings["MAILGUN_SMTP_SERVER"],
-                        Port = int.Parse(ConfigurationManager.AppSettings["MAILGUN_SMTP_PORT"] ?? "25"),
-                        Username = ConfigurationManager.AppSettings["MAILGUN_SMTP_LOGIN"],
-                        Password = ConfigurationManager.AppSettings["MAILGUN_SMTP_PASSWORD"]
-                    };
-                });
-
             container.Register<EmailService>();
 
             container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
