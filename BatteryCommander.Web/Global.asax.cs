@@ -79,6 +79,11 @@ namespace BatteryCommander.Web
         {
             filters.Add(new System.Web.Mvc.HandleErrorAttribute());
             filters.Add(new System.Web.Mvc.AuthorizeAttribute());
+
+            // We're going to require HTTPS for all pages outside of running locally
+#if !DEBUG
+            filters.Add(new System.Web.Mvc.RequireHttpsAttribute());
+#endif
         }
 
         public static void RegisterRoutes(RouteCollection routes)
