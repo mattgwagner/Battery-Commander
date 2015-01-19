@@ -18,6 +18,8 @@ namespace BatteryCommander.Common
 
         public virtual IDbSet<SoldierQualification> SoldierQualifications { get; set; }
 
+        public virtual IDbSet<Alert> Alerts { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             // TODO

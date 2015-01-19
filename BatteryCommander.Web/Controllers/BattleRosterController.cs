@@ -4,6 +4,8 @@ using Microsoft.AspNet.Identity;
 using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Linq;
+using BatteryCommander.Web.Models;
 
 namespace BatteryCommander.Web.Controllers
 {
@@ -17,13 +19,21 @@ namespace BatteryCommander.Web.Controllers
             _db = db;
         }
 
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Roster()
         {
-            // TODO Which qualifications to show?
+            var roster_items =
+                _db
+                .Soldiers
+                .Include(s => s.Qualifications)
+                // TODO How to order soldiers?
+                .OrderBy(s => s.LastName)
+                .ThenBy(s => s.FirstName)
+                .Select(s => new BattleRosterRow
+                {
+                    // TODO Which qualifications to show?
+                });
 
-            // TODO How to order soldiers?
-
-            return View();
+            return View(roster_items);
         }
     }
 }
