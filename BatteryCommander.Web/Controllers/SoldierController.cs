@@ -1,10 +1,8 @@
 ﻿using BatteryCommander.Common;
 using BatteryCommander.Common.Models;
 using Microsoft.AspNet.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Data.Entity;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace BatteryCommander.Web.Controllers
@@ -19,9 +17,27 @@ namespace BatteryCommander.Web.Controllers
             _db = db;
         }
 
-        public ActionResult Index()
+        [Route("Soldiers")]
+        public async Task<ActionResult> List()
         {
-            return View();
+            var soldiers =
+                await _db
+                .Soldiers
+                .ToListAsync();
+
+            return View(soldiers);
+        }
+
+        [Route("Soldier/{soldierId}")]
+        public async Task<ActionResult> View(int soldierId)
+        {
+            var soldier =
+                await _db
+                .Soldiers
+                .Include(s => s.Qualifications)
+                .SingleOrDefaultAsync(s => s.Id == soldierId);
+
+            return View(soldier);
         }
     }
 }

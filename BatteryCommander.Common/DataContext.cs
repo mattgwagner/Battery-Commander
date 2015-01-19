@@ -14,6 +14,10 @@ namespace BatteryCommander.Common
 
         public virtual IDbSet<WorkItem> WorkItems { get; set; }
 
+        public virtual IDbSet<Qualification> Qualifications { get; set; }
+
+        public virtual IDbSet<SoldierQualification> SoldierQualifications { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             // TODO
