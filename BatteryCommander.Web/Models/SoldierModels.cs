@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BatteryCommander.Common.Models;
+using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BatteryCommander.Common.Models
+namespace BatteryCommander.Web.Models
 {
-    public class Soldier
+    public class SoldierEditModel
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required, StringLength(50)]
@@ -27,14 +24,10 @@ namespace BatteryCommander.Common.Models
 
         // TODO MOS & Duty MOSQ'd
 
-        public virtual ICollection<SoldierQualification> Qualifications { get; set; }
-
-        public Soldier()
+        public SoldierEditModel()
         {
             this.Rank = Rank.E1;
             this.Status = SoldierStatus.Active;
-
-            this.Qualifications = new List<SoldierQualification>();
         }
     }
 }

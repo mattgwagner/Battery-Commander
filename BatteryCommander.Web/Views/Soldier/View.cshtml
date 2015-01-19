@@ -1,0 +1,56 @@
+﻿@model BatteryCommander.Common.Models.Soldier
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>View</h2>
+
+<div>
+    <h4>Soldier</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rank)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rank)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <ul>
+            @foreach (var qual in Model.Qualifications)
+            {
+                <li>@Html.DisplayFor(m => qual)</li>
+            }
+        </ul>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { soldierId = Model.Id }) |
+    @Html.ActionLink("Back to List", "List")
+</p>
