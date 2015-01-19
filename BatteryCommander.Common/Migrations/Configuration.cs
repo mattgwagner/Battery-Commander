@@ -18,7 +18,7 @@ namespace BatteryCommander.Common.Migrations
             //  to avoid creating duplicate seed data.
 
             context.Qualifications.AddOrUpdate(
-                q => new { q.Name, q.Description },
+                q => q.Name,
 
                 // Field Artillery Qual Events
 
