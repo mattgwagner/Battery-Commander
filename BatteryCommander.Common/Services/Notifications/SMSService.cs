@@ -9,7 +9,7 @@ namespace BatteryCommander.Common.Services.Notifications
 {
     public class SMSService : IIdentityMessageService
     {
-        // TODO
+        // TODO Use Twilio to send the messages as appropriate
 
         public Task SendAsync(IdentityMessage message)
         {
