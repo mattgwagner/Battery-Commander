@@ -82,7 +82,7 @@ namespace BatteryCommander.Web
 
             // We're going to require HTTPS for all pages outside of running locally
 #if !DEBUG
-            filters.Add(new System.Web.Mvc.RequireHttpsAttribute());
+            filters.Add(new AppHarbor.Web.RequireHttpsAttribute());
 #endif
         }
 
