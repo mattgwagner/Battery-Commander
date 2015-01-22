@@ -1,0 +1,10 @@
+﻿@model BatteryCommander.Web.Models.SoldierEditModel
+
+<tr>
+    @Html.HiddenFor(s => s.Id)
+    <td>@Html.DisplayFor(s => s.Id)</td>
+    <td>@Html.EnumDropDownListFor(s => s.Rank)</td>
+    <td>@Html.EditorFor(s => s.LastName)</td>
+    <td>@Html.EditorFor(s => s.FirstName)</td>
+    <td>@Html.EnumDropDownListFor(s => s.Status)</td>
+</tr>

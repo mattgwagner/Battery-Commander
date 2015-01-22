@@ -222,6 +222,8 @@
     <Content Include="Views\Shared\DisplayTemplates\Soldier.cshtml" />
     <Content Include="Views\Qualification\List.cshtml" />
     <Content Include="Views\Qualification\View.cshtml" />
+    <Content Include="Views\Soldier\Bulk.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\SoldierEditModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\BattleRoster\" />
