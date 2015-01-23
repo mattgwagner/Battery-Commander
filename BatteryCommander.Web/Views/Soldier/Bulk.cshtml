@@ -12,13 +12,15 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.AntiForgeryToken()
 
-        <table>
+        <table class="table table-striped">
             <thead>
-                <tr>@Html.DisplayNameFor(s => s.FirstOrDefault().Id)</tr>
-                <tr>@Html.DisplayNameFor(s => s.FirstOrDefault().Rank)</tr>
-                <tr>@Html.DisplayNameFor(s => s.FirstOrDefault().LastName)</tr>
-                <tr>@Html.DisplayNameFor(s => s.FirstOrDefault().FirstName)</tr>
-                <tr>@Html.DisplayNameFor(s => s.FirstOrDefault().Status)</tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(s => s.FirstOrDefault().Id)</th>
+                    <th>@Html.DisplayNameFor(s => s.FirstOrDefault().Rank)</th>
+                    <th>@Html.DisplayNameFor(s => s.FirstOrDefault().LastName)</th>
+                    <th>@Html.DisplayNameFor(s => s.FirstOrDefault().FirstName)</th>
+                    <th>@Html.DisplayNameFor(s => s.FirstOrDefault().Status)</th>
+                </tr>
             </thead>
 
             <tbody>
