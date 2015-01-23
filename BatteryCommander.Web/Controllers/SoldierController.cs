@@ -2,6 +2,7 @@
 using BatteryCommander.Common.Models;
 using BatteryCommander.Web.Models;
 using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -69,9 +70,12 @@ namespace BatteryCommander.Web.Controllers
         [Route("Soldiers/Bulk")]
         public async Task<ActionResult> Bulk()
         {
+            var lines_to_add = 25;
+
             var soldiers =
                 await _db
                 .Soldiers
+                .OrderByDescending(s => s.Rank)
                 .Select(s => new SoldierEditModel
                 {
                     Id = s.Id,
@@ -82,6 +86,8 @@ namespace BatteryCommander.Web.Controllers
                 })
                 .ToListAsync();
 
+            soldiers.AddRange(Enumerable.Range(1, lines_to_add).Select(s => new SoldierEditModel { }).ToList());
+
             return View(soldiers);
         }
 
@@ -91,6 +97,8 @@ namespace BatteryCommander.Web.Controllers
         {
             foreach (var model in models)
             {
+                if (String.IsNullOrWhiteSpace(model.FirstName) || String.IsNullOrWhiteSpace(model.LastName)) continue;
+
                 await AddOrUpdate(model);
             }
 
