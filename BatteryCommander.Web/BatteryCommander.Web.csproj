@@ -226,7 +226,7 @@
     <Content Include="Views\Shared\EditorTemplates\SoldierEditModel.cshtml" />
     <Content Include="Views\BattleRoster\Show.cshtml" />
     <Content Include="Views\Qualification\Bulk.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\BulkQualifcationUpdateModel.ModelRow.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\BulkQualificationUpdateModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Task\" />

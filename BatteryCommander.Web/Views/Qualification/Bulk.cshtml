@@ -1,4 +1,4 @@
-﻿@model BatteryCommander.Web.Models.BulkQualificationUpdateModel
+﻿@model IEnumerable<BatteryCommander.Web.Models.BulkQualificationUpdateModel>
 
 @{
     ViewBag.Title = "Bulk Update Qualification";
@@ -15,10 +15,10 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>@Html.DisplayNameFor(s => s.Rows.FirstOrDefault().Soldier)</th>
-                    <th>@Html.DisplayNameFor(s => s.Rows.FirstOrDefault().Status)</th>
-                    <th>@Html.DisplayNameFor(s => s.Rows.FirstOrDefault().QualificationDate)</th>
-                    <th>@Html.DisplayNameFor(s => s.Rows.FirstOrDefault().ExpirationDate)</th>
+                    <th>@Html.DisplayNameFor(s => s.FirstOrDefault().Soldier)</th>
+                    <th>@Html.DisplayNameFor(s => s.FirstOrDefault().Status)</th>
+                    <th>@Html.DisplayNameFor(s => s.FirstOrDefault().QualificationDate)</th>
+                    <th>@Html.DisplayNameFor(s => s.FirstOrDefault().ExpirationDate)</th>
                 </tr>
             </thead>
 
@@ -34,4 +34,3 @@
         </div>
     </div>
 }
-

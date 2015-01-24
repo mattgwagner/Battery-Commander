@@ -20,40 +20,30 @@ namespace BatteryCommander.Web.Models
 
     public class BulkQualificationUpdateModel
     {
-        public Qualification Qualification { get; set; }
+        [Required]
+        public int QualificationId { get; set; }
 
-        public IEnumerable<ModelRow> Rows { get; set; }
+        [Required]
+        public int SoldierId { get; set; }
+
+        public Soldier Soldier { get; set; }
+
+        [Required]
+        public QualificationStatus Status { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime QualificationDate { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime? ExpirationDate { get; set; }
 
         public BulkQualificationUpdateModel()
         {
-            this.Rows = Enumerable.Empty<ModelRow>();
-        }
-
-        public class ModelRow
-        {
-            [Required]
-            public int QualificationId { get; set; }
-
-            [Required]
-            public int SoldierId { get; set; }
-
-            public Soldier Soldier { get; set; }
-
-            [Required]
-            public QualificationStatus Status { get; set; }
-
-            [Required]
-            [DataType(DataType.Date)]
-            public DateTime QualificationDate { get; set; }
-
-            [DataType(DataType.Date)]
-            public DateTime? ExpirationDate { get; set; }
-
-            public ModelRow()
-            {
-                this.Status = QualificationStatus.Unknown;
-                this.QualificationDate = DateTime.Today;
-            }
+            this.Status = QualificationStatus.Unknown;
+            this.QualificationDate = DateTime.Today;
         }
     }
 }
