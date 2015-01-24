@@ -224,9 +224,11 @@
     <Content Include="Views\Qualification\View.cshtml" />
     <Content Include="Views\Soldier\Bulk.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\SoldierEditModel.cshtml" />
+    <Content Include="Views\BattleRoster\Show.cshtml" />
+    <Content Include="Views\Qualification\Bulk.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\BulkQualifcationUpdateModel.ModelRow.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\BattleRoster\" />
     <Folder Include="Views\Task\" />
   </ItemGroup>
   <ItemGroup>

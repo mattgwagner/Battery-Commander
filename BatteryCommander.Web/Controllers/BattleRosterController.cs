@@ -22,17 +22,23 @@ namespace BatteryCommander.Web.Controllers
         [Route("BattleRoster")]
         public async Task<ActionResult> Show()
         {
+            // TODO How to order soldiers?
+
             var roster_items =
-                _db
+                await _db
                 .Soldiers
                 .Include(s => s.Qualifications)
-                // TODO How to order soldiers?
-                .OrderBy(s => s.LastName)
-                .ThenBy(s => s.FirstName)
-                .Select(s => new BattleRosterRow
+                .Where(s => s.Status == SoldierStatus.Active)
+                .OrderBy(s => s.Rank)
+                .ThenBy(s => s.LastName)
+                .Select(soldier => new BattleRosterRow
                 {
+                    Soldier = soldier,
+                    Position = "Superman"
+
                     // TODO Which qualifications to show?
-                });
+                })
+                .ToListAsync();
 
             return View(roster_items);
         }

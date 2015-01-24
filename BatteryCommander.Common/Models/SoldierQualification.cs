@@ -16,6 +16,11 @@ namespace BatteryCommander.Common.Models
         public virtual Soldier Soldier { get; set; }
 
         [Required]
+        public int QualificationId { get; set; }
+
+        public virtual Qualification Qualification { get; set; }
+
+        [Required]
         public QualificationStatus Status { get; set; }
 
         [Required]

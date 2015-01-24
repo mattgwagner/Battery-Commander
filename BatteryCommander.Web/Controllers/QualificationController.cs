@@ -2,9 +2,12 @@
 using BatteryCommander.Common.Models;
 using BatteryCommander.Web.Models;
 using Microsoft.AspNet.Identity;
+using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Linq;
 
 namespace BatteryCommander.Web.Controllers
 {
@@ -29,7 +32,7 @@ namespace BatteryCommander.Web.Controllers
             return View(qualifications);
         }
 
-        [Route("Qualification/{qualificationId}")]
+        [Route("{qualificationId}")]
         public async Task<ActionResult> View(int qualificationId)
         {
             var qualification =
@@ -40,8 +43,8 @@ namespace BatteryCommander.Web.Controllers
             return View(qualification);
         }
 
-        [Route("Qualification/{qualificationId}/Edit")]
-        [Route("Qualification/New")]
+        [Route("New")]
+        [Route("{qualificationId}/Edit")]
         public async Task<ActionResult> Edit(int? qualificationId)
         {
             var model = new QualificationEditModel { };
@@ -61,7 +64,44 @@ namespace BatteryCommander.Web.Controllers
             return View(model);
         }
 
-        [Route("Qualification")]
+        [Route("{qualificationId}/Bulk")]
+        public async Task<ActionResult> Bulk(int qualificationId)
+        {
+            var qualification =
+                await _db
+                .Qualifications
+                .SingleOrDefaultAsync(q => q.Id == qualificationId);
+
+            var soldier_quals = from soldier in _db.Soldiers
+                                join qual in _db.SoldierQualifications
+                                on soldier.Id equals qual.SoldierId into quals
+                                from qual in quals.DefaultIfEmpty()
+                                select new BulkQualificationUpdateModel.ModelRow
+                                {
+                                    QualificationId = qualificationId,
+                                    SoldierId = soldier.Id,
+
+                                    QualificationDate = (qual != null ? qual.QualificationDate : DateTime.Today),
+                                    ExpirationDate = (qual != null ? qual.ExpirationDate : null),
+                                    Status = (qual != null ? qual.Status : QualificationStatus.Unknown)
+                                };
+
+            return View(new BulkQualificationUpdateModel
+                {
+                    Qualification = qualification,
+                    Rows = soldier_quals
+                });
+        }
+
+        [Route("Bulk")]
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<ActionResult> Bulk(IEnumerable<String> models)
+        {
+            // TODO
+
+            return RedirectToAction("List");
+        }
+
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<ActionResult> Save(QualificationEditModel model)
         {
