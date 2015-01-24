@@ -2,9 +2,8 @@
 
 namespace BatteryCommander.Common.Models
 {
-    public enum QualificationStatus
+    public enum QualificationStatus : byte
     {
-        [Display(Name = "Unknown")]
         Unknown = 0,
 
         Pass = 1,

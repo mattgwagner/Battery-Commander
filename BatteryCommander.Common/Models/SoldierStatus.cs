@@ -1,6 +1,6 @@
 ﻿namespace BatteryCommander.Common.Models
 {
-    public enum SoldierStatus
+    public enum SoldierStatus : byte
     {
         Active,
 

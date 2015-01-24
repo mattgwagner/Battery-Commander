@@ -2,9 +2,8 @@
 
 namespace BatteryCommander.Common.Models
 {
-    public enum WorkItemStatus
+    public enum WorkItemStatus : byte
     {
-        [Display(Name = "Unknown")]
         Unknown = 0,
 
         // TODO Waiting?
