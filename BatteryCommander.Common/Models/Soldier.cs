@@ -28,6 +28,9 @@ namespace BatteryCommander.Common.Models
         [Required]
         public MOS MOS { get; set; }
 
+        [Required]
+        public MilitaryEducationLevel EducationLevelCompleted { get; set; }
+
         // TODO MOS & Duty MOSQ'd
 
         [Required]
@@ -46,6 +49,7 @@ namespace BatteryCommander.Common.Models
             this.Rank = Models.Rank.E1;
             this.Status = Models.SoldierStatus.Active;
             this.MOS = Models.MOS.Unknown;
+            this.EducationLevelCompleted = MilitaryEducationLevel.None;
             this.Group = Models.Group.GhostGuns;
 
             this.Qualifications = new List<SoldierQualification>();

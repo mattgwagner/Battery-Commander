@@ -29,6 +29,9 @@ namespace BatteryCommander.Web.Models
         public MOS MOS { get; set; }
 
         [Required]
+        public MilitaryEducationLevel EducationLevelCompleted { get; set; }
+
+        [Required]
         public Group Group { get; set; }
 
         [StringLength(300)]
@@ -40,6 +43,7 @@ namespace BatteryCommander.Web.Models
             this.Rank = Rank.E1;
             this.Status = SoldierStatus.Active;
             this.MOS = MOS.Unknown;
+            this.EducationLevelCompleted = MilitaryEducationLevel.None;
             this.Group = Group.GhostGuns;
         }
     }

@@ -63,6 +63,7 @@ namespace BatteryCommander.Web.Controllers
                 model.Rank = soldier.Rank;
                 model.Status = soldier.Status;
                 model.MOS = soldier.MOS;
+                model.EducationLevelCompleted = soldier.EducationLevelCompleted;
                 model.Group = soldier.Group;
                 model.ETSDate = soldier.ETSDate;
                 model.Notes = soldier.Notes;
@@ -88,6 +89,7 @@ namespace BatteryCommander.Web.Controllers
                     Rank = s.Rank,
                     Status = s.Status,
                     MOS = s.MOS,
+                    EducationLevelCompleted = s.EducationLevelCompleted,
                     Group = s.Group,
                     ETSDate = s.ETSDate,
                     Notes = s.Notes
@@ -143,6 +145,7 @@ namespace BatteryCommander.Web.Controllers
             soldier.Rank = model.Rank;
             soldier.Status = model.Status;
             soldier.MOS = model.MOS;
+            soldier.EducationLevelCompleted = model.EducationLevelCompleted;
             soldier.Group = model.Group;
             soldier.ETSDate = model.ETSDate;
             soldier.Notes = model.Notes;

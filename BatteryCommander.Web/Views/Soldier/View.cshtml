@@ -6,51 +6,79 @@
 
 <h2>@ViewBag.Title</h2>
 
-    <div>
-        <h4>Soldier</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.LastName)
-            </dt>
+<div>
+    <h4>Soldier</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.LastName)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.FirstName)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Rank)
-            </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.Rank)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Rank)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Rank)
+        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Status)
-            </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.ETSDate)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Status)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.ETSDate)
+        </dd>
 
-            <ul>
-                @foreach (var qual in Model.Qualifications)
-                {
-                    <li>@Html.DisplayFor(m => qual)</li>
-                }
-            </ul>
-        </dl>
-    </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { soldierId = Model.Id }) |
-        @Html.ActionLink("Back to List", "List")
-    </p>
+        <dt>
+            @Html.DisplayNameFor(model => model.Group)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Group)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MOS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MOS)
+        </dd>
+
+        <dd>
+            @Html.DisplayFor(model => model.EducationLevelCompleted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EducationLevelCompleted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <ul>
+            @foreach (var qual in Model.Qualifications)
+            {
+                <li>@Html.DisplayFor(m => qual)</li>
+            }
+        </ul>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { soldierId = Model.Id }) |
+    @Html.ActionLink("Back to List", "List")
+</p>
