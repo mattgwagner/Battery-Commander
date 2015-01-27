@@ -37,6 +37,9 @@ namespace BatteryCommander.Common.Models
         [Display(Name = "1st PLT HQ")]
         Headquarters_FirstPlatoon,
 
+        [Display(Name = "1st PLT FDC")]
+        FDC1,
+
         [Display(Name = "1st PLT Gun 1")]
         Gun1,
 
@@ -52,11 +55,11 @@ namespace BatteryCommander.Common.Models
         [Display(Name = "1st PLT Ammo")]
         Ammo1,
 
-        [Display(Name = "1st PLT FDC")]
-        FDC1,
-
         [Display(Name = "2nd PLT HQ")]
         Headquarters_SecondPlatoon,
+
+        [Display(Name = "2nd PLT FDC")]
+        FDC2,
 
         [Display(Name = "2nd PLT Gun 5")]
         Gun5,
@@ -73,10 +76,7 @@ namespace BatteryCommander.Common.Models
         [Display(Name = "2nd PLT Ammo")]
         Ammo2,
 
-        [Display(Name = "2nd PLT FDC")]
-        FDC2,
-
-        [Display(Name = "Ghost Guns")]
+        [Display(Name = "Ghost Guns (Unassigned)")]
         GhostGuns
     }
 }
