@@ -27,6 +27,8 @@ namespace BatteryCommander.Web.Controllers
             var soldiers =
                 await _db
                 .Soldiers
+                .OrderBy(s => s.LastName)
+                .ThenBy(s => s.FirstName)
                 .ToListAsync();
 
             return View(soldiers);
