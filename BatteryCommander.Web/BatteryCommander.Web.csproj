@@ -213,7 +213,6 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Auth\Login.cshtml" />
     <Content Include="Views\Soldier\List.cshtml" />
-    <Content Include="Views\Group\List.cshtml" />
     <Content Include="Views\Users\List.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Soldier\View.cshtml" />
