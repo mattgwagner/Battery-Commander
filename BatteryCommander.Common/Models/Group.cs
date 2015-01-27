@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace BatteryCommander.Common.Models
 {
@@ -34,32 +31,46 @@ namespace BatteryCommander.Common.Models
 
     public enum Group
     {
+        [Display(Name = "BTRY HQ")]
         Headquarters,
 
+        [Display(Name = "1st PLT HQ")]
         Headquarters_FirstPlatoon,
 
+        [Display(Name = "2nd PLT HQ")]
         Headquarters_SecondPlatoon,
 
+        [Display(Name = "1st PLT Gun 1")]
         Gun1,
 
+        [Display(Name = "1st PLT Gun 2")]
         Gun2,
 
+        [Display(Name = "1st PLT Gun 3")]
         Gun3,
 
+        [Display(Name = "1st PLT Gun 4")]
         Gun4,
 
+        [Display(Name = "2nd PLT Gun 5")]
         Gun5,
 
+        [Display(Name = "2nd PLT Gun 6")]
         Gun6,
 
+        [Display(Name = "2nd PLT Gun 7")]
         Gun7,
 
+        [Display(Name = "2nd PLT Gun 8")]
         Gun8,
 
+        [Display(Name = "1st PLT Ammo")]
         Ammo1,
 
+        [Display(Name = "2nd PLT Ammo")]
         Ammo2,
 
+        [Display(Name = "Ghost Guns")]
         GhostGuns
     }
 }
