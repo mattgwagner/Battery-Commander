@@ -43,7 +43,6 @@ namespace BatteryCommander.Web.Controllers
             return View(qualification);
         }
 
-        [Route("Qualification/New")]
         [Route("Qualification/{qualificationId}/Edit")]
         public async Task<ActionResult> Edit(int? qualificationId)
         {
@@ -62,6 +61,12 @@ namespace BatteryCommander.Web.Controllers
             }
 
             return View(model);
+        }
+
+        [Route("Qualification/New")]
+        public ActionResult New()
+        {
+            return View("Edit", new QualificationEditModel { });
         }
 
         [Route("Qualification/{qualificationId}/Update")]
