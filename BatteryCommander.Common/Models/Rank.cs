@@ -28,6 +28,7 @@ namespace BatteryCommander.Common.Models
         [Display(Name = "1SG")]
         E8 = 8,
 
+        [Display(Name = "CDT")]
         Cadet = 9,
 
         [Display(Name = "2LT")]
