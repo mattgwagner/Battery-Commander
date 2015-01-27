@@ -29,6 +29,9 @@ namespace BatteryCommander.Web.Models
         public MOS MOS { get; set; }
 
         [Required]
+        public Boolean IsDutyMOSQualified { get; set; }
+
+        [Required]
         public MilitaryEducationLevel EducationLevelCompleted { get; set; }
 
         [Required]

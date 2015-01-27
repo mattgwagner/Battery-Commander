@@ -29,9 +29,10 @@ namespace BatteryCommander.Common.Models
         public MOS MOS { get; set; }
 
         [Required]
-        public MilitaryEducationLevel EducationLevelCompleted { get; set; }
+        public Boolean IsDutyMOSQualified { get; set; }
 
-        // TODO MOS & Duty MOSQ'd
+        [Required]
+        public MilitaryEducationLevel EducationLevelCompleted { get; set; }
 
         [Required]
         public Group Group { get; set; }
