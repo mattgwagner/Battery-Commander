@@ -10,8 +10,6 @@ namespace BatteryCommander.Common
 
         public virtual IDbSet<Soldier> Soldiers { get; set; }
 
-        public virtual IDbSet<Group> Groups { get; set; }
-
         public virtual IDbSet<WorkItem> WorkItems { get; set; }
 
         public virtual IDbSet<Qualification> Qualifications { get; set; }

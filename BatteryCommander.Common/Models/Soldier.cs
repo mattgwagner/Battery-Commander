@@ -25,14 +25,22 @@ namespace BatteryCommander.Common.Models
 
         // TODO Position - PL, FDO, Section Chief, etc.
 
+        [Required]
+        public MOS MOS { get; set; }
+
         // TODO MOS & Duty MOSQ'd
+
+        [Required]
+        public Group Group { get; set; }
 
         public virtual ICollection<SoldierQualification> Qualifications { get; set; }
 
         public Soldier()
         {
-            this.Rank = Rank.E1;
-            this.Status = SoldierStatus.Active;
+            this.Rank = Models.Rank.E1;
+            this.Status = Models.SoldierStatus.Active;
+            this.MOS = Models.MOS.Unknown;
+            this.Group = Models.Group.GhostGuns;
 
             this.Qualifications = new List<SoldierQualification>();
         }

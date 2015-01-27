@@ -160,7 +160,6 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\AlertController.cs" />
     <Compile Include="Controllers\BattleRosterController.cs" />
-    <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\QualificationController.cs" />
     <Compile Include="Controllers\SoldierController.cs" />

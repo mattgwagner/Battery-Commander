@@ -22,12 +22,18 @@ namespace BatteryCommander.Web.Models
 
         // TODO Position - PL, FDO, Section Chief, etc.
 
-        // TODO MOS & Duty MOSQ'd
+        [Required]
+        public MOS MOS { get; set; }
+
+        [Required]
+        public Group Group { get; set; }
 
         public SoldierEditModel()
         {
             this.Rank = Rank.E1;
             this.Status = SoldierStatus.Active;
+            this.MOS = MOS.Unknown;
+            this.Group = Group.GhostGuns;
         }
     }
 }

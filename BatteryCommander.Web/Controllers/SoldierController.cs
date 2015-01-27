@@ -62,6 +62,8 @@ namespace BatteryCommander.Web.Controllers
                 model.LastName = soldier.LastName;
                 model.Rank = soldier.Rank;
                 model.Status = soldier.Status;
+                model.MOS = soldier.MOS;
+                model.Group = soldier.Group;
             }
 
             return View(model);
@@ -82,7 +84,9 @@ namespace BatteryCommander.Web.Controllers
                     FirstName = s.FirstName,
                     LastName = s.LastName,
                     Rank = s.Rank,
-                    Status = s.Status
+                    Status = s.Status,
+                    MOS = s.MOS,
+                    Group = s.Group
                 })
                 .ToListAsync();
 
@@ -134,6 +138,8 @@ namespace BatteryCommander.Web.Controllers
             soldier.LastName = model.LastName;
             soldier.Rank = model.Rank;
             soldier.Status = model.Status;
+            soldier.MOS = model.MOS;
+            soldier.Group = model.Group;
 
             await _db.SaveChangesAsync();
 
