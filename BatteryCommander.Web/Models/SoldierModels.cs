@@ -26,6 +26,9 @@ namespace BatteryCommander.Web.Models
         [Required]
         public SoldierStatus Status { get; set; }
 
+        [Required]
+        public SecurityClearance SecurityClearance { get; set; }
+
         // TODO Position - PL, FDO, Section Chief, etc.
 
         [Required]
@@ -49,6 +52,7 @@ namespace BatteryCommander.Web.Models
             this.Rank = Rank.E1;
             this.Status = SoldierStatus.Active;
             this.MOS = MOS.Unknown;
+            this.SecurityClearance = SecurityClearance.None;
             this.EducationLevelCompleted = MilitaryEducationLevel.None;
             this.Group = Group.GhostGuns;
         }

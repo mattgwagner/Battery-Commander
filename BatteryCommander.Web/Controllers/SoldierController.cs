@@ -65,6 +65,7 @@ namespace BatteryCommander.Web.Controllers
                 model.LastName = soldier.LastName;
                 model.Rank = soldier.Rank;
                 model.Status = soldier.Status;
+                model.SecurityClearance = soldier.SecurityClearance;
                 model.MOS = soldier.MOS;
                 model.IsDutyMOSQualified = soldier.IsDutyMOSQualified;
                 model.EducationLevelCompleted = soldier.EducationLevelCompleted;
@@ -93,6 +94,7 @@ namespace BatteryCommander.Web.Controllers
                     LastName = s.LastName,
                     Rank = s.Rank,
                     Status = s.Status,
+                    SecurityClearance = s.SecurityClearance,
                     MOS = s.MOS,
                     IsDutyMOSQualified = s.IsDutyMOSQualified,
                     EducationLevelCompleted = s.EducationLevelCompleted,
@@ -150,6 +152,7 @@ namespace BatteryCommander.Web.Controllers
             soldier.LastName = model.LastName;
             soldier.Rank = model.Rank;
             soldier.Status = model.Status;
+            soldier.SecurityClearance = model.SecurityClearance;
             soldier.MOS = model.MOS;
             soldier.IsDutyMOSQualified = model.IsDutyMOSQualified;
             soldier.EducationLevelCompleted = model.EducationLevelCompleted;

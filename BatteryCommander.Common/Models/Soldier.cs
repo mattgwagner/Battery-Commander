@@ -28,6 +28,9 @@ namespace BatteryCommander.Common.Models
         // TODO Position - PL, FDO, Section Chief, etc.
 
         [Required]
+        public SecurityClearance SecurityClearance { get; set; }
+
+        [Required]
         public MOS MOS { get; set; }
 
         [Required]
@@ -55,6 +58,7 @@ namespace BatteryCommander.Common.Models
             this.Rank = Models.Rank.E1;
             this.Status = Models.SoldierStatus.Active;
             this.MOS = Models.MOS.Unknown;
+            this.SecurityClearance = Models.SecurityClearance.None;
             this.EducationLevelCompleted = MilitaryEducationLevel.None;
             this.Group = Models.Group.GhostGuns;
 
