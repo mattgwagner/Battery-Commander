@@ -35,10 +35,11 @@ namespace BatteryCommander.Common.Migrations
 
                 // Driver Quals
 
-                // Otther individual warrior task quals
+                // Other individual warrior task quals
 
                 new Qualification { Name = "CLS", Description = "Combat Life Saver" },
-                new Qualification { Name = "DSCA", Description = "Defense Support of Civil authorities" }
+                new Qualification { Name = "DSCA", Description = "Defense Support of Civil Authorities" },
+                new Qualification { Name = "APFT", Description = "Army Physical Fitness Test" }
                 );
 
             context.Users.AddOrUpdate(
