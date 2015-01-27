@@ -175,6 +175,7 @@
     <Compile Include="Models\QualificationModels.cs" />
     <Compile Include="Models\RequireHttpsAttribute.cs" />
     <Compile Include="Models\SoldierModels.cs" />
+    <Compile Include="Models\UserModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
