@@ -95,7 +95,10 @@ namespace BatteryCommander.Web.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<ActionResult> Bulk(IEnumerable<BulkQualificationUpdateModel> models)
         {
-            // TODO
+            foreach (var model in models)
+            {
+                await AddOrUpdate(model);
+            }
 
             return RedirectToAction("List");
         }
@@ -122,6 +125,33 @@ namespace BatteryCommander.Web.Controllers
             await _db.SaveChangesAsync();
 
             return RedirectToAction("View", new { qualificationId = qualification.Id });
+        }
+
+        private async Task<SoldierQualification> AddOrUpdate(BulkQualificationUpdateModel model)
+        {
+            var soldier_qual =
+                await _db
+                .SoldierQualifications
+                .Where(sq => sq.SoldierId == model.SoldierId)
+                .Where(sq => sq.QualificationId == model.QualificationId)
+                .SingleOrDefaultAsync();
+
+            if (soldier_qual == null)
+            {
+                soldier_qual = _db.SoldierQualifications.Add(new SoldierQualification
+                {
+                    SoldierId = model.SoldierId,
+                    QualificationId = model.QualificationId
+                });
+            }
+
+            soldier_qual.QualificationDate = model.QualificationDate;
+            soldier_qual.ExpirationDate = model.ExpirationDate;
+            soldier_qual.Status = model.Status;
+
+            await _db.SaveChangesAsync();
+
+            return soldier_qual;
         }
     }
 }
