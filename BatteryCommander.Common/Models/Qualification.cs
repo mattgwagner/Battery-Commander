@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -16,5 +17,13 @@ namespace BatteryCommander.Common.Models
         public String Description { get; set; }
 
         // TODO Length of time qual is valid?
+
+        [Display(Name = "Soldier Qualifications")]
+        public virtual ICollection<SoldierQualification> SoldierQualifications { get; set; }
+
+        public Qualification()
+        {
+            this.SoldierQualifications = new List<SoldierQualification>();
+        }
     }
 }

@@ -19,6 +19,38 @@
 
 </table>
 
+<hr />
+
+<h2>@Html.DisplayNameFor(model => model.SoldierQualifications)</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.SoldierQualifications.FirstOrDefault().Soldier)</th>
+            <th>@Html.DisplayNameFor(model => model.SoldierQualifications.FirstOrDefault().Status)</th>
+            <th>@Html.DisplayNameFor(model => model.SoldierQualifications.FirstOrDefault().QualificationDate)</th>
+            <th>@Html.DisplayNameFor(model => model.SoldierQualifications.FirstOrDefault().ExpirationDate)</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var soldier_qual in Model.SoldierQualifications)
+        {
+            <tr>
+                <td>@Html.DisplayFor(s => soldier_qual.Soldier)</td>
+                <td>@Html.DisplayFor(s => soldier_qual.Status)</td>
+                <td>@Html.DisplayFor(s => soldier_qual.QualificationDate)</td>
+                <td>@Html.DisplayFor(s => soldier_qual.ExpirationDate)</td>
+                <td>@Html.ActionLink("Edit", "Edit", "SoldierQualification", new { soldierId = soldier_qual.Soldier, qualificationId = soldier_qual.QualificationId }, null)</td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+
+
 <p>
     @Html.ActionLink("Bulk Update Soldier Qualifications", "Update", new { qualificationId = Model.Id }) |
     @Html.ActionLink("Back to List", "List")
