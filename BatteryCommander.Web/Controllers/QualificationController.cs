@@ -64,8 +64,8 @@ namespace BatteryCommander.Web.Controllers
             return View(model);
         }
 
-        [Route("Qualification/{qualificationId}/Bulk")]
-        public async Task<ActionResult> Bulk(int qualificationId)
+        [Route("Qualification/{qualificationId}/Update")]
+        public async Task<ActionResult> Update(int qualificationId)
         {
             var qualification =
                 await _db
@@ -88,7 +88,7 @@ namespace BatteryCommander.Web.Controllers
                                     Status = (soldier_qual != null ? soldier_qual.Status : QualificationStatus.Unknown)
                                 };
 
-            return View(soldier_quals);
+            return View("Bulk", soldier_quals);
         }
 
         [Route("Qualification/Bulk")]
