@@ -31,6 +31,10 @@ namespace BatteryCommander.Web.Models
         [Required]
         public Group Group { get; set; }
 
+        [StringLength(300)]
+        [DataType(DataType.MultilineText)]
+        public String Notes { get; set; }
+
         public SoldierEditModel()
         {
             this.Rank = Rank.E1;
