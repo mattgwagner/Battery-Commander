@@ -69,6 +69,7 @@
     <Compile Include="Models\Rank.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Alert.cs" />
+    <Compile Include="Models\SecurityClearance.cs" />
     <Compile Include="Models\Soldier.cs" />
     <Compile Include="Models\SoldierQualification.cs" />
     <Compile Include="Models\SoldierStatus.cs" />
