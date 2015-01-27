@@ -139,7 +139,7 @@ namespace BatteryCommander.Web.Controllers
                 .SoldierQualifications
                 .Where(sq => sq.SoldierId == model.SoldierId)
                 .Where(sq => sq.QualificationId == model.QualificationId)
-                .SingleOrDefaultAsync();
+                .SingleOrDefaultAsync();    
 
             if (soldier_qual == null)
             {

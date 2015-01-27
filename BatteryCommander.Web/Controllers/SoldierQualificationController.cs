@@ -62,29 +62,34 @@ namespace BatteryCommander.Web.Controllers
             return View("Edit", model);
         }
 
+        [Route("Soldier/{soldierId}/Qualifications/Update")]
         public async Task<ActionResult> Update(int soldierId)
         {
-            var possible_quals = await GetQuals();
+            var lines_to_add = 10;
 
-            var models = from qual in _db.Qualifications
-                         join soldier_quals in _db.SoldierQualifications
-                            .Where(q => q.SoldierId == soldierId)
-                         on qual.Id equals soldier_quals.QualificationId into quals
-                         from soldier_qual in quals.DefaultIfEmpty()
-                         select new SoldierQualificationEditModel
-                         {
-                             Id = qual.Id,
-                             SoldierId = soldierId,
+            var possible_qualifications = await GetQuals();
 
-                             PossibleQualifications = possible_quals,
+            var quals =
+                _db
+                .SoldierQualifications
+                .Where(q => q.SoldierId == soldierId)
+                .AsEnumerable()
+                .Select(m => new SoldierQualificationEditModel
+                {
+                    QualificationId = m.QualificationId,
+                    SoldierId = m.SoldierId,
+                    QualificationDate = m.QualificationDate,
+                    ExpirationDate = m.ExpirationDate,
+                    PossibleQualifications = possible_qualifications
+                })
+                .ToList();
 
-                             QualificationDate = (soldier_qual != null ? soldier_qual.QualificationDate : DateTime.Today),
-                             ExpirationDate = (soldier_qual != null ? soldier_qual.ExpirationDate : null)
-                         };
+            quals.AddRange(Enumerable.Range(1, lines_to_add).Select(s => new SoldierQualificationEditModel { SoldierId = soldierId, PossibleQualifications = possible_qualifications }));
 
-            return View(await models.ToListAsync());
+            return View(quals);
         }
 
+        [Route("Soldier/Qualifications/Update")]
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<ActionResult> Update(IEnumerable<SoldierQualificationEditModel> models)
         {
@@ -96,6 +101,7 @@ namespace BatteryCommander.Web.Controllers
             return RedirectToAction("View", "Soldier", new { soldierId = 1 });
         }
 
+        [Route("Soldier/Qualification/Save")]
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<ActionResult> Save(SoldierQualificationEditModel model)
         {
@@ -114,6 +120,7 @@ namespace BatteryCommander.Web.Controllers
         {
             if (model.QualificationId == 0) return;
             if (model.SoldierId == 0) return;
+            if (model.Status == QualificationStatus.Unknown && model.QualificationDate == DateTime.Today) return;
 
             var qual =
                 await _db
