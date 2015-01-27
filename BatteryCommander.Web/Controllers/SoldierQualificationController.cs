@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace BatteryCommander.Web.Controllers
 {
+    [RoutePrefix("Soldier")]
     public class SoldierQualificationController : BaseController
     {
         private readonly DataContext _db;
@@ -21,7 +22,7 @@ namespace BatteryCommander.Web.Controllers
             _db = db;
         }
 
-        [Route("Soldier/{soldierId}/Qualification/{qualificationId}")]
+        [Route("{soldierId}/Qualification/{qualificationId}")]
         public async Task<ActionResult> Edit(int soldierId, int qualificationId)
         {
             var model = new SoldierQualificationEditModel
@@ -50,7 +51,7 @@ namespace BatteryCommander.Web.Controllers
             return View(model);
         }
 
-        [Route("Soldier/{soldierId}/Qualification/New")]
+        [Route("{soldierId}/Qualification/New")]
         public async Task<ActionResult> New(int soldierId)
         {
             var model = new SoldierQualificationEditModel
@@ -62,7 +63,8 @@ namespace BatteryCommander.Web.Controllers
             return View("Edit", model);
         }
 
-        [Route("Soldier/{soldierId}/Qualifications/Update")]
+
+        [Route("{soldierId}/Qualification/Update")]
         public async Task<ActionResult> Update(int soldierId)
         {
             var lines_to_add = 10;
@@ -78,6 +80,7 @@ namespace BatteryCommander.Web.Controllers
                 {
                     QualificationId = m.QualificationId,
                     SoldierId = m.SoldierId,
+                    Status = m.Status,
                     QualificationDate = m.QualificationDate,
                     ExpirationDate = m.ExpirationDate,
                     PossibleQualifications = possible_qualifications
@@ -89,9 +92,9 @@ namespace BatteryCommander.Web.Controllers
             return View(quals);
         }
 
-        [Route("Soldier/Qualifications/Update")]
+        [Route("Qualifications/Update")]
         [HttpPost, ValidateAntiForgeryToken]
-        public async Task<ActionResult> Update(IEnumerable<SoldierQualificationEditModel> models)
+        public async Task<ActionResult> Update_All(IEnumerable<SoldierQualificationEditModel> models)
         {
             foreach (var model in models)
             {
@@ -101,7 +104,7 @@ namespace BatteryCommander.Web.Controllers
             return RedirectToAction("View", "Soldier", new { soldierId = 1 });
         }
 
-        [Route("Soldier/Qualification/Save")]
+        [Route("Qualification/Save")]
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<ActionResult> Save(SoldierQualificationEditModel model)
         {
