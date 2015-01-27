@@ -58,6 +58,37 @@
     </tr>
 </table>
 
+<hr />
+
+<h2>@Html.DisplayNameFor(model => model.Qualifications)</h2>
+
+@Html.ActionLink("Add Qualification", "New", "Qualification", new { soldierId = Model.Id }, null);
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Qualifications.FirstOrDefault().Qualification)</th>
+            <th>@Html.DisplayNameFor(model => model.Qualifications.FirstOrDefault().QualificationDate)</th>
+            <th>@Html.DisplayNameFor(model => model.Qualifications.FirstOrDefault().ExpirationDate)</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var qual in Model.Qualifications)
+        {
+            <tr>
+                <td>@Html.DisplayFor(q => qual.Qualification)</td>
+                <td>@Html.DisplayFor(q => qual.QualificationDate)</td>
+                <td>@Html.DisplayFor(q => qual.ExpirationDate)</td>
+                <td>@Html.ActionLink("Edit", "Edit", "SoldierQualification", new { soldierId = Model.Id, qualificationId = qual.Id }, null)</td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { soldierId = Model.Id }) |
     @Html.ActionLink("Back to List", "List")
