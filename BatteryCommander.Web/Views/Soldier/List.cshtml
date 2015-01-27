@@ -20,8 +20,6 @@
         <th>@Html.DisplayNameFor(s => s.FirstOrDefault().FirstName)</th>
         <th>@Html.DisplayNameFor(s => s.FirstOrDefault().MOS)</th>
         <th>@Html.DisplayNameFor(s => s.FirstOrDefault().IsDutyMOSQualified)</th>
-        <th>@Html.DisplayNameFor(s => s.FirstOrDefault().EducationLevelCompleted)</th>
-        <th>@Html.DisplayNameFor(s => s.FirstOrDefault().ETSDate)</th>
         <th>@Html.DisplayNameFor(s => s.FirstOrDefault().Status)</th>
         <th>@Html.DisplayNameFor(s => s.FirstOrDefault().Notes)</th>
         <th></th>
@@ -30,14 +28,12 @@
     @foreach (var soldier in Model)
     {
         <tr>
-            <td>@Html.DisplayFor(s => soldier.Id)</td>
+            <td>@Html.ActionLink("" + soldier.Id, "View", new { soldierId = soldier.Id })</td>
             <td>@Html.DisplayFor(s => soldier.Rank)</td>
             <td>@Html.DisplayFor(s => soldier.LastName)</td>
             <td>@Html.DisplayFor(s => soldier.FirstName)</td>
             <td>@Html.DisplayFor(s => soldier.MOS)</td>
             <td>@Html.DisplayFor(s => soldier.IsDutyMOSQualified)</td>
-            <td>@Html.DisplayFor(s => soldier.EducationLevelCompleted)</td>
-            <td>@Html.DisplayFor(s => soldier.ETSDate)</td>
             <td>@Html.DisplayFor(s => soldier.Status)</td>
             <td>@Html.DisplayFor(s => soldier.Notes)</td>
             <td>@Html.ActionLink("View", "View", new { soldierId = soldier.Id })</td>
