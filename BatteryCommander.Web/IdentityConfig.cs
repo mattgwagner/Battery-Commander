@@ -17,7 +17,7 @@ namespace BatteryCommander.Web
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 LoginPath = new PathString("/Auth/Login"),
                 LogoutPath = new PathString("/Auth/Logout"),
-                ExpireTimeSpan = TimeSpan.FromHours(1),
+                ExpireTimeSpan = TimeSpan.FromDays(1),
                 SlidingExpiration = true,
                 CookieHttpOnly = true,
                 CookieSecure = CookieSecureOption.SameAsRequest
