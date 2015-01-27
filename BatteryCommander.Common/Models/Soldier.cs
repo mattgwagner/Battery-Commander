@@ -12,9 +12,11 @@ namespace BatteryCommander.Common.Models
         public int Id { get; set; }
 
         [Required, StringLength(50)]
+        [Display(Name = "Last Name")]
         public String LastName { get; set; }
 
         [Required, StringLength(50)]
+        [Display(Name = "First Name")]
         public String FirstName { get; set; }
 
         [Required]
@@ -29,15 +31,18 @@ namespace BatteryCommander.Common.Models
         public MOS MOS { get; set; }
 
         [Required]
+        [Display(Name = "DMOSQ'd?")]
         public Boolean IsDutyMOSQualified { get; set; }
 
         [Required]
+        [Display(Name = "Highest Military Ed")]
         public MilitaryEducationLevel EducationLevelCompleted { get; set; }
 
         [Required]
         public Group Group { get; set; }
 
         [DataType(DataType.Date)]
+        [Display(Name = "ETS Date")]
         public DateTime? ETSDate { get; set; }
 
         public virtual ICollection<SoldierQualification> Qualifications { get; set; }
