@@ -1,6 +1,9 @@
 ﻿using BatteryCommander.Common.Models;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace BatteryCommander.Web.Models
 {
@@ -48,6 +51,35 @@ namespace BatteryCommander.Web.Models
             this.MOS = MOS.Unknown;
             this.EducationLevelCompleted = MilitaryEducationLevel.None;
             this.Group = Group.GhostGuns;
+        }
+    }
+
+    public class SoldierQualificationEditModel
+    {
+        public int Id { get; set; }
+
+        [Required]
+        public int SoldierId { get; set; }
+
+        [Required]
+        [Display(Name = "Qualification")]
+        public int QualificationId { get; set; }
+
+        public IEnumerable<SelectListItem> PossibleQualifications { get; set; }
+
+        [Required]
+        public QualificationStatus Status { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime QualificationDate { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime? ExpirationDate { get; set; }
+
+        public SoldierQualificationEditModel()
+        {
+            this.PossibleQualifications = Enumerable.Empty<SelectListItem>();
         }
     }
 }

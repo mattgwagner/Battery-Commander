@@ -163,6 +163,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\QualificationController.cs" />
     <Compile Include="Controllers\SoldierController.cs" />
+    <Compile Include="Controllers\SoldierQualificationController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\WorkItemController.cs" />
     <Compile Include="Global.asax.cs">
@@ -227,6 +228,7 @@
     <Content Include="Views\Qualification\Bulk.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\BulkQualificationUpdateModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Enum.cshtml" />
+    <Content Include="Views\SoldierQualification\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Task\" />
