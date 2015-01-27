@@ -1,0 +1,9 @@
+﻿@model BatteryCommander.Web.Models.SoldierQualificationEditModel
+
+<tr>
+    @Html.HiddenFor(s => s.SoldierId)
+    <td>@Html.DropDownListFor(s => s.QualificationId, Model.PossibleQualifications, "-- Select a Qualification --")</td>
+    <td>@Html.EnumDropDownListFor(s => s.Status)</td>
+    <td>@Html.EditorFor(s => s.QualificationDate)</td>
+    <td>@Html.EditorFor(s => s.ExpirationDate)</td>
+</tr>

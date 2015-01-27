@@ -1,0 +1,37 @@
+﻿@model IEnumerable<BatteryCommander.Web.Models.SoldierQualificationEditModel>
+
+@{
+    ViewBag.Title = "Bulk Update Soldier Qualifications";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Update", "SoliderQualifiation", FormMethod.Post))
+{
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.AntiForgeryToken()
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(s => s.FirstOrDefault().QualificationId)</th>
+                    <th>@Html.DisplayNameFor(s => s.FirstOrDefault().Status)</th>
+                    <th>@Html.DisplayNameFor(s => s.FirstOrDefault().QualificationDate)</th>
+                    <th>@Html.DisplayNameFor(s => s.FirstOrDefault().ExpirationDate)</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @Html.EditorForModel()
+            </tbody>
+        </table>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+

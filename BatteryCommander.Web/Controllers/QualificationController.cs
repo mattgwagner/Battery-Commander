@@ -96,9 +96,9 @@ namespace BatteryCommander.Web.Controllers
             return View("Bulk", soldier_quals);
         }
 
-        [Route("Qualification/Bulk")]
+        [Route("Qualification/Update")]
         [HttpPost, ValidateAntiForgeryToken]
-        public async Task<ActionResult> Bulk(IEnumerable<BulkQualificationUpdateModel> models)
+        public async Task<ActionResult> Update(IEnumerable<BulkQualificationUpdateModel> models)
         {
             foreach (var model in models)
             {

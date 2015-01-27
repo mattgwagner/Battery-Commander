@@ -225,11 +225,13 @@
     <Content Include="Views\Soldier\Bulk.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\SoldierEditModel.cshtml" />
     <Content Include="Views\BattleRoster\Show.cshtml" />
-    <Content Include="Views\Qualification\Bulk.cshtml" />
+    <Content Include="Views\Qualification\Update.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\BulkQualificationUpdateModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Enum.cshtml" />
     <Content Include="Views\SoldierQualification\Edit.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Qualification.cshtml" />
+    <Content Include="Views\SoldierQualification\Update.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\SoldierQualificationEditModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Task\" />
