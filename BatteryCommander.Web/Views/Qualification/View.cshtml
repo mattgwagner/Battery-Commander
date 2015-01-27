@@ -21,7 +21,7 @@
 
 <hr />
 
-<h2>@Html.DisplayNameFor(model => model.SoldierQualifications.OrderBy(q => q.Status).ThenBy(q => q.ExpirationDate))</h2>
+<h2>@Html.DisplayNameFor(model => model.SoldierQualifications)</h2>
 
 <table class="table table-striped">
     <thead>
@@ -35,7 +35,7 @@
     </thead>
 
     <tbody>
-        @foreach (var soldier_qual in Model.SoldierQualifications)
+        @foreach (var soldier_qual in Model.SoldierQualifications.OrderBy(q => q.Status).ThenBy(q => q.ExpirationDate))
         {
             <tr>
                 <td>@Html.DisplayFor(s => soldier_qual.Soldier)</td>
