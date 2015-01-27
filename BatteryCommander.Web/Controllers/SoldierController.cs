@@ -29,6 +29,7 @@ namespace BatteryCommander.Web.Controllers
                 .Soldiers
                 .Where(s => !activeOnly || s.Status == SoldierStatus.Active)
                 .OrderBy(s => s.Group)
+                .ThenByDescending(s => s.Rank)
                 .ToListAsync();
 
             return View(soldiers);
@@ -83,7 +84,8 @@ namespace BatteryCommander.Web.Controllers
             var soldiers =
                 await _db
                 .Soldiers
-                .OrderByDescending(s => s.Rank)
+                .OrderBy(s => s.Group)
+                .ThenByDescending(s => s.Rank)
                 .Select(s => new SoldierEditModel
                 {
                     Id = s.Id,
