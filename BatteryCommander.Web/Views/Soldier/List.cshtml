@@ -14,7 +14,7 @@
 
 <table class="table table-striped">
     <tr>
-        <th>@Html.DisplayNameFor(s => s.FirstOrDefault().Id)</th>
+        <th>@Html.DisplayNameFor(s => s.FirstOrDefault().Group)</th>
         <th>@Html.DisplayNameFor(s => s.FirstOrDefault().Rank)</th>
         <th>@Html.DisplayNameFor(s => s.FirstOrDefault().LastName)</th>
         <th>@Html.DisplayNameFor(s => s.FirstOrDefault().FirstName)</th>
@@ -28,7 +28,7 @@
     @foreach (var soldier in Model)
     {
         <tr>
-            <td>@Html.ActionLink("" + soldier.Id, "View", new { soldierId = soldier.Id })</td>
+            <td>@Html.DisplayFor(s => soldier.Group)</td>
             <td>@Html.DisplayFor(s => soldier.Rank)</td>
             <td>@Html.DisplayFor(s => soldier.LastName)</td>
             <td>@Html.DisplayFor(s => soldier.FirstName)</td>
