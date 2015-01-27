@@ -81,7 +81,7 @@
                 <td>@Html.DisplayFor(q => qual.Qualification)</td>
                 <td>@Html.DisplayFor(q => qual.QualificationDate)</td>
                 <td>@Html.DisplayFor(q => qual.ExpirationDate)</td>
-                <td>@Html.ActionLink("Edit", "Edit", "SoldierQualification", new { soldierId = Model.Id, qualificationId = qual.Id }, null)</td>
+                <td>@Html.ActionLink("Edit", "Edit", "SoldierQualification", new { soldierId = Model.Id, qualificationId = qual.QualificationId }, null)</td>
             </tr>
         }
 

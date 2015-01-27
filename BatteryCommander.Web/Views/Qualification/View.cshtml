@@ -21,7 +21,7 @@
 
 <hr />
 
-<h2>@Html.DisplayNameFor(model => model.SoldierQualifications)</h2>
+<h2>@Html.DisplayNameFor(model => model.SoldierQualifications.OrderBy(q => q.Status).ThenBy(q => q.ExpirationDate))</h2>
 
 <table class="table table-striped">
     <thead>
