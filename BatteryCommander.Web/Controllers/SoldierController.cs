@@ -28,8 +28,7 @@ namespace BatteryCommander.Web.Controllers
                 await _db
                 .Soldiers
                 .Where(s => !activeOnly || s.Status == SoldierStatus.Active)
-                .OrderBy(s => s.LastName)
-                .ThenBy(s => s.FirstName)
+                .OrderBy(s => s.Group)
                 .ToListAsync();
 
             return View(soldiers);

@@ -1,0 +1,20 @@
+﻿@using System.ComponentModel.DataAnnotations
+@model Enum
+
+@{
+    var field = Model.GetType().GetField(Model.ToString());
+
+    if (field != null)
+    {
+        var display = ((DisplayAttribute[])field.GetCustomAttributes(typeof(DisplayAttribute), false)).FirstOrDefault();
+
+        if (display != null)
+        {
+            <span>@display.Name</span>
+        }
+        else
+        {
+            <span>@Model.ToString()</span>
+        }
+    }
+}
