@@ -1,0 +1,6 @@
+﻿@model BatteryCommander.Common.Models.Qualification
+
+@if (Model != null)
+{
+    <span>@Html.ActionLink(Model.Name, "View", "Qualification", new { qualificationId = Model.Id }, null)</span>
+}

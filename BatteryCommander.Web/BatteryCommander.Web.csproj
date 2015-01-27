@@ -229,6 +229,7 @@
     <Content Include="Views\Shared\EditorTemplates\BulkQualificationUpdateModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Enum.cshtml" />
     <Content Include="Views\SoldierQualification\Edit.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Qualification.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Task\" />
