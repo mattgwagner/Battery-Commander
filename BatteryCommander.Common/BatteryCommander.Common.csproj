@@ -61,6 +61,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppUser.cs" />
     <Compile Include="Models\Group.cs" />
+    <Compile Include="Models\MilitaryEducationLevel.cs" />
     <Compile Include="Models\MOS.cs" />
     <Compile Include="Models\Position.cs" />
     <Compile Include="Models\Qualification.cs" />
