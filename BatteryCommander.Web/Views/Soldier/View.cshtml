@@ -6,86 +6,58 @@
 
 <h2>@ViewBag.Title</h2>
 
-<div>
-    <h4>Soldier</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
+<table class="table table-striped">
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Rank)</td>
+        <td>@Html.DisplayFor(model => model.Rank)</td>
+    </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.LastName)</td>
+        <td>@Html.DisplayFor(model => model.LastName)</td>
+    </tr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.FirstName)</td>
+        <td>@Html.DisplayFor(model => model.FirstName)</td>
+    </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Group)</td>
+        <td>@Html.DisplayFor(model => model.Group)</td>
+    </tr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Rank)
-        </dt>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Status)</td>
+        <td>@Html.DisplayFor(model => model.Status)</td>
+    </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.Rank)
-        </dd>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.MOS)</td>
+        <td>@Html.DisplayFor(model => model.MOS)</td>
+    </tr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ETSDate)
-        </dt>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.IsDutyMOSQualified)</td>
+        <td>@Html.DisplayFor(model => model.IsDutyMOSQualified)</td>
+    </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.ETSDate)
-        </dd>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.EducationLevelCompleted)</td>
+        <td>@Html.DisplayFor(model => model.EducationLevelCompleted)</td>
+    </tr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Group)
-        </dt>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.ETSDate)</td>
+        <td>@Html.DisplayFor(model => model.ETSDate)</td>
+    </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.Group)
-        </dd>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Notes)</td>
+        <td>@Html.DisplayFor(model => model.Notes)</td>
+    </tr>
+</table>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MOS)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MOS)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsDutyMOSQualified)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsDutyMOSQualified)
-        </dd>
-
-        <dd>
-            @Html.DisplayFor(model => model.EducationLevelCompleted)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EducationLevelCompleted)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-
-        <ul>
-            @foreach (var qual in Model.Qualifications)
-            {
-                <li>@Html.DisplayFor(m => qual)</li>
-            }
-        </ul>
-    </dl>
-</div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { soldierId = Model.Id }) |
     @Html.ActionLink("Back to List", "List")

@@ -6,29 +6,20 @@
 
 <h2>@ViewBag.Title</h2>
 
-<div>
-    <h4>@ViewBag.Title</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+<table class="table table-striped">
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Name)</td>
+        <td>@Html.DisplayFor(model => model.Name)</td>
+    </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Description)</td>
+        <td>@Html.DisplayFor(model => model.Description)</td>
+    </tr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+</table>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-    </dl>
-</div>
 <p>
-    @Html.ActionLink("Bulk Update Soldier Qualifications", "Bulk", new { qualificationId = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Bulk Update Soldier Qualifications", "Update", new { qualificationId = Model.Id }) |
+    @Html.ActionLink("Back to List", "List")
 </p>
