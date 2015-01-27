@@ -33,6 +33,9 @@ namespace BatteryCommander.Common.Models
         [Required]
         public Group Group { get; set; }
 
+        [DataType(DataType.Date)]
+        public DateTime? ETSDate { get; set; }
+
         public virtual ICollection<SoldierQualification> Qualifications { get; set; }
 
         public Soldier()

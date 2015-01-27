@@ -17,6 +17,9 @@ namespace BatteryCommander.Web.Models
         [Required]
         public Rank Rank { get; set; }
 
+        [DataType(DataType.Date)]
+        public DateTime? ETSDate { get; set; }
+
         [Required]
         public SoldierStatus Status { get; set; }
 

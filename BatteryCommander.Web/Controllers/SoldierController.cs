@@ -64,6 +64,7 @@ namespace BatteryCommander.Web.Controllers
                 model.Status = soldier.Status;
                 model.MOS = soldier.MOS;
                 model.Group = soldier.Group;
+                model.ETSDate = soldier.ETSDate;
             }
 
             return View(model);
@@ -86,7 +87,8 @@ namespace BatteryCommander.Web.Controllers
                     Rank = s.Rank,
                     Status = s.Status,
                     MOS = s.MOS,
-                    Group = s.Group
+                    Group = s.Group,
+                    ETSDate = s.ETSDate
                 })
                 .ToListAsync();
 
@@ -140,6 +142,7 @@ namespace BatteryCommander.Web.Controllers
             soldier.Status = model.Status;
             soldier.MOS = model.MOS;
             soldier.Group = model.Group;
+            soldier.ETSDate = model.ETSDate;
 
             await _db.SaveChangesAsync();
 
