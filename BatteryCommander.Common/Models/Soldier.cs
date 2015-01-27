@@ -38,6 +38,9 @@ namespace BatteryCommander.Common.Models
 
         public virtual ICollection<SoldierQualification> Qualifications { get; set; }
 
+        [StringLength(300)]
+        public String Notes { get; set; }
+
         public Soldier()
         {
             this.Rank = Models.Rank.E1;

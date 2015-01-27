@@ -12,17 +12,29 @@
 
 <table class="table table-striped">
     <tr>
-        <th>
-            Soldier
-        </th>
+        <th>@Html.DisplayNameFor(s => s.FirstOrDefault().Id)</th>
+        <th>@Html.DisplayNameFor(s => s.FirstOrDefault().Rank)</th>
+        <th>@Html.DisplayNameFor(s => s.FirstOrDefault().LastName)</th>
+        <th>@Html.DisplayNameFor(s => s.FirstOrDefault().FirstName)</th>
+        <th>@Html.DisplayNameFor(s => s.FirstOrDefault().MOS)</th>
+        <th>@Html.DisplayNameFor(s => s.FirstOrDefault().ETSDate)</th>
+        <th>@Html.DisplayNameFor(s => s.FirstOrDefault().Status)</th>
+        <th>@Html.DisplayNameFor(s => s.FirstOrDefault().Notes)</th>
+        <th></th>
     </tr>
 
     @foreach (var soldier in Model)
     {
         <tr>
-            <td>
-                @Html.DisplayFor(m => soldier)
-            </td>
+            <td>@Html.DisplayFor(s => soldier.Id)</td>
+            <td>@Html.DisplayFor(s => soldier.Rank)</td>
+            <td>@Html.DisplayFor(s => soldier.LastName)</td>
+            <td>@Html.DisplayFor(s => soldier.FirstName)</td>
+            <td>@Html.DisplayFor(s => soldier.MOS)</td>
+            <td>@Html.DisplayFor(s => soldier.ETSDate)</td>
+            <td>@Html.DisplayFor(s => soldier.Status)</td>
+            <td>@Html.DisplayFor(s => soldier.Notes)</td>
+            <td>@Html.ActionLink("View", "View", new { soldierId = soldier.Id })</td>
         </tr>
     }
 </table>
