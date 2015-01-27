@@ -6,6 +6,8 @@
 
 <h2>@ViewBag.Title</h2>
 
+@Html.ActionLink("Include Inactive Soldiers", "List", new { activeOnly = false })
+
 @Html.ActionLink("Add a Soldier", "Edit")
 
 @Html.ActionLink("Bulk Add/Edit Soldiers", "Bulk")
