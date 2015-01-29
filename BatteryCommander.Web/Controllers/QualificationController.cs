@@ -90,7 +90,8 @@ namespace BatteryCommander.Web.Controllers
 
                                     QualificationDate = (soldier_qual != null ? soldier_qual.QualificationDate : DateTime.Today),
                                     ExpirationDate = (soldier_qual != null ? soldier_qual.ExpirationDate : null),
-                                    Status = (soldier_qual != null ? soldier_qual.Status : QualificationStatus.Unknown)
+                                    Status = (soldier_qual != null ? soldier_qual.Status : QualificationStatus.Unknown),
+                                    Comments = (soldier_qual != null ? soldier_qual.Comments : String.Empty)
                                 };
 
             return View("Bulk", soldier_quals);
@@ -139,7 +140,7 @@ namespace BatteryCommander.Web.Controllers
                 .SoldierQualifications
                 .Where(sq => sq.SoldierId == model.SoldierId)
                 .Where(sq => sq.QualificationId == model.QualificationId)
-                .SingleOrDefaultAsync();    
+                .SingleOrDefaultAsync();
 
             if (soldier_qual == null)
             {
@@ -153,6 +154,7 @@ namespace BatteryCommander.Web.Controllers
             soldier_qual.QualificationDate = model.QualificationDate;
             soldier_qual.ExpirationDate = model.ExpirationDate;
             soldier_qual.Status = model.Status;
+            soldier_qual.Comments = model.Comments;
 
             await _db.SaveChangesAsync();
 

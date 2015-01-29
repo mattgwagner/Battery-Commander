@@ -81,6 +81,9 @@ namespace BatteryCommander.Web.Models
         [DataType(DataType.Date)]
         public DateTime? ExpirationDate { get; set; }
 
+        [StringLength(200)]
+        public String Comments { get; set; }
+
         public SoldierQualificationEditModel()
         {
             this.PossibleQualifications = Enumerable.Empty<SelectListItem>();

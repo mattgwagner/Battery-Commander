@@ -40,6 +40,9 @@ namespace BatteryCommander.Web.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? ExpirationDate { get; set; }
 
+        [StringLength(200)]
+        public String Comments { get; set; }
+
         public BulkQualificationUpdateModel()
         {
             this.Status = QualificationStatus.Unknown;

@@ -46,6 +46,7 @@ namespace BatteryCommander.Web.Controllers
                 model.Status = qual.Status;
                 model.QualificationDate = qual.QualificationDate;
                 model.ExpirationDate = qual.ExpirationDate;
+                model.Comments = qual.Comments;
             }
 
             return View(model);
@@ -62,7 +63,6 @@ namespace BatteryCommander.Web.Controllers
 
             return View("Edit", model);
         }
-
 
         [Route("{soldierId}/Qualification/Update")]
         public async Task<ActionResult> Update(int soldierId)
@@ -83,6 +83,7 @@ namespace BatteryCommander.Web.Controllers
                     Status = m.Status,
                     QualificationDate = m.QualificationDate,
                     ExpirationDate = m.ExpirationDate,
+                    Comments = m.Comments,
                     PossibleQualifications = possible_qualifications
                 })
                 .ToList();
@@ -142,6 +143,7 @@ namespace BatteryCommander.Web.Controllers
             qual.Status = model.Status;
             qual.QualificationDate = model.QualificationDate;
             qual.ExpirationDate = model.ExpirationDate;
+            qual.Comments = model.Comments;
 
             await _db.SaveChangesAsync();
         }

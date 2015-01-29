@@ -30,6 +30,9 @@ namespace BatteryCommander.Common.Models
         [DataType(DataType.Date)]
         public DateTime? ExpirationDate { get; set; }
 
+        [StringLength(200)]
+        public String Comments { get; set; }
+
         public SoldierQualification()
         {
             this.Status = QualificationStatus.Unknown;
