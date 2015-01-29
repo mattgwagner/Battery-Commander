@@ -22,7 +22,7 @@ namespace BatteryCommander.Web.Controllers
             _db = db;
         }
 
-        [Route("{soldierId}/Qualification/{qualificationId}")]
+        [Route("~/Soldier/{soldierId}/Qualification/{qualificationId}")]
         public async Task<ActionResult> Edit(int soldierId, int qualificationId)
         {
             var model = new SoldierQualificationEditModel
@@ -52,7 +52,7 @@ namespace BatteryCommander.Web.Controllers
             return View(model);
         }
 
-        [Route("{soldierId}/Qualification/New")]
+        [Route("~/Soldier/{soldierId}/Qualification/New")]
         public async Task<ActionResult> New(int soldierId)
         {
             var model = new SoldierQualificationEditModel
@@ -64,7 +64,7 @@ namespace BatteryCommander.Web.Controllers
             return View("Edit", model);
         }
 
-        [Route("{soldierId}/Qualification/Update")]
+        [Route("~/Soldier/{soldierId}/Qualifications/Update")]
         public async Task<ActionResult> Update(int soldierId)
         {
             var lines_to_add = 10;
@@ -93,7 +93,7 @@ namespace BatteryCommander.Web.Controllers
             return View(quals);
         }
 
-        [Route("Qualifications/Update")]
+        [Route("~/Soldiers/Qualifications/Update")]
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<ActionResult> Update_All(IEnumerable<SoldierQualificationEditModel> models)
         {
@@ -105,7 +105,7 @@ namespace BatteryCommander.Web.Controllers
             return RedirectToAction("View", "Soldier", new { soldierId = 1 });
         }
 
-        [Route("Qualification/Save")]
+        [Route("~/Soldiers/Qualification/Save")]
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<ActionResult> Save(SoldierQualificationEditModel model)
         {

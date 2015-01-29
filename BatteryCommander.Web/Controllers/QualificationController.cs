@@ -21,7 +21,7 @@ namespace BatteryCommander.Web.Controllers
             _db = db;
         }
 
-        [Route("Qualifications")]
+        [Route("~/Qualifications")]
         public async Task<ActionResult> List()
         {
             var qualifications =
@@ -32,7 +32,7 @@ namespace BatteryCommander.Web.Controllers
             return View(qualifications);
         }
 
-        [Route("Qualification/{qualificationId}")]
+        [Route("~/Qualification/{qualificationId}")]
         public async Task<ActionResult> View(int qualificationId)
         {
             var qualification =
@@ -43,7 +43,7 @@ namespace BatteryCommander.Web.Controllers
             return View(qualification);
         }
 
-        [Route("Qualification/{qualificationId}/Edit")]
+        [Route("~/Qualification/{qualificationId}/Edit")]
         public async Task<ActionResult> Edit(int? qualificationId)
         {
             var model = new QualificationEditModel { };
@@ -63,13 +63,13 @@ namespace BatteryCommander.Web.Controllers
             return View(model);
         }
 
-        [Route("Qualification/New")]
+        [Route("~/Qualification/New")]
         public ActionResult New()
         {
             return View("Edit", new QualificationEditModel { });
         }
 
-        [Route("Qualification/{qualificationId}/Update")]
+        [Route("~/Qualification/{qualificationId}/Update")]
         public async Task<ActionResult> Update(int qualificationId)
         {
             var qualification =
@@ -94,10 +94,10 @@ namespace BatteryCommander.Web.Controllers
                                     Comments = (soldier_qual != null ? soldier_qual.Comments : String.Empty)
                                 };
 
-            return View("Bulk", soldier_quals);
+            return View("Update", soldier_quals);
         }
 
-        [Route("Qualification/Update")]
+        [Route("~/Qualifications/Save")]
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<ActionResult> Update(IEnumerable<BulkQualificationUpdateModel> models)
         {
@@ -109,7 +109,7 @@ namespace BatteryCommander.Web.Controllers
             return RedirectToAction("List");
         }
 
-        [Route("Qualification/Save")]
+        [Route("~/Qualification/Save")]
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<ActionResult> Save(QualificationEditModel model)
         {

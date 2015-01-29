@@ -21,7 +21,7 @@ namespace BatteryCommander.Web.Controllers
             _db = db;
         }
 
-        [Route("Soldiers")]
+        [Route("~/Soldiers")]
         public async Task<ActionResult> List(Boolean activeOnly = true)
         {
             var soldiers =
@@ -35,7 +35,7 @@ namespace BatteryCommander.Web.Controllers
             return View(soldiers);
         }
 
-        [Route("Soldier/{soldierId}")]
+        [Route("~/Soldier/{soldierId}")]
         public async Task<ActionResult> View(int soldierId)
         {
             var soldier =
@@ -47,8 +47,8 @@ namespace BatteryCommander.Web.Controllers
             return View(soldier);
         }
 
-        [Route("Soldier/{soldierId}/Edit")]
-        [Route("Soldier/New")]
+        [Route("~/Soldier/{soldierId}/Edit")]
+        [Route("~/Soldier/New")]
         public async Task<ActionResult> Edit(int? soldierId)
         {
             var model = new SoldierEditModel { };
@@ -77,7 +77,7 @@ namespace BatteryCommander.Web.Controllers
             return View(model);
         }
 
-        [Route("Soldiers/Bulk")]
+        [Route("~/Soldiers/Bulk")]
         public async Task<ActionResult> Bulk()
         {
             var lines_to_add = 25;
@@ -109,7 +109,7 @@ namespace BatteryCommander.Web.Controllers
             return View(soldiers);
         }
 
-        [Route("Soldiers/Bulk")]
+        [Route("~/Soldiers/Bulk")]
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<ActionResult> Bulk(IEnumerable<SoldierEditModel> models)
         {
@@ -123,7 +123,7 @@ namespace BatteryCommander.Web.Controllers
             return RedirectToAction("List");
         }
 
-        [Route("Soldier")]
+        [Route("~/Soldier/Save")]
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<ActionResult> Save(SoldierEditModel model)
         {

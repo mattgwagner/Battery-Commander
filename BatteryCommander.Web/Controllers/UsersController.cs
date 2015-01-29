@@ -19,7 +19,7 @@ namespace BatteryCommander.Web.Controllers
             _db = db;
         }
 
-        [Route("Users")]
+        [Route("~/Users")]
         public async Task<ActionResult> List()
         {
             var users =
@@ -31,7 +31,7 @@ namespace BatteryCommander.Web.Controllers
             return View(users);
         }
 
-        [Route("User/{userId}")]
+        [Route("~/User/{userId}")]
         public async Task<ActionResult> View(int userId)
         {
             var user =
@@ -42,8 +42,8 @@ namespace BatteryCommander.Web.Controllers
             return View(user);
         }
 
-        [Route("User/New")]
-        [Route("User/{userId}/Edit")]
+        [Route("~/User/New")]
+        [Route("~/User/{userId}/Edit")]
         public async Task<ActionResult> Edit(int? userId)
         {
             var model = new UserEditModel { };
