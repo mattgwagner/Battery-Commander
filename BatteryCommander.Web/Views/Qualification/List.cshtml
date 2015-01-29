@@ -31,7 +31,7 @@
             </td>
             <td>
                 @Html.ActionLink("View", "View", new { qualificationId = item.Id }) |
-                @Html.ActionLink("Bulk Update Soldiers", "Update", new { qualificationId = item.Id })
+                <a href="~/Qualification/@item.Id/Update">Bulk Update Soldiers</a>
             </td>
         </tr>
     }

@@ -93,7 +93,7 @@ namespace BatteryCommander.Web.Controllers
             return View(quals);
         }
 
-        [Route("~/Soldiers/Qualifications/Update")]
+        [Route("~/Soldiers/Qualifications/Save")]
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<ActionResult> Update_All(IEnumerable<SoldierQualificationEditModel> models)
         {

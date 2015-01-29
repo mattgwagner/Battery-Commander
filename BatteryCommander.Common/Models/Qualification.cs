@@ -18,12 +18,21 @@ namespace BatteryCommander.Common.Models
 
         // TODO Length of time qual is valid?
 
+        [Display(Name = "Parent Task")]
+        public virtual Qualification ParentTask { get; set; }
+
+        public int? ParentTaskId { get; set; }
+
         [Display(Name = "Soldier Qualifications")]
         public virtual ICollection<SoldierQualification> SoldierQualifications { get; set; }
+
+        [Display(Name = "Qualification Tasks")]
+        public virtual ICollection<Qualification> Tasks { get; set; }
 
         public Qualification()
         {
             this.SoldierQualifications = new List<SoldierQualification>();
+            this.Tasks = new List<Qualification>();
         }
     }
 }

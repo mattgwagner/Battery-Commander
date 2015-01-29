@@ -52,6 +52,6 @@
 
 
 <p>
-    @Html.ActionLink("Bulk Update Soldier Qualifications", "Update", new { qualificationId = Model.Id }) |
-    @Html.ActionLink("Back to List", "List")
+    <a href="~/Qualification/@Model.Id/Update">Bulk Update Soldiers</a> |
+    @Html.ActionLink("Back to List", "List", "Qualification")
 </p>
