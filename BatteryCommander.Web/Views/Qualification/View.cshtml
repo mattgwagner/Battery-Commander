@@ -63,21 +63,26 @@
 
 @Html.ActionLink("Add a Subtask", "New", new { parentId = Model.Id })
 
-    <table class="table table-bordered">
-        <tbody>
-            @foreach (var task in Model.Tasks)
-            {
-                <tr>
-                    <td>@Html.DisplayFor(t => task)</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+<table class="table table-bordered">
+    <tbody>
+        @foreach (var task in Model.Tasks)
+        {
+            <tr>
+                <td>@Html.DisplayFor(t => task)</td>
+            </tr>
+        }
+    </tbody>
+</table>
 
 
 
 
-    <p>
-        <a href="~/Qualification/@Model.Id/Update">Bulk Update Soldiers</a> |
-        @Html.ActionLink("Back to List", "List", "Qualification")
-    </p>
+<p>
+    <a href="~/Qualification/@Model.Id/Update">Bulk Update Soldiers</a> |
+    @Html.ActionLink("Back to List", "List", "Qualification")
+
+    @if (Model.ParentTaskId.HasValue)
+    {
+        @Html.ActionLink("Back to Parent Task", "View", new { qualificationId = Model.ParentTaskId })
+    }
+</p>
