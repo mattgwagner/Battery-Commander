@@ -19,6 +19,7 @@
         <th>GO</th>
         <th>NOGO</th>
         <th>UNKNOWN</th>
+        <th>Tasks</th>
         <th></th>
     </tr>
 
@@ -29,6 +30,12 @@
             <td>@item.SoldierQualifications.Count(q => q.Status == QualificationStatus.Pass)</td>
             <td>@item.SoldierQualifications.Count(q => q.Status == QualificationStatus.Fail)</td>
             <td>@item.SoldierQualifications.Count(q => q.Status == QualificationStatus.Unknown)</td>
+            <td>
+                @foreach (var task in item.Tasks)
+                {
+                    <li>@Html.DisplayFor(t => task)</li>
+                }
+            </td>
             <td>
                 @Html.ActionLink("View", "View", new { qualificationId = item.Id }) |
                 <a href="~/Qualification/@item.Id/Update">Bulk Update Soldiers</a>
