@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<BatteryCommander.Common.Models.Qualification>
 
+@using BatteryCommander.Common.Models;
+
 @{
     ViewBag.Title = "Qualifications";
 }
@@ -14,21 +16,19 @@
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
+        <th>GO</th>
+        <th>NOGO</th>
+        <th>UNKNOWN</th>
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
+            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+            <td>@item.SoldierQualifications.Count(q => q.Status == QualificationStatus.Pass)</td>
+            <td>@item.SoldierQualifications.Count(q => q.Status == QualificationStatus.Fail)</td>
+            <td>@item.SoldierQualifications.Count(q => q.Status == QualificationStatus.Unknown)</td>
             <td>
                 @Html.ActionLink("View", "View", new { qualificationId = item.Id }) |
                 <a href="~/Qualification/@item.Id/Update">Bulk Update Soldiers</a>

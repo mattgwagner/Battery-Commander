@@ -2,5 +2,11 @@
 
 @if (Model != null)
 {
-    <span>@Html.ActionLink(Model.Name, "View", "Qualification", new { qualificationId = Model.Id }, null)</span>
+    var completed = Model.SoldierQualifications.Count(q => q.Status == BatteryCommander.Common.Models.QualificationStatus.Pass);
+
+    var total = Model.SoldierQualifications.Count();
+
+    var link_text = String.Format("{0} ({1}/{2})", Model.Name, completed, total);
+
+    <span>@Html.ActionLink(link_text, "View", "Qualification", new { qualificationId = Model.Id }, null)</span>
 }
