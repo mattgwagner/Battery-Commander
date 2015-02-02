@@ -27,6 +27,8 @@ namespace BatteryCommander.Web.Controllers
             var qualifications =
                 await _db
                 .Qualifications
+                // only show top level quals
+                .Where(q => !q.ParentTaskId.HasValue)
                 .ToListAsync();
 
             return View(qualifications);
@@ -53,11 +55,19 @@ namespace BatteryCommander.Web.Controllers
                 .Qualifications
                 .SingleOrDefaultAsync(q => q.Id == qualificationId);
 
+            model.PossibleParentQualifications = from q in _db.Qualifications
+                                                 select new SelectListItem
+                                                 {
+                                                     Text = q.Name,
+                                                     Value = q.Id + ""
+                                                 };
+
             if (qualification != null)
             {
                 model.Id = qualification.Id;
                 model.Name = qualification.Name;
                 model.Description = qualification.Description;
+                model.ParentTaskId = qualification.ParentTaskId;
             }
 
             return View(model);
@@ -66,7 +76,17 @@ namespace BatteryCommander.Web.Controllers
         [Route("~/Qualification/New")]
         public ActionResult New()
         {
-            return View("Edit", new QualificationEditModel { });
+            var model = new QualificationEditModel
+            {
+                PossibleParentQualifications = from q in _db.Qualifications
+                                               select new SelectListItem
+                                               {
+                                                   Text = q.Name,
+                                                   Value = q.Id + ""
+                                               }
+            };
+
+            return View("Edit", model);
         }
 
         [Route("~/Qualification/{qualificationId}/Update")]
@@ -122,9 +142,10 @@ namespace BatteryCommander.Web.Controllers
 
             if (qualification == null)
             {
-                _db.Qualifications.Add(new Qualification { });
+                qualification = _db.Qualifications.Add(new Qualification { });
             }
 
+            qualification.ParentTaskId = model.ParentTaskId;
             qualification.Name = model.Name;
             qualification.Description = model.Description;
 

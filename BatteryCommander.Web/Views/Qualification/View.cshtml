@@ -7,6 +7,14 @@
 <h2>@ViewBag.Title</h2>
 
 <table class="table table-bordered">
+    @if (Model.ParentTaskId.HasValue)
+    {
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.ParentTask)</td>
+            <td>@Html.DisplayFor(model => model.ParentTask)</td>
+        </tr>
+    }
+
     <tr>
         <td>@Html.DisplayNameFor(model => model.Name)</td>
         <td>@Html.DisplayFor(model => model.Name)</td>
@@ -48,6 +56,22 @@
     </tbody>
 
 </table>
+
+<hr />
+
+<h3>@Html.DisplayNameFor(m => m.Tasks)</h3>
+
+<table class="table table-bordered">
+    <tbody>
+        @foreach (var task in Model.Tasks)
+        {
+            <tr>
+                <td>@Html.DisplayFor(t => task)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
 
 
 

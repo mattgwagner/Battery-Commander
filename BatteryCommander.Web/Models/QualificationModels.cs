@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
+using System.Web.Mvc;
 
 namespace BatteryCommander.Web.Models
 {
@@ -15,7 +15,10 @@ namespace BatteryCommander.Web.Models
 
         public String Description { get; set; }
 
-        // TODO
+        [Display(Name = "Parent Task (if applicable)")]
+        public int? ParentTaskId { get; set; }
+
+        public IEnumerable<SelectListItem> PossibleParentQualifications { get; set; }
     }
 
     public class BulkQualificationUpdateModel
