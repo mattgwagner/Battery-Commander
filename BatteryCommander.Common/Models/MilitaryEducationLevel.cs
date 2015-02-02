@@ -18,7 +18,7 @@ namespace BatteryCommander.Common.Models
         [Display(Name = "Senior Leader Course")]
         SLC,
 
-        [Display(Name = "Basic Officer Leadership Course")]
+        [Display(Name = "Basic Officer Leaders Course")]
         BOLC,
 
         [Display(Name = "Captains Career Course")]
