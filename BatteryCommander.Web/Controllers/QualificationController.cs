@@ -40,6 +40,8 @@ namespace BatteryCommander.Web.Controllers
             var qualification =
                 await _db
                 .Qualifications
+                .Include(q => q.ParentTask)
+                .Include(q => q.Tasks)
                 .SingleOrDefaultAsync(q => q.Id == qualificationId);
 
             return View(qualification);
@@ -74,10 +76,11 @@ namespace BatteryCommander.Web.Controllers
         }
 
         [Route("~/Qualification/New")]
-        public ActionResult New()
+        public ActionResult New(int? parentId)
         {
             var model = new QualificationEditModel
             {
+                ParentTaskId = parentId,
                 PossibleParentQualifications = from q in _db.Qualifications
                                                select new SelectListItem
                                                {

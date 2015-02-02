@@ -23,8 +23,20 @@ namespace BatteryCommander.Common
 
         // public virtual IDbSet<Alert> Alerts { get; set; }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        protected override void OnModelCreating(DbModelBuilder builder)
         {
+            builder
+                .Entity<Qualification>()
+                .HasOptional(q => q.ParentTask)
+                .WithMany(q => q.Tasks)
+                .WillCascadeOnDelete(false);
+
+            //builder
+            //    .Entity<Qualification>()
+            //    .HasMany(q => q.Tasks)
+            //    .WithRequired(t => t.ParentTask)
+            //    .WillCascadeOnDelete(true);
+
             // TODO
         }
     }
