@@ -34,6 +34,7 @@ namespace BatteryCommander.Web.Controllers
 
                 Qualifications = await _db
                     .Qualifications
+                    .Where(q => q.ParentTaskId == null)
                     .ToListAsync()
             });
         }

@@ -6,32 +6,54 @@
 
 <h2>@ViewBag.Title</h2>
 
-<table class="table table-striped table-responsive">
-    <tr>
-        <th>@Html.DisplayNameFor(m => m.Soldiers.FirstOrDefault().Group)</th>
-        <th>Position</th>
-        <th>@Html.DisplayNameForModel()</th>
-        <th>@Html.DisplayNameFor(m => m.Soldiers.FirstOrDefault().ETSDate)</th>
-        <th>@Html.DisplayNameFor(m => m.Soldiers.FirstOrDefault().MOS)</th>
-        <th>@Html.DisplayNameFor(m => m.Soldiers.FirstOrDefault().IsDutyMOSQualified)</th>
-        <th>@Html.DisplayNameFor(m => m.Soldiers.FirstOrDefault().EducationLevelCompleted)</th>
-        <th>@Html.DisplayNameFor(m => m.Soldiers.FirstOrDefault().SecurityClearance)</th>
-        <th>@Html.DisplayNameFor(m => m.Soldiers.FirstOrDefault().Notes)</th>
-    </tr>
-
-    @foreach (var soldier in Model.Soldiers)
-    {
+<div class="table-responsive">
+    <table class="table table-striped table-responsive">
         <tr>
-            <td>@Html.DisplayFor(m => soldier.Group)</td>
-            <td>-- TODO --</td>
-            <!-- DisplayFor Soldier shows Rank, Last, First -->
-            <td>@Html.DisplayFor(m => soldier)</td>
-            <td>@Html.DisplayFor(m => soldier.ETSDate)</td>
-            <td>@Html.DisplayFor(m => soldier.MOS)</td>
-            <td>@Html.DisplayFor(m => soldier.IsDutyMOSQualified)</td>
-            <td>@Html.DisplayFor(m => soldier.EducationLevelCompleted)</td>
-            <td>@Html.DisplayFor(m => soldier.SecurityClearance)</td>
-            <td>@Html.DisplayFor(m => soldier.Notes)</td>
+            <th>@Html.DisplayNameFor(m => m.Soldiers.FirstOrDefault().Group)</th>
+            <th>Position</th>
+            <th>@Html.DisplayNameFor(m => m.Soldiers.FirstOrDefault().Rank)</th>
+            <th>@Html.DisplayNameFor(m => m.Soldiers.FirstOrDefault().LastName)</th>
+            <th>@Html.DisplayNameFor(m => m.Soldiers.FirstOrDefault().FirstName)</th>
+            <th>@Html.DisplayNameFor(m => m.Soldiers.FirstOrDefault().ETSDate)</th>
+            <th>@Html.DisplayNameFor(m => m.Soldiers.FirstOrDefault().MOS)</th>
+            <th>@Html.DisplayNameFor(m => m.Soldiers.FirstOrDefault().IsDutyMOSQualified)</th>
+            <th>@Html.DisplayNameFor(m => m.Soldiers.FirstOrDefault().EducationLevelCompleted)</th>
+            <th>@Html.DisplayNameFor(m => m.Soldiers.FirstOrDefault().SecurityClearance)</th>
+
+            @foreach (var qualification in Model.Qualifications)
+            {
+                <th>@Html.DisplayFor(m => qualification)</th>
+            }
+
+            <th>@Html.DisplayNameFor(m => m.Soldiers.FirstOrDefault().Notes)</th>
         </tr>
-    }
-</table>
+
+        @foreach (var soldier in Model.Soldiers)
+        {
+            <tr>
+                <td>@Html.DisplayFor(m => soldier.Group)</td>
+                <td>-- TODO --</td>
+                <td>@Html.DisplayFor(m => soldier.Rank)</td>
+                <td>@Html.DisplayFor(m => soldier.LastName)</td>
+                <td>@Html.DisplayFor(m => soldier.FirstName)</td>
+                <td>@Html.DisplayFor(m => soldier.ETSDate)</td>
+                <td>@Html.DisplayFor(m => soldier.MOS)</td>
+                <td>@Html.DisplayFor(m => soldier.IsDutyMOSQualified)</td>
+                <td>@Html.DisplayFor(m => soldier.EducationLevelCompleted)</td>
+                <td>@Html.DisplayFor(m => soldier.SecurityClearance)</td>
+
+                @foreach (var qualification in Model.Qualifications)
+                {
+                    var soldier_qual = soldier.Qualifications.SingleOrDefault(q => q.QualificationId == qualification.Id);
+
+                    <td>@Html.DisplayFor(m => soldier_qual)</td>
+                }
+
+                <td>@Html.DisplayFor(m => soldier.Notes)</td>
+            </tr>
+        }
+    </table>
+
+</div>
+
+

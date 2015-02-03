@@ -12,16 +12,16 @@ namespace BatteryCommander.Common.Models
         [Display(Name = "(WLC) Warrior Leader Course")]
         WLC,
 
-        [Display(Name = "Advanced Leader Course")]
+        [Display(Name = "(ALC) Advanced Leader Course")]
         ALC,
 
-        [Display(Name = "Senior Leader Course")]
+        [Display(Name = "(SLC) Senior Leader Course")]
         SLC,
 
-        [Display(Name = "Basic Officer Leaders Course")]
+        [Display(Name = "(BOLC) Basic Officer Leaders Course")]
         BOLC,
 
-        [Display(Name = "Captains Career Course")]
+        [Display(Name = "(CCC) Captains Career Course")]
         CCC
     }
 }
