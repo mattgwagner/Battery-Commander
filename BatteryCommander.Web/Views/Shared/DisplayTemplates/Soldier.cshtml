@@ -6,7 +6,7 @@
 {
     var status_text = Model.Status == BatteryCommander.Common.Models.SoldierStatus.Inactive ? " (Inactive)" : String.Empty;
 
-    var link_text = String.Format("{0} {1}, {2}{3}", Model.Rank.DisplayName(), Model.LastName, Model.FirstName, status_text);
+    var link_text = String.Format("{0} {1}, {2}{3}", Model.Rank.ShortName(), Model.LastName, Model.FirstName, status_text);
 
     <span>@Html.ActionLink(link_text, "View", "Soldier", new { soldierId = Model.Id }, null)</span>
 }

@@ -4,49 +4,49 @@ namespace BatteryCommander.Common.Models
 {
     public enum Rank
     {
-        [Display(Name = "PVT")]
+        [Display(Name = "Private", ShortName = "PVT")]
         E1 = 1,
 
-        [Display(Name = "PV2")]
+        [Display(Name = "Private", ShortName = "PV2")]
         E2 = 2,
 
-        [Display(Name = "PFC")]
+        [Display(Name = "Private First Class", ShortName = "PFC")]
         E3 = 3,
 
-        [Display(Name = "SPC")]
+        [Display(Name = "Specialist", ShortName = "SPC")]
         E4 = 4,
 
-        [Display(Name = "SGT")]
+        [Display(Name = "Sergeant", ShortName = "SGT")]
         E5 = 5,
 
-        [Display(Name = "SSG")]
+        [Display(Name = "Staff Sergeant", ShortName = "SSG")]
         E6 = 6,
 
-        [Display(Name = "SFC")]
+        [Display(Name = "Sergeant First Class", ShortName = "SFC")]
         E7 = 7,
 
-        [Display(Name = "1SG")]
+        [Display(Name = "First Sergeant", ShortName = "1SG")]
         E8 = 8,
 
-        [Display(Name = "CDT")]
+        [Display(Name = "Cadet", ShortName = "CDT")]
         Cadet = 9,
 
-        [Display(Name = "2LT")]
+        [Display(Name = "Second Lieutenant", ShortName = "2LT")]
         O1 = 10,
 
-        [Display(Name = "1LT")]
+        [Display(Name = "First Lieutenant", ShortName = "1LT")]
         O2 = 11,
 
-        [Display(Name = "CPT")]
+        [Display(Name = "Captain", ShortName = "CPT")]
         O3 = 12,
 
-        [Display(Name = "MAJ")]
+        [Display(Name = "Major", ShortName = "MAJ")]
         O4 = 13,
 
-        [Display(Name = "LTC")]
+        [Display(Name = "Lieutenant Colonel", ShortName = "LTC")]
         O5 = 14,
 
-        [Display(Name = "COL")]
+        [Display(Name = "Colonel", ShortName = "COL")]
         O6 = 15
     }
 }
