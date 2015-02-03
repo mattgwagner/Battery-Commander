@@ -33,11 +33,16 @@ Task Clean {
 }
 
 Task Push-Dev -depends Build {
-	robocopy "$SolutionRoot\BatteryCommander.Web" "\\app-server\Apps\BatteryCommander.Dev" /mir
+	Push-Code "Dev"
 }
 
 Task Push-Prod -depends Build {
-	robocopy "$SolutionRoot\BatteryCommander.Web" "\\app-server\Apps\BatteryCommander.Prod" /mir
+	Push-Code "Prod"
+}
+
+function Push-Code($Environment)
+{
+	robocopy "$SolutionRoot\BatteryCommander.Web" "\\app-server\Apps\BatteryCommander.$Environment" /mir
 }
 
 Task Restore-Packages -depends Install-BuildTools {
