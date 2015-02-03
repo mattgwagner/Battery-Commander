@@ -6,22 +6,22 @@ namespace BatteryCommander.Common.Models
     {
         None,
 
-        [Display(Name = "(AIT) Advanced Individual Training")]
+        [Display(Name = "(AIT) Advanced Individual Training", ShortName = "AIT")]
         AIT,
 
-        [Display(Name = "(WLC) Warrior Leader Course")]
+        [Display(Name = "(WLC) Warrior Leader Course", ShortName = "WLC")]
         WLC,
 
-        [Display(Name = "(ALC) Advanced Leader Course")]
+        [Display(Name = "(ALC) Advanced Leader Course", ShortName = "ALC")]
         ALC,
 
-        [Display(Name = "(SLC) Senior Leader Course")]
+        [Display(Name = "(SLC) Senior Leader Course", ShortName = "SLC")]
         SLC,
 
-        [Display(Name = "(BOLC) Basic Officer Leaders Course")]
+        [Display(Name = "(BOLC) Basic Officer Leaders Course", ShortName = "BOLC")]
         BOLC,
 
-        [Display(Name = "(CCC) Captains Career Course")]
+        [Display(Name = "(CCC) Captains Career Course", ShortName = "CCC")]
         CCC
     }
 }

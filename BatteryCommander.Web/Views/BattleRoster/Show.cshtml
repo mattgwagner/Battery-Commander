@@ -1,4 +1,6 @@
-﻿@model BatteryCommander.Web.Models.BattleRosterModel
+﻿@using BatteryCommander.Common;
+
+@model BatteryCommander.Web.Models.BattleRosterModel
 
 @{
     ViewBag.Title = "Battle Roster";
@@ -11,7 +13,7 @@
         <tr>
             <th>@Html.DisplayNameFor(m => m.Soldiers.FirstOrDefault().Group)</th>
             <th>Position</th>
-            <th>Rank Last, First</th>
+            <th>Soldier</th>
             <th>@Html.DisplayNameFor(m => m.Soldiers.FirstOrDefault().ETSDate)</th>
             <th>@Html.DisplayNameFor(m => m.Soldiers.FirstOrDefault().MOS)</th>
             <th>@Html.DisplayNameFor(m => m.Soldiers.FirstOrDefault().IsDutyMOSQualified)</th>
@@ -33,10 +35,10 @@
                 <td>-- TODO --</td>
                 <td>@Html.DisplayFor(m => soldier)</td>
                 <td>@Html.DisplayFor(m => soldier.ETSDate)</td>
-                <td>@Html.DisplayFor(m => soldier.MOS)</td>
+                <td>@Html.DisplayFor(m => soldier.MOS, new { UseShortName = true })</td>
                 <td>@Html.DisplayFor(m => soldier.IsDutyMOSQualified)</td>
-                <td>@Html.DisplayFor(m => soldier.EducationLevelCompleted)</td>
-                <td>@Html.DisplayFor(m => soldier.SecurityClearance)</td>
+                <td>@Html.DisplayFor(m => soldier.EducationLevelCompleted, new { UseShortName = true })</td>
+                <td>@Html.DisplayFor(m => soldier.SecurityClearance, new { UseShortName = true })</td>
 
                 @foreach (var qualification in Model.Qualifications)
                 {
@@ -51,5 +53,4 @@
     </table>
 
 </div>
-
 

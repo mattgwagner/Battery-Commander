@@ -2,6 +2,10 @@
 
 @using BatteryCommander.Common;
 
+@{
+    Boolean use_short_name = Convert.ToBoolean(ViewData["UseShortName"]);
+}
+
 @if (EnumHelper.IsValidForEnumHelper(ViewData.ModelMetadata))
 {
     // Display Enum using same names (from [Display] attributes) as in editors
@@ -21,6 +25,10 @@
         if (Model == null)
         {
             displayName = String.Empty;
+        }
+        else if (use_short_name)
+        {
+            displayName = Model.ShortName();
         }
         else
         {
