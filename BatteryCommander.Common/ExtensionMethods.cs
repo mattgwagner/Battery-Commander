@@ -10,11 +10,11 @@ namespace BatteryCommander.Common
         {
             FieldInfo fi = val.GetType().GetField(val.ToString());
 
-            DescriptionAttribute[] attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
+            DisplayNameAttribute[] attributes = (DisplayNameAttribute[])fi.GetCustomAttributes(typeof(DisplayNameAttribute), false);
 
             if (attributes != null && attributes.Length > 0)
             {
-                return attributes[0].Description;
+                return attributes[0].DisplayName;
             }
 
             return val.ToString();
