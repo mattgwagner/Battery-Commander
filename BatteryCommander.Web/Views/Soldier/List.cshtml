@@ -6,11 +6,11 @@
 
 <h2>@ViewBag.Title</h2>
 
-@Html.ActionLink("Include Inactive Soldiers", "List", new { activeOnly = false })
-
-@Html.ActionLink("Add a Soldier", "Edit")
-
-@Html.ActionLink("Bulk Add/Edit Soldiers", "Bulk")
+<div class="btn-group" role="group">
+    @Html.ActionLink("Add a Soldier", "Edit", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Bulk Add/Edit Soldiers", "Bulk", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Include Inactive Soldiers", "List", new { activeOnly = false }, new { @class = "btn btn-default" })
+</div>
 
 <table class="table table-striped">
     <tr>
@@ -19,7 +19,6 @@
         <th>@Html.DisplayNameFor(s => s.FirstOrDefault().LastName)</th>
         <th>@Html.DisplayNameFor(s => s.FirstOrDefault().FirstName)</th>
         <th>@Html.DisplayNameFor(s => s.FirstOrDefault().MOS)</th>
-        <th>@Html.DisplayNameFor(s => s.FirstOrDefault().IsDutyMOSQualified)</th>
         <th>@Html.DisplayNameFor(s => s.FirstOrDefault().Status)</th>
         <th>@Html.DisplayNameFor(s => s.FirstOrDefault().Notes)</th>
         <th></th>
@@ -29,11 +28,10 @@
     {
         <tr>
             <td>@Html.DisplayFor(s => soldier.Group)</td>
-            <td>@Html.DisplayFor(s => soldier.Rank)</td>
+            <td>@Html.DisplayFor(s => soldier.Rank, new { UseShortName = true })</td>
             <td>@Html.DisplayFor(s => soldier.LastName)</td>
             <td>@Html.DisplayFor(s => soldier.FirstName)</td>
             <td>@Html.DisplayFor(s => soldier.MOS)</td>
-            <td>@Html.DisplayFor(s => soldier.IsDutyMOSQualified)</td>
             <td>@Html.DisplayFor(s => soldier.Status)</td>
             <td>@Html.DisplayFor(s => soldier.Notes)</td>
             <td>@Html.ActionLink("View", "View", new { soldierId = soldier.Id })</td>
