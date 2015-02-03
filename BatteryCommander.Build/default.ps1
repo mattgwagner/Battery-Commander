@@ -32,6 +32,14 @@ Task Clean {
 	exec { . $MSBuild $SolutionFile /t:Clean /v:quiet }
 }
 
+Task Push-Dev -depends Build {
+	robocopy "$SolutionRoot\BatteryCommander.Web" "\\app-server\Apps\BatteryCommander.Dev" /mir
+}
+
+Task Push-Prod -depends Build {
+	robocopy "$SolutionRoot\BatteryCommander.Web" "\\app-server\Apps\BatteryCommander.Prod" /mir
+}
+
 Task Restore-Packages -depends Install-BuildTools {
 	exec { . $NuGet restore $SolutionFile }
 }
