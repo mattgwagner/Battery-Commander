@@ -7,13 +7,11 @@
 <h2>@ViewBag.Title</h2>
 
 <div class="table-responsive">
-    <table class="table table-striped table-responsive">
+    <table class="table table-bordered table-striped table-responsive">
         <tr>
             <th>@Html.DisplayNameFor(m => m.Soldiers.FirstOrDefault().Group)</th>
             <th>Position</th>
-            <th>@Html.DisplayNameFor(m => m.Soldiers.FirstOrDefault().Rank)</th>
-            <th>@Html.DisplayNameFor(m => m.Soldiers.FirstOrDefault().LastName)</th>
-            <th>@Html.DisplayNameFor(m => m.Soldiers.FirstOrDefault().FirstName)</th>
+            <th>Rank Last, First</th>
             <th>@Html.DisplayNameFor(m => m.Soldiers.FirstOrDefault().ETSDate)</th>
             <th>@Html.DisplayNameFor(m => m.Soldiers.FirstOrDefault().MOS)</th>
             <th>@Html.DisplayNameFor(m => m.Soldiers.FirstOrDefault().IsDutyMOSQualified)</th>
@@ -33,9 +31,7 @@
             <tr>
                 <td>@Html.DisplayFor(m => soldier.Group)</td>
                 <td>-- TODO --</td>
-                <td>@Html.DisplayFor(m => soldier.Rank)</td>
-                <td>@Html.DisplayFor(m => soldier.LastName)</td>
-                <td>@Html.DisplayFor(m => soldier.FirstName)</td>
+                <td>@Html.DisplayFor(m => soldier)</td>
                 <td>@Html.DisplayFor(m => soldier.ETSDate)</td>
                 <td>@Html.DisplayFor(m => soldier.MOS)</td>
                 <td>@Html.DisplayFor(m => soldier.IsDutyMOSQualified)</td>
