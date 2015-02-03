@@ -2,5 +2,14 @@
 
 @if (Model != null)
 {
-    <span>@Html.DisplayFor(m => m.Status)</span>
+    String link_text = String.Format("{0} ({1})", Model.Status, Model.QualificationDate.ToShortDateString());
+
+    String format_text = String.Empty;
+
+    if (Model.ExpirationDate.HasValue)
+    {
+        // TODO Highlight expired or nearly expired items
+    }
+
+    <small>@Html.ActionLink(link_text, "Edit", "SoldierQualification", new { soldierId = Model.SoldierId, qualificationId = Model.QualificationId }, null)</small>
 }
