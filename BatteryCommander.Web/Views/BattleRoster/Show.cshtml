@@ -8,16 +8,30 @@
 
 <table class="table table-striped table-responsive">
     <tr>
-        <th>@Html.DisplayNameFor(m => m.Soldier)</th>
+        <th>@Html.DisplayNameFor(m => m.Soldier.Group)</th>
         <th>@Html.DisplayNameFor(m => m.Position)</th>
-        <th></th>
+        <th>@Html.DisplayNameFor(m => m.Soldier)</th>
+        <th>@Html.DisplayNameFor(m => m.Soldier.ETSDate)</th>
+        <th>@Html.DisplayNameFor(m => m.Soldier.MOS)</th>
+        <th>@Html.DisplayNameFor(m => m.Soldier.IsDutyMOSQualified)</th>
+        <th>@Html.DisplayNameFor(m => m.Soldier.EducationLevelCompleted)</th>
+        <th>@Html.DisplayNameFor(m => m.Soldier.SecurityClearance)</th>
+        <th>@Html.DisplayNameFor(m => m.Soldier.Notes)</th>
     </tr>
 
     @foreach (var row in Model)
     {
         <tr>
-            <td>@Html.DisplayFor(m => row.Soldier)</td>
+            <td>@Html.DisplayFor(m => row.Soldier.Group)</td>
             <td>@Html.DisplayFor(m => row.Position)</td>
+            <!-- DisplayFor Soldier shows Rank, Last, First -->
+            <td>@Html.DisplayFor(m => row.Soldier)</td>
+            <td>@Html.DisplayFor(m => row.Soldier.ETSDate)</td>
+            <td>@Html.DisplayFor(m => row.Soldier.MOS)</td>
+            <td>@Html.DisplayFor(m => row.Soldier.IsDutyMOSQualified)</td>
+            <td>@Html.DisplayFor(m => row.Soldier.EducationLevelCompleted)</td>
+            <td>@Html.DisplayFor(m => row.Soldier.SecurityClearance)</td>
+            <td>@Html.DisplayFor(m => row.Soldier.Notes)</td>
         </tr>
     }
 </table>

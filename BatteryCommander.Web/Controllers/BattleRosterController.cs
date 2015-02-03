@@ -29,8 +29,8 @@ namespace BatteryCommander.Web.Controllers
                 .Soldiers
                 .Include(s => s.Qualifications)
                 .Where(s => s.Status == SoldierStatus.Active)
-                .OrderBy(s => s.Rank)
-                .ThenBy(s => s.LastName)
+                .OrderBy(s => s.Group)
+                .ThenBy(s => s.Rank)
                 .Select(soldier => new BattleRosterRow
                 {
                     Soldier = soldier,
