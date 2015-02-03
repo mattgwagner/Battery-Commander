@@ -3,7 +3,7 @@
 @using BatteryCommander.Common;
 
 @{
-    Boolean use_short_name = Convert.ToBoolean(ViewData["UseShortName"]);
+    Boolean use_short_name = Convert.ToBoolean(ViewData["UseShortName"] ?? false);
 }
 
 @if (EnumHelper.IsValidForEnumHelper(ViewData.ModelMetadata))
@@ -11,29 +11,17 @@
     // Display Enum using same names (from [Display] attributes) as in editors
     string displayName = null;
 
-    foreach (SelectListItem item in EnumHelper.GetSelectList(ViewData.ModelMetadata, (Enum)Model))
+    if (Model == null)
     {
-        if (item.Selected)
-        {
-            displayName = item.Text ?? item.Value;
-        }
+        displayName = String.Empty;
     }
-
-    // Handle the unexpected case that nothing is selected
-    if (String.IsNullOrEmpty(displayName))
+    else if (use_short_name)
     {
-        if (Model == null)
-        {
-            displayName = String.Empty;
-        }
-        else if (use_short_name)
-        {
-            displayName = Model.ShortName();
-        }
-        else
-        {
-            displayName = Model.DisplayName();
-        }
+        displayName = Model.ShortName();
+    }
+    else
+    {
+        displayName = Model.DisplayName();
     }
 
     @Html.DisplayTextFor(model => displayName)
