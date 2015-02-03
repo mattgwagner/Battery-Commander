@@ -28,6 +28,7 @@ namespace BatteryCommander.Common.Models
         // TODO Position - PL, FDO, Section Chief, etc.
 
         [Required]
+        [Display(Name = "Security Clearance")]
         public SecurityClearance SecurityClearance { get; set; }
 
         [Required]
@@ -42,6 +43,7 @@ namespace BatteryCommander.Common.Models
         public MilitaryEducationLevel EducationLevelCompleted { get; set; }
 
         [Required]
+        [Display(Name = "Section")]
         public Group Group { get; set; }
 
         [DataType(DataType.Date)]
