@@ -53,7 +53,7 @@ namespace BatteryCommander.Common.Models
         FATDS,
 
         [Display(Name = "Section Chief", ShortName = "CHF")]
-        Gun_Section_Chief,
+        Section_Chief,
 
         [Display(Name = "Gunnery Sergeant", ShortName = "GSG")]
         Gunnery_Sergeant,
