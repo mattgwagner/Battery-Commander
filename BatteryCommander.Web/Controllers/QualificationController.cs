@@ -194,6 +194,7 @@ namespace BatteryCommander.Web.Controllers
         }
 
         [Route("~/Qualifcation/Tasks/Save")]
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<ActionResult> AddTasks(int qualificationId, IEnumerable<String> tasksToAdd)
         {
             foreach (var task in tasksToAdd)

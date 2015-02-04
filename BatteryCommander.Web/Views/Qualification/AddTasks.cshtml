@@ -14,6 +14,7 @@
 
 @using (Html.BeginForm("AddTasks", "Qualification", FormMethod.Post))
 {
+    @Html.AntiForgeryToken()
     @Html.Hidden("QualificationId", (int)ViewBag.QualificationId);
 
     <table class="table table-bordered">
