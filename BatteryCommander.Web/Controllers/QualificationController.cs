@@ -111,7 +111,13 @@ namespace BatteryCommander.Web.Controllers
                                     .Where(q => q.QualificationId == qualificationId)
                                 on soldier.Id equals qualifications.SoldierId into quals
                                 from soldier_qual in quals.DefaultIfEmpty()
-                                where ((!rankId.HasValue || soldier.Rank == (Rank)rankId.Value) && (!positionId.HasValue || soldier.Position == (Position)positionId.Value) && (!groupId.HasValue || soldier.Group == (Group)groupId.Value))
+                                where
+                                (
+                                    soldier.Status == SoldierStatus.Active
+                                    && (!rankId.HasValue || soldier.Rank == (Rank)rankId.Value)
+                                    && (!positionId.HasValue || soldier.Position == (Position)positionId.Value)
+                                    && (!groupId.HasValue || soldier.Group == (Group)groupId.Value)
+                                )
                                 orderby soldier.LastName
                                 select new BulkQualificationUpdateModel
                                 {
