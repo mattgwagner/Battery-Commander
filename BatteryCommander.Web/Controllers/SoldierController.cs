@@ -22,15 +22,15 @@ namespace BatteryCommander.Web.Controllers
         }
 
         [Route("~/Soldiers")]
-        public async Task<ActionResult> List(Boolean activeOnly = true)
+        public ActionResult List(Boolean activeOnly = true)
         {
             var soldiers =
-                await _db
+                _db
                 .Soldiers
                 .Where(s => !activeOnly || s.Status == SoldierStatus.Active)
                 .OrderBy(s => s.LastName)
                 .ThenBy(s => s.FirstName)
-                .ToListAsync();
+                .ToList();
 
             return View(soldiers);
         }
