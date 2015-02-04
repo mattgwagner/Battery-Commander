@@ -29,7 +29,7 @@ namespace BatteryCommander.Web.Controllers
             {
                 SoldierId = soldierId,
                 QualificationId = qualificationId,
-                PossibleQualifications = await GetQuals()
+                PossibleQualifications = GetQuals()
             };
 
             var qual =
@@ -58,7 +58,7 @@ namespace BatteryCommander.Web.Controllers
             var model = new SoldierQualificationEditModel
             {
                 SoldierId = soldierId,
-                PossibleQualifications = await GetQuals()
+                PossibleQualifications = GetQuals()
             };
 
             return View("Edit", model);
@@ -69,7 +69,7 @@ namespace BatteryCommander.Web.Controllers
         {
             var lines_to_add = 10;
 
-            var possible_qualifications = await GetQuals();
+            var possible_qualifications = GetQuals();
 
             var quals =
                 _db
@@ -111,7 +111,7 @@ namespace BatteryCommander.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                model.PossibleQualifications = await GetQuals();
+                model.PossibleQualifications = GetQuals();
                 return View("Edit", model);
             }
 
@@ -148,18 +148,27 @@ namespace BatteryCommander.Web.Controllers
             await _db.SaveChangesAsync();
         }
 
-        private async Task<IEnumerable<SelectListItem>> GetQuals()
+        private IEnumerable<SelectListItem> GetQuals()
         {
-            return
-                await _db
-                .Qualifications
-                .OrderBy(q => q.Name)
-                .Select(q => new SelectListItem
+            foreach (var qual in _db.Qualifications.OrderBy(q => q.Name))
+            {
+                if (qual.ParentTaskId.HasValue)
                 {
-                    Text = q.Name,
-                    Value = "" + q.Id
-                })
-                .ToListAsync();
+                    yield return new SelectListItem
+                    {
+                        Text = qual.ParentTask.Name + " : " + qual.Name,
+                        Value = "" + qual.Id
+                    };
+                }
+                else
+                {
+                    yield return new SelectListItem
+                    {
+                        Text = qual.Name,
+                        Value = "" + qual.Id
+                    };
+                }
+            }
         }
     }
 }
