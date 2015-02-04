@@ -4,13 +4,11 @@
     ViewBag.Title = "Add Subtasks";
 }
 
-<h2>@ViewBag.Title</h2>
+<h2>@ViewBag.Title @Html.ActionLink("Back to Parent Task", "View", new { qualificationId = ViewBag.QualificationId })</h2>
 
 <div class="alert alert-info">
     Use this page to batch add subtasks into a qualification or parent task.
 </div>
-
-@Html.ActionLink("Back to Parent Task", "View", new { qualificationId = ViewBag.QualificationId })
 
 @using (Html.BeginForm("AddTasksSave", "Qualification", FormMethod.Post))
 {

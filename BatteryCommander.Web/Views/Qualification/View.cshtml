@@ -70,11 +70,11 @@
 
 <hr />
 
-<h3>@Html.DisplayNameFor(m => m.Tasks)</h3>
-
-@Html.ActionLink("Add a Subtask", "New", new { parentId = Model.Id }, new { @class = "btn btn-primary" })
-
-@Html.ActionLink("Bulk Add Subtasks", "AddTasks", new { qualificationId = Model.Id }, new { @class = "btn btn-warning" })
+<h3>
+    @Html.DisplayNameFor(m => m.Tasks)
+    @Html.ActionLink("Add a Subtask", "New", new { parentId = Model.Id }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Bulk Add Subtasks", "AddTasks", new { qualificationId = Model.Id }, new { @class = "btn btn-warning" })
+</h3>
 
 <table class="table table-bordered">
     <tbody>
