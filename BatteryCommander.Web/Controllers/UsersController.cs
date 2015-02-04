@@ -2,6 +2,7 @@
 using BatteryCommander.Common.Models;
 using BatteryCommander.Web.Models;
 using Microsoft.AspNet.Identity;
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -31,17 +32,6 @@ namespace BatteryCommander.Web.Controllers
             return View(users);
         }
 
-        [Route("~/User/{userId}")]
-        public async Task<ActionResult> View(int userId)
-        {
-            var user =
-                await _db
-                .Users
-                .SingleOrDefaultAsync(w => w.Id == userId);
-
-            return View(user);
-        }
-
         [Route("~/User/New")]
         [Route("~/User/{userId}/Edit")]
         public async Task<ActionResult> Edit(int? userId)
@@ -64,6 +54,7 @@ namespace BatteryCommander.Web.Controllers
             return View(model);
         }
 
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<ActionResult> Save(UserEditModel model)
         {
             if (!ModelState.IsValid) return View("Edit", model);
@@ -75,13 +66,22 @@ namespace BatteryCommander.Web.Controllers
 
             if (user == null)
             {
-                user = _db.Users.Add(new AppUser { UserName = model.UserName });
+                user = _db.Users.Add(new AppUser
+                {
+                    UserName = model.UserName
+                });
             }
-
-            // TODO Need to handle password creation and other things for new users
 
             user.PhoneNumber = model.PhoneNumber;
             user.TwoFactorEnabled = model.TwoFactorEnabled;
+
+            user.SecurityStamp = Guid.NewGuid().ToString();
+            user.LastUpdated = DateTime.UtcNow;
+
+            if (!String.IsNullOrWhiteSpace(model.Password))
+            {
+                model.Password = new PasswordHasher().HashPassword(model.Password);
+            }
 
             await _db.SaveChangesAsync();
 

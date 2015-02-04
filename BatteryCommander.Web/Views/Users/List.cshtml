@@ -6,6 +6,8 @@
 
 <h2>@ViewBag.Title</h2>
 
+@Html.ActionLink("Add New User", "Edit", null, new { @class = "btn btn-primary" })
+
 <table class="table table-striped">
 
     <thead>
@@ -14,7 +16,7 @@
             <th>@Html.DisplayNameFor(u => u.FirstOrDefault().AccessFailedCount)</th>
             <th>@Html.DisplayNameFor(u => u.FirstOrDefault().LockoutEndDate)</th>
             <th>@Html.DisplayNameFor(u => u.FirstOrDefault().TwoFactorEnabled)</th>
-            <th>@Html.DisplayNameFor(u => u.FirstOrDefault().Role)</th>
+            <th></th>
         </tr>
     </thead>
 
@@ -25,7 +27,7 @@
             <td>@Html.DisplayFor(u => user.AccessFailedCount)</td>
             <td>@Html.DisplayFor(u => user.LockoutEndDate)</td>
             <td>@Html.DisplayFor(u => user.TwoFactorEnabled)</td>
-            <td>@Html.DisplayFor(u => user.Role)</td>
+            <td>@Html.ActionLink("Edit", "Edit", "User", new { userId = user.Id })</td>
         </tr>
     }
 </table>

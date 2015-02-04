@@ -21,5 +21,9 @@ namespace BatteryCommander.Web.Models
         [StringLength(20)]
         [Display(Name = "Mobile Phone")]
         public String PhoneNumber { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Password (If Changed)")]
+        public String Password { get; set; }
     }
 }
