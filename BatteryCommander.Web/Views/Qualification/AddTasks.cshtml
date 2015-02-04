@@ -1,0 +1,36 @@
+﻿@model IEnumerable<String>
+
+@{
+    ViewBag.Title = "Add Subtasks";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="alert alert-info">
+    Use this page to batch add subtasks into a qualification or parent task.
+</div>
+
+@Html.ActionLink("Back to Parent Task", "View", new { qualificationId = ViewBag.QualificationId })
+
+@using (Html.BeginForm("AddTasks", "Qualification", FormMethod.Post))
+{
+    @Html.Hidden("QualificationId", (int)ViewBag.QualificationId);
+
+    <table class="table table-bordered">
+        @foreach (var i in Model)
+        {
+            <tr><td>@Html.EditorFor(m => i)</td></tr>
+        }
+    </table>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Add Tasks" class="btn btn-primary" />
+        </div>
+    </div>
+}
+
+
+
+
+
