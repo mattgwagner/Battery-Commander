@@ -23,7 +23,7 @@ namespace BatteryCommander.Web.Controllers
         }
 
         [Route("~/Soldiers")]
-        [OutputCache(Location = OutputCacheLocation.Any, Duration = 60)]
+        [OutputCache(Location = OutputCacheLocation.Server, Duration = 60, VaryByParam = "activeOnly")]
         public ActionResult List(Boolean activeOnly = true)
         {
             var soldiers =
