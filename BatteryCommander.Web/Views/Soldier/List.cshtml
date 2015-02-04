@@ -34,7 +34,10 @@
             <td>@Html.DisplayFor(s => soldier.Position)</td>
             <td>@Html.DisplayFor(s => soldier.MOS, new { UseShortName = true })</td>
             <td>@Html.DisplayFor(s => soldier.Notes)</td>
-            <td>@Html.ActionLink("View", "View", new { soldierId = soldier.Id }, new { @class = "btn btn-default" })</td>
+            <td>
+                @Html.ActionLink("View", "View", new { soldierId = soldier.Id }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Edit", "Edit", new { soldierId = soldier.Id }, new { @class = "btn btn-default" })<
+            </td>
         </tr>
     }
 </table>
