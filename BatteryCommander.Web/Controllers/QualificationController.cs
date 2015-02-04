@@ -8,6 +8,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace BatteryCommander.Web.Controllers
 {
@@ -22,6 +23,7 @@ namespace BatteryCommander.Web.Controllers
         }
 
         [Route("~/Qualifications")]
+        [OutputCache(Location = OutputCacheLocation.Any, Duration = 60)]
         public async Task<ActionResult> List()
         {
             var qualifications =

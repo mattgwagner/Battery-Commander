@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace BatteryCommander.Web.Controllers
 {
@@ -20,6 +21,7 @@ namespace BatteryCommander.Web.Controllers
         }
 
         [Route("BattleRoster")]
+        [OutputCache(Location = OutputCacheLocation.Any, Duration = 180)]
         public async Task<ActionResult> Show()
         {
             return View(new BattleRosterModel
