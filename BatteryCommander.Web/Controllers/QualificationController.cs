@@ -136,8 +136,6 @@ namespace BatteryCommander.Web.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<ActionResult> Save(QualificationEditModel model)
         {
-            if (!ModelState.IsValid) return View("Edit", model);
-
             var qualification =
                 await _db
                 .Qualifications
@@ -197,7 +195,10 @@ namespace BatteryCommander.Web.Controllers
         {
             foreach (var task in tasksToAdd)
             {
-                await Save(task);
+                if (!String.IsNullOrWhiteSpace(task.Name))
+                {
+                    await Save(task);
+                }
             }
 
             return RedirectToAction("List");
