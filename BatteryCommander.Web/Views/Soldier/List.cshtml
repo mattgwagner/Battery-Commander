@@ -15,6 +15,7 @@
 <table class="table table-striped">
     <tr>
         <th>@Html.DisplayNameFor(s => s.FirstOrDefault().Group)</th>
+        <th>@Html.DisplayNameFor(s => s.FirstOrDefault().Position)</th>
         <th>@Html.DisplayNameFor(s => s.FirstOrDefault().Rank)</th>
         <th>@Html.DisplayNameFor(s => s.FirstOrDefault().LastName)</th>
         <th>@Html.DisplayNameFor(s => s.FirstOrDefault().FirstName)</th>
@@ -28,6 +29,7 @@
     {
         <tr>
             <td>@Html.DisplayFor(s => soldier.Group)</td>
+            <td>@Html.DisplayFor(s => soldier.Position, new { UseShortName = true })</td>
             <td>@Html.DisplayFor(s => soldier.Rank, new { UseShortName = true })</td>
             <td>@Html.DisplayFor(s => soldier.LastName)</td>
             <td>@Html.DisplayFor(s => soldier.FirstName)</td>

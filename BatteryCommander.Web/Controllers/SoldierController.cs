@@ -29,7 +29,7 @@ namespace BatteryCommander.Web.Controllers
                 .Soldiers
                 .Where(s => !activeOnly || s.Status == SoldierStatus.Active)
                 .OrderBy(s => s.Group)
-                .ThenByDescending(s => s.Rank)
+                .ThenByDescending(s => s.Position)
                 .ToListAsync();
 
             return View(soldiers);
@@ -67,6 +67,7 @@ namespace BatteryCommander.Web.Controllers
                 model.Status = soldier.Status;
                 model.SecurityClearance = soldier.SecurityClearance;
                 model.MOS = soldier.MOS;
+                model.Position = soldier.Position;
                 model.IsDutyMOSQualified = soldier.IsDutyMOSQualified;
                 model.EducationLevelCompleted = soldier.EducationLevelCompleted;
                 model.Group = soldier.Group;
@@ -93,6 +94,7 @@ namespace BatteryCommander.Web.Controllers
                     FirstName = s.FirstName,
                     LastName = s.LastName,
                     Rank = s.Rank,
+                    Position = s.Position,
                     Status = s.Status,
                     SecurityClearance = s.SecurityClearance,
                     MOS = s.MOS,
@@ -154,6 +156,7 @@ namespace BatteryCommander.Web.Controllers
             soldier.Status = model.Status;
             soldier.SecurityClearance = model.SecurityClearance;
             soldier.MOS = model.MOS;
+            soldier.Position = model.Position;
             soldier.IsDutyMOSQualified = model.IsDutyMOSQualified;
             soldier.EducationLevelCompleted = model.EducationLevelCompleted;
             soldier.Group = model.Group;

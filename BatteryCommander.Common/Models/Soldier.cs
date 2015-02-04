@@ -25,7 +25,8 @@ namespace BatteryCommander.Common.Models
         [Required]
         public SoldierStatus Status { get; set; }
 
-        // TODO Position - PL, FDO, Section Chief, etc.
+        [Required]
+        public Position Position { get; set; }
 
         [Required]
         [Display(Name = "Security Clearance")]
@@ -63,6 +64,7 @@ namespace BatteryCommander.Common.Models
             this.SecurityClearance = Models.SecurityClearance.None;
             this.EducationLevelCompleted = MilitaryEducationLevel.None;
             this.Group = Models.Group.GhostGuns;
+            this.Position = Models.Position.Unassigned;
 
             this.Qualifications = new List<SoldierQualification>();
         }

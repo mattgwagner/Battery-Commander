@@ -29,7 +29,8 @@ namespace BatteryCommander.Web.Models
         [Required]
         public SecurityClearance SecurityClearance { get; set; }
 
-        // TODO Position - PL, FDO, Section Chief, etc.
+        [Required]
+        public Position Position { get; set; }
 
         [Required]
         public MOS MOS { get; set; }
@@ -55,6 +56,7 @@ namespace BatteryCommander.Web.Models
             this.SecurityClearance = SecurityClearance.None;
             this.EducationLevelCompleted = MilitaryEducationLevel.None;
             this.Group = Group.GhostGuns;
+            this.Position = Position.Unassigned;
         }
     }
 
