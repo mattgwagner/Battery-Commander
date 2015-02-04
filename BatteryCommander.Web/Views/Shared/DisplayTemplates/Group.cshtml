@@ -2,4 +2,8 @@
 
 @using BatteryCommander.Common;
 
-@Html.ActionLink(Model.DisplayName(), "List", "Soldier", new { groupId = (int)Model }, null)
+@{
+    Boolean use_short_name = Convert.ToBoolean(ViewData["UseShortName"] ?? false);
+}
+
+@Html.ActionLink(use_short_name ? Model.ShortName() : Model.DisplayName(), "List", "Soldier", new { groupId = (int)Model }, null)
