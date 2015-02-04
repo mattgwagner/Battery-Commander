@@ -80,13 +80,11 @@ namespace BatteryCommander.Web.Controllers
 
             user.PhoneNumber = model.PhoneNumber;
             user.TwoFactorEnabled = model.TwoFactorEnabled;
-
-            user.SecurityStamp = Guid.NewGuid().ToString();
             user.LastUpdated = DateTime.UtcNow;
 
             if (!String.IsNullOrWhiteSpace(model.Password))
             {
-                model.Password = new PasswordHasher().HashPassword(model.Password);
+                user.Password = new PasswordHasher().HashPassword(model.Password);
             }
 
             await _db.SaveChangesAsync();
