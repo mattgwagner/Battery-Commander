@@ -22,7 +22,7 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>@Html.ActionLink(item.Name, "View", new { qualificationId = item.Id }, new { @class = "btn btn-default" })</td>
+            <td>@Html.ActionLink(item.Name, "View", new { qualificationId = item.Id }, null)</td>
             <td>@Html.DisplayFor(modelItem => item.Description)</td>
             <td>@item.SoldierQualifications.Count(q => q.Status == QualificationStatus.Pass)</td>
             <td>@item.SoldierQualifications.Count(q => q.Status == QualificationStatus.Fail)</td>
