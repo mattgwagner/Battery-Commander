@@ -59,6 +59,7 @@ namespace BatteryCommander.Web.Controllers
             return View(model);
         }
 
+        [Route("~/User/Save")]
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<ActionResult> Save(UserEditModel model)
         {
