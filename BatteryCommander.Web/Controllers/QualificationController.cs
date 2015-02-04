@@ -209,11 +209,13 @@ namespace BatteryCommander.Web.Controllers
         {
             var qual = await _db.Qualifications.SingleAsync(q => q.Id == qualificationId);
 
+            int? parentId = qual.ParentTaskId;
+
             _db.Entry(qual).State = EntityState.Deleted;
 
             await _db.SaveChangesAsync();
 
-            if (qual.ParentTaskId.HasValue)
+            if (parentId.HasValue)
             {
                 return RedirectToAction("View", new { qualificationId = qual.ParentTaskId });
             }
