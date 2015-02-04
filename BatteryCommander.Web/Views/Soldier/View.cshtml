@@ -6,6 +6,11 @@
 
 <h2>@ViewBag.Title</h2>
 
+<div class="btn-group" role="group">
+    @Html.ActionLink("Back to List", "List", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Edit", "Edit", new { soldierId = Model.Id }, new { @class = "btn btn-default" })
+</div>
+
 <table class="table table-bordered">
     <tr>
         <td>@Html.DisplayNameFor(model => model.Rank)</td>
@@ -65,10 +70,11 @@
 
 <hr />
 
-<h2>@Html.DisplayNameFor(model => model.Qualifications)</h2>
-
-@Html.ActionLink("Add Qualification", "New", "SoldierQualification", new { soldierId = Model.Id }, null) |
-@Html.ActionLink("Bulk Update Qualifications", "Update", "SoldierQualification", new { soldierId = Model.Id }, null)
+<h2>
+    @Html.DisplayNameFor(model => model.Qualifications)
+    @Html.ActionLink("Add Qualification", "New", "SoldierQualification", new { soldierId = Model.Id }, new { @class = "btn btn-info" })
+    @Html.ActionLink("Bulk Update Qualifications", "Update", "SoldierQualification", new { soldierId = Model.Id }, new { @class = "btn btn-default" })
+</h2>
 
 <table class="table table-bordered">
     <thead>
@@ -89,15 +95,10 @@
                 <td>@Html.DisplayFor(q => qual.Status)</td>
                 <td>@Html.DisplayFor(q => qual.QualificationDate)</td>
                 <td>@Html.DisplayFor(q => qual.ExpirationDate)</td>
-                <td>@Html.ActionLink("Edit", "Edit", "SoldierQualification", new { soldierId = Model.Id, qualificationId = qual.QualificationId }, null)</td>
+                <td>@Html.ActionLink("Edit", "Edit", "SoldierQualification", new { soldierId = Model.Id, qualificationId = qual.QualificationId }, new { @class = "btn btn-info" })</td>
             </tr>
         }
 
     </tbody>
 
 </table>
-
-<p>
-    @Html.ActionLink("Edit", "Edit", new { soldierId = Model.Id }) |
-    @Html.ActionLink("Back to List", "List")
-</p>

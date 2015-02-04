@@ -47,9 +47,14 @@ namespace BatteryCommander.Web.Controllers
             return View(soldier);
         }
 
-        [Route("~/Soldier/{soldierId}/Edit")]
         [Route("~/Soldier/New")]
-        public async Task<ActionResult> Edit(int? soldierId)
+        public ActionResult New()
+        {
+            return View("Edit", new SoldierEditModel { });
+        }
+
+        [Route("~/Soldier/{soldierId}/Edit")]
+        public async Task<ActionResult> Edit(int soldierId)
         {
             var model = new SoldierEditModel { };
 
