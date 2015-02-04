@@ -11,12 +11,14 @@ namespace BatteryCommander.Web
             // More information about RuntimePolicies can be found at http://getglimpse.com/Help/Custom-Runtime-Policy
             var httpContext = policyContext.GetHttpContext();
 
-            if (httpContext.User.Identity.Name != "mattgwagner@gmail.com")
+            if (httpContext.Request.IsLocal) return RuntimePolicy.On;
+
+            if (httpContext.User != null && httpContext.User.Identity.Name == "mattgwagner@gmail.com")
             {
-                return RuntimePolicy.Off;
+                return RuntimePolicy.On;
             }
 
-            return RuntimePolicy.On;
+            return RuntimePolicy.Off;
         }
 
         public RuntimeEvent ExecuteOn
