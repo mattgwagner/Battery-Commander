@@ -203,5 +203,22 @@ namespace BatteryCommander.Web.Controllers
 
             return RedirectToAction("List");
         }
+
+        [Route("~/Qualification/{qualificationId}/Delete")]
+        public async Task<ActionResult> Delete(int qualificationId)
+        {
+            var qual = await _db.Qualifications.SingleAsync(q => q.Id == qualificationId);
+
+            _db.Entry(qual).State = EntityState.Deleted;
+
+            await _db.SaveChangesAsync();
+
+            if (qual.ParentTaskId.HasValue)
+            {
+                return RedirectToAction("View", new { qualificationId = qual.ParentTaskId });
+            }
+
+            return RedirectToAction("List");
+        }
     }
 }
