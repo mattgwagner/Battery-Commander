@@ -217,7 +217,7 @@ namespace BatteryCommander.Web.Controllers
 
             if (parentId.HasValue)
             {
-                return RedirectToAction("View", new { qualificationId = qual.ParentTaskId });
+                return RedirectToAction("View", new { qualificationId = parentId });
             }
 
             return RedirectToAction("List");
