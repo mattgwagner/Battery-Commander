@@ -184,5 +184,33 @@ namespace BatteryCommander.Web.Controllers
 
             return soldier_qual;
         }
+
+        [Route("~/Qualifcation/{qualificationId}/Tasks")]
+        public ActionResult AddTasks(int qualificationId)
+        {
+            ViewBag.QualificationId = qualificationId;
+
+            return View(Enumerable.Range(1, count: 10).Select(i => String.Empty));
+        }
+
+        [Route("~/Qualifcation/Tasks/Save")]
+        public async Task<ActionResult> AddTasks(int qualificationId, IEnumerable<String> tasksToAdd)
+        {
+            foreach (var task in tasksToAdd)
+            {
+                if (!String.IsNullOrWhiteSpace(task))
+                {
+                    _db.Qualifications.Add(new Qualification
+                        {
+                            ParentTaskId = qualificationId,
+                            Name = task
+                        });
+                }
+            }
+
+            await _db.SaveChangesAsync();
+
+            return RedirectToAction("View", new { qualificationId = qualificationId });
+        }
     }
 }

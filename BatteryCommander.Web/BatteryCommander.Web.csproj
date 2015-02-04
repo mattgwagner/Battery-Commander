@@ -229,6 +229,7 @@
     <Content Include="Views\Qualification\Edit.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\SoldierQualification.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Qualification\AddTasks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Task\" />
