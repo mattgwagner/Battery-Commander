@@ -93,7 +93,7 @@
     </thead>
 
     <tbody>
-        @foreach (var qual in Model.Qualifications)
+        @foreach (var qual in Model.Qualifications.OrderBy(q => q.QualificationId))
         {
             <tr>
                 <td>@Html.DisplayFor(q => qual.Qualification)</td>
