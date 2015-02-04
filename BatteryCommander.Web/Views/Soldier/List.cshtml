@@ -14,11 +14,11 @@
 
 <table class="table table-striped">
     <tr>
-        <th>@Html.DisplayNameFor(s => s.FirstOrDefault().Group)</th>
-        <th>@Html.DisplayNameFor(s => s.FirstOrDefault().Position)</th>
         <th>@Html.DisplayNameFor(s => s.FirstOrDefault().Rank)</th>
         <th>@Html.DisplayNameFor(s => s.FirstOrDefault().LastName)</th>
         <th>@Html.DisplayNameFor(s => s.FirstOrDefault().FirstName)</th>
+        <th>@Html.DisplayNameFor(s => s.FirstOrDefault().Group)</th>
+        <th>@Html.DisplayNameFor(s => s.FirstOrDefault().Position)</th>
         <th>@Html.DisplayNameFor(s => s.FirstOrDefault().MOS)</th>
         <th>@Html.DisplayNameFor(s => s.FirstOrDefault().Notes)</th>
         <th></th>
@@ -27,11 +27,11 @@
     @foreach (var soldier in Model)
     {
         <tr>
-            <td>@Html.DisplayFor(s => soldier.Group)</td>
-            <td>@Html.DisplayFor(s => soldier.Position)</td>
             <td>@Html.DisplayFor(s => soldier.Rank, new { UseShortName = true })</td>
             <td>@Html.DisplayFor(s => soldier.LastName)</td>
             <td>@Html.DisplayFor(s => soldier.FirstName)</td>
+            <td>@Html.DisplayFor(s => soldier.Group)</td>
+            <td>@Html.DisplayFor(s => soldier.Position)</td>
             <td>@Html.DisplayFor(s => soldier.MOS, new { UseShortName = true })</td>
             <td>@Html.DisplayFor(s => soldier.Notes)</td>
             <td>@Html.ActionLink("View", "View", new { soldierId = soldier.Id }, new { @class = "btn btn-default" })</td>
