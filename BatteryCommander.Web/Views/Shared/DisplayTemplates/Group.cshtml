@@ -1,0 +1,5 @@
+﻿@model BatteryCommander.Common.Models.Group
+
+@using BatteryCommander.Common;
+
+@Html.ActionLink(Model.DisplayName(), "List", "Soldier", new { groupId = (int)Model }, null)

@@ -23,16 +23,17 @@ namespace BatteryCommander.Web.Controllers
         }
 
         [Route("~/Soldiers")]
-        [OutputCache(Location = OutputCacheLocation.Server, Duration = 60, VaryByParam = "activeOnly")]
-        public ActionResult List(Boolean activeOnly = true)
+        public async Task<ActionResult> List(int? groupId, int? rankId, Boolean activeOnly = true)
         {
             var soldiers =
-                _db
+                await _db
                 .Soldiers
                 .Where(s => !activeOnly || s.Status == SoldierStatus.Active)
+                .Where(s => !groupId.HasValue || s.Group == (Group)groupId.Value)
+                .Where(s => !rankId.HasValue || s.Rank == (Rank)rankId.Value)
                 .OrderBy(s => s.LastName)
                 .ThenBy(s => s.FirstName)
-                .ToList();
+                .ToListAsync();
 
             return View(soldiers);
         }
