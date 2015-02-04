@@ -23,7 +23,7 @@ namespace BatteryCommander.Web.Controllers
         }
 
         [Route("~/Soldiers")]
-        public async Task<ActionResult> List(int? groupId, int? rankId, Boolean activeOnly = true)
+        public async Task<ActionResult> List(int? groupId, int? rankId, int? positionId, Boolean activeOnly = true)
         {
             var soldiers =
                 await _db
@@ -31,6 +31,7 @@ namespace BatteryCommander.Web.Controllers
                 .Where(s => !activeOnly || s.Status == SoldierStatus.Active)
                 .Where(s => !groupId.HasValue || s.Group == (Group)groupId.Value)
                 .Where(s => !rankId.HasValue || s.Rank == (Rank)rankId.Value)
+                .Where(s => !positionId.HasValue || s.Position == (Position)positionId.Value)
                 .OrderBy(s => s.LastName)
                 .ThenBy(s => s.FirstName)
                 .ToListAsync();
