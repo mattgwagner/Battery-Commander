@@ -60,7 +60,7 @@
                 <td>@Html.DisplayFor(s => soldier_qual.Status)</td>
                 <td>@Html.DisplayFor(s => soldier_qual.QualificationDate)</td>
                 <td>@Html.DisplayFor(s => soldier_qual.ExpirationDate)</td>
-                <td>@Html.ActionLink("Edit", "Edit", "SoldierQualification", new { soldierId = soldier_qual.SoldierId, qualificationId = soldier_qual.QualificationId }, null)</td>
+                <td>@Html.ActionLink("Edit", "Edit", "SoldierQualification", new { soldierId = soldier_qual.SoldierId, qualificationId = soldier_qual.QualificationId }, new { @class = "btn btn-default" })</td>
             </tr>
         }
     </tbody>
