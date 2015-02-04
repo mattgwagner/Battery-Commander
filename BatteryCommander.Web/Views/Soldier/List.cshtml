@@ -20,7 +20,6 @@
         <th>@Html.DisplayNameFor(s => s.FirstOrDefault().LastName)</th>
         <th>@Html.DisplayNameFor(s => s.FirstOrDefault().FirstName)</th>
         <th>@Html.DisplayNameFor(s => s.FirstOrDefault().MOS)</th>
-        <th>@Html.DisplayNameFor(s => s.FirstOrDefault().Status)</th>
         <th>@Html.DisplayNameFor(s => s.FirstOrDefault().Notes)</th>
         <th></th>
     </tr>
@@ -33,8 +32,7 @@
             <td>@Html.DisplayFor(s => soldier.Rank, new { UseShortName = true })</td>
             <td>@Html.DisplayFor(s => soldier.LastName)</td>
             <td>@Html.DisplayFor(s => soldier.FirstName)</td>
-            <td>@Html.DisplayFor(s => soldier.MOS)</td>
-            <td>@Html.DisplayFor(s => soldier.Status)</td>
+            <td>@Html.DisplayFor(s => soldier.MOS, new { UseShortName = true })</td>
             <td>@Html.DisplayFor(s => soldier.Notes)</td>
             <td>@Html.ActionLink("View", "View", new { soldierId = soldier.Id })</td>
         </tr>
