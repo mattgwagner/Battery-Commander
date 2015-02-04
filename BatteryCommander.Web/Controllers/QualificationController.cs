@@ -27,6 +27,7 @@ namespace BatteryCommander.Web.Controllers
             var qualifications =
                 await _db
                 .Qualifications
+                .Include(q => q.Tasks)
                 // only show top level quals
                 .Where(q => !q.ParentTaskId.HasValue)
                 .OrderBy(q => q.Name)
