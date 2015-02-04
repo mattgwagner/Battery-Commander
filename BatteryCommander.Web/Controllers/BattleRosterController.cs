@@ -29,7 +29,7 @@ namespace BatteryCommander.Web.Controllers
                     .Include(s => s.Qualifications)
                     .Where(s => s.Status == SoldierStatus.Active)
                     .OrderBy(s => s.Group)
-                    .ThenBy(s => s.Rank)
+                    .ThenByDescending(s => s.Position)
                     .ToListAsync(),
 
                 Qualifications = await _db
