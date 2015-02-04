@@ -20,6 +20,9 @@ namespace BatteryCommander.Web
     {
         protected void Application_Start()
         {
+            ViewEngines.Engines.Clear();
+            ViewEngines.Engines.Add(new RazorViewEngine());
+
             RegisterIoc();
 
             AreaRegistration.RegisterAllAreas();
