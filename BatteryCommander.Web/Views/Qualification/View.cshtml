@@ -14,8 +14,6 @@
     {
         @Html.ActionLink("Back to Parent Task", "View", new { qualificationId = Model.ParentTaskId }, new { @class = "btn btn-info" })
     }
-
-    <a href="~/Qualification/@Model.Id/Update" class="btn btn-default">Bulk Update Soldiers</a>
 </h2>
 
 <table class="table table-bordered">
@@ -41,7 +39,7 @@
 
 <hr />
 
-<h2>@Html.DisplayNameFor(model => model.SoldierQualifications)</h2>
+<h2>@Html.DisplayNameFor(model => model.SoldierQualifications) <a href="~/Qualification/@Model.Id/Update" class="btn btn-default">Bulk Update Soldiers</a></h2>
 
 <table class="table table-striped">
     <thead>
