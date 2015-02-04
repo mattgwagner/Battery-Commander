@@ -91,8 +91,8 @@ namespace BatteryCommander.Web.Controllers
             var soldiers =
                 await _db
                 .Soldiers
-                .OrderBy(s => s.Group)
-                .ThenByDescending(s => s.Rank)
+                .OrderBy(s => s.LastName)
+                .ThenBy(s => s.FirstName)
                 .Select(s => new SoldierEditModel
                 {
                     Id = s.Id,
