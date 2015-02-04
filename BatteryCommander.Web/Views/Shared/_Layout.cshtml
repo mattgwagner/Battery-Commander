@@ -20,11 +20,12 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Soldiers", "List", "Soldier")</li>
-                    <li>@Html.ActionLink("Battle Roster", "Show", "BattleRoster")</li>
+                    <li><a href="@Url.Action("Index", "Home")"><span class="glyphicon glyphicon-home"></span>Home</a></li>
+                    <li><a href="@Url.Action("List", "Soldier")"><span class="glyphicon glyphicon-user"></span>Soldiers</a></li>
+                    <li><a href="@Url.Action("Show", "BattleRoster")"><span class="glyphicon glyphicon-th-list"></span>Battle Roster</a></li>
+                    <li><a href="@Url.Action("List", "Qualification")"><span class="glyphicon glyphicon-check"></span>Qualifications</a></li>
+
                     <!--<li>@Html.ActionLink("Groups", "List", "Group")</li>-->
-                    <li>@Html.ActionLink("Qualifications", "List", "Qualification")</li>
                     <!--<li>@Html.ActionLink("Alerts", "List", "Alert")</li>-->
                     <!--<li>@Html.ActionLink("Work Items", "List", "WorkItem")</li>-->
                 </ul>
