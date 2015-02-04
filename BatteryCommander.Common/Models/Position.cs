@@ -34,9 +34,6 @@ namespace BatteryCommander.Common.Models
         [Display(Name = "Ammo Section Sergeant", ShortName = "AMMO SGT")]
         Ammo_Section_Sergeant,
 
-        [Display(Name = "Ammo Section Chief", ShortName = "AMMO CHF")]
-        Ammo_Section_Chief,
-
         [Display(Name = "Ammo Team Chief", ShortName = "ATC")]
         Ammo_Team_Chief,
 
@@ -51,6 +48,9 @@ namespace BatteryCommander.Common.Models
 
         [Display(Name = "Gunner", ShortName = "G")]
         Gunner,
+
+        [Display(Name = "Field Artillery Tactical Data Specialist", ShortName = "FATDS")]
+        FATDS,
 
         [Display(Name = "Section Chief", ShortName = "CHF")]
         Gun_Section_Chief,
