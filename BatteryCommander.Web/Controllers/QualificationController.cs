@@ -186,7 +186,7 @@ namespace BatteryCommander.Web.Controllers
         [Route("~/Qualification/{qualificationId}/Tasks")]
         public ActionResult AddTasks(int qualificationId)
         {
-            return View(Enumerable.Range(1, count: 15).Select(i => new QualificationEditModel { ParentTaskId = qualificationId }));
+            return View(Enumerable.Range(1, count: 5).Select(i => new QualificationEditModel { ParentTaskId = qualificationId }));
         }
 
         [Route("~/Qualification/Save/Tasks")]
