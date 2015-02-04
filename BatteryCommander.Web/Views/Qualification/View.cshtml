@@ -4,18 +4,19 @@
     ViewBag.Title = "View Qualification";
 }
 
-<h2>@ViewBag.Title</h2>
+<h2>
+    @ViewBag.Title
+    @Html.ActionLink("Back to List", "List", "Qualification", null, new { @class = "btn btn-primary" })
 
-@Html.ActionLink("Back to List", "List", "Qualification", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Edit", "Edit", "Qualification", new { qualificationId = Model.Id }, new { @class = "btn btn-primary" })
 
-@Html.ActionLink("Edit", "Edit", "Qualification", new { qualificationId = Model.Id }, new { @class = "btn btn-primary" })
+    @if (Model.ParentTaskId.HasValue)
+    {
+        @Html.ActionLink("Back to Parent Task", "View", new { qualificationId = Model.ParentTaskId }, new { @class = "btn btn-info" })
+    }
 
-@if (Model.ParentTaskId.HasValue)
-{
-    @Html.ActionLink("Back to Parent Task", "View", new { qualificationId = Model.ParentTaskId }, new { @class = "btn btn-info" })
-}
-
-<a href="~/Qualification/@Model.Id/Update" class="btn btn-danger">Bulk Update Soldiers</a>
+    <a href="~/Qualification/@Model.Id/Update" class="btn btn-default">Bulk Update Soldiers</a>
+</h2>
 
 <table class="table table-bordered">
     @if (Model.ParentTaskId.HasValue)
@@ -72,8 +73,8 @@
 
 <h3>
     @Html.DisplayNameFor(m => m.Tasks)
-    @Html.ActionLink("Add a Subtask", "New", new { parentId = Model.Id }, new { @class = "btn btn-primary" })
-    @Html.ActionLink("Bulk Add Subtasks", "AddTasks", new { qualificationId = Model.Id }, new { @class = "btn btn-warning" })
+    @Html.ActionLink("Add a Subtask", "New", new { parentId = Model.Id }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Bulk Add Subtasks", "AddTasks", new { qualificationId = Model.Id }, new { @class = "btn btn-default" })
 </h3>
 
 <table class="table table-bordered">
