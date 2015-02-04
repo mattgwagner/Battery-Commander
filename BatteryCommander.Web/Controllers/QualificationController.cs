@@ -102,13 +102,16 @@ namespace BatteryCommander.Web.Controllers
             var qualification =
                 await _db
                 .Qualifications
-                .SingleOrDefaultAsync(q => q.Id == qualificationId);
+                .Single(q => q.Id == qualificationId);
+
+            ViewBag.Qualification = qualification;
 
             var soldier_quals = from soldier in _db.Soldiers
                                 join qualifications in _db.SoldierQualifications
                                     .Where(q => q.QualificationId == qualificationId)
                                 on soldier.Id equals qualifications.SoldierId into quals
                                 from soldier_qual in quals.DefaultIfEmpty()
+                                orderby soldier.LastName
                                 select new BulkQualificationUpdateModel
                                 {
                                     QualificationId = qualificationId,

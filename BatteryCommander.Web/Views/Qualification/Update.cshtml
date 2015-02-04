@@ -2,11 +2,18 @@
 
 @{
     ViewBag.Title = "Bulk Update Qualification";
+    
+    var qual = (BatteryCommander.Common.Models.Qualification)ViewBag.Qualification;
 }
 
 <h2>@ViewBag.Title</h2>
 
+<div class="alert alert-info">
+    Bulk Updating Qualifications for @Html.DisplayFor(q => qual).
+</div>
+
 @using (Html.BeginForm("Update", "Qualification", FormMethod.Post))
+
 {
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
