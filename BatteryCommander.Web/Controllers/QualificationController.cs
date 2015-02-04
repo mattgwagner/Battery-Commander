@@ -188,30 +188,19 @@ namespace BatteryCommander.Web.Controllers
         [Route("~/Qualification/{qualificationId}/Tasks")]
         public ActionResult AddTasks(int qualificationId)
         {
-            ViewBag.QualificationId = qualificationId;
-
-            return View(Enumerable.Range(1, count: 10).Select(i => String.Empty));
+            return View(Enumerable.Range(1, count: 15).Select(i => new QualificationEditModel { ParentTaskId = qualificationId }));
         }
 
         [Route("~/Qualification/Save/Tasks")]
         [HttpPost, ValidateAntiForgeryToken]
-        public async Task<ActionResult> AddTasksSave(int qualificationId, IEnumerable<String> tasksToAdd)
+        public async Task<ActionResult> AddTasksSave(IEnumerable<QualificationEditModel> tasksToAdd)
         {
             foreach (var task in tasksToAdd)
             {
-                if (!String.IsNullOrWhiteSpace(task))
-                {
-                    _db.Qualifications.Add(new Qualification
-                        {
-                            ParentTaskId = qualificationId,
-                            Name = task
-                        });
-                }
+                await Save(task);
             }
 
-            await _db.SaveChangesAsync();
-
-            return RedirectToAction("View", new { qualificationId = qualificationId });
+            return RedirectToAction("List");
         }
     }
 }

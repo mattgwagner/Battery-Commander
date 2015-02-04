@@ -1,4 +1,4 @@
-﻿@model IEnumerable<String>
+﻿@model IEnumerable<BatteryCommander.Web.Models.QualificationEditModel>
 
 @{
     ViewBag.Title = "Add Subtasks";
@@ -15,12 +15,11 @@
 @using (Html.BeginForm("AddTasksSave", "Qualification", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    @Html.Hidden("QualificationId", (int)ViewBag.QualificationId);
 
     <table class="table table-bordered">
         @foreach (var i in Model)
         {
-            <tr><td>@Html.EditorFor(m => i)</td></tr>
+            @Html.EditorForModel()
         }
     </table>
 
