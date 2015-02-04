@@ -102,7 +102,7 @@ namespace BatteryCommander.Web.Controllers
             var qualification =
                 await _db
                 .Qualifications
-                .Single(q => q.Id == qualificationId);
+                .SingleAsync(q => q.Id == qualificationId);
 
             ViewBag.Qualification = qualification;
 
