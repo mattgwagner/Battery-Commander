@@ -79,7 +79,7 @@
 
 <table class="table table-bordered">
     <tbody>
-        @foreach (var task in Model.Tasks)
+        @foreach (var task in Model.Tasks.OrderBy(t => t.Name))
         {
             <tr>
                 <td>@Html.DisplayFor(t => task)</td>
