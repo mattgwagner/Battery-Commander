@@ -36,6 +36,7 @@ namespace BatteryCommander.Web.Controllers
 
                 Qualifications = await _db
                     .Qualifications
+                    .Include(q => q.SoldierQualifications)
                     .Where(q => q.ParentTaskId == null)
                     .ToListAsync()
             });
