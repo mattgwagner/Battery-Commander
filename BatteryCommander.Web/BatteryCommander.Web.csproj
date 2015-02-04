@@ -249,6 +249,7 @@
     <Content Include="Views\Shared\EditorTemplates\QualificationEditModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Group.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Position.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Rank.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Task\" />

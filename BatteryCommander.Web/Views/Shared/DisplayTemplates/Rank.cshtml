@@ -1,0 +1,5 @@
+﻿@model BatteryCommander.Common.Models.Rank
+
+@using BatteryCommander.Common;
+
+@Html.ActionLink(Model.DisplayName(), "List", "Soldier", new { rankId = (int)Model }, null)
