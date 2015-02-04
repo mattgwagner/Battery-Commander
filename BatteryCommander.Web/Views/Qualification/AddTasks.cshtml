@@ -17,6 +17,13 @@
     @Html.AntiForgeryToken()
 
     <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(m => m.FirstOrDefault().Name)</th>
+                <th>@Html.DisplayNameFor(m => m.FirstOrDefault().Description)</th>
+            </tr>
+        </thead>
+
         @foreach (var i in Model)
         {
             @Html.EditorForModel()

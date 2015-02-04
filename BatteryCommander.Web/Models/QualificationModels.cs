@@ -13,6 +13,7 @@ namespace BatteryCommander.Web.Models
         [Required, StringLength(100)]
         public String Name { get; set; }
 
+        [DataType(DataType.MultilineText)]
         public String Description { get; set; }
 
         [Display(Name = "Parent Task (if applicable)")]
