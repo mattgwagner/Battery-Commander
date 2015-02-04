@@ -23,7 +23,6 @@ namespace BatteryCommander.Web.Controllers
         }
 
         [Route("~/Qualifications")]
-        [OutputCache(Location = OutputCacheLocation.Server, Duration = 60)]
         public async Task<ActionResult> List()
         {
             var qualifications =

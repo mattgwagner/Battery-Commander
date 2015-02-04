@@ -21,7 +21,7 @@ namespace BatteryCommander.Web.Controllers
         }
 
         [Route("BattleRoster")]
-        [OutputCache(Location = OutputCacheLocation.Server, Duration = 180)]
+        [OutputCache(Location = OutputCacheLocation.Server, Duration = 60)]
         public async Task<ActionResult> Show()
         {
             return View(new BattleRosterModel
