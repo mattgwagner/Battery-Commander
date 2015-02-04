@@ -185,7 +185,7 @@ namespace BatteryCommander.Web.Controllers
             return soldier_qual;
         }
 
-        [Route("~/Qualifcation/{qualificationId}/Tasks")]
+        [Route("~/Qualification/{qualificationId}/Tasks")]
         public ActionResult AddTasks(int qualificationId)
         {
             ViewBag.QualificationId = qualificationId;
@@ -193,9 +193,9 @@ namespace BatteryCommander.Web.Controllers
             return View(Enumerable.Range(1, count: 10).Select(i => String.Empty));
         }
 
-        [Route("~/Qualifcation/Tasks/Save")]
+        [Route("~/Qualification/Save/Tasks")]
         [HttpPost, ValidateAntiForgeryToken]
-        public async Task<ActionResult> AddTasks(int qualificationId, IEnumerable<String> tasksToAdd)
+        public async Task<ActionResult> AddTasksSave(int qualificationId, IEnumerable<String> tasksToAdd)
         {
             foreach (var task in tasksToAdd)
             {
