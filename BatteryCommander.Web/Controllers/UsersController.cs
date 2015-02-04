@@ -33,6 +33,11 @@ namespace BatteryCommander.Web.Controllers
         }
 
         [Route("~/User/New")]
+        public ActionResult New()
+        {
+            return View("Edit", new UserEditModel { });
+        }
+
         [Route("~/User/{userId}/Edit")]
         public async Task<ActionResult> Edit(int? userId)
         {
