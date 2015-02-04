@@ -250,6 +250,7 @@
     <Content Include="Views\Shared\DisplayTemplates\Group.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Position.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Rank.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\MOS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Task\" />
