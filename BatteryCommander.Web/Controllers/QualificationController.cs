@@ -29,6 +29,7 @@ namespace BatteryCommander.Web.Controllers
                 .Qualifications
                 // only show top level quals
                 .Where(q => !q.ParentTaskId.HasValue)
+                .OrderBy(q => q.Name)
                 .ToListAsync();
 
             return View(qualifications);
