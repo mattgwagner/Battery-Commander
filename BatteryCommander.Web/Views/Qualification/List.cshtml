@@ -28,7 +28,7 @@
             <td>@item.SoldierQualifications.Count(q => q.Status == QualificationStatus.Fail)</td>
             <td>@item.SoldierQualifications.Count(q => q.Status == QualificationStatus.Unknown)</td>
             <td>
-                @foreach (var task in item.Tasks)
+                @foreach (var task in item.Tasks.OrderBy(t => t.Name))
                 {
                     <li>@Html.DisplayFor(t => task)</li>
                 }
