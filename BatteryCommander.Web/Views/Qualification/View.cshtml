@@ -6,6 +6,13 @@
 
 <h2>@ViewBag.Title</h2>
 
+@Html.ActionLink("Back to List", "List", "Qualification", null, new { @class = "btn btn-primary" })
+
+@if (Model.ParentTaskId.HasValue)
+{
+    @Html.ActionLink("Back to Parent Task", "View", new { qualificationId = Model.ParentTaskId }, new { @class = "btn btn-info" })
+}
+
 <table class="table table-bordered">
     @if (Model.ParentTaskId.HasValue)
     {
@@ -30,6 +37,8 @@
 <hr />
 
 <h2>@Html.DisplayNameFor(model => model.SoldierQualifications)</h2>
+
+<a href="~/Qualification/@Model.Id/Update" class="btn btn-danger">Bulk Update Soldiers</a>
 
 <table class="table table-striped">
     <thead>
@@ -75,16 +84,3 @@
         }
     </tbody>
 </table>
-
-
-
-
-<p>
-    <a href="~/Qualification/@Model.Id/Update">Bulk Update Soldiers</a> |
-    @Html.ActionLink("Back to List", "List", "Qualification", null, , new { @class = "btn btn-primary" }) |
-
-    @if (Model.ParentTaskId.HasValue)
-    {
-        @Html.ActionLink("Back to Parent Task", "View", new { qualificationId = Model.ParentTaskId }, new { @class = "btn btn-info" })
-    }
-</p>
