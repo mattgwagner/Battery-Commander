@@ -127,6 +127,8 @@ namespace BatteryCommander.Web.Controllers
                 await AddOrUpdate(model);
             }
 
+            await _db.SaveChangesAsync();
+
             return RedirectToAction("List");
         }
 
@@ -137,6 +139,8 @@ namespace BatteryCommander.Web.Controllers
             if (!ModelState.IsValid) return View("Edit", model);
 
             var soldier = await AddOrUpdate(model);
+
+            await _db.SaveChangesAsync();
 
             return RedirectToAction("View", new { soldierId = soldier.Id });
         }
@@ -167,8 +171,6 @@ namespace BatteryCommander.Web.Controllers
             soldier.Group = model.Group;
             soldier.ETSDate = model.ETSDate;
             soldier.Notes = model.Notes;
-
-            await _db.SaveChangesAsync();
 
             return soldier;
         }
