@@ -27,7 +27,7 @@
             <td>@Html.DisplayFor(u => user.AccessFailedCount)</td>
             <td>@Html.DisplayFor(u => user.LockoutEndDate)</td>
             <td>@Html.DisplayFor(u => user.TwoFactorEnabled)</td>
-            <td>@Html.ActionLink("Edit", "Edit", "User", new { userId = user.Id })</td>
+            <td>@Html.ActionLink("Edit", "Edit", new { userId = user.Id })</td>
         </tr>
     }
 </table>
