@@ -7,7 +7,7 @@ namespace BatteryCommander.Common.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(BatteryCommander.Common.DataContext context)

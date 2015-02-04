@@ -59,6 +59,10 @@
   <ItemGroup>
     <Compile Include="DataContext.cs" />
     <Compile Include="ExtensionMethods.cs" />
+    <Compile Include="Migrations\201502041518472_Initial.cs" />
+    <Compile Include="Migrations\201502041518472_Initial.Designer.cs">
+      <DependentUpon>201502041518472_Initial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppUser.cs" />
     <Compile Include="Models\Group.cs" />
@@ -84,6 +88,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201502041518472_Initial.resx">
+      <DependentUpon>201502041518472_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
