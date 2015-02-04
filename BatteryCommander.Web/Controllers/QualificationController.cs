@@ -97,7 +97,7 @@ namespace BatteryCommander.Web.Controllers
         }
 
         [Route("~/Qualification/{qualificationId}/Update")]
-        public async Task<ActionResult> Update(int qualificationId)
+        public async Task<ActionResult> Update(int qualificationId, int? rankId, int? positionId, int? groupId)
         {
             var qualification =
                 await _db
@@ -111,6 +111,7 @@ namespace BatteryCommander.Web.Controllers
                                     .Where(q => q.QualificationId == qualificationId)
                                 on soldier.Id equals qualifications.SoldierId into quals
                                 from soldier_qual in quals.DefaultIfEmpty()
+                                where ((!rankId.HasValue || soldier.Rank == (Rank)rankId.Value) && (!positionId.HasValue || soldier.Position == (Position)positionId.Value) && (!groupId.HasValue || soldier.Group == (Group)groupId.Value))
                                 orderby soldier.LastName
                                 select new BulkQualificationUpdateModel
                                 {
