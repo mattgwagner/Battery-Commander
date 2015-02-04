@@ -7,7 +7,7 @@
 <h2>@ViewBag.Title</h2>
 
 <div class="btn-group" role="group">
-    @Html.ActionLink("Add a Soldier", "Edit", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Add a Soldier", "New", null, new { @class = "btn btn-primary" })
     @Html.ActionLink("Bulk Add/Edit Soldiers", "Bulk", null, new { @class = "btn btn-default" })
     @Html.ActionLink("Include Inactive Soldiers", "List", new { activeOnly = false }, new { @class = "btn btn-default" })
 </div>
