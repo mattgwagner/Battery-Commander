@@ -4,7 +4,7 @@
 {
     var completed = Model.SoldierQualifications.Count(q => q.Status == BatteryCommander.Common.Models.QualificationStatus.Pass);
 
-    var total = Model.SoldierQualifications.Count();
+    var total = Model.SoldierQualifications.Count(q => q.Status != BatteryCommander.Common.Models.QualificationStatus.NotApplicable);
 
     var link_text = String.Format("{0} ({1}/{2})", Model.Name, completed, total);
 
