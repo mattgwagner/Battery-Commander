@@ -29,7 +29,7 @@
         <tr>
             <td>@Html.DisplayFor(s => soldier.Rank, new { UseShortName = true })</td>
             <td>@Html.ActionLink(soldier.LastName, "View", new { soldierId = soldier.Id })</td>
-            <td>@Html.DisplayFor(s => soldier.FirstName)</td>
+            <td>@Html.ActionLink(soldier.FirstName, "View", new { soldierId = soldier.Id })</td>
             <td>@Html.DisplayFor(s => soldier.Group)</td>
             <td>@Html.DisplayFor(s => soldier.Position)</td>
             <td>@Html.DisplayFor(s => soldier.MOS, new { UseShortName = true })</td>
