@@ -29,8 +29,6 @@ $NuGet = Join-Path $SolutionRoot ".nuget\nuget.exe"
 
 $MSBuild ="${env:ProgramFiles(x86)}\MSBuild\12.0\Bin\msbuild.exe"
 
-$ConnectionString = "Data Source=localhost;Initial Catalog=BatteryCommander;Integrated Security=SSPI;"
-
 FormatTaskName (("-"*25) + "[{0}]" + ("-"*25))
 
 Task default -depends Build
@@ -51,19 +49,6 @@ Task Package -depends Restore-Packages, Update-AssemblyInfoFiles {
 	## /p:OctoPackAppendToPackageId="Local/Staging/etc"
 	## /p:OctoPackPublishPackagesToTeamCity="False"
 	## /p:OctoPackPublishApiKey="api-key-here"
-}
-
-Task Push-Dev -depends Build {
-	Push-Code "Dev"
-}
-
-Task Push-Prod -depends Build {
-	Push-Code "Prod"
-}
-
-function Push-Code($Environment)
-{
-	robocopy "$SolutionRoot\BatteryCommander.Web" "\\app-server\Apps\BatteryCommander.$Environment" /mir
 }
 
 Task Restore-Packages -depends Install-BuildTools {
