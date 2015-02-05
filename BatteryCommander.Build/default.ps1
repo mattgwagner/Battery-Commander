@@ -32,6 +32,14 @@ Task Clean {
 	exec { . $MSBuild $SolutionFile /t:Clean /v:quiet }
 }
 
+Task Package -depends Restore-Packages, Update-AssemblyInfoFiles {
+	exec { . $MSBuild $SolutionFile /v:quiet /p:Configuration=$Configuration /p:RunOctoPack="true" /p:OctoPackPackageVersion="$Version" }
+
+	## /p:OctoPackAppendToPackageId="Local/Staging/etc"
+	## /p:OctoPackPublishPackagesToTeamCity="False"
+	## /p:OctoPackPublishApiKey="api-key-here"
+}
+
 Task Push-Dev -depends Build {
 	Push-Code "Dev"
 }
