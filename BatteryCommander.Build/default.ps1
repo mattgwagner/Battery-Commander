@@ -1,12 +1,4 @@
 $PSake.use_exit_on_error = $true
-Properties {
-	## The version format is Major.Minor.Build
-	## The dll will be stamped with the informational version including the changeset
-	$MajorVersion = "0"
-	$MinorVersion = "1"
-	$Version = "$MajorVersion.$MinorVersion.$BuildNumber"
-	$InformationalVersion = "$Version.$CommitHash"
-}
 
 ## This comes from the build server iteration
 if(!$BuildNumber) { $BuildNumber = $env:APPVEYOR_BUILD_NUMBER }
@@ -19,6 +11,9 @@ if(!$CommitHash) { $CommitHash = "local-build" }
 ## The build configuration, i.e. Debug/Release
 if(!$Configuration) { $Configuration = $env:Configuration }
 if(!$Configuration) { $Configuration = "Release" }
+
+if(!$Version) { $Version = $env:APPVEYOR_BUILD_VERSION }
+if(!$Version) { $Version = "0.1.$BuildNumber" }
 
 $Here = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
 
