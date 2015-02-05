@@ -41,8 +41,8 @@
                 <td>@Html.DisplayFor(m => soldier.Group)</td>
                 <td>@Html.DisplayFor(m => soldier.Position, new { UseShortName = true })</td>
                 <td>@Html.DisplayFor(m => soldier.Rank, new { UseShortName = true })</td>
-                <td>@Html.DisplayFor(m => soldier.LastName)</td>
-                <td>@Html.DisplayFor(m => soldier.FirstName)</td>
+                <td>@Html.ActionLink(soldier.LastName, "View", "Soldier", new { soldierId = soldier.Id }, null)</td>
+                <td>@Html.ActionLink(soldier.FirstName, "View", "Soldier", new { soldierId = soldier.Id }, null)</td>
                 <td>@Html.DisplayFor(m => soldier.ETSDate)</td>
                 <td>@Html.DisplayFor(m => soldier.MOS, new { UseShortName = true })</td>
                 <td>@Html.DisplayFor(m => soldier.IsDutyMOSQualified)</td>
