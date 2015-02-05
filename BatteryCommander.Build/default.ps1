@@ -48,7 +48,7 @@ Task Clean {
 }
 
 Task Package -depends Restore-Packages, Update-AssemblyInfoFiles {
-	exec { . $MSBuild $SolutionFile /v:quiet /p:Configuration=$Configuration /p:RunOctoPack="true" /p:OctoPackPackageVersion="$Version" }
+	exec { . $MSBuild $SolutionFile /v:minimal /p:Configuration=$Configuration /p:RunOctoPack="true" /p:OctoPackPackageVersion="$Version" }
 
 	## /p:OctoPackAppendToPackageId="Local/Staging/etc"
 	## /p:OctoPackPublishPackagesToTeamCity="False"
