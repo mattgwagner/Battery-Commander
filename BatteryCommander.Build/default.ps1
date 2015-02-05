@@ -1,5 +1,20 @@
 $PSake.use_exit_on_error = $true
+Properties {
+	## The version format is Major.Minor.Build
+	## The dll will be stamped with the informational version including the changeset
+	$MajorVersion = "0"
+	$MinorVersion = "1"
+	$Version = "$MajorVersion.$MinorVersion.$BuildNumber"
+	$InformationalVersion = "$Version.$CommitHash"
+}
 
+## This comes from the build server iteration
+if(!$BuildNumber) { $BuildNumber = "0" }
+
+## This comes from the Hg commit hash used to build
+if(!$CommitHash) { $CommitHash = "local-build" }
+
+## The build configuration, i.e. Debug/Release
 if(!$Configuration) { $Configuration = "Debug" }
 
 $Here = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
