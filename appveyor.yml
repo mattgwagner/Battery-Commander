@@ -23,7 +23,7 @@ configuration: Release
 
 # to run your custom scripts instead of automatic MSBuild
 build_script:
-  - cmd: .\build.bat
+  - cmd: .\build.bat Package "@{BuildNumber='{APPVEYOR_BUILD_VERSION}';CommitHash='{APPVEYOR_REPO_COMMIT}';Configuration='Release'}"
 
 assembly_info:
   patch: true
