@@ -9,13 +9,13 @@ Properties {
 }
 
 ## This comes from the build server iteration
-if(!$BuildNumber) { $BuildNumber = "0" }
+if(!$BuildNumber) { $BuildNumber = $env:APPVEYOR_BUILD_NUMBER }
 
 ## This comes from the Hg commit hash used to build
-if(!$CommitHash) { $CommitHash = "local-build" }
+if(!$CommitHash) { $CommitHash = $env:APPVEYOR_REPO_COMMIT }
 
 ## The build configuration, i.e. Debug/Release
-if(!$Configuration) { $Configuration = "Debug" }
+if(!$Configuration) { $Configuration = $env:Configuration }
 
 $Here = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
 
