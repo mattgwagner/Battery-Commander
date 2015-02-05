@@ -31,3 +31,6 @@ assembly_info:
   assembly_version: "{version}"
   assembly_file_version: "{version}"
   assembly_informational_version: "{version}"
+
+  before_deploy:
+  - ps: Push-AppveyorArtifact "BatteryCommander.Web.$($env:APPVEYOR_BUILD_VERSION).nupkg"
