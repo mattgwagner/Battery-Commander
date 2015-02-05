@@ -85,6 +85,7 @@
     <Compile Include="Services\Notifications\SMSService.cs" />
     <Compile Include="Services\Users\UserManager.cs" />
     <Compile Include="Services\Users\UserService.cs" />
+    <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
