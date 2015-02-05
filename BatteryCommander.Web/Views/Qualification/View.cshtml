@@ -6,6 +6,9 @@
 
 <h2>
     @ViewBag.Title
+</h2>
+
+<div class="btn-group" role="group">
     @Html.ActionLink("Back to List", "List", "Qualification", null, new { @class = "btn btn-primary" })
 
     @Html.ActionLink("Edit", "Edit", "Qualification", new { qualificationId = Model.Id }, new { @class = "btn btn-primary" })
@@ -14,7 +17,9 @@
     {
         @Html.ActionLink("Back to Parent Task", "View", new { qualificationId = Model.ParentTaskId }, new { @class = "btn btn-info" })
     }
-</h2>
+
+    @Html.ActionLink("Delete Task", "Delete", new { qualificationId = Model.Id }, new { @class = "btn btn-danger" })
+</div>
 
 <table class="table table-bordered">
     @if (Model.ParentTaskId.HasValue)
@@ -39,7 +44,26 @@
 
 <hr />
 
-<h2>@Html.DisplayNameFor(model => model.SoldierQualifications) <a href="~/Qualification/@Model.Id/Update" class="btn btn-default">Bulk Update Soldiers</a></h2>
+<h3>
+    @Html.DisplayNameFor(m => m.Tasks)
+    @Html.ActionLink("Add a Subtask", "New", new { parentId = Model.Id }, new { @class = "btn btn-default btn-xs" })
+    @Html.ActionLink("Bulk Add Subtasks", "AddTasks", new { qualificationId = Model.Id }, new { @class = "btn btn-default btn-xs" })
+</h3>
+
+<table class="table table-bordered">
+    <tbody>
+        @foreach (var task in Model.Tasks.OrderBy(t => t.Name))
+        {
+            <tr>
+                <td>@Html.DisplayFor(t => task)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<hr />
+
+<h2>@Html.DisplayNameFor(model => model.SoldierQualifications) <a href="~/Qualification/@Model.Id/Update" class="btn btn-default btn-xs">Bulk Update Soldiers</a></h2>
 
 <table class="table table-striped">
     <thead>
@@ -66,24 +90,3 @@
     </tbody>
 
 </table>
-
-<hr />
-
-<h3>
-    @Html.DisplayNameFor(m => m.Tasks)
-    @Html.ActionLink("Add a Subtask", "New", new { parentId = Model.Id }, new { @class = "btn btn-default" })
-    @Html.ActionLink("Bulk Add Subtasks", "AddTasks", new { qualificationId = Model.Id }, new { @class = "btn btn-default" })
-</h3>
-
-<table class="table table-bordered">
-    <tbody>
-        @foreach (var task in Model.Tasks.OrderBy(t => t.Name))
-        {
-            <tr>
-                <td>@Html.DisplayFor(t => task)</td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-@Html.ActionLink("Delete Task", "Delete", new { qualificationId = Model.Id }, new { @class = "btn btn-danger" })
