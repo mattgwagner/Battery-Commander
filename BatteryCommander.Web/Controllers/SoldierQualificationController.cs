@@ -150,7 +150,7 @@ namespace BatteryCommander.Web.Controllers
 
         private IEnumerable<SelectListItem> GetQuals()
         {
-            foreach (var qual in _db.Qualifications.OrderBy(q => q.Name))
+            foreach (var qual in _db.Qualifications.OrderBy(q => q.ParentTaskId).ThenBy(q => q.Name))
             {
                 if (qual.ParentTaskId.HasValue)
                 {
