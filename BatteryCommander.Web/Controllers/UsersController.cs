@@ -81,6 +81,8 @@ namespace BatteryCommander.Web.Controllers
             user.PhoneNumber = model.PhoneNumber;
             user.TwoFactorEnabled = model.TwoFactorEnabled;
             user.LastUpdated = DateTime.UtcNow;
+            user.LockoutEndDate = null;
+            user.AccessFailedCount = 0;
 
             if (!String.IsNullOrWhiteSpace(model.Password))
             {
