@@ -125,7 +125,7 @@ namespace BatteryCommander.Web.Controllers
                                     SoldierId = soldier.Id,
                                     Soldier = soldier,
 
-                                    QualificationDate = (soldier_qual != null ? soldier_qual.QualificationDate : DateTime.Today),
+                                    QualificationDate = ((soldier_qual != null || soldier_qual.QualificationDate != DateTime.MinValue) ? soldier_qual.QualificationDate : DateTime.Today),
                                     ExpirationDate = (soldier_qual != null ? soldier_qual.ExpirationDate : null),
                                     Status = (soldier_qual != null ? soldier_qual.Status : QualificationStatus.Unknown),
                                     Comments = (soldier_qual != null ? soldier_qual.Comments : String.Empty)

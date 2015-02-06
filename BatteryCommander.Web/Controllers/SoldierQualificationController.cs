@@ -141,7 +141,7 @@ namespace BatteryCommander.Web.Controllers
             }
 
             qual.Status = model.Status;
-            qual.QualificationDate = model.QualificationDate;
+            qual.QualificationDate = model.QualificationDate == DateTime.MinValue ? DateTime.Today : model.QualificationDate;
             qual.ExpirationDate = model.ExpirationDate;
             qual.Comments = model.Comments;
 
