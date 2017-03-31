@@ -49,6 +49,7 @@ namespace BatteryCommander.Web.Controllers
             return View(await db.Evaluations.FindAsync(id));
         }
 
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Save(Evaluation model)
         {
             var evaluation = await db.Evaluations.FindAsync(model.Id);
