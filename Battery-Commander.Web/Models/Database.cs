@@ -4,7 +4,9 @@ namespace BatteryCommander.Web.Models
 {
     public class Database : DbContext
     {
-        private DbSet<Soldier> Soldiers { get; set; }
+        public DbSet<Soldier> Soldiers { get; set; }
+
+        public DbSet<Evaluation> Evaluations { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
