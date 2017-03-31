@@ -58,7 +58,8 @@ namespace BatteryCommander.Web.Controllers
             return View(await db.APFTs.FindAsync(id));
         }
 
-        public async Task<IActionResult> Save(APFT model)
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> Save([Bind("Id,SoldierId,Date,PushUps,SitUps,Run")]APFT model)
         {
             var apft = await db.APFTs.FindAsync(model.Id);
 
