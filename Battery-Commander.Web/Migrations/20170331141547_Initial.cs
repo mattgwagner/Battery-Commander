@@ -9,6 +9,19 @@ namespace BatteryCommander.Web.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Units",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Units", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Soldiers",
                 columns: table => new
                 {
@@ -21,11 +34,41 @@ namespace BatteryCommander.Web.Migrations
                     Gender = table.Column<byte>(nullable: false),
                     LastName = table.Column<string>(maxLength: 50, nullable: false),
                     MilitaryEmail = table.Column<string>(maxLength: 50, nullable: true),
-                    Rank = table.Column<byte>(nullable: false)
+                    Rank = table.Column<byte>(nullable: false),
+                    UnitId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Soldiers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Soldiers_Units_UnitId",
+                        column: x => x.UnitId,
+                        principalTable: "Units",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "APFTs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Date = table.Column<DateTime>(type: "date", nullable: false),
+                    PushUps = table.Column<int>(nullable: false),
+                    RunSeconds = table.Column<int>(nullable: false),
+                    SitUps = table.Column<int>(nullable: false),
+                    SoldierId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_APFTs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_APFTs_Soldiers_SoldierId",
+                        column: x => x.SoldierId,
+                        principalTable: "Soldiers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -88,6 +131,11 @@ namespace BatteryCommander.Web.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_APFTs_SoldierId",
+                table: "APFTs",
+                column: "SoldierId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Evaluations_RateeId",
                 table: "Evaluations",
                 column: "RateeId");
@@ -106,10 +154,18 @@ namespace BatteryCommander.Web.Migrations
                 name: "IX_Event_EvaluationId",
                 table: "Event",
                 column: "EvaluationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Soldiers_UnitId",
+                table: "Soldiers",
+                column: "UnitId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "APFTs");
+
             migrationBuilder.DropTable(
                 name: "Event");
 
@@ -118,6 +174,9 @@ namespace BatteryCommander.Web.Migrations
 
             migrationBuilder.DropTable(
                 name: "Soldiers");
+
+            migrationBuilder.DropTable(
+                name: "Units");
         }
     }
 }

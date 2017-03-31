@@ -8,8 +8,8 @@ using BatteryCommander.Web.Models;
 namespace BatteryCommander.Web.Migrations
 {
     [DbContext(typeof(Database))]
-    [Migration("20170331141318_Unit")]
-    partial class Unit
+    [Migration("20170331141547_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
