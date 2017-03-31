@@ -9,6 +9,13 @@ namespace BatteryCommander.Web.Services
 {
     public class PDFService
     {
+        static PDFService()
+        {
+            // Who needs the owner password?
+
+            PdfReader.AllowOpenWithFullPermissions = true;
+        }
+
         public static byte[] Generate_DA4856(Counseling model)
         {
             const String prefix = "form1[0]";
