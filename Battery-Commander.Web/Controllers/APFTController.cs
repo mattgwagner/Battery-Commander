@@ -42,7 +42,7 @@ namespace BatteryCommander.Web.Controllers
         {
             var apft = await Get(db, id);
 
-            var filename = $"{apft.Soldier.Unit}_DA4856_APFT_{apft.Soldier.LastName}_{apft.Date:yyyyMMdd}.pdf";
+            var filename = $"{apft.Soldier.Unit.Name}_DA4856_APFT_{apft.Soldier.LastName}_{apft.Date:yyyyMMdd}.pdf";
 
             return File(apft.GenerateCounseling(), "application/pdf", filename);
         }
