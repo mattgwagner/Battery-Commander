@@ -24,30 +24,30 @@ namespace BatteryCommander.Web.Models
         [Required, DataType(DataType.Date), Column(TypeName = "date")]
         public DateTime Date { get; set; } = DateTime.Today;
 
-        public AgeGroup AgeGroup
+        public APFTAgeGroup AgeGroup
         {
             get
             {
                 int? Age = Soldier?.AgeAsOf(Date);
 
-                if (Age <= 21) return AgeGroup.Group_17_to_21;
-                if (Age <= 26) return AgeGroup.Group_22_to_26;
-                if (Age <= 31) return AgeGroup.Group_27_to_31;
-                if (Age <= 36) return AgeGroup.Group_32_to_36;
-                if (Age <= 41) return AgeGroup.Group_37_to_41;
-                if (Age <= 46) return AgeGroup.Group_42_to_46;
-                if (Age <= 51) return AgeGroup.Group_47_to_51;
-                if (Age <= 56) return AgeGroup.Group_52_to_56;
-                if (Age <= 61) return AgeGroup.Group_57_to_61;
+                if (Age <= 21) return APFTAgeGroup.Group_17_to_21;
+                if (Age <= 26) return APFTAgeGroup.Group_22_to_26;
+                if (Age <= 31) return APFTAgeGroup.Group_27_to_31;
+                if (Age <= 36) return APFTAgeGroup.Group_32_to_36;
+                if (Age <= 41) return APFTAgeGroup.Group_37_to_41;
+                if (Age <= 46) return APFTAgeGroup.Group_42_to_46;
+                if (Age <= 51) return APFTAgeGroup.Group_47_to_51;
+                if (Age <= 56) return APFTAgeGroup.Group_52_to_56;
+                if (Age <= 61) return APFTAgeGroup.Group_57_to_61;
 
-                return AgeGroup.Group_62_Plus;
+                return APFTAgeGroup.Group_62_Plus;
             }
         }
 
-        [Range(0, int.MaxValue)]
+        [Range(0, 200)]
         public int PushUps { get; set; }
 
-        [Range(0, int.MaxValue)]
+        [Range(0, 200)]
         public int SitUps { get; set; }
 
         [Range(0, int.MaxValue)]
@@ -170,7 +170,7 @@ Policy Inefficiency is a demonstration of characteristics that shows that the pe
         Bike_Stationary
     }
 
-    public enum AgeGroup : byte
+    public enum APFTAgeGroup : byte
     {
         [Display(Name = "17-21")]
         Group_17_to_21,

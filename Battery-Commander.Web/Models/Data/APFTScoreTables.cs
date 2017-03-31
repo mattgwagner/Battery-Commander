@@ -9,7 +9,7 @@
 
     public class APFTScoreTables
     {
-        private static IEnumerable<AgeGroup> AgeGroups { get { return Enum.GetValues(typeof(AgeGroup)).Cast<AgeGroup>(); } }
+        private static IEnumerable<APFTAgeGroup> AgeGroups { get { return Enum.GetValues(typeof(APFTAgeGroup)).Cast<APFTAgeGroup>(); } }
 
         public static IEnumerable<Entry> PushUps
         {
@@ -125,7 +125,7 @@
 
         public class Entry
         {
-            public AgeGroup AgeGroup { get; set; }
+            public APFTAgeGroup AgeGroup { get; set; }
 
             public Gender Gender { get; set; }
 
