@@ -1,49 +1,14 @@
-﻿@model Soldier
+﻿@model Unit
 
-@using (Html.BeginForm("Save", "Soldier", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Save", "Unit", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.Id)
     @Html.ValidationSummary()
 
     <div class="form-group form-group-lg">
-        @Html.DisplayNameFor(model => model.LastName)
-        @Html.EditorFor(model => model.LastName)
-    </div>
-
-    <div class="form-group form-group-lg">
-        @Html.DisplayNameFor(model => model.FirstName)
-        @Html.EditorFor(model => model.FirstName)
-    </div>
-
-    <div class="form-group form-group-lg">
-        @Html.DisplayNameFor(model => model.Rank)
-        @Html.DropDownListFor(model => model.Rank, Html.GetEnumSelectList<Rank>())
-    </div>
-
-    <div class="form-group form-group-lg">
-        @Html.DisplayNameFor(model => model.DoDId)
-        @Html.EditorFor(model => model.DoDId)
-    </div>
-
-    <div class="form-group form-group-lg">
-        @Html.DisplayNameFor(model => model.MilitaryEmail)
-        @Html.EditorFor(model => model.MilitaryEmail)
-    </div>
-
-    <div class="form-group form-group-lg">
-        @Html.DisplayNameFor(model => model.CivilianEmail)
-        @Html.EditorFor(model => model.CivilianEmail)
-    </div>
-
-    <div class="form-group form-group-lg">
-        @Html.DisplayNameFor(model => model.DateOfBirth)
-        @Html.EditorFor(model => model.DateOfBirth)
-    </div>
-
-    <div class="form-group form-group-lg">
-        @Html.DisplayNameFor(model => model.Gender)
-        @Html.DropDownListFor(model => model.Gender, Html.GetEnumSelectList<Gender>())
+        @Html.DisplayNameFor(model => model.Name)
+        @Html.EditorFor(model => model.Name)
     </div>
 
     <button type="submit">Save</button>

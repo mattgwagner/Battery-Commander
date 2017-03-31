@@ -1,27 +1,23 @@
-﻿@model IEnumerable<Soldier>
+﻿@model IEnumerable<Unit>
 
 <h2>Soldiers</h2>
 
-@Html.ActionLink("Add New Soldier", "New")
+@Html.ActionLink("Add New Unit", "New")
 
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Rank)</th>
-            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().LastName)</th>
-            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().FirstName)</th>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Name)</th>
             <th></th>
         </tr>
     </thead>
 
     <tbody>
-        @foreach (var soldier in Model)
+        @foreach (var unit in Model)
         {
             <tr>
-                <td>@Html.DisplayFor(s => soldier.Rank)</td>
-                <td>@Html.DisplayFor(s => soldier.LastName)</td>
-                <td>@Html.DisplayFor(s => soldier.FirstName)</td>
-                <td>@Html.ActionLink("Details", "Details", new { soldier.Id })</td>
+                <td>@Html.DisplayFor(s => unit.Name)</td>
+                <td>@Html.ActionLink("Edit", "Edit", new { unit.Id })</td>
             </tr>
         }
     </tbody>
