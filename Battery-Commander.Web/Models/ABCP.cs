@@ -47,6 +47,7 @@ namespace BatteryCommander.Web.Models
                     .ScreeningWeights
                     .Where(_ => _.AgeGroup == AgeGroup)
                     .Where(_ => _.Gender == Soldier?.Gender)
+                    .Where(_ => _.Height == Math.Round(Height, decimals: 0, mode: MidpointRounding.AwayFromZero))
                     .Select(_ => _.Weight)
                     .SingleOrDefault();
             }
