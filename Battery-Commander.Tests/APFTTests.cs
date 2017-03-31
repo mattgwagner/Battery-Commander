@@ -71,7 +71,8 @@ namespace BatteryCommander.Tests
                         Rank = Rank.O2,
                         LastName = "Wagner",
                         FirstName = "Matthew",
-                        DateOfBirth = new DateTime(1987, 5, 5)
+                        DateOfBirth = new DateTime(1987, 5, 5),
+                        Unit = new Unit { Name = "A/2/116 FA" }
                     },
                     PushUps = 45,
                     SitUps = 60,
