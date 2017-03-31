@@ -1,0 +1,7 @@
+﻿@model Soldier
+
+@{
+    var display = $"{Model.Rank.ShortName()} {Model.LastName}, {Model.FirstName}";
+}
+
+<div>@display</div>
