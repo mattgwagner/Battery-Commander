@@ -116,12 +116,9 @@ namespace BatteryCommander.Web.Models
         {
             return PDFService.Generate_DA4856(new PDFService.Counseling
             {
-                // TODO Soldier Organization
-
-                Organization = "A BTRY 2-116TH FA",
-
                 Name = $"{Soldier.LastName}, {Soldier.FirstName}",
                 Rank = Soldier.Rank,
+                Organization = $"{Soldier.Unit.Name}",
                 Date = Date,
 
                 Purpose = $@"This counseling is for the failure of a record APFT on {Date:yyyy-MM-dd}. This counseling also outlines the actions that must be taken in the event of continuous APFT failures in accordance with AR 135-187, and AR 350-1, and AR 600-8-19 in order to increase Soldier awareness.
