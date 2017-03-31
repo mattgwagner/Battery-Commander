@@ -27,6 +27,7 @@ namespace BatteryCommander.Web.Controllers
                 await db
                 .APFTs
                 .OrderByDescending(apft => apft.Date)
+                .Include(apft => apft.Soldier)
                 .ToListAsync();
 
             return View("List", tests);
@@ -34,12 +35,12 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> Details(int id)
         {
-            return View(await db.APFTs.FindAsync(id));
+            return View(await Get(db, id));
         }
 
         public async Task<IActionResult> Counseling(int id)
         {
-            var apft = await db.APFTs.FindAsync(id);
+            var apft = await Get(db, id);
 
             return File(apft.GenerateCounseling(), "application/pdf");
         }
@@ -55,13 +56,13 @@ namespace BatteryCommander.Web.Controllers
         {
             ViewBag.Soldiers = await SoldiersController.GetDropDownList(db);
 
-            return View(await db.APFTs.FindAsync(id));
+            return View(await Get(db, id));
         }
 
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Save([Bind("Id,SoldierId,Date,PushUps,SitUps,Run")]APFT model)
         {
-            var apft = await db.APFTs.FindAsync(model.Id);
+            var apft = await Get(db, model.Id);
 
             if (apft == null)
             {
@@ -75,6 +76,16 @@ namespace BatteryCommander.Web.Controllers
             await db.SaveChangesAsync();
 
             return RedirectToAction(nameof(Details), model.Id);
+        }
+
+        public static async Task<APFT> Get(Database db, int id)
+        {
+            return
+                await db
+                .APFTs
+                .Include(_ => _.Soldier)
+                .Where(_ => _.Id == id)
+                .SingleOrDefaultAsync();
         }
     }
 }
