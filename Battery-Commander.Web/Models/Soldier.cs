@@ -6,6 +6,8 @@ namespace BatteryCommander.Web.Models
 {
     public class Soldier
     {
+        private const double DaysPerYear = 365.2425;
+
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
@@ -30,6 +32,18 @@ namespace BatteryCommander.Web.Models
 
         [DataType(DataType.Date), Column(TypeName = "date")]
         public DateTime DateOfBirth { get; set; }
+
+        public int Age => AgeAsOf(DateTime.Today);
+
+        public int AgeAsOf(DateTime date)
+        {
+            // They may not have reached their birthday for this year
+
+            return (int)((date - DateOfBirth).TotalDays / DaysPerYear);
+        }
+
+        [Required]
+        public Gender Gender { get; set; } = Gender.Male;
 
         // Status - Active, Inactive
 
