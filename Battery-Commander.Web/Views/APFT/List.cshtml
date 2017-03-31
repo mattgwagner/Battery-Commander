@@ -6,7 +6,6 @@
     <thead>
         <tr>
             <th></th>
-            <th></th>
         </tr>
     </thead>
 
@@ -14,7 +13,13 @@
         @foreach (var model in Model)
         {
             <tr>
-                <td></td>
+                <td>@Html.DisplayFor(_ => model.Soldier)</td>
+                <td>@Html.DisplayFor(_ => model.Date)</td>
+                <td>@Html.DisplayFor(_ => model.PushUps)</td>
+                <td>@Html.DisplayFor(_ => model.SitUps)</td>
+                <td>@Html.DisplayFor(_ => model.Run)</td>
+                <td>@Html.DisplayFor(_ => model.TotalScore)</td>
+                <td>@Html.DisplayFor(_ => model.IsPassing)</td>
             </tr>
         }
     </tbody>
