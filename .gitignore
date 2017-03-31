@@ -106,3 +106,4 @@ packages/*
 
 *.userprefs
 appsettings.*.json
+/.vs
