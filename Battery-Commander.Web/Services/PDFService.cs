@@ -37,10 +37,10 @@ namespace BatteryCommander.Web.Services
                 form.SetField($"{prefix}.Page1[0].Key_Points_Disscussion[0]", model.KeyPointsOfDiscussion);
                 form.SetField($"{prefix}.Page1[0].Date_Counseling[0]", model.Date.ToString("yyyy-MM-dd"));
                 form.SetField($"{prefix}.Page1[0].Rank_Grade[0]", model.Rank.DisplayName());
-                form.SetField($"{prefix}.Page1[0].Leader_Responsibilities[0]", model.Name);
+                form.SetField($"{prefix}.Page2[0].Leader_Responsibilities[0]", model.Name);
                 form.SetField($"{prefix}.Page1[0].Purpose_Counseling[0]", model.Purpose);
                 form.SetField($"{prefix}.Page1[0].Organization[0]", model.Organization);
-                form.SetField($"{prefix}.Page1[0].Plan_Action[0]", model.PlanOfAction);
+                form.SetField($"{prefix}.Page2[0].Plan_Action[0]", model.PlanOfAction);
 
                 return output.ToArray();
             }
