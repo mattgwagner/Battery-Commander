@@ -1,6 +1,6 @@
 ﻿@model APFT
 
-@using (Html.BeginForm("Edit", "APFT", FormMethod.Post, new { @class = "form-horizontal" role = "form" }))
+@using (Html.BeginForm("Save", "APFT", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.Id)
