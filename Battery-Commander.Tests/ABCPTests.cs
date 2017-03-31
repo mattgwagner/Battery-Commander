@@ -67,5 +67,32 @@ namespace BatteryCommander.Tests
 
             Assert.Equal(47, score.BodyFatPercentage);
         }
+
+        [Fact]
+        public void Generate_Male_Counseling()
+        {
+            var score = new ABCP
+            {
+                Soldier = new Soldier
+                {
+                    FirstName = "Joe",
+                    LastName = "Snuffy",
+                    Rank = Rank.E2,
+                    Gender = Gender.Male,
+                    DateOfBirth = DateTime.Today.AddYears(-38)
+                },
+                Date = DateTime.Today,
+                Height = 69,
+                Weight = 192,
+                Measurements = new[]
+                {
+                    new Measurement {  Neck = 17.5d, Waist = 39 },
+                    new Measurement {  Neck = 18, Waist = 39 },
+                    new Measurement {  Neck = 17.5d, Waist = 39 }
+                }
+            };
+
+            score.GenerateCounseling();
+        }
     }
 }

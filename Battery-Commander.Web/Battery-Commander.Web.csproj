@@ -9,6 +9,8 @@
   <ItemGroup>
     <None Remove="Models\Data\ABCP.csv" />
     <None Remove="Models\Data\DA4856.pdf" />
+    <None Remove="Models\Data\DA5500.pdf" />
+    <None Remove="Models\Data\DA5501.pdf" />
     <None Remove="Models\Data\PushUps.csv" />
     <None Remove="Models\Data\Run.csv" />
     <None Remove="Models\Data\SitUps.csv" />
@@ -17,6 +19,8 @@
   <ItemGroup>
     <EmbeddedResource Include="Models\Data\ABCP.csv" />
     <EmbeddedResource Include="Models\Data\DA4856.pdf" />
+    <EmbeddedResource Include="Models\Data\DA5500.pdf" />
+    <EmbeddedResource Include="Models\Data\DA5501.pdf" />
     <EmbeddedResource Include="Models\Data\PushUps.csv" />
     <EmbeddedResource Include="Models\Data\Run.csv" />
     <EmbeddedResource Include="Models\Data\SitUps.csv" />

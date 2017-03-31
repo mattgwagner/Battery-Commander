@@ -1,4 +1,5 @@
 ﻿using BatteryCommander.Web.Models.Data;
+using BatteryCommander.Web.Services;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -70,11 +71,11 @@ namespace BatteryCommander.Web.Models
             set { MeasurementsJson = JsonConvert.SerializeObject(value); }
         }
 
-        public Double WaistAverage => Measurements.Select(_ => _.Waist).Average();
+        public Double WaistAverage => Average_To_Half(Measurements.Select(_ => _.Waist));
 
-        public Double NeckAverage => Measurements.Select(_ => _.Neck).Average();
+        public Double NeckAverage => Average_To_Half(Measurements.Select(_ => _.Neck));
 
-        public Double HipAverage => Measurements.Select(_ => _.Hips).Average();
+        public Double HipAverage => Average_To_Half(Measurements.Select(_ => _.Hips));
 
         public String MeasurementsJson { get; set; } = String.Empty;
 
@@ -136,6 +137,24 @@ namespace BatteryCommander.Web.Models
 
             [Range(0, 50)]
             public Double Hips { get; set; }
+        }
+
+        public byte[] GenerateCounseling()
+        {
+            switch (Soldier?.Gender)
+            {
+                case Gender.Female:
+                    return PDFService.Generate_DA5501(this);
+
+                case Gender.Male:
+                default:
+                    return PDFService.Generate_DA5500(this);
+            }
+        }
+
+        private static Double Average_To_Half(IEnumerable<Double> values)
+        {
+            return Math.Round(values.Average() * 2, MidpointRounding.AwayFromZero) / 2;
         }
     }
 

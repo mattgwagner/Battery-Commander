@@ -1,6 +1,7 @@
 ﻿using BatteryCommander.Web.Models;
 using iTextSharp.text.pdf;
 using System;
+using System.Collections;
 using System.IO;
 using System.Reflection;
 
@@ -41,6 +42,62 @@ namespace BatteryCommander.Web.Services
                 form.SetField($"{prefix}.Page1[0].Purpose_Counseling[0]", model.Purpose);
                 form.SetField($"{prefix}.Page1[0].Organization[0]", model.Organization);
                 form.SetField($"{prefix}.Page2[0].Plan_Action[0]", model.PlanOfAction);
+
+                stamper.Close();
+
+                return output.ToArray();
+            }
+        }
+
+        public static byte[] Generate_DA5500(ABCP model)
+        {
+            const String prefix = "form1[0]";
+
+            using (var stream = typeof(Program).GetTypeInfo().Assembly.GetManifestResourceStream("BatteryCommander.Web.Models.Data.DA5500.pdf"))
+            using (var output = new MemoryStream())
+            {
+                var reader = new PdfReader(stream);
+                var stamper = new PdfStamper(reader, output);
+
+                var form = stamper.AcroFields;
+
+                foreach (DictionaryEntry k in form.Fields)
+                {
+                    Console.WriteLine(k.Key);
+                }
+
+                // Update the form fields as appropriate
+
+                // form.SetField($"{prefix}.Page1[0].Name[0]", model.Name);
+
+                stamper.Close();
+
+                return output.ToArray();
+            }
+        }
+
+        public static byte[] Generate_DA5501(ABCP model)
+        {
+            const String prefix = "form1[0]";
+
+            using (var stream = typeof(Program).GetTypeInfo().Assembly.GetManifestResourceStream("BatteryCommander.Web.Models.Data.DA5501.pdf"))
+            using (var output = new MemoryStream())
+            {
+                var reader = new PdfReader(stream);
+                var stamper = new PdfStamper(reader, output);
+
+                var form = stamper.AcroFields;
+
+                foreach (DictionaryEntry k in form.Fields)
+                {
+                    Console.WriteLine(k.Key);
+                }
+
+                // Update the form fields as appropriate
+
+                // form.SetField($"{prefix}.Page1[0].Name[0]", model.Name);
+
+                throw new NotImplementedException();
 
                 stamper.Close();
 
