@@ -7,18 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Models\Data\DA4856.pdf" />
     <None Remove="Models\Data\PushUps.csv" />
     <None Remove="Models\Data\Run.csv" />
     <None Remove="Models\Data\SitUps.csv" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Models\Data\DA4856.pdf" />
     <EmbeddedResource Include="Models\Data\PushUps.csv" />
     <EmbeddedResource Include="Models\Data\Run.csv" />
     <EmbeddedResource Include="Models\Data\SitUps.csv" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.2.4" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.1" />
