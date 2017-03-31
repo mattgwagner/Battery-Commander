@@ -47,6 +47,8 @@ namespace BatteryCommander.Web.Models
         [Required]
         public Gender Gender { get; set; } = Gender.Male;
 
+        // public MilitaryEducationLevel EducationLevel { get; set; } = MilitaryEducationLevel.None;
+
         // Status - Active, Inactive
 
         // Unit
@@ -58,8 +60,6 @@ namespace BatteryCommander.Web.Models
         // MOS - Duty MOSQ'd?
 
         // ETS Date
-
-        // Education Level Completed
 
         public virtual ICollection<APFT> APFTs { get; set; }
     }
