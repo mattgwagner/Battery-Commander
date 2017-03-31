@@ -19,11 +19,17 @@ namespace BatteryCommander.Web.Models
         [Required, DataType(DataType.Date), Column(TypeName = "date")]
         public DateTime Date { get; set; } = DateTime.Today;
 
+        /// <summary>
+        /// Recorded to nearest half inch when used for body fat percentage calculations
+        /// </summary>
         [Required, Range(0, 90)]
         public Decimal Height { get; set; }
 
+        /// <summary>
+        /// Recorded to the nearest pound for all usage
+        /// </summary>
         [Required, Range(0, 400)]
-        public Decimal Weight { get; set; }
+        public int Weight { get; set; }
 
         public ABCPAgeGroup AgeGroup
         {
