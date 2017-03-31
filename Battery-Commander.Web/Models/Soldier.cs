@@ -62,7 +62,11 @@ namespace BatteryCommander.Web.Models
 
         // MOS - Duty MOSQ'd?
 
-        // ETS Date
+        // ETS Date & Time till ETS
+
+        // PEBD
+
+        // Date of Rank
 
         public virtual ICollection<APFT> APFTs { get; set; }
     }
