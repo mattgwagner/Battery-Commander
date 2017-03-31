@@ -36,7 +36,7 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> Details(int id)
         {
-            return Json(await db.Soldiers.FindAsync(id));
+            return Json(await Get(db, id));
         }
 
         public async Task<IActionResult> New()
@@ -50,13 +50,13 @@ namespace BatteryCommander.Web.Controllers
         {
             ViewBag.Units = await UnitsController.GetDropDownList(db);
 
-            return View(await db.Soldiers.FindAsync(id));
+            return View(await Get(db, id));
         }
 
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Save(Soldier model)
         {
-            var soldier = await db.Soldiers.FindAsync(model.Id);
+            var soldier = await Get(db, model.Id);
 
             if (soldier == null)
             {
@@ -70,6 +70,17 @@ namespace BatteryCommander.Web.Controllers
             await db.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
+        }
+
+        public static async Task<Soldier> Get(Database db, int id)
+        {
+            return
+                await db
+                .Soldiers
+                .Include(_ => _.Unit)
+                .Include(_ => _.APFTs)
+                .Where(_ => _.Id == id)
+                .SingleOrDefaultAsync();
         }
 
         public static async Task<IEnumerable<SelectListItem>> GetDropDownList(Database db)
