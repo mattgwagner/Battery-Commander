@@ -10,6 +10,7 @@
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Rank)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().LastName)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().FirstName)</th>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Unit)</th>
             <th></th>
         </tr>
     </thead>
@@ -21,6 +22,7 @@
                 <td>@Html.DisplayFor(s => soldier.Rank)</td>
                 <td>@Html.DisplayFor(s => soldier.LastName)</td>
                 <td>@Html.DisplayFor(s => soldier.FirstName)</td>
+                <td>@Html.DisplayFor(s => soldier.Unit)</td>
                 <td>@Html.ActionLink("Details", "Details", new { soldier.Id })</td>
             </tr>
         }
