@@ -1,1 +1,7 @@
-﻿
+﻿@model APFT
+
+@Html.ActionLink("Generate Counseling", "Counseling", "APFT", new { Model.Id }, new { @class = "btn btn-default" })
+
+<fieldset>
+    <legend>APFT for @Html.DisplayFor(model => model.Soldier) on @Html.DisplayFor(model => model.Date)</legend>
+</fieldset>

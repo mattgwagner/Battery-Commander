@@ -37,6 +37,13 @@ namespace BatteryCommander.Web.Controllers
             return View(await db.APFTs.FindAsync(id));
         }
 
+        public async Task<IActionResult> Counseling(int id)
+        {
+            var apft = await db.APFTs.FindAsync(id);
+
+            return File(apft.GenerateCounseling(), "application/pdf");
+        }
+
         public async Task<IActionResult> New()
         {
             ViewBag.Soldiers = await SoldiersController.GetDropDownList(db);
