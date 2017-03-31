@@ -61,8 +61,6 @@ namespace BatteryCommander.Web.Models
 
         // Education Level Completed
 
-        public virtual ICollection<Evaluation> Evaluations { get; set; }
-
         public virtual ICollection<APFT> APFTs { get; set; }
     }
 }

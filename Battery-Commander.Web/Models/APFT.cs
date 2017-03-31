@@ -53,6 +53,7 @@ namespace BatteryCommander.Web.Models
         [Range(0, int.MaxValue)]
         public int RunSeconds { get; set; }
 
+        [NotMapped]
         public TimeSpan Run
         {
             get { return TimeSpan.FromSeconds(RunSeconds); }
