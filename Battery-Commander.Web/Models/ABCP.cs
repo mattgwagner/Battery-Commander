@@ -1,5 +1,7 @@
 ﻿using BatteryCommander.Web.Models.Data;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -60,6 +62,81 @@ namespace BatteryCommander.Web.Models
         }
 
         public Boolean RequiresTape => Screening_Weight < Weight;
+
+        [NotMapped]
+        public ICollection<Measurement> Measurements
+        {
+            get { return JsonConvert.DeserializeObject<List<Measurement>>(MeasurementsJson); }
+            set { MeasurementsJson = JsonConvert.SerializeObject(value); }
+        }
+
+        public Double WaistAverage => Measurements.Select(_ => _.Waist).Average();
+
+        public Double NeckAverage => Measurements.Select(_ => _.Neck).Average();
+
+        public Double HipAverage => Measurements.Select(_ => _.Hips).Average();
+
+        public String MeasurementsJson { get; set; } = String.Empty;
+
+        public Double CircumferenceValue
+        {
+            get
+            {
+                switch (Soldier?.Gender)
+                {
+                    case Gender.Female:
+                        return (WaistAverage + HipAverage) - NeckAverage;
+
+                    case Gender.Male:
+                    default:
+                        return WaistAverage - NeckAverage;
+                }
+            }
+        }
+
+        public Double BodyFatPercentage
+        {
+            get
+            {
+                switch (Soldier?.Gender)
+                {
+                    case Gender.Female:
+                        return Math.Round(((163.205 * Math.Log10(WaistAverage + HipAverage - NeckAverage)) - (97.684 * Math.Log10((Double)Height)) - 78.387));
+
+                    case Gender.Male:
+                    default:
+                        return Math.Round((86.010 * Math.Log10(WaistAverage - NeckAverage)) - (70.041 * Math.Log10((Double)Height)) + 36.76);
+                }
+            }
+        }
+
+        public Double MaximumAllowableBodyFat
+        {
+            get
+            {
+                return
+                    ABCPScoreTables
+                    .MaxAllowablePercentages
+                    .Where(_ => _.Gender == Soldier?.Gender)
+                    .Where(_ => _.AgeGroup == AgeGroup)
+                    .Select(_ => _.Maximum)
+                    .SingleOrDefault();
+            }
+        }
+
+        public Boolean IsPassingTape => BodyFatPercentage <= MaximumAllowableBodyFat;
+
+        public class Measurement
+        {
+            [Range(0, 50)]
+            public Double Waist { get; set; }
+
+            [Range(0, 50)]
+            public Double Neck { get; set; }
+
+            [Range(0, 50)]
+            public Double Hips { get; set; }
+        }
     }
 
     public enum ABCPAgeGroup : byte

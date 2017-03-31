@@ -46,6 +46,33 @@ namespace BatteryCommander.Web.Models.Data
             }
         }
 
+        public static IEnumerable<MaximumAllowableBodyFat> MaxAllowablePercentages
+        {
+            get
+            {
+                yield return new MaximumAllowableBodyFat { Gender = Gender.Male, AgeGroup = ABCPAgeGroup.Group_17_to_20, Maximum = 20 };
+                yield return new MaximumAllowableBodyFat { Gender = Gender.Female, AgeGroup = ABCPAgeGroup.Group_17_to_20, Maximum = 30 };
+
+                yield return new MaximumAllowableBodyFat { Gender = Gender.Male, AgeGroup = ABCPAgeGroup.Group_21_to_27, Maximum = 22 };
+                yield return new MaximumAllowableBodyFat { Gender = Gender.Female, AgeGroup = ABCPAgeGroup.Group_21_to_27, Maximum = 32 };
+
+                yield return new MaximumAllowableBodyFat { Gender = Gender.Male, AgeGroup = ABCPAgeGroup.Group_28_to_39, Maximum = 24 };
+                yield return new MaximumAllowableBodyFat { Gender = Gender.Female, AgeGroup = ABCPAgeGroup.Group_28_to_39, Maximum = 34 };
+
+                yield return new MaximumAllowableBodyFat { Gender = Gender.Male, AgeGroup = ABCPAgeGroup.Group_40_Plus, Maximum = 26 };
+                yield return new MaximumAllowableBodyFat { Gender = Gender.Female, AgeGroup = ABCPAgeGroup.Group_40_Plus, Maximum = 36 };
+            }
+        }
+
+        public class MaximumAllowableBodyFat
+        {
+            public Gender Gender { get; set; }
+
+            public ABCPAgeGroup AgeGroup { get; set; }
+
+            public Double Maximum { get; set; }
+        }
+
         public class Entry
         {
             public Gender Gender { get; set; }
