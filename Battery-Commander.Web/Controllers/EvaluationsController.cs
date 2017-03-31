@@ -32,28 +32,39 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> Details(int id)
         {
-            return Json(await db.Evaluations.FindAsync(id));
+            return View(await db.Evaluations.FindAsync(id));
         }
 
-        public IActionResult New()
+        public async Task<IActionResult> New()
         {
-            throw new NotImplementedException();
+            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db);
+
+            return View("Edit", new Evaluation { });
         }
 
         public async Task<IActionResult> Edit(int id)
         {
+            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db);
+
             return View(await db.Evaluations.FindAsync(id));
         }
 
-        public async Task<IActionResult> Save(dynamic model)
+        public async Task<IActionResult> Save(Evaluation model)
         {
-            // If EXISTS, Update
+            var evaluation = await db.Evaluations.FindAsync(model.Id);
 
-            // Else, Create New
+            if (evaluation == null)
+            {
+                db.Evaluations.Add(model);
+            }
+            else
+            {
+                db.Evaluations.Update(model);
+            }
 
             await db.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Details), model.Id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
