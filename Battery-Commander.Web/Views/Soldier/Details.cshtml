@@ -1,1 +1,41 @@
-﻿
+﻿@model Soldier
+
+@Html.ActionLink("Edit", "Edit", new { Model.Id })
+
+<table>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Rank)</td>
+        <td>@Html.DisplayFor(model => model.Rank)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.FirstName)</td>
+        <td>@Html.DisplayFor(model => model.FirstName)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.LastName)</td>
+        <td>@Html.DisplayFor(model => model.LastName)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.DateOfBirth)</td>
+        <td>@Html.DisplayFor(model => model.DateOfBirth) (@Html.DisplayFor(model => model.Age))</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.MilitaryEmail)</td>
+        <td>@Html.DisplayFor(model => model.MilitaryEmail)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.DoDId)</td>
+        <td>@Html.DisplayFor(model => model.DoDId)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.CivilianEmail)</td>
+        <td>@Html.DisplayFor(model => model.CivilianEmail)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Gender)</td>
+        <td>@Html.DisplayFor(model => model.Gender)</td>
+    </tr>
+</table>
+
+<!-- APFT Records -->
+<!-- Evaluations? -->

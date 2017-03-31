@@ -38,7 +38,7 @@ namespace BatteryCommander.Web.Controllers
 
         public IActionResult New()
         {
-            return View();
+            return View("Edit", new Soldier { });
         }
 
         public async Task<IActionResult> Edit(int id)
