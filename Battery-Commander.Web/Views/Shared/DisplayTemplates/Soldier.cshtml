@@ -4,4 +4,4 @@
     var display = $"{Model.Rank.ShortName()} {Model.LastName}, {Model.FirstName}";
 }
 
-<div>@display</div>
+<div>@Html.ActionLink(display, "Details", "Soldiers", new { Model.Id })</div>
