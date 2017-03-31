@@ -1,1 +1,21 @@
-﻿
+﻿@model IEnumerable<Evaluation>
+
+<h2>Units @Html.ActionLink("Add New", "New", "Evaluations", null, new { @class = "btn btn-default" })</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var model in Model)
+        {
+            <tr>
+                <td></td>
+            </tr>
+        }
+    </tbody>
+</table>

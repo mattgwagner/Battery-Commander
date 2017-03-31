@@ -1,8 +1,6 @@
 ﻿@model IEnumerable<Unit>
 
-<h2>Units</h2>
-
-@Html.ActionLink("Add New Unit", "New", "Units", null, new { @class = "btn btn-default" })
+<h2>Units @Html.ActionLink("Add New", "New", "Units", null, new { @class = "btn btn-default" })</h2>
 
 <table class="table table-striped">
     <thead>
