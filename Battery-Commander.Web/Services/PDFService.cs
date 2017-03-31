@@ -1,7 +1,6 @@
 ﻿using BatteryCommander.Web.Models;
 using iTextSharp.text.pdf;
 using System;
-using System.Collections;
 using System.IO;
 using System.Reflection;
 
@@ -68,12 +67,37 @@ namespace BatteryCommander.Web.Services
 
                 var form = stamper.AcroFields;
 
-                foreach (DictionaryEntry k in form.Fields)
-                {
-                    Console.WriteLine(k.Key);
-                }
-
                 // Update the form fields as appropriate
+
+                //form1[0].Page1[0].AVE_F[0]
+                //form1[0].Page1[0].signature_BUTTON1[0]
+                //form1[0].Page1[0].NAME[0]
+                //form1[0].Page1[0].IS[0]
+                //form1[0].Page1[0].APPROVE[0]
+                //form1[0].Page1[0].signature_BUTTON2[0]
+                //form1[0].Page1[0].DATE_A[0]
+                //form1[0].Page1[0].FIRST_A[0]
+                //form1[0].Page1[0].RANK_A[0]
+                //form1[0].Page1[0].ISNOT[0]
+                //form1[0].Page1[0].HEIGHT[0]
+                //form1[0].Page1[0].RANK[0]
+                //form1[0].Page1[0].AVE_A[0]
+                //form1[0].Page1[0].THIRD_A[0]
+                //form1[0].Page1[0].AVE_E[0]
+                //form1[0].Page1[0].AVE_B[0]
+                //form1[0].Page1[0].THIRD_B[0]
+                //form1[0].Page1[0].AGE[0]
+                //form1[0].Page1[0].AVE_D[0]
+                //form1[0].Page1[0].AVE_G[0]
+                //form1[0].Page1[0].SCND_B[0]
+                //form1[0].Page1[0].AVE_C[0]
+                //form1[0].Page1[0].FIRST_B[0]
+                //form1[0].Page1[0].REMRKS[0]
+                //form1[0].Page1[0].SCND_A[0]
+                //form1[0].Page1[0].WEIGHT[0]
+                //form1[0].Page1[0].DATE_B[0]
+                //form1[0].Page1[0].PREPARE[0]
+                //form1[0].Page1[0].RANK_B[0]
 
                 // form.SetField($"{prefix}.Page1[0].Name[0]", model.Name);
 
@@ -95,16 +119,45 @@ namespace BatteryCommander.Web.Services
 
                 var form = stamper.AcroFields;
 
-                foreach (DictionaryEntry k in form.Fields)
-                {
-                    Console.WriteLine(k.Key);
-                }
-
                 // Update the form fields as appropriate
 
                 // form.SetField($"{prefix}.Page1[0].Name[0]", model.Name);
 
-                throw new NotImplementedException();
+                //form1[0].Page1[0].IS[0]
+                //form1[0].Page1[0].signature_BUTTON2[0]
+                //form1[0].Page1[0].H_FACTR[0]
+                //form1[0].Page1[0].NECK_B[0]
+                //form1[0].Page1[0].TOT_A[0]
+                //form1[0].Page1[0].HIP_A[0]
+                //form1[0].Page1[0].NECK_A[0]
+                //form1[0].Page1[0].RANK_C[0]
+                //form1[0].Page1[0].HIP_B[0]
+                //form1[0].Page1[0].HE_FACTR[0]
+                //form1[0].Page1[0].APPRVD[0]
+                //form1[0].Page1[0].ARM_A[0]
+                //form1[0].Page1[0].REMRKS[0]
+                //form1[0].Page1[0].RANK_B[0]
+                //form1[0].Page1[0].N_FACTR[0]
+                //form1[0].Page1[0].NECK_C[0]
+                //form1[0].Page1[0].HEIGHT[0]
+                //form1[0].Page1[0].IS_NOT[0]
+                //form1[0].Page1[0].AVE_NECK[0]
+                //form1[0].Page1[0].AVE_ARM[0]
+                //form1[0].Page1[0].ARM_C[0]
+                //form1[0].Page1[0].SIGNA[0]
+                //form1[0].Page1[0].WE_FACTR[0]
+                //form1[0].Page1[0].F_FACTR[0]
+                //form1[0].Page1[0].ARM_B[0]
+                //form1[0].Page1[0].RANK[0]
+                //form1[0].Page1[0].WEIGHT[0]
+                //form1[0].Page1[0].NAME[0]
+                //form1[0].Page1[0].HIP_C[0]
+                //form1[0].Page1[0].signature_BUTTON1[0]
+                //form1[0].Page1[0].AGE[0]
+                //form1[0].Page1[0].AVE_HIP[0]
+                //form1[0].Page1[0].DATE[0]
+                //form1[0].Page1[0].BODY_FAT[0]
+                //form1[0].Page1[0].DATE_B[0]
 
                 stamper.Close();
 
