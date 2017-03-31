@@ -1,6 +1,7 @@
 using BatteryCommander.Web.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Xunit;
 
 namespace BatteryCommander.Tests
@@ -55,6 +56,31 @@ namespace BatteryCommander.Tests
                 yield return new object[] { Gender.Male, 29, 45, 69, new TimeSpan(0, 14, 45), 236 };
                 yield return new object[] { Gender.Male, 19, 51, 66, new TimeSpan(0, 13, 19), 247 };
                 yield return new object[] { Gender.Female, 19, 51, 66, new TimeSpan(0, 13, 19), 281 };
+            }
+        }
+
+        [Fact]
+        public void Generate_Counseling()
+        {
+            using (var file = new FileStream("TestCounseling_APFT.pdf", FileMode.Create))
+            {
+                var apft = new APFT
+                {
+                    Soldier = new Soldier
+                    {
+                        Rank = Rank.O2,
+                        LastName = "Wagner",
+                        FirstName = "Matthew",
+                        DateOfBirth = new DateTime(1987, 5, 5)
+                    },
+                    PushUps = 45,
+                    SitUps = 60,
+                    Run = new TimeSpan(0, 14, 0)
+                };
+
+                var data = apft.GenerateCounseling();
+
+                file.Write(data, 0, data.Length);
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using BatteryCommander.Web.Models.Data;
+using BatteryCommander.Web.Services;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -107,6 +108,47 @@ namespace BatteryCommander.Web.Models
         public int TotalScore => PushUpScore + SitUpScore + RunScore;
 
         public Boolean IsPassing => new[] { PushUpScore, SitUpScore, RunScore }.All(s => s >= MinimumPerEvent);
+
+        public byte[] GenerateCounseling()
+        {
+            return PDFService.Generate_DA4856(new PDFService.Counseling
+            {
+                // TODO Soldier Organization
+
+                Organization = "A BTRY 2-116TH FA",
+
+                Name = $"{Soldier.LastName}, {Soldier.FirstName}",
+                Rank = Soldier.Rank,
+                Date = Date,
+
+                Purpose = $@"This counseling is for the failure of a record APFT on {Date:yyyy-MM-dd}. This counseling also outlines the actions that must be taken in the event of continuous APFT failures in accordance with AR 135-187, and AR 350-1, and AR 600-8-19 in order to increase Soldier awareness.
+
+You achieved the following scores:
+
+Push Ups(reps/score): {PushUps}/{PushUpScore}
+Sit Ups(reps/score): {SitUps}/{SitUpScore}
+2 Mile Run(time/score): {Run}/{RunScore}
+
+Total: {TotalScore}",
+
+                KeyPointsOfDiscussion = @"
+1. In the event of a first time record APFT failure, paragraph G-9m of Appendix G in AR 350-1 states:
+
+- Soldiers who fail a record APFT for the first time or fail to take a record APFT within the required period will be flagged in accordance with AR 600–8–2. In the event of a record test failure, commanders may allow Soldiers to retake the test as soon as the Soldier and the commander feel the Soldier is ready. Soldiers without a medical profile will be retested no later than 90 days following the initial APFT failure. Reserve component Soldiers not on active duty and without a medical profile will be tested no later than 180 days following the initial APFT failure.
+
+2. In addition, a first time record APFT failure may also result in reduction of rank, as outlined in Chapter 10 of AR 600-8-19:-10–5.
+
+Policy Inefficiency is a demonstration of characteristics that shows that the person cannot perform duties and responsibilities of the grade and MOS. Inefficiency may also include any act or conduct that clearly shows that the Soldier lacks those abilities and qualities normally required and expected of an individual of that grade and experience. CDRs may consider misconduct, including conviction by civil court, as bearing on inefficiency. A Soldier may be reduced under this authority for longstanding unpaid personal debts that he or she has not made a reasonable attempt to pay.
+
+3. Soldiers will be counseled and given time to a correct deficiencies. Paragraph 2-4b of AR 135-178 states:
+
+-b. Counseling. When a Soldier’s conduct or performance approaches the point where a continuation of such conduct or performance would warrant initiating separation action for one of the reasons in paragraph a, above, the Soldier will be counseled by a responsible person about his or her deficiencies at least once before initiating separation action. Additional formal counseling is discretionary; however, the Soldier’s counseling or personnel records must establish that the Soldier was afforded a reasonable opportunity to overcome these deficiencies. Such factors as the length of time that has elapsed since the prior counseling, the Soldier’s conduct and performance during that period, and the commander’s assessment of the Soldier’s potential for becoming a fully satisfactory Soldier, should be considered.
+
+4. If a Soldier fails to correct deficiencies after all above actions are taken, discharge procedures will be enacted. Paragraph 9-2e of AR 135-178 states:
+
+-e. Initiation of discharge proceedings is required for Soldiers without medical limitations who have two consecutive failures of the Army Physical Fitness Test, or who are eliminated for cause from Noncommissioned Officer Education System courses, unless the responsible commander chooses to impose a bar to reenlistment in accordance with AR 140–111, or NGR 600–200."
+            });
+        }
     }
 
     public enum Event : byte
