@@ -75,17 +75,18 @@ namespace BatteryCommander.Web.Controllers
         {
             // TODO Filter by status, unit
 
-            return
+            var soldiers =
                 await db
                 .Soldiers
                 .OrderBy(soldier => soldier.LastName)
                 .ThenBy(soldier => soldier.FirstName)
-                .Select(soldier => new SelectListItem
-                {
-                    Text = $"{soldier.Rank.ShortName()} {soldier.LastName}, {soldier.FirstName}",
-                    Value = $"{soldier.Id}"
-                })
                 .ToListAsync();
+
+            return soldiers.Select(soldier => new SelectListItem
+            {
+                Text = $"{soldier.Rank.ShortName()} {soldier.LastName}, {soldier.FirstName}",
+                Value = $"{soldier.Id}"
+            });
         }
     }
 }
