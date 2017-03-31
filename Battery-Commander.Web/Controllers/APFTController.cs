@@ -84,7 +84,7 @@ namespace BatteryCommander.Web.Controllers
                 await db
                 .APFTs
                 .Include(_ => _.Soldier)
-                .Include(_ => _.Soldier.Unit)
+                .ThenInclude(_ => _.Unit)
                 .Where(_ => _.Id == id)
                 .SingleOrDefaultAsync();
         }
