@@ -10,10 +10,6 @@ namespace BatteryCommander.Web.Models
     {
         private const int MinimumPerEvent = 60;
 
-        private const int MinimumTotal = MinimumPerEvent * 3;
-
-        private const double DaysPerYear = 365.2425;
-
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
@@ -106,13 +102,7 @@ namespace BatteryCommander.Web.Models
 
         public int TotalScore => PushUpScore + SitUpScore + RunScore;
 
-        public Boolean IsPassing
-        {
-            get
-            {
-                return new[] { PushUpScore, SitUpScore, RunScore }.All(s => s >= MinimumPerEvent) && TotalScore >= MinimumTotal;
-            }
-        }
+        public Boolean IsPassing => new[] { PushUpScore, SitUpScore, RunScore }.All(s => s >= MinimumPerEvent);
     }
 
     public enum Event : byte
