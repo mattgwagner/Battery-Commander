@@ -1,7 +1,8 @@
 ﻿using BatteryCommander.Web.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Controllers
@@ -18,29 +19,50 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            throw new NotImplementedException();
+            // TODO Filtering by pass/fail
+
+            // TODO Group by last per-soldier?
+
+            var tests =
+                await db
+                .APFTs
+                .OrderByDescending(apft => apft.Date)
+                .ToListAsync();
+
+            return View(tests);
         }
 
         public async Task<IActionResult> Details(int id)
         {
-            throw new NotImplementedException();
+            return View(await db.APFTs.FindAsync(id));
         }
 
-        public IActionResult New()
+        public async Task<IActionResult> New()
         {
-            throw new NotImplementedException();
+            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db);
+
+            return View(nameof(Edit), new APFT { });
         }
 
         public async Task<IActionResult> Edit(int id)
         {
-            throw new NotImplementedException();
+            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db);
+
+            return View(await db.APFTs.FindAsync(id));
         }
 
-        public async Task<IActionResult> Save(dynamic model)
+        public async Task<IActionResult> Save(APFT model)
         {
-            // If EXISTS, Update
+            var apft = await db.APFTs.FindAsync(model.Id);
 
-            // Else, Create New
+            if (apft == null)
+            {
+                db.APFTs.Add(model);
+            }
+            else
+            {
+                db.APFTs.Update(model);
+            }
 
             await db.SaveChangesAsync();
 

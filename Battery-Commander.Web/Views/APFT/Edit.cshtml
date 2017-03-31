@@ -1,1 +1,35 @@
-﻿
+﻿@model APFT
+
+@using (Html.BeginForm("Edit", "APFT", FormMethod.Post, new { @class = "form-horizontal" role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+    @Html.ValidationSummary()
+
+    <div class="form-group form-group-lg">
+        @Html.DisplayNameFor(model => model.Soldier)
+        @Html.EditorFor(model => model.SoldierId)
+    </div>
+
+    <div class="form-group form-group-lg">
+        @Html.DisplayNameFor(model => model.Date)
+        @Html.EditorFor(model => model.Date)
+    </div>
+
+    <div class="form-group form-group-lg">
+        @Html.DisplayNameFor(model => model.PushUps)
+        @Html.EditorFor(model => model.PushUps)
+    </div>
+
+    <div class="form-group form-group-lg">
+        @Html.DisplayNameFor(model => model.SitUps)
+        @Html.EditorFor(model => model.SitUps)
+    </div>
+
+    <div class="form-group form-group-lg">
+        @Html.DisplayNameFor(model => model.Run)
+        @Html.EditorFor(model => model.Run)
+    </div>
+
+    <button type="submit">Save</button>
+}

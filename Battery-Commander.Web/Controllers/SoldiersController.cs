@@ -1,7 +1,9 @@
 ﻿using BatteryCommander.Web.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -63,6 +65,23 @@ namespace BatteryCommander.Web.Controllers
             await db.SaveChangesAsync();
 
             return RedirectToAction(nameof(Details), model.Id);
+        }
+
+        public static async Task<IEnumerable<SelectListItem>> GetDropDownList(Database db)
+        {
+            // TODO Filter by status, unit
+
+            return
+                await db
+                .Soldiers
+                .OrderBy(soldier => soldier.LastName)
+                .ThenBy(soldier => soldier.FirstName)
+                .Select(soldier => new SelectListItem
+                {
+                    Text = $"{soldier.Rank.ShortName()} {soldier.LastName}, {soldier.FirstName}",
+                    Value = $"{soldier.Id}"
+                })
+                .ToListAsync();
         }
     }
 }

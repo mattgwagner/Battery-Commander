@@ -19,6 +19,8 @@ namespace BatteryCommander.Web.Models
 
         public virtual Soldier Soldier { get; set; }
 
+        // Grader?
+
         [Required, DataType(DataType.Date), Column(TypeName = "date")]
         public DateTime Date { get; set; } = DateTime.Today;
 

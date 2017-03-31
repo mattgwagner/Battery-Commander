@@ -8,6 +8,8 @@ namespace BatteryCommander.Web.Models
 
         public DbSet<Evaluation> Evaluations { get; set; }
 
+        public DbSet<APFT> APFTs { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
             builder.UseSqlite("Data Source=Data.db");
