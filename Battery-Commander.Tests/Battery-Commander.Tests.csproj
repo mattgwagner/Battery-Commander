@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
+    <AssemblyName>BatteryCommander.Tests</AssemblyName>
+    <RootNamespace>BatteryCommander.Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

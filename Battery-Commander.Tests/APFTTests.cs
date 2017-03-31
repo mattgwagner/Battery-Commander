@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 
-namespace Battery_Commander.Tests
+namespace BatteryCommander.Tests
 {
     public class APFTTests
     {
