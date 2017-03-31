@@ -12,7 +12,7 @@
     <tbody>
         @foreach (var model in Model)
         {
-            <tr>
+            <tr class="@(model.IsPassing ? "alert-success" : "alert-danger")">
                 <td>@Html.DisplayFor(_ => model.Soldier)</td>
                 <td>@Html.DisplayFor(_ => model.Date)</td>
                 <td>@Html.DisplayFor(_ => model.TotalScore)</td>
