@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 namespace BatteryCommander.Web.Controllers
 {
     [Authorize]
-    public class SoldierController : Controller
+    public class SoldiersController : Controller
     {
         private readonly Database db;
 
-        public SoldierController(Database db)
+        public SoldiersController(Database db)
         {
             this.db = db;
         }
