@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Models\Data\ABCP.csv" />
     <None Remove="Models\Data\DA4856.pdf" />
     <None Remove="Models\Data\PushUps.csv" />
     <None Remove="Models\Data\Run.csv" />
@@ -14,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Models\Data\ABCP.csv" />
     <EmbeddedResource Include="Models\Data\DA4856.pdf" />
     <EmbeddedResource Include="Models\Data\PushUps.csv" />
     <EmbeddedResource Include="Models\Data\Run.csv" />
