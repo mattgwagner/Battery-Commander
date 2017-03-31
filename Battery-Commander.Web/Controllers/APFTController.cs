@@ -75,7 +75,7 @@ namespace BatteryCommander.Web.Controllers
 
             await db.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Details), model.Id);
+            return RedirectToAction(nameof(Index));
         }
 
         public static async Task<APFT> Get(Database db, int id)
