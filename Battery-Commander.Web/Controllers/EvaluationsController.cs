@@ -18,7 +18,7 @@ namespace BatteryCommander.Web.Controllers
             this.db = db;
         }
 
-        public async Task<IActionResult> List(Boolean includeComplete = false)
+        public async Task<IActionResult> Index(Boolean includeComplete = false)
         {
             var evaluations =
                 await db

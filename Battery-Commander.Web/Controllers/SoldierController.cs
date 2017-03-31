@@ -17,7 +17,7 @@ namespace BatteryCommander.Web.Controllers
             this.db = db;
         }
 
-        public async Task<IActionResult> List()
+        public async Task<IActionResult> Index()
         {
             // TODO Filtering by Rank, MOS, Position, Name, Status
 
@@ -28,7 +28,7 @@ namespace BatteryCommander.Web.Controllers
                 .ThenBy(_ => _.FirstName)
                 .ToListAsync();
 
-            return Json(soldiers);
+            return View("List", soldiers);
         }
 
         public async Task<IActionResult> Details(int id)

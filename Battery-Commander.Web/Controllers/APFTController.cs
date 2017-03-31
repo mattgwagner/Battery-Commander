@@ -16,7 +16,7 @@ namespace BatteryCommander.Web.Controllers
             this.db = db;
         }
 
-        public async Task<IActionResult> List()
+        public async Task<IActionResult> Index()
         {
             throw new NotImplementedException();
         }
