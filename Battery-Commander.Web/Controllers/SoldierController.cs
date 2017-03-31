@@ -47,18 +47,22 @@ namespace BatteryCommander.Web.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> Save(dynamic model)
+        public async Task<IActionResult> Save(Soldier model)
         {
-            // If EXISTS, Update
+            var soldier = await db.Soldiers.FindAsync(model.Id);
 
-            var soldier = db.Soldiers.Add(new Soldier
+            if (soldier == null)
             {
-                // Else, Create New
-            });
+                db.Soldiers.Add(model);
+            }
+            else
+            {
+                db.Soldiers.Update(model);
+            }
 
             await db.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Details), model.id);
+            return RedirectToAction(nameof(Details), model.Id);
         }
     }
 }
