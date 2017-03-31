@@ -28,7 +28,7 @@ namespace BatteryCommander.Web.Models
         {
             get
             {
-                int Age = Soldier.AgeAsOf(Date);
+                int? Age = Soldier?.AgeAsOf(Date);
 
                 if (Age <= 21) return AgeGroup.Group_17_to_21;
                 if (Age <= 26) return AgeGroup.Group_22_to_26;
