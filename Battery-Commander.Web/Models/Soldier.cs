@@ -28,6 +28,9 @@ namespace BatteryCommander.Web.Models
         [DataType(DataType.EmailAddress)]
         public String CivilianEmail { get; set; }
 
+        [DataType(DataType.Date), Column(TypeName = "date")]
+        public DateTime DateOfBirth { get; set; }
+
         // Status - Active, Inactive
 
         // Unit
