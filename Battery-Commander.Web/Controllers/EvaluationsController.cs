@@ -23,6 +23,10 @@ namespace BatteryCommander.Web.Controllers
             var evaluations =
                 await db
                 .Evaluations
+                .Include(_ => _.Ratee)
+                .Include(_ => _.Rater)
+                .Include(_ => _.SeniorRater)
+                .Include(_ => _.Events)
                 .Where(_ => includeComplete || _.IsCompleted)
                 .OrderBy(_ => _.ThruDate)
                 .ToListAsync();
@@ -32,7 +36,7 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> Details(int id)
         {
-            return View(await db.Evaluations.FindAsync(id));
+            return View(await Get(db, id));
         }
 
         public async Task<IActionResult> New()
@@ -46,13 +50,13 @@ namespace BatteryCommander.Web.Controllers
         {
             ViewBag.Soldiers = await SoldiersController.GetDropDownList(db);
 
-            return View(await db.Evaluations.FindAsync(id));
+            return View(await Get(db, id));
         }
 
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Save(Evaluation model)
         {
-            var evaluation = await db.Evaluations.FindAsync(model.Id);
+            var evaluation = await Get(db, model.Id);
 
             if (evaluation == null)
             {
@@ -66,6 +70,19 @@ namespace BatteryCommander.Web.Controllers
             await db.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<Evaluation> Get(Database db, int id)
+        {
+            return
+                await db
+                .Evaluations
+                .Include(_ => _.Ratee)
+                .Include(_ => _.Rater)
+                .Include(_ => _.SeniorRater)
+                .Include(_ => _.Events)
+                .Where(_ => _.Id == id)
+                .SingleOrDefaultAsync();
         }
     }
 }

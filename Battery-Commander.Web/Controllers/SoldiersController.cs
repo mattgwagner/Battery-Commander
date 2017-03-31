@@ -26,6 +26,7 @@ namespace BatteryCommander.Web.Controllers
             var soldiers =
                 await db
                 .Soldiers
+                .Include(_ => _.Unit)
                 .OrderBy(_ => _.LastName)
                 .ThenBy(_ => _.FirstName)
                 .ToListAsync();
