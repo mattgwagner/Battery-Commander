@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<Unit>
 
-<h2>Soldiers</h2>
+<h2>Units</h2>
 
-@Html.ActionLink("Add New Unit", "New")
+@Html.ActionLink("Add New Unit", "New", "Units", null, new { @class = "btn btn-default" })
 
 <table class="table table-striped">
     <thead>
@@ -17,8 +17,13 @@
         {
             <tr>
                 <td>@Html.DisplayFor(s => unit.Name)</td>
-                <td>@Html.ActionLink("Edit", "Edit", new { unit.Id })</td>
-            </tr>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new
+               {
+                   unit.Id
+               })
+            </td>
+        </tr>
         }
     </tbody>
 </table>

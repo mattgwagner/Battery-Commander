@@ -34,9 +34,10 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Soldier" asp-action="Index">Soldiers</a></li>
+                    <li><a asp-area="" asp-controller="Soldiers" asp-action="Index">Soldiers</a></li>
                     <li><a asp-area="" asp-controller="Evaluations" asp-action="Index">Evaluations</a></li>
                     <li><a asp-area="" asp-controller="APFT" asp-action="Index">APFT</a></li>
+                    <li><a asp-area="" asp-controller="Units" asp-action="Index">Units</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @if (User.Identity.IsAuthenticated)

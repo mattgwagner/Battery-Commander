@@ -1,6 +1,6 @@
 ﻿@model Unit
 
-@using (Html.BeginForm("Save", "Unit", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Save", "Units", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.Id)
