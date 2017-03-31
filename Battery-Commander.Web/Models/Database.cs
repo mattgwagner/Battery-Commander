@@ -12,5 +12,10 @@ namespace BatteryCommander.Web.Models
         {
             builder.UseSqlite("Data Source=Data.db");
         }
+
+        public static void Init(Database db)
+        {
+            db.Database.Migrate();
+        }
     }
 }
