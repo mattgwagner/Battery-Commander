@@ -22,12 +22,13 @@ namespace BatteryCommander.Web.Models
         [Required]
         public Rank Rank { get; set; } = Rank.E1;
 
+        [StringLength(12)]
         public String DoDId { get; set; }
 
-        [DataType(DataType.EmailAddress)]
+        [DataType(DataType.EmailAddress), StringLength(50)]
         public String MilitaryEmail { get; set; }
 
-        [DataType(DataType.EmailAddress)]
+        [DataType(DataType.EmailAddress), StringLength(50)]
         public String CivilianEmail { get; set; }
 
         [DataType(DataType.Date), Column(TypeName = "date")]
