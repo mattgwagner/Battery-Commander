@@ -38,13 +38,17 @@ namespace BatteryCommander.Web.Controllers
             return Json(await db.Soldiers.FindAsync(id));
         }
 
-        public IActionResult New()
+        public async Task<IActionResult> New()
         {
+            ViewBag.Units = await UnitsController.GetDropDownList(db);
+
             return View("Edit", new Soldier { });
         }
 
         public async Task<IActionResult> Edit(int id)
         {
+            ViewBag.Units = await UnitsController.GetDropDownList(db);
+
             return View(await db.Soldiers.FindAsync(id));
         }
 

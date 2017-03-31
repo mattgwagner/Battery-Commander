@@ -27,7 +27,7 @@ namespace BatteryCommander.Web.Controllers
                 .OrderBy(_ => _.ThruDate)
                 .ToListAsync();
 
-            return Json(evaluations);
+            return View("List", evaluations);
         }
 
         public async Task<IActionResult> Details(int id)

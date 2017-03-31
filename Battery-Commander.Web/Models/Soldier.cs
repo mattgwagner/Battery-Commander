@@ -51,7 +51,10 @@ namespace BatteryCommander.Web.Models
 
         // Status - Active, Inactive
 
-        // Unit
+        [Required]
+        public int UnitId { get; set; }
+
+        public virtual Unit Unit { get; set; }
 
         // Position
 

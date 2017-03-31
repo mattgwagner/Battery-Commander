@@ -29,7 +29,7 @@ namespace BatteryCommander.Web.Controllers
                 .OrderByDescending(apft => apft.Date)
                 .ToListAsync();
 
-            return View(tests);
+            return View("List", tests);
         }
 
         public async Task<IActionResult> Details(int id)

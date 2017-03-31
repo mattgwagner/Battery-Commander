@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Soldier>
+
+<h2>Soldiers</h2>
+
+@Html.ActionLink("Add New Soldier", "New")
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Rank)</th>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().LastName)</th>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().FirstName)</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var soldier in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(s => soldier.Rank)</td>
+                <td>@Html.DisplayFor(s => soldier.LastName)</td>
+                <td>@Html.DisplayFor(s => soldier.FirstName)</td>
+                <td>@Html.ActionLink("Details", "Details", new { soldier.Id })</td>
+            </tr>
+        }
+    </tbody>
+</table>
