@@ -69,7 +69,7 @@ namespace BatteryCommander.Web.Models
                     .PushUps
                     .OrderByDescending(row => row.Reps)
                     .Where(row => row.AgeGroup == AgeGroup)
-                    .Where(row => row.Gender == Soldier.Gender)
+                    .Where(row => row.Gender == Soldier?.Gender)
                     .Where(row => row.Reps <= PushUps)
                     .Select(row => row.Score)
                     .FirstOrDefault();
@@ -85,7 +85,7 @@ namespace BatteryCommander.Web.Models
                     .SitUps
                     .OrderByDescending(row => row.Reps)
                     .Where(row => row.AgeGroup == AgeGroup)
-                    .Where(row => row.Gender == Soldier.Gender)
+                    .Where(row => row.Gender == Soldier?.Gender)
                     .Where(row => row.Reps <= SitUps)
                     .Select(row => row.Score)
                     .FirstOrDefault();
@@ -101,7 +101,7 @@ namespace BatteryCommander.Web.Models
                     .Run
                     .OrderBy(row => row.Reps)
                     .Where(row => row.AgeGroup == AgeGroup)
-                    .Where(row => row.Gender == Soldier.Gender)
+                    .Where(row => row.Gender == Soldier?.Gender)
                     .Where(row => row.Reps >= Run.TotalSeconds)
                     .Select(row => row.Score)
                     .FirstOrDefault();
