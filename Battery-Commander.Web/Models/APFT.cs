@@ -50,7 +50,11 @@ namespace BatteryCommander.Web.Models
         [Range(0, int.MaxValue)]
         public int RunSeconds { get; set; }
 
-        public TimeSpan Run => TimeSpan.FromSeconds(RunSeconds);
+        public TimeSpan Run
+        {
+            get { return TimeSpan.FromSeconds(RunSeconds); }
+            set { RunSeconds = (int)value.TotalSeconds; }
+        }
 
         public int PushUpScore
         {

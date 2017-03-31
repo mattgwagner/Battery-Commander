@@ -19,7 +19,7 @@ namespace Battery_Commander.Tests
                 },
                 PushUps = 45,
                 SitUps = 69,
-                RunSeconds = (int)new TimeSpan(0, 14, 45).TotalSeconds
+                Run = new TimeSpan(0, 14, 45)
             };
 
             Assert.Equal(66, score.PushUpScore);
@@ -42,7 +42,7 @@ namespace Battery_Commander.Tests
                 },
                 PushUps = pushups,
                 SitUps = situps,
-                RunSeconds = (int)run.TotalSeconds
+                Run = run
             };
 
             Assert.Equal(expected_total, score.TotalScore);
