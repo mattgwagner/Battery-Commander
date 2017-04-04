@@ -71,8 +71,10 @@ namespace BatteryCommander.Web.Models
     {
         Annual,
 
+        [Display(Name = "Change of Rater")]
         Change_of_Rater,
 
+        [Display(Name = "Complete the Record")]
         Complete_the_Record
     }
 
