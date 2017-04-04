@@ -47,11 +47,11 @@ namespace BatteryCommander.Web.Controllers
             return File(apft.GenerateCounseling(), "application/pdf", filename);
         }
 
-        public async Task<IActionResult> New()
+        public async Task<IActionResult> New(int soldier = 0)
         {
             ViewBag.Soldiers = await SoldiersController.GetDropDownList(db);
 
-            return View(nameof(Edit), new APFT { });
+            return View(nameof(Edit), new APFT { SoldierId = soldier });
         }
 
         public async Task<IActionResult> Edit(int id)

@@ -39,11 +39,11 @@ namespace BatteryCommander.Web.Controllers
             return View(await Get(db, id));
         }
 
-        public async Task<IActionResult> New()
+        public async Task<IActionResult> New(int soldier = 0)
         {
             ViewBag.Soldiers = await SoldiersController.GetDropDownList(db);
 
-            return View("Edit", new Evaluation { });
+            return View("Edit", new Evaluation { RateeId = soldier });
         }
 
         public async Task<IActionResult> Edit(int id)
