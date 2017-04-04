@@ -1,11 +1,42 @@
 ﻿@model Evaluation
 
-<!-- Edit link, if available -->
+@Html.ActionLink("Edit", "Edit", new { Model.Id }, new { @class = "btn btn-default" })
+
 <!-- Workflow steps available -->
 
-<fieldset>
-    @Html.DisplayForModel()
-</fieldset>
+<table class="table table-bordered">
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Ratee)</td>
+        <td>@Html.DisplayFor(model => model.Ratee)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Rater)</td>
+        <td>@Html.DisplayFor(model => model.Rater)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.SeniorRater)</td>
+        <td>@Html.DisplayFor(model => model.SeniorRater)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.StartDate)</td>
+        <td>@Html.DisplayFor(model => model.StartDate)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.ThruDate)</td>
+        <td>@Html.DisplayFor(model => model.ThruDate)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Delinquency)</td>
+        <td>@Html.DisplayFor(model => model.Delinquency)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Status)</td>
+        <td>@Html.DisplayFor(model => model.Status)</td>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.LastUpdated)</td>
+        <td>@Html.DisplayFor(model => model.LastUpdated)</td>
+    </tr>
+</table>
 
 <h2>@Html.DisplayNameFor(_ => Model.Events)</h2>
 
@@ -25,7 +56,7 @@
     <thead></thead>
     <tbody>
         @foreach (var @event in Model.Events.OrderByDescending(_ => _.Timestamp))
-        {
+            {
             <tr>
                 <td>@Html.DisplayFor(_ => @event.Author)</td>
                 <td>@Html.DisplayFor(_ => @event.Message)</td>
