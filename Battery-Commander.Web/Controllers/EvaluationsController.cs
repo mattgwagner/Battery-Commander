@@ -27,7 +27,7 @@ namespace BatteryCommander.Web.Controllers
                 .Include(_ => _.Rater)
                 .Include(_ => _.SeniorRater)
                 .Include(_ => _.Events)
-                .Where(_ => includeComplete || _.IsCompleted)
+                .Where(_ => includeComplete || !_.IsCompleted)
                 .OrderBy(_ => _.ThruDate)
                 .ToListAsync();
 
