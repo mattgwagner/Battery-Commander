@@ -72,6 +72,18 @@ namespace BatteryCommander.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> Comment(Evaluation.Event comment)
+        {
+            var evaluation = await Get(db, comment.EvaluationId);
+
+            evaluation.Events.Add(comment);
+
+            await db.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Details), new { id = comment.EvaluationId });
+        }
+
         public async Task<Evaluation> Get(Database db, int id)
         {
             return

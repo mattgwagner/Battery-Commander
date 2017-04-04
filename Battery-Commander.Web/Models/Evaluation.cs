@@ -56,6 +56,10 @@ namespace BatteryCommander.Web.Models
             [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
             public int Id { get; set; }
 
+            public int EvaluationId { get; set; }
+
+            public virtual Evaluation Evaluation { get; set; }
+
             [DataType(DataType.DateTime)]
             public DateTimeOffset Timestamp { get; set; } = DateTimeOffset.UtcNow;
 
