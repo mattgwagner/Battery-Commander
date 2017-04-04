@@ -69,5 +69,7 @@ namespace BatteryCommander.Web.Models
         // Date of Rank
 
         public virtual ICollection<APFT> APFTs { get; set; }
+
+        public virtual ICollection<ABCP> ABCPs { get; set; }
     }
 }

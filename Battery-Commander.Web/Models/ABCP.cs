@@ -127,6 +127,8 @@ namespace BatteryCommander.Web.Models
 
         public Boolean IsPassingTape => BodyFatPercentage <= MaximumAllowableBodyFat;
 
+        public Boolean IsPassing => !RequiresTape || IsPassingTape;
+
         public class Measurement
         {
             [Range(0, 50)]

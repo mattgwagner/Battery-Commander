@@ -38,4 +38,62 @@
 </table>
 
 <!-- APFT Records -->
+
+<h2>@Html.DisplayNameFor(_ => _.APFTs) @Html.ActionLink("Add New", "New", "APFT", new { soldier = Model.Id })</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(_ => _.APFTs.FirstOrDefault().Date)</th>
+            <th>@Html.DisplayNameFor(_ => _.APFTs.FirstOrDefault().PushUps)</th>
+            <th>@Html.DisplayNameFor(_ => _.APFTs.FirstOrDefault().SitUps)</th>
+            <th>@Html.DisplayNameFor(_ => _.APFTs.FirstOrDefault().Run)</th>
+            <th>@Html.DisplayNameFor(_ => _.APFTs.FirstOrDefault().TotalScore)</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var apft in Model.APFTs.OrderByDescending(_ => _.Date))
+            {
+            <tr>
+                <td>@Html.DisplayFor(_ => apft.Date)</td>
+                <td>@Html.DisplayFor(_ => apft.PushUps)</td>
+                <td>@Html.DisplayFor(_ => apft.SitUps)</td>
+                <td>@Html.DisplayFor(_ => apft.Run)</td>
+                <td>@Html.DisplayFor(_ => apft.TotalScore)</td>
+                <td>@Html.ActionLink("Details", "Details", "APFT", new { apft.Id })</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- ABCP Records -->
+
+<h2>@Html.DisplayNameFor(_ => _.ABCPs) @Html.ActionLink("Add New", "New", "ABCP", new { soldier = Model.Id })</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(_ => _.ABCPs.FirstOrDefault().Date)</th>
+            <th>@Html.DisplayNameFor(_ => _.ABCPs.FirstOrDefault().Weight)</th>
+            <th>@Html.DisplayNameFor(_ => _.ABCPs.FirstOrDefault().Screening_Weight)</th>
+            <th>@Html.DisplayNameFor(_ => _.ABCPs.FirstOrDefault().IsPassing)</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var abcp in Model.ABCPs.OrderByDescending(_ => _.Date))
+            {
+            <tr>
+                <td>@Html.DisplayFor(_ => abcp.Date)</td>
+                <td>@Html.DisplayFor(_ => abcp.Weight)</td>
+                <td>@Html.DisplayFor(_ => abcp.Screening_Weight)</td>
+                <td>@Html.DisplayFor(_ => abcp.IsPassing)</td>
+                <td>@Html.ActionLink("Details", "Details", "ABCP", new { abcp.Id })</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
 <!-- Evaluations? -->
