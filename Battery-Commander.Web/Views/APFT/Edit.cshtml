@@ -34,9 +34,13 @@
     <button type="submit">Save</button>
 }
 
-<link rel="stylesheet" type="text/css" href="https://weareoutman.github.io/clockpicker/dist/bootstrap-clockpicker.min.css" />
-<script type="text/javascript" src="https://weareoutman.github.io/clockpicker/dist/bootstrap-clockpicker.min.js"></script>
-
-<script type="text/javascript">
-    $('.clockpicker').clockpicker();
-</script>
+@section Scripts{
+    <script type="text/javascript">
+        $('.clockpicker').clockpicker({
+            autoclose: true,
+            afterDone: function () {
+                $('#Run').val('00:' + $('#Run').val());
+            }
+        });
+    </script>
+}
