@@ -49,6 +49,29 @@ namespace BatteryCommander.Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ABCPs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Date = table.Column<DateTime>(type: "date", nullable: false),
+                    Height = table.Column<decimal>(nullable: false),
+                    MeasurementsJson = table.Column<string>(nullable: true),
+                    SoldierId = table.Column<int>(nullable: false),
+                    Weight = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ABCPs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ABCPs_Soldiers_SoldierId",
+                        column: x => x.SoldierId,
+                        principalTable: "Soldiers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "APFTs",
                 columns: table => new
                 {
@@ -131,6 +154,11 @@ namespace BatteryCommander.Web.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_ABCPs_SoldierId",
+                table: "ABCPs",
+                column: "SoldierId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_APFTs_SoldierId",
                 table: "APFTs",
                 column: "SoldierId");
@@ -163,6 +191,9 @@ namespace BatteryCommander.Web.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "ABCPs");
+
             migrationBuilder.DropTable(
                 name: "APFTs");
 

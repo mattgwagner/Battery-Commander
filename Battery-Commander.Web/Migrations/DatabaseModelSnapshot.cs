@@ -35,7 +35,7 @@ namespace BatteryCommander.Web.Migrations
 
                     b.HasIndex("SoldierId");
 
-                    b.ToTable("ABCP");
+                    b.ToTable("ABCPs");
                 });
 
             modelBuilder.Entity("BatteryCommander.Web.Models.APFT", b =>

@@ -8,13 +8,36 @@ using BatteryCommander.Web.Models;
 namespace BatteryCommander.Web.Migrations
 {
     [DbContext(typeof(Database))]
-    [Migration("20170331141547_Initial")]
+    [Migration("20170404015029_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1");
+
+            modelBuilder.Entity("BatteryCommander.Web.Models.ABCP", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("date");
+
+                    b.Property<decimal>("Height");
+
+                    b.Property<string>("MeasurementsJson");
+
+                    b.Property<int>("SoldierId");
+
+                    b.Property<int>("Weight");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SoldierId");
+
+                    b.ToTable("ABCPs");
+                });
 
             modelBuilder.Entity("BatteryCommander.Web.Models.APFT", b =>
                 {
@@ -139,6 +162,14 @@ namespace BatteryCommander.Web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Units");
+                });
+
+            modelBuilder.Entity("BatteryCommander.Web.Models.ABCP", b =>
+                {
+                    b.HasOne("BatteryCommander.Web.Models.Soldier", "Soldier")
+                        .WithMany("ABCPs")
+                        .HasForeignKey("SoldierId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("BatteryCommander.Web.Models.APFT", b =>
