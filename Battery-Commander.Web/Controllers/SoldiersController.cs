@@ -36,7 +36,7 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> Details(int id)
         {
-            return Json(await Get(db, id));
+            return View(await Get(db, id));
         }
 
         public async Task<IActionResult> New()
