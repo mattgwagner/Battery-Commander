@@ -5,16 +5,29 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th></th>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Ratee)</th>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().ThruDate)</th>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Delinquency)</th>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().LastUpdated)</th>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Type)</th>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Rater)</th>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().SeniorRater)</th>
             <th></th>
         </tr>
     </thead>
 
     <tbody>
-        @foreach (var model in Model)
+        @foreach (var evaluation in Model)
         {
             <tr>
-                <td></td>
+                <th>@Html.DisplayFor(_ => evaluation.Ratee)</th>
+                <th>@Html.DisplayFor(_ => evaluation.ThruDate)</th>
+                <th>@Html.DisplayFor(_ => evaluation.Delinquency)</th>
+                <th>@Html.DisplayFor(_ => evaluation.LastUpdated)</th>
+                <th>@Html.DisplayFor(_ => evaluation.Type)</th>
+                <th>@Html.DisplayFor(_ => evaluation.Rater)</th>
+                <th>@Html.DisplayFor(_ => evaluation.SeniorRater)</th>
+                <th>@Html.ActionLink("Details", "Details", new { evaluation.Id })</th>
             </tr>
         }
     </tbody>

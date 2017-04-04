@@ -1,1 +1,24 @@
-﻿
+﻿@model Evaluation
+
+<!-- Edit link, if available -->
+<!-- Workflow steps available -->
+
+<fieldset>
+    <legend></legend>
+</fieldset>
+
+<h2>@Html.DisplayNameFor(_ => Model.Events)</h2>
+
+<table class="table">
+    <thead></thead>
+    <tbody>
+        @foreach (var @event in Model.Events.OrderByDescending(_ => _.Timestamp))
+        {
+            <tr>
+                <td>@Html.DisplayFor(_ => @event.Author)</td>
+                <td>@Html.DisplayFor(_ => @event.Message)</td>
+                <td>@Html.DisplayFor(_ => @event.Timestamp)</td>
+            </tr>
+        }
+    </tbody>
+</table>
