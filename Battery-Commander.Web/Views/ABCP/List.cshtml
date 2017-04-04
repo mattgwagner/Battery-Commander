@@ -1,0 +1,23 @@
+﻿@model IEnumerable<ABCP>
+
+<h2>APFT @Html.ActionLink("Add New", "New", "ABCP", null, new { @class = "btn btn-default" })</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var model in Model)
+        {
+            <tr class="@(model.IsPassing ? "alert-success" : "alert-danger")">
+                <td>@Html.DisplayFor(_ => model.Soldier)</td>
+                <td>@Html.DisplayFor(_ => model.Date)</td>
+                <td>@Html.DisplayFor(_ => model.IsPassing)</td>
+                <td>@Html.ActionLink("Details", "Details", new { model.Id })</td>
+            </tr>
+        }
+    </tbody>
+</table>

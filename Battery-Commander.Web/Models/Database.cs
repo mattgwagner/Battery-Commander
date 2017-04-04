@@ -10,6 +10,8 @@ namespace BatteryCommander.Web.Models
 
         public DbSet<APFT> APFTs { get; set; }
 
+        public DbSet<ABCP> ABCPs { get; set; }
+
         public DbSet<Unit> Units { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)

@@ -1,0 +1,30 @@
+﻿@model ABCP
+
+@using (Html.BeginForm("Save", "ABCP", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+    @Html.ValidationSummary()
+
+    <div class="form-group form-group-lg">
+        @Html.DisplayNameFor(model => model.Soldier)
+        @Html.DropDownListFor(model => model.SoldierId, (IEnumerable<SelectListItem>)ViewBag.Soldiers, "-- Select a Soldier --")
+    </div>
+
+    <div class="form-group form-group-lg">
+        @Html.DisplayNameFor(model => model.Date)
+        @Html.EditorFor(model => model.Date)
+    </div>
+
+    <div class="form-group form-group-lg">
+        @Html.DisplayNameFor(model => model.Height)
+        @Html.EditorFor(model => model.Height)
+    </div>
+
+    <div class="form-group form-group-lg">
+        @Html.DisplayNameFor(model => model.Weight)
+        @Html.EditorFor(model => model.Weight)
+    </div>
+
+    <button type="submit">Save</button>
+}
