@@ -1,8 +1,8 @@
 ﻿@model Soldier
 
-@Html.ActionLink("Edit", "Edit", new { Model.Id })
+@Html.ActionLink("Edit", "Edit", new { Model.Id }, new { @class = "btn btn-default" })
 
-<table>
+<table class="table table-bordered">
     <tr>
         <td>@Html.DisplayNameFor(model => model.Rank)</td>
         <td>@Html.DisplayFor(model => model.Rank)</td>
@@ -39,9 +39,9 @@
 
 <!-- APFT Records -->
 
-<h2>@Html.DisplayNameFor(_ => _.APFTs) @Html.ActionLink("Add New", "New", "APFT", new { soldier = Model.Id })</h2>
+<h2>@Html.DisplayNameFor(_ => _.APFTs) @Html.ActionLink("Add New", "New", "APFT", new { soldier = Model.Id }, new { @class = "btn btn-default" })</h2>
 
-<table>
+<table class="table table-bordered">
     <thead>
         <tr>
             <th>@Html.DisplayNameFor(_ => _.APFTs.FirstOrDefault().Date)</th>
@@ -49,6 +49,7 @@
             <th>@Html.DisplayNameFor(_ => _.APFTs.FirstOrDefault().SitUps)</th>
             <th>@Html.DisplayNameFor(_ => _.APFTs.FirstOrDefault().Run)</th>
             <th>@Html.DisplayNameFor(_ => _.APFTs.FirstOrDefault().TotalScore)</th>
+            <th></th>
         </tr>
     </thead>
 
@@ -69,9 +70,9 @@
 
 <!-- ABCP Records -->
 
-<h2>@Html.DisplayNameFor(_ => _.ABCPs) @Html.ActionLink("Add New", "New", "ABCP", new { soldier = Model.Id })</h2>
+<h2>@Html.DisplayNameFor(_ => _.ABCPs) @Html.ActionLink("Add New", "New", "ABCP", new { soldier = Model.Id }, new { @class = "btn btn-default" })</h2>
 
-<table>
+<table class="table table-bordered">
     <thead>
         <tr>
             <th>@Html.DisplayNameFor(_ => _.ABCPs.FirstOrDefault().Date)</th>
