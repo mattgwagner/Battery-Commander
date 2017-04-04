@@ -1,6 +1,6 @@
 ﻿@model Evaluation
 
-@using (Html.BeginForm("Save", "Evaluation", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Save", "Evaluations", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.Id)
@@ -33,7 +33,7 @@
 
     <div class="form-group form-group-lg">
         @Html.DisplayNameFor(model => model.Type)
-        @Html.EditorFor(model => model.Type)
+        @Html.DropDownListFor(model => model.Type, Html.GetEnumSelectList<EvaluationType>())
     </div>
 
     <button type="submit">Save</button>
