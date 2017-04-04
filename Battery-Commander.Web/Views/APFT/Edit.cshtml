@@ -26,10 +26,17 @@
         @Html.EditorFor(model => model.SitUps)
     </div>
 
-    <div class="form-group form-group-lg">
+    <div class="form-group form-group-lg clockpicker">
         @Html.DisplayNameFor(model => model.Run)
         @Html.EditorFor(model => model.Run)
     </div>
 
     <button type="submit">Save</button>
 }
+
+<link rel="stylesheet" type="text/css" href="https://weareoutman.github.io/clockpicker/dist/bootstrap-clockpicker.min.css" />
+<script type="text/javascript" src="https://weareoutman.github.io/clockpicker/dist/bootstrap-clockpicker.min.js"></script>
+
+<script type="text/javascript">
+    $('.clockpicker').clockpicker();
+</script>
