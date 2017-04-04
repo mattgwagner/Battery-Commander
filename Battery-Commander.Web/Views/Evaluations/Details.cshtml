@@ -10,7 +10,7 @@
 <h2>@Html.DisplayNameFor(_ => Model.Events)</h2>
 
 <div>
-    @using (Html.BeginForm("Comment", "Evaluation", FormMethod.Post, new { @class = "form-horitzontal" }))
+    @using (Html.BeginForm("Comment", "Evaluations", FormMethod.Post, new { @class = "form-horitzontal" }))
     {
         @Html.AntiForgeryToken()
         @Html.HiddenFor(_ => _.Id)
