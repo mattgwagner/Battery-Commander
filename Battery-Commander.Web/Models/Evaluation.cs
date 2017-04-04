@@ -41,8 +41,10 @@ namespace BatteryCommander.Web.Models
         [NotMapped]
         public Boolean IsCompleted => EvaluationStatus.Completed == Status;
 
+        [NotMapped, DisplayFormat(DataFormatString = "{0:%d}d")]
         public TimeSpan Delinquency => (ThruDate - DateTime.Today);
 
+        [NotMapped, DataType(DataType.Date)]
         public DateTimeOffset? LastUpdated => Events.OrderByDescending(e => e.Timestamp).Select(e => (DateTimeOffset?)e.Timestamp).FirstOrDefault();
 
         public virtual ICollection<Event> Events { get; set; } = new List<Event>();
