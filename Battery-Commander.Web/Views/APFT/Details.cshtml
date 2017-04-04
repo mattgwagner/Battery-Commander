@@ -5,6 +5,41 @@
     @Html.ActionLink("Generate Counseling", "Counseling", "APFT", new { Model.Id }, new { @class = "btn btn-default" })
 }
 
-<fieldset>
-    <legend>APFT for @Html.DisplayFor(model => model.Soldier) on @Html.DisplayFor(model => model.Date)</legend>
-</fieldset>
+<table class="table table-bordered">
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Soldier)</td>
+        <td>@Html.DisplayFor(model => model.Soldier)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.IsPassing)</td>
+        <td>@Html.DisplayFor(model => model.IsPassing)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.PushUps)</td>
+        <td>@Html.DisplayFor(model => model.PushUps)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.PushUpScore)</td>
+        <td>@Html.DisplayFor(model => model.PushUpScore)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.SitUps)</td>
+        <td>@Html.DisplayFor(model => model.SitUps)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.SitUpScore)</td>
+        <td>@Html.DisplayFor(model => model.SitUpScore)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Run)</td>
+        <td>@Html.DisplayFor(model => model.Run)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.RunScore)</td>
+        <td>@Html.DisplayFor(model => model.RunScore)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.TotalScore)</td>
+        <td>@Html.DisplayFor(model => model.TotalScore)</td>
+    </tr>
+</table>
