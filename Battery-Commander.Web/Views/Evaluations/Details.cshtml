@@ -4,10 +4,22 @@
 <!-- Workflow steps available -->
 
 <fieldset>
-    <legend></legend>
+    @Html.DisplayForModel()
 </fieldset>
 
 <h2>@Html.DisplayNameFor(_ => Model.Events)</h2>
+
+<div>
+    @using (Html.BeginForm("Comment", "Evaluation", FormMethod.Post, new { @class = "form-horitzontal" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(_ => _.Id)
+
+        @Html.TextArea("message")
+
+        <button type="submit">Add Comment</button>
+    }
+</div>
 
 <table class="table">
     <thead></thead>
