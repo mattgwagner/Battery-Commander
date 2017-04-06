@@ -49,6 +49,7 @@
                     <th>@Html.DisplayNameFor(_ => _.APFTs.FirstOrDefault().SitUps)</th>
                     <th>@Html.DisplayNameFor(_ => _.APFTs.FirstOrDefault().Run)</th>
                     <th>@Html.DisplayNameFor(_ => _.APFTs.FirstOrDefault().TotalScore)</th>
+                    <th>@Html.DisplayNameFor(_ => _.APFTs.FirstOrDefault().IsPassing)</th>
                     <th></th>
                 </tr>
             </thead>
@@ -62,6 +63,7 @@
                         <td>@Html.DisplayFor(_ => apft.SitUps)</td>
                         <td>@Html.DisplayFor(_ => apft.Run)</td>
                         <td>@Html.DisplayFor(_ => apft.TotalScore)</td>
+                        <td>@Html.DisplayFor(_ => apft.IsPassing)</td>
                         <td>@Html.ActionLink("Details", "Details", "APFT", new { apft.Id })</td>
                     </tr>
                 }

@@ -60,6 +60,7 @@ namespace BatteryCommander.Web.Models
             set { RunSeconds = (int)value.TotalSeconds; }
         }
 
+        [Display(Name = "PushUp Score")]
         public int PushUpScore
         {
             get
@@ -76,6 +77,7 @@ namespace BatteryCommander.Web.Models
             }
         }
 
+        [Display(Name = "SitUp Score")]
         public int SitUpScore
         {
             get
@@ -92,6 +94,7 @@ namespace BatteryCommander.Web.Models
             }
         }
 
+        [Display(Name = "Run Score")]
         public int RunScore
         {
             get
@@ -108,8 +111,10 @@ namespace BatteryCommander.Web.Models
             }
         }
 
+        [Display(Name = "Total")]
         public int TotalScore => PushUpScore + SitUpScore + RunScore;
 
+        [Display(Name = "Is Passing?")]
         public Boolean IsPassing => new[] { PushUpScore, SitUpScore, RunScore }.All(s => s >= MinimumPerEvent);
 
         public byte[] GenerateCounseling()
