@@ -1,7 +1,5 @@
 ﻿@model Soldier
 
-
-
 <div class="panel panel-default">
 
     <div class="panel-heading">
@@ -30,7 +28,6 @@
             <td>@Html.DisplayFor(model => model.Gender)</td>
         </tr>
     </table>
-
 </div>
 
 <div class="panel panel-default">
@@ -38,7 +35,6 @@
     <div class="panel-heading">
         <h2 class="panel-title">@Html.DisplayNameFor(_ => _.APFTs) @Html.ActionLink("Add New", "New", "APFT", new { soldier = Model.Id }, new { @class = "btn btn-default btn-xs" })</h2>
     </div>
-
 
     <div class="panel-body">
         <table class="table">
@@ -69,8 +65,12 @@
                 }
             </tbody>
         </table>
-    </div>
 
+        @if (Model.APFTs.Count > 1)
+        {
+            <div id="apft_chart"></div>
+        }
+    </div>
 </div>
 
 <div class="panel panel-default">
@@ -105,7 +105,6 @@
             </tbody>
         </table>
     </div>
-
 </div>
 
 <div>
@@ -115,3 +114,53 @@
         <button type="submit" class="btn btn-danger">Delete</button>
     }
 </div>
+
+@section Scripts
+{
+    @{
+        var chart_data =
+            Model
+            .APFTs
+            .OrderBy(apft => apft.Date)
+            .Select(apft => new
+            {
+                date = apft.Date.ToString("yyyy-MM-dd"),
+                score = apft.TotalScore
+            })
+            .ToList();
+    }
+
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        // Load the Visualization API and the corechart package.
+        google.charts.load('current', { 'packages': ['corechart'] });
+
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(drawChart);
+
+        var result = JSON.parse('@Json.Serialize(chart_data)');
+
+        function drawChart() {
+            // Create the data table.
+            var data = new google.visualization.DataTable();
+
+            data.addColumn('date', 'Date');
+            data.addColumn('number', 'Score');
+
+            for (var i = 0; i < result.length; i++)
+            {
+                data.addRow([new Date(result[i].date), result[i].score]);
+            }
+
+            var options = {
+                title: 'APFT Scores',
+                legend: { position: 'bottom' }
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('apft_chart'));
+
+            chart.draw(data, options);
+        }
+    </script>
+}
