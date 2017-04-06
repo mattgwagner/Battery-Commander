@@ -8,3 +8,11 @@
 <fieldset>
     <legend>ABCP for @Html.DisplayFor(model => model.Soldier) on @Html.DisplayFor(model => model.Date)</legend>
 </fieldset>
+
+<div>
+    @using (Html.BeginForm("Delete", "ABCP", new { Model.Id }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-danger">Delete</button>
+    }
+</div>

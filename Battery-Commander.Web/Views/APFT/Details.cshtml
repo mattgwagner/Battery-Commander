@@ -49,3 +49,11 @@
         <td>@Html.DisplayFor(model => model.TotalScore)</td>
     </tr>
 </table>
+
+<div>
+    @using (Html.BeginForm("Delete", "APFT", new { Model.Id }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-danger">Delete</button>
+    }
+</div>

@@ -67,3 +67,11 @@
         }
     </tbody>
 </table>
+
+<div>
+    @using (Html.BeginForm("Delete", "Evaluation", new { Model.Id }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-danger">Delete</button>
+    }
+</div>

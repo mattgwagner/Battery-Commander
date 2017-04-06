@@ -98,3 +98,11 @@
 </table>
 
 <!-- Evaluations? -->
+
+<div>
+    @using (Html.BeginForm("Delete", "Soldier", new { Model.Id }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-danger">Delete</button>
+    }
+</div>
