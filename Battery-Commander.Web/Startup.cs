@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace BatteryCommander.Web
@@ -102,8 +103,28 @@ namespace BatteryCommander.Web
                 // Configure the Claims Issuer to be Auth0
                 ClaimsIssuer = "Auth0",
 
+                // Saves tokens to the AuthenticationProperties
+                SaveTokens = true,
+
                 Events = new OpenIdConnectEvents
                 {
+                    OnTicketReceived = (context) =>
+                    {
+                        var identity = context.Principal.Identity as ClaimsIdentity;
+
+                        if (identity != null)
+                        {
+                            var name = identity.FindFirst("name");
+
+                            if (name != null)
+                            {
+                                identity.AddClaim(new Claim(ClaimTypes.Name, name.Value));
+                            }
+                        }
+
+                        return Task.CompletedTask;
+                    },
+
                     OnRedirectToIdentityProviderForSignOut = (context) =>
                     {
                         var logoutUri = $"https://{auth0Settings.Value.Domain}/v2/logout?client_id={auth0Settings.Value.ClientId}";
@@ -130,6 +151,8 @@ namespace BatteryCommander.Web
 
             options.Scope.Clear();
             options.Scope.Add("openid");
+            options.Scope.Add("name");
+            options.Scope.Add("email");
 
             app.UseOpenIdConnectAuthentication(options);
 
