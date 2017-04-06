@@ -56,9 +56,7 @@ namespace BatteryCommander.Web.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Save(Evaluation model)
         {
-            var evaluation = await Get(db, model.Id);
-
-            if (evaluation == null)
+            if (await db.Evaluations.AnyAsync(evaluation => evaluation.Id == model.Id) == false)
             {
                 db.Evaluations.Add(model);
             }

@@ -66,9 +66,7 @@ namespace BatteryCommander.Web.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Save(ABCP model)
         {
-            var apft = await Get(db, model.Id);
-
-            if (apft == null)
+            if (await db.ABCPs.AnyAsync(abcp => abcp.Id == model.Id) == false)
             {
                 db.ABCPs.Add(model);
             }
