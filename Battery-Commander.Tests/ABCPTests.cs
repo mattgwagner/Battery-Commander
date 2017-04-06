@@ -70,9 +70,9 @@ namespace BatteryCommander.Tests
         }
 
         [Fact]
-        public void Generate_Male_Counseling()
+        public void Generate_Male_5500()
         {
-            using (var file = new FileStream("TestCounseling_ABCP_Male.pdf", FileMode.Create))
+            using (var file = new FileStream("Test_DA5500_ABCP_Male.pdf", FileMode.Create))
             {
                 var score = new ABCP
                 {

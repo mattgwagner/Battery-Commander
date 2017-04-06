@@ -1,6 +1,7 @@
 ﻿using BatteryCommander.Web.Models;
 using iTextSharp.text.pdf;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
@@ -57,7 +58,7 @@ namespace BatteryCommander.Web.Services
 
         public static byte[] Generate_DA5500(ABCP model)
         {
-            const String prefix = "form1[0]";
+            const String prefix = "form1[0].Page1[0]";
 
             using (var stream = typeof(Program).GetTypeInfo().Assembly.GetManifestResourceStream("BatteryCommander.Web.Models.Data.DA5500.pdf"))
             using (var output = new MemoryStream())
@@ -69,37 +70,44 @@ namespace BatteryCommander.Web.Services
 
                 // Update the form fields as appropriate
 
-                //form1[0].Page1[0].AVE_F[0]
-                //form1[0].Page1[0].signature_BUTTON1[0]
-                //form1[0].Page1[0].NAME[0]
-                //form1[0].Page1[0].IS[0]
-                //form1[0].Page1[0].APPROVE[0]
-                //form1[0].Page1[0].signature_BUTTON2[0]
-                //form1[0].Page1[0].DATE_A[0]
-                //form1[0].Page1[0].FIRST_A[0]
-                //form1[0].Page1[0].RANK_A[0]
-                //form1[0].Page1[0].ISNOT[0]
-                //form1[0].Page1[0].HEIGHT[0]
-                //form1[0].Page1[0].RANK[0]
-                //form1[0].Page1[0].AVE_A[0]
-                //form1[0].Page1[0].THIRD_A[0]
-                //form1[0].Page1[0].AVE_E[0]
-                //form1[0].Page1[0].AVE_B[0]
-                //form1[0].Page1[0].THIRD_B[0]
-                //form1[0].Page1[0].AGE[0]
-                //form1[0].Page1[0].AVE_D[0]
-                //form1[0].Page1[0].AVE_G[0]
-                //form1[0].Page1[0].SCND_B[0]
-                //form1[0].Page1[0].AVE_C[0]
-                //form1[0].Page1[0].FIRST_B[0]
-                //form1[0].Page1[0].REMRKS[0]
-                //form1[0].Page1[0].SCND_A[0]
-                //form1[0].Page1[0].WEIGHT[0]
-                //form1[0].Page1[0].DATE_B[0]
-                //form1[0].Page1[0].PREPARE[0]
-                //form1[0].Page1[0].RANK_B[0]
+                form.SetField($"{prefix}.NAME[0]", $"{model.Soldier.LastName} {model.Soldier.FirstName}");
+                form.SetField($"{prefix}.RANK[0]", $"{model.Soldier.Rank.ShortName()}");
 
-                // form.SetField($"{prefix}.Page1[0].Name[0]", model.Name);
+                form.SetField($"{prefix}.HEIGHT[0]", $"{model.Height}");
+                form.SetField($"{prefix}.WEIGHT[0]", $"{model.Weight}");
+                form.SetField($"{prefix}.AGE[0]", $"{model.Soldier.AgeAsOf(model.Date)}");
+
+                var q = new Queue<String>(new[] { "FIRST", "SCND", "THIRD" });
+
+                foreach (var measurement in model.Measurements)
+                {
+                    // Abdomen
+
+                    var m = q.Dequeue();
+
+                    form.SetField($"{prefix}.{m}_A[0]", $"{measurement.Waist}");
+                    form.SetField($"{prefix}.{m}_B[0]", $"{measurement.Neck}");
+                }
+
+                // Check one
+
+                form.SetField($"{prefix}.IS[0]", model.IsPassing ? "1" : "0");
+                form.SetField($"{prefix}.ISNOT[0]", model.IsPassing ? "0" : "1");
+
+                form.SetField($"{prefix}.AVE_A[0]", $"{model.WaistAverage}");
+                form.SetField($"{prefix}.AVE_B[0]", $"{model.NeckAverage}");
+                form.SetField($"{prefix}.AVE_C[0]", $"{model.WaistAverage}");
+                form.SetField($"{prefix}.AVE_D[0]", $"{model.NeckAverage}");
+                form.SetField($"{prefix}.AVE_E[0]", $"{model.CircumferenceValue}");
+                form.SetField($"{prefix}.AVE_F[0]", $"{model.Height}");
+                form.SetField($"{prefix}.AVE_G[0]", $"{model.BodyFatPercentage}");
+
+                form.SetField($"{prefix}.REMRKS[0]", $@"
+                    AUTHORIZED BODY FAT IS: {model.MaximumAllowableBodyFat}%
+                         TOTAL BODY FAT IS: {model.BodyFatPercentage}%
+
+                    SOLDIER {(model.IsPassing ? "MEETS" : "DOES NOT MEET")} ARMY STANDARDS
+                ");
 
                 stamper.Close();
 
