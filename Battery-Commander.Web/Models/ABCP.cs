@@ -48,6 +48,7 @@ namespace BatteryCommander.Web.Models
             }
         }
 
+        [Display(Name = "Screening Weight")]
         public Decimal Screening_Weight
         {
             get
@@ -62,6 +63,7 @@ namespace BatteryCommander.Web.Models
             }
         }
 
+        [Display(Name = "Requires Taping?")]
         public Boolean RequiresTape => Screening_Weight < Weight;
 
         [NotMapped]
@@ -79,6 +81,7 @@ namespace BatteryCommander.Web.Models
 
         public String MeasurementsJson { get; set; } = String.Empty;
 
+        [Display(Name = "Circumference Value")]
         public Double CircumferenceValue
         {
             get
@@ -95,6 +98,7 @@ namespace BatteryCommander.Web.Models
             }
         }
 
+        [Display(Name = "Calculated Body Fat %")]
         public Double BodyFatPercentage
         {
             get
@@ -111,6 +115,7 @@ namespace BatteryCommander.Web.Models
             }
         }
 
+        [Display(Name = "Max Body Fat %")]
         public Double MaximumAllowableBodyFat
         {
             get
@@ -125,8 +130,10 @@ namespace BatteryCommander.Web.Models
             }
         }
 
+        [Display(Name = "Is Passing Tape?")]
         public Boolean IsPassingTape => BodyFatPercentage <= MaximumAllowableBodyFat;
 
+        [Display(Name = "Is Passing?")]
         public Boolean IsPassing => !RequiresTape || IsPassingTape;
 
         public class Measurement
