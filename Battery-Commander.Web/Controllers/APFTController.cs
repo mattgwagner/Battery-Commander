@@ -78,6 +78,18 @@ namespace BatteryCommander.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var apft = await Get(db, id);
+
+            db.APFTs.Remove(apft);
+
+            await db.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
         public static async Task<APFT> Get(Database db, int id)
         {
             return
