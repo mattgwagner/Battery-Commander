@@ -33,6 +33,7 @@ namespace BatteryCommander.Web.Migrations
                     FirstName = table.Column<string>(maxLength: 50, nullable: false),
                     Gender = table.Column<byte>(nullable: false),
                     LastName = table.Column<string>(maxLength: 50, nullable: false),
+                    MiddleName = table.Column<string>(maxLength: 50, nullable: true),
                     MilitaryEmail = table.Column<string>(maxLength: 50, nullable: true),
                     Rank = table.Column<byte>(nullable: false),
                     UnitId = table.Column<int>(nullable: false)
@@ -138,7 +139,7 @@ namespace BatteryCommander.Web.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Author = table.Column<string>(nullable: true),
-                    EvaluationId = table.Column<int>(nullable: true),
+                    EvaluationId = table.Column<int>(nullable: false),
                     Message = table.Column<string>(nullable: true),
                     Timestamp = table.Column<DateTimeOffset>(nullable: false)
                 },
@@ -150,7 +151,7 @@ namespace BatteryCommander.Web.Migrations
                         column: x => x.EvaluationId,
                         principalTable: "Evaluations",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

@@ -8,7 +8,7 @@ using BatteryCommander.Web.Models;
 namespace BatteryCommander.Web.Migrations
 {
     [DbContext(typeof(Database))]
-    [Migration("20170404015029_Initial")]
+    [Migration("20170406014321_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -101,7 +101,7 @@ namespace BatteryCommander.Web.Migrations
 
                     b.Property<string>("Author");
 
-                    b.Property<int?>("EvaluationId");
+                    b.Property<int>("EvaluationId");
 
                     b.Property<string>("Message");
 
@@ -136,6 +136,9 @@ namespace BatteryCommander.Web.Migrations
 
                     b.Property<string>("LastName")
                         .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("MiddleName")
                         .HasMaxLength(50);
 
                     b.Property<string>("MilitaryEmail")
@@ -200,9 +203,10 @@ namespace BatteryCommander.Web.Migrations
 
             modelBuilder.Entity("BatteryCommander.Web.Models.Evaluation+Event", b =>
                 {
-                    b.HasOne("BatteryCommander.Web.Models.Evaluation")
+                    b.HasOne("BatteryCommander.Web.Models.Evaluation", "Evaluation")
                         .WithMany("Events")
-                        .HasForeignKey("EvaluationId");
+                        .HasForeignKey("EvaluationId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("BatteryCommander.Web.Models.Soldier", b =>
