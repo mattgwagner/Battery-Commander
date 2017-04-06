@@ -32,7 +32,7 @@ namespace BatteryCommander.Web.Models
         [DataType(DataType.EmailAddress), StringLength(50)]
         public String CivilianEmail { get; set; }
 
-        [DataType(DataType.Date), Column(TypeName = "date")]
+        [DataType(DataType.Date), Column(TypeName = "date"), Display(Name = "DOB")]
         public DateTime DateOfBirth { get; set; }
 
         public int Age => AgeAsOf(DateTime.Today);
