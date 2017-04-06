@@ -22,6 +22,11 @@
     </div>
 
     <div class="form-group form-group-lg">
+        @Html.DisplayNameFor(model => model.MiddleName)
+        @Html.EditorFor(model => model.MiddleName)
+    </div>
+
+    <div class="form-group form-group-lg">
         @Html.DisplayNameFor(model => model.Rank)
         @Html.DropDownListFor(model => model.Rank, Html.GetEnumSelectList<Rank>())
     </div>

@@ -20,6 +20,9 @@ namespace BatteryCommander.Web.Models
         [Display(Name = "First Name")]
         public String FirstName { get; set; }
 
+        [StringLength(50), Display(Name = "Middle Name")]
+        public String MiddleName { get; set; }
+
         [Required]
         public Rank Rank { get; set; } = Rank.E1;
 
@@ -71,5 +74,7 @@ namespace BatteryCommander.Web.Models
         public virtual ICollection<APFT> APFTs { get; set; }
 
         public virtual ICollection<ABCP> ABCPs { get; set; }
+
+        public override string ToString() => $"{Rank} {LastName}, {FirstName} {MiddleName}";
     }
 }
