@@ -79,7 +79,7 @@ namespace BatteryCommander.Web.Services
 
                 // Update the form fields as appropriate
 
-                form.SetField($"{prefix}.NAME[0]", $"{model.Soldier.LastName}, {model.Soldier.FirstName} {model.Soldier.MiddleName.ToCharArray().FirstOrDefault()}");
+                form.SetField($"{prefix}.NAME[0]", $"{model.Soldier.LastName}, {model.Soldier.FirstName} {model.Soldier.MiddleName?.ToCharArray().FirstOrDefault()}");
                 form.SetField($"{prefix}.RANK[0]", $"{model.Soldier.Rank.ShortName()}");
 
                 form.SetField($"{prefix}.HEIGHT[0]", $"{model.Height}");
