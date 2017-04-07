@@ -1,14 +1,17 @@
 ﻿@model APFT
 
-<div>
-    <a href="@Url.Action("Details", "APFT", new { Model.Id })">
-        @if (Model.IsPassing)
-        {
-            <span class="label label-success">Passing</span>
-        }
-        else
-        {
-            <span class="label label-danger">Failure</span>
-        }
-    </a>
-</div>
+@if (Model != null)
+{
+    <div>
+        <a href="@Url.Action("Details", "APFT", new { Model.Id })">
+            @if (Model.IsPassing)
+            {
+                <span class="label label-success">Passing</span>
+            }
+            else
+            {
+                <span class="label label-danger">Failure</span>
+            }
+        </a>
+    </div>
+}

@@ -5,9 +5,10 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th></th>
-            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().FirstName)</th>
+            <th>Soldier</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Unit)</th>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().APFTs)</th>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().ABCPs)</th>
             <th></th>
         </tr>
     </thead>
@@ -16,14 +17,25 @@
         @foreach (var soldier in Model)
         {
             <tr>
-                <td>@Html.ActionLink("Details", "Details", new { soldier.Id })</td>
                 <td>@Html.DisplayFor(s => soldier)</td>
                 <td>@Html.DisplayFor(s => soldier.Unit)</td>
+                <td>
+                    @{
+                        var apft = soldier.APFTs.OrderByDescending(_ => _.Date).FirstOrDefault();
+                    }
+                    @Html.DisplayFor(s => apft)
+                </td>
+                <td>
+                    @{
+                        var abcp = soldier.ABCPs.OrderByDescending(_ => _.Date).FirstOrDefault();
+                    }
+                    @Html.DisplayFor(s => abcp)
+                </td>
                 <td>
                     @Html.ActionLink("Add ABCP", "New", "ABCP", new { soldier = soldier.Id }, new { @class = "btn btn-default" })
                     @Html.ActionLink("Add APFT", "New", "APFT", new { soldier = soldier.Id }, new { @class = "btn btn-default" })
                 </td>
             </tr>
-        }
+                        }
     </tbody>
 </table>
