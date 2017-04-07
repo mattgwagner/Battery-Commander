@@ -50,7 +50,7 @@ namespace BatteryCommander.Web.Models
         [DataType(DataType.Date), Column(TypeName = "date"), Display(Name = "ETS Date")]
         public DateTime? ETSDate { get; set; }
 
-        [NotMapped, DisplayFormat(DataFormatString = "{0:%d}d")]
+        [NotMapped, DisplayFormat(DataFormatString = "{0:%d}d"), Display(Name = "Till ETS")]
         public TimeSpan? TimeTillETS => ETSDate - DateTime.Today;
 
         [Required]

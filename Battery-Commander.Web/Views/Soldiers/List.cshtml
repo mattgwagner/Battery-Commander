@@ -7,6 +7,7 @@
         <tr>
             <th>Soldier</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Unit)</th>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().TimeTillETS)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().APFTs)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().ABCPs)</th>
             <th></th>
@@ -19,6 +20,7 @@
             <tr>
                 <td>@Html.DisplayFor(s => soldier)</td>
                 <td>@Html.DisplayFor(s => soldier.Unit)</td>
+                <td>@Html.DisplayFor(s => soldier.TimeTillETS)</td>
                 <td>
                     @{
                         var apft = soldier.APFTs.OrderByDescending(_ => _.Date).FirstOrDefault();
