@@ -131,7 +131,7 @@ namespace BatteryCommander.Web.Models
         }
 
         [Display(Name = "Is Passing Tape?")]
-        public Boolean IsPassingTape => BodyFatPercentage <= MaximumAllowableBodyFat;
+        public Boolean IsPassingTape => RequiresTape && Measurements.Any() && BodyFatPercentage <= MaximumAllowableBodyFat;
 
         [Display(Name = "Is Passing?")]
         public Boolean IsPassing => !RequiresTape || IsPassingTape;
