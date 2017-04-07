@@ -5,6 +5,7 @@
 <table class="table table-striped">
     <thead>
         <tr>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Ratee.Rank)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Ratee)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().ThruDate)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Status)</th>
@@ -21,6 +22,7 @@
         @foreach (var evaluation in Model)
         {
             <tr>
+                <td>@Html.DisplayFor(_ => evaluation.Ratee.Rank)</td>
                 <td>@Html.DisplayFor(_ => evaluation.Ratee)</td>
                 <td>@Html.DisplayFor(_ => evaluation.ThruDate)</td>
                 <td>@Html.DisplayFor(_ => evaluation.Status)</td>
