@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
+using static BatteryCommander.Web.Models.ABCP;
 
 namespace BatteryCommander.Web.Controllers
 {
@@ -47,6 +48,22 @@ namespace BatteryCommander.Web.Controllers
             var filename = $"{abcp.Soldier.Unit.Name}_DA500_ABCP_{abcp.Soldier.LastName}_{abcp.Date:yyyyMMdd}.pdf";
 
             return File(abcp.GenerateCounseling(), "application/pdf", filename);
+        }
+
+        public async Task<IActionResult> Measurements(int id)
+        {
+            return View(await Get(db, id));
+        }
+
+        public async Task<IActionResult> Measurements(int id, Measurement[] measurements)
+        {
+            var abcp = await Get(db, id);
+
+            abcp.Measurements = measurements;
+
+            await db.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Details), id);
         }
 
         public async Task<IActionResult> New(int soldier = 0)

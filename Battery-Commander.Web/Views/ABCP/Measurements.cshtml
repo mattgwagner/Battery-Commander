@@ -1,0 +1,40 @@
+﻿@model ABCP
+
+<panel class="panel">
+    <div class="panel-heading">
+        <h1>ABCP for @Html.DisplayFor(model => model.Soldier) on @Html.DisplayFor(model => model.Date)</h1>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Id)
+
+        <table>
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Measurements.FirstOrDefault().Waist)</th>
+                    <th>@Html.DisplayNameFor(model => model.Measurements.FirstOrDefault().Neck)</th>
+                    @if (Model.Soldier.Gender == Gender.Female)
+                    {
+                        <th>@Html.DisplayNameFor(model => model.Measurements.FirstOrDefault().Hips)</th>
+                    }
+                </tr>
+            </thead>
+
+            @for (int i = 0; i < 3; i++)
+            {
+                <tr>
+                    <td><input name="measurements[@i].Waist" /></td>
+                    <td><input name="measurements[@i].Neck" /></td>
+                    @if (Model.Soldier.Gender == Gender.Female)
+                    {
+                        <td><input name="measurements[@i].Hips" /></td>
+                    }
+                </tr>
+            }
+        </table>
+
+        <button type="submit">Save</button>
+    }
+</panel>

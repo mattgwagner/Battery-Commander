@@ -15,7 +15,9 @@
 }
 
 <panel class="panel">
-    <div class="panel panel-heading">ABCP for @Html.DisplayFor(model => model.Soldier) on @Html.DisplayFor(model => model.Date)</div>
+    <div class="panel-heading">
+        <h1>ABCP for @Html.DisplayFor(model => model.Soldier) on @Html.DisplayFor(model => model.Date)</h1>
+    </div>
 
     <table class="table table-bordered">
         <tr>
@@ -54,7 +56,10 @@
                     <ul>
                         <li>@Html.DisplayNameFor(_ => measurement.Neck): @Html.DisplayFor(_ => measurement.Neck)</li>
                         <li>@Html.DisplayNameFor(_ => measurement.Waist): @Html.DisplayFor(_ => measurement.Waist)</li>
-                        <li>@Html.DisplayNameFor(_ => measurement.Hips): @Html.DisplayFor(_ => measurement.Hips)</li>
+                        @if (Model.Soldier.Gender == Gender.Female)
+                        {
+                            <li>@Html.DisplayNameFor(_ => measurement.Hips): @Html.DisplayFor(_ => measurement.Hips)</li>
+                        }
                     </ul>
                 </td>
             </tr>
