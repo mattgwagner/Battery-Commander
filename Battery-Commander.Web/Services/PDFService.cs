@@ -118,8 +118,8 @@ namespace BatteryCommander.Web.Services
                     Screening Table Weight: {model.Screening_Weight} lbs
                     {(model.RequiresTape ? "OVER " : "UNDER")} {(Math.Abs(model.Screening_Weight - model.Weight))} lbs
 
-                    Soldier's Actual Body Fat %: {model.MaximumAllowableBodyFat}%
-                    Authorized Body Fat %: {model.BodyFatPercentage}%
+                    Soldier's Actual Body Fat %: {model.BodyFatPercentage}%
+                    Authorized Body Fat %: {model.MaximumAllowableBodyFat}%
 
                     Individual is {(model.IsPassing ? "" : "not")} in compliance with Army standards.
                 ");
