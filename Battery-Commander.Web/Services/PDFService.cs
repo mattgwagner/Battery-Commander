@@ -1,6 +1,7 @@
 ﻿using BatteryCommander.Web.Models;
 using iTextSharp.text.pdf;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -68,6 +69,13 @@ namespace BatteryCommander.Web.Services
 
                 var form = stamper.AcroFields;
 
+#if DEBUG
+                foreach (DictionaryEntry de in form.Fields)
+                {
+                    Console.WriteLine($"{de.Key}");
+                }
+#endif
+
                 // Update the form fields as appropriate
 
                 form.SetField($"{prefix}.NAME[0]", $"{model.Soldier.LastName} {model.Soldier.FirstName}");
@@ -77,9 +85,8 @@ namespace BatteryCommander.Web.Services
                 form.SetField($"{prefix}.WEIGHT[0]", $"{model.Weight}");
                 form.SetField($"{prefix}.AGE[0]", $"{model.Soldier.AgeAsOf(model.Date)}");
 
-                form.SetField($"{prefix}.DATE[0]", $"{model.Date:yyyyMMdd}");
+                form.SetField($"{prefix}.DATE_A[0]", $"{model.Date:yyyyMMdd}");
                 form.SetField($"{prefix}.DATE_B[0]", $"{model.Date:yyyyMMdd}");
-
 
                 var q = new Queue<String>(new[] { "FIRST", "SCND", "THIRD" });
 
