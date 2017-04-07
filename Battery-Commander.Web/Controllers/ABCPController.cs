@@ -55,6 +55,7 @@ namespace BatteryCommander.Web.Controllers
             return View(await Get(db, id));
         }
 
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Measurements(int id, Measurement[] measurements)
         {
             var abcp = await Get(db, id);
