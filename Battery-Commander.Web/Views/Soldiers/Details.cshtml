@@ -27,7 +27,7 @@
             <td>@Html.DisplayNameFor(model => model.Gender)</td>
             <td>@Html.DisplayFor(model => model.Gender)</td>
         </tr>
-         <tr>
+        <tr>
             <td>@Html.DisplayNameFor(model => model.Unit)</td>
             <td>@Html.DisplayFor(model => model.Unit)</td>
         </tr>
@@ -63,7 +63,16 @@
                         <td>@Html.DisplayFor(_ => apft.SitUps)</td>
                         <td>@Html.DisplayFor(_ => apft.Run)</td>
                         <td>@Html.DisplayFor(_ => apft.TotalScore)</td>
-                        <td>@Html.DisplayFor(_ => apft.IsPassing)</td>
+                        <td>
+                            @if (apft.IsPassing)
+                            {
+                                <span class="label label-success">Passing</span>
+                            }
+                            else
+                            {
+                                <span class="label label-danger">Failure</span>
+                            }
+                        </td>
                         <td>@Html.ActionLink("Details", "Details", "APFT", new { apft.Id })</td>
                     </tr>
                 }
@@ -102,7 +111,16 @@
                         <td>@Html.DisplayFor(_ => abcp.Date)</td>
                         <td>@Html.DisplayFor(_ => abcp.Weight)</td>
                         <td>@Html.DisplayFor(_ => abcp.Screening_Weight)</td>
-                        <td>@Html.DisplayFor(_ => abcp.IsPassing)</td>
+                        <td>
+                            @if (abcp.IsPassing)
+                            {
+                                <span class="label label-success">Passing</span>
+                            }
+                            else
+                            {
+                                <span class="label label-danger">Failure</span>
+                            }
+                        </td>
                         <td>@Html.ActionLink("Details", "Details", "ABCP", new { abcp.Id })</td>
                     </tr>
                 }
