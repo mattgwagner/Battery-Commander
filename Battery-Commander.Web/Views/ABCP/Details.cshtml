@@ -14,23 +14,15 @@
     @Html.ActionLink("Generate Counseling", "Counseling", "ABCP", new { Model.Id }, new { @class = "btn btn-default" })
 }
 
-<panel class="panel">
+<div class="panel panel-default">
     <div class="panel-heading">
-        <h1>ABCP for @Html.DisplayFor(model => model.Soldier) on @Html.DisplayFor(model => model.Date)</h1>
+        <h1 class="panel-title">ABCP for @Model.Soldier on @Html.DisplayFor(model => model.Date)</h1>
     </div>
 
     <table class="table table-bordered">
         <tr>
-            <td>@Html.DisplayNameFor(model => model.Soldier)</td>
-            <td>@Html.DisplayFor(model => model.Soldier)</td>
-        </tr>
-        <tr>
             <td>@Html.DisplayNameFor(model => model.IsPassing)</td>
             <td>@Html.DisplayFor(model => model.IsPassing)</td>
-        </tr>
-        <tr>
-            <td>@Html.DisplayNameFor(model => model.Date)</td>
-            <td>@Html.DisplayFor(model => model.Date)</td>
         </tr>
         <tr>
             <td>@Html.DisplayNameFor(model => model.Height)</td>
@@ -66,7 +58,7 @@
         }
 
     </table>
-</panel>
+</div>
 
 <div>
     @using (Html.BeginForm("Delete", "ABCP", new { Model.Id }, FormMethod.Post))
