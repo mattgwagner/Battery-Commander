@@ -19,7 +19,7 @@ namespace BatteryCommander.Web.Controllers
             this.db = db;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? unit = null)
         {
             // TODO Filtering by Rank, MOS, Position, Name, Status
 
@@ -29,6 +29,7 @@ namespace BatteryCommander.Web.Controllers
                 .Include(_ => _.Unit)
                 .OrderBy(_ => _.LastName)
                 .ThenBy(_ => _.FirstName)
+                .Where(_ => !unit.HasValue || _.UnitId == unit)
                 .ToListAsync();
 
             return View("List", soldiers);
