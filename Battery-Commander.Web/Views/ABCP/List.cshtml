@@ -21,6 +21,14 @@
                         <span class="label label-danger">Failure</span>
                     }
                 </td>
+                <td>
+                    @if (model.RequiresTape && !model.Measurements.Any())
+                    {
+                        <a href="@Url.Action("Measurements", new { model.Id })">
+                            <span class="label label-warning">Requires Measurement</span>
+                        </a>
+                    }
+                </td>
                 <td>@Html.ActionLink("Details", "Details", new { model.Id })</td>
             </tr>
         }
