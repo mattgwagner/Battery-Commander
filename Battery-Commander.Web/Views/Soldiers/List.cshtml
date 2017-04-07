@@ -22,6 +22,10 @@
                 <td>@Html.DisplayFor(s => soldier.FirstName)</td>
                 <td>@Html.DisplayFor(s => soldier.Unit)</td>
                 <td>@Html.ActionLink("Details", "Details", new { soldier.Id })</td>
+                <td>
+                    @Html.ActionLink("Add ABCP", "New", "ABCP", new { soldier = soldier.Id })
+                    @Html.ActionLink("Add APFT", "New", "APFT", new { soldier = soldier.Id })
+                </td>
             </tr>
         }
     </tbody>
