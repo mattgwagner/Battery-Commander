@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace BatteryCommander.Web.Models
 {
@@ -48,5 +49,30 @@ namespace BatteryCommander.Web.Models
 
         [Display(Name = "Colonel", ShortName = "COL")]
         O6 = 15
+    }
+
+    public static class RankExtensions
+    {
+        public static Boolean IsNCO(this Rank rank)
+        {
+            return !IsOfficer(rank);
+        }
+
+        public static Boolean IsOfficer(this Rank rank)
+        {
+            switch (rank)
+            {
+                case Rank.O1:
+                case Rank.O2:
+                case Rank.O3:
+                case Rank.O4:
+                case Rank.O5:
+                case Rank.O6:
+                    return true;
+
+                default:
+                    return false;
+            }
+        }
     }
 }
