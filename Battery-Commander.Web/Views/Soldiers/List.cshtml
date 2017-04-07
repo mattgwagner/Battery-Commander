@@ -6,8 +6,6 @@
     <thead>
         <tr>
             <th></th>
-            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Rank)</th>
-            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().LastName)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().FirstName)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Unit)</th>
             <th></th>
@@ -19,9 +17,7 @@
         {
             <tr>
                 <td>@Html.ActionLink("Details", "Details", new { soldier.Id })</td>
-                <td>@Html.DisplayFor(s => soldier.Rank)</td>
-                <td>@Html.DisplayFor(s => soldier.LastName)</td>
-                <td>@Html.DisplayFor(s => soldier.FirstName)</td>
+                <td>@Html.DisplayFor(s => soldier)</td>
                 <td>@Html.DisplayFor(s => soldier.Unit)</td>
                 <td>
                     @Html.ActionLink("Add ABCP", "New", "ABCP", new { soldier = soldier.Id }, new { @class = "btn btn-default" })
