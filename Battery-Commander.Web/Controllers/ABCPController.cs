@@ -45,7 +45,7 @@ namespace BatteryCommander.Web.Controllers
 
             var abcp = await Get(db, id);
 
-            var filename = $"{abcp.Soldier.Unit.Name}_DA500_ABCP_{abcp.Soldier.LastName}_{abcp.Date:yyyyMMdd}.pdf";
+            var filename = $"{abcp.Soldier.Unit.Name}_DA5500_ABCP_{abcp.Soldier.LastName}_{abcp.Date:yyyyMMdd}.pdf";
 
             return File(abcp.GenerateCounseling(), "application/pdf", filename);
         }
@@ -64,7 +64,7 @@ namespace BatteryCommander.Web.Controllers
 
             await db.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Details), id);
+            return RedirectToAction(nameof(Details), new { id });
         }
 
         public async Task<IActionResult> New(int soldier = 0)
@@ -95,7 +95,7 @@ namespace BatteryCommander.Web.Controllers
 
             await db.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Details), model.Id);
+            return RedirectToAction(nameof(Details), new { model.Id });
         }
 
         [HttpPost, ValidateAntiForgeryToken]
