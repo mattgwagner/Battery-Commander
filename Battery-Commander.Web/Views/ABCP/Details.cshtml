@@ -11,7 +11,7 @@
 
 @if (!Model.IsPassing && Model.Measurements.Any())
 {
-    @Html.ActionLink("Generate Counseling", "Counseling", "ABCP", new { Model.Id }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Generate DA5500", "Counseling", "ABCP", new { Model.Id }, new { @class = "btn btn-default" })
 }
 
 <div class="panel panel-default">
