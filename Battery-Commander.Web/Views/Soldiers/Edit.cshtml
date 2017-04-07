@@ -52,6 +52,11 @@
     </div>
 
     <div class="form-group form-group-lg">
+        @Html.DisplayNameFor(model => model.ETSDate)
+        @Html.EditorFor(model => model.ETSDate)
+    </div>
+
+    <div class="form-group form-group-lg">
         @Html.DisplayNameFor(model => model.Gender)
         @Html.DropDownListFor(model => model.Gender, Html.GetEnumSelectList<Gender>())
     </div>

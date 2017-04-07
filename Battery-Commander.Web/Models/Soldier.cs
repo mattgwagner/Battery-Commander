@@ -47,6 +47,11 @@ namespace BatteryCommander.Web.Models
             return (int)((date - DateOfBirth).TotalDays / DaysPerYear);
         }
 
+        [DataType(DataType.Date), Column(TypeName = "date"), Display(Name = "ETS Date")]
+        public DateTime? ETSDate { get; set; }
+
+        public TimeSpan? TimeTillETS => ETSDate - DateTime.Today;
+
         [Required]
         public Gender Gender { get; set; } = Gender.Male;
 
