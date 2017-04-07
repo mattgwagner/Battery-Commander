@@ -79,7 +79,7 @@ namespace BatteryCommander.Web.Models
 
         public Double HipAverage => Average_To_Half(Measurements.Select(_ => _.Hips));
 
-        public String MeasurementsJson { get; set; } = String.Empty;
+        public String MeasurementsJson { get; set; } = "[]";
 
         [Display(Name = "Circumference Value")]
         public Double CircumferenceValue
@@ -163,7 +163,12 @@ namespace BatteryCommander.Web.Models
 
         private static Double Average_To_Half(IEnumerable<Double> values)
         {
-            return Math.Round(values.Average() * 2, MidpointRounding.AwayFromZero) / 2;
+            if (values.Any())
+            {
+                return Math.Round(values.Average() * 2, MidpointRounding.AwayFromZero) / 2;
+            }
+
+            return 0;
         }
     }
 
