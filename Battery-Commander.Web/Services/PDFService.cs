@@ -97,7 +97,7 @@ namespace BatteryCommander.Web.Services
                     var m = q.Dequeue();
 
                     form.SetField($"{prefix}.{m}_A[0]", $"{measurement.Neck}");
-                    form.SetField($"{prefix}.{m}_B[0]", $"{measurement.Wait}");
+                    form.SetField($"{prefix}.{m}_B[0]", $"{measurement.Waist}");
                 }
 
                 // Check
