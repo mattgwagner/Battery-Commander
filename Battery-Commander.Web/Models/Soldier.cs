@@ -75,6 +75,6 @@ namespace BatteryCommander.Web.Models
 
         public virtual ICollection<ABCP> ABCPs { get; set; }
 
-        public override string ToString() => $"{Rank} {LastName}, {FirstName} {MiddleName}";
+        public override string ToString() => $"{LastName} {FirstName} {MiddleName}".ToUpper();
     }
 }
