@@ -22,6 +22,8 @@ namespace BatteryCommander.Web.Models
         [Required, DataType(DataType.Date), Column(TypeName = "date")]
         public DateTime Date { get; set; } = DateTime.Today;
 
+        public int? Age => Soldier?.AgeAsOf(Date);
+
         /// <summary>
         /// Recorded to nearest half inch when used for body fat percentage calculations
         /// </summary>

@@ -24,12 +24,12 @@ namespace BatteryCommander.Web.Models
         [Required, DataType(DataType.Date), Column(TypeName = "date")]
         public DateTime Date { get; set; } = DateTime.Today;
 
+        public int? Age => Soldier?.AgeAsOf(Date);
+
         public APFTAgeGroup AgeGroup
         {
             get
             {
-                int? Age = Soldier?.AgeAsOf(Date);
-
                 if (Age <= 21) return APFTAgeGroup.Group_17_to_21;
                 if (Age <= 26) return APFTAgeGroup.Group_22_to_26;
                 if (Age <= 31) return APFTAgeGroup.Group_27_to_31;

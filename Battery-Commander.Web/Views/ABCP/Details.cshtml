@@ -1,7 +1,5 @@
 ﻿@model ABCP
 
-
-
 @if (Model.RequiresTape && !Model.Measurements.Any())
 {
     <div class="alert alert-danger">
@@ -32,6 +30,10 @@
                     <span class="label label-danger">Failure</span>
                 }
             </td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Age)</td>
+            <td>@Html.DisplayFor(model => model.Age)</td>
         </tr>
         <tr>
             <td>@Html.DisplayNameFor(model => model.Height)</td>
@@ -86,7 +88,6 @@
                 </td>
             </tr>
         }
-
     </table>
 </div>
 
