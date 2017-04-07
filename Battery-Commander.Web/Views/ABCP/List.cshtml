@@ -22,6 +22,10 @@
                     {
                         <span class="label label-danger">Failure</span>
                     }
+                    else
+                    {
+                        <span class="label label-success">Passing</span>
+                    }
                 </td>
                 <td>
                     @if (model.RequiresTape && !model.Measurements.Any())
