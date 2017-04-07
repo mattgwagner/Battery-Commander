@@ -1,13 +1,67 @@
 ﻿@model ABCP
 
-@if (!Model.IsPassing)
+
+
+@if (Model.RequiresTape && !Model.Measurements.Any())
+{
+    <div class="alert alert-danger">
+        Soldier requires taping. Please @Html.ActionLink("add measurements", "Measurements", new { Model.Id }, new { @class = "btn btn-danger" })
+    </div>
+}
+
+@if (!Model.IsPassing && Model.Measurements.Any())
 {
     @Html.ActionLink("Generate Counseling", "Counseling", "ABCP", new { Model.Id }, new { @class = "btn btn-default" })
 }
 
-<fieldset>
-    <legend>ABCP for @Html.DisplayFor(model => model.Soldier) on @Html.DisplayFor(model => model.Date)</legend>
-</fieldset>
+<panel class="panel">
+    <div class="panel panel-heading">ABCP for @Html.DisplayFor(model => model.Soldier) on @Html.DisplayFor(model => model.Date)</div>
+
+    <table class="table table-bordered">
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Soldier)</td>
+            <td>@Html.DisplayFor(model => model.Soldier)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.IsPassing)</td>
+            <td>@Html.DisplayFor(model => model.IsPassing)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Date)</td>
+            <td>@Html.DisplayFor(model => model.Date)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Height)</td>
+            <td>@Html.DisplayFor(model => model.Height)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Weight)</td>
+            <td>@Html.DisplayFor(model => model.Weight)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Screening_Weight)</td>
+            <td>@Html.DisplayFor(model => model.Screening_Weight)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.RequiresTape)</td>
+            <td>@Html.DisplayFor(model => model.RequiresTape)
+        </tr>
+
+        @foreach (var measurement in Model.Measurements)
+        {
+            <tr>
+                <td colspan="2">
+                    <ul>
+                        <li>@Html.DisplayNameFor(_ => measurement.Neck): @Html.DisplayFor(_ => measurement.Neck)</li>
+                        <li>@Html.DisplayNameFor(_ => measurement.Waist): @Html.DisplayFor(_ => measurement.Waist)</li>
+                        <li>@Html.DisplayNameFor(_ => measurement.Hips): @Html.DisplayFor(_ => measurement.Hips)</li>
+                    </ul>
+                </td>
+            </tr>
+        }
+
+    </table>
+</panel>
 
 <div>
     @using (Html.BeginForm("Delete", "ABCP", new { Model.Id }, FormMethod.Post))
