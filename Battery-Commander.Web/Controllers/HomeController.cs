@@ -3,10 +3,13 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
-namespace Battery_Commander.Web.Controllers
+namespace BatteryCommander.Web.Controllers
 {
     [Authorize]
     public class HomeController : Controller
@@ -18,9 +21,47 @@ namespace Battery_Commander.Web.Controllers
             this.db = db;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var model = new List<UnitStatsViewModel>();
+
+            foreach (var unit in db.Units)
+            {
+                var soldiers =
+                    await db
+                    .Soldiers
+                    .Include(s => s.ABCPs)
+                    .Include(s => s.APFTs)
+                    .Where(s => s.UnitId == unit.Id)
+                    .Select(s => new
+                    {
+                        Soldier = s,
+                        APFT = s.APFTs.OrderByDescending(_ => _.Date).FirstOrDefault(),
+                        ABCP = s.ABCPs.OrderByDescending(_ => _.Date).FirstOrDefault()
+                    })
+                    .ToListAsync();
+
+                model.Add(new UnitStatsViewModel
+                {
+                    Unit = unit,
+                    ABCP = new UnitStatsViewModel.Stat
+                    {
+                        Assigned = soldiers.Count,
+                        Passed = soldiers.Where(_ => _.APFT?.IsPassing == true).Count(),
+                        Failed = soldiers.Where(_ => _.APFT?.IsPassing == false).Count(),
+                        NotTested = soldiers.Where(_ => _.APFT == null).Count()
+                    },
+                    APFT = new UnitStatsViewModel.Stat
+                    {
+                        Assigned = soldiers.Count,
+                        Passed = soldiers.Where(_ => _.ABCP?.IsPassing == true).Count(),
+                        Failed = soldiers.Where(_ => _.ABCP?.IsPassing == false).Count(),
+                        NotTested = soldiers.Where(_ => _.ABCP == null).Count()
+                    }
+                });
+            }
+
+            return View(model);
         }
 
         public IActionResult About()

@@ -1,3 +1,66 @@
-﻿@{
+﻿@model IEnumerable<UnitStatsViewModel>
+@{
     ViewData["Title"] = "Home Page";
+}
+@foreach (var unit in Model)
+{
+    <div class="panel">
+        <div class="panel-heading">
+            <div class="panel-title">@Html.DisplayFor(_ => unit.Unit)</div>
+        </div>
+
+        <div class="panel-body">
+            <h2>@Html.DisplayNameFor(_ => unit.ABCP)</h2>
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <td>@Html.DisplayNameFor(_ => unit.ABCP.Assigned)</td>
+                        <td>@Html.DisplayFor(_ => unit.ABCP.Assigned)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(_ => unit.ABCP.Passed)</td>
+                        <td>@Html.DisplayFor(_ => unit.ABCP.Passed)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(_ => unit.ABCP.Failed)</td>
+                        <td>@Html.DisplayFor(_ => unit.ABCP.Failed)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(_ => unit.ABCP.NotTested)</td>
+                        <td>@Html.DisplayFor(_ => unit.ABCP.NotTested)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(_ => unit.ABCP.PercentPass)</td>
+                        <td>@Html.DisplayFor(_ => unit.ABCP.PercentPass)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>@Html.DisplayNameFor(_ => unit.APFT)</h2>
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <td>@Html.DisplayNameFor(_ => unit.APFT.Assigned)</td>
+                        <td>@Html.DisplayFor(_ => unit.APFT.Assigned)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(_ => unit.APFT.Passed)</td>
+                        <td>@Html.DisplayFor(_ => unit.APFT.Passed)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(_ => unit.APFT.Failed)</td>
+                        <td>@Html.DisplayFor(_ => unit.APFT.Failed)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(_ => unit.APFT.NotTested)</td>
+                        <td>@Html.DisplayFor(_ => unit.APFT.NotTested)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(_ => unit.APFT.PercentPass)</td>
+                        <td>@Html.DisplayFor(_ => unit.APFT.PercentPass)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 }
