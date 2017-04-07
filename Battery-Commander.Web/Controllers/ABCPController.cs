@@ -95,7 +95,7 @@ namespace BatteryCommander.Web.Controllers
 
             await db.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Details), model.Id);
         }
 
         [HttpPost, ValidateAntiForgeryToken]
