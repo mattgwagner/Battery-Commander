@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using static BatteryCommander.Web.Models.ABCP;
@@ -18,15 +19,14 @@ namespace BatteryCommander.Web.Controllers
             this.db = db;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(DateTime? date = null)
         {
             // TODO Filtering by pass/fail
-
-            // TODO Group by last per-soldier?
 
             var tests =
                 await db
                 .ABCPs
+                .Where(abcp => !date.HasValue || abcp.Date.Date == date.Value)
                 .OrderByDescending(abcp => abcp.Date)
                 .Include(abcp => abcp.Soldier)
                 .ToListAsync();

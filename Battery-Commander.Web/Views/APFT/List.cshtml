@@ -14,7 +14,11 @@
         {
             <tr class="@(model.IsPassing ? "alert-success" : "alert-danger")">
                 <td>@Html.DisplayFor(_ => model.Soldier)</td>
-                <td>@Html.DisplayFor(_ => model.Date)</td>
+                <td>
+                    <a href="@Url.Action("Index", new { date = model.Date })">
+                        @Html.DisplayFor(_ => model.Date)
+                    </a>
+                </td>
                 <td>@Html.DisplayFor(_ => model.TotalScore)</td>
                 <td>
                     @if(model.IsPassing)
