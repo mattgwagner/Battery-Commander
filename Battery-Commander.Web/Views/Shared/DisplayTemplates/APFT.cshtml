@@ -6,11 +6,11 @@
         <a href="@Url.Action("Details", "APFT", new { Model.Id })">
             @if (Model.IsPassing)
             {
-                <span class="label label-success">Passing</span>
+                <span class="label label-success">Passing (@Model.TotalScore)</span>
             }
             else
             {
-                <span class="label label-danger">Failure</span>
+                <span class="label label-danger">Failure (@Model.TotalScore)</span>
             }
         </a>
     </div>
