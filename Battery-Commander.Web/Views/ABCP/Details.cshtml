@@ -59,7 +59,16 @@
         </tr>
         <tr>
             <td>@Html.DisplayNameFor(model => model.RequiresTape)</td>
-            <td>@Html.DisplayFor(model => model.RequiresTape)
+            <td>
+                @if (!Model.RequiresTape)
+                {
+                    <span class="label label-success">Nope</span>
+                }
+                else
+                {
+                    <span class="label label-danger">Requires Tape</span>
+                }
+                </td>
         </tr>
 
         @foreach (var measurement in Model.Measurements)
