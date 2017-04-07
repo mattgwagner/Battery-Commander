@@ -12,7 +12,7 @@
     <tbody>
         @foreach (var model in Model)
         {
-            <tr class="@(model.IsPassing ? "alert-success" : "alert-danger")">
+            <tr>
                 <td>@Html.DisplayFor(_ => model.Soldier)</td>
                 <td>
                     <a href="@Url.Action("Index", new { date = model.Date })">
