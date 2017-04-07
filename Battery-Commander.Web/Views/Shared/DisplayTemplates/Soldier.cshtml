@@ -1,7 +1,3 @@
 ﻿@model Soldier
 
-@{
-    var display = $"{Model.Rank.ShortName()} {Model.LastName}, {Model.FirstName}";
-}
-
-<div>@Html.ActionLink(display, "Details", "Soldiers", new { Model.Id })</div>
+<div>@Html.ActionLink(Model.ToString(), "Details", "Soldiers", new { Model.Id })</div>
