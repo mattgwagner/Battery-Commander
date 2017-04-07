@@ -100,7 +100,7 @@ namespace BatteryCommander.Web.Services
                     form.SetField($"{prefix}.{m}_B[0]", $"{measurement.Neck}");
                 }
 
-                // Check 
+                // Check
 
                 form.SetField($"{prefix}.IS[0]", model.IsPassing ? "1" : "0");
                 form.SetField($"{prefix}.ISNOT[0]", model.IsPassing ? "0" : "2");
@@ -140,43 +140,60 @@ namespace BatteryCommander.Web.Services
 
                 // Update the form fields as appropriate
 
+#if DEBUG
+                foreach (DictionaryEntry de in form.Fields)
+                {
+                    Console.WriteLine($"{de.Key}");
+                }
+#endif
+
+                // Update the form fields as appropriate
+
+                form.SetField($"{prefix}.NAME[0]", $"{model.Soldier.LastName} {model.Soldier.FirstName}");
+                form.SetField($"{prefix}.RANK[0]", $"{model.Soldier.Rank.ShortName()}");
+
+                form.SetField($"{prefix}.HEIGHT[0]", $"{model.Height}");
+                form.SetField($"{prefix}.WEIGHT[0]", $"{model.Weight}");
+                form.SetField($"{prefix}.AGE[0]", $"{model.Soldier.AgeAsOf(model.Date)}");
+
+                form.SetField($"{prefix}.DATE[0]", $"{model.Date:yyyyMMdd}");
+                form.SetField($"{prefix}.DATE_B[0]", $"{model.Date:yyyyMMdd}");
+
                 // form.SetField($"{prefix}.Page1[0].Name[0]", model.Name);
 
-                //form1[0].Page1[0].IS[0]
-                //form1[0].Page1[0].signature_BUTTON2[0]
                 //form1[0].Page1[0].H_FACTR[0]
                 //form1[0].Page1[0].NECK_B[0]
                 //form1[0].Page1[0].TOT_A[0]
                 //form1[0].Page1[0].HIP_A[0]
                 //form1[0].Page1[0].NECK_A[0]
-                //form1[0].Page1[0].RANK_C[0]
                 //form1[0].Page1[0].HIP_B[0]
                 //form1[0].Page1[0].HE_FACTR[0]
                 //form1[0].Page1[0].APPRVD[0]
                 //form1[0].Page1[0].ARM_A[0]
-                //form1[0].Page1[0].REMRKS[0]
-                //form1[0].Page1[0].RANK_B[0]
                 //form1[0].Page1[0].N_FACTR[0]
                 //form1[0].Page1[0].NECK_C[0]
                 //form1[0].Page1[0].HEIGHT[0]
-                //form1[0].Page1[0].IS_NOT[0]
                 //form1[0].Page1[0].AVE_NECK[0]
                 //form1[0].Page1[0].AVE_ARM[0]
                 //form1[0].Page1[0].ARM_C[0]
-                //form1[0].Page1[0].SIGNA[0]
                 //form1[0].Page1[0].WE_FACTR[0]
                 //form1[0].Page1[0].F_FACTR[0]
                 //form1[0].Page1[0].ARM_B[0]
-                //form1[0].Page1[0].RANK[0]
-                //form1[0].Page1[0].WEIGHT[0]
-                //form1[0].Page1[0].NAME[0]
                 //form1[0].Page1[0].HIP_C[0]
-                //form1[0].Page1[0].signature_BUTTON1[0]
-                //form1[0].Page1[0].AGE[0]
                 //form1[0].Page1[0].AVE_HIP[0]
-                //form1[0].Page1[0].DATE[0]
                 //form1[0].Page1[0].BODY_FAT[0]
-                //form1[0].Page1[0].DATE_B[0]
+
+                form.SetField($"{prefix}.REMRKS[0]", $@"
+                    AUTHORIZED BODY FAT IS: {model.MaximumAllowableBodyFat}%
+                         TOTAL BODY FAT IS: {model.BodyFatPercentage}%
+
+                    SOLDIER {(model.IsPassing ? "MEETS" : "DOES NOT MEET")} ARMY STANDARDS
+                ");
+
+                // Check
+
+                form.SetField($"{prefix}.IS[0]", model.IsPassing ? "1" : "0");
+                form.SetField($"{prefix}.ISNOT[0]", model.IsPassing ? "0" : "2");
 
                 stamper.Close();
 
