@@ -39,7 +39,7 @@ namespace BatteryCommander.Web.Controllers
             return View(await Get(db, id));
         }
 
-        public async Task<IActionResult> Counseling(int id)
+        public async Task<IActionResult> Worksheet(int id)
         {
             // TODO It's a 5501 for females, and that's just the worksheet, not the associated counseling
 
