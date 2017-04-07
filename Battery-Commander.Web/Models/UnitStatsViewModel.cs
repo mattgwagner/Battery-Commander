@@ -21,6 +21,7 @@ namespace BatteryCommander.Web.Models
 
             public int Failed { get; set; }
 
+            [Display(Name = "Not Tested")]
             public int NotTested { get; set; }
 
             [Display(Name = "Pass %")]
