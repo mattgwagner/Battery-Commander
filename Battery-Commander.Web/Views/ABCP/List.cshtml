@@ -15,7 +15,12 @@
             <tr>
                 <td>@Html.DisplayFor(_ => model.Soldier)</td>
                 <td>@Html.DisplayFor(_ => model.Date)</td>
-                <td>@Html.DisplayFor(_ => model.IsPassing)</td>
+                <td>
+                    @if (model.IsPassing)
+                    {
+                        <span class="label label-danger">Failure</span>
+                    }
+                </td>
                 <td>@Html.ActionLink("Details", "Details", new { model.Id })</td>
             </tr>
         }
