@@ -5,7 +5,7 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Name)</th>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault())</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().UIC)</th>
             <th></th>
         </tr>
@@ -15,11 +15,11 @@
         @foreach (var unit in Model)
         {
             <tr>
-                <td>@Html.DisplayFor(s => unit.Name)</td>
+                <td>@Html.DisplayFor(s => unit)</td>
                 <td>@Html.DisplayFor(s => unit.UIC)</td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { unit.Id })
-                    @Html.ActionLink("Soldiers", "Index", "Soldier", new { unit = unit.Id })
+                    @Html.ActionLink("Soldiers", "Index", "Soldiers", new { unit = unit.Id })
                 </td>
             </tr>
         }
