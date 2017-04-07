@@ -22,7 +22,7 @@ namespace BatteryCommander.Web.Models
 
             public int NotTested { get; set; }
 
-            public Decimal PercentPass => Passed / Assigned;
+            public Decimal PercentPass => (Decimal)Passed / Assigned;
         }
     }
 }
