@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace BatteryCommander.Web.Models
 {
@@ -22,6 +23,7 @@ namespace BatteryCommander.Web.Models
 
             public int NotTested { get; set; }
 
+            [Display(Name = "Pass %")]
             public Decimal PercentPass => (Decimal)Passed / Assigned * 100;
         }
     }
