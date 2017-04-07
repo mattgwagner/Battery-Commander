@@ -114,10 +114,14 @@ namespace BatteryCommander.Web.Services
                 form.SetField($"{prefix}.AVE_G[0]", $"{model.BodyFatPercentage}%");
 
                 form.SetField($"{prefix}.REMRKS[0]", $@"
-                    AUTHORIZED BODY FAT IS: {model.MaximumAllowableBodyFat}%
-                         TOTAL BODY FAT IS: {model.BodyFatPercentage}%
+                    Soldier's Actual Weight: {model.Weight}
+                    Screening Table Weight: {model.Screening_Weight}
+                    {(model.RequiresTape ? "OVER " : "UNDER")} {(Math.Abs(model.Screening_Weight - model.Weight))} lbs
 
-                    SOLDIER {(model.IsPassing ? "MEETS" : "DOES NOT MEET")} ARMY STANDARDS
+                    Soldier's Actual Body Fat %: {model.MaximumAllowableBodyFat}
+                    Authorized Body Fat %: {model.BodyFatPercentage}%
+
+                    Individual is {(model.IsPassing ? "" : "not")} in compliance with Army standards.
                 ");
 
                 stamper.Close();
