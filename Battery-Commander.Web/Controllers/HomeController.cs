@@ -41,24 +41,27 @@ namespace BatteryCommander.Web.Controllers
                     })
                     .ToListAsync();
 
-                model.Add(new UnitStatsViewModel
+                if (soldiers.Any())
                 {
-                    Unit = unit,
-                    ABCP = new UnitStatsViewModel.Stat
+                    model.Add(new UnitStatsViewModel
                     {
-                        Assigned = soldiers.Count,
-                        Passed = soldiers.Where(_ => _.APFT?.IsPassing == true).Count(),
-                        Failed = soldiers.Where(_ => _.APFT?.IsPassing == false).Count(),
-                        NotTested = soldiers.Where(_ => _.APFT == null).Count()
-                    },
-                    APFT = new UnitStatsViewModel.Stat
-                    {
-                        Assigned = soldiers.Count,
-                        Passed = soldiers.Where(_ => _.ABCP?.IsPassing == true).Count(),
-                        Failed = soldiers.Where(_ => _.ABCP?.IsPassing == false).Count(),
-                        NotTested = soldiers.Where(_ => _.ABCP == null).Count()
-                    }
-                });
+                        Unit = unit,
+                        ABCP = new UnitStatsViewModel.Stat
+                        {
+                            Assigned = soldiers.Count,
+                            Passed = soldiers.Where(_ => _.APFT?.IsPassing == true).Count(),
+                            Failed = soldiers.Where(_ => _.APFT?.IsPassing == false).Count(),
+                            NotTested = soldiers.Where(_ => _.APFT == null).Count()
+                        },
+                        APFT = new UnitStatsViewModel.Stat
+                        {
+                            Assigned = soldiers.Count,
+                            Passed = soldiers.Where(_ => _.ABCP?.IsPassing == true).Count(),
+                            Failed = soldiers.Where(_ => _.ABCP?.IsPassing == false).Count(),
+                            NotTested = soldiers.Where(_ => _.ABCP == null).Count()
+                        }
+                    });
+                }
             }
 
             return View(model);
