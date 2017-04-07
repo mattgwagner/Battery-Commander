@@ -103,8 +103,11 @@ namespace BatteryCommander.Web.Services
 
                 // Check
 
-                form.SetField($"{prefix}.IS[0]", model.IsPassing ? "1" : "0");
-                form.SetField($"{prefix}.ISNOT[0]", model.IsPassing ? "0" : "2");
+                if (model.RequiresTape)
+                {
+                    form.SetField($"{prefix}.IS[0]", model.IsPassing ? "1" : "0");
+                    form.SetField($"{prefix}.ISNOT[0]", model.IsPassing ? "0" : "2");
+                }
 
                 form.SetField($"{prefix}.AVE_B[0]", $"{model.WaistAverage}");
                 form.SetField($"{prefix}.AVE_A[0]", $"{model.NeckAverage}");
