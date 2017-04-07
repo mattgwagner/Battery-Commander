@@ -77,6 +77,10 @@ namespace BatteryCommander.Web.Services
                 form.SetField($"{prefix}.WEIGHT[0]", $"{model.Weight}");
                 form.SetField($"{prefix}.AGE[0]", $"{model.Soldier.AgeAsOf(model.Date)}");
 
+                form.SetField($"{prefix}.DATE[0]", $"{model.Date:d}");
+                form.SetField($"{prefix}.DATE_B[0]", $"{model.Date:d}");
+
+
                 var q = new Queue<String>(new[] { "FIRST", "SCND", "THIRD" });
 
                 foreach (var measurement in model.Measurements)
