@@ -105,8 +105,8 @@ namespace BatteryCommander.Web.Services
                 form.SetField($"{prefix}.IS[0]", model.IsPassing ? "1" : "0");
                 form.SetField($"{prefix}.ISNOT[0]", model.IsPassing ? "0" : "2");
 
-                form.SetField($"{prefix}.AVE_A[0]", $"{model.WaistAverage}");
-                form.SetField($"{prefix}.AVE_B[0]", $"{model.NeckAverage}");
+                form.SetField($"{prefix}.AVE_B[0]", $"{model.WaistAverage}");
+                form.SetField($"{prefix}.AVE_A[0]", $"{model.NeckAverage}");
                 form.SetField($"{prefix}.AVE_C[0]", $"{model.WaistAverage}");
                 form.SetField($"{prefix}.AVE_D[0]", $"{model.NeckAverage}");
                 form.SetField($"{prefix}.AVE_E[0]", $"{model.CircumferenceValue}");
