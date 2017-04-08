@@ -9,7 +9,10 @@
     {
         <tr>
             <td>@Html.DisplayNameFor(model => model.EvaluationId)</td>
-            <td>@Html.DisplayFor(model => model.EvaluationId) (@Html.DisplayFor(model => model.EvaluationLink)</td>
+            <td>
+                @Html.DisplayFor(model => model.EvaluationId) 
+                (<a href="@Model.EvaluationLink" target="_blank">View in EES</a>)
+            </td>
         </tr>
     }
     <tr>
