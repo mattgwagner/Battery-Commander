@@ -11,6 +11,27 @@ namespace BatteryCommander.Web.Models
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        [Display(Name = "EES ID")]
+        public int? EvaluationId { get; set; }
+
+        [DataType(DataType.Url)]
+        public String EvaluationLink
+        {
+            get
+            {
+                const string BaseUri = "https://evaluations.hrc.army.mil";
+
+                if (Ratee.IsOfficer)
+                {
+                    return $"{BaseUri}/signatureController.html?eid={EvaluationId}";
+                }
+                else
+                {
+                    return $"{BaseUri}/ncoerSignatureController.html?eid={EvaluationId}";
+                }
+            }
+        }
+
         [Required]
         public int RateeId { get; set; }
 

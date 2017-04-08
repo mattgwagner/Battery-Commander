@@ -5,6 +5,13 @@
 <!-- Workflow steps available -->
 
 <table class="table table-bordered">
+    @if (Model.EvaluationId.HasValue)
+    {
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.EvaluationId)</td>
+            <td>@Html.DisplayFor(model => model.EvaluationId) (@Html.DisplayFor(model => model.EvaluationLink)</td>
+        </tr>
+    }
     <tr>
         <td>@Html.DisplayNameFor(model => model.Ratee)</td>
         <td>@Html.DisplayFor(model => model.Ratee)</td>
