@@ -130,6 +130,11 @@
                 }
             </tbody>
         </table>
+
+        @if (Model.ABCPs.Count > 1)
+        {
+            <div id="abcp_chart"></div>
+        }
     </div>
 </div>
 
@@ -144,7 +149,7 @@
 @section Scripts
 {
     @{
-        var chart_data =
+        var apft_data =
             Model
             .APFTs
             .OrderBy(apft => apft.Date)
@@ -152,6 +157,17 @@
             {
                 date = apft.Date.ToString("yyyy-MM-dd"),
                 score = apft.TotalScore
+            })
+            .ToList();
+
+        var abcp_data =
+            Model
+            .ABCPs
+            .OrderBy(abcp => abcp.Date)
+            .Select(abcp => new
+            {
+                date = abcp.Date.ToString("yyyy-MM-dd"),
+                weight = abcp.Weight
             })
             .ToList();
     }
@@ -163,30 +179,49 @@
         google.charts.load('current', { 'packages': ['corechart'] });
 
         // Set a callback to run when the Google Visualization API is loaded.
-        google.charts.setOnLoadCallback(drawChart);
+        google.charts.setOnLoadCallback(draw_apft_chart);
 
-        var result = JSON.parse('@Json.Serialize(chart_data)');
+        var apft_data = JSON.parse('@Json.Serialize(apft_data)');
 
-        function drawChart() {
+        var abcp_data = JSON.parse('@Json.Serialize(abcp_data)');
+
+        function draw_apft_chart() {
             // Create the data table.
             var data = new google.visualization.DataTable();
 
             data.addColumn('date', 'Date');
             data.addColumn('number', 'Score');
 
-            for (var i = 0; i < result.length; i++)
+            for (var i = 0; i < apft_data.length; i++)
             {
-                data.addRow([new Date(result[i].date), result[i].score]);
+                data.addRow([new Date(apft_data[i].date), apft_data[i].score]);
             }
-
-            var options = {
-                title: 'APFT Scores',
-                legend: { position: 'bottom' }
-            };
 
             var chart = new google.visualization.LineChart(document.getElementById('apft_chart'));
 
-            chart.draw(data, options);
+            chart.draw(data, {
+                title: 'APFT Scores',
+                legend: { position: 'bottom' }
+            });
+        }
+
+        function draw_abcp_chart() {
+            // Create the data table.
+            var data = new google.visualization.DataTable();
+
+            data.addColumn('date', 'Date');
+            data.addColumn('number', 'Weight');
+
+            for (var i = 0; i < abcp_data.length; i++) {
+                data.addRow([new Date(abcp_data[i].date), abcp_data[i].weight]);
+            }
+
+            var chart = new google.visualization.LineChart(document.getElementById('abcp_chart'));
+
+            chart.draw(data, {
+                title: 'ACBP - Weight',
+                legend: { position: 'bottom' }
+            });
         }
     </script>
 }
