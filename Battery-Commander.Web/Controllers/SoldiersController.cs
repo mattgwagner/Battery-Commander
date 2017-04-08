@@ -127,7 +127,7 @@ namespace BatteryCommander.Web.Controllers
 
             return soldiers.Select(soldier => new SelectListItem
             {
-                Text = $"{soldier.Rank.ShortName()} {soldier.LastName}, {soldier.FirstName}",
+                Text = $"{soldier}",
                 Value = $"{soldier.Id}"
             });
         }
