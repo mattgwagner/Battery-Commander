@@ -1,39 +1,39 @@
-﻿@model Soldier
+﻿@model SoldierDetailsViewModel
 
 <div class="panel panel-default">
 
     <div class="panel-heading">
-        <h1 class="panel-title">@Html.DisplayFor(model => model) @Html.ActionLink("Edit", "Edit", new { Model.Id }, new { @class = "btn btn-default" })</h1>
+        <h1 class="panel-title">@Html.DisplayFor(model => model) @Html.ActionLink("Edit", "Edit", new { Model.Soldier.Id }, new { @class = "btn btn-default" })</h1>
     </div>
 
     <table class="table">
         <tr>
-            <td>@Html.DisplayNameFor(model => model.DateOfBirth)</td>
-            <td>@Html.DisplayFor(model => model.DateOfBirth) (@Html.DisplayFor(model => model.Age) y/o)</td>
+            <td>@Html.DisplayNameFor(model => model.Soldier.DateOfBirth)</td>
+            <td>@Html.DisplayFor(model => model.Soldier.DateOfBirth) (@Html.DisplayFor(model => model.Soldier.Age) y/o)</td>
         </tr>
         <tr>
-            <td>@Html.DisplayNameFor(model => model.MilitaryEmail)</td>
-            <td>@Html.DisplayFor(model => model.MilitaryEmail)</td>
+            <td>@Html.DisplayNameFor(model => model.Soldier.MilitaryEmail)</td>
+            <td>@Html.DisplayFor(model => model.Soldier.MilitaryEmail)</td>
         </tr>
         <tr>
-            <td>@Html.DisplayNameFor(model => model.DoDId)</td>
-            <td>@Html.DisplayFor(model => model.DoDId)</td>
+            <td>@Html.DisplayNameFor(model => model.Soldier.DoDId)</td>
+            <td>@Html.DisplayFor(model => model.Soldier.DoDId)</td>
         </tr>
         <tr>
-            <td>@Html.DisplayNameFor(model => model.CivilianEmail)</td>
-            <td>@Html.DisplayFor(model => model.CivilianEmail)</td>
+            <td>@Html.DisplayNameFor(model => model.Soldier.CivilianEmail)</td>
+            <td>@Html.DisplayFor(model => model.Soldier.CivilianEmail)</td>
         </tr>
         <tr>
-            <td>@Html.DisplayNameFor(model => model.Gender)</td>
-            <td>@Html.DisplayFor(model => model.Gender)</td>
+            <td>@Html.DisplayNameFor(model => model.Soldier.Gender)</td>
+            <td>@Html.DisplayFor(model => model.Soldier.Gender)</td>
         </tr>
         <tr>
-            <td>@Html.DisplayNameFor(model => model.Unit)</td>
-            <td>@Html.DisplayFor(model => model.Unit)</td>
+            <td>@Html.DisplayNameFor(model => model.Soldier.Unit)</td>
+            <td>@Html.DisplayFor(model => model.Soldier.Unit)</td>
         </tr>
         <tr>
-            <td>@Html.DisplayNameFor(model => model.ETSDate)</td>
-            <td>@Html.DisplayFor(model => model.ETSDate) (@Html.DisplayFor(model => model.TimeTillETS))</td>
+            <td>@Html.DisplayNameFor(model => model.Soldier.ETSDate)</td>
+            <td>@Html.DisplayFor(model => model.Soldier.ETSDate) (@Html.DisplayFor(model => model.Soldier.TimeTillETS))</td>
         </tr>
     </table>
 </div>
@@ -41,25 +41,25 @@
 <div class="panel panel-default">
 
     <div class="panel-heading">
-        <h2 class="panel-title">@Html.DisplayNameFor(_ => _.APFTs) @Html.ActionLink("Add New", "New", "APFT", new { soldier = Model.Id }, new { @class = "btn btn-default btn-xs" })</h2>
+        <h2 class="panel-title">@Html.DisplayNameFor(_ => _.Soldier.APFTs) @Html.ActionLink("Add New", "New", "APFT", new { soldier = Model.Soldier.Id }, new { @class = "btn btn-default btn-xs" })</h2>
     </div>
 
     <div class="panel-body">
         <table class="table">
             <thead>
                 <tr>
-                    <th>@Html.DisplayNameFor(_ => _.APFTs.FirstOrDefault().Date)</th>
-                    <th>@Html.DisplayNameFor(_ => _.APFTs.FirstOrDefault().PushUps)</th>
-                    <th>@Html.DisplayNameFor(_ => _.APFTs.FirstOrDefault().SitUps)</th>
-                    <th>@Html.DisplayNameFor(_ => _.APFTs.FirstOrDefault().Run)</th>
-                    <th>@Html.DisplayNameFor(_ => _.APFTs.FirstOrDefault().TotalScore)</th>
-                    <th>@Html.DisplayNameFor(_ => _.APFTs.FirstOrDefault().IsPassing)</th>
+                    <th>@Html.DisplayNameFor(_ => _.Soldier.APFTs.FirstOrDefault().Date)</th>
+                    <th>@Html.DisplayNameFor(_ => _.Soldier.APFTs.FirstOrDefault().PushUps)</th>
+                    <th>@Html.DisplayNameFor(_ => _.Soldier.APFTs.FirstOrDefault().SitUps)</th>
+                    <th>@Html.DisplayNameFor(_ => _.Soldier.APFTs.FirstOrDefault().Run)</th>
+                    <th>@Html.DisplayNameFor(_ => _.Soldier.APFTs.FirstOrDefault().TotalScore)</th>
+                    <th>@Html.DisplayNameFor(_ => _.Soldier.APFTs.FirstOrDefault().IsPassing)</th>
                     <th></th>
                 </tr>
             </thead>
 
             <tbody>
-                @foreach (var apft in Model.APFTs.OrderByDescending(_ => _.Date))
+                @foreach (var apft in Model.Soldier.APFTs.OrderByDescending(_ => _.Date))
                 {
                     <tr>
                         <td>@Html.DisplayFor(_ => apft.Date)</td>
@@ -90,23 +90,23 @@
 <div class="panel panel-default">
 
     <div class="panel-heading">
-        <h2 class="panel-title">@Html.DisplayNameFor(_ => _.ABCPs) @Html.ActionLink("Add New", "New", "ABCP", new { soldier = Model.Id }, new { @class = "btn btn-default btn-xs" })</h2>
+        <h2 class="panel-title">@Html.DisplayNameFor(_ => _.Soldier.ABCPs) @Html.ActionLink("Add New", "New", "ABCP", new { soldier = Model.Soldier.Id }, new { @class = "btn btn-default btn-xs" })</h2>
     </div>
 
     <div class="panel-body">
         <table class="table">
             <thead>
                 <tr>
-                    <th>@Html.DisplayNameFor(_ => _.ABCPs.FirstOrDefault().Date)</th>
-                    <th>@Html.DisplayNameFor(_ => _.ABCPs.FirstOrDefault().Weight)</th>
-                    <th>@Html.DisplayNameFor(_ => _.ABCPs.FirstOrDefault().Screening_Weight)</th>
-                    <th>@Html.DisplayNameFor(_ => _.ABCPs.FirstOrDefault().IsPassing)</th>
+                    <th>@Html.DisplayNameFor(_ => _.Soldier.ABCPs.FirstOrDefault().Date)</th>
+                    <th>@Html.DisplayNameFor(_ => _.Soldier.ABCPs.FirstOrDefault().Weight)</th>
+                    <th>@Html.DisplayNameFor(_ => _.Soldier.ABCPs.FirstOrDefault().Screening_Weight)</th>
+                    <th>@Html.DisplayNameFor(_ => _.Soldier.ABCPs.FirstOrDefault().IsPassing)</th>
                     <th></th>
                 </tr>
             </thead>
 
             <tbody>
-                @foreach (var abcp in Model.ABCPs.OrderByDescending(_ => _.Date))
+                @foreach (var abcp in Model.Soldier.ABCPs.OrderByDescending(_ => _.Date))
                 {
                     <tr>
                         <td>@Html.DisplayFor(_ => abcp.Date)</td>
@@ -132,9 +132,41 @@
     </div>
 </div>
 
+<div class="panel panel-default">
+
+    <div class="panel-heading">
+        <h2 class="panel-title">@Html.DisplayNameFor(_ => _.Evaluations) @Html.ActionLink("Add New", "New", "Evaluations", null, new { @class = "btn btn-default btn-xs" })</h2>
+    </div>
+
+    <div class="panel-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Role)</th>
+                    <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Evaluation.Ratee)</th>
+                    <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Evaluation.Status)</th>
+                    <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Evaluation.Delinquency)</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var evaluation in Model.Evaluations)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(_ => evaluation.Role)</td>
+                        <td>@Html.DisplayFor(_ => evaluation.Evaluation.Ratee)</td>
+                        <td>@Html.DisplayFor(_ => evaluation.Evaluation.Status)</td>
+                        <td>@Html.DisplayFor(_ => evaluation.Evaluation.Delinquency)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
 <div>
-    @using (Html.BeginForm("Delete", "Soldiers", new { Model.Id }, FormMethod.Post))
-    {
+    @using (Html.BeginForm("Delete", "Soldiers", new { Model.Soldier.Id }, FormMethod.Post))
+            {
         @Html.AntiForgeryToken()
         <button type="submit" class="btn btn-danger">Delete</button>
     }
@@ -145,6 +177,7 @@
     @{
         var apft_data =
             Model
+            .Soldier
             .APFTs
             .OrderBy(apft => apft.Date)
             .Select(apft => new
@@ -156,6 +189,7 @@
 
         var abcp_data =
             Model
+            .Soldier
             .ABCPs
             .OrderBy(abcp => abcp.Date)
             .Select(abcp => new

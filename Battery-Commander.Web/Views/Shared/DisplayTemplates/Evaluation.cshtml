@@ -1,0 +1,10 @@
+﻿@model Evaluation
+
+@if (Model != null)
+{
+    <div>
+        <a href="@Url.Action("Details", "Evaluations", new { Model.Id })">
+            @Model.Ratee.Rank.ShortName() @Model.Ratee.LastName (@Html.DisplayFor(model => model.Status))
+        </a>
+    </div>
+}

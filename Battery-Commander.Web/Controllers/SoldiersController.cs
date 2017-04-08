@@ -40,7 +40,22 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> Details(int id)
         {
-            return View(await Get(db, id));
+            var model = new SoldierDetailsViewModel
+            {
+                Soldier = await Get(db, id),
+                Evaluations =
+                    await db
+                    .Evaluations
+                    .Where(eval => new[] { eval.RateeId, eval.RaterId, eval.SeniorRaterId }.Any(sm => sm == id))
+                    .Select(eval => new SoldierDetailsViewModel.EvaluationViewModel
+                    {
+                        Evaluation = eval,
+                        Role = eval.RateeId == id ? "Soldier" : (eval.RaterId == id ? "Rater" : "Senior Rater")
+                    })
+                    .ToListAsync()
+            };
+
+            return View(model);
         }
 
         public async Task<IActionResult> New()
