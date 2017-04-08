@@ -83,10 +83,7 @@
             </tbody>
         </table>
 
-        @if (Model.APFTs.Count > 1)
-        {
-            <div id="apft_chart"></div>
-        }
+        <div id="apft_chart"></div>
     </div>
 </div>
 
@@ -131,16 +128,13 @@
             </tbody>
         </table>
 
-        @if (Model.ABCPs.Count > 1)
-        {
-            <div id="abcp_chart"></div>
-        }
+        <div id="abcp_chart"></div>
     </div>
 </div>
 
 <div>
     @using (Html.BeginForm("Delete", "Soldiers", new { Model.Id }, FormMethod.Post))
-            {
+    {
         @Html.AntiForgeryToken()
         <button type="submit" class="btn btn-danger">Delete</button>
     }
@@ -178,12 +172,13 @@
         // Load the Visualization API and the corechart package.
         google.charts.load('current', { 'packages': ['corechart'] });
 
-        // Set a callback to run when the Google Visualization API is loaded.
-        google.charts.setOnLoadCallback(draw_apft_chart);
-
         var apft_data = JSON.parse('@Json.Serialize(apft_data)');
 
         var abcp_data = JSON.parse('@Json.Serialize(abcp_data)');
+
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(draw_apft_chart);
+        google.charts.setOnLoadCallback(draw_abcp_chart);
 
         function draw_apft_chart() {
             // Create the data table.
@@ -200,7 +195,7 @@
             var chart = new google.visualization.LineChart(document.getElementById('apft_chart'));
 
             chart.draw(data, {
-                title: 'APFT Scores',
+                title: 'APFT - Scores',
                 legend: { position: 'bottom' }
             });
         }
