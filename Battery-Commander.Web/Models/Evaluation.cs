@@ -21,7 +21,7 @@ namespace BatteryCommander.Web.Models
             {
                 const string BaseUri = "https://evaluations.hrc.army.mil";
 
-                if (Ratee.IsOfficer)
+                if (Ratee?.IsOfficer == true)
                 {
                     return $"{BaseUri}/signatureController.html?eid={EvaluationId}";
                 }
