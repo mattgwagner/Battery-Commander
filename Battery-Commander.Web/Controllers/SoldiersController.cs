@@ -46,6 +46,9 @@ namespace BatteryCommander.Web.Controllers
                 Evaluations =
                     await db
                     .Evaluations
+                    .Include(eval => eval.Ratee)
+                    .Include(eval => eval.Rater)
+                    .Include(eval => eval.SeniorRater)
                     .Where(eval => new[] { eval.RateeId, eval.RaterId, eval.SeniorRaterId }.Any(sm => sm == id))
                     .Select(eval => new SoldierDetailsViewModel.EvaluationViewModel
                     {
