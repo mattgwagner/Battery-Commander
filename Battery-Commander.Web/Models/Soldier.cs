@@ -26,6 +26,12 @@ namespace BatteryCommander.Web.Models
         [Required]
         public Rank Rank { get; set; } = Rank.E1;
 
+        [NotMapped]
+        public Boolean IsNCO => Rank.IsNCO();
+
+        [NotMapped]
+        public Boolean IsOfficer => Rank.IsOfficer();
+
         [StringLength(12)]
         public String DoDId { get; set; }
 

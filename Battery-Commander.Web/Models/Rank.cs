@@ -55,7 +55,17 @@ namespace BatteryCommander.Web.Models
     {
         public static Boolean IsNCO(this Rank rank)
         {
-            return !IsOfficer(rank);
+            switch (rank)
+            {
+                case Rank.E5:
+                case Rank.E6:
+                case Rank.E7:
+                case Rank.E8:
+                    return true;
+
+                default:
+                    return false;
+            }
         }
 
         public static Boolean IsOfficer(this Rank rank)
