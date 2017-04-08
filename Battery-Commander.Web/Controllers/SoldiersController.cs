@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -97,13 +98,14 @@ namespace BatteryCommander.Web.Controllers
                 .SingleOrDefaultAsync();
         }
 
-        public static async Task<IEnumerable<SelectListItem>> GetDropDownList(Database db)
+        public static async Task<IEnumerable<SelectListItem>> GetDropDownList(Database db, Boolean excludeEnlisted = false)
         {
             // TODO Filter by status, unit
 
             var soldiers =
                 await db
                 .Soldiers
+                .Where(soldier => excludeEnlisted == false || soldier.IsNCO || soldier.IsOfficer)
                 .OrderBy(soldier => soldier.LastName)
                 .ThenBy(soldier => soldier.FirstName)
                 .ToListAsync();
