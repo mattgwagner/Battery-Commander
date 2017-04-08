@@ -46,14 +46,14 @@ namespace BatteryCommander.Web.Controllers
                     model.Add(new UnitStatsViewModel
                     {
                         Unit = unit,
-                        ABCP = new UnitStatsViewModel.Stat
+                        APFT = new UnitStatsViewModel.Stat
                         {
                             Assigned = soldiers.Count,
                             Passed = soldiers.Where(_ => _.APFT?.IsPassing == true).Count(),
                             Failed = soldiers.Where(_ => _.APFT?.IsPassing == false).Count(),
                             NotTested = soldiers.Where(_ => _.APFT == null).Count()
                         },
-                        APFT = new UnitStatsViewModel.Stat
+                        ABCP = new UnitStatsViewModel.Stat
                         {
                             Assigned = soldiers.Count,
                             Passed = soldiers.Where(_ => _.ABCP?.IsPassing == true).Count(),
