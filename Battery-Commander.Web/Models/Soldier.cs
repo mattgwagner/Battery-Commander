@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BatteryCommander.Web.Models
 {
-    public class Soldier
+    public class Soldier : IValidatableObject
     {
         private const double DaysPerYear = 365.2425;
 
@@ -88,5 +88,10 @@ namespace BatteryCommander.Web.Models
         public virtual ICollection<ABCP> ABCPs { get; set; }
 
         public override string ToString() => $"{Rank.ShortName()} {LastName} {FirstName} {MiddleName}".ToUpper();
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (DateOfBirth > DateTime.Today.AddYears(-17)) yield return new ValidationResult("DateOfBirth doesn't seem right", new[] { nameof(DateOfBirth) });
+        }
     }
 }

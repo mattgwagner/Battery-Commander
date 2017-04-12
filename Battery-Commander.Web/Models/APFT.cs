@@ -1,13 +1,14 @@
 ﻿using BatteryCommander.Web.Models.Data;
 using BatteryCommander.Web.Services;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
 namespace BatteryCommander.Web.Models
 {
-    public class APFT
+    public class APFT : IValidatableObject
     {
         private const int MinimumPerEvent = 60;
 
@@ -116,6 +117,11 @@ namespace BatteryCommander.Web.Models
 
         [Display(Name = "Is Passing?")]
         public Boolean IsPassing => new[] { PushUpScore, SitUpScore, RunScore }.All(s => s >= MinimumPerEvent);
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (Date > DateTime.Today) yield return new ValidationResult("Cannot select a date after today", new[] { nameof(Date) });
+        }
 
         public byte[] GenerateCounseling()
         {

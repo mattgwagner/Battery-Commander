@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace BatteryCommander.Web.Models
 {
-    public class ABCP
+    public class ABCP : IValidatableObject
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -171,6 +171,11 @@ namespace BatteryCommander.Web.Models
             }
 
             return 0;
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (Date > DateTime.Today) yield return new ValidationResult("Cannot select a date after today", new[] { nameof(Date) });
         }
     }
 
