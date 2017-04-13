@@ -36,7 +36,7 @@ namespace BatteryCommander.Web.Models
         [DataType(DataType.Date), Column(TypeName = "date"), Display(Name = "Date of Rank")]
         public DateTime? DateOfRank { get; set; }
 
-        [NotMapped]
+        [NotMapped, DisplayFormat(DataFormatString = "{0:%d}d")
         public TimeSpan? TimeInGrade => (DateTime.Today - DateOfRank);
 
         [StringLength(12)]
