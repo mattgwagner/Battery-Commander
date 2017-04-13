@@ -15,7 +15,7 @@
     </thead>
 
     <tbody>
-        @foreach (var soldier in Model)
+        @foreach (var soldier in Model.OrderBy(s => s.LastName).ThenBy(s => s.FirstName))
         {
             <tr>
                 <td>@Html.DisplayFor(s => soldier)</td>

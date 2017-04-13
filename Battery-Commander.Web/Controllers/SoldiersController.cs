@@ -25,15 +25,13 @@ namespace BatteryCommander.Web.Controllers
             // TODO Filtering by Rank, MOS, Position, Name, Status
 
             var soldiers =
-                db
+                await db
                 .Soldiers
                 .Include(_ => _.Unit)
                 .Include(_ => _.ABCPs)
                 .Include(_ => _.APFTs)
                 .Where(_ => !unit.HasValue || _.UnitId == unit)
-                .ToList() // SQLite case insentive search isn't available on EF?
-                .OrderBy(_ => _.LastName)
-                .ThenBy(_ => _.FirstName);
+                .ToListAsync();
 
             return View("List", soldiers);
         }
