@@ -72,6 +72,9 @@ namespace BatteryCommander.Web.Models
         [NotMapped, DataType(DataType.Date)]
         public DateTimeOffset? LastUpdated => Events.OrderByDescending(e => e.Timestamp).Select(e => (DateTimeOffset?)e.Timestamp).FirstOrDefault();
 
+        [NotMapped, Display(Name = "Last Updated")]
+        public String LastUpdatedHumanized => LastUpdated?.Humanize();
+
         public virtual ICollection<Event> Events { get; set; } = new List<Event>();
 
         public class Event
