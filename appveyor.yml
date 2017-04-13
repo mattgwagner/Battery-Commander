@@ -1,14 +1,25 @@
 version: 1.0.{build}
+
 skip_branch_with_pr: true
+
 image: Visual Studio 2017
+
 before_build:
 - ps: dotnet restore
+
 build:
   publish_wap: true
   verbosity: minimal
+
 after_build:
-- ps: .\Test.ps1
+- ps: .\Test.ps1 -Configuration %CONFIGURATION%
+- ps: .\Package.ps1 -Configuration %CONFIGURATION%
+
 test: off
+
+artifacts:
+- path: **\Battery-Commander.Web.*.nupkg
+
 deploy:
 - provider: WebDeploy
   server: battery-commander.scm.azurewebsites.net:443
