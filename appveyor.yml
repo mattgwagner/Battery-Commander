@@ -23,7 +23,7 @@ artifacts:
 
 deploy:
 - provider: WebDeploy
-  server: battery-commander.scm.azurewebsites.net:443
+  server: https://battery-commander.scm.azurewebsites.net/msdeploy.axd?site=Battery-COmmander
   website: Battery-Commander
   username: $Battery-Commander
   password:
