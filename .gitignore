@@ -107,3 +107,4 @@ packages/*
 *.userprefs
 appsettings.*.json
 /.vs
+/output

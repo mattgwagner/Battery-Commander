@@ -18,7 +18,7 @@ after_build:
 test: off
 
 artifacts:
-- path: output\BatteryCommander.Web.zip
+- path: BatteryCommander.Web.zip
   type: WebDeployPackage
 
 deploy:
