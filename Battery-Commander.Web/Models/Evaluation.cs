@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Humanizer;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -64,6 +65,9 @@ namespace BatteryCommander.Web.Models
 
         [NotMapped, DisplayFormat(DataFormatString = "{0:%d}d")]
         public TimeSpan Delinquency => (ThruDate - DateTime.Today);
+
+        [NotMapped, Display(Name = "Delinquency")]
+        public String DelinquencyHumanized => Delinquency.Humanize();
 
         [NotMapped, DataType(DataType.Date)]
         public DateTimeOffset? LastUpdated => Events.OrderByDescending(e => e.Timestamp).Select(e => (DateTimeOffset?)e.Timestamp).FirstOrDefault();
