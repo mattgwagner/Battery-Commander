@@ -154,7 +154,7 @@
                 @foreach (var evaluation in Model.Evaluations)
                 {
                     <tr>
-                        <td>@Html.ActionLink("Details", "Details", "Evaluations", new { evaluation.Id })</td>
+                        <td>@Html.ActionLink("Details", "Details", "Evaluations", new { evaluation.Evaluation.Id })</td>
                         <td>@Html.DisplayFor(_ => evaluation.Role)</td>
                         <td>@Html.DisplayFor(_ => evaluation.Evaluation.Ratee)</td>
                         <td>@Html.DisplayFor(_ => evaluation.Evaluation.Status)</td>
