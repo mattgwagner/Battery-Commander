@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Humanizer;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -58,6 +59,9 @@ namespace BatteryCommander.Web.Models
 
         [NotMapped, DisplayFormat(DataFormatString = "{0:%d}d"), Display(Name = "Till ETS")]
         public TimeSpan? TimeTillETS => ETSDate - DateTime.Today;
+
+        [NotMapped, Display(Name = "Till ETS")]
+        public String TimeTillETSHumanized => TimeTillETS?.Humanize();
 
         [Required]
         public Gender Gender { get; set; } = Gender.Male;

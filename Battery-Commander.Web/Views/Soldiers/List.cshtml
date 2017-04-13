@@ -20,7 +20,20 @@
             <tr>
                 <td>@Html.DisplayFor(s => soldier)</td>
                 <td>@Html.DisplayFor(s => soldier.Unit)</td>
-                <td>@Html.DisplayFor(s => soldier.TimeTillETS)</td>
+                <td>
+                    @if (soldier.TimeTillETS > TimeSpan.FromDays(365))
+                    {
+                        <span class="label label-default">@Html.DisplayFor(s => soldier.TimeTillETSHumanized)</span>
+                    }
+                    else if (soldier.TimeTillETS > TimeSpan.FromDays(180))
+                    {
+                        <span class="label label-warning">@Html.DisplayFor(s => soldier.TimeTillETSHumanized)</span>
+                    }
+                    else
+                    {
+                        <span class="label label-danger">@Html.DisplayFor(s => soldier.TimeTillETSHumanized)</span>
+                    }
+                </td>
                 <td>
                     @{
                         var apft = soldier.APFTs.OrderByDescending(_ => _.Date).FirstOrDefault();
@@ -38,6 +51,6 @@
                     @Html.ActionLink("Add APFT", "New", "APFT", new { soldier = soldier.Id }, new { @class = "btn btn-default btn-xs" })
                 </td>
             </tr>
-        }
+                        }
     </tbody>
 </table>
