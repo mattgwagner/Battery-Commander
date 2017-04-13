@@ -33,6 +33,12 @@ namespace BatteryCommander.Web.Models
         [NotMapped]
         public Boolean IsOfficer => Rank.IsOfficer();
 
+        [DataType(DataType.Date), Column(TypeName = "date"), Display(Name = "Date of Rank")]
+        public DateTime? DateOfRank { get; set; }
+
+        [NotMapped]
+        public TimeSpan? TimeInGrade => (DateTime.Today - DateOfRank);
+
         [StringLength(12)]
         public String DoDId { get; set; }
 
