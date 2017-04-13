@@ -10,6 +10,8 @@ $DotNet = "${env:ProgramFiles}\dotnet\dotnet.exe"
 
 $Website = Join-Path $Here "Battery-Commander.Web\Battery-Commander.Web.csproj"
 
-& $DotNet pack $Website --configuration $Configuration
+& $DotNet publish $Website --configuration $Configuration --output "$Here/output"
+
+7z a BatteryCommander.Web.zip "$Here/output"
 
 EXIT $LASTEXITCODE
