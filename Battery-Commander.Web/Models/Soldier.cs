@@ -36,8 +36,11 @@ namespace BatteryCommander.Web.Models
         [DataType(DataType.Date), Column(TypeName = "date"), Display(Name = "Date of Rank")]
         public DateTime? DateOfRank { get; set; }
 
-        [NotMapped, DisplayFormat(DataFormatString = "{0:%d}d")]
+        [NotMapped, Display(Name = "Time in Grade")]
         public TimeSpan? TimeInGrade => (DateTime.Today - DateOfRank);
+
+        [NotMapped, Display(Name = "Time in Grade")]
+        public String TimeInGradeHumanized => TimeInGrade?.Humanize(precision: 2);
 
         [StringLength(12)]
         public String DoDId { get; set; }
@@ -67,7 +70,7 @@ namespace BatteryCommander.Web.Models
         public TimeSpan? TimeTillETS => ETSDate - DateTime.Today;
 
         [NotMapped, Display(Name = "Till ETS")]
-        public String TimeTillETSHumanized => TimeTillETS?.Humanize();
+        public String TimeTillETSHumanized => TimeTillETS?.Humanize(precision: 2);
 
         [Required]
         public Gender Gender { get; set; } = Gender.Male;
