@@ -23,9 +23,11 @@ artifacts:
 
 deploy:
 - provider: WebDeploy
-  server: https://battery-commander.scm.azurewebsites.net/msdeploy.axd?site=Battery-COmmander
+  server: https://battery-commander.scm.azurewebsites.net/msdeploy.axd?site=Battery-Commander
   website: Battery-Commander
   username: $Battery-Commander
   password:
     secure: JXt7ilTf1Jnghu7FirHi5yE1HqVtCya6TjFOWmDVt2jwymyOHcFRx/sSsbgsxaN0Q/jprb3qYi1V7BdKLpM2Fw==
   aspnet_core: true
+  app_offline: true
+  aspnet_core_force_restart: true
