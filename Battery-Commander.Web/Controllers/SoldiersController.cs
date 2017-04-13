@@ -30,9 +30,9 @@ namespace BatteryCommander.Web.Controllers
                 .Include(_ => _.Unit)
                 .Include(_ => _.ABCPs)
                 .Include(_ => _.APFTs)
+                .Where(_ => !unit.HasValue || _.UnitId == unit)
                 .OrderBy(_ => _.LastName)
                 .ThenBy(_ => _.FirstName)
-                .Where(_ => !unit.HasValue || _.UnitId == unit)
                 .ToListAsync();
 
             return View("List", soldiers);
