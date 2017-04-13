@@ -19,6 +19,7 @@ test: off
 
 artifacts:
 - path: Battery-Commander.Web\**\BatteryCommander.Web.*.nupkg
+  type: WebDeployPackage
 
 deploy:
 - provider: WebDeploy
