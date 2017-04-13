@@ -158,7 +158,16 @@
                         <td>@Html.DisplayFor(_ => evaluation.Role)</td>
                         <td>@Html.DisplayFor(_ => evaluation.Evaluation.Ratee)</td>
                         <td>@Html.DisplayFor(_ => evaluation.Evaluation.Status)</td>
-                        <td>@Html.DisplayFor(_ => evaluation.Evaluation.Delinquency)</td>
+                        <td>
+                            @if (evaluation.Evaluation.Delinquency > TimeSpan.Zero)
+                            {
+                                <span class="label label-default">Due in @Html.DisplayFor(_ => evaluation.Evaluation.DelinquencyHumanized)</span>
+                            }
+                            else
+                            {
+                                <span class="label label-danger">Overude @Html.DisplayFor(_ => evaluation.Evaluation.DelinquencyHumanized)</span>
+                            }
+                        </td>
                     </tr>
                 }
             </tbody>
