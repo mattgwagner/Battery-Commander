@@ -142,6 +142,7 @@
         <table class="table">
             <thead>
                 <tr>
+                    <th></th>
                     <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Role)</th>
                     <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Evaluation.Ratee)</th>
                     <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Evaluation.Status)</th>
@@ -153,6 +154,7 @@
                 @foreach (var evaluation in Model.Evaluations)
                 {
                     <tr>
+                        <td>@Html.ActionLink("Details", "Details", "Evaluations", new { evaluation.Id })</td>
                         <td>@Html.DisplayFor(_ => evaluation.Role)</td>
                         <td>@Html.DisplayFor(_ => evaluation.Evaluation.Ratee)</td>
                         <td>@Html.DisplayFor(_ => evaluation.Evaluation.Status)</td>
