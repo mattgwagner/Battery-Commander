@@ -18,7 +18,7 @@ after_build:
 test: off
 
 artifacts:
-- path: Battery-Commander.Web.*.nupkg
+- path: Battery-Commander.Web\**\Battery-Commander.Web.*.nupkg
 
 deploy:
 - provider: WebDeploy
