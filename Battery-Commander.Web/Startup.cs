@@ -43,7 +43,7 @@ namespace BatteryCommander.Web
             {
                 if (!IsDevelopment)
                 {
-                    // options.Filters.Add(new RequireHttpsAttribute { });
+                    options.Filters.Add(new RequireHttpsAttribute { });
                 }
             });
 
