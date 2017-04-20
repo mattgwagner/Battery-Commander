@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Controllers
 {
+    [Authorize]
     public class UnitsController : Controller
     {
         private readonly Database db;
