@@ -1,5 +1,4 @@
 ﻿using BatteryCommander.Web.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using OfficeOpenXml;
 using System;
@@ -30,6 +29,12 @@ namespace BatteryCommander.Web.Services
 
                 for (int row = 2; row <= sheet.Dimension.Rows; row++)
                 {
+                    // TODO Determine unit
+
+                    // TODO Where can we get DoB?
+
+                    var unit = db.Units.FirstOrDefault();
+
                     // Parse into soldier
 
                     var parsed = new Soldier
@@ -38,7 +43,8 @@ namespace BatteryCommander.Web.Services
                         MiddleName = $"{sheet.Cells[row, 2].Value}",
                         FirstName = $"{sheet.Cells[row, 3].Value}",
                         Rank = RankExtensions.Parse($"{sheet.Cells[row, 4]}"),
-                        DateOfRank = Convert.ToDateTime(sheet.Cells[row, 9].Value)
+                        DateOfRank = Convert.ToDateTime(sheet.Cells[row, 9].Value),
+                        Unit = unit
                     };
 
                     // Check for existing, create if not
