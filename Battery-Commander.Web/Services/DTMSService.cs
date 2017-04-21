@@ -47,16 +47,29 @@ namespace BatteryCommander.Web.Services
 
                     // Check for existing, create if not
 
-                    // TODO Update existing entries?
+                    var existing =
+                        await db
+                        .Soldiers
+                        .Where(_ => _.LastName.ToUpper() == parsed.LastName.ToUpper())
+                        .Where(_ => _.FirstName.ToUpper() == parsed.FirstName.ToUpper())
+                        .FirstOrDefaultAsync();
 
-                    if (!await db.Soldiers.Where(_ => _.LastName.ToUpper() == parsed.LastName.ToUpper()).Where(_ => _.FirstName.ToUpper() == parsed.FirstName.ToUpper()).AnyAsync())
+                    if (existing == null)
                     {
                         // Soldier does not exist, create
 
                         await db.Soldiers.AddAsync(parsed);
-
-                        changed.Add(parsed);
                     }
+                    else
+                    {
+                        // Update existing entries
+
+                        existing.MiddleName = parsed.MiddleName;
+                        existing.DateOfRank = parsed.DateOfRank;
+                        existing.Rank = parsed.Rank;
+                    }
+
+                    changed.Add(parsed);
                 }
             }
 
