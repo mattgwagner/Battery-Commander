@@ -1,5 +1,7 @@
 ﻿using BatteryCommander.Web.Models;
+using BatteryCommander.Web.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -98,6 +100,19 @@ namespace BatteryCommander.Web.Controllers
             db.Soldiers.Remove(soldier);
 
             await db.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Import()
+        {
+            return View();
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> Import(IFormFile file)
+        {
+            var changes = await DTMSService.ImportSoldiers(db, file);
 
             return RedirectToAction(nameof(Index));
         }
