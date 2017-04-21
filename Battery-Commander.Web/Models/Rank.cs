@@ -53,6 +53,31 @@ namespace BatteryCommander.Web.Models
 
     public static class RankExtensions
     {
+        public static Rank Parse(String value)
+        {
+            Rank result = Rank.E1;
+
+            if (!Enum.TryParse(value, ignoreCase: true, result: out result))
+            {
+                // Couldn't parse rank strictly by string
+
+                foreach (Rank rank in Enum.GetValues(typeof(Rank)))
+                {
+                    if (String.Equals(rank.DisplayName(), value, StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        return rank;
+                    }
+
+                    if (String.Equals(rank.ShortName(), value, StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        return rank;
+                    }
+                }
+            }
+
+            return result;
+        }
+
         public static Boolean IsNCO(this Rank rank)
         {
             switch (rank)
