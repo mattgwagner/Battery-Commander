@@ -1,5 +1,6 @@
 ﻿using BatteryCommander.Web.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
@@ -28,18 +29,31 @@ namespace BatteryCommander.Web.Services
                 {
                     // Parse into soldier
 
-                    // Check for existing, update if found, create if not
-
-                    changed.Add(new Soldier
+                    var parsed = new Soldier
                     {
                         LastName = $"{sheet.Cells[row, 1].Value}",
                         MiddleName = $"{sheet.Cells[row, 2].Value}",
                         FirstName = $"{sheet.Cells[row, 3].Value}",
                         Rank = RankExtensions.Parse($"{sheet.Cells[row, 4]}"),
                         DateOfRank = Convert.ToDateTime(sheet.Cells[row, 9].Value)
-                    });
+                    };
+
+                    // Check for existing, create if not
+
+                    // TODO Update existing entries?
+
+                    if (!await db.Soldiers.Where(_ => _.LastName.ToUpper() == parsed.LastName.ToUpper()).Where(_ => _.FirstName.ToUpper() == parsed.FirstName.ToUpper()).AnyAsync())
+                    {
+                        // Soldier does not exist, create
+
+                        await db.Soldiers.AddAsync(parsed);
+
+                        changed.Add(parsed);
+                    }
                 }
             }
+
+            await db.SaveChangesAsync();
 
             return changed;
         }
