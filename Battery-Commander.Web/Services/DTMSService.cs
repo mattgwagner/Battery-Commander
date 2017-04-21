@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,12 +12,14 @@ namespace BatteryCommander.Web.Services
 {
     public class DTMSService
     {
-        public static async Task<IEnumerable<Soldier>> ImportSoldiers(Database db, IFormFile file)
+        public static async Task<IEnumerable<Soldier>> ImportSoldiers(Database db, Stream stream)
         {
             var changed = new List<Soldier>();
 
-            using (var excel = new ExcelPackage(file.OpenReadStream()))
+            using (var excel = new ExcelPackage())
             {
+                excel.Load(stream);
+
                 // LastName MiddleName  FirstName RankShort   Last4 PayGradeCode    MOS SMOS    DateOfRank BASD UnitAssigned UnitAssigned    Status
 
                 // Process Excel upload
