@@ -5,10 +5,10 @@ namespace BatteryCommander.Web.Models
 {
     public enum Rank : byte
     {
-        [Display(Name = "Private", ShortName = "PVT")]
+        [Display(Name = "Private", ShortName = "PV1")]
         E1 = 1,
 
-        [Display(Name = "Private", ShortName = "PV2")]
+        [Display(Name = "Private (PV2)", ShortName = "PV2")]
         E2 = 2,
 
         [Display(Name = "Private First Class", ShortName = "PFC")]
