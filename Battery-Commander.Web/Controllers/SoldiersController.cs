@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -113,14 +112,9 @@ namespace BatteryCommander.Web.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Import(IFormFile file)
         {
-            using (var stream = new MemoryStream())
-            {
-                await file.CopyToAsync(stream);
+            await DTMSService.ImportSoldiers(db, file.OpenReadStream());
 
-                var changes = await DTMSService.ImportSoldiers(db, stream);
-
-                return RedirectToAction(nameof(Index));
-            }
+            return RedirectToAction(nameof(Index));
         }
 
         public static async Task<Soldier> Get(Database db, int id)

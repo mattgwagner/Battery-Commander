@@ -15,10 +15,8 @@ namespace BatteryCommander.Web.Services
         {
             var changed = new List<Soldier>();
 
-            using (var excel = new ExcelPackage())
+            using (var excel = new ExcelPackage(stream))
             {
-                excel.Load(stream);
-
                 // LastName MiddleName  FirstName RankShort   Last4 PayGradeCode    MOS SMOS    DateOfRank BASD UnitAssigned UnitAssigned    Status
 
                 // Process Excel upload
@@ -42,7 +40,7 @@ namespace BatteryCommander.Web.Services
                         LastName = $"{sheet.Cells[row, 1].Value}",
                         MiddleName = $"{sheet.Cells[row, 2].Value}",
                         FirstName = $"{sheet.Cells[row, 3].Value}",
-                        Rank = RankExtensions.Parse($"{sheet.Cells[row, 4]}"),
+                        Rank = RankExtensions.Parse($"{sheet.Cells[row, 4].Value}"),
                         DateOfRank = Convert.ToDateTime(sheet.Cells[row, 9].Value),
                         Unit = unit
                     };
