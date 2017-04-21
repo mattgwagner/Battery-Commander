@@ -16,6 +16,12 @@ namespace BatteryCommander.Tests
 
             Database.Init(db);
 
+            if(!db.Units.Any())
+            {
+                db.Units.Add(new Unit { Name = "Test" });
+                db.SaveChanges();
+            }
+
             using (var file = new FileStream("Scrubbed.xlsx", FileMode.Open))
             {
                 var soldiers = await DTMSService.ImportSoldiers(db, file);
