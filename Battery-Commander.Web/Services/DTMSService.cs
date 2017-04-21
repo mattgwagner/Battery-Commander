@@ -22,7 +22,9 @@ namespace BatteryCommander.Web.Services
 
                 var sheet = excel.Workbook.Worksheets.First();
 
-                for (int row = 1; row <= sheet.Dimension.Rows; row++)
+                // Skip header row
+
+                for (int row = 2; row <= sheet.Dimension.Rows; row++)
                 {
                     // Parse into soldier
 

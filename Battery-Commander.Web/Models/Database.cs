@@ -4,15 +4,15 @@ namespace BatteryCommander.Web.Models
 {
     public class Database : DbContext
     {
-        public DbSet<Soldier> Soldiers { get; set; }
+        public virtual DbSet<Soldier> Soldiers { get; set; }
 
-        public DbSet<Evaluation> Evaluations { get; set; }
+        public virtual DbSet<Evaluation> Evaluations { get; set; }
 
-        public DbSet<APFT> APFTs { get; set; }
+        public virtual DbSet<APFT> APFTs { get; set; }
 
-        public DbSet<ABCP> ABCPs { get; set; }
+        public virtual DbSet<ABCP> ABCPs { get; set; }
 
-        public DbSet<Unit> Units { get; set; }
+        public virtual DbSet<Unit> Units { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
