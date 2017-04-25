@@ -89,6 +89,12 @@ namespace BatteryCommander.Web.Controllers
 
             evaluation.Transition(trigger);
 
+            evaluation.Events.Add(new Evaluation.Event
+            {
+                Author = User.Identity.Name,
+                Message = trigger.DisplayName()
+            });
+
             await db.SaveChangesAsync();
 
             return RedirectToAction(nameof(Details), new { id });
