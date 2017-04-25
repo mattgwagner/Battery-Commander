@@ -5,7 +5,7 @@
 <!-- Workflow steps available -->
 
 <div class="btn-group" role="group">
-    @using (Html.BeginForm("Transition", "Evaluations", new { Model.Id, trigger }))
+    @using (Html.BeginForm("Transition", "Evaluations", new { Model.Id }))
     {
         @Html.AntiForgeryToken()
 
