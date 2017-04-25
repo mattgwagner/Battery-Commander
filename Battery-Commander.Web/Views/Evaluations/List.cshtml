@@ -24,7 +24,9 @@
                 <td>@Html.ActionLink("Details", "Details", new { evaluation.Id })</td>
                 <td>@Html.DisplayFor(_ => evaluation.Ratee)</td>
                 <td>@Html.DisplayFor(_ => evaluation.ThruDate)</td>
-                <td>@Html.DisplayFor(_ => evaluation.Status)</td>
+                <td>
+                    @Html.ActionLink(evaluation.Status.DisplayName(), "List", "Evaluations", new { status = evaluation.Status })
+                </td>
                 <td>
                     @if (evaluation.Delinquency > TimeSpan.Zero)
                     {

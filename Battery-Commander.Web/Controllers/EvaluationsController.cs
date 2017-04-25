@@ -18,7 +18,7 @@ namespace BatteryCommander.Web.Controllers
             this.db = db;
         }
 
-        public async Task<IActionResult> Index(Boolean includeComplete = false)
+        public async Task<IActionResult> Index(Boolean includeComplete = false, EvaluationStatus? status = null)
         {
             var evaluations =
                 await db
@@ -27,6 +27,7 @@ namespace BatteryCommander.Web.Controllers
                 .Include(_ => _.Rater)
                 .Include(_ => _.SeniorRater)
                 .Include(_ => _.Events)
+                .Where(_ => !status.HasValue || _.Status == status)
                 .Where(_ => includeComplete || !_.IsCompleted)
                 .OrderBy(_ => _.ThruDate)
                 .ToListAsync();
