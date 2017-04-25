@@ -11,7 +11,7 @@
 
         @foreach (var trigger in Model.Available_Transitions)
         {
-            <button type="submit" nae="trigger" value="@trigger" class="btn btn-default">@trigger.DisplayName()</button>
+            <button type="submit" name="trigger" value="@trigger" class="btn btn-default">@trigger.DisplayName()</button>
         }
     }
 </div>
