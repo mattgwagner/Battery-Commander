@@ -58,10 +58,22 @@ namespace BatteryCommander.Web.Controllers
         {
             if (await db.Evaluations.AnyAsync(evaluation => evaluation.Id == model.Id) == false)
             {
+                model.Events.Add(new Evaluation.Event
+                {
+                    Author = User.Identity.Name,
+                    Message = "Added Evaluation"
+                });
+
                 db.Evaluations.Add(model);
             }
             else
             {
+                model.Events.Add(new Evaluation.Event
+                {
+                    Author = User.Identity.Name,
+                    Message = "Evaluation Updated"
+                });
+
                 db.Evaluations.Update(model);
             }
 
