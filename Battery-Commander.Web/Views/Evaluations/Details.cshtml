@@ -1,20 +1,21 @@
 ﻿@model Evaluation
 
-@Html.ActionLink("Edit", "Edit", new { Model.Id }, new { @class = "btn btn-default" })
-
 <!-- Workflow steps available -->
 
-<div class="btn-group" role="group">
+<div class="btn-toolbar" role="group">
+    <button class="btn btn-warning">@Html.ActionLink("Edit", "Edit", new { Model.Id })</button>
     @using (Html.BeginForm("Transition", "Evaluations", new { Model.Id }))
     {
         @Html.AntiForgeryToken()
 
         @foreach (var trigger in Model.Available_Transitions)
         {
-            <button type="submit" name="trigger" value="@trigger" class="btn btn-default">@trigger.DisplayName()</button>
+            <button type="submit" name="trigger" value="@trigger" class="btn btn-info">@trigger.DisplayName()</button>
         }
     }
 </div>
+
+<hr />
 
 <table class="table table-bordered">
     @if (Model.EvaluationId.HasValue)
@@ -49,14 +50,16 @@
     </tr>
     <tr>
         <td>@Html.DisplayNameFor(model => model.Delinquency)</td>
-        <td>@if (Model.Delinquency > TimeSpan.Zero)
-        {
-            <span class="label label-default">Due in @Html.DisplayFor(_ => Model.DelinquencyHumanized)</span>
-        }
-        else
-        {
-            <span class="label label-danger">Overdue @Html.DisplayFor(_ => Model.DelinquencyHumanized)</span>
-        }</td>
+        <td>
+            @if (Model.Delinquency > TimeSpan.Zero)
+            {
+                <span class="label label-default">Due in @Html.DisplayFor(_ => Model.DelinquencyHumanized)</span>
+            }
+            else
+            {
+                <span class="label label-danger">Overdue @Html.DisplayFor(_ => Model.DelinquencyHumanized)</span>
+            }
+        </td>
     </tr>
     <tr>
         <td>@Html.DisplayNameFor(model => model.Status)</td>
@@ -71,18 +74,6 @@
 
 <h2>@Html.DisplayNameFor(_ => Model.Events)</h2>
 
-<div>
-    @using (Html.BeginForm("Comment", "Evaluations", FormMethod.Post, new { @class = "form-horitzontal" }))
-    {
-        @Html.AntiForgeryToken()
-        @Html.HiddenFor(_ => _.Id)
-
-        @Html.TextArea("message")
-
-        <button type="submit">Add Comment</button>
-    }
-</div>
-
 <table class="table table-striped">
     <thead>
         <tr>
@@ -93,7 +84,7 @@
     </thead>
     <tbody>
         @foreach (var @event in Model.Events.OrderByDescending(_ => _.Timestamp))
-            {
+        {
             <tr>
                 <td>@Html.DisplayFor(_ => @event.Author)</td>
                 <td>@Html.DisplayFor(_ => @event.Message)</td>
@@ -101,6 +92,20 @@
             </tr>
         }
     </tbody>
+    <tfoot>
+        <tr>
+            @using (Html.BeginForm("Comment", "Evaluations", FormMethod.Post, new { @class = "form-horitzontal" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.Id)
+
+                <td colspan="3">
+                    <textarea rows="4" cols="100" name="message"></textarea>
+                    <button type="submit">Comment</button>
+                </td>
+            }
+        </tr>
+    </tfoot>
 </table>
 
 <div>

@@ -75,6 +75,7 @@ namespace BatteryCommander.Web.Models
         [NotMapped, Display(Name = "Last Updated")]
         public String LastUpdatedHumanized => LastUpdated?.Humanize();
 
+        [Display(Name = "History")]
         public virtual ICollection<Event> Events { get; set; } = new List<Event>();
 
         public class Event
