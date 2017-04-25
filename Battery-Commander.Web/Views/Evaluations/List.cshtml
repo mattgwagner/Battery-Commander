@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Evaluation>
 
-<h2>Evaluations @Html.ActionLink("Add New", "New", "Evaluations", null, new { @class = "btn btn-default" })</h2>
+<h2>Evaluations @Html.ActionLink("Add New", "New", "Evaluations", null, new { @class = "btn btn-default" }) @Html.ActionLink("Include Complete", "List", "Evaluations", new { includeComplete = true }, new { @class = "btn btn-default" })</h2>
 
 <table class="table table-striped">
     <thead>
@@ -26,7 +26,7 @@
                 <td>@Html.DisplayFor(_ => evaluation.ThruDate)</td>
                 <td>@Html.DisplayFor(_ => evaluation.Status)</td>
                 <td>
-                    @if(evaluation.Delinquency > TimeSpan.Zero)
+                    @if (evaluation.Delinquency > TimeSpan.Zero)
                     {
                         <span class="label label-default">Due in @Html.DisplayFor(_ => evaluation.DelinquencyHumanized)</span>
                     }
