@@ -55,7 +55,7 @@ namespace BatteryCommander.Web.Models
         public DateTime ThruDate { get; set; }
 
         [Required]
-        public EvaluationStatus Status { get; set; } = EvaluationStatus.Unknown;
+        public EvaluationStatus Status { get; set; } = EvaluationStatus.At_Rater;
 
         [Required]
         public EvaluationType Type { get; set; } = EvaluationType.Annual;
@@ -112,23 +112,20 @@ namespace BatteryCommander.Web.Models
 
     public enum EvaluationStatus : byte
     {
-        [Display(Name = "Unknown/Unitiated")]
-        Unknown = 0,
-
         [Display(Name = "At Rater")]
-        At_Rater = 10,
+        At_Rater = 0,
 
         [Display(Name = "At Senior Rater")]
-        At_Senior_Rater = 20,
+        At_Senior_Rater = 10,
 
         [Display(Name = "Pending 1SG/Admin Review")]
-        Pending_Internal_Review = 30,
+        Pending_Internal_Review = 20,
 
         [Display(Name = "Ready for Signatures")]
-        Ready_for_Signatures = 40,
+        Ready_for_Signatures = 30,
 
         [Display(Name = "Pending S1 Review")]
-        Pending_S1_Review = 50,
+        Pending_S1_Review = 80,
 
         [Display(Name = "Pending HQDA Submission")]
         Pending_HQDA_Submission = 90,
