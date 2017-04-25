@@ -14,6 +14,11 @@ namespace BatteryCommander.Web.Models
         /// </summary>
         public static TimeSpan DelinquentAfter => TimeSpan.FromDays(60);
 
+        /// <summary>
+        /// List of statuses that represent completed evaluations
+        /// </summary>
+        public static IEnumerable<EvaluationStatus> Completed => new[] { EvaluationStatus.Submitted_to_HQDA, EvaluationStatus.Accepted_to_iPerms };
+
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
@@ -66,7 +71,7 @@ namespace BatteryCommander.Web.Models
         public EvaluationType Type { get; set; } = EvaluationType.Annual;
 
         [NotMapped]
-        public Boolean IsCompleted => new[] { EvaluationStatus.Submitted_to_HQDA, EvaluationStatus.Accepted_to_iPerms }.Contains(Status);
+        public Boolean IsCompleted => Completed.Contains(Status);
 
         [NotMapped]
         public Boolean IsDelinquent => !IsCompleted && (Delinquency < TimeSpan.Zero && Delinquency > DelinquentAfter);
