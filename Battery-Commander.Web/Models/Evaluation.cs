@@ -112,8 +112,31 @@ namespace BatteryCommander.Web.Models
 
     public enum EvaluationStatus : byte
     {
-        Unknown,
+        [Display(Name = "Unknown/Unitiated")]
+        Unknown = 0,
 
-        Completed = 100
+        [Display(Name = "At Rater")]
+        At_Rater = 10,
+
+        [Display(Name = "At Senior Rater")]
+        At_Senior_Rater = 20,
+
+        [Display(Name = "Pending 1SG/Admin Review")]
+        Pending_Internal_Review = 30,
+
+        [Display(Name = "Ready for Signatures")]
+        Ready_for_Signatures = 40,
+
+        [Display(Name = "Pending S1 Review")]
+        Pending_S1_Review = 50,
+
+        [Display(Name = "Pending HQDA Submission")]
+        Pending_HQDA_Submission = 90,
+
+        [Display(Name = "Submitted to HQDA")]
+        Submitted_to_HQDA = 100,
+
+        [Display(Name = "Accepted to iPerms")]
+        Accepted_to_iPerms = byte.MaxValue
     }
 }
