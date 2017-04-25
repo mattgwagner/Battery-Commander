@@ -69,7 +69,7 @@ namespace BatteryCommander.Web.Models
         public Boolean IsCompleted => new[] { EvaluationStatus.Submitted_to_HQDA, EvaluationStatus.Accepted_to_iPerms }.Contains(Status);
 
         [NotMapped]
-        public Boolean IsDelinquent => !IsCompleted && Delinquency > DelinquentAfter;
+        public Boolean IsDelinquent => !IsCompleted && (Delinquency < TimeSpan.Zero && Delinquency > DelinquentAfter);
 
         [NotMapped, DisplayFormat(DataFormatString = "{0:%d}d")]
         public TimeSpan Delinquency => (ThruDate - DateTime.Today);
