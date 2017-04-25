@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace BatteryCommander.Web.Models
 {
-    public class Evaluation
+    public partial class Evaluation
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
