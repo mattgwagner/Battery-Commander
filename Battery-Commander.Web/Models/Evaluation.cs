@@ -61,7 +61,7 @@ namespace BatteryCommander.Web.Models
         public EvaluationType Type { get; set; } = EvaluationType.Annual;
 
         [NotMapped]
-        public Boolean IsCompleted => EvaluationStatus.Completed == Status;
+        public Boolean IsCompleted => new[] { EvaluationStatus.Submitted_to_HQDA, EvaluationStatus.Accepted_to_iPerms }.Contains(Status);
 
         [NotMapped, DisplayFormat(DataFormatString = "{0:%d}d")]
         public TimeSpan Delinquency => (ThruDate - DateTime.Today);
