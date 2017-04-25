@@ -9,6 +9,11 @@ namespace BatteryCommander.Web.Models
 {
     public partial class Evaluation
     {
+        /// <summary>
+        /// After this period of time, incomplete evaluations are considered delinquent
+        /// </summary>
+        public static TimeSpan DelinquentAfter => TimeSpan.FromDays(60);
+
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
@@ -62,6 +67,9 @@ namespace BatteryCommander.Web.Models
 
         [NotMapped]
         public Boolean IsCompleted => new[] { EvaluationStatus.Submitted_to_HQDA, EvaluationStatus.Accepted_to_iPerms }.Contains(Status);
+
+        [NotMapped]
+        public Boolean IsDelinquent => !IsCompleted && Delinquency > DelinquentAfter;
 
         [NotMapped, DisplayFormat(DataFormatString = "{0:%d}d")]
         public TimeSpan Delinquency => (ThruDate - DateTime.Today);

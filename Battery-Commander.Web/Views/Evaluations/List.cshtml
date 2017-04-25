@@ -1,6 +1,12 @@
 ﻿@model IEnumerable<Evaluation>
 
-<h2>Evaluations @Html.ActionLink("Add New", "New", "Evaluations", null, new { @class = "btn btn-default" }) @Html.ActionLink("Include Complete", "List", "Evaluations", new { includeComplete = true }, new { @class = "btn btn-default" })</h2>
+<h2>Evaluations </h2>
+
+<div class="btn-group">
+    @Html.ActionLink("Add New", "New", "Evaluations", null, new { @class = "btn btn-default" }) 
+    @Html.ActionLink("Include Complete", "List", "Evaluations", new { includeComplete = true }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Only Delinquent", "List", "Evaluations", new { onlyDelinquent = true }, new { @class = "btn btn-default" })
+</div>
 
 <table class="table table-striped">
     <thead>
