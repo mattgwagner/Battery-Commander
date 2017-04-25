@@ -49,7 +49,14 @@
     </tr>
     <tr>
         <td>@Html.DisplayNameFor(model => model.Delinquency)</td>
-        <td>@Html.DisplayFor(model => model.Delinquency)</td>
+        <td>@if (Model.Delinquency > TimeSpan.Zero)
+        {
+            <span class="label label-default">Due in @Html.DisplayFor(_ => Model.DelinquencyHumanized)</span>
+        }
+        else
+        {
+            <span class="label label-danger">Overdue @Html.DisplayFor(_ => Model.DelinquencyHumanized)</span>
+        }</td>
     </tr>
     <tr>
         <td>@Html.DisplayNameFor(model => model.Status)</td>
