@@ -84,14 +84,20 @@
 </div>
 
 <table class="table">
-    <thead></thead>
+    <thead>
+        <tr>
+            <th>Who</th>
+            <th>What</th>
+            <th>When</th>
+        </tr>
+    </thead>
     <tbody>
         @foreach (var @event in Model.Events.OrderByDescending(_ => _.Timestamp))
             {
             <tr>
                 <td>@Html.DisplayFor(_ => @event.Author)</td>
                 <td>@Html.DisplayFor(_ => @event.Message)</td>
-                <td>@Html.DisplayFor(_ => @event.Timestamp)</td>
+                <td>@Html.DisplayFor(_ => @event.TimestampHumanized)</td>
             </tr>
         }
     </tbody>

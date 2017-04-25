@@ -91,7 +91,7 @@ namespace BatteryCommander.Web.Models
             [DataType(DataType.DateTime)]
             public DateTimeOffset Timestamp { get; set; } = DateTimeOffset.UtcNow;
 
-            // Username? Printed name?
+            public String TimestampHumanized => Timestamp.Humanize();
 
             public string Author { get; set; }
 
