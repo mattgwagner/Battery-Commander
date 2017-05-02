@@ -20,15 +20,15 @@
                     </tr>
                     <tr>
                         <td>@Html.DisplayNameFor(_ => unit.ABCP.Passed)</td>
-                        <td>@Html.ActionLink(unit.ABCP.NotTested.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, abcp = Soldier.EventStatus.Passed })</td>
+                        <td>@Html.ActionLink(unit.ABCP.Passed.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, abcp = Soldier.EventStatus.Passed })</td>
                     </tr>
                     <tr>
                         <td>@Html.DisplayNameFor(_ => unit.ABCP.Failed)</td>
-                        <td>@Html.ActionLink(unit.ABCP.NotTested.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, abcp = Soldier.EventStatus.Failed })</td>
+                        <td>@Html.ActionLink(unit.ABCP.Failed.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, abcp = Soldier.EventStatus.Failed })</td>
                     </tr>
                     <tr>
                         <td>@Html.DisplayNameFor(_ => unit.ABCP.NotTested)</td>
-                        <td>@Html.ActionLink(unit.ABCP.NotTested.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, abcp = Soldier.EventStatus.NotTested }))</td>
+                        <td>@Html.ActionLink(unit.ABCP.NotTested.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, abcp = Soldier.EventStatus.NotTested })</td>
                     </tr>
                     <tr>
                         <td>@Html.DisplayNameFor(_ => unit.ABCP.PercentPass)</td>
