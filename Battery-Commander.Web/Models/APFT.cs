@@ -121,6 +121,8 @@ namespace BatteryCommander.Web.Models
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (Date > DateTime.Today) yield return new ValidationResult("Cannot select a date after today", new[] { nameof(Date) });
+
+            if (Run > TimeSpan.FromHours(1)) yield return new ValidationResult("Cannot enter run time greater than one hour", new[] { nameof(Run) });
         }
 
         public byte[] GenerateCounseling()
