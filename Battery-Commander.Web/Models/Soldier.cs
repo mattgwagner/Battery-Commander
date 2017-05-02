@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace BatteryCommander.Web.Models
 {
@@ -98,13 +99,52 @@ namespace BatteryCommander.Web.Models
 
         public virtual ICollection<APFT> APFTs { get; set; }
 
+        public virtual APFT LastApft => APFTs.OrderByDescending(apft => apft.Date).FirstOrDefault();
+
+        public virtual EventStatus ApftStatus
+        {
+            get
+            {
+                if (LastApft?.IsPassing == true) return EventStatus.Passed;
+
+                if (LastApft.IsPassing == false) return EventStatus.Failed;
+
+                return EventStatus.NotTaken;
+            }
+        }
+
         public virtual ICollection<ABCP> ABCPs { get; set; }
+
+        public virtual ABCP LastAbcp => ABCPs.OrderByDescending(abcp => abcp.Date).FirstOrDefault();
+
+        public virtual EventStatus AbcpStatus
+        {
+            get
+            {
+                // TODO This doesn't take into account soldiers who passed tape but are still on the ABCP program
+
+                if (LastAbcp?.IsPassing == true) return EventStatus.Passed;
+
+                if (LastAbcp.IsPassing == false) return EventStatus.Failed;
+
+                return EventStatus.NotTaken;
+            }
+        }
 
         public override string ToString() => $"{Rank.ShortName()} {LastName} {FirstName} {MiddleName}".ToUpper();
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (DateOfBirth > DateTime.Today.AddYears(-17)) yield return new ValidationResult("DateOfBirth doesn't seem right", new[] { nameof(DateOfBirth) });
+        }
+
+        public enum EventStatus
+        {
+            NotTaken,
+
+            Passed,
+
+            Failed
         }
     }
 }

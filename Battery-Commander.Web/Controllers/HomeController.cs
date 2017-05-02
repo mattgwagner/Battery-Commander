@@ -33,12 +33,6 @@ namespace BatteryCommander.Web.Controllers
                     .Include(s => s.ABCPs)
                     .Include(s => s.APFTs)
                     .Where(s => s.UnitId == unit.Id)
-                    .Select(s => new
-                    {
-                        Soldier = s,
-                        APFT = s.APFTs.OrderByDescending(_ => _.Date).FirstOrDefault(),
-                        ABCP = s.ABCPs.OrderByDescending(_ => _.Date).FirstOrDefault()
-                    })
                     .ToListAsync();
 
                 if (soldiers.Any())
@@ -49,16 +43,16 @@ namespace BatteryCommander.Web.Controllers
                         APFT = new UnitStatsViewModel.Stat
                         {
                             Assigned = soldiers.Count,
-                            Passed = soldiers.Where(_ => _.APFT?.IsPassing == true).Count(),
-                            Failed = soldiers.Where(_ => _.APFT?.IsPassing == false).Count(),
-                            NotTested = soldiers.Where(_ => _.APFT == null).Count()
+                            Passed = soldiers.Where(soldier => soldier.ApftStatus == Soldier.EventStatus.Passed).Count(),
+                            Failed = soldiers.Where(soldier => soldier.ApftStatus == Soldier.EventStatus.Failed).Count(),
+                            NotTested = soldiers.Where(soldier => soldier.ApftStatus == Soldier.EventStatus.NotTaken).Count()
                         },
                         ABCP = new UnitStatsViewModel.Stat
                         {
                             Assigned = soldiers.Count,
-                            Passed = soldiers.Where(_ => _.ABCP?.IsPassing == true).Count(),
-                            Failed = soldiers.Where(_ => _.ABCP?.IsPassing == false).Count(),
-                            NotTested = soldiers.Where(_ => _.ABCP == null).Count()
+                            Passed = soldiers.Where(soldier => soldier.AbcpStatus == Soldier.EventStatus.Passed).Count(),
+                            Failed = soldiers.Where(soldier => soldier.AbcpStatus == Soldier.EventStatus.Failed).Count(),
+                            NotTested = soldiers.Where(soldier => soldier.AbcpStatus == Soldier.EventStatus.NotTaken).Count()
                         }
                     });
                 }
