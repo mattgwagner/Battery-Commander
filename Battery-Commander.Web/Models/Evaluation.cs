@@ -82,8 +82,11 @@ namespace BatteryCommander.Web.Models
         [NotMapped, Display(Name = "Delinquency")]
         public String DelinquencyHumanized => Delinquency.Humanize();
 
+        [NotMapped]
+        public virtual Event LastEvent => Events.OrderByDescending(e => e.Timestamp).FirstOrDefault();
+
         [NotMapped, DataType(DataType.Date)]
-        public DateTimeOffset? LastUpdated => Events.OrderByDescending(e => e.Timestamp).Select(e => (DateTimeOffset?)e.Timestamp).FirstOrDefault();
+        public DateTimeOffset? LastUpdated => LastEvent?.Timestamp;;
 
         [NotMapped, Display(Name = "Last Updated")]
         public String LastUpdatedHumanized => LastUpdated?.Humanize();
