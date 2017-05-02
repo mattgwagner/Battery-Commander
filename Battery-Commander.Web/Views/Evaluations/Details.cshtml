@@ -18,6 +18,16 @@
 <hr />
 
 <table class="table table-bordered">
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.LastUpdated)</td>
+        <td>@Html.DisplayFor(model => model.LastUpdatedHumanized)</td>
+    </tr>
+
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Status)</td>
+        <td>@Html.DisplayFor(model => model.Status)</td>
+    </tr>
+
     @if (Model.EvaluationId.HasValue)
     {
         <tr>
@@ -60,13 +70,6 @@
                 <span class="label label-danger">Overdue @Html.DisplayFor(_ => Model.DelinquencyHumanized)</span>
             }
         </td>
-    </tr>
-    <tr>
-        <td>@Html.DisplayNameFor(model => model.Status)</td>
-        <td>@Html.DisplayFor(model => model.Status)</td>
-    <tr>
-        <td>@Html.DisplayNameFor(model => model.LastUpdated)</td>
-        <td>@Html.DisplayFor(model => model.LastUpdated)</td>
     </tr>
 </table>
 
