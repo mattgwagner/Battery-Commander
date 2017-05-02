@@ -107,7 +107,7 @@ namespace BatteryCommander.Web.Models
             {
                 if (LastApft?.IsPassing == true) return EventStatus.Passed;
 
-                if (LastApft.IsPassing == false) return EventStatus.Failed;
+                if (LastApft?.IsPassing == false) return EventStatus.Failed;
 
                 return EventStatus.NotTested;
             }
@@ -125,7 +125,7 @@ namespace BatteryCommander.Web.Models
 
                 if (LastAbcp?.IsPassing == true) return EventStatus.Passed;
 
-                if (LastAbcp.IsPassing == false) return EventStatus.Failed;
+                if (LastAbcp?.IsPassing == false) return EventStatus.Failed;
 
                 return EventStatus.NotTested;
             }
