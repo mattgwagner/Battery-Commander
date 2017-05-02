@@ -22,7 +22,7 @@ namespace BatteryCommander.Web.Controllers
             this.db = db;
         }
 
-        public async Task<IActionResult> Index(int? unit = null)
+        public async Task<IActionResult> Index(int? unit = null, Soldier.EventStatus? abcp = null, Soldier.EventStatus? apft = null)
         {
             // TODO Filtering by Rank, MOS, Position, Name, Status
 
@@ -33,6 +33,8 @@ namespace BatteryCommander.Web.Controllers
                 .Include(_ => _.ABCPs)
                 .Include(_ => _.APFTs)
                 .Where(_ => !unit.HasValue || _.UnitId == unit)
+                .Where(_ => !abcp.HasValue || _.AbcpStatus == abcp)
+                .Where(_ => !apft.HasValue || _.ApftStatus == apft)
                 .ToListAsync();
 
             return View("List", soldiers);
@@ -147,5 +149,7 @@ namespace BatteryCommander.Web.Controllers
                 Value = $"{soldier.Id}"
             });
         }
+
+
     }
 }
