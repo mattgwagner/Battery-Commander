@@ -26,7 +26,7 @@
     <tbody>
         @foreach (var evaluation in Model)
         {
-            <tr>
+            <tr class="@(evaluation.IsDelinquent ? "alert alert-danger" : "")">
                 <td>@Html.ActionLink("Details", "Details", new { evaluation.Id })</td>
                 <td>@Html.DisplayFor(_ => evaluation.Ratee)</td>
                 <td>@Html.DisplayFor(_ => evaluation.ThruDate)</td>
