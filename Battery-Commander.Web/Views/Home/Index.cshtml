@@ -1,4 +1,5 @@
-﻿@model IEnumerable<UnitStatsViewModel>
+﻿@using BatteryCommander.Web.Models;
+@model IEnumerable<UnitStatsViewModel>
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -19,15 +20,15 @@
                     </tr>
                     <tr>
                         <td>@Html.DisplayNameFor(_ => unit.ABCP.Passed)</td>
-                        <td>@Html.DisplayFor(_ => unit.ABCP.Passed)</td>
+                        <td>@Html.ActionLink(unit.ABCP.NotTested.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, abcp = Soldier.EventStatus.Passed })</td>
                     </tr>
                     <tr>
                         <td>@Html.DisplayNameFor(_ => unit.ABCP.Failed)</td>
-                        <td>@Html.DisplayFor(_ => unit.ABCP.Failed)</td>
+                        <td>@Html.ActionLink(unit.ABCP.NotTested.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, abcp = Soldier.EventStatus.Failed })</td>
                     </tr>
                     <tr>
                         <td>@Html.DisplayNameFor(_ => unit.ABCP.NotTested)</td>
-                        <td>@Html.DisplayFor(_ => unit.ABCP.NotTested)</td>
+                        <td>@Html.ActionLink(unit.ABCP.NotTested.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, abcp = Soldier.EventStatus.NotTested }))</td>
                     </tr>
                     <tr>
                         <td>@Html.DisplayNameFor(_ => unit.ABCP.PercentPass)</td>
@@ -45,15 +46,15 @@
                     </tr>
                     <tr>
                         <td>@Html.DisplayNameFor(_ => unit.APFT.Passed)</td>
-                        <td>@Html.DisplayFor(_ => unit.APFT.Passed)</td>
+                        <td>@Html.ActionLink(unit.APFT.Passed.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, apft = Soldier.EventStatus.Passed })</td>
                     </tr>
                     <tr>
                         <td>@Html.DisplayNameFor(_ => unit.APFT.Failed)</td>
-                        <td>@Html.DisplayFor(_ => unit.APFT.Failed)</td>
+                        <td>@Html.ActionLink(unit.APFT.Failed.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, apft = Soldier.EventStatus.Failed })</td>
                     </tr>
                     <tr>
                         <td>@Html.DisplayNameFor(_ => unit.APFT.NotTested)</td>
-                        <td>@Html.DisplayFor(_ => unit.APFT.NotTested)</td>
+                        <td>@Html.ActionLink(unit.APFT.NotTested.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, apft = Soldier.EventStatus.NotTested })</td>
                     </tr>
                     <tr>
                         <td>@Html.DisplayNameFor(_ => unit.APFT.PercentPass)</td>

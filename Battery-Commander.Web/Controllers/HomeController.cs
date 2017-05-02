@@ -45,14 +45,14 @@ namespace BatteryCommander.Web.Controllers
                             Assigned = soldiers.Count,
                             Passed = soldiers.Where(soldier => soldier.ApftStatus == Soldier.EventStatus.Passed).Count(),
                             Failed = soldiers.Where(soldier => soldier.ApftStatus == Soldier.EventStatus.Failed).Count(),
-                            NotTested = soldiers.Where(soldier => soldier.ApftStatus == Soldier.EventStatus.NotTaken).Count()
+                            NotTested = soldiers.Where(soldier => soldier.ApftStatus == Soldier.EventStatus.NotTested).Count()
                         },
                         ABCP = new UnitStatsViewModel.Stat
                         {
                             Assigned = soldiers.Count,
                             Passed = soldiers.Where(soldier => soldier.AbcpStatus == Soldier.EventStatus.Passed).Count(),
                             Failed = soldiers.Where(soldier => soldier.AbcpStatus == Soldier.EventStatus.Failed).Count(),
-                            NotTested = soldiers.Where(soldier => soldier.AbcpStatus == Soldier.EventStatus.NotTaken).Count()
+                            NotTested = soldiers.Where(soldier => soldier.AbcpStatus == Soldier.EventStatus.NotTested).Count()
                         }
                     });
                 }

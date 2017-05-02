@@ -109,7 +109,7 @@ namespace BatteryCommander.Web.Models
 
                 if (LastApft.IsPassing == false) return EventStatus.Failed;
 
-                return EventStatus.NotTaken;
+                return EventStatus.NotTested;
             }
         }
 
@@ -127,7 +127,7 @@ namespace BatteryCommander.Web.Models
 
                 if (LastAbcp.IsPassing == false) return EventStatus.Failed;
 
-                return EventStatus.NotTaken;
+                return EventStatus.NotTested;
             }
         }
 
@@ -140,7 +140,7 @@ namespace BatteryCommander.Web.Models
 
         public enum EventStatus
         {
-            NotTaken,
+            NotTested,
 
             Passed,
 
