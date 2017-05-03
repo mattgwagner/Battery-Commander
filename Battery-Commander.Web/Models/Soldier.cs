@@ -99,7 +99,7 @@ namespace BatteryCommander.Web.Models
 
         public virtual ICollection<APFT> APFTs { get; set; }
 
-        public virtual APFT LastApft => APFTs.OrderByDescending(apft => apft.Date).FirstOrDefault();
+        public virtual APFT LastApft => APFTs?.OrderByDescending(apft => apft.Date).FirstOrDefault();
 
         public virtual EventStatus ApftStatus
         {
@@ -115,7 +115,7 @@ namespace BatteryCommander.Web.Models
 
         public virtual ICollection<ABCP> ABCPs { get; set; }
 
-        public virtual ABCP LastAbcp => ABCPs.OrderByDescending(abcp => abcp.Date).FirstOrDefault();
+        public virtual ABCP LastAbcp => ABCPs?.OrderByDescending(abcp => abcp.Date).FirstOrDefault();
 
         public virtual EventStatus AbcpStatus
         {
