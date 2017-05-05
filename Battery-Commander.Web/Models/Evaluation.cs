@@ -58,6 +58,10 @@ namespace BatteryCommander.Web.Models
 
         public virtual Soldier SeniorRater { get; set; }
 
+        public int? ReviewerId { get; set; }
+
+        public virtual Soldier Reviewer { get; set; }
+
         [Required, DataType(DataType.Date), Column(TypeName = "date")]
         public DateTime StartDate { get; set; } = DateTime.Today;
 
