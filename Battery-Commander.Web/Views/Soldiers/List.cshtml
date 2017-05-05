@@ -18,7 +18,13 @@
         @foreach (var soldier in Model.OrderBy(s => s.LastName).ThenBy(s => s.FirstName))
         {
             <tr>
-                <td>@Html.DisplayFor(s => soldier)</td>
+                <td>
+                    @Html.DisplayFor(s => soldier)
+                    @if(soldier.DateOfBirth == DateTime.MinValue)
+                    {
+                        <span class="label label-danger">Missing DoB</span>
+                    }
+                </td>
                 <td>@Html.DisplayFor(s => soldier.Unit)</td>
                 <td>
                     @if (soldier.TimeTillETS > TimeSpan.FromDays(365))
