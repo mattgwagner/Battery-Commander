@@ -1,3 +1,6 @@
 ﻿@model Soldier
 
-<div>@Html.ActionLink(Model.ToString(), "Details", "Soldiers", new { Model.Id })</div>
+@if (Model != null)
+{
+    <div>@Html.ActionLink(Model.ToString(), "Details", "Soldiers", new { Model.Id })</div>
+}
