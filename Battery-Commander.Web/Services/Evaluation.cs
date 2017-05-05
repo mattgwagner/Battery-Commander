@@ -16,6 +16,9 @@ namespace BatteryCommander.Web.Models
             [Display(Name = "Senior Rater Completed")]
             Senior_Rater_Completed,
 
+            [Display(Name = "Reviewer Completed")]
+            Reviewer_Completed,
+
             [Display(Name = "Return to Rater (Changes Required)")]
             Return_to_Rater,
 
@@ -54,6 +57,10 @@ namespace BatteryCommander.Web.Models
                 machine.Configure(EvaluationStatus.At_Senior_Rater)
                     .Permit(Trigger.Return_to_Rater, EvaluationStatus.At_Rater)
                     .Permit(Trigger.Senior_Rater_Completed, EvaluationStatus.Pending_Internal_Review);
+
+                machine.Configure(EvaluationStatus.At_Reviewer)
+                    .Permit(Trigger.Reviewer_Completed, EvaluationStatus.Pending_Internal_Review)
+                    .Permit(Trigger.Return_to_Rater, EvaluationStatus.At_Rater);
 
                 machine.Configure(EvaluationStatus.Pending_Internal_Review)
                     .Permit(Trigger.Return_to_Rater, EvaluationStatus.At_Rater)

@@ -139,6 +139,9 @@ namespace BatteryCommander.Web.Models
         [Display(Name = "At Senior Rater")]
         At_Senior_Rater = 10,
 
+        [Display(Name = "At Reviewer")]
+        At_Reviewer = 15,
+
         [Display(Name = "Pending 1SG/Admin Review")]
         Pending_Internal_Review = 20,
 
