@@ -18,13 +18,13 @@ namespace BatteryCommander.Web.Migrations
                 table: "Evaluations",
                 column: "ReviewerId");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_Evaluations_Soldiers_ReviewerId",
-                table: "Evaluations",
-                column: "ReviewerId",
-                principalTable: "Soldiers",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+            //migrationBuilder.AddForeignKey(
+            //    name: "FK_Evaluations_Soldiers_ReviewerId",
+            //    table: "Evaluations",
+            //    column: "ReviewerId",
+            //    principalTable: "Soldiers",
+            //    principalColumn: "Id",
+            //    onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
