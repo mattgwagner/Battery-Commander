@@ -138,6 +138,7 @@ namespace BatteryCommander.Web.Controllers
                 .Include(_ => _.Ratee)
                 .Include(_ => _.Rater)
                 .Include(_ => _.SeniorRater)
+                .Include(_ => _.Reviewer)
                 .Include(_ => _.Events)
                 .Where(_ => _.Id == id)
                 .SingleOrDefaultAsync();
