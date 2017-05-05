@@ -56,7 +56,8 @@ namespace BatteryCommander.Web.Models
 
                 machine.Configure(EvaluationStatus.At_Senior_Rater)
                     .Permit(Trigger.Return_to_Rater, EvaluationStatus.At_Rater)
-                    .Permit(Trigger.Senior_Rater_Completed, EvaluationStatus.Pending_Internal_Review);
+                    .PermitIf(Trigger.Senior_Rater_Completed, EvaluationStatus.At_Reviewer, () => ReviewerId.HasValue)
+                    .PermitIf(Trigger.Senior_Rater_Completed, EvaluationStatus.Pending_Internal_Review, () => !ReviewerId.HasValue);
 
                 machine.Configure(EvaluationStatus.At_Reviewer)
                     .Permit(Trigger.Reviewer_Completed, EvaluationStatus.Pending_Internal_Review)
