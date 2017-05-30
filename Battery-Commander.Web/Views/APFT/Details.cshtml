@@ -7,6 +7,11 @@
     @Html.ActionLink("Generate Counseling", "Counseling", "APFT", new { Model.Id }, new { @class = "btn btn-default" })
 }
 
+@if (!Model.Soldier.HasDoB)
+{
+    <div class="alert alert-danger">Soldier has invalid Date of Birth!</div>
+}
+
 <table class="table table-bordered">
     <tr>
         <td>@Html.DisplayNameFor(model => model.Soldier)</td>

@@ -55,6 +55,8 @@ namespace BatteryCommander.Web.Models
         [DataType(DataType.Date), Column(TypeName = "date"), Display(Name = "DOB")]
         public DateTime DateOfBirth { get; set; }
 
+        public Boolean HasDoB => DateOfBirth > DateTime.MinValue;
+
         public int Age => AgeAsOf(DateTime.Today);
 
         public int AgeAsOf(DateTime date)

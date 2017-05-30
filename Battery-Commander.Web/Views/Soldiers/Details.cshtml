@@ -6,6 +6,11 @@
         <h1 class="panel-title">@Html.DisplayFor(model => model.Soldier) @Html.ActionLink("Edit", "Edit", new { Model.Soldier.Id }, new { @class = "btn btn-default" })</h1>
     </div>
 
+    @if (!Model.Soldier.HasDoB)
+    {
+        <div class="alert alert-danger">Soldier has invalid Date of Birth!</div>
+    }
+
     <table class="table">
         <tr>
             <td>@Html.DisplayNameFor(model => model.Soldier.DateOfBirth)</td>

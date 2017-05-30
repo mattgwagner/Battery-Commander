@@ -17,6 +17,11 @@
         <h1 class="panel-title">ABCP for @Model.Soldier on @Html.DisplayFor(model => model.Date)</h1>
     </div>
 
+    @if (!Model.Soldier.HasDoB)
+    {
+        <div class="alert alert-danger">Soldier has invalid Date of Birth!</div>
+    }
+
     <table class="table table-bordered">
         <tr>
             <td>@Html.DisplayNameFor(model => model.IsPassing)</td>
