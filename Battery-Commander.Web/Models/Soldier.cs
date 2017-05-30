@@ -41,7 +41,7 @@ namespace BatteryCommander.Web.Models
         public TimeSpan? TimeInGrade => (DateTime.Today - DateOfRank);
 
         [NotMapped, Display(Name = "Time in Grade")]
-        public String TimeInGradeHumanized => TimeInGrade?.Humanize(precision: 2);
+        public String TimeInGradeHumanized => TimeInGrade?.Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year, minUnit: Humanizer.Localisation.TimeUnit.Day);
 
         [StringLength(12)]
         public String DoDId { get; set; }
@@ -71,7 +71,7 @@ namespace BatteryCommander.Web.Models
         public TimeSpan? TimeTillETS => ETSDate - DateTime.Today;
 
         [NotMapped, Display(Name = "Till ETS")]
-        public String TimeTillETSHumanized => TimeTillETS?.Humanize(precision: 2);
+        public String TimeTillETSHumanized => TimeTillETS?.Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year, minUnit: Humanizer.Localisation.TimeUnit.Day);
 
         [Required]
         public Gender Gender { get; set; } = Gender.Male;

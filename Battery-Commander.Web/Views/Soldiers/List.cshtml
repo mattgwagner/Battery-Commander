@@ -35,13 +35,9 @@
                     {
                         <span class="label label-warning">@Html.DisplayFor(s => soldier.TimeTillETSHumanized)</span>
                     }
-                    else if(soldier.TimeTillETS > TimeSpan.Zero)
-                    {
-                        <span class="label label-danger">@Html.DisplayFor(s => soldier.TimeTillETSHumanized)</span>
-                    }
                     else
                     {
-                        <span class="label">(@Html.DisplayFor(s => soldier.TimeTillETSHumanized))</span>
+                        <span class="label label-danger">@Html.DisplayFor(s => soldier.TimeTillETSHumanized)</span>
                     }
                 </td>
                 <td>
