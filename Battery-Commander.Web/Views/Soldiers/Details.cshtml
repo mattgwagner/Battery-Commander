@@ -1,9 +1,11 @@
 ﻿@model SoldierDetailsViewModel
 
+
+
 <div class="panel panel-default">
 
     <div class="panel-heading">
-        <h1 class="panel-title">@Html.DisplayFor(model => model) @Html.ActionLink("Edit", "Edit", new { Model.Soldier.Id }, new { @class = "btn btn-default" })</h1>
+        <h1 class="panel-title">@Html.DisplayFor(model => model.Soldier) @Html.ActionLink("Edit", "Edit", new { Model.Soldier.Id }, new { @class = "btn btn-default" })</h1>
     </div>
 
     <table class="table">
