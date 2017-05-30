@@ -28,7 +28,7 @@
 
   <ItemGroup>
     <PackageReference Include="epplus.core" Version="1.3.2" />
-    <PackageReference Include="Humanizer.Core" Version="2.1.0" />
+    <PackageReference Include="Humanizer.Core" Version="2.2.0" />
     <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.2.4" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
