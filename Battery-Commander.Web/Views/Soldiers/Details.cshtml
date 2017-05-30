@@ -1,7 +1,5 @@
 ﻿@model SoldierDetailsViewModel
 
-
-
 <div class="panel panel-default">
 
     <div class="panel-heading">
@@ -138,48 +136,51 @@
     </div>
 </div>
 
-<div class="panel panel-default">
+@if (Model.Evaluations.Any())
+{
+    <div class="panel panel-default">
 
-    <div class="panel-heading">
-        <h2 class="panel-title">@Html.DisplayNameFor(_ => _.Evaluations) @Html.ActionLink("Add New", "New", "Evaluations", null, new { @class = "btn btn-default btn-xs" })</h2>
-    </div>
+        <div class="panel-heading">
+            <h2 class="panel-title">@Html.DisplayNameFor(_ => _.Evaluations) @Html.ActionLink("Add New", "New", "Evaluations", null, new { @class = "btn btn-default btn-xs" })</h2>
+        </div>
 
-    <div class="panel-body">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Role)</th>
-                    <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Evaluation.Ratee)</th>
-                    <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Evaluation.Status)</th>
-                    <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Evaluation.Delinquency)</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                @foreach (var evaluation in Model.Evaluations)
-                {
+        <div class="panel-body">
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>@Html.ActionLink("Details", "Details", "Evaluations", new { evaluation.Evaluation.Id })</td>
-                        <td>@Html.DisplayFor(_ => evaluation.Role)</td>
-                        <td>@Html.DisplayFor(_ => evaluation.Evaluation.Ratee)</td>
-                        <td>@Html.DisplayFor(_ => evaluation.Evaluation.Status)</td>
-                        <td>
-                            @if (evaluation.Evaluation.Delinquency > TimeSpan.Zero)
-                            {
-                                <span class="label label-default">Due in @Html.DisplayFor(_ => evaluation.Evaluation.DelinquencyHumanized)</span>
-                            }
-                            else
-                            {
-                                <span class="label label-danger">Overdue @Html.DisplayFor(_ => evaluation.Evaluation.DelinquencyHumanized)</span>
-                            }
-                        </td>
+                        <th></th>
+                        <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Role)</th>
+                        <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Evaluation.Ratee)</th>
+                        <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Evaluation.Status)</th>
+                        <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Evaluation.Delinquency)</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+
+                <tbody>
+                    @foreach (var evaluation in Model.Evaluations)
+                {
+                        <tr>
+                            <td>@Html.ActionLink("Details", "Details", "Evaluations", new { evaluation.Evaluation.Id })</td>
+                            <td>@Html.DisplayFor(_ => evaluation.Role)</td>
+                            <td>@Html.DisplayFor(_ => evaluation.Evaluation.Ratee)</td>
+                            <td>@Html.DisplayFor(_ => evaluation.Evaluation.Status)</td>
+                            <td>
+                                @if (evaluation.Evaluation.Delinquency > TimeSpan.Zero)
+                                {
+                                    <span class="label label-default">Due in @Html.DisplayFor(_ => evaluation.Evaluation.DelinquencyHumanized)</span>
+                                }
+                                else
+                                {
+                                    <span class="label label-danger">Overdue @Html.DisplayFor(_ => evaluation.Evaluation.DelinquencyHumanized)</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
+}
 
 <div>
     @using (Html.BeginForm("Delete", "Soldiers", new { Model.Soldier.Id }, FormMethod.Post))
