@@ -14,6 +14,8 @@ namespace BatteryCommander.Web.Models
 
         public String UIC { get; set; }
 
+        public Boolean IgnoreForReports { get; set; }
+
         public virtual ICollection<Soldier> Soldiers { get; set; }
     }
 }
