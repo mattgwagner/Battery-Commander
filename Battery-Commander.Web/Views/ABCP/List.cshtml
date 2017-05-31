@@ -4,7 +4,18 @@
     <h1>ABCP @Html.ActionLink("Add New", "New", "ABCP", null, new { @class = "btn btn-default" })</h1>
 </div>
 
-<table class="table table-striped">
+<table class="table table-striped" id="dt">
+    <thead>
+        <tr>
+            <th>Soldier</th>
+            <th>Date</th>
+            <th>Height</th>
+            <th>Weight</th>
+            <th>Result</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+
     <tbody>
         @foreach (var model in Model)
         {
@@ -25,14 +36,6 @@
                     else
                     {
                         <span class="label label-success">Passing</span>
-                    }
-                </td>
-                <td>
-                    @if (model.RequiresTape && !model.Measurements.Any())
-                    {
-                        <a href="@Url.Action("Measurements", new { model.Id })">
-                            <span class="label label-warning">Requires Measurement</span>
-                        </a>
                     }
                 </td>
                 <td>@Html.ActionLink("Details", "Details", new { model.Id })</td>

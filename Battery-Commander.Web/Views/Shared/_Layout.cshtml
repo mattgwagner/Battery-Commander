@@ -84,7 +84,15 @@
 
     <link rel="stylesheet" type="text/css" href="https://weareoutman.github.io/clockpicker/dist/bootstrap-clockpicker.min.css" />
     <script type="text/javascript" src="https://weareoutman.github.io/clockpicker/dist/bootstrap-clockpicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"/>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 
     @RenderSection("Scripts", required: false)
+
+    <script>
+        $(document).ready(function () {
+            $('#dt').DataTable();
+        });
+    </script>
 </body>
 </html>
