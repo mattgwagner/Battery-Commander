@@ -99,8 +99,6 @@ namespace BatteryCommander.Web.Models
 
         // PEBD
 
-        // Date of Rank
-
         public virtual ICollection<APFT> APFTs { get; set; }
 
         public virtual APFT LastApft => APFTs?.OrderByDescending(apft => apft.Date).FirstOrDefault();
