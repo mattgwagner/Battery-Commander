@@ -38,18 +38,8 @@
                         <span class="label label-danger">@Html.DisplayFor(s => soldier.TimeTillETSHumanized)</span>
                     }
                 </td>
-                <td>
-                    @{
-                        var apft = soldier.APFTs.OrderByDescending(_ => _.Date).FirstOrDefault();
-                    }
-                    @Html.DisplayFor(s => apft)
-                </td>
-                <td>
-                    @{
-                        var abcp = soldier.ABCPs.OrderByDescending(_ => _.Date).FirstOrDefault();
-                    }
-                    @Html.DisplayFor(s => abcp)
-                </td>
+                <td>@Html.DisplayFor(s => soldier.LastApft)</td>
+                <td>@Html.DisplayFor(s => soldier.LastAbcp)</td>
                 <td>
                     @if (!soldier.HasDoB)
                     {
