@@ -25,7 +25,7 @@ namespace BatteryCommander.Web.Controllers
         {
             var model = new List<UnitStatsViewModel>();
 
-            foreach (var unit in db.Units)
+            foreach (var unit in db.Units.Where(unit => !unit.IgnoreForReports))
             {
                 var soldiers =
                     await db
