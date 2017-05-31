@@ -22,7 +22,7 @@ namespace BatteryCommander.Web.Models
 
         // Grader?
 
-        [Required, DataType(DataType.Date), Column(TypeName = "date")]
+        [Required, DataType(DataType.Date), Column(TypeName = "date"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime Date { get; set; } = DateTime.Today;
 
         public int? Age => Soldier?.AgeAsOf(Date);

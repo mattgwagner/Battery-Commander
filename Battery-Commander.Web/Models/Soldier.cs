@@ -36,7 +36,7 @@ namespace BatteryCommander.Web.Models
         [NotMapped]
         public Boolean IsOfficer => Rank.IsOfficer();
 
-        [DataType(DataType.Date), Column(TypeName = "date"), Display(Name = "Date of Rank")]
+        [DataType(DataType.Date), Column(TypeName = "date"), Display(Name = "Date of Rank"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime? DateOfRank { get; set; }
 
         [NotMapped, Display(Name = "Time in Grade")]
@@ -54,7 +54,7 @@ namespace BatteryCommander.Web.Models
         [DataType(DataType.EmailAddress), StringLength(50)]
         public String CivilianEmail { get; set; }
 
-        [DataType(DataType.Date), Column(TypeName = "date"), Display(Name = "DOB")]
+        [DataType(DataType.Date), Column(TypeName = "date"), Display(Name = "DOB"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime DateOfBirth { get; set; }
 
         public Boolean HasDoB => DateOfBirth > DateTime.MinValue;
@@ -68,7 +68,7 @@ namespace BatteryCommander.Web.Models
             return (int)((date - DateOfBirth).TotalDays / DaysPerYear);
         }
 
-        [DataType(DataType.Date), Column(TypeName = "date"), Display(Name = "ETS Date")]
+        [DataType(DataType.Date), Column(TypeName = "date"), Display(Name = "ETS Date"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime? ETSDate { get; set; }
 
         [NotMapped, DisplayFormat(DataFormatString = "{0:%d}d"), Display(Name = "Till ETS")]
