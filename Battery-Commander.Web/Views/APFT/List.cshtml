@@ -1,6 +1,8 @@
 ﻿@model IEnumerable<APFT>
 
-<h2>APFT @Html.ActionLink("Add New", "New", "APFT", null, new { @class = "btn btn-default" })</h2>
+<div class="page-header">
+    <h1>APFT @Html.ActionLink("Add New", "New", "APFT", null, new { @class = "btn btn-default" })</h1>
+</div>
 
 <table class="table table-striped">
     <thead>
@@ -11,7 +13,7 @@
 
     <tbody>
         @foreach (var model in Model)
-        {
+            {
             <tr>
                 <td>@Html.DisplayFor(_ => model.Soldier)</td>
                 <td>
@@ -21,7 +23,7 @@
                 </td>
                 <td>@Html.DisplayFor(_ => model.TotalScore)</td>
                 <td>
-                    @if(model.IsPassing)
+                    @if (model.IsPassing)
                     {
                         <span class="label label-success">Passing</span>
                     }

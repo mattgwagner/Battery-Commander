@@ -1,9 +1,11 @@
 ﻿@model IEnumerable<Evaluation>
 
-<h2>Evaluations </h2>
+<div class="page-header">
+    <h1>Evaluations </h1>
+</div>
 
 <div class="btn-group">
-    @Html.ActionLink("Add New", "New", "Evaluations", null, new { @class = "btn btn-default" }) 
+    @Html.ActionLink("Add New", "New", "Evaluations", null, new { @class = "btn btn-default" })
     @Html.ActionLink("Include Complete", "Index", "Evaluations", new { includeComplete = true }, new { @class = "btn btn-default" })
     @Html.ActionLink("Only Delinquent", "Index", "Evaluations", new { onlyDelinquent = true }, new { @class = "btn btn-default" })
 </div>
@@ -26,7 +28,7 @@
 
     <tbody>
         @foreach (var evaluation in Model)
-        {
+            {
             <tr class="@(evaluation.IsDelinquent ? "alert alert-danger" : "")">
                 <td>@Html.ActionLink("Details", "Details", new { evaluation.Id })</td>
                 <td>@Html.DisplayFor(_ => evaluation.Ratee)</td>

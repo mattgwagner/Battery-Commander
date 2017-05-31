@@ -1,6 +1,8 @@
 ﻿@model IEnumerable<ABCP>
 
-<h2>ABCP @Html.ActionLink("Add New", "New", "ABCP", null, new { @class = "btn btn-default" })</h2>
+<div class="page-header">
+    <h1>ABCP @Html.ActionLink("Add New", "New", "ABCP", null, new { @class = "btn btn-default" })</h1>
+</div>
 
 <table class="table table-striped">
     <thead>
@@ -11,7 +13,7 @@
 
     <tbody>
         @foreach (var model in Model)
-        {
+            {
             <tr>
                 <td>@Html.DisplayFor(_ => model.Soldier)</td>
                 <td>

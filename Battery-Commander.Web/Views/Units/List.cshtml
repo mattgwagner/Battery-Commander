@@ -1,6 +1,8 @@
 ﻿@model IEnumerable<Unit>
 
-<h2>Units @Html.ActionLink("Add New", "New", "Units", null, new { @class = "btn btn-default" })</h2>
+<div class="page-header">
+    <h1>Units @Html.ActionLink("Add New", "New", "Units", null, new { @class = "btn btn-default" })</h1>
+</div>
 
 <table class="table table-striped">
     <thead>
@@ -13,7 +15,7 @@
 
     <tbody>
         @foreach (var unit in Model)
-        {
+            {
             <tr>
                 <td>@Html.DisplayFor(s => unit)</td>
                 <td>@Html.DisplayFor(s => unit.UIC)</td>
