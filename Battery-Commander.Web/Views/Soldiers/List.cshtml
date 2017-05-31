@@ -22,10 +22,6 @@
             <tr>
                 <td>
                     @Html.DisplayFor(s => soldier)
-                    @if(soldier.DateOfBirth == DateTime.MinValue)
-                    {
-                        <span class="label label-danger">Missing DoB</span>
-                    }
                 </td>
                 <td>@Html.DisplayFor(s => soldier.Unit)</td>
                 <td>
@@ -55,10 +51,17 @@
                     @Html.DisplayFor(s => abcp)
                 </td>
                 <td>
-                    @Html.ActionLink("Add ABCP", "New", "ABCP", new { soldier = soldier.Id }, new { @class = "btn btn-default btn-xs" })
-                    @Html.ActionLink("Add APFT", "New", "APFT", new { soldier = soldier.Id }, new { @class = "btn btn-default btn-xs" })
+                    @if (soldier.DateOfBirth == DateTime.MinValue)
+                    {
+                        <span class="label label-danger">Missing DoB</span>
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Add ABCP", "New", "ABCP", new { soldier = soldier.Id }, new { @class = "btn btn-default btn-xs" })
+                        @Html.ActionLink("Add APFT", "New", "APFT", new { soldier = soldier.Id }, new { @class = "btn btn-default btn-xs" })
+                    }
                 </td>
             </tr>
-                        }
+        }
     </tbody>
 </table>
