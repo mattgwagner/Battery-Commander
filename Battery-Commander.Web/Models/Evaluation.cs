@@ -62,10 +62,10 @@ namespace BatteryCommander.Web.Models
 
         public virtual Soldier Reviewer { get; set; }
 
-        [Required, DataType(DataType.Date), Column(TypeName = "date")]
+        [Required, DataType(DataType.Date), Column(TypeName = "date"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime StartDate { get; set; } = DateTime.Today;
 
-        [Required, DataType(DataType.Date), Column(TypeName = "date")]
+        [Required, DataType(DataType.Date), Column(TypeName = "date"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime ThruDate { get; set; }
 
         [Required]
