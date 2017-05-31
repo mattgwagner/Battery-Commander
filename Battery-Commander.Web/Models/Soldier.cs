@@ -82,8 +82,6 @@ namespace BatteryCommander.Web.Models
 
         // public MilitaryEducationLevel EducationLevel { get; set; } = MilitaryEducationLevel.None;
 
-        // Status - Active, Inactive
-
         [Required]
         public int UnitId { get; set; }
 
