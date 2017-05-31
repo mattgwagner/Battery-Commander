@@ -5,15 +5,9 @@
 </div>
 
 <table class="table table-striped">
-    <thead>
-        <tr>
-            <th></th>
-        </tr>
-    </thead>
-
     <tbody>
         @foreach (var model in Model)
-            {
+        {
             <tr>
                 <td>@Html.DisplayFor(_ => model.Soldier)</td>
                 <td>
