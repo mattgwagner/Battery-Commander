@@ -24,7 +24,7 @@
         {
             <tr>
                 <td>@Html.RouteLink("Details", "Soldier.Details", new { soldier.Id })</td>
-                <td>@Html.DisplayFor(s => soldier.Rank)</td>
+                <td>@Html.DisplayFor(s => soldier.RankHumanized)</td>
                 <td>@Html.DisplayFor(s => soldier.LastName)</td>
                 <td>@Html.DisplayFor(s => soldier.FirstName)</td>
                 <td>@Html.DisplayFor(s => soldier.Unit)</td>

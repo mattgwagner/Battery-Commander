@@ -28,6 +28,8 @@ namespace BatteryCommander.Web.Models
         [Required]
         public Rank Rank { get; set; } = Rank.E1;
 
+        public String RankHumanized => Rank.ShortName();
+
         [NotMapped]
         public Boolean IsNCO => Rank.IsNCO();
 
