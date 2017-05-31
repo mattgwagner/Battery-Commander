@@ -7,7 +7,10 @@
 <table class="table table-striped" id="dt">
     <thead>
         <tr>
-            <th>Soldier</th>
+            <th></th>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Rank)</th>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().LastName)</th>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().FirstName)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Unit)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().TimeTillETS)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().APFTs)</th>
@@ -17,12 +20,13 @@
     </thead>
 
     <tbody>
-        @foreach (var soldier in Model.OrderBy(s => s.LastName).ThenBy(s => s.FirstName))
+        @foreach (var soldier in Model)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(s => soldier)
-                </td>
+                <td>@Html.RouteLink("Details", "Soldier.Details", new { soldier.Id })</td>
+                <td>@Html.DisplayFor(s => soldier.Rank)</td>
+                <td>@Html.DisplayFor(s => soldier.LastName)</td>
+                <td>@Html.DisplayFor(s => soldier.FirstName)</td>
                 <td>@Html.DisplayFor(s => soldier.Unit)</td>
                 <td>
                     @if (soldier.TimeTillETS > TimeSpan.FromDays(365))
