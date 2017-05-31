@@ -40,6 +40,7 @@ namespace BatteryCommander.Web.Controllers
             return View("List", soldiers);
         }
 
+        [Route("~/Soldiers/{id}", Name = "Soldier.Details")]
         public async Task<IActionResult> Details(int id)
         {
             var model = new SoldierDetailsViewModel
