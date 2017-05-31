@@ -32,7 +32,7 @@ namespace BatteryCommander.Web.Controllers
                 .Include(_ => _.Unit)
                 .Include(_ => _.ABCPs)
                 .Include(_ => _.APFTs)
-                .Where(_ => !unit.HasValue || _.UnitId == unit)
+                .Where(_ => (!unit.HasValue && !_.Unit.IgnoreForReports) || _.UnitId == unit)
                 .Where(_ => !abcp.HasValue || _.AbcpStatus == abcp)
                 .Where(_ => !apft.HasValue || _.ApftStatus == apft)
                 .ToListAsync();
