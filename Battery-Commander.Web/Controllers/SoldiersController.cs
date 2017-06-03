@@ -65,7 +65,8 @@ namespace BatteryCommander.Web.Controllers
 
             return View(model);
         }
-
+        
+        [Route("~/Soldiers/New", Name = "Soldiers.New")]
         public async Task<IActionResult> New()
         {
             ViewBag.Units = await UnitsController.GetDropDownList(db);
