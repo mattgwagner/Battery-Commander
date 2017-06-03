@@ -81,7 +81,7 @@ namespace BatteryCommander.Web.Controllers
             return View(await Get(db, id));
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [Route("~/Soldiers"), HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Save(Soldier model)
         {
             if (await db.Soldiers.AnyAsync(soldier => soldier.Id == model.Id) == false)
