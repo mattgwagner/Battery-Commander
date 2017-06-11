@@ -40,6 +40,19 @@ namespace BatteryCommander.Web.Controllers
             return View("List", soldiers);
         }
 
+        public async Task<IActionResult> All()
+        {
+            var soldiers =
+                await db
+                .Soldiers
+                .Include(_ => _.Unit)
+                .Include(_ => _.ABCPs)
+                .Include(_ => _.APFTs)
+                .ToListAsync();
+
+            return View("List", soldiers);
+        }
+
         [Route("~/Soldiers/{id}", Name = "Soldier.Details")]
         public async Task<IActionResult> Details(int id)
         {
@@ -65,7 +78,7 @@ namespace BatteryCommander.Web.Controllers
 
             return View(model);
         }
-        
+
         [Route("~/Soldiers/New", Name = "Soldiers.New")]
         public async Task<IActionResult> New()
         {
@@ -153,7 +166,5 @@ namespace BatteryCommander.Web.Controllers
                 Value = $"{soldier.Id}"
             });
         }
-
-
     }
 }
