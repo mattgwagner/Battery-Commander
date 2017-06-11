@@ -39,7 +39,8 @@ namespace BatteryCommander.Web.Controllers
 
             return View("List", soldiers);
         }
-
+        
+        [Route("~/Soldiers/All", Name = "Soldiers.List")]
         public async Task<IActionResult> All()
         {
             var soldiers =
