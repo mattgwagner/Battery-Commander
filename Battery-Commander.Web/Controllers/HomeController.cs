@@ -92,15 +92,6 @@ namespace BatteryCommander.Web.Controllers
             await HttpContext.Authentication.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         }
 
-        public IActionResult Backup()
-        {
-            var data = System.IO.File.ReadAllBytes("Data.db");
-
-            var mimeType = "application/octet-stream";
-
-            return File(data, mimeType);
-        }
-
         public IActionResult Error()
         {
             return View();
