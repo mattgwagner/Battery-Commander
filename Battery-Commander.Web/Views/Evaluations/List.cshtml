@@ -10,7 +10,7 @@
     @Html.ActionLink("Only Delinquent", "Index", "Evaluations", new { onlyDelinquent = true }, new { @class = "btn btn-default" })
 </div>
 
-<table class="table table-striped">
+<table class="table table-striped" id="dt">
     <thead>
         <tr>
             <th></th>
@@ -28,7 +28,7 @@
 
     <tbody>
         @foreach (var evaluation in Model)
-            {
+        {
             <tr class="@(evaluation.IsDelinquent ? "alert alert-danger" : "")">
                 <td>@Html.ActionLink("Details", "Details", new { evaluation.Id })</td>
                 <td>@Html.DisplayFor(_ => evaluation.Ratee)</td>
@@ -36,7 +36,7 @@
                 <td>
                     @Html.ActionLink(evaluation.Status.DisplayName(), "Index", "Evaluations", new { status = evaluation.Status })
                 </td>
-                <td>
+                <td data-sort="@evaluation.Delinquency.TotalDays">
                     @if (evaluation.Delinquency > TimeSpan.Zero)
                     {
                         <span class="label label-default">Due in @Html.DisplayFor(_ => evaluation.DelinquencyHumanized)</span>
@@ -46,7 +46,7 @@
                         <span class="label label-danger">Overdue @Html.DisplayFor(_ => evaluation.DelinquencyHumanized)</span>
                     }
                 </td>
-                <td>@Html.DisplayFor(_ => evaluation.LastUpdatedHumanized)</td>
+                <td data-sort="@evaluation.LastUpdated">@Html.DisplayFor(_ => evaluation.LastUpdatedHumanized)</td>
                 <td>@Html.DisplayFor(_ => evaluation.Type)</td>
                 <td>@Html.DisplayFor(_ => evaluation.Rater)</td>
                 <td>@Html.DisplayFor(_ => evaluation.SeniorRater)</td>
