@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using BatteryCommander.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -15,6 +16,13 @@ namespace BatteryCommander.Web.Controllers
 
         // Scrub Soldier Data
 
+        private readonly Database db;
+
+        public AdminController(Database db)
+        {
+            this.db = db;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -23,6 +31,15 @@ namespace BatteryCommander.Web.Controllers
         public async Task<IActionResult> Scrub()
         {
             // Go through each soldier and fix casing on their name
+
+            foreach(var soldier in db.Soldiers)
+            {
+                soldier.FirstName = soldier.FirstName.ToTitleCase();
+                soldier.MiddleName = soldier.MiddleName.ToTitleCase();
+                soldier.LastName = soldier.LastName.ToTitleCase();
+            }
+
+            await db.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }
