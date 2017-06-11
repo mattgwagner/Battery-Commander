@@ -28,7 +28,7 @@
                 <td>@Html.DisplayFor(s => soldier.LastName)</td>
                 <td>@Html.DisplayFor(s => soldier.FirstName)</td>
                 <td>@Html.DisplayFor(s => soldier.Unit)</td>
-                <td>
+                <td data-sort="@soldier.TimeTillETS?.TotalDays">
                     @if (soldier.TimeTillETS > TimeSpan.FromDays(365))
                     {
                         <span class="label label-default">@Html.DisplayFor(s => soldier.TimeTillETSHumanized)</span>
