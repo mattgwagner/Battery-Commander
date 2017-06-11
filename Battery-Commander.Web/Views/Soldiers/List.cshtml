@@ -42,7 +42,7 @@
                         <span class="label label-danger">@Html.DisplayFor(s => soldier.TimeTillETSHumanized)</span>
                     }
                 </td>
-                <td>@Html.DisplayFor(s => soldier.LastApft)</td>
+                <td data-sort="@soldier.LastApft?.TotalScore">@Html.DisplayFor(s => soldier.LastApft)</td>
                 <td>@Html.DisplayFor(s => soldier.LastAbcp)</td>
                 <td>
                     @if (!soldier.HasDoB)
