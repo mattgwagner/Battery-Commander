@@ -105,7 +105,17 @@ namespace BatteryCommander.Web.Models
             {
                 switch (AerobicEvent)
                 {
-                    // TODO Handle Bike, Swim, Walk
+                    // Alternate aerobic events are pass/fail. To clear the other logical checks, just return 60 here if they meet standards.
+
+                    case Event.Bike_Moving:
+                    case Event.Bike_Stationary:
+                        return APFTScoreTables.Bicycle.Where(row => row.AgeGroup == AgeGroup).Where(row => row.Gender == Soldier?.Gender).Select(row => row.Reps).Single() >= RunSeconds ? MinimumPerEvent : 0;
+
+                    case Event.Walk:
+                        return APFTScoreTables.Walk.Where(row => row.AgeGroup == AgeGroup).Where(row => row.Gender == Soldier?.Gender).Select(row => row.Reps).Single() >= RunSeconds ? MinimumPerEvent : 0;
+
+                    case Event.Swim:
+                        return APFTScoreTables.Swim.Where(row => row.AgeGroup == AgeGroup).Where(row => row.Gender == Soldier?.Gender).Select(row => row.Reps).Single() >= RunSeconds ? MinimumPerEvent : 0;
 
                     case Event.Run:
                     default:
