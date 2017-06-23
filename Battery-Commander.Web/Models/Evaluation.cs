@@ -122,13 +122,26 @@ namespace BatteryCommander.Web.Models
 
     public enum EvaluationType : byte
     {
-        Annual,
+        Annual = 0,
 
         [Display(Name = "Change of Rater")]
-        Change_of_Rater,
+        Change_of_Rater = 1,
 
         [Display(Name = "Complete the Record")]
-        Complete_the_Record
+        Complete_the_Record = 2,
+
+        [Display(Name = "Change of Duty")]
+        Change_of_Duty = 3,
+
+        Retirement = 4,
+
+        Discharge = 5,
+
+        [Display(Name = "Extended Annual")]
+        Extended_Annual = 6,
+
+        [Display(Name = "Relief for Cause")]
+        Relief_for_Cause = 7
     }
 
     public enum EvaluationStatus : byte
