@@ -51,6 +51,9 @@ namespace BatteryCommander.Web.Models
         [Range(0, 200)]
         public int SitUps { get; set; }
 
+        [Display(Name = "Aerobic Event")]
+        public Event AerobicEvent { get; set; } = Event.Run;
+
         [Range(0, int.MaxValue)]
         public int RunSeconds { get; set; }
 
@@ -166,20 +169,22 @@ Policy Inefficiency is a demonstration of characteristics that shows that the pe
 
     public enum Event : byte
     {
-        PushUp,
+        //PushUp,
 
-        SitUp,
+        //SitUp,
 
         Run,
 
-        // We currently don't grade alternate events
-
+        [Display(Name = "800-Yard-Swim Test")]
         Swim,
 
+        [Display(Name = "2.5-Mile Walk Test")]
         Walk,
 
+        [Display(Name = "6.2-Mile Bicycle Test")]
         Bike_Moving,
 
+        [Display(Name = "6.2-Mile Stationary-Cycle Ergometer Test")]
         Bike_Stationary
     }
 
