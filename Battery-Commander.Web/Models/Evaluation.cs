@@ -68,6 +68,9 @@ namespace BatteryCommander.Web.Models
         [Required, DataType(DataType.Date), Column(TypeName = "date"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime ThruDate { get; set; }
 
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}"), Display(Name = "Sign On/After")]
+        public DateTime CanBeSignedAfter => ThruDate.AddDays(-14);
+
         [Required]
         public EvaluationStatus Status { get; set; } = EvaluationStatus.At_Rater;
 

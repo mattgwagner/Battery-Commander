@@ -68,6 +68,10 @@
         <td>@Html.DisplayFor(model => model.ThruDate)</td>
     </tr>
     <tr>
+        <td>@Html.DisplayNameFor(model => model.CanBeSignedAfter)</td>
+        <td>@Html.DisplayFor(model => model.CanBeSignedAfter)</td>
+    </tr>
+    <tr>
         <td>@Html.DisplayNameFor(model => model.Delinquency)</td>
         <td>
             @if (Model.Delinquency > TimeSpan.Zero)
