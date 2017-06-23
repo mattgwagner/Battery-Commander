@@ -103,7 +103,7 @@ namespace BatteryCommander.Web.Models
         {
             get
             {
-                switch(AerobicEvent)
+                switch (AerobicEvent)
                 {
                     // TODO Handle Bike, Swim, Walk
 
@@ -180,19 +180,19 @@ Policy Inefficiency is a demonstration of characteristics that shows that the pe
 
         //SitUp,
 
-        Run,
+        Run = 0,
 
         [Display(Name = "800-Yard-Swim Test")]
-        Swim,
+        Swim = 1,
 
         [Display(Name = "2.5-Mile Walk Test")]
-        Walk,
+        Walk = 2,
 
         [Display(Name = "6.2-Mile Bicycle Test")]
-        Bike_Moving,
+        Bike_Moving = 3,
 
         [Display(Name = "6.2-Mile Stationary-Cycle Ergometer Test")]
-        Bike_Stationary
+        Bike_Stationary = 4
     }
 
     public enum APFTAgeGroup : byte
