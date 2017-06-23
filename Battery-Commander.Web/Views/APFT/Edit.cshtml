@@ -28,6 +28,11 @@
     </div>
 
     <div class="form-group form-group-lg clockpicker">
+        @Html.DisplayNameFor(model => model.AerobicEvent)
+        @Html.DropDownListFor(model => model.AerobicEvent, Html.GetEnumSelectList<BatteryCommander.Web.Models.Event>())
+    </div>
+
+    <div class="form-group form-group-lg clockpicker">
         @Html.DisplayNameFor(model => model.Run)
         @Html.EditorFor(model => model.Run)
     </div>
