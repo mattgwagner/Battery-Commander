@@ -150,7 +150,7 @@ You achieved the following scores:
 
 Push Ups(reps/score): {PushUps}/{PushUpScore}
 Sit Ups(reps/score): {SitUps}/{SitUpScore}
-2 Mile Run(time/score): {Run}/{RunScore}
+{AerobicEvent.DisplayName()}(time/score): {Run}/{RunScore}
 
 Total: {TotalScore}",
 
