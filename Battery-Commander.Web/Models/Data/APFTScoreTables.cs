@@ -34,7 +34,6 @@
                             {
                                 yield return new Entry
                                 {
-                                    Event = Event.PushUp,
                                     Gender = gender,
                                     AgeGroup = group,
                                     Reps = reps,
@@ -72,7 +71,6 @@
                             {
                                 yield return new Entry
                                 {
-                                    Event = Event.SitUp,
                                     Gender = gender,
                                     AgeGroup = group,
                                     Reps = reps,
@@ -110,7 +108,6 @@
                             {
                                 yield return new Entry
                                 {
-                                    Event = Event.Run,
                                     Gender = gender,
                                     AgeGroup = group,
                                     Reps = (int)time.TotalSeconds,
@@ -128,8 +125,6 @@
             public APFTAgeGroup AgeGroup { get; set; }
 
             public Gender Gender { get; set; }
-
-            public Event Event { get; set; }
 
             // # of Push-ups/Sit-ups or Seconds on Run
 
