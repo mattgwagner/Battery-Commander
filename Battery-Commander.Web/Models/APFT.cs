@@ -103,15 +103,22 @@ namespace BatteryCommander.Web.Models
         {
             get
             {
-                return
-                    APFTScoreTables
-                    .Run
-                    .OrderBy(row => row.Reps)
-                    .Where(row => row.AgeGroup == AgeGroup)
-                    .Where(row => row.Gender == Soldier?.Gender)
-                    .Where(row => row.Reps >= Run.TotalSeconds)
-                    .Select(row => row.Score)
-                    .FirstOrDefault();
+                switch(AerobicEvent)
+                {
+                    // TODO Handle Bike, Swim, Walk
+
+                    case Event.Run:
+                    default:
+                        return
+                            APFTScoreTables
+                            .Run
+                            .OrderBy(row => row.Reps)
+                            .Where(row => row.AgeGroup == AgeGroup)
+                            .Where(row => row.Gender == Soldier?.Gender)
+                            .Where(row => row.Reps >= Run.TotalSeconds)
+                            .Select(row => row.Score)
+                            .FirstOrDefault();
+                }
             }
         }
 
