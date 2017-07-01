@@ -7,7 +7,7 @@
 <div class="btn-group">
     @Html.ActionLink("Add New", "New", "Evaluations", null, new { @class = "btn btn-default" })
     @Html.ActionLink("Include Complete", "Index", "Evaluations", new { includeComplete = true }, new { @class = "btn btn-default" })
-    @Html.ActionLink("Only Delinquent", "Index", "Evaluations", new { onlyDelinquent = true }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Only Delinquent (> 60 Days)", "Index", "Evaluations", new { onlyDelinquent = true }, new { @class = "btn btn-default" })
 </div>
 
 <table class="table table-striped" id="dt">

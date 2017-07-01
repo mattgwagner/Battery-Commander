@@ -87,7 +87,7 @@ namespace BatteryCommander.Web.Models
         public TimeSpan Delinquency => (ThruDate - DateTime.Today);
 
         [NotMapped, Display(Name = "Delinquency")]
-        public String DelinquencyHumanized => Delinquency.Humanize(minUnit: Humanizer.Localisation.TimeUnit.Day);
+        public String DelinquencyHumanized => Delinquency.Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Day);
 
         [NotMapped]
         public virtual Event LastEvent => Events.OrderByDescending(e => e.Timestamp).FirstOrDefault();
