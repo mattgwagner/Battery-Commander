@@ -25,7 +25,7 @@
                         @Html.DisplayFor(_ => model.Date)
                     </a>
                 </td>
-                <td>
+                <td data-sort="@model.TotalScore">
                     @Html.DisplayFor(_ => model.TotalScore)
                     @if(model.IsAlternateAerobicEvent)
                     {
