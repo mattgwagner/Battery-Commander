@@ -25,7 +25,13 @@
                         @Html.DisplayFor(_ => model.Date)
                     </a>
                 </td>
-                <td>@Html.DisplayFor(_ => model.TotalScore)</td>
+                <td>
+                    @Html.DisplayFor(_ => model.TotalScore)
+                    @if(model.IsAlternateAerobicEvent)
+                    {
+                        <span class="label">Alt. Aerobic</span>
+                    }
+                </td>
                 <td>
                     @if (model.IsPassing)
                     {
