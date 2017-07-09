@@ -9,6 +9,44 @@ namespace BatteryCommander.Tests
     public class APFTTests
     {
         [Fact]
+        public void Walker_Score_1()
+        {
+            // 25 y/o Male Walker has 20.5 minutes to pass
+
+            var score = new APFT
+            {
+                Soldier = new Soldier
+                {
+                    Gender = Gender.Male,
+                    DateOfBirth = DateTime.Today.AddYears(-25)
+                },
+                AerobicEvent = Event.Walk,
+                Run = TimeSpan.FromMinutes(16)
+            };
+
+            Assert.Equal(60, score.RunScore);
+        }
+
+        [Fact]
+        public void Walker_Score_2()
+        {
+            // 25 y/o Male Walker has 20.5 minutes to pass
+
+            var score = new APFT
+            {
+                Soldier = new Soldier
+                {
+                    Gender = Gender.Male,
+                    DateOfBirth = DateTime.Today.AddYears(-25)
+                },
+                AerobicEvent = Event.Walk,
+                Run = TimeSpan.FromMinutes(21)
+            };
+
+            Assert.Equal(0, score.RunScore);
+        }
+
+        [Fact]
         public void Score_1()
         {
             var score = new APFT
