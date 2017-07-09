@@ -64,13 +64,19 @@
         <td>@Html.DisplayNameFor(model => model.Run)</td>
         <td>@Html.DisplayFor(model => model.Run)</td>
     </tr>
-    <tr>
-        <td>@Html.DisplayNameFor(model => model.RunScore)</td>
-        <td>@Html.DisplayFor(model => model.RunScore)</td>
-    </tr>
+    @if (!Model.IsAlternateAerobicEvent)
+    {
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.RunScore)</td>
+            <td>@Html.DisplayFor(model => model.RunScore)</td>
+        </tr>
+    }
     <tr>
         <td>@Html.DisplayNameFor(model => model.TotalScore)</td>
-        <td>@Html.DisplayFor(model => model.TotalScore)</td>
+        <td>
+            @Html.DisplayFor(model => model.TotalScore)
+            <span class="label">Alt. Aerobic</span>
+        </td>
     </tr>
 </table>
 

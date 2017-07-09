@@ -54,6 +54,8 @@ namespace BatteryCommander.Web.Models
         [Display(Name = "Aerobic Event")]
         public Event AerobicEvent { get; set; } = Event.Run;
 
+        public Boolean IsAlternateAerobicEvent => AerobicEvent != Event.Run;
+
         [Range(0, int.MaxValue)]
         public int RunSeconds { get; set; }
 
