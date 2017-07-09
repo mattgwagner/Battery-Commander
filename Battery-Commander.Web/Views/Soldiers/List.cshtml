@@ -42,7 +42,13 @@
                         <span class="label label-danger">@Html.DisplayFor(s => soldier.TimeTillETSHumanized)</span>
                     }
                 </td>
-                <td data-sort="@soldier.LastApft?.TotalScore">@Html.DisplayFor(s => soldier.LastApft)</td>
+                <td data-sort="@soldier.LastApft?.TotalScore">
+                    @Html.DisplayFor(s => soldier.LastApft)
+                    @if(soldier.LastApft?.IsAlternateAerobicEvent == true)
+                    {
+                        <span class="label">Alt. Aerobic</span>
+                    }
+                </td>
                 <td>@Html.DisplayFor(s => soldier.LastAbcp)</td>
                 <td>
                     @if (!soldier.HasDoB)
