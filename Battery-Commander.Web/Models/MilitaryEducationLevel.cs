@@ -18,6 +18,12 @@ namespace BatteryCommander.Web.Models
         [Display(Name = "(SLC) Senior Leader Course", ShortName = "SLC")]
         SLC = 4,
 
+        [Display(Name = "(MLC) Master Leader Course", ShortName = "MLC")]
+        MLC = 5,
+
+        [Display(Name = "(SMC) Sergeants Major Course", ShortName = "SMC")]
+        SMC = 6,
+
         [Display(Name = "(BOLC) Basic Officer Leaders Course", ShortName = "BOLC")]
         BOLC = 10,
 
