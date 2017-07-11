@@ -40,14 +40,24 @@
             <td>@Html.DisplayNameFor(model => model.Soldier.EducationLevel)</td>
             <td>@Html.DisplayFor(model => model.Soldier.EducationLevel)</td>
         </tr>
-        <tr>
-            <td>@Html.DisplayNameFor(model => model.Soldier.DateOfRank)</td>
-            <td>@Html.DisplayFor(model => model.Soldier.DateOfRank) (@Html.DisplayFor(model => model.Soldier.TimeInGradeHumanized))</td>
-        </tr>
-        <tr>
-            <td>@Html.DisplayNameFor(model => model.Soldier.ETSDate)</td>
-            <td>@Html.DisplayFor(model => model.Soldier.ETSDate) (@Html.DisplayFor(model => model.Soldier.TimeTillETSHumanized))</td>
-        </tr>
+
+        @if (Model.Soldier.DateOfRank.HasValue)
+        {
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.Soldier.DateOfRank)</td>
+                <td>@Html.DisplayFor(model => model.Soldier.DateOfRank) (@Html.DisplayFor(model => model.Soldier.TimeInGradeHumanized))</td>
+            </tr>
+        }
+
+        @if (Model.Soldier.ETSDate.HasValue)
+        {
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.Soldier.ETSDate)</td>
+                <td>@Html.DisplayFor(model => model.Soldier.ETSDate) (@Html.DisplayFor(model => model.Soldier.TimeTillETSHumanized))</td>
+            </tr>
+        }
+
+
     </table>
 </div>
 
