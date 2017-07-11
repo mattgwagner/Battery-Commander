@@ -80,7 +80,10 @@ namespace BatteryCommander.Web.Models
         [Required]
         public Gender Gender { get; set; } = Gender.Male;
 
-        // public MilitaryEducationLevel EducationLevel { get; set; } = MilitaryEducationLevel.None;
+        /// <summary>
+        /// The highest level of military education attained by the Soldier
+        /// </summary>
+        public MilitaryEducationLevel EducationLevel { get; set; } = MilitaryEducationLevel.Unknown;
 
         [Required]
         public int UnitId { get; set; }
@@ -92,8 +95,6 @@ namespace BatteryCommander.Web.Models
         // Security Clearance
 
         // MOS - Duty MOSQ'd?
-
-        // ETS Date & Time till ETS
 
         // PEBD
 
