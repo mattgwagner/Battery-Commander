@@ -53,6 +53,9 @@ namespace BatteryCommander.Web
             // Add the Auth0 Settings object so it can be injected
             services.Configure<Auth0Settings>(Configuration.GetSection("Auth0"));
 
+            // Add the Twilio settings so it can be injected
+            services.Configure<TwilioSettings>(Configuration.GetSection("Twilio"));
+
             services.AddDbContext<Database>();
         }
 
