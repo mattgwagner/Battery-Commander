@@ -4,8 +4,8 @@
     {
         public string PhoneNumber { get; set; }
 
-        public string Username { get; set; }
+        public string AccountSid { get; set; }
 
-        public string Password { get; set; }
+        public string AuthToken { get; set; }
     }
 }

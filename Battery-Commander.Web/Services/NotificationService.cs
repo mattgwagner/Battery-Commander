@@ -17,7 +17,7 @@ namespace BatteryCommander.Web.Services
 
         public NotificationService(TwilioSettings settings)
         {
-            TwilioClient.Init(settings.Username, settings.Password);
+            TwilioClient.Init(settings.AccountSid, settings.AuthToken);
             fromNumber = new PhoneNumber(settings.PhoneNumber);
         }
 
