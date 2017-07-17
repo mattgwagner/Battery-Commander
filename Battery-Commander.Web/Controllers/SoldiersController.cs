@@ -32,6 +32,7 @@ namespace BatteryCommander.Web.Controllers
                 .Include(_ => _.Unit)
                 .Include(_ => _.ABCPs)
                 .Include(_ => _.APFTs)
+                .Include(_ => _.SSDSnapshots)
                 .Where(_ => (!unit.HasValue && !_.Unit.IgnoreForReports) || _.UnitId == unit)
                 .Where(_ => !abcp.HasValue || _.AbcpStatus == abcp)
                 .Where(_ => !apft.HasValue || _.ApftStatus == apft)
@@ -49,6 +50,7 @@ namespace BatteryCommander.Web.Controllers
                 .Include(_ => _.Unit)
                 .Include(_ => _.ABCPs)
                 .Include(_ => _.APFTs)
+                .Include(_ => _.SSDSnapshots)
                 .ToListAsync();
 
             return View("List", soldiers);
@@ -145,6 +147,7 @@ namespace BatteryCommander.Web.Controllers
                 .Include(_ => _.Unit)
                 .Include(_ => _.APFTs)
                 .Include(_ => _.ABCPs)
+                .Include(_ => _.SSDSnapshots)
                 .Where(_ => _.Id == id)
                 .SingleOrDefaultAsync();
         }
