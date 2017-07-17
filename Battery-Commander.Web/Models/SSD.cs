@@ -92,18 +92,24 @@ namespace BatteryCommander.Web.Models
 
         public class SSDStatusModel
         {
+            [Display(Name = "Updated")]
             public DateTimeOffset? AsOf { get; set; }
 
             // Humanized time since
 
+            [Display(Name = "SSD 1")]
             public decimal? SSD_1 { get; set; }
 
+            [Display(Name = "SSD 2")]
             public decimal? SSD_2 { get; set; }
 
+            [Display(Name = "SSD 3")]
             public decimal? SSD_3 { get; set; }
 
+            [Display(Name = "SSD 4")]
             public decimal? SSD_4 { get; set; }
 
+            [Display(Name = "SSD 5")]
             public decimal? SSD_5 { get; set; }
         }
     }
