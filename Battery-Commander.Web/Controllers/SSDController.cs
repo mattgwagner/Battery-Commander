@@ -25,6 +25,7 @@ namespace BatteryCommander.Web.Controllers
                 .Include(s => s.SSDSnapshots)
                 .Include(s => s.Unit)
                 .Where(s => s.IsNCO || s.Rank == Rank.E4)
+                .Where(s => !s.Unit.IgnoreForReports)
                 .Where(s => !unit.HasValue || s.UnitId == unit)
                 .OrderBy(s => s.LastName)
                 .ThenBy(s => s.FirstName)
