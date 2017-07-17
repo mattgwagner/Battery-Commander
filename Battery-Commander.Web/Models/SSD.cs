@@ -34,6 +34,8 @@ namespace BatteryCommander.Web.Models
             {
                 return new SSDStatusModel
                 {
+                    Rank = Rank,
+
                     AsOf =
                         SSDSnapshots
                         .Select(snapshot => (DateTimeOffset?)snapshot.AsOf)
@@ -92,6 +94,38 @@ namespace BatteryCommander.Web.Models
 
         public class SSDStatusModel
         {
+            public Rank Rank { get; set; }
+
+            public Decimal? CurrentProgress
+            {
+                get
+                {
+                    switch (Rank)
+                    {
+                        case Rank.E1:
+                        case Rank.E2:
+                        case Rank.E3:
+                        case Rank.E4:
+                            return SSD_1;
+
+                        case Rank.E5:
+                            return SSD_2;
+
+                        case Rank.E6:
+                            return SSD_3;
+
+                        case Rank.E7:
+                            return SSD_4;
+
+                        case Rank.E8:
+                            return SSD_5;
+
+                        default:
+                            return null;
+                    }
+                }
+            }
+
             [Display(Name = "Updated")]
             public DateTimeOffset? AsOf { get; set; }
 
