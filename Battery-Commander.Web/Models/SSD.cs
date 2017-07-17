@@ -1,27 +1,27 @@
-using BatteryCommander.Web.Models.Data;
-using BatteryCommander.Web.Services;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
 namespace BatteryCommander.Web.Models
 {
     public enum SSD : byte
     {
+        [Display(Name = "SSD 1")]
         SSD_1,
 
+        [Display(Name = "SSD 2")]
         SSD_2,
 
+        [Display(Name = "SSD 3")]
         SSD_3,
 
+        [Display(Name = "SSD 4")]
         SSD_4,
 
+        [Display(Name = "SSD 5")]
         SSD_5
     }
-
 
     public partial class Soldier
     {
@@ -33,7 +33,7 @@ namespace BatteryCommander.Web.Models
             {
                 return new SSDStatusModel
                 {
-                    AsOf = 
+                    AsOf =
                         SSDSnapshots
                         .Select(snapshot => snapshot.AsOf)
                         .Max(),
@@ -42,35 +42,35 @@ namespace BatteryCommander.Web.Models
                         SSDSnapshots
                         .OrderByDescending(snapshot => snapshot.AsOf)
                         .Where(snapshot => snapshot.SSD == SSD.SSD_1)
-                        .Select(snapshot => (decimal?)snapshot.PerecentComplete)
+                        .Select(snapshot => snapshot.PerecentComplete)
                         .FirstOrDefault(),
 
                     SSD_2 =
                         SSDSnapshots
                         .OrderByDescending(snapshot => snapshot.AsOf)
                         .Where(snapshot => snapshot.SSD == SSD.SSD_2)
-                        .Select(snapshot => (decimal?)snapshot.PerecentComplete)
+                        .Select(snapshot => snapshot.PerecentComplete)
                         .FirstOrDefault(),
 
                     SSD_3 =
                         SSDSnapshots
                         .OrderByDescending(snapshot => snapshot.AsOf)
                         .Where(snapshot => snapshot.SSD == SSD.SSD_3)
-                        .Select(snapshot => (decimal?)snapshot.PerecentComplete)
+                        .Select(snapshot => snapshot.PerecentComplete)
                         .FirstOrDefault(),
 
                     SSD_4 =
                         SSDSnapshots
                         .OrderByDescending(snapshot => snapshot.AsOf)
                         .Where(snapshot => snapshot.SSD == SSD.SSD_4)
-                        .Select(snapshot => (decimal?)snapshot.PerecentComplete)
+                        .Select(snapshot => snapshot.PerecentComplete)
                         .FirstOrDefault(),
 
                     SSD_5 =
                         SSDSnapshots
                         .OrderByDescending(snapshot => snapshot.AsOf)
                         .Where(snapshot => snapshot.SSD == SSD.SSD_5)
-                        .Select(snapshot => (decimal?)snapshot.PerecentComplete)
+                        .Select(snapshot => snapshot.PerecentComplete)
                         .FirstOrDefault()
                 };
             }
@@ -78,11 +78,11 @@ namespace BatteryCommander.Web.Models
 
         public class SSDSnapshot
         {
-            public DateTimeOffset AsOf { get; set;} = DateTimeOffset.UtcNow;
+            public DateTimeOffset AsOf { get; set; } = DateTimeOffset.UtcNow;
 
             public SSD SSD { get; set; } = SSD.SSD_1;
 
-            public decimal PerecentComplete { get; set; }
+            public decimal? PerecentComplete { get; set; }
         }
 
         public class SSDStatusModel
