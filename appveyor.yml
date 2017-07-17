@@ -31,3 +31,6 @@ deploy:
   aspnet_core: true
   app_offline: true
   aspnet_core_force_restart: true
+  
+hosts:
+  api.nuget.org: 93.184.221.200
