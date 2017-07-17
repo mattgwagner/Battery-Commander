@@ -17,7 +17,7 @@ namespace BatteryCommander.Web.Controllers
             this.db = db;
         }
 
-        public async Task<IActionResult> List(int? unit)
+        public async Task<IActionResult> Index(int? unit)
         {
             var model =
                 await db
@@ -28,7 +28,7 @@ namespace BatteryCommander.Web.Controllers
                 .ThenBy(s => s.FirstName)
                 .ToListAsync();
 
-            return View(model);
+            return View("List", model);
         }
 
         [HttpPost]
@@ -38,7 +38,7 @@ namespace BatteryCommander.Web.Controllers
 
             await db.SaveChangesAsync();
 
-            return RedirectToAction(nameof(List));
+            return RedirectToAction(nameof(Index));
         }
     }
 }
