@@ -23,6 +23,7 @@ namespace BatteryCommander.Web.Controllers
                 await db
                 .Soldiers
                 .Include(s => s.SSDSnapshots)
+                .Include(s => s.Unit)
                 .Where(s => !unit.HasValue || s.UnitId == unit)
                 .OrderBy(s => s.LastName)
                 .ThenBy(s => s.FirstName)
