@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace BatteryCommander.Web.Models
 {
-    public class Soldier : IValidatableObject
+    public partial class Soldier : IValidatableObject
     {
         private const double DaysPerYear = 365.2425;
 
