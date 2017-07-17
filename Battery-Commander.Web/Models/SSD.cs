@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
 namespace BatteryCommander.Web.Models
@@ -78,6 +79,9 @@ namespace BatteryCommander.Web.Models
 
         public class SSDSnapshot
         {
+            [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+            public int Id { get; set; }
+
             public DateTimeOffset AsOf { get; set; } = DateTimeOffset.UtcNow;
 
             public SSD SSD { get; set; } = SSD.SSD_1;

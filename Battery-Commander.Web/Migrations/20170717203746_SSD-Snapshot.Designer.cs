@@ -8,9 +8,10 @@ using BatteryCommander.Web.Models;
 namespace BatteryCommander.Web.Migrations
 {
     [DbContext(typeof(Database))]
-    partial class DatabaseModelSnapshot : ModelSnapshot
+    [Migration("20170717203746_SSD-Snapshot")]
+    partial class SSDSnapshot
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1");
@@ -140,8 +141,6 @@ namespace BatteryCommander.Web.Migrations
 
                     b.Property<DateTime?>("ETSDate")
                         .HasColumnType("date");
-
-                    b.Property<byte>("EducationLevel");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
