@@ -28,6 +28,7 @@ namespace BatteryCommander.Web.Models
     {
         public virtual ICollection<SSDSnapshot> SSDSnapshots { get; set; }
 
+        [Display(Name = "SSD")]
         public virtual SSDStatusModel SSDStatus
         {
             get
