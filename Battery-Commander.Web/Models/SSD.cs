@@ -36,7 +36,7 @@ namespace BatteryCommander.Web.Models
                 {
                     AsOf =
                         SSDSnapshots
-                        .Select(snapshot => snapshot.AsOf)
+                        .Select(snapshot => (DateTimeOffset?)snapshot.AsOf)
                         .OrderByDescending(d => d)
                         .FirstOrDefault(),
 
@@ -92,7 +92,7 @@ namespace BatteryCommander.Web.Models
 
         public class SSDStatusModel
         {
-            public DateTimeOffset AsOf { get; set; }
+            public DateTimeOffset? AsOf { get; set; }
 
             // Humanized time since
 
