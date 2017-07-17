@@ -37,7 +37,8 @@ namespace BatteryCommander.Web.Models
                     AsOf =
                         SSDSnapshots
                         .Select(snapshot => snapshot.AsOf)
-                        .Max(),
+                        .OrderByDescending(d => d)
+                        .FirstOrDefault(),
 
                     SSD_1 =
                         SSDSnapshots

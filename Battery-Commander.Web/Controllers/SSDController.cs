@@ -36,5 +36,15 @@ namespace BatteryCommander.Web.Controllers
                         }
                         );
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Update()
+        {
+            // Take the models and pull the updated data
+
+            await db.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
