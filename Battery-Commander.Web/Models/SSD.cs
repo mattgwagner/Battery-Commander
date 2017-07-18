@@ -54,28 +54,28 @@ namespace BatteryCommander.Web.Models
                         SSDSnapshots
                         .OrderByDescending(snapshot => snapshot.AsOf)
                         .Where(snapshot => snapshot.SSD == SSD.SSD_2)
-                        .Select(snapshot => snapshot.PerecentComplete)
+                        .Select(snapshot => snapshot.PerecentComplete ?? 0)
                         .FirstOrDefault(),
 
                     SSD_3 =
                         SSDSnapshots
                         .OrderByDescending(snapshot => snapshot.AsOf)
                         .Where(snapshot => snapshot.SSD == SSD.SSD_3)
-                        .Select(snapshot => snapshot.PerecentComplete)
+                        .Select(snapshot => snapshot.PerecentComplete ?? 0)
                         .FirstOrDefault(),
 
                     SSD_4 =
                         SSDSnapshots
                         .OrderByDescending(snapshot => snapshot.AsOf)
                         .Where(snapshot => snapshot.SSD == SSD.SSD_4)
-                        .Select(snapshot => snapshot.PerecentComplete)
+                        .Select(snapshot => snapshot.PerecentComplete ?? 0)
                         .FirstOrDefault(),
 
                     SSD_5 =
                         SSDSnapshots
                         .OrderByDescending(snapshot => snapshot.AsOf)
                         .Where(snapshot => snapshot.SSD == SSD.SSD_5)
-                        .Select(snapshot => snapshot.PerecentComplete)
+                        .Select(snapshot => snapshot.PerecentComplete ?? 0)
                         .FirstOrDefault()
                 };
             }
