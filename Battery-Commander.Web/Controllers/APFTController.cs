@@ -18,7 +18,7 @@ namespace BatteryCommander.Web.Controllers
             this.db = db;
         }
 
-        public async Task<IActionResult> Index(DateTime? date = null)
+        public async Task<IActionResult> Index(int? unit = null, DateTime? date = null)
         {
             // TODO Filtering by pass/fail
 
@@ -26,8 +26,10 @@ namespace BatteryCommander.Web.Controllers
                 await db
                 .APFTs
                 .Where(apft => !date.HasValue || apft.Date.Date == date.Value)
+                .Where(apft => !unit.HasValue || apft.Soldier.UnitId == unit)
                 .OrderByDescending(apft => apft.Date)
                 .Include(apft => apft.Soldier)
+                .Include(apft => apft.Soldier.Unit)
                 .ToListAsync();
 
             return View("List", tests);

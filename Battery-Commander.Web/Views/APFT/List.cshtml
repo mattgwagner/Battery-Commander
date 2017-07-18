@@ -8,6 +8,7 @@
     <thead>
         <tr>
             <th>Soldier</th>
+            <th>Unit</th>
             <th>Date</th>
             <th>Score</th>
             <th>Result</th>
@@ -20,6 +21,7 @@
         {
             <tr>
                 <td>@Html.DisplayFor(_ => apft.Soldier)</td>
+                <td>@Html.DisplayFor(_ => apft.Soldier.Unit, additionalViewData: new { controller = "APFT" })</td>
                 <td>
                     <a href="@Url.Action("Index", new { date = apft.Date })">
                         @Html.DisplayFor(_ => apft.Date)
