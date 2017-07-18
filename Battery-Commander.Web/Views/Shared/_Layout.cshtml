@@ -104,8 +104,8 @@
             $('#dt').DataTable({
                 dom: 'Bfrtip',
                 buttons: [
-                    { extend: 'csvHtml5', exportOptions: { columns: ':visible' } },
-                    { extend: 'excelHtml5', exportOptions: { columns: ':visible' } },
+                    { extend: 'csvHtml5', exportOptions: { columns: ':visible', orthogonal: 'sort' } },
+                    { extend: 'excelHtml5', exportOptions: { columns: ':visible', orthogonal: 'sort' } },
                     { extend: 'pdfHtml5', exportOptions: { columns: ':visible' } },
                     'colvis'
                 ]
