@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ABCP>
 
 <div class="page-header">
-    <h1>ABCP @Html.ActionLink("Add New", "New", "ABCP", null, new { @class = "btn btn-default" })</h1>
+    <h1>ABCP <span class="badge">@Model.Count()</span> @Html.ActionLink("Add New", "New", "ABCP", null, new { @class = "btn btn-default" })</h1>
 </div>
 
 <table class="table table-striped" id="dt">
