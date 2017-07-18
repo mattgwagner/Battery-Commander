@@ -35,13 +35,23 @@ namespace BatteryCommander.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update()
+        public async Task<IActionResult> Update(int id, SSD ssd, decimal completion)
         {
             // Take the models and pull the updated data
 
+            var soldier = await SoldiersController.Get(db, id);
+
+            soldier
+                .SSDSnapshots
+                .Add(new Soldier.SSDSnapshot
+                {
+                    SSD = ssd,
+                    PerecentComplete = completion
+                });
+
             await db.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Index));
+            return Json(new { success = true });
         }
     }
 }
