@@ -1,3 +1,6 @@
 ﻿@model Unit
 
-<div>@Html.ActionLink(Model.Name, "Index", "Soldiers", new { unit = Model.Id })</div>
+@if (Model != null)
+{
+    <div>@Html.ActionLink(Model.Name, "Index", "Soldiers", new { unit = Model.Id })</div>
+}
