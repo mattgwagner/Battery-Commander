@@ -2,5 +2,7 @@
 
 @if (Model != null)
 {
-    <div>@Html.ActionLink(Model.Name, "Index", "Soldiers", new { unit = Model.Id })</div>
+    var controller = ViewData["controller"] ?? "Soldiers";
+
+    <div>@Html.ActionLink(Model.Name, "Index", controller, new { unit = Model.Id })</div>
 }
