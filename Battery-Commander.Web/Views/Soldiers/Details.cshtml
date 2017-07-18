@@ -57,6 +57,13 @@
             </tr>
         }
 
+        @if(!Model.Soldier.IsOfficer)
+        {
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.Soldier.SSDStatus)</td>
+                <td>@Html.DisplayFor(model => model.Soldier.SSDStatus)</td>
+            </tr>
+        }
 
     </table>
 </div>
