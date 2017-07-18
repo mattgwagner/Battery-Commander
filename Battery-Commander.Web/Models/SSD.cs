@@ -47,7 +47,7 @@ namespace BatteryCommander.Web.Models
                         SSDSnapshots
                         .OrderByDescending(snapshot => snapshot.AsOf)
                         .Where(snapshot => snapshot.SSD == SSD.SSD_1)
-                        .Select(snapshot => snapshot.PerecentComplete)
+                        .Select(snapshot => snapshot.PerecentComplete ?? 0)
                         .FirstOrDefault(),
 
                     SSD_2 =
@@ -95,6 +95,8 @@ namespace BatteryCommander.Web.Models
 
         public class SSDStatusModel
         {
+            const String Format = "{0:P1}";
+
             public Rank Rank { get; set; }
 
             public Decimal? CurrentProgress
@@ -132,19 +134,19 @@ namespace BatteryCommander.Web.Models
 
             // Humanized time since
 
-            [Display(Name = "SSD 1")]
+            [Display(Name = "SSD 1"), DisplayFormat(DataFormatString = Format)]
             public decimal? SSD_1 { get; set; }
 
-            [Display(Name = "SSD 2")]
+            [Display(Name = "SSD 2"), DisplayFormat(DataFormatString = Format)]
             public decimal? SSD_2 { get; set; }
 
-            [Display(Name = "SSD 3")]
+            [Display(Name = "SSD 3"), DisplayFormat(DataFormatString = Format)]
             public decimal? SSD_3 { get; set; }
 
-            [Display(Name = "SSD 4")]
+            [Display(Name = "SSD 4"), DisplayFormat(DataFormatString = Format)]
             public decimal? SSD_4 { get; set; }
 
-            [Display(Name = "SSD 5")]
+            [Display(Name = "SSD 5"), DisplayFormat(DataFormatString = Format)]
             public decimal? SSD_5 { get; set; }
         }
     }
