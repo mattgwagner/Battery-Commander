@@ -32,11 +32,31 @@
                 <td>@Html.DisplayFor(s => soldier.Unit, additionalViewData: new { controller = "SSD" })</td>
                 <td>@Html.DisplayFor(s => soldier.EducationLevel)</td>
                 <td>@Html.DisplayFor(s => soldier.SSDStatus.AsOf)</td>
-                <td class="update" data-soldier="@soldier.Id" data-ssd="SSD_1" data-completion="@soldier.SSDStatus.SSD_1">@Html.DisplayFor(s => soldier.SSDStatus.SSD_1)</td>
-                <td class="update" data-soldier="@soldier.Id" data-ssd="SSD_2" data-completion="@soldier.SSDStatus.SSD_2">@Html.DisplayFor(s => soldier.SSDStatus.SSD_2)</td>
-                <td class="update" data-soldier="@soldier.Id" data-ssd="SSD_3" data-completion="@soldier.SSDStatus.SSD_3">@Html.DisplayFor(s => soldier.SSDStatus.SSD_3)</td>
-                <td class="update" data-soldier="@soldier.Id" data-ssd="SSD_4" data-completion="@soldier.SSDStatus.SSD_4">@Html.DisplayFor(s => soldier.SSDStatus.SSD_4)</td>
-                <td class="update" data-soldier="@soldier.Id" data-ssd="SSD_5" data-completion="@soldier.SSDStatus.SSD_5">@Html.DisplayFor(s => soldier.SSDStatus.SSD_5)</td>
+                <td>
+                    <span class="update" data-soldier="@soldier.Id" data-ssd="SSD_1" data-completion="@soldier.SSDStatus.SSD_1">
+                        @Html.DisplayFor(s => soldier.SSDStatus.SSD_1)
+                    </span>
+                </td>
+                <td>
+                    <span class="update" data-soldier="@soldier.Id" data-ssd="SSD_2" data-completion="@soldier.SSDStatus.SSD_1">
+                        @Html.DisplayFor(s => soldier.SSDStatus.SSD_2)
+                    </span>
+                </td>
+                <td>
+                    <span class="update" data-soldier="@soldier.Id" data-ssd="SSD_3" data-completion="@soldier.SSDStatus.SSD_1">
+                        @Html.DisplayFor(s => soldier.SSDStatus.SSD_3)
+                    </span>
+                </td>
+                <td>
+                    <span class="update" data-soldier="@soldier.Id" data-ssd="SSD_4" data-completion="@soldier.SSDStatus.SSD_1">
+                        @Html.DisplayFor(s => soldier.SSDStatus.SSD_4)
+                    </span>
+                </td>
+                <td>
+                    <span class="update" data-soldier="@soldier.Id" data-ssd="SSD_5" data-completion="@soldier.SSDStatus.SSD_1">
+                        @Html.DisplayFor(s => soldier.SSDStatus.SSD_5)
+                    </span>
+                </td>
                 <td></td>
             </tr>
         }
@@ -57,14 +77,16 @@
 
 @section Scripts{
     <script type="text/javascript">
-        $("td .update").click(function () {
-            var ssd = $(this).data('ssd');
-            var completion = $(this).data('completion');
-            var soldierId = $(this).data('soldier');
+        $(document).ready(function () {
+            $("td .update").click(function () {
+                var ssd = $(this).data('ssd');
+                var completion = $(this).data('completion');
+                var soldierId = $(this).data('soldier');
 
-            alert(soldierId + ' is ' + completion + '% complete with ' + ssd);
+                alert(soldierId + ' is ' + completion + '% complete with ' + ssd);
 
-            // TODO Populate and display modal form for updates
+                // TODO Populate and display modal form for updates
+            });
         });
     </script>
 }
