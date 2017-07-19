@@ -106,13 +106,13 @@
             $('#dt').DataTable({
                 dom: 'Bfrtip',
                 buttons: [
-                    { extend: 'csvHtml5', exportOptions: { columns: ':visible', orthogonal: 'sort' } },
-                    { extend: 'excelHtml5', exportOptions: { columns: ':visible', orthogonal: 'sort' } },
-                    { extend: 'pdfHtml5', exportOptions: { columns: ':visible' } },
+                    { extend: 'csvHtml5', title = '@ViewBag.Title', exportOptions: { columns: ':visible', orthogonal: 'sort' } },
+                    { extend: 'excelHtml5', title = '@ViewBag.Title', exportOptions: { columns: ':visible', orthogonal: 'sort' } },
+                    { extend: 'pdfHtml5', title = '@ViewBag.Title', exportOptions: { columns: ':visible' } },
                     'colvis'
                 ]
             });
-            
+
             $('select').select2();
         });
     </script>
