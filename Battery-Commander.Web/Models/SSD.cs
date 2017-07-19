@@ -136,7 +136,7 @@ namespace BatteryCommander.Web.Models
             public TimeSpan? Updated => (DateTimeOffset.UtcNow - AsOf);
 
             [Display(Name = "Updated")]
-            public String UpdatedHumanized => Updated?.Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Day);
+            public String UpdatedHumanized => Updated?.Humanize(minUnit: Humanizer.Localisation.TimeUnit.Day);
 
             // Humanized time since
 
