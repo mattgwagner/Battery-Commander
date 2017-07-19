@@ -33,27 +33,27 @@
                 <td>@Html.DisplayFor(s => soldier.EducationLevel)</td>
                 <td>@Html.DisplayFor(s => soldier.SSDStatus.AsOf)</td>
                 <td>
-                    <span class="update" data-soldier="@soldier.Id" data-ssd="SSD_1" data-completion="@soldier.SSDStatus.SSD_1">
+                    <span class="update" data-name="@soldier" data-soldier="@soldier.Id" data-ssd="SSD_1" data-completion="@soldier.SSDStatus.SSD_1">
                         @Html.DisplayFor(s => soldier.SSDStatus.SSD_1)
                     </span>
                 </td>
                 <td>
-                    <span class="update" data-soldier="@soldier.Id" data-ssd="SSD_2" data-completion="@soldier.SSDStatus.SSD_1">
+                    <span class="update" data-name="@soldier" data-soldier="@soldier.Id" data-ssd="SSD_2" data-completion="@soldier.SSDStatus.SSD_1">
                         @Html.DisplayFor(s => soldier.SSDStatus.SSD_2)
                     </span>
                 </td>
                 <td>
-                    <span class="update" data-soldier="@soldier.Id" data-ssd="SSD_3" data-completion="@soldier.SSDStatus.SSD_1">
+                    <span class="update" data-name="@soldier" data-soldier="@soldier.Id" data-ssd="SSD_3" data-completion="@soldier.SSDStatus.SSD_1">
                         @Html.DisplayFor(s => soldier.SSDStatus.SSD_3)
                     </span>
                 </td>
                 <td>
-                    <span class="update" data-soldier="@soldier.Id" data-ssd="SSD_4" data-completion="@soldier.SSDStatus.SSD_1">
+                    <span class="update" data-name="@soldier" data-soldier="@soldier.Id" data-ssd="SSD_4" data-completion="@soldier.SSDStatus.SSD_1">
                         @Html.DisplayFor(s => soldier.SSDStatus.SSD_4)
                     </span>
                 </td>
                 <td>
-                    <span class="update" data-soldier="@soldier.Id" data-ssd="SSD_5" data-completion="@soldier.SSDStatus.SSD_1">
+                    <span class="update" data-name="@soldier" data-soldier="@soldier.Id" data-ssd="SSD_5" data-completion="@soldier.SSDStatus.SSD_1">
                         @Html.DisplayFor(s => soldier.SSDStatus.SSD_5)
                     </span>
                 </td>
@@ -63,9 +63,11 @@
     </tbody>
 </table>
 
-<div style="display:none" id="update-modal">
+<div style="display:none" id="dialog" title="Update SSD Status">
     @using (Html.BeginForm("Update", "SSD", FormMethod.Post))
     {
+        <b id="name"></b>
+
         <input id="soldierId" type="hidden" />
         <input id="ssd" type="hidden" />
         <input id="completion" type="range" />
@@ -79,13 +81,14 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $("td .update").click(function () {
-                var ssd = $(this).data('ssd');
-                var completion = $(this).data('completion');
-                var soldierId = $(this).data('soldier');
+                $("#name").html($(this).data('name') + ' : ' + $(this).data('ssd'));
+                $("#soldierId").val($(this).data('soldierId'));
+                $("#ssd").val($(this).data('ssd'));
+                $("#completion").val($(this).data('completion'));
 
-                alert(soldierId + ' is ' + completion + '% complete with ' + ssd);
-
-                // TODO Populate and display modal form for updates
+                $("#dialog").dialog({
+                    modal: true
+                });
             });
         });
     </script>
