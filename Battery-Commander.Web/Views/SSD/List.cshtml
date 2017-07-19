@@ -43,19 +43,29 @@
 </table>
 
 <div style="display:none" id="update-modal">
-    <input id="soldierId" type="hidden" />
-    <input id="ssd"  type="hidden" />
-    <input id="completion" type="range" />
+    @using (Html.BeginForm("Update", "SSD", FormMethod.Post))
+    {
+        <input id="soldierId" type="hidden" />
+        <input id="ssd" type="hidden" />
+        <input id="completion" type="range" />
+        <!-- Comments? -->
+        <button type="submit" id="save">Save</button>
+    }
+
 </div>
 
-@section Scripts{ 
-    $(document).ready(function(){
-        $("td .update").click(function(){
-            var ssd = $(this).data('ssd');
-            var completion = $(this).data('completion');
-            var soldierId = $(this).data('soldier');
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("td .update").click(function () {
+                var ssd = $(this).data('ssd');
+                var completion = $(this).data('completion');
+                var soldierId = $(this).data('soldier');
 
-            alert(soldierId + ' is ' + completion '% complete with ' + ssd);
+                alert(soldierId + ' is ' + completion + '% complete with ' + ssd);
+
+                // TODO Populate and display modal form for updates
+            });
         });
-    });       
+    </script>
 }
