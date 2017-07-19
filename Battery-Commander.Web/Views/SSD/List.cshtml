@@ -56,16 +56,14 @@
 
 @section Scripts{
     <script type="text/javascript">
-        $(document).ready(function () {
-            $("td .update").click(function () {
-                var ssd = $(this).data('ssd');
-                var completion = $(this).data('completion');
-                var soldierId = $(this).data('soldier');
+        $("td .update").click(function () {
+            var ssd = $(this).data('ssd');
+            var completion = $(this).data('completion');
+            var soldierId = $(this).data('soldier');
 
-                alert(soldierId + ' is ' + completion + '% complete with ' + ssd);
+            alert(soldierId + ' is ' + completion + '% complete with ' + ssd);
 
-                // TODO Populate and display modal form for updates
-            });
+            // TODO Populate and display modal form for updates
         });
     </script>
 }
