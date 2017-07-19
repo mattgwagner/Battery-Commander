@@ -51,7 +51,7 @@ namespace BatteryCommander.Web.Controllers
 
             await db.SaveChangesAsync();
 
-            return Json(new { success = true });
+            return RedirectToAction(nameof(Index));
         }
     }
 }
