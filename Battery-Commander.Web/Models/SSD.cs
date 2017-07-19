@@ -96,7 +96,7 @@ namespace BatteryCommander.Web.Models
 
         public class SSDStatusModel
         {
-            const String Format = "{0:P1}";
+            const String Format = "{0:P0}";
 
             public Rank Rank { get; set; }
 
