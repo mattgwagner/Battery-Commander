@@ -1,3 +1,4 @@
+using Humanizer;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -131,6 +132,11 @@ namespace BatteryCommander.Web.Models
 
             [Display(Name = "Updated")]
             public DateTimeOffset? AsOf { get; set; }
+
+            public TimeSpan? Updated => (DateTimeOffset.UtcNow - AsOf);
+
+            [Display(Name = "Updated")]
+            public String UpdatedHumanized => Updated?.Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Day);
 
             // Humanized time since
 
