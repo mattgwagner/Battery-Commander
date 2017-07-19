@@ -28,16 +28,14 @@
                 <td>@Html.DisplayFor(s => soldier.RankHumanized)</td>
                 <td>@Html.DisplayFor(s => soldier.LastName)</td>
                 <td>@Html.DisplayFor(s => soldier.FirstName)</td>
-                <td>
-                    @Html.DisplayFor(s => soldier.Unit, additionalViewData: new { controller = "SSD" })
-                </td>
+                <td>@Html.DisplayFor(s => soldier.Unit, additionalViewData: new { controller = "SSD" })</td>
                 <td>@Html.DisplayFor(s => soldier.EducationLevel)</td>
                 <td>@Html.DisplayFor(s => soldier.SSDStatus.AsOf)</td>
-                <td>@Html.DisplayFor(s => soldier.SSDStatus.SSD_1)</td>
-                <td>@Html.DisplayFor(s => soldier.SSDStatus.SSD_2)</td>
-                <td>@Html.DisplayFor(s => soldier.SSDStatus.SSD_3)</td>
-                <td>@Html.DisplayFor(s => soldier.SSDStatus.SSD_4)</td>
-                <td>@Html.DisplayFor(s => soldier.SSDStatus.SSD_5)</td>
+                <td class="update" data-soldier="@soldier.Id" data-ssd="SSD_1" data-completion="@soldier.SSDStatus.SSD_1">@Html.DisplayFor(s => soldier.SSDStatus.SSD_1)</td>
+                <td class="update" data-soldier="@soldier.Id" data-ssd="SSD_2" data-completion="@soldier.SSDStatus.SSD_2">@Html.DisplayFor(s => soldier.SSDStatus.SSD_2)</td>
+                <td class="update" data-soldier="@soldier.Id" data-ssd="SSD_3" data-completion="@soldier.SSDStatus.SSD_3">@Html.DisplayFor(s => soldier.SSDStatus.SSD_3)</td>
+                <td class="update" data-soldier="@soldier.Id" data-ssd="SSD_4" data-completion="@soldier.SSDStatus.SSD_4">@Html.DisplayFor(s => soldier.SSDStatus.SSD_4)</td>
+                <td class="update" data-soldier="@soldier.Id" data-ssd="SSD_5" data-completion="@soldier.SSDStatus.SSD_5">@Html.DisplayFor(s => soldier.SSDStatus.SSD_5)</td>
                 <td></td>
             </tr>
         }
@@ -45,11 +43,19 @@
 </table>
 
 <div style="display:none" id="update-modal">
-    <input id="soldierId" />
-    <input id="ssd" />
-    <input id="completion" />
+    <input id="soldierId" type="hidden" />
+    <input id="ssd"  type="hidden" />
+    <input id="completion" type="range" />
 </div>
 
 @section Scripts{ 
-        
+    $(document).ready(function(){
+        $("td .update").click(function(){
+            var ssd = $(this).data('ssd');
+            var completion = $(this).data('completion');
+            var soldierId = $(this).data('soldier');
+
+            alert(soldierId + ' is ' + completion '% complete with ' + ssd);
+        });
+    });       
 }
