@@ -14,6 +14,7 @@
     <None Remove="Models\Data\PushUps.csv" />
     <None Remove="Models\Data\Run.csv" />
     <None Remove="Models\Data\SitUps.csv" />
+    <None Remove="Properties\PublishProfiles\Battery-Commander - Web Deploy.pubxml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -53,5 +54,6 @@
     <Folder Include="Migrations\" />
     <Folder Include="Migrations\" />
     <Folder Include="Migrations\" />
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
 </Project>
