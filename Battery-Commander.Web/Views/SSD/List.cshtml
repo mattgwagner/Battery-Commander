@@ -80,6 +80,8 @@
 @section Scripts{
     <script type="text/javascript">
         $(document).ready(function () {
+            $("#completion").slider();
+
             $("td .update").click(function () {
                 $("#name").html($(this).data('name') + ' : ' + $(this).data('ssd'));
                 $("#soldierId").val($(this).data('soldier'));
