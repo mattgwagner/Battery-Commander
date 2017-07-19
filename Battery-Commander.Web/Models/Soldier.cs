@@ -83,6 +83,7 @@ namespace BatteryCommander.Web.Models
         /// <summary>
         /// The highest level of military education attained by the Soldier
         /// </summary>
+        [Display(Name = "Education Level")]
         public MilitaryEducationLevel EducationLevel { get; set; } = MilitaryEducationLevel.Unknown;
 
         [Required]
