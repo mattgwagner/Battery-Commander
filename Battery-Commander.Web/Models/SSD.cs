@@ -96,7 +96,7 @@ namespace BatteryCommander.Web.Models
 
         public class SSDStatusModel
         {
-            const String Format = "{0:P0}";
+            private const String Format = "{0:P0}";
 
             public Rank Rank { get; set; }
 
@@ -137,8 +137,6 @@ namespace BatteryCommander.Web.Models
 
             [Display(Name = "Updated")]
             public String UpdatedHumanized => Updated?.Humanize(minUnit: Humanizer.Localisation.TimeUnit.Minute);
-
-            // Humanized time since
 
             [Display(Name = "SSD 1"), DisplayFormat(DataFormatString = Format)]
             public decimal? SSD_1 { get; set; }
