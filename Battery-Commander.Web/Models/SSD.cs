@@ -38,41 +38,41 @@ namespace BatteryCommander.Web.Models
                     Rank = Rank,
 
                     AsOf =
-                        SSDSnapshots
+                        SSDSnapshots?
                         .Select(snapshot => (DateTimeOffset?)snapshot.AsOf)
                         .OrderByDescending(d => d)
                         .FirstOrDefault(),
 
                     SSD_1 =
-                        SSDSnapshots
+                        SSDSnapshots?
                         .OrderByDescending(snapshot => snapshot.AsOf)
                         .Where(snapshot => snapshot.SSD == SSD.SSD_1)
                         .Select(snapshot => snapshot.PerecentComplete ?? 0)
                         .FirstOrDefault(),
 
                     SSD_2 =
-                        SSDSnapshots
+                        SSDSnapshots?
                         .OrderByDescending(snapshot => snapshot.AsOf)
                         .Where(snapshot => snapshot.SSD == SSD.SSD_2)
                         .Select(snapshot => snapshot.PerecentComplete ?? 0)
                         .FirstOrDefault(),
 
                     SSD_3 =
-                        SSDSnapshots
+                        SSDSnapshots?
                         .OrderByDescending(snapshot => snapshot.AsOf)
                         .Where(snapshot => snapshot.SSD == SSD.SSD_3)
                         .Select(snapshot => snapshot.PerecentComplete ?? 0)
                         .FirstOrDefault(),
 
                     SSD_4 =
-                        SSDSnapshots
+                        SSDSnapshots?
                         .OrderByDescending(snapshot => snapshot.AsOf)
                         .Where(snapshot => snapshot.SSD == SSD.SSD_4)
                         .Select(snapshot => snapshot.PerecentComplete ?? 0)
                         .FirstOrDefault(),
 
                     SSD_5 =
-                        SSDSnapshots
+                        SSDSnapshots?
                         .OrderByDescending(snapshot => snapshot.AsOf)
                         .Where(snapshot => snapshot.SSD == SSD.SSD_5)
                         .Select(snapshot => snapshot.PerecentComplete ?? 0)
