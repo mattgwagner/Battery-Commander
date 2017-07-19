@@ -1,7 +1,11 @@
 ﻿@model IEnumerable<Soldier>
 
+@{
+    ViewBag.Title = "SSD Tracker";
+}
+
 <div class="page-header">
-    <h1>SSD Tracker <span class="badge">@Model.Count()</span></h1>
+    <h1>@ViewBag.Title <span class="badge">@Model.Count()</span></h1>
 </div>
 
 <table class="table table-striped" id="dt">
