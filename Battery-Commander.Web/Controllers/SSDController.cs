@@ -46,7 +46,7 @@ namespace BatteryCommander.Web.Controllers
                 .Add(new Soldier.SSDSnapshot
                 {
                     SSD = ssd,
-                    PerecentComplete = completion
+                    PerecentComplete = completion / 100 // Convert to decimal percentage
                 });
 
             await db.SaveChangesAsync();
