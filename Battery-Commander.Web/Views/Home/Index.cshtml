@@ -62,6 +62,21 @@
                     </tr>
                 </tbody>
             </table>
+
+            <h2>@Html.DisplayNameFor(_ => unit.SSD)</h2>
+            <table class="table table-bordered">
+                <tbody>
+                    @foreach(var row in unit.SSD)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(_ => row.Rank)</td>
+                            <td>@Html.DisplayFor(_ => row.Assigned)</td>
+                            <td>@Html.DisplayFor(_ => row.Completed)</td>
+                            <td>@Html.DisplayFor(_ => row.Percentage)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </div>
     </div>
 }
