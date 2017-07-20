@@ -32,6 +32,7 @@ namespace BatteryCommander.Web.Controllers
                     .Soldiers
                     .Include(s => s.ABCPs)
                     .Include(s => s.APFTs)
+                    .Include(s => s.SSDSnapshots)
                     .Where(s => s.UnitId == unit.Id)
                     .ToListAsync();
 
