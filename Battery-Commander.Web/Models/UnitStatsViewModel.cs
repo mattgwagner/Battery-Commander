@@ -26,7 +26,7 @@ namespace BatteryCommander.Web.Models
             public int Completed { get; set; }
 
             [DisplayFormat(DataFormatString = SSDStatusModel.Format)]
-            public Decimal Percentage => Assigned > 0 ? Completed / Assigned : Decimal.Zero;
+            public Decimal Percentage => Assigned > 0 ? Completed / Assigned * 100 : Decimal.Zero;
         }
 
         public class Stat
