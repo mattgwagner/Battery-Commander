@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace BatteryCommander.Web.Models
@@ -76,6 +77,29 @@ namespace BatteryCommander.Web.Models
             }
 
             return result;
+        }
+
+        public static IEnumerable<Rank> All()
+        {
+            foreach(Rank rank in Enum.GetValues(typeof(Rank)))
+            {
+                yield return rank;
+            }
+        }
+
+        public static Boolean IsEnlisted(this Rank rank)
+        {
+            switch(rank)
+            {
+                case Rank.E1:
+                case Rank.E2:
+                case Rank.E3:
+                case Rank.E4:
+                    return true;
+
+                default:
+                    return false;
+            }
         }
 
         public static Boolean IsNCO(this Rank rank)
