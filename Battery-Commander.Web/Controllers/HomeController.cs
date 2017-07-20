@@ -57,7 +57,7 @@ namespace BatteryCommander.Web.Controllers
                         SSD =
                             RankExtensions
                             .All()
-                            .Where(rank => !rank.IsOfficer())
+                            .Where(rank => rank.IsEnlisted() || rank.IsNCO())
                             .Select(rank => new UnitStatsViewModel.SSDStat
                             {
                                 Rank = rank,
