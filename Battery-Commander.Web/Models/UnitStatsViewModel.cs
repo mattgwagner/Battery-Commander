@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using static BatteryCommander.Web.Models.Soldier;
 
 namespace BatteryCommander.Web.Models
@@ -16,6 +17,12 @@ namespace BatteryCommander.Web.Models
         public Stat APFT { get; set; } = new Stat { };
 
         public ICollection<SSDStat> SSD { get; set; } = new List<SSDStat>();
+
+        public SSDStat SSDTotal => new SSDStat
+        {
+            Assigned = SSD.Select(s => s.Assigned).Sum(),
+            Completed = SSD.Select(s => s.Completed).Sum()
+        };
 
         public class SSDStat
         {
