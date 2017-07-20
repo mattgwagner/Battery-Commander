@@ -84,6 +84,14 @@
                         </tr>
                     }
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <th></th>
+                        <th>@Html.DisplayFor(_ => unit.SSDTotal.Assigned)</th>
+                        <th>@Html.DisplayFor(_ => unit.SSDTotal.Completed)</th>
+                        <th>@Html.DisplayFor(_ => unit.SSDTotal.Percentage)</th>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     </div>
