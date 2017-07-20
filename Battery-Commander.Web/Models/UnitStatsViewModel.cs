@@ -40,8 +40,8 @@ namespace BatteryCommander.Web.Models
             [Display(Name = "Not Tested")]
             public int NotTested { get; set; }
 
-            [Display(Name = "Pass %")]
-            public Decimal PercentPass => (Decimal)Passed / Assigned * 100;
+            [Display(Name = "Pass %"), DisplayFormat(DataFormatString = SSDStatusModel.Format)]
+            public Decimal PercentPass => (Decimal)Passed / Assigned;
         }
     }
 }
