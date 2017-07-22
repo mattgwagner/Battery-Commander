@@ -8,7 +8,7 @@
     <ul>
         @foreach (var unit in Model)
         {
-            <li><a href="#@unit.Unit.UIC">@Html.DisplayFor(_ => unit)</a></li>
+            <li><a href="#@unit.Unit.UIC">@Html.DisplayFor(_ => unit.Unit.Name)</a></li>
         }
     </ul>
 
