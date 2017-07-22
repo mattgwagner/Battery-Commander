@@ -102,6 +102,7 @@
                 <thead>
                     <tr>
                         <th>@Html.DisplayNameFor(_ => unit.SSD.FirstOrDefault().Rank)</th>
+                        <th>Level</th>
                         <th>@Html.DisplayNameFor(_ => unit.SSD.FirstOrDefault().Assigned)</th>
                         <th>@Html.DisplayNameFor(_ => unit.SSD.FirstOrDefault().Incomplete)</th>
                         <th>@Html.DisplayNameFor(_ => unit.SSD.FirstOrDefault().Completed)</th>
@@ -113,6 +114,7 @@
                     {
                         <tr>
                             <td>@Html.ActionLink(row.Rank.DisplayName(), "Index", "Soldiers", new { unit = unit.Unit.Id, rank = row.Rank })</td>
+                            <td>@EducationExtensions.RequiredEducation(row.Rank).DisplayName()</td>
                             <td>@Html.ActionLink(row.Assigned.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, rank = row.Rank })</td>
                             <td>@Html.ActionLink(row.Incomplete.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, rank = row.Rank, education = false })</td>
                             <td>@Html.ActionLink(row.Completed.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, rank = row.Rank, education = true })</td>
