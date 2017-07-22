@@ -57,7 +57,7 @@
             </tr>
         }
 
-        @if(!Model.Soldier.IsOfficer)
+        @if (!Model.Soldier.IsOfficer)
         {
             <tr>
                 <td>@Html.DisplayNameFor(model => model.Soldier.SSDStatus)</td>
@@ -71,182 +71,217 @@
 <div class="panel panel-default">
 
     <div class="panel-heading">
-        <h2 class="panel-title">@Html.DisplayNameFor(_ => _.Soldier.APFTs) @Html.ActionLink("Add New", "New", "APFT", new { soldier = Model.Soldier.Id }, new { @class = "btn btn-default btn-xs" })</h2>
-    </div>
+        <h2 class="panel-title">@Html.DisplayNameFor(_ => _.Soldier.SSDStatus)</h2>
 
-    <div class="panel-body">
         <table class="table">
-            <thead>
-                <tr>
-                    <th>@Html.DisplayNameFor(_ => _.Soldier.APFTs.FirstOrDefault().Date)</th>
-                    <th>@Html.DisplayNameFor(_ => _.Soldier.APFTs.FirstOrDefault().PushUps)</th>
-                    <th>@Html.DisplayNameFor(_ => _.Soldier.APFTs.FirstOrDefault().SitUps)</th>
-                    <th>@Html.DisplayNameFor(_ => _.Soldier.APFTs.FirstOrDefault().Run)</th>
-                    <th>@Html.DisplayNameFor(_ => _.Soldier.APFTs.FirstOrDefault().TotalScore)</th>
-                    <th>@Html.DisplayNameFor(_ => _.Soldier.APFTs.FirstOrDefault().IsPassing)</th>
-                    <th></th>
-                </tr>
-            </thead>
-
             <tbody>
-                @foreach (var apft in Model.Soldier.APFTs.OrderByDescending(_ => _.Date))
-                {
-                    <tr>
-                        <td>@Html.DisplayFor(_ => apft.Date)</td>
-                        <td>@Html.DisplayFor(_ => apft.PushUps)</td>
-                        <td>@Html.DisplayFor(_ => apft.SitUps)</td>
-                        <td>@Html.DisplayFor(_ => apft.Run)</td>
-                        <td>@Html.DisplayFor(_ => apft.TotalScore)</td>
-                        <td>
-                            @if (apft.IsPassing)
-                            {
-                                <span class="label label-success">Passing</span>
-                            }
-                            else
-                            {
-                                <span class="label label-danger">Failure</span>
-                            }
-                        </td>
-                        <td>@Html.ActionLink("Details", "Details", "APFT", new { apft.Id })</td>
-                    </tr>
-                }
+                <tr>
+                    <td>@Html.DisplayNameFor(_ => _.Soldier.SSDStatus.AsOf)</td>
+                    <td>@Html.DisplayFor(_ => _.Soldier.SSDStatus.AsOf)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(_ => _.Soldier.SSDStatus.SSD_1)</td>
+                    <td>@Html.DisplayFor(_ => _.Soldier.SSDStatus.SSD_1)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(_ => _.Soldier.SSDStatus.SSD_2)</td>
+                    <td>@Html.DisplayFor(_ => _.Soldier.SSDStatus.SSD_2)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(_ => _.Soldier.SSDStatus.SSD_3)</td>
+                    <td>@Html.DisplayFor(_ => _.Soldier.SSDStatus.SSD_3)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(_ => _.Soldier.SSDStatus.SSD_4)</td>
+                    <td>@Html.DisplayFor(_ => _.Soldier.SSDStatus.SSD_4)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(_ => _.Soldier.SSDStatus.SSD_5)</td>
+                    <td>@Html.DisplayFor(_ => _.Soldier.SSDStatus.SSD_5)</td>
+                </tr>
             </tbody>
         </table>
-
-        <div id="apft_chart"></div>
-    </div>
-</div>
-
-<div class="panel panel-default">
-
-    <div class="panel-heading">
-        <h2 class="panel-title">@Html.DisplayNameFor(_ => _.Soldier.ABCPs) @Html.ActionLink("Add New", "New", "ABCP", new { soldier = Model.Soldier.Id }, new { @class = "btn btn-default btn-xs" })</h2>
     </div>
 
-    <div class="panel-body">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>@Html.DisplayNameFor(_ => _.Soldier.ABCPs.FirstOrDefault().Date)</th>
-                    <th>@Html.DisplayNameFor(_ => _.Soldier.ABCPs.FirstOrDefault().Weight)</th>
-                    <th>@Html.DisplayNameFor(_ => _.Soldier.ABCPs.FirstOrDefault().Screening_Weight)</th>
-                    <th>@Html.DisplayNameFor(_ => _.Soldier.ABCPs.FirstOrDefault().IsPassing)</th>
-                    <th></th>
-                </tr>
-            </thead>
-
-            <tbody>
-                @foreach (var abcp in Model.Soldier.ABCPs.OrderByDescending(_ => _.Date))
-                {
-                    <tr>
-                        <td>@Html.DisplayFor(_ => abcp.Date)</td>
-                        <td>@Html.DisplayFor(_ => abcp.Weight)</td>
-                        <td>@Html.DisplayFor(_ => abcp.Screening_Weight)</td>
-                        <td>
-                            @if (abcp.IsPassing)
-                            {
-                                <span class="label label-success">Passing</span>
-                            }
-                            else
-                            {
-                                <span class="label label-danger">Failure</span>
-                            }
-                        </td>
-                        <td>@Html.ActionLink("Details", "Details", "ABCP", new { abcp.Id })</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-
-        <div id="abcp_chart"></div>
-    </div>
-</div>
-
-@if (Model.Evaluations.Any())
-{
     <div class="panel panel-default">
 
         <div class="panel-heading">
-            <h2 class="panel-title">@Html.DisplayNameFor(_ => _.Evaluations) @Html.ActionLink("Add New", "New", "Evaluations", null, new { @class = "btn btn-default btn-xs" })</h2>
+            <h2 class="panel-title">@Html.DisplayNameFor(_ => _.Soldier.APFTs) @Html.ActionLink("Add New", "New", "APFT", new { soldier = Model.Soldier.Id }, new { @class = "btn btn-default btn-xs" })</h2>
         </div>
 
         <div class="panel-body">
             <table class="table">
                 <thead>
                     <tr>
+                        <th>@Html.DisplayNameFor(_ => _.Soldier.APFTs.FirstOrDefault().Date)</th>
+                        <th>@Html.DisplayNameFor(_ => _.Soldier.APFTs.FirstOrDefault().PushUps)</th>
+                        <th>@Html.DisplayNameFor(_ => _.Soldier.APFTs.FirstOrDefault().SitUps)</th>
+                        <th>@Html.DisplayNameFor(_ => _.Soldier.APFTs.FirstOrDefault().Run)</th>
+                        <th>@Html.DisplayNameFor(_ => _.Soldier.APFTs.FirstOrDefault().TotalScore)</th>
+                        <th>@Html.DisplayNameFor(_ => _.Soldier.APFTs.FirstOrDefault().IsPassing)</th>
                         <th></th>
-                        <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Role)</th>
-                        <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Evaluation.Ratee)</th>
-                        <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Evaluation.Status)</th>
-                        <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Evaluation.Delinquency)</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    @foreach (var evaluation in Model.Evaluations)
-                {
+                    @foreach (var apft in Model.Soldier.APFTs.OrderByDescending(_ => _.Date))
+                    {
                         <tr>
-                            <td>@Html.ActionLink("Details", "Details", "Evaluations", new { evaluation.Evaluation.Id })</td>
-                            <td>@Html.DisplayFor(_ => evaluation.Role)</td>
-                            <td>@Html.DisplayFor(_ => evaluation.Evaluation.Ratee)</td>
-                            <td>@Html.DisplayFor(_ => evaluation.Evaluation.Status)</td>
+                            <td>@Html.DisplayFor(_ => apft.Date)</td>
+                            <td>@Html.DisplayFor(_ => apft.PushUps)</td>
+                            <td>@Html.DisplayFor(_ => apft.SitUps)</td>
+                            <td>@Html.DisplayFor(_ => apft.Run)</td>
+                            <td>@Html.DisplayFor(_ => apft.TotalScore)</td>
                             <td>
-                                @if (evaluation.Evaluation.Delinquency > TimeSpan.Zero)
+                                @if (apft.IsPassing)
                                 {
-                                    <span class="label label-default">Due in @Html.DisplayFor(_ => evaluation.Evaluation.DelinquencyHumanized)</span>
+                                    <span class="label label-success">Passing</span>
                                 }
                                 else
                                 {
-                                    <span class="label label-danger">Overdue @Html.DisplayFor(_ => evaluation.Evaluation.DelinquencyHumanized)</span>
+                                    <span class="label label-danger">Failure</span>
                                 }
                             </td>
+                            <td>@Html.ActionLink("Details", "Details", "APFT", new { apft.Id })</td>
                         </tr>
                     }
                 </tbody>
             </table>
+
+            <div id="apft_chart"></div>
         </div>
     </div>
-}
 
-<div>
-    @using (Html.BeginForm("Delete", "Soldiers", new { Model.Soldier.Id }, FormMethod.Post))
-            {
-        @Html.AntiForgeryToken()
-        <button type="submit" class="btn btn-danger">Delete</button>
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+            <h2 class="panel-title">@Html.DisplayNameFor(_ => _.Soldier.ABCPs) @Html.ActionLink("Add New", "New", "ABCP", new { soldier = Model.Soldier.Id }, new { @class = "btn btn-default btn-xs" })</h2>
+        </div>
+
+        <div class="panel-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(_ => _.Soldier.ABCPs.FirstOrDefault().Date)</th>
+                        <th>@Html.DisplayNameFor(_ => _.Soldier.ABCPs.FirstOrDefault().Weight)</th>
+                        <th>@Html.DisplayNameFor(_ => _.Soldier.ABCPs.FirstOrDefault().Screening_Weight)</th>
+                        <th>@Html.DisplayNameFor(_ => _.Soldier.ABCPs.FirstOrDefault().IsPassing)</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var abcp in Model.Soldier.ABCPs.OrderByDescending(_ => _.Date))
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(_ => abcp.Date)</td>
+                            <td>@Html.DisplayFor(_ => abcp.Weight)</td>
+                            <td>@Html.DisplayFor(_ => abcp.Screening_Weight)</td>
+                            <td>
+                                @if (abcp.IsPassing)
+                                {
+                                    <span class="label label-success">Passing</span>
+                                }
+                                else
+                                {
+                                    <span class="label label-danger">Failure</span>
+                                }
+                            </td>
+                            <td>@Html.ActionLink("Details", "Details", "ABCP", new { abcp.Id })</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <div id="abcp_chart"></div>
+        </div>
+    </div>
+
+    @if (Model.Evaluations.Any())
+    {
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+                <h2 class="panel-title">@Html.DisplayNameFor(_ => _.Evaluations) @Html.ActionLink("Add New", "New", "Evaluations", null, new { @class = "btn btn-default btn-xs" })</h2>
+            </div>
+
+            <div class="panel-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Role)</th>
+                            <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Evaluation.Ratee)</th>
+                            <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Evaluation.Status)</th>
+                            <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Evaluation.Delinquency)</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var evaluation in Model.Evaluations)
+                {
+                            <tr>
+                                <td>@Html.ActionLink("Details", "Details", "Evaluations", new { evaluation.Evaluation.Id })</td>
+                                <td>@Html.DisplayFor(_ => evaluation.Role)</td>
+                                <td>@Html.DisplayFor(_ => evaluation.Evaluation.Ratee)</td>
+                                <td>@Html.DisplayFor(_ => evaluation.Evaluation.Status)</td>
+                                <td>
+                                    @if (evaluation.Evaluation.Delinquency > TimeSpan.Zero)
+                                    {
+                                        <span class="label label-default">Due in @Html.DisplayFor(_ => evaluation.Evaluation.DelinquencyHumanized)</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="label label-danger">Overdue @Html.DisplayFor(_ => evaluation.Evaluation.DelinquencyHumanized)</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     }
-</div>
 
-@section Scripts
+    <div>
+        @using (Html.BeginForm("Delete", "Soldiers", new { Model.Soldier.Id }, FormMethod.Post))
+            {
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-danger">Delete</button>
+        }
+    </div>
+
+    @section Scripts
 {
-    @{
-        var apft_data =
-            Model
-            .Soldier
-            .APFTs
-            .OrderBy(apft => apft.Date)
-            .Select(apft => new
-            {
-                date = apft.Date.ToString("yyyy-MM-dd"),
-                score = apft.TotalScore
-            })
-            .ToList();
+        @{
+            var apft_data =
+                Model
+                .Soldier
+                .APFTs
+                .OrderBy(apft => apft.Date)
+                .Select(apft => new
+                {
+                    date = apft.Date.ToString("yyyy-MM-dd"),
+                    score = apft.TotalScore
+                })
+                .ToList();
 
-        var abcp_data =
-            Model
-            .Soldier
-            .ABCPs
-            .OrderBy(abcp => abcp.Date)
-            .Select(abcp => new
-            {
-                date = abcp.Date.ToString("yyyy-MM-dd"),
-                weight = abcp.Weight
-            })
-            .ToList();
-    }
+            var abcp_data =
+                Model
+                .Soldier
+                .ABCPs
+                .OrderBy(abcp => abcp.Date)
+                .Select(abcp => new
+                {
+                    date = abcp.Date.ToString("yyyy-MM-dd"),
+                    weight = abcp.Weight
+                })
+                .ToList();
+        }
 
-    <!--Load the AJAX API-->
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
+        <!--Load the AJAX API-->
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
         // Load the Visualization API and the corechart package.
         google.charts.load('current', { 'packages': ['corechart'] });
 
@@ -298,5 +333,5 @@
                 vAxis: { minValue: 150, maxValue: 300 }
             });
         }
-    </script>
-}
+        </script>
+    }
