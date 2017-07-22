@@ -31,6 +31,9 @@ namespace BatteryCommander.Web.Models
         public String RankHumanized => Rank.ShortName();
 
         [NotMapped]
+        public Boolean IsEnlisted => Rank.IsEnlisted();
+
+        [NotMapped]
         public Boolean IsNCO => Rank.IsNCO();
 
         [NotMapped]

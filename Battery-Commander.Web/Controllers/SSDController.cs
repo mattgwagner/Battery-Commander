@@ -1,8 +1,7 @@
 ﻿using BatteryCommander.Web.Models;
+using BatteryCommander.Web.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Controllers
@@ -19,19 +18,11 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> Index(int? unit)
         {
-            var model =
-                await db
-                .Soldiers
-                .Include(s => s.SSDSnapshots)
-                .Include(s => s.Unit)
-                .Where(s => !s.IsOfficer)
-                .Where(s => !s.Unit.IgnoreForReports)
-                .Where(s => !unit.HasValue || s.UnitId == unit)
-                .OrderBy(s => s.LastName)
-                .ThenBy(s => s.FirstName)
-                .ToListAsync();
-
-            return View("List", model);
+            return View("List", await SoldierSearchService.Filter(db, new SoldierSearchService.Query
+            {
+                Unit = unit,
+                OnlyEnlisted = true
+            }));
         }
 
         [HttpPost]
