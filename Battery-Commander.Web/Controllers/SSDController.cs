@@ -2,6 +2,7 @@
 using BatteryCommander.Web.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Controllers
@@ -16,11 +17,13 @@ namespace BatteryCommander.Web.Controllers
             this.db = db;
         }
 
-        public async Task<IActionResult> Index(int? unit)
+        public async Task<IActionResult> Index(int? unit, Boolean? complete, Rank? rank)
         {
             return View("List", await SoldierSearchService.Filter(db, new SoldierSearchService.Query
             {
                 Unit = unit,
+                Rank = rank,
+                SSD = complete,
                 OnlyEnlisted = true
             }));
         }

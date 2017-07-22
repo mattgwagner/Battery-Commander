@@ -48,6 +48,11 @@ namespace BatteryCommander.Web.Services
                 soldiers = soldiers.Where(_ => _.ApftStatus == query.APFT);
             }
 
+            if(query.SSD.HasValue)
+            {
+                soldiers = soldiers.Where(_ => _.SSDStatus.CurrentProgress >= Decimal.One);
+            }
+
             return
                 await soldiers
                 .OrderBy(soldier => soldier.LastName)
@@ -70,6 +75,8 @@ namespace BatteryCommander.Web.Services
             public Soldier.EventStatus? ABCP { get; set; }
 
             public Soldier.EventStatus? APFT { get; set; }
+
+            public Boolean? SSD { get; set; }
         }
     }
 }
