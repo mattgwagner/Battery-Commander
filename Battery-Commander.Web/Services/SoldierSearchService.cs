@@ -19,6 +19,11 @@ namespace BatteryCommander.Web.Services
                 .Include(s => s.APFTs)
                 .Include(s => s.Unit);
 
+            if(query.Id.HasValue)
+            {
+                soldiers = soldiers.Where(_ => _.Id == query.Id);
+            }
+
             if (query.Unit.HasValue)
             {
                 soldiers = soldiers.Where(_ => _.UnitId == query.Unit);
@@ -70,6 +75,8 @@ namespace BatteryCommander.Web.Services
         public class Query
         {
             // TODO Filtering by MOS, Position, Name, Status
+
+            public int? Id { get; set; }
 
             public int? Unit { get; set; }
 

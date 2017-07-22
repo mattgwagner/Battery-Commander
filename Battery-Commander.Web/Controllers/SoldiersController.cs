@@ -126,15 +126,9 @@ namespace BatteryCommander.Web.Controllers
 
         public static async Task<Soldier> Get(Database db, int id)
         {
-            return
-                await db
-                .Soldiers
-                .Include(_ => _.Unit)
-                .Include(_ => _.APFTs)
-                .Include(_ => _.ABCPs)
-                .Include(_ => _.SSDSnapshots)
-                .Where(_ => _.Id == id)
-                .SingleOrDefaultAsync();
+            var soldiers = await SoldierSearchService.Filter(db, new SoldierSearchService.Query { Id = id });
+
+            return soldiers.SingleOrDefault();
         }
 
         public static async Task<IEnumerable<SelectListItem>> GetDropDownList(Database db, Boolean excludeEnlisted = false)
