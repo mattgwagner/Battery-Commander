@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BatteryCommander.Web.Models
 {
@@ -29,5 +31,46 @@ namespace BatteryCommander.Web.Models
 
         [Display(Name = "(CCC) Captains Career Course", ShortName = "CCC")]
         CCC = 11
+    }
+
+    public partial class Soldier
+    {
+        /// <summary>
+        /// The highest level of military education attained by the Soldier
+        /// </summary>
+        [Display(Name = "Education Level")]
+        public MilitaryEducationLevel EducationLevel { get; set; } = MilitaryEducationLevel.Unknown;
+
+        [NotMapped]
+        public virtual Boolean IsEducationComplete
+        {
+            get
+            {
+                switch (Rank)
+                {
+                    case Rank.E5:
+                        return MilitaryEducationLevel.BLC <= EducationLevel;
+
+                    case Rank.E6:
+                        return MilitaryEducationLevel.ALC <= EducationLevel;
+
+                    case Rank.E7:
+                        return MilitaryEducationLevel.SLC <= EducationLevel;
+
+                    case Rank.E8:
+                        return MilitaryEducationLevel.MLC <= EducationLevel;
+
+                    case Rank.O1:
+                    case Rank.O2:
+                        return MilitaryEducationLevel.BOLC <= EducationLevel;
+
+                    case Rank.O3:
+                        return MilitaryEducationLevel.CCC <= EducationLevel;
+
+                    default:
+                        return MilitaryEducationLevel.AIT <= EducationLevel;
+                }
+            }
+        }
     }
 }

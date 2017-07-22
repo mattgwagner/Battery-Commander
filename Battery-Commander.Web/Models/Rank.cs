@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BatteryCommander.Web.Models
 {
@@ -52,6 +53,24 @@ namespace BatteryCommander.Web.Models
         O6 = 15
     }
 
+    public partial class Soldier
+    {
+        [Required]
+        public Rank Rank { get; set; } = Rank.E1;
+
+        [NotMapped]
+        public String RankHumanized => Rank.ShortName();
+
+        [NotMapped]
+        public Boolean IsEnlisted => Rank.IsEnlisted();
+
+        [NotMapped]
+        public Boolean IsNCO => Rank.IsNCO();
+
+        [NotMapped]
+        public Boolean IsOfficer => Rank.IsOfficer();
+    }
+
     public static class RankExtensions
     {
         public static Rank Parse(String value)
@@ -81,7 +100,7 @@ namespace BatteryCommander.Web.Models
 
         public static IEnumerable<Rank> All()
         {
-            foreach(Rank rank in Enum.GetValues(typeof(Rank)))
+            foreach (Rank rank in Enum.GetValues(typeof(Rank)))
             {
                 yield return rank;
             }
@@ -89,7 +108,7 @@ namespace BatteryCommander.Web.Models
 
         public static Boolean IsEnlisted(this Rank rank)
         {
-            switch(rank)
+            switch (rank)
             {
                 case Rank.E1:
                 case Rank.E2:

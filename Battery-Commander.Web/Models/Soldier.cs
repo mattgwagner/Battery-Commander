@@ -25,20 +25,6 @@ namespace BatteryCommander.Web.Models
         [StringLength(50), Display(Name = "Middle Name")]
         public String MiddleName { get; set; }
 
-        [Required]
-        public Rank Rank { get; set; } = Rank.E1;
-
-        public String RankHumanized => Rank.ShortName();
-
-        [NotMapped]
-        public Boolean IsEnlisted => Rank.IsEnlisted();
-
-        [NotMapped]
-        public Boolean IsNCO => Rank.IsNCO();
-
-        [NotMapped]
-        public Boolean IsOfficer => Rank.IsOfficer();
-
         [DataType(DataType.Date), Column(TypeName = "date"), Display(Name = "Date of Rank"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime? DateOfRank { get; set; }
 
@@ -82,12 +68,6 @@ namespace BatteryCommander.Web.Models
 
         [Required]
         public Gender Gender { get; set; } = Gender.Male;
-
-        /// <summary>
-        /// The highest level of military education attained by the Soldier
-        /// </summary>
-        [Display(Name = "Education Level")]
-        public MilitaryEducationLevel EducationLevel { get; set; } = MilitaryEducationLevel.Unknown;
 
         [Required]
         public int UnitId { get; set; }
