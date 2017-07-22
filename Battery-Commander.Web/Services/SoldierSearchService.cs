@@ -19,7 +19,7 @@ namespace BatteryCommander.Web.Services
                 .Include(s => s.APFTs)
                 .Include(s => s.Unit);
 
-            if(query.Id.HasValue)
+            if (query.Id.HasValue)
             {
                 soldiers = soldiers.Where(_ => _.Id == query.Id);
             }
@@ -65,6 +65,11 @@ namespace BatteryCommander.Web.Services
                 }
             }
 
+            if (query.EducationComplete.HasValue)
+            {
+                soldiers = soldiers.Where(_ => _.IsEducationComplete == query.EducationComplete);
+            }
+
             return
                 await soldiers
                 .OrderBy(soldier => soldier.LastName)
@@ -91,6 +96,8 @@ namespace BatteryCommander.Web.Services
             public Soldier.EventStatus? APFT { get; set; }
 
             public Boolean? SSD { get; set; }
+
+            public Boolean? EducationComplete { get; set; }
         }
     }
 }
