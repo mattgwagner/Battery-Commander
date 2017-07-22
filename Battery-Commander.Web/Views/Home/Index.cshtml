@@ -81,7 +81,7 @@
                     {
                         <tr>
                             <td>@Html.ActionLink(row.Rank.DisplayName(), "Index", "SSD", new { unit = unit.Unit.Id, rank = row.Rank })</td>
-                            <td>@SSDExtensions.RequiredSSD(row.Rank).ShortName()</td>
+                            <td>@SSDExtensions.RequiredSSD(row.Rank).DisplayName()</td>
                             <td>@Html.ActionLink(row.Assigned.ToString(), "Index", "SSD", new { unit = unit.Unit.Id, rank = row.Rank })</td>
                             <td>@Html.ActionLink(row.Incomplete.ToString(), "Index", "SSD", new { unit = unit.Unit.Id, rank = row.Rank, complete = false })</td>
                             <td>@Html.ActionLink(row.Completed.ToString(), "Index", "SSD", new { unit = unit.Unit.Id, rank = row.Rank, complete = true })</td>
