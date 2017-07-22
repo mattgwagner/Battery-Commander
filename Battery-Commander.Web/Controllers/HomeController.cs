@@ -76,6 +76,7 @@ namespace BatteryCommander.Web.Controllers
                                 Assigned = soldiers.Where(soldier => soldier.Rank == rank).Count(),
                                 Completed = soldiers.Where(soldier => soldier.Rank == rank).Where(soldier => soldier.IsEducationComplete).Count()
                             })
+                            .Where(stat => stat.Assigned > 0)
                             .ToList()
                     });
                 }
