@@ -75,3 +75,4 @@ namespace BatteryCommander.Web.Models
         [NotMapped]
         public virtual Boolean IsEducationComplete => Rank.RequiredEducation() <= EducationLevel;
     }
+}
