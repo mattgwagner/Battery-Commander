@@ -79,17 +79,19 @@
                         <tr>
                             <td>@Html.ActionLink(row.Rank.DisplayName(), "Index", "SSD", new { unit = unit.Unit.Id,  rank = row.Rank})</td>
                             <td>@Html.ActionLink(row.Assigned.ToString(), "Index", "SSD", new { unit = unit.Unit.Id, rank = row.Rank })</td>
+                            <td>@Html.ActionLink(row.Incomplete.ToString(), "Index", "SSD", new { unit = unit.Unit.Id, rank = row.Rank, complete = false })</td>
                             <td>@Html.ActionLink(row.Completed.ToString(), "Index", "SSD", new { unit = unit.Unit.Id, rank = row.Rank, complete = true })</td>
-                            <td>@Html.ActionLink(row.Percentage.ToString("P2"), "Index", "SSD", new { unit = unit.Unit.Id, rank = row.Rank, complete = false })</td>
+                            <td>@Html.ActionLink(row.Percentage.ToString("P2"), "Index", "SSD", new { unit = unit.Unit.Id, rank = row.Rank })</td>
                         </tr>
                     }
                 </tbody>
                 <tfoot>
                     <tr>
                         <th></th>
-                        <th>@Html.DisplayFor(_ => unit.SSDTotal.Assigned)</th>
-                        <th>@Html.DisplayFor(_ => unit.SSDTotal.Completed)</th>
-                        <th>@Html.DisplayFor(_ => unit.SSDTotal.Percentage)</th>
+                        <th>@Html.ActionLink(unit.SSDTotal.Assigned.ToString(), "Index", "SSD", new { unit = unit.Unit.Id })</th>
+                        <th>@Html.ActionLink(unit.SSDTotal.Incomplete.ToString(), "Index", "SSD", new { unit = unit.Unit.Id, complete = false })</th>
+                        <th>@Html.ActionLink(unit.SSDTotal.Completed.ToString(), "Index", "SSD", new { unit = unit.Unit.Id, complete = false })</th>
+                        <th>@Html.ActionLink(unit.SSDTotal.Percentage.ToString("P2"), "Index", "SSD", new { unit = unit.Unit.Id })</th>
                     </tr>
                 </tfoot>
             </table>

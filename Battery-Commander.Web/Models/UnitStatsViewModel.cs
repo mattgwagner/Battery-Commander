@@ -30,6 +30,8 @@ namespace BatteryCommander.Web.Models
 
             public int Assigned { get; set; }
 
+            public int Incomplete => Assigned - Completed;
+
             public int Completed { get; set; }
 
             [DisplayFormat(DataFormatString = SSDStatusModel.Format)]
