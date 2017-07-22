@@ -154,4 +154,34 @@ namespace BatteryCommander.Web.Models
             public decimal? SSD_5 { get; set; }
         }
     }
+
+    public static class SSDExtensions
+    {
+        public static SSD? RequiredSSD(this Rank rank)
+        {
+            switch (rank)
+            {
+                case Rank.E1:
+                case Rank.E2:
+                case Rank.E3:
+                case Rank.E4:
+                    return SSD.SSD_1;
+
+                case Rank.E5:
+                    return SSD.SSD_2;
+
+                case Rank.E6:
+                    return SSD.SSD_3;
+
+                case Rank.E7:
+                    return SSD.SSD_4;
+
+                case Rank.E8:
+                    return SSD.SSD_5;
+
+                default:
+                    return null;
+            }
+        }
+    }
 }
