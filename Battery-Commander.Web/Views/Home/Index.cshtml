@@ -10,6 +10,7 @@
             <div class="panel-title"><h2>@Html.DisplayFor(_ => unit.Unit)</h2></div>
         </div>
 
+
         <div class="panel-body">
             <h2>@Html.DisplayNameFor(_ => unit.ABCP)</h2>
             <table class="table table-bordered">
@@ -122,7 +123,7 @@
                         </tr>
                     }
                 </tbody>
-                <tfoot>
+                @*<tfoot>
                     <tr>
                         <th></th>
                         <th>@Html.ActionLink(unit.SSDTotal.Assigned.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id })</th>
@@ -130,7 +131,7 @@
                         <th>@Html.ActionLink(unit.SSDTotal.Completed.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, education = false })</th>
                         <th>@Html.ActionLink(unit.SSDTotal.Percentage.ToString("P0"), "Index", "Soldiers", new { unit = unit.Unit.Id })</th>
                     </tr>
-                </tfoot>
+                </tfoot>*@
             </table>
         </div>
     </div>
