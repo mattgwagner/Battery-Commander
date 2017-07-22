@@ -17,6 +17,7 @@
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().FirstName)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Unit)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().TimeTillETS)</th>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().TimeInGrade)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().APFTs)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().ABCPs)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().SSDStatus)</th>
@@ -46,6 +47,9 @@
                     {
                         <span class="label label-danger">@Html.DisplayFor(s => soldier.TimeTillETSHumanized)</span>
                     }
+                </td>
+                <td data-sort="@soldier.TimeInGrade?.TotalDays">
+                    @Html.DisplayFor(s => soldier.TimeInGradeHumanized)
                 </td>
                 <td data-sort="@soldier.LastApft?.TotalScore">
                     @Html.DisplayFor(s => soldier.LastApft)
