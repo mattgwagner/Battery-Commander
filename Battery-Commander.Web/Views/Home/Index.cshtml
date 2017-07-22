@@ -114,8 +114,8 @@
                         <tr>
                             <td>@Html.ActionLink(row.Rank.DisplayName(), "Index", "Soldiers", new { unit = unit.Unit.Id, rank = row.Rank })</td>
                             <td>@Html.ActionLink(row.Assigned.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, rank = row.Rank })</td>
-                            <td>@Html.ActionLink(row.Incomplete.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, rank = row.Rank, complete = false })</td>
-                            <td>@Html.ActionLink(row.Completed.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, rank = row.Rank, complete = true })</td>
+                            <td>@Html.ActionLink(row.Incomplete.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, rank = row.Rank, education = false })</td>
+                            <td>@Html.ActionLink(row.Completed.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, rank = row.Rank, education = true })</td>
                             <td>@Html.ActionLink(row.Percentage.ToString("P"), "Index", "Soldiers", new { unit = unit.Unit.Id, rank = row.Rank })</td>
                         </tr>
                     }
@@ -124,8 +124,8 @@
                     <tr>
                         <th></th>
                         <th>@Html.ActionLink(unit.SSDTotal.Assigned.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id })</th>
-                        <th>@Html.ActionLink(unit.SSDTotal.Incomplete.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, complete = false })</th>
-                        <th>@Html.ActionLink(unit.SSDTotal.Completed.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, complete = false })</th>
+                        <th>@Html.ActionLink(unit.SSDTotal.Incomplete.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, education = false })</th>
+                        <th>@Html.ActionLink(unit.SSDTotal.Completed.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, education = false })</th>
                         <th>@Html.ActionLink(unit.SSDTotal.Percentage.ToString("P"), "Index", "Soldiers", new { unit = unit.Unit.Id })</th>
                     </tr>
                 </tfoot>
