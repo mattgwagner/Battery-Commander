@@ -139,15 +139,10 @@ namespace BatteryCommander.Web.Controllers
 
         public static async Task<IEnumerable<SelectListItem>> GetDropDownList(Database db, Boolean excludeEnlisted = false)
         {
-            // TODO Filter by status, unit
-
-            var soldiers =
-                await db
-                .Soldiers
-                .Where(soldier => excludeEnlisted == false || soldier.IsNCO || soldier.IsOfficer)
-                .OrderBy(soldier => soldier.LastName)
-                .ThenBy(soldier => soldier.FirstName)
-                .ToListAsync();
+            var soldiers = await SoldierSearchService.Filter(db, new SoldierSearchService.Query
+            {
+                OnlyEnlisted = !excludeEnlisted
+            });
 
             return soldiers.Select(soldier => new SelectListItem
             {
