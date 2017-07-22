@@ -33,6 +33,37 @@ namespace BatteryCommander.Web.Models
         CCC = 11
     }
 
+    public static class EducationExtensions
+    {
+        public static MilitaryEducationLevel RequiredEducation(this Rank rank)
+        {
+            switch (rank)
+            {
+                case Rank.E5:
+                    return MilitaryEducationLevel.BLC;
+
+                case Rank.E6:
+                    return MilitaryEducationLevel.ALC;
+
+                case Rank.E7:
+                    return MilitaryEducationLevel.SLC;
+
+                case Rank.E8:
+                    return MilitaryEducationLevel.MLC;
+
+                case Rank.O1:
+                case Rank.O2:
+                    return MilitaryEducationLevel.BOLC;
+
+                case Rank.O3:
+                    return MilitaryEducationLevel.CCC;
+
+                default:
+                    return MilitaryEducationLevel.AIT;
+            }
+        }
+    }
+
     public partial class Soldier
     {
         /// <summary>
@@ -42,35 +73,5 @@ namespace BatteryCommander.Web.Models
         public MilitaryEducationLevel EducationLevel { get; set; } = MilitaryEducationLevel.Unknown;
 
         [NotMapped]
-        public virtual Boolean IsEducationComplete
-        {
-            get
-            {
-                switch (Rank)
-                {
-                    case Rank.E5:
-                        return MilitaryEducationLevel.BLC <= EducationLevel;
-
-                    case Rank.E6:
-                        return MilitaryEducationLevel.ALC <= EducationLevel;
-
-                    case Rank.E7:
-                        return MilitaryEducationLevel.SLC <= EducationLevel;
-
-                    case Rank.E8:
-                        return MilitaryEducationLevel.MLC <= EducationLevel;
-
-                    case Rank.O1:
-                    case Rank.O2:
-                        return MilitaryEducationLevel.BOLC <= EducationLevel;
-
-                    case Rank.O3:
-                        return MilitaryEducationLevel.CCC <= EducationLevel;
-
-                    default:
-                        return MilitaryEducationLevel.AIT <= EducationLevel;
-                }
-            }
-        }
+        public virtual Boolean IsEducationComplete => Rank.RequiredEducation() <= EducationLevel;
     }
-}
