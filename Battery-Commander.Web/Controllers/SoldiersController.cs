@@ -137,7 +137,8 @@ namespace BatteryCommander.Web.Controllers
         {
             var soldiers = await SoldierSearchService.Filter(db, new SoldierSearchService.Query
             {
-                OnlyEnlisted = !excludeEnlisted
+                OnlyEnlisted = !excludeEnlisted,
+                IncludeIgnoredUnits = true
             });
 
             return soldiers.Select(soldier => new SelectListItem

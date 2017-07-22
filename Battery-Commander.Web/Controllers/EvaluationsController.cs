@@ -44,14 +44,14 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> New(int soldier = 0)
         {
-            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, excludeEnlisted: true);
+            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db);
 
             return View("Edit", new Evaluation { RateeId = soldier });
         }
 
         public async Task<IActionResult> Edit(int id)
         {
-            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, excludeEnlisted: true);
+            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db);
 
             return View(await Get(db, id));
         }
