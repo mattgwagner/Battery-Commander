@@ -77,10 +77,10 @@
                     @foreach(var row in unit.SSD)
                     {
                         <tr>
-                            <td>@Html.DisplayFor(_ => row.Rank)</td>
-                            <td>@Html.DisplayFor(_ => row.Assigned)</td>
-                            <td>@Html.DisplayFor(_ => row.Completed)</td>
-                            <td>@Html.DisplayFor(_ => row.Percentage)</td>
+                            <td>@Html.ActionLink(row.Rank.DisplayName(), "Index", "SSD", new { unit = unit.Unit.Id,  rank = row.Rank})</td>
+                            <td>@Html.ActionLink(row.Assigned.ToString(), "Index", "SSD", new { unit = unit.Unit.Id, rank = row.Rank })</td>
+                            <td>@Html.ActionLink(row.Completed.ToString(), "Index", "SSD", new { unit = unit.Unit.Id, rank = row.Rank, completed = true })</td>
+                            <td>@Html.ActionLink(row.Percentage.ToString("P2"), "Index", "SSD", new { unit = unit.Unit.Id, rank = row.Rank, completed = false })</td>
                         </tr>
                     }
                 </tbody>

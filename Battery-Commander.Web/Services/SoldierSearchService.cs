@@ -35,7 +35,7 @@ namespace BatteryCommander.Web.Services
 
             if (query.OnlyEnlisted == true)
             {
-                soldiers = soldiers.Where(_ => _.IsEnlisted);
+                soldiers = soldiers.Where(_ => _.IsEnlisted || _.IsNCO);
             }
 
             if (query.ABCP.HasValue)
