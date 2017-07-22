@@ -114,7 +114,7 @@
                     {
                         <tr>
                             <td>@Html.ActionLink(row.Rank.DisplayName(), "Index", "Soldiers", new { unit = unit.Unit.Id, rank = row.Rank })</td>
-                            <td>@EducationExtensions.RequiredEducation(row.Rank).DisplayName()</td>
+                            <td>@EducationExtensions.RequiredEducation(row.Rank).ShortName()</td>
                             <td>@Html.ActionLink(row.Assigned.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, rank = row.Rank })</td>
                             <td>@Html.ActionLink(row.Incomplete.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, rank = row.Rank, education = false })</td>
                             <td>@Html.ActionLink(row.Completed.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, rank = row.Rank, education = true })</td>
