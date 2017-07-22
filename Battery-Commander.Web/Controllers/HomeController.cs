@@ -65,6 +65,17 @@ namespace BatteryCommander.Web.Controllers
                                 Assigned = soldiers.Where(soldier => soldier.Rank == rank).Count(),
                                 Completed = soldiers.Where(soldier => soldier.Rank == rank).Where(soldier => soldier.SSDStatus.CurrentProgress >= Decimal.One).Count()
                             })
+                            .ToList(),
+                        Education =
+                            RankExtensions
+                            .All()
+                            .Where(rank => Rank.Cadet != rank)
+                            .Select(rank => new UnitStatsViewModel.SSDStat
+                            {
+                                Rank = rank,
+                                Assigned = soldiers.Where(soldier => soldier.Rank == rank).Count(),
+                                Completed = soldiers.Where(soldier => soldier.Rank == rank).Where(soldier => soldier.IsEducationComplete).Count()
+                            })
                             .ToList()
                     });
                 }

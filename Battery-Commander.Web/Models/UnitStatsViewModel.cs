@@ -18,6 +18,8 @@ namespace BatteryCommander.Web.Models
 
         public ICollection<SSDStat> SSD { get; set; } = new List<SSDStat>();
 
+        public ICollection<SSDStat> Education { get; set; } = new List<SSDStat>();
+
         public SSDStat SSDTotal => new SSDStat
         {
             Assigned = SSD.Select(s => s.Assigned).Sum(),

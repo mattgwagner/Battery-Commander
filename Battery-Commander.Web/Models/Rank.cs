@@ -69,6 +69,9 @@ namespace BatteryCommander.Web.Models
 
         [NotMapped]
         public Boolean IsOfficer => Rank.IsOfficer();
+
+        [NotMapped]
+        public Boolean IsCadet => Rank.Cadet == Rank;
     }
 
     public static class RankExtensions
