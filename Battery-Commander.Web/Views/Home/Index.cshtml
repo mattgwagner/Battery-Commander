@@ -79,8 +79,8 @@
                         <tr>
                             <td>@Html.ActionLink(row.Rank.DisplayName(), "Index", "SSD", new { unit = unit.Unit.Id,  rank = row.Rank})</td>
                             <td>@Html.ActionLink(row.Assigned.ToString(), "Index", "SSD", new { unit = unit.Unit.Id, rank = row.Rank })</td>
-                            <td>@Html.ActionLink(row.Completed.ToString(), "Index", "SSD", new { unit = unit.Unit.Id, rank = row.Rank, completed = true })</td>
-                            <td>@Html.ActionLink(row.Percentage.ToString("P2"), "Index", "SSD", new { unit = unit.Unit.Id, rank = row.Rank, completed = false })</td>
+                            <td>@Html.ActionLink(row.Completed.ToString(), "Index", "SSD", new { unit = unit.Unit.Id, rank = row.Rank, complete = true })</td>
+                            <td>@Html.ActionLink(row.Percentage.ToString("P2"), "Index", "SSD", new { unit = unit.Unit.Id, rank = row.Rank, complete = false })</td>
                         </tr>
                     }
                 </tbody>
