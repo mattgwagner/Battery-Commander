@@ -24,36 +24,21 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> Index(int? unit = null, Soldier.EventStatus? abcp = null, Soldier.EventStatus? apft = null)
         {
-            // TODO Filtering by Rank, MOS, Position, Name, Status
-
-            var soldiers =
-                await db
-                .Soldiers
-                .Include(_ => _.Unit)
-                .Include(_ => _.ABCPs)
-                .Include(_ => _.APFTs)
-                .Include(_ => _.SSDSnapshots)
-                .Where(_ => (!unit.HasValue && !_.Unit.IgnoreForReports) || _.UnitId == unit)
-                .Where(_ => !abcp.HasValue || _.AbcpStatus == abcp)
-                .Where(_ => !apft.HasValue || _.ApftStatus == apft)
-                .ToListAsync();
-
-            return View("List", soldiers);
+            return View("List", await SoldierSearchService.Filter(db, new SoldierSearchService.Query
+            {
+                Unit = unit,
+                ABCP = abcp,
+                APFT = apft
+            }));
         }
-        
+
         [Route("~/Soldiers/All", Name = "Soldiers.List")]
         public async Task<IActionResult> All()
         {
-            var soldiers =
-                await db
-                .Soldiers
-                .Include(_ => _.Unit)
-                .Include(_ => _.ABCPs)
-                .Include(_ => _.APFTs)
-                .Include(_ => _.SSDSnapshots)
-                .ToListAsync();
-
-            return View("List", soldiers);
+            return View("List", await SoldierSearchService.Filter(db, new SoldierSearchService.Query
+            {
+                IncludeIgnoredUnits = true
+            }));
         }
 
         [Route("~/Soldiers/{id}", Name = "Soldier.Details")]
