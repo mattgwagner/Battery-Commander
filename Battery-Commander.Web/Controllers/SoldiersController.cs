@@ -128,7 +128,7 @@ namespace BatteryCommander.Web.Controllers
 
         public static async Task<Soldier> Get(Database db, int id)
         {
-            var soldiers = await SoldierSearchService.Filter(db, new SoldierSearchService.Query { Id = id });
+            var soldiers = await SoldierSearchService.Filter(db, new SoldierSearchService.Query { Id = id, IncludeIgnoredUnits = true });
 
             return soldiers.SingleOrDefault();
         }
