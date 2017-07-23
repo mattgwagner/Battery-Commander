@@ -188,16 +188,17 @@ namespace BatteryCommander.Web.Services
                 form.SetField($"{prefix}.AVE_ARM[0]", $"{model.WaistAverage}");
                 form.SetField($"{prefix}.AVE_HIP[0]", $"{model.HipAverage}");
 
-                //form1[0].Page1[0].H_FACTR[0]
-                //form1[0].Page1[0].N_FACTR[0]
-                //form1[0].Page1[0].F_FACTR[0]
-                //form1[0].Page1[0].WE_FACTR[0]
-                //form1[0].Page1[0].HE_FACTR[0]
+                form.SetField($"{prefix}.WE_FACTR[0]", $"{model.WaistAverage}");
+                form.SetField($"{prefix}.HE_FACTR[0]", $"{model.Height}");
+                form.SetField($"{prefix}.TOT_A[0]", $"{model.HipAverage + model.WaistAverage}");
+                form.SetField($"{prefix}.H_FACTR[0]", $"{model.HipAverage}");
+                form.SetField($"{prefix}.N_FACTR[0]", $"{model.NeckAverage}");
+                form.SetField($"{prefix}.F_FACTR[0]", $"{model.HipAverage + model.WaistAverage - model.NeckAverage}");
+                form.SetField($"{prefix}.HE_FACTR[0]", $"{model.Height}");
 
-                //form1[0].Page1[0].TOT_A[0]
+                form.SetField($"{prefix}.BODY_FAT[0]", $"{model.BodyFatPercentage}");
 
                 //form1[0].Page1[0].APPRVD[0]
-                //form1[0].Page1[0].BODY_FAT[0]
 
                 form.SetField($"{prefix}.REMRKS[0]", $@"
                     AUTHORIZED BODY FAT IS: {model.MaximumAllowableBodyFat}%
