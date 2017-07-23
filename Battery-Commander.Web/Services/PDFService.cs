@@ -169,26 +169,34 @@ namespace BatteryCommander.Web.Services
 
                 // form.SetField($"{prefix}.Page1[0].Name[0]", model.Name);
 
+                //form1[0].Page1[0].NECK_A[0] / B / C
+
+                var q = new Queue<String>(new[] { "A", "B", "C" });
+
+                foreach (var measurement in model.Measurements)
+                {
+                    // Abdomen
+
+                    var m = q.Dequeue();
+
+                    form.SetField($"{prefix}.NECK_{m}[0]", $"{measurement.Neck}");
+                    form.SetField($"{prefix}.ARM_{m}[0]", $"{measurement.Waist}");
+                    form.SetField($"{prefix}.HIP_{m}[0]", $"{measurement.Hips}");
+                }
+
+                form.SetField($"{prefix}.AVE_NECK[0]", $"{model.NeckAverage}");
+                form.SetField($"{prefix}.AVE_ARM[0]", $"{model.WaistAverage}");
+                form.SetField($"{prefix}.AVE_HIP[0]", $"{model.HipAverage}");
+
                 //form1[0].Page1[0].H_FACTR[0]
-                //form1[0].Page1[0].NECK_B[0]
-                //form1[0].Page1[0].TOT_A[0]
-                //form1[0].Page1[0].HIP_A[0]
-                //form1[0].Page1[0].NECK_A[0]
-                //form1[0].Page1[0].HIP_B[0]
-                //form1[0].Page1[0].HE_FACTR[0]
-                //form1[0].Page1[0].APPRVD[0]
-                //form1[0].Page1[0].ARM_A[0]
                 //form1[0].Page1[0].N_FACTR[0]
-                //form1[0].Page1[0].NECK_C[0]
-                //form1[0].Page1[0].HEIGHT[0]
-                //form1[0].Page1[0].AVE_NECK[0]
-                //form1[0].Page1[0].AVE_ARM[0]
-                //form1[0].Page1[0].ARM_C[0]
-                //form1[0].Page1[0].WE_FACTR[0]
                 //form1[0].Page1[0].F_FACTR[0]
-                //form1[0].Page1[0].ARM_B[0]
-                //form1[0].Page1[0].HIP_C[0]
-                //form1[0].Page1[0].AVE_HIP[0]
+                //form1[0].Page1[0].WE_FACTR[0]
+                //form1[0].Page1[0].HE_FACTR[0]
+
+                //form1[0].Page1[0].TOT_A[0]
+
+                //form1[0].Page1[0].APPRVD[0]
                 //form1[0].Page1[0].BODY_FAT[0]
 
                 form.SetField($"{prefix}.REMRKS[0]", $@"

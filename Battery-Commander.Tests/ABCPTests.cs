@@ -100,5 +100,37 @@ namespace BatteryCommander.Tests
                 file.Write(data, 0, data.Length);
             }
         }
+
+        [Fact]
+        public void Generate_Female_5501()
+        {
+            using (var file = new FileStream("Test_DA5501_ABCP_Female.pdf", FileMode.Create))
+            {
+                var score = new ABCP
+                {
+                    Soldier = new Soldier
+                    {
+                        FirstName = "Jane",
+                        LastName = "Doe",
+                        Rank = Rank.E2,
+                        Gender = Gender.Female,
+                        DateOfBirth = DateTime.Today.AddYears(-21)
+                    },
+                    Date = DateTime.Today,
+                    Height = 63,
+                    Weight = 150,
+                    Measurements = new[]
+                    {
+                        new Measurement {  Neck = 13d, Waist = 26d, Hips = 40.5d },
+                        new Measurement {  Neck = 13.5d, Waist = 26.5d, Hips = 41d },
+                        new Measurement {  Neck = 13.5d, Waist = 26d, Hips = 41d }
+                    }
+                };
+
+                var data = score.GenerateCounseling();
+
+                file.Write(data, 0, data.Length);
+            }
+        }
     }
 }
