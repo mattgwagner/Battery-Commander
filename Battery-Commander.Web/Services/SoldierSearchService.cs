@@ -14,6 +14,7 @@ namespace BatteryCommander.Web.Services
             IQueryable<Soldier> soldiers =
                 db
                 .Soldiers
+                .Include(s => s.Supervisor)
                 .Include(s => s.SSDSnapshots)
                 .Include(s => s.ABCPs)
                 .Include(s => s.APFTs)

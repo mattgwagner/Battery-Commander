@@ -41,6 +41,15 @@
             <td>@Html.DisplayFor(model => model.Soldier.EducationLevel)</td>
         </tr>
 
+        @if (Model.Soldier.SupervisorId.HasValue)
+        {
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.Soldier.Supervisor)</td>
+                <td>@Html.DisplayFor(model => model.Soldier.Supervisor)</td>
+            </tr>
+
+        }
+
         @if (Model.Soldier.DateOfRank.HasValue)
         {
             <tr>
@@ -64,7 +73,6 @@
                 <td>@Html.DisplayFor(model => model.Soldier.SSDStatus)</td>
             </tr>
         }
-
     </table>
 </div>
 
@@ -103,7 +111,6 @@
         </table>
     </div>
 }
-
 
 <div class="panel panel-default">
 

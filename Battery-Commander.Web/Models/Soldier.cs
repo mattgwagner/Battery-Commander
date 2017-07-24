@@ -25,6 +25,10 @@ namespace BatteryCommander.Web.Models
         [StringLength(50), Display(Name = "Middle Name")]
         public String MiddleName { get; set; }
 
+        public int? SupervisorId { get; set; }
+
+        public Soldier Supervisor { get; set; }
+
         [DataType(DataType.Date), Column(TypeName = "date"), Display(Name = "Date of Rank"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime? DateOfRank { get; set; }
 
