@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Soldier>
+
+<div id="chart_div"></div>
+
+@section Scripts
+{
+    @{
+        var soldiers =
+            Model
+            .Select(soldier => new
+            {
+                Name = soldier.ToString(),
+                Supervisor = soldier.Supervisor?.ToString()
+            })
+            .ToList();
+    }
+
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        // Load the Visualization API and the corechart package.
+        google.charts.load('current', { 'packages': ['orgchart'] });
+
+        var unit_org = JSON.parse('@Json.Serialize(soldiers)');
+
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(draw_unit_org);
+
+        function draw_unit_org() {
+            // Create the data table.
+            var data = new google.visualization.DataTable();
+
+            data.addColumn('string', 'Name');
+            data.addColumn('string', 'Supervisor');
+
+            for (var i = 0; i < unit_org.length; i++)
+            {
+                data.addRow(unit_org[i].Name, unit_org[i].Supervisor);
+            }
+
+            var chart = new google.visualization.OrgChart(document.getElementById('chart_div'));
+
+            chart.draw(data, { allowHtml: true });
+        }
+    </script>
+}

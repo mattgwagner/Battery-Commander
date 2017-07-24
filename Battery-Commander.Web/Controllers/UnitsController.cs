@@ -1,4 +1,5 @@
 ﻿using BatteryCommander.Web.Models;
+using BatteryCommander.Web.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -22,6 +23,16 @@ namespace BatteryCommander.Web.Controllers
         public async Task<IActionResult> Index()
         {
             return View("List", await db.Units.ToListAsync());
+        }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var model = await SoldierSearchService.Filter(db, new SoldierSearchService.Query
+            {
+                Unit = id
+            });
+
+            return View(model);
         }
 
         public IActionResult New()
