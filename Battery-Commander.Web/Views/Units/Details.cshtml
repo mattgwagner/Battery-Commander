@@ -35,7 +35,7 @@
 
             for (var i = 0; i < unit_org.length; i++)
             {
-                data.addRow(unit_org[i].Name, unit_org[i].Supervisor);
+                data.addRow([unit_org[i].name, unit_org[i].supervisor]);
             }
 
             var chart = new google.visualization.OrgChart(document.getElementById('chart_div'));
