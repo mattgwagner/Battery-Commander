@@ -78,6 +78,7 @@ namespace BatteryCommander.Web.Controllers
         public async Task<IActionResult> New()
         {
             ViewBag.Units = await UnitsController.GetDropDownList(db);
+            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db);
 
             return View("Edit", new Soldier { });
         }
