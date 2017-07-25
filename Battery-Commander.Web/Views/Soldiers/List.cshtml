@@ -17,6 +17,7 @@
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().FirstName)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Unit)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().TimeTillETS)</th>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().TimeInGrade)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().APFTs)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().ABCPs)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().SSDStatus)</th>
@@ -33,6 +34,9 @@
                 <td>@Html.DisplayFor(s => soldier.LastName)</td>
                 <td>@Html.DisplayFor(s => soldier.FirstName)</td>
                 <td>@Html.DisplayFor(s => soldier.Unit)</td>
+                <td data-sort="@soldier.TimeInGrade?.TotalDays">
+                    @Html.DisplayFor(s => soldier.TimeInGradeHumanized)
+                </td>
                 <td data-sort="@soldier.TimeTillETS?.TotalDays">
                     @if (soldier.TimeTillETS > TimeSpan.FromDays(365))
                     {
@@ -49,13 +53,13 @@
                 </td>
                 <td data-sort="@soldier.LastApft?.TotalScore">
                     @Html.DisplayFor(s => soldier.LastApft)
-                    @if(soldier.LastApft?.IsAlternateAerobicEvent == true)
+                    @if (soldier.LastApft?.IsAlternateAerobicEvent == true)
                     {
                         <span class="label">Alt. Aerobic</span>
                     }
                 </td>
                 <td>@Html.DisplayFor(s => soldier.LastAbcp)</td>
-                <td>@Html.DisplayFor(s=> soldier.SSDStatus)</td>
+                <td>@Html.DisplayFor(s => soldier.SSDStatus)</td>
                 <td>
                     @if (!soldier.HasDoB)
                     {
