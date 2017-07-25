@@ -16,6 +16,7 @@
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().LastName)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().FirstName)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Unit)</th>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().EducationLevel)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().TimeTillETS)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().TimeInGrade)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().APFTs)</th>
@@ -34,6 +35,7 @@
                 <td>@Html.DisplayFor(s => soldier.LastName)</td>
                 <td>@Html.DisplayFor(s => soldier.FirstName)</td>
                 <td>@Html.DisplayFor(s => soldier.Unit)</td>
+                <td>@Html.DisplayFor(s => soldier.EducationLevel)</td>
                 <td data-sort="@soldier.TimeInGrade?.TotalDays">
                     @Html.DisplayFor(s => soldier.TimeInGradeHumanized)
                 </td>
