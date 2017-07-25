@@ -49,6 +49,11 @@ namespace BatteryCommander.Web.Controllers
             var model = new SoldierDetailsViewModel
             {
                 Soldier = await Get(db, id),
+                Subordinates =
+                    await db
+                    .Soldiers
+                    .Where(s => s.SupervisorId == id)
+                    .ToListAsync(),
                 Evaluations =
                     await db
                     .Evaluations
