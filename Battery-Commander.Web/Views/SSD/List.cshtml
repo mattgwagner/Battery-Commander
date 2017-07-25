@@ -11,10 +11,7 @@
 <table class="table table-striped" id="dt">
     <thead>
         <tr>
-            <th>Details</th>
-            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Rank)</th>
-            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().LastName)</th>
-            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().FirstName)</th>
+            <th>Soldier</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Unit)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().EducationLevel)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().TimeInGrade)</th>
@@ -31,10 +28,7 @@
         @foreach (var soldier in Model)
         {
             <tr>
-                <td>@Html.RouteLink("Details", "Soldier.Details", new { soldier.Id })</td>
-                <td>@Html.DisplayFor(s => soldier.RankHumanized)</td>
-                <td>@Html.DisplayFor(s => soldier.LastName)</td>
-                <td>@Html.DisplayFor(s => soldier.FirstName)</td>
+                <td>@Html.DisplayFor(s => soldier)</td>
                 <td>@Html.DisplayFor(s => soldier.Unit, additionalViewData: new { controller = "SSD" })</td>
                 <td>@Html.DisplayFor(s => soldier.EducationLevel)</td>
                 <td data-sort="@soldier.TimeInGrade?.TotalDays">
