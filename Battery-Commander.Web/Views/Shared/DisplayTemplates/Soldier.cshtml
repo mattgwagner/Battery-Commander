@@ -2,5 +2,11 @@
 
 @if (Model != null)
 {
+    if(String.Equals("Unknown", Model.LastName, StringComparison.CurrentCultureIgnoreCase))
+    {
+        <span class="label label-warning">Unknown</span>
+        return;
+    }
+
     <div>@Html.ActionLink(Model.ToString(), "Details", "Soldiers", new { Model.Id })</div>
 }
