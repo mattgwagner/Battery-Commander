@@ -61,6 +61,7 @@ namespace BatteryCommander.Web.Controllers
                     .Include(eval => eval.Rater)
                     .Include(eval => eval.SeniorRater)
                     .Include(eval => eval.Reviewer)
+                    .Where(eval => !eval.IsCompleted)
                     .Where(eval => new[] { eval.RateeId, eval.RaterId, eval.SeniorRaterId, eval.ReviewerId }.Any(sm => sm == id))
                     .OrderByDescending(eval => eval.ThruDate)
                     .Select(eval => new SoldierDetailsViewModel.EvaluationViewModel
