@@ -99,6 +99,19 @@ namespace BatteryCommander.Web.Models
             internal const String Format = "{0:P0}";
 
             public Rank Rank { get; set; }
+            
+            public String CssClass
+            {
+             get
+             {
+                if(CurrentProgress >= Decimal.One)
+                {
+                 return "label label-success";   
+                }
+                 
+                 return "label label-danger";
+             }
+            }
 
             public Decimal? CurrentProgress
             {
