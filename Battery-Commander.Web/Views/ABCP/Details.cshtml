@@ -105,6 +105,6 @@
     @using (Html.BeginForm("Delete", "ABCP", new { Model.Id }, FormMethod.Post))
     {
         @Html.AntiForgeryToken()
-        <button type="submit" class="btn btn-danger">Delete</button>
+        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this?')">Delete</button>
     }
 </div>
