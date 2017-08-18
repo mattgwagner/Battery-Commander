@@ -236,7 +236,7 @@
                             <td>@Html.DisplayFor(_ => evaluation.Role)</td>
                             <td>@Html.DisplayFor(_ => evaluation.Evaluation.Ratee)</td>
                             <td>@Html.DisplayFor(_ => evaluation.Evaluation.Status)</td>
-                            <td>
+                            <td data-sort="@evaluation.Evaluation.Delinquency.TotalDays">
                                 @if (evaluation.Evaluation.Delinquency > TimeSpan.Zero)
                                 {
                                     <span class="label label-default">Due in @Html.DisplayFor(_ => evaluation.Evaluation.DelinquencyHumanized)</span>
