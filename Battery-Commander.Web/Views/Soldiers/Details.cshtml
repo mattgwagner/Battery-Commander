@@ -15,16 +15,20 @@
 
     <table class="table">
         <tr>
-            <td>@Html.DisplayNameFor(model => model.Soldier.DateOfBirth)</td>
-            <td>@Html.DisplayFor(model => model.Soldier.DateOfBirth) (@Html.DisplayFor(model => model.Soldier.Age) y/o)</td>
-        </tr>
-        <tr>
-            <td>@Html.DisplayNameFor(model => model.Soldier.MilitaryEmail)</td>
-            <td>@Html.DisplayFor(model => model.Soldier.MilitaryEmail)</td>
+            <td>@Html.DisplayNameFor(model => model.Soldier.Unit)</td>
+            <td>@Html.DisplayFor(model => model.Soldier.Unit)</td>
         </tr>
         <tr>
             <td>@Html.DisplayNameFor(model => model.Soldier.DoDId)</td>
             <td>@Html.DisplayFor(model => model.Soldier.DoDId)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Soldier.Age)</td>
+            <td>@Html.DisplayFor(model => model.Soldier.Age)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Soldier.MilitaryEmail)</td>
+            <td>@Html.DisplayFor(model => model.Soldier.MilitaryEmail)</td>
         </tr>
         <tr>
             <td>@Html.DisplayNameFor(model => model.Soldier.CivilianEmail)</td>
@@ -34,14 +38,6 @@
             <td>@Html.DisplayNameFor(model => model.Soldier.Gender)</td>
             <td>@Html.DisplayFor(model => model.Soldier.Gender)</td>
         </tr>
-        <tr>
-            <td>@Html.DisplayNameFor(model => model.Soldier.Unit)</td>
-            <td>@Html.DisplayFor(model => model.Soldier.Unit)</td>
-        </tr>
-        <tr>
-            <td>@Html.DisplayNameFor(model => model.Soldier.EducationLevel)</td>
-            <td>@Html.DisplayFor(model => model.Soldier.EducationLevel)</td>
-        </tr>
 
         @if (Model.Soldier.SupervisorId.HasValue)
         {
@@ -49,7 +45,6 @@
                 <td>@Html.DisplayNameFor(model => model.Soldier.Supervisor)</td>
                 <td>@Html.DisplayFor(model => model.Soldier.Supervisor)</td>
             </tr>
-
         }
 
         @if (Model.Soldier.DateOfRank.HasValue)
@@ -67,6 +62,11 @@
                 <td>@Html.DisplayFor(model => model.Soldier.ETSDate) (@Html.DisplayFor(model => model.Soldier.TimeTillETSHumanized))</td>
             </tr>
         }
+
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Soldier.EducationLevel)</td>
+            <td>@Html.DisplayFor(model => model.Soldier.EducationLevel)</td>
+        </tr>
 
         @if (!Model.Soldier.IsOfficer)
         {
