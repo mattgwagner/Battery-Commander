@@ -80,37 +80,39 @@
 
 @if (!Model.Soldier.IsOfficer)
 {
-    <div class="panel-heading">
-        <h2 class="panel-title">@Html.DisplayNameFor(_ => _.Soldier.SSDStatus)</h2>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">@Html.DisplayNameFor(_ => _.Soldier.SSDStatus)</h2>
 
-        <table class="table">
-            <tbody>
-                <tr>
-                    <td>@Html.DisplayNameFor(_ => _.Soldier.SSDStatus.AsOf)</td>
-                    <td>@Html.DisplayFor(_ => _.Soldier.SSDStatus.AsOf)</td>
-                </tr>
-                <tr>
-                    <td>@Html.DisplayNameFor(_ => _.Soldier.SSDStatus.SSD_1)</td>
-                    <td>@Html.DisplayFor(_ => _.Soldier.SSDStatus.SSD_1)</td>
-                </tr>
-                <tr>
-                    <td>@Html.DisplayNameFor(_ => _.Soldier.SSDStatus.SSD_2)</td>
-                    <td>@Html.DisplayFor(_ => _.Soldier.SSDStatus.SSD_2)</td>
-                </tr>
-                <tr>
-                    <td>@Html.DisplayNameFor(_ => _.Soldier.SSDStatus.SSD_3)</td>
-                    <td>@Html.DisplayFor(_ => _.Soldier.SSDStatus.SSD_3)</td>
-                </tr>
-                <tr>
-                    <td>@Html.DisplayNameFor(_ => _.Soldier.SSDStatus.SSD_4)</td>
-                    <td>@Html.DisplayFor(_ => _.Soldier.SSDStatus.SSD_4)</td>
-                </tr>
-                <tr>
-                    <td>@Html.DisplayNameFor(_ => _.Soldier.SSDStatus.SSD_5)</td>
-                    <td>@Html.DisplayFor(_ => _.Soldier.SSDStatus.SSD_5)</td>
-                </tr>
-            </tbody>
-        </table>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td>@Html.DisplayNameFor(_ => _.Soldier.SSDStatus.AsOf)</td>
+                        <td>@Html.DisplayFor(_ => _.Soldier.SSDStatus.AsOf)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(_ => _.Soldier.SSDStatus.SSD_1)</td>
+                        <td>@Html.DisplayFor(_ => _.Soldier.SSDStatus.SSD_1)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(_ => _.Soldier.SSDStatus.SSD_2)</td>
+                        <td>@Html.DisplayFor(_ => _.Soldier.SSDStatus.SSD_2)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(_ => _.Soldier.SSDStatus.SSD_3)</td>
+                        <td>@Html.DisplayFor(_ => _.Soldier.SSDStatus.SSD_3)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(_ => _.Soldier.SSDStatus.SSD_4)</td>
+                        <td>@Html.DisplayFor(_ => _.Soldier.SSDStatus.SSD_4)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(_ => _.Soldier.SSDStatus.SSD_5)</td>
+                        <td>@Html.DisplayFor(_ => _.Soldier.SSDStatus.SSD_5)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 }
 
@@ -256,7 +258,7 @@
 
 <div>
     @using (Html.BeginForm("Delete", "Soldiers", new { Model.Soldier.Id }, FormMethod.Post))
-    {
+            {
         @Html.AntiForgeryToken()
         <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this?')">Delete</button>
     }
