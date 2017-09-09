@@ -22,6 +22,7 @@
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().APFTs)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().ABCPs)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().SSDStatus)</th>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().DscaQualified)</th>
             <th>Links</th>
         </tr>
     </thead>
@@ -62,6 +63,16 @@
                 </td>
                 <td>@Html.DisplayFor(s => soldier.LastAbcp)</td>
                 <td>@Html.DisplayFor(s => soldier.SSDStatus)</td>
+                <td>
+                    @if(soldier.DscaQualified)
+                    {
+                        <span class="label label-success">@Html.DisplayFor(s => soldier.DscaQualified)</span>
+                    }
+                    else
+                    {
+                        <span class="label label-dagner">@Html.DisplayFor(s => soldier.DscaQualified)</span>
+                    }
+                </td>
                 <td>
                     @if (!soldier.HasDoB)
                     {
