@@ -39,6 +39,11 @@
             <td>@Html.DisplayFor(model => model.Soldier.Gender)</td>
         </tr>
 
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Soldier.DscaQualified)</td>
+            <td>@Html.DisplayFor(model => model.Soldier.DscaQualified) (@Html.DisplayFor(model => model.Soldier.DscaQualificationAge)</td>
+        </tr>
+
         @if (Model.Soldier.SupervisorId.HasValue)
         {
             <tr>
