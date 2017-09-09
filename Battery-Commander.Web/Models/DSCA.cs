@@ -5,7 +5,7 @@ namespace BatteryCommander.Web.Models
 {
     public partial class Soldier
     {
-        [DataType(DataType.Date)]
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime? DscaQualificationDate { get; set; }
 
         public TimeSpan? DscaQualificationAge => (DateTime.Today - DscaQualificationDate);
