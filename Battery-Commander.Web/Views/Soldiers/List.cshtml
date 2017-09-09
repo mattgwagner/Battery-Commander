@@ -63,7 +63,20 @@
                 </td>
                 <td>@Html.DisplayFor(s => soldier.LastAbcp)</td>
                 <td>@Html.DisplayFor(s => soldier.SSDStatus)</td>
-                <td>@Html.DisplayFor(s => soldier.DscaQualified)</td>
+                <td>
+                    @if(soldier.DscaQualified)
+                    {
+                        <span class="label label-success">@Html.DisplayFor(s => soldier.DscaQualificationDate)</span>
+                    }
+                    else if(soldier.DscaQualificationDate.HasValue)
+                    {
+                        <span class="label label-warning">@Html.DisplayFor(s => soldier.DscaQualificationDate)</span>
+                    }
+                    else
+                    {
+                        <span class="label label-danger">?</span>
+                    }
+                </td>
                 <td>
                     @if (!soldier.HasDoB)
                     {
