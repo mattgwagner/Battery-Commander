@@ -14,6 +14,8 @@ namespace BatteryCommander.Web.Models
 
         public virtual DbSet<Unit> Units { get; set; }
 
+        public virtual DbSet<Vehicle> Vehicles { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
             builder.UseSqlite("Data Source=Data.db");

@@ -17,5 +17,7 @@ namespace BatteryCommander.Web.Models
         public Boolean IgnoreForReports { get; set; }
 
         public virtual ICollection<Soldier> Soldiers { get; set; }
+
+        public virtual ICollection<Vehicle> Vehicles { get; set; }
     }
 }
