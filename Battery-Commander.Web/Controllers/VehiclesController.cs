@@ -17,23 +17,24 @@ namespace BatteryCommander.Web.Controllers
             this.db = db;
         }
 
-        // List of Vehicles - by unit, by status
-
         // Add Vehicle
 
         // Edit Vehicle
 
         // Delete Vehicle (?)
 
-        public async Task<IActionResult> Index(int? unit = null)
+        public async Task<IActionResult> Index()
         {
+            // List of Vehicles - by unit, by status
+
             var vehicles =
                 await db
                 .Vehicles
                 .Include(vehicle => vehicle.Unit)
+                .OrderBy(vehicle => vehicle.Bumper)
                 .ToListAsync();
 
-            return Json(vehicles);
+            return View("List", vehicles);
         }
 
         public async Task<IActionResult> New()

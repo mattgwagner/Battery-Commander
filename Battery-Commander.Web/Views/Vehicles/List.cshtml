@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Vehicle>
+
+@{
+    ViewBag.Title = "Vehicle Tracker";
+}
+
+<div class="page-header">
+    <h1>@ViewBag.Title <span class="badge">@Model.Count()</span> @Html.ActionLink("Add New", "New", "Vehicle", null, new { @class = "btn btn-default" })</h1>
+</div>
+
+<table class="table table-striped" id="dt">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Bumper)</th>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Type)</th>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Status)</th>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Seats)</th>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Unit)</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var vehicle in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(_ => vehicle.Bumper)</td>
+                <td>@Html.DisplayFor(_ => vehicle.Type)</td>
+                <td>@Html.DisplayFor(_ => vehicle.Status)</td>
+                <td>@Html.DisplayFor(_ => vehicle.Seats)</td>
+                <td>@Html.DisplayFor(_ => vehicle.Unit)</td>
+            </tr>
+        }
+    </tbody>
+</table>
