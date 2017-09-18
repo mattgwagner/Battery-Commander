@@ -36,6 +36,22 @@ namespace BatteryCommander.Web.Controllers
             return Json(vehicles);
         }
 
+        public async Task<IActionResult> New()
+        {
+            return View(nameof(Edit), new Vehicle { });
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var model =
+                await db
+                .Vehicles
+                .Where(_ => _.Id == id)
+                .SingleOrDefaultAsync();
+
+            return View(model);
+        }
+
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Save(Vehicle model)
         {
