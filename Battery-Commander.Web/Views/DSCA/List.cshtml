@@ -1,54 +1,27 @@
-﻿@model IEnumerable<APFT>
+﻿@model IEnumerable<Soldier>
 
 @{
-    ViewBag.Title = "APFT Tracker";
+    ViewBag.Title = "DSCA Tracker";
 }
 
 <div class="page-header">
-    <h1>@ViewBag.Title <span class="badge">@Model.Count()</span> @Html.ActionLink("Add New", "New", "APFT", null, new { @class = "btn btn-default" })</h1>
+    <h1>@ViewBag.Title <span class="badge">@Model.Count()</span></h1>
 </div>
 
 <table class="table table-striped" id="dt">
     <thead>
         <tr>
             <th>Soldier</th>
-            <th>Unit</th>
-            <th>Date</th>
-            <th>Score</th>
-            <th>Result</th>
-            <th>Details</th>
+            <th>DSCA Date</th>
         </tr>
     </thead>
 
     <tbody>
-        @foreach (var apft in Model)
+        @foreach (var soldier in Model)
         {
             <tr>
-                <td>@Html.DisplayFor(_ => apft.Soldier)</td>
-                <td>@Html.DisplayFor(_ => apft.Soldier.Unit, additionalViewData: new { controller = "APFT" })</td>
-                <td>
-                    <a href="@Url.Action("Index", new { date = apft.Date })">
-                        @Html.DisplayFor(_ => apft.Date)
-                    </a>
-                </td>
-                <td data-sort="@apft.TotalScore">
-                    @Html.DisplayFor(_ => apft.TotalScore)
-                    @if(apft.IsAlternateAerobicEvent)
-                    {
-                        <span class="label">Alt. Aerobic</span>
-                    }
-                </td>
-                <td>
-                    @if (apft.IsPassing)
-                    {
-                        <span class="label label-success">Passing</span>
-                    }
-                    else
-                    {
-                        <span class="label label-danger">Failure</span>
-                    }
-                </td>
-                <td>@Html.ActionLink("Details", "Details", new { apft.Id })</td>
+                <td>@Html.DisplayFor(_ => soldier)</td>
+                <td>@Html.DisplayFor(_ => soldier.DscaQualificationDate)</td>
             </tr>
         }
     </tbody>

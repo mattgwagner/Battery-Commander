@@ -29,12 +29,10 @@ namespace BatteryCommander.Web.Controllers
             var soldiers =
                 await db
                 .Soldiers
-                .Select(soldier => new DTO
-                {
-                })
+                .Include(soldier => soldier.Unit)
                 .ToListAsync();
 
-            return Json(soldiers);
+            return View("List", soldiers);
         }
 
         [HttpPost, ValidateAntiForgeryToken]
