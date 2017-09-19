@@ -26,21 +26,30 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var soldiers =
-                await db
-                .Soldiers
-                .Include(soldier => soldier.Unit)
-                .ToListAsync();
-
-            return View("List", soldiers);
+            return View("List", new DSCAListViewModel
+            {
+                Rows =
+                    (await db
+                    .Soldiers
+                    .Include(soldier => soldier.Unit)
+                    .Where(soldier => !soldier.Unit.IgnoreForReports)
+                    .ToListAsync())
+                    .Select(soldier => new DSCAListViewModel.Row
+                    {
+                        Soldier = soldier,
+                        SoldierId = soldier.Id,
+                        DscaQualificationDate = soldier.DscaQualificationDate
+                    })
+                    .ToList()
+            });
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> Save(IEnumerable<DTO> model)
+        public async Task<IActionResult> Save(DSCAListViewModel model)
         {
             // For each DTO posted, update the soldier info
 
-            foreach (var dto in model)
+            foreach (var dto in model.Rows)
             {
                 var soldier =
                     await db
@@ -50,7 +59,7 @@ namespace BatteryCommander.Web.Controllers
 
                 // Update DSCA info
 
-                soldier.DscaQualificationDate = dto.QualificationDate;
+                soldier.DscaQualificationDate = dto.DscaQualificationDate;
             }
 
             await db.SaveChangesAsync();
@@ -58,12 +67,19 @@ namespace BatteryCommander.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public class DTO
+        public class DSCAListViewModel
         {
-            public int SoldierId { get; set; }
+            public IList<Row> Rows { get; set; }
 
-            [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
-            public DateTime? QualificationDate { get; set; }
+            public class Row
+            {
+                public Soldier Soldier { get; set; }
+
+                public int SoldierId { get; set; }
+
+                [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
+                public DateTime? DscaQualificationDate { get; set; }
+            }
         }
     }
 }

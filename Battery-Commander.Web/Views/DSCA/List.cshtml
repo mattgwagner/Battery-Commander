@@ -1,28 +1,40 @@
-﻿@model IEnumerable<Soldier>
+﻿@model BatteryCommander.Web.Controllers.DSCAController.DSCAListViewModel
 
 @{
     ViewBag.Title = "DSCA Tracker";
 }
 
 <div class="page-header">
-    <h1>@ViewBag.Title <span class="badge">@Model.Count()</span></h1>
+    <h1>@ViewBag.Title <span class="badge">@Model.Rows.Count</span></h1>
 </div>
 
-<table class="table table-striped" id="dt">
-    <thead>
-        <tr>
-            <th>Soldier</th>
-            <th>DSCA Date</th>
-        </tr>
-    </thead>
+@using (Html.BeginForm("Save", "DSCA", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
 
-    <tbody>
-        @foreach (var soldier in Model)
-        {
+    <table class="table table-striped" id="dt">
+        <thead>
             <tr>
-                <td>@Html.DisplayFor(_ => soldier)</td>
-                <td>@Html.DisplayFor(_ => soldier.DscaQualificationDate)</td>
+                <th>Unit</th>
+                <th>Soldier</th>
+                <th>DSCA Date</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+
+        <tbody>
+            @for (var i = 0; i < Model.Rows.Count; ++i)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(_ => Model.Rows[i].Soldier.Unit)</td>
+                    <td>
+                        @Html.HiddenFor(_ => Model.Rows[i].SoldierId)
+                        @Html.DisplayFor(_ => Model.Rows[i].Soldier)
+                    </td>
+                    <td>@Html.EditorFor(_ => Model.Rows[i].DscaQualificationDate)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <button type="submit" name="Save">Save Updates</button>
+}
