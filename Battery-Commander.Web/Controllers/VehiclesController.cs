@@ -39,11 +39,15 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> New()
         {
+            ViewBag.Units = await UnitsController.GetDropDownList(db);
+
             return View(nameof(Edit), new Vehicle { });
         }
 
         public async Task<IActionResult> Edit(int id)
         {
+            ViewBag.Units = await UnitsController.GetDropDownList(db);
+
             var model =
                 await db
                 .Vehicles

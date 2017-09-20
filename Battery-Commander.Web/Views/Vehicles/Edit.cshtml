@@ -8,7 +8,7 @@
 
     <div class="form-group form-group-lg">
         @Html.DisplayNameFor(model => model.Unit)
-        @Html.EditorFor(model => model.Unit)
+        @Html.DropDownListFor(model => model.UnitId, (IEnumerable<SelectListItem>)ViewBag.Units, "-- Select Unit --")
     </div>
 
     <div class="form-group form-group-lg">
