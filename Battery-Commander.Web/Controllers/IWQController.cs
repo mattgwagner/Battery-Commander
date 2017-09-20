@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using BatteryCommander.Web.Services;
 
 namespace BatteryCommander.Web.Controllers
 {
@@ -24,16 +25,9 @@ namespace BatteryCommander.Web.Controllers
 
         // Bulk update qual status/date
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(SoldierSearchService.Query query)
         {
-            var soldiers =
-                await db
-                .Soldiers
-                .Include(soldier => soldier.Unit)
-                .Where(soldier => !soldier.Unit.IgnoreForReports)
-                .OrderBy(soldier => soldier.LastName)
-                .ThenBy(soldier => soldier.FirstName)
-                .ToListAsync();
+            var soldiers = await SoldierSearchService.Find(db, query);
 
             return View("List", soldiers);
         }
