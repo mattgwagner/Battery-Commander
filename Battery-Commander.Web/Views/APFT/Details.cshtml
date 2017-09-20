@@ -25,16 +25,7 @@
     </tr>
     <tr>
         <td>@Html.DisplayNameFor(model => model.IsPassing)</td>
-        <td>
-            @if (Model.IsPassing)
-            {
-                <span class="label label-success">Passing</span>
-            }
-            else
-            {
-                <span class="label label-danger">Failure</span>
-            }
-        </td>
+        <td>@Html.DisplayFor(model => model)</td>
     </tr>
     <tr>
         <td>@Html.DisplayNameFor(model => model.Date)</td>
