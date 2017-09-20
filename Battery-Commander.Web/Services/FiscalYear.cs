@@ -32,6 +32,15 @@ namespace BatteryCommander.Web.Services
             }
         }
 
+        public static FiscalYear Next(this FiscalYear fy)
+        {
+            return
+                fy
+                .End()
+                .AddDays(1)
+                .ToFiscalYear();
+        }
+
         public static DateTime Start(this FiscalYear fy)
         {
             switch (fy)
