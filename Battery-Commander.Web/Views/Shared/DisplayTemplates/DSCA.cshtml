@@ -1,0 +1,18 @@
+@model Soldier
+
+<div>
+    <a href="@Url.Action("Details", "Soldier", new { Model.Id })">
+        @if (Model.DscaQualified)
+        {
+            <span class="label label-success">Qualified</span>
+        }
+        else if (Model.DscaQualificationAge < TimeSpan.FromDays(Soldier.DaysPerYear * 2))
+        {
+            <span class="label label-warning">Qualified (Overdue)</span>
+        }
+        else
+        {
+            <span class="label label-danger">Unqualified</span>
+        }
+    </a>
+</div>
