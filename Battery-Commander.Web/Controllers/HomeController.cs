@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BatteryCommander.Web.Services;
 
 namespace BatteryCommander.Web.Controllers
 {
@@ -27,14 +28,10 @@ namespace BatteryCommander.Web.Controllers
 
             foreach (var unit in db.Units.Where(unit => !unit.IgnoreForReports))
             {
-                var soldiers =
-                    await db
-                    .Soldiers
-                    .Include(s => s.ABCPs)
-                    .Include(s => s.APFTs)
-                    .Include(s => s.SSDSnapshots)
-                    .Where(s => s.UnitId == unit.Id)
-                    .ToListAsync();
+                var soldiers = await SoldierSearchService.Filter(db, new SoldierSearchService.Query
+                {
+                    Unit = unit.Id
+                });
 
                 if (soldiers.Any())
                 {
