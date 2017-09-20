@@ -19,7 +19,7 @@ namespace BatteryCommander.Web.Models
         {
             get
             {
-                if (LastAbcp?.IsValid)
+                if (LastAbcp?.IsValid == true)
                 {
                     // TODO This doesn't take into account soldiers who passed tape but are still on the ABCP program
 
