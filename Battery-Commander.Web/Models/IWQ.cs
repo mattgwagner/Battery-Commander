@@ -14,6 +14,19 @@ namespace BatteryCommander.Web.Models
         //public Boolean IwqQualified => IwqQualificationAge.HasValue && IwqQualificationAge < TimeSpan.FromDays(365);
     }
 
+    public enum Weapon : byte
+    {
+        M4,
+
+        M9,
+
+        M240B,
+
+        M249,
+
+        M320
+    }
+
     public enum WeaponQualificationStatus : byte
     {
         Unqualified,
