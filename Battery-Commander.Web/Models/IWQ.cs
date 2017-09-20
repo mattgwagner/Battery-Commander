@@ -16,6 +16,8 @@ namespace BatteryCommander.Web.Models
 
     public enum Weapon : byte
     {
+// Not used yet
+
         M4,
 
         M9,
@@ -29,6 +31,8 @@ namespace BatteryCommander.Web.Models
 
     public enum WeaponQualificationStatus : byte
     {
+// Not used yet
+
         Unqualified,
 
         Marksman,
