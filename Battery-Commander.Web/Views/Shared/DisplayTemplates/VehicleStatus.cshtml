@@ -1,0 +1,16 @@
+@model Vehicle.VehicleStatus
+
+@switch(Model)
+{
+    case Vehicle.VehicleStatus.FMC:
+        <span class="label label-success">FMC</span>
+        return;
+
+    case Vehicle.VehicleStatus.NMC:
+        <span class="label label-danger">NMC</span>
+        return;
+
+    default:
+        <span class="label label-warning">@Html.DisplayFor(model => model)</span>
+        return;
+}
