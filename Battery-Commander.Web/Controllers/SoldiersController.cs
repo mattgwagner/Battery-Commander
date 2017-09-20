@@ -22,16 +22,9 @@ namespace BatteryCommander.Web.Controllers
             this.db = db;
         }
 
-        public async Task<IActionResult> Index(Boolean? education = null, Rank? rank =  null, int? unit = null, Soldier.EventStatus? abcp = null, Soldier.EventStatus? apft = null)
+        public async Task<IActionResult> Index(SoldierSearchService.Query query)
         {
-            return View("List", await SoldierSearchService.Filter(db, new SoldierSearchService.Query
-            {
-                Unit = unit,
-                Rank = rank,
-                EducationComplete = education,
-                ABCP = abcp,
-                APFT = apft
-            }));
+            return View("List", await SoldierSearchService.Filter(db, query));
         }
 
         [Route("~/Soldiers/All", Name = "Soldiers.List")]

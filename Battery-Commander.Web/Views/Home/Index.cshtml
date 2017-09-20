@@ -120,8 +120,8 @@
                             <td>@Html.ActionLink(row.Rank.DisplayName(), "Index", "Soldiers", new { unit = unit.Unit.Id, rank = row.Rank })</td>
                             <td>@EducationExtensions.RequiredEducation(row.Rank).ShortName()</td>
                             <td>@Html.ActionLink(row.Assigned.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, rank = row.Rank })</td>
-                            <td>@Html.ActionLink(row.Incomplete.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, rank = row.Rank, education = false })</td>
-                            <td>@Html.ActionLink(row.Completed.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, rank = row.Rank, education = true })</td>
+                            <td>@Html.ActionLink(row.Incomplete.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, rank = row.Rank, educationStatus = false })</td>
+                            <td>@Html.ActionLink(row.Completed.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, rank = row.Rank, educationStatus = true })</td>
                             <td>@Html.ActionLink(row.Percentage.ToString("P0"), "Index", "Soldiers", new { unit = unit.Unit.Id, rank = row.Rank })</td>
                         </tr>
                     }
