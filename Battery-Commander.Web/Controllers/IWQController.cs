@@ -33,7 +33,7 @@ namespace BatteryCommander.Web.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> Save(IWQListViewModel model)
+        public async Task<IActionResult> Save(IwqListViewModel model)
         {
             // For each DTO posted, update the soldier info
 
