@@ -59,6 +59,13 @@ namespace BatteryCommander.Web.Controllers
                             Failed = soldiers.Where(soldier => soldier.DscaQualificationDate.HasValue && !soldier.DscaQualified).Count(),
                             NotTested = soldiers.Where(soldier => !soldier.DscaQualificationDate.HasValue).Count()
                         },
+                        IWQ = new UnitStatsViewModel.Stat
+                        {
+                            Assigned = soldiers.Count(),
+                            Passed = soldiers.Where(soldier => soldier.IwqQualified).Count(),
+                            Failed = soldiers.Where(soldier => soldier.IwqQualifificationDate.HasValue && !soldier.IwqQualified).Count(),
+                            NotTested = soldiers.Where(soldier => !soldier.IwqQualifificationDate.HasValue).Count()
+                        },
                         SSD =
                             RankExtensions
                             .All()

@@ -18,6 +18,8 @@ namespace BatteryCommander.Web.Models
 
         public Stat DSCA { get; set; } = new Stat { };
 
+        public Stat IWQ { get; set; } = new Stat { };
+
         public ICollection<SSDStat> SSD { get; set; } = new List<SSDStat>();
 
         public ICollection<SSDStat> Education { get; set; } = new List<SSDStat>();

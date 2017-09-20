@@ -149,12 +149,42 @@
                         <td>@Html.ActionLink(unit.DSCA.Passed.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, dsca = true })</td>
                     </tr>
                     <tr>
+                        <td>Qualified (Overdue)</td>
+                        <td>@Html.ActionLink(unit.DSCA.Failed.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, dsca = true })</td>
+                    </tr>
+                    <tr>
                         <td>Unqualified</td>
-                        <td>@Html.ActionLink(unit.DSCA.Failed.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, dsca = false })</td>
+                        <td>@Html.ActionLink(unit.DSCA.NotTested.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, dsca = false })</td>
                     </tr>
                     <tr>
                         <td>@Html.DisplayNameFor(_ => unit.DSCA.PercentPass)</td>
                         <td>@Html.DisplayFor(_ => unit.DSCA.PercentPass)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>@Html.DisplayNameFor(_ => unit.IWQ)</h2>
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <td>@Html.DisplayNameFor(_ => unit.IWQ.Assigned)</td>
+                        <td>@Html.DisplayFor(_ => unit.IWQ.Assigned)</td>
+                    </tr>
+                    <tr>
+                        <td>Qualified</td>
+                        <td>@Html.ActionLink(unit.IWQDSCA.Passed.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, dsca = true })</td>
+                    </tr>
+                    <tr>
+                        <td>Qualified (Overdue)</td>
+                        <td>@Html.ActionLink(unit.IWQ.Failed.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, dsca = true })</td>
+                    </tr>
+                    <tr>
+                        <td>Unqualified</td>
+                        <td>@Html.ActionLink(unit.IWQ.NotTested.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, dsca = false })</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(_ => unit.IWQ.PercentPass)</td>
+                        <td>@Html.DisplayFor(_ => unit.IWQ.PercentPass)</td>
                     </tr>
                 </tbody>
             </table>
