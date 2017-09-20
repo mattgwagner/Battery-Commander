@@ -13,4 +13,15 @@ namespace BatteryCommander.Web.Models
         //[Display(Name = "DSCA Qualified?")]
         //public Boolean IwqQualified => IwqQualificationAge.HasValue && IwqQualificationAge < TimeSpan.FromDays(365);
     }
+
+    public enum WeaponQualificationStatus : byte
+    {
+        Unqualified,
+
+        Marksman,
+
+        Sharpshooter,
+
+        Expert
+    }
 }
