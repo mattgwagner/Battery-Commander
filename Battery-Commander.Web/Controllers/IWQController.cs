@@ -27,7 +27,7 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> Index(SoldierSearchService.Query query)
         {
-            var soldiers = await SoldierSearchService.Find(db, query);
+            var soldiers = await SoldierSearchService.Filter(db, query);
 
             return View("List", soldiers);
         }
