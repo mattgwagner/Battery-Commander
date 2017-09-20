@@ -27,9 +27,18 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> Index(SoldierSearchService.Query query)
         {
-            var soldiers = await SoldierSearchService.Filter(db, query);
-
-            return View("List", soldiers);
+            return View("List", new IwqListViewModel
+            {
+                Rows = 
+                    (await SoldierSearchService.Filter(db, query))
+                    .Select(soldier => new IwqListViewModel.Row
+                    {
+                        Soldier = soldier,
+                        SoldierId = soldier.Id,
+                        IwqQualificationDate = solder.IwqQualificationDate
+                    })
+                    .ToList()
+            });
         }
 
         [HttpPost, ValidateAntiForgeryToken]
