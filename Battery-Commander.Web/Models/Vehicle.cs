@@ -44,6 +44,8 @@ namespace BatteryCommander.Web.Models
 
         // Driver, A-Driver, Passengers, Assigned Section?
 
+        // Has JBC-P?
+
         public enum VehicleType : byte
         {
             HMMWV = 0,
