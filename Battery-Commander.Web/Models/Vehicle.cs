@@ -14,8 +14,6 @@ namespace BatteryCommander.Web.Models
 
         public virtual Unit Unit { get; set; }
 
-        // Notes, What's broken about it?
-
         [Required]
         public VehicleStatus Status { get; set; } = VehicleStatus.FMC;
 
@@ -25,9 +23,14 @@ namespace BatteryCommander.Web.Models
         [Required]
         public VehicleType Type { get; set; } = VehicleType.HMMWV;
 
-        // public String Registration { get; set; }
+        [StringLength(10)]
+        public String Registration { get; set; }
 
-        // public String Serial { get; set; }
+        [StringLength(50)]
+        public String Serial { get; set; }
+
+        [StringLength(20)]
+        public String Nomenclature { get; set; }
 
         [Required]
         public int Seats { get; set; } = 2;
@@ -45,6 +48,10 @@ namespace BatteryCommander.Web.Models
         // Driver, A-Driver, Passengers, Assigned Section?
 
         // Has JBC-P?
+
+        // Location?
+        
+        public String Notes { get; set; }
 
         public enum VehicleType : byte
         {
