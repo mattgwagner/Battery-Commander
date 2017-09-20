@@ -44,6 +44,11 @@
             <td>@Html.DisplayFor(model => model.Soldier.DscaQualified) (@Html.DisplayFor(model => model.Soldier.DscaQualificationDate))</td>
         </tr>
 
+               <tr>
+            <td>@Html.DisplayNameFor(model => model.Soldier.IwqQualified)</td>
+            <td>@Html.DisplayFor(model => model.Soldier.IwqQualified) (@Html.DisplayFor(model => model.Soldier.IwqQualificationDate))</td>
+        </tr>
+
         @if (Model.Soldier.SupervisorId.HasValue)
         {
             <tr>
