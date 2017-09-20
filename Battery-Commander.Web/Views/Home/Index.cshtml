@@ -172,15 +172,15 @@
                     </tr>
                     <tr>
                         <td>Qualified</td>
-                        <td>@Html.ActionLink(unit.IWQDSCA.Passed.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, dsca = true })</td>
+                        <td>@Html.ActionLink(unit.IWQDSCA.Passed.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, iwq = true })</td>
                     </tr>
                     <tr>
                         <td>Qualified (Overdue)</td>
-                        <td>@Html.ActionLink(unit.IWQ.Failed.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, dsca = true })</td>
+                        <td>@Html.ActionLink(unit.IWQ.Failed.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, iwq = true })</td>
                     </tr>
                     <tr>
                         <td>Unqualified</td>
-                        <td>@Html.ActionLink(unit.IWQ.NotTested.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, dsca = false })</td>
+                        <td>@Html.ActionLink(unit.IWQ.NotTested.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, iwq = false })</td>
                     </tr>
                     <tr>
                         <td>@Html.DisplayNameFor(_ => unit.IWQ.PercentPass)</td>
