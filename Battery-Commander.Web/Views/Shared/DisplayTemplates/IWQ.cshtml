@@ -7,7 +7,7 @@
         {
             <span class="label label-success">Qualified</span>
         }
-        else if (Model.IwqQualificationAge < TimeSpan.FromDays(Soldier.DaysPerYear * 2))
+        else if (Model.IwqQualificationDate.HasValue)
         {
             <span class="label label-warning">Qualified (Overdue)</span>
         }

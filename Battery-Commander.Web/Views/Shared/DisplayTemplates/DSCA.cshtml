@@ -7,7 +7,7 @@
         {
             <span class="label label-success">Qualified</span>
         }
-        else if (Model.DscaQualificationAge < TimeSpan.FromDays(Soldier.DaysPerYear * 2))
+        else if (Model.DscaQualificationDate.HasValue)
         {
             <span class="label label-warning">Qualified (Overdue)</span>
         }
