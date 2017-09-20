@@ -8,6 +8,25 @@ using System.Linq;
 
 namespace BatteryCommander.Web.Models
 {
+    public partial class Soldier
+    {
+        public virtual ICollection<APFT> APFTs { get; set; }
+
+        public virtual APFT LastApft => APFTs?.OrderByDescending(apft => apft.Date).FirstOrDefault();
+
+        public virtual EventStatus ApftStatus
+        {
+            get
+            {
+                if (LastApft?.IsPassing == true) return EventStatus.Passed;
+
+                if (LastApft?.IsPassing == false) return EventStatus.Failed;
+
+                return EventStatus.NotTested;
+            }
+        }
+    }
+
     public class APFT : IValidatableObject
     {
         private const int MinimumPerEvent = 60;

@@ -9,6 +9,27 @@ using System.Linq;
 
 namespace BatteryCommander.Web.Models
 {
+    public partial class Soldier
+    {
+        public virtual ICollection<ABCP> ABCPs { get; set; }
+
+        public virtual ABCP LastAbcp => ABCPs?.OrderByDescending(abcp => abcp.Date).FirstOrDefault();
+
+        public virtual EventStatus AbcpStatus
+        {
+            get
+            {
+                // TODO This doesn't take into account soldiers who passed tape but are still on the ABCP program
+
+                if (LastAbcp?.IsPassing == true) return EventStatus.Passed;
+
+                if (LastAbcp?.IsPassing == false) return EventStatus.Failed;
+
+                return EventStatus.NotTested;
+            }
+        }
+    }
+    
     public class ABCP : IValidatableObject
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
