@@ -9,7 +9,7 @@ namespace BatteryCommander.Web.Models
 {
     public partial class Soldier : IValidatableObject
     {
-        private const double DaysPerYear = 365.2425;
+        internal const double DaysPerYear = 365.2425;
 
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
