@@ -33,6 +33,8 @@ namespace BatteryCommander.Web.Controllers
                     .Soldiers
                     .Include(soldier => soldier.Unit)
                     .Where(soldier => !soldier.Unit.IgnoreForReports)
+                    .OrderBy(soldier => soldier.LastName)
+                    .ThenBy(soldier => soldier.FirstName)
                     .ToListAsync())
                     .Select(soldier => new DSCAListViewModel.Row
                     {
