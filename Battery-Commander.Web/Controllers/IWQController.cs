@@ -30,6 +30,9 @@ namespace BatteryCommander.Web.Controllers
                 await db
                 .Soldiers
                 .Include(soldier => soldier.Unit)
+                .Where(soldier => !soldier.Unit.IgnoreForReports)
+                .OrderBy(soldier => soldier.LastName)
+                .ThenBy(soldier => soldier.FirstName)
                 .ToListAsync();
 
             return View("List", soldiers);
@@ -58,9 +61,11 @@ namespace BatteryCommander.Web.Controllers
 
         public class DTO
         {
+            public Soldier Soldier { get; set; }
+
             public int SoldierId { get; set; }
 
-            [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
+            [DataType(DataType.Date)]
             public DateTime? QualificationDate { get; set; }
         }
     }

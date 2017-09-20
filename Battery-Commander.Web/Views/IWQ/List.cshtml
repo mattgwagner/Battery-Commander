@@ -1,14 +1,14 @@
-﻿@model IEnumerable<Soldier>
+﻿@model IList<BatteryCommander.Web.Controllers.IWQController.DTO>
 
 @{
     ViewBag.Title = "IWQ Tracker";
 }
 
 <div class="page-header">
-    <h1>@ViewBag.Title <span class="badge">@Model.Count()</span></h1>
+    <h1>@ViewBag.Title <span class="badge">@Model.Count</span></h1>
 </div>
 
-<table class="table table-striped" id="dt">
+<table class="table table-striped">
     <thead>
         <tr>
             <th>Soldier</th>
@@ -17,10 +17,15 @@
     </thead>
 
     <tbody>
-        @foreach (var soldier in Model)
+        @for (var i = 0; i < Model.Count; ++i)
         {
             <tr>
-                <td>@Html.DisplayFor(_ => soldier)</td>
+                <td>@Html.DisplayFor(_ => Model[i].Soldier.Unit)</td>
+                <td>
+                    @Html.HiddenFor(_ => Model[i].SoldierId)
+                    @Html.DisplayFor(_ => Model[i].Soldier)
+                </td>
+                <td>@Html.EditorFor(_ => Model[i].QualificationDate)</td>
             </tr>
         }
     </tbody>
