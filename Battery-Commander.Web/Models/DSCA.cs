@@ -10,7 +10,7 @@ namespace BatteryCommander.Web.Models
 
         public TimeSpan? DscaQualificationAge => (DateTime.Today - DscaQualificationDate);
 
-        [Display(Name = "DSCA Qualified?")]
+        [Display(Name = "DSCA")]
         public Boolean DscaQualified => DscaQualificationAge.HasValue && DscaQualificationAge < TimeSpan.FromDays(Soldier.DaysPerYear);
     }
 }
