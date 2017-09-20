@@ -17,15 +17,9 @@ namespace BatteryCommander.Web.Controllers
             this.db = db;
         }
 
-        public async Task<IActionResult> Index(int? unit, Boolean? complete, Rank? rank)
+        public async Task<IActionResult> Index(SoldierSearchService.Query query)
         {
-            return View("List", await SoldierSearchService.Filter(db, new SoldierSearchService.Query
-            {
-                Unit = unit,
-                Rank = rank,
-                SSD = complete,
-                OnlyEnlisted = true
-            }));
+            return View("List", await SoldierSearchService.Filter(db, query));
         }
 
         [HttpPost]
