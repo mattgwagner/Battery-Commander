@@ -11,10 +11,10 @@
 <table class="table table-striped" id="dt">
     <thead>
         <tr>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Status)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Unit)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Bumper)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Type)</th>
-            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Status)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Seats)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Nomenclature)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Registration)</th>
@@ -28,10 +28,10 @@
         @foreach (var vehicle in Model)
         {
             <tr>
+                <td>@Html.DisplayFor(_ => vehicle, "VehicleStatus")</td>
                 <td>@Html.DisplayFor(_ => vehicle.Unit)</td>
                 <td>@Html.DisplayFor(_ => vehicle.Bumper)</td>
                 <td>@Html.DisplayFor(_ => vehicle.Type)</td>
-                <td>@Html.DisplayFor(_ => vehicle.Status)</td>
                 <td>@Html.DisplayFor(_ => vehicle.Seats)</td>
                 <td>@Html.DisplayFor(_ => vehicle.Nomenclature)</td>
                 <td>@Html.DisplayFor(_ => vehicle.Registration)</td>
