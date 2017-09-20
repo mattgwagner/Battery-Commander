@@ -75,6 +75,11 @@ namespace BatteryCommander.Web.Services
 			{
 				soldiers = soldiers.Where(_ => _.Gender == query.Gender);
 			}
+
+            if (query.IWQ.HasValue)
+            {
+                soldiers = soldiers.Where(_ => _.IwqQualified == query.IWQ);
+            }
 			
             if (query.EducationComplete.HasValue)
             {
@@ -108,7 +113,7 @@ namespace BatteryCommander.Web.Services
 			
 			public Boolean? DSCA { get; set; }
 			
-			// public Boolean? IWQ { get; set; }
+			public Boolean? IWQ { get; set; }
 			
 			public Gender? Gender { get; set; }
 
