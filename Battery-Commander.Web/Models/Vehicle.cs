@@ -53,9 +53,9 @@ namespace BatteryCommander.Web.Models
 
         public enum VehicleStatus : byte
         {
-            Unknown = byte.MinValue,
+            Unknown = 0,
 
-            FMC = 0,
+            FMC = 1,
 
             NMC = byte.MaxValue
         }
