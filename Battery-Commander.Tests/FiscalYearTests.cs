@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using Xunit;
-using BatteryCommander.Web.Services;
 
 namespace BatteryCommander.Tests
 {

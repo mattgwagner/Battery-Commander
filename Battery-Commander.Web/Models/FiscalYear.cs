@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BatteryCommander.Web.Services
+namespace BatteryCommander.Web.Models
 {
     public enum FiscalYear : byte
     {
