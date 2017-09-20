@@ -4,7 +4,11 @@
 {
     <div>
         <a href="@Url.Action("Details", "ABCP", new { Model.Id })">
-            @if (Model.IsPassing)
+            @if (Model.IsValid)
+            {
+                <span class="label label-warning">Passing (Overdue)</span>
+            }
+            else if (Model.IsPassing)
             {
                 <span class="label label-success">Passing</span>
             }
