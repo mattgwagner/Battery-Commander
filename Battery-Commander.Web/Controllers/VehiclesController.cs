@@ -31,6 +31,7 @@ namespace BatteryCommander.Web.Controllers
                 await db
                 .Vehicles
                 .Include(vehicle => vehicle.Unit)
+                .Where(vehicle => !vehicle.Unit.IgnoreForReports)
                 .OrderBy(vehicle => vehicle.Bumper)
                 .ToListAsync();
 
