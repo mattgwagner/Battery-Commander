@@ -102,9 +102,9 @@ namespace BatteryCommander.Web.Services
 
             public Boolean? IncludeIgnoredUnits { get; set; } = false;
 
-            public Soldier.EventStatus? ABCP { get; set; }
+            public EventStatus? ABCP { get; set; }
 
-            public Soldier.EventStatus? APFT { get; set; }
+            public EventStatus? APFT { get; set; }
 			
 			public Boolean? DSCA { get; set; }
 			
