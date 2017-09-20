@@ -65,7 +65,17 @@ namespace BatteryCommander.Web.Services
                     soldiers = soldiers.Where(_ => _.SSDStatus.CurrentProgress < Decimal.One);
                 }
             }
+			
+			if(query.DSCA.HasValue)
+			{
+				soldiers = soldiers.Where(_ => _.DscaQualified = query.DSCA);
+			}
 
+			if(query.Gender.HasValue)
+			{
+				soldiers = soldiers.Where(_ => _.Gender == query.Gender);
+			}
+			
             if (query.EducationComplete.HasValue)
             {
                 soldiers = soldiers.Where(_ => _.IsEducationComplete == query.EducationComplete);
@@ -95,6 +105,12 @@ namespace BatteryCommander.Web.Services
             public Soldier.EventStatus? ABCP { get; set; }
 
             public Soldier.EventStatus? APFT { get; set; }
+			
+			public Boolean? DSCA { get; set; }
+			
+			// public Boolean? IWQ { get; set; }
+			
+			public Gender? Gender { get; set; }
 
             public Boolean? SSD { get; set; }
 
