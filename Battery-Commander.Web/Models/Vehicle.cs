@@ -48,7 +48,7 @@ namespace BatteryCommander.Web.Models
         {
             HMMWV = 0,
 
-            LMTV = 1
+            MTV = 1
         }
 
         public enum VehicleStatus : byte
