@@ -136,6 +136,32 @@
                     </tr>
                 </tfoot>*@
             </table>
+
+            <h2>@Html.DisplayNameFor(_ => unit.DSCA)</h2>
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <td>@Html.DisplayNameFor(_ => unit.DSCA.Assigned)</td>
+                        <td>@Html.DisplayFor(_ => unit.DSCA.Assigned)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(_ => unit.DSCA.Passed)</td>
+                        <td>@Html.ActionLink(unit.DSCA.Passed.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, dsca = Soldier.EventStatus.Passed })</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(_ => unit.DSCA.Failed)</td>
+                        <td>@Html.ActionLink(unit.DSCA.Failed.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, dsca = Soldier.EventStatus.Failed })</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(_ => unit.DSCA.NotTested)</td>
+                        <td>@Html.ActionLink(unit.DSCA.NotTested.ToString(), "Index", "Soldiers", new { unit = unit.Unit.Id, dsca = Soldier.EventStatus.NotTested })</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(_ => unit.DSCA.PercentPass)</td>
+                        <td>@Html.DisplayFor(_ => unit.DSCA.PercentPass)</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 }
