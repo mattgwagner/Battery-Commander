@@ -35,7 +35,7 @@ namespace BatteryCommander.Web.Controllers
                     {
                         Soldier = soldier,
                         SoldierId = soldier.Id,
-                        IwqQualificationDate = solder.IwqQualificationDate
+                        IwqQualificationDate = soldier.IwqQualificationDate
                     })
                     .ToList()
             });
