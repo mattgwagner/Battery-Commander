@@ -18,9 +18,12 @@ namespace BatteryCommander.Web.Models
         {
             get
             {
-                if (LastApft?.IsPassing == true) return EventStatus.Passed;
+                if (LastApft?.IsValid == true)
+                {
+                    if (LastApft?.IsPassing == true) return EventStatus.Passed;
 
-                if (LastApft?.IsPassing == false) return EventStatus.Failed;
+                    if (LastApft?.IsPassing == false) return EventStatus.Failed;
+                }
 
                 return EventStatus.NotTested;
             }
@@ -43,6 +46,11 @@ namespace BatteryCommander.Web.Models
 
         [Required, DataType(DataType.Date), Column(TypeName = "date"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime Date { get; set; } = DateTime.Today;
+
+        [DateType(DateType.Date)]
+        public DateTime ValidThru => Date.AddDays(Soldier.DaysPerYear);
+
+        public Boolean IsValid => DateTime.Today <= ValidThru;
 
         public int? Age => Soldier?.AgeAsOf(Date);
 

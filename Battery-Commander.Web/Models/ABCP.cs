@@ -19,11 +19,14 @@ namespace BatteryCommander.Web.Models
         {
             get
             {
-                // TODO This doesn't take into account soldiers who passed tape but are still on the ABCP program
+                if (LastAbcp?.IsValid)
+                {
+                    // TODO This doesn't take into account soldiers who passed tape but are still on the ABCP program
 
-                if (LastAbcp?.IsPassing == true) return EventStatus.Passed;
+                    if (LastAbcp?.IsPassing == true) return EventStatus.Passed;
 
-                if (LastAbcp?.IsPassing == false) return EventStatus.Failed;
+                    if (LastAbcp?.IsPassing == false) return EventStatus.Failed;
+                }
 
                 return EventStatus.NotTested;
             }
@@ -42,6 +45,11 @@ namespace BatteryCommander.Web.Models
 
         [Required, DataType(DataType.Date), Column(TypeName = "date"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime Date { get; set; } = DateTime.Today;
+
+        [DateType(DateType.Date)]
+        public DateTime ValidThru => Date.AddDays(Soldier.DaysPerYear);
+
+        public Boolean IsValid => DateTime.Today <= ValidThru;
 
         public int? Age => Soldier?.AgeAsOf(Date);
 
