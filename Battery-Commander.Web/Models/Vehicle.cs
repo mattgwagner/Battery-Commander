@@ -32,6 +32,8 @@ namespace BatteryCommander.Web.Models
         [Required]
         public int Seats { get; set; } = 2;
 
+        // TroopCapacity?
+
         // Chalk Order?
 
         // LIN?
