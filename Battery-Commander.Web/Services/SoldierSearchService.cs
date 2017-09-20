@@ -68,7 +68,7 @@ namespace BatteryCommander.Web.Services
 			
 			if(query.DSCA.HasValue)
 			{
-				soldiers = soldiers.Where(_ => _.DscaQualified = query.DSCA);
+				soldiers = soldiers.Where(_ => _.DscaQualified == query.DSCA);
 			}
 
 			if(query.Gender.HasValue)
