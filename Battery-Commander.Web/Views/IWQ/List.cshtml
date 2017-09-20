@@ -1,32 +1,40 @@
-﻿@model IList<BatteryCommander.Web.Controllers.IWQController.DTO>
+﻿@model BatteryCommander.Web.Controllers.IWQController.IWQListViewModel
 
 @{
     ViewBag.Title = "IWQ Tracker";
 }
 
 <div class="page-header">
-    <h1>@ViewBag.Title <span class="badge">@Model.Count</span></h1>
+    <h1>@ViewBag.Title <span class="badge">@Model.Rows.Count</span></h1>
 </div>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Soldier</th>
-            <th>IWQ Date</th>
-        </tr>
-    </thead>
+@using (Html.BeginForm("Save", "IWQ", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
 
-    <tbody>
-        @for (var i = 0; i < Model.Count; ++i)
-        {
+    <table class="table table-striped">
+        <thead>
             <tr>
-                <td>@Html.DisplayFor(_ => Model[i].Soldier.Unit)</td>
-                <td>
-                    @Html.HiddenFor(_ => Model[i].SoldierId)
-                    @Html.DisplayFor(_ => Model[i].Soldier)
-                </td>
-                <td>@Html.EditorFor(_ => Model[i].QualificationDate)</td>
+                <th>Unit</th>
+                <th>Soldier</th>
+                <th>IWQ Date</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+
+        <tbody>
+            @for (var i = 0; i < Model.Rows.Count; ++i)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(_ => Model.Rows[i].Soldier.Unit)</td>
+                    <td>
+                        @Html.HiddenFor(_ => Model.Rows[i].SoldierId)
+                        @Html.DisplayFor(_ => Model.Rows[i].Soldier)
+                    </td>
+                    <td>@Html.EditorFor(_ => Model.Rows[i].IwqQualificationDate)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <button type="submit" name="Save">Save Updates</button>
+}

@@ -33,11 +33,11 @@ namespace BatteryCommander.Web.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> Save(IEnumerable<DTO> model)
+        public async Task<IActionResult> Save(IWQListViewModel model)
         {
             // For each DTO posted, update the soldier info
 
-            foreach (var dto in model)
+            foreach (var dto in model.Rows)
             {
                 var soldier =
                     await db
@@ -45,7 +45,7 @@ namespace BatteryCommander.Web.Controllers
                     .Where(_ => _.Id == dto.SoldierId)
                     .SingleOrDefaultAsync();
 
-                // Update IWQ info
+                soldier.IwqQualificationDate = dto.IwqQualificationDate;
             }
 
             await db.SaveChangesAsync();
@@ -53,14 +53,19 @@ namespace BatteryCommander.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public class DTO
+        public class IwqListViewModel
         {
-            public Soldier Soldier { get; set; }
+            public IList<Row> Rows { get; set; }
 
-            public int SoldierId { get; set; }
+            public class Row
+            {
+                public Soldier Soldier { get; set; }
 
-            [DataType(DataType.Date)]
-            public DateTime? QualificationDate { get; set; }
+                public int SoldierId { get; set; }
+
+                [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
+                public DateTime? IwqQualificationDate { get; set; }
+            }
         }
     }
 }
