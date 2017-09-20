@@ -63,8 +63,8 @@ namespace BatteryCommander.Web.Controllers
                         {
                             Assigned = soldiers.Count(),
                             Passed = soldiers.Where(soldier => soldier.IwqQualified).Count(),
-                            Failed = soldiers.Where(soldier => soldier.IwqQualifificationDate.HasValue && !soldier.IwqQualified).Count(),
-                            NotTested = soldiers.Where(soldier => !soldier.IwqQualifificationDate.HasValue).Count()
+                            Failed = soldiers.Where(soldier => soldier.IwqQualificationDate.HasValue && !soldier.IwqQualified).Count(),
+                            NotTested = soldiers.Where(soldier => !soldier.IwqQualificationDate.HasValue).Count()
                         },
                         SSD =
                             RankExtensions
