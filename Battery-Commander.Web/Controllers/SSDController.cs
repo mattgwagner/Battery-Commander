@@ -19,6 +19,10 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> Index(SoldierSearchService.Query query)
         {
+            // Ensure we're only displaying Soldiers we care about here
+
+            query.OnlyEnlisted = true;
+
             return View("List", await SoldierSearchService.Filter(db, query));
         }
 
