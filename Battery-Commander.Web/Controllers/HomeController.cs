@@ -40,21 +40,21 @@ namespace BatteryCommander.Web.Controllers
                         Unit = unit,
                         APFT = new UnitStatsViewModel.Stat
                         {
-                            Assigned = soldiers.Count,
+                            Assigned = soldiers.Count(),
                             Passed = soldiers.Where(soldier => soldier.ApftStatus == Soldier.EventStatus.Passed).Count(),
                             Failed = soldiers.Where(soldier => soldier.ApftStatus == Soldier.EventStatus.Failed).Count(),
                             NotTested = soldiers.Where(soldier => soldier.ApftStatus == Soldier.EventStatus.NotTested).Count()
                         },
                         ABCP = new UnitStatsViewModel.Stat
                         {
-                            Assigned = soldiers.Count,
+                            Assigned = soldiers.Count(),
                             Passed = soldiers.Where(soldier => soldier.AbcpStatus == Soldier.EventStatus.Passed).Count(),
                             Failed = soldiers.Where(soldier => soldier.AbcpStatus == Soldier.EventStatus.Failed).Count(),
                             NotTested = soldiers.Where(soldier => soldier.AbcpStatus == Soldier.EventStatus.NotTested).Count()
                         },
                         DSCA = new UnitStatsViewModel.Stat
                         {
-                            Assigned = soldiers.Count,
+                            Assigned = soldiers.Count(),
                             Passed = soldiers.Where(soldier => soldier.DscaQualified).Count(),
                             Failed = soldiers.Where(soldier => soldier.DscaQualificationDate.HasValue && !soldier.DscaQualified).Count(),
                             NotTested = soldiers.Where(soldier => !soldier.DscaQualificationDate.HasValue).Count()
