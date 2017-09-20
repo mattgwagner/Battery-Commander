@@ -92,14 +92,5 @@ namespace BatteryCommander.Web.Models
         {
             if (DateOfBirth > DateTime.Today.AddYears(-17)) yield return new ValidationResult("DateOfBirth doesn't seem right", new[] { nameof(DateOfBirth) });
         }
-
-        public enum EventStatus
-        {
-            NotTested,
-
-            Passed,
-
-            Failed
-        }
     }
 }
