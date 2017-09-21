@@ -17,12 +17,6 @@ namespace BatteryCommander.Web.Controllers
             this.db = db;
         }
 
-        // Add Vehicle
-
-        // Edit Vehicle
-
-        // Delete Vehicle (?)
-
         public async Task<IActionResult> Index()
         {
             // List of Vehicles - by unit, by status
