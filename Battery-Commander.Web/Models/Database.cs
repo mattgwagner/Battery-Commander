@@ -24,6 +24,21 @@ namespace BatteryCommander.Web.Models
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder
+                .Entity<Unit>()
+                .HasIndex(unit => unit.UIC)
+                .IsUnique();
+
+            builder
+                .Entity<Soldier>()
+                .HasIndex(soldier => new { soldier.FirstName, soldier.MiddleName, soldier.LastName })
+                .IsUnique();
+
+            builder
+                .Entity<Soldier>()
+                .HasIndex(soldier => soldier.DoDId)
+                .IsUnique();
+
+            builder
                 .Entity<Vehicle>()
                 .HasIndex(vehicle => vehicle.Registration)
                 .IsUnique();
