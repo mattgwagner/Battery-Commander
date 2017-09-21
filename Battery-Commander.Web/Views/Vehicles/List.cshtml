@@ -51,7 +51,7 @@
                     }
                 </td>
                 <td class="update-adriver" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper">
-                    @if (vehicle.DriverId.HasValue)
+                    @if (vehicle.A_DriverId.HasValue)
                     {
                         <span class="update-adriver" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper">@Html.DisplayFor(_ => vehicle.A_Driver)</span>
                     }
