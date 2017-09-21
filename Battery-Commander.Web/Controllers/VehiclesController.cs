@@ -24,6 +24,8 @@ namespace BatteryCommander.Web.Controllers
         {
             // List of Vehicles - by unit, by status
 
+            ViewBag.Soldiers = await Get_Available_Drivers(db);
+
             var vehicles =
                 await db
                 .Vehicles
@@ -70,6 +72,22 @@ namespace BatteryCommander.Web.Controllers
             {
                 db.Vehicles.Update(model);
             }
+
+            await db.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> SetDriver(int vehicleId, int? driverId)
+        {
+            var vehicle =
+                await db
+                .Vehicles
+                .Where(_ => _.Id == vehicleId)
+                .SingleOrDefaultAsync();
+
+            vehicle.DriverId = driverId;
 
             await db.SaveChangesAsync();
 
