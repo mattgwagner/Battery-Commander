@@ -44,18 +44,24 @@ namespace BatteryCommander.Web.Models
 
         // Chalk Order?
 
-        // LIN?
+        //public Boolean HasFuelCard { get; set; }
 
-        // Fuel Card? Towbar? Water Buffalo?
+        //public Boolean HasTowBar { get; set; }
+
+        //public Boolean HasWaterBuffalo { get; set; }
 
         // Fuel Level?
-
-        // Driver, A-Driver, Passengers, Assigned Section?
 
         // Has JBC-P?
 
         // Location?
-        
+
+        public Soldier Driver { get; set; }
+
+        public Soldier A_Driver { get; set; }
+
+        // Passengers
+
         public String Notes { get; set; }
 
         public enum VehicleType : byte
