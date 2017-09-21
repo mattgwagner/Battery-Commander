@@ -40,24 +40,24 @@
                 <td>@Html.DisplayFor(_ => vehicle.Registration)</td>
                 <td>@Html.DisplayFor(_ => vehicle.Serial)</td>
                 <td>@Html.DisplayFor(_ => vehicle.LIN)</td>
-                <td >
+                <td>
                     @if (vehicle.DriverId.HasValue)
                     {
-                        <span class="update-driver" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper">@Html.DisplayFor(_ => vehicle.Driver)</span>
+                        <span class="update-driver" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper" data-driver="@vehicle.DriverId" data-adriver="@vehicle.A_DriverId">@Html.DisplayFor(_ => vehicle.Driver)</span>
                     }
                     else
                     {
-                        <span class="update-driver label label-info" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper">(Empty)</span>
+                        <span class="update-driver label label-info" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper" data-driver="@vehicle.DriverId" data-adriver="@vehicle.A_DriverId">(Empty)</span>
                     }
                 </td>
-                <td class="update-adriver" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper">
+                <td>
                     @if (vehicle.A_DriverId.HasValue)
                     {
-                        <span class="update-adriver" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper">@Html.DisplayFor(_ => vehicle.A_Driver)</span>
+                        <span class="update-driver" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper" data-driver="@vehicle.DriverId" data-adriver="@vehicle.A_DriverId">@Html.DisplayFor(_ => vehicle.A_Driver)</span>
                     }
                     else
                     {
-                        <span class="update-adriver label label-info" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper">(Empty)</span>
+                        <span class="update-driver label label-info" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper" data-driver="@vehicle.DriverId" data-adriver="@vehicle.A_DriverId">(Empty)</span>
                     }
                 </td>
                 <td>@Html.DisplayFor(_ => vehicle.Notes)</td>
@@ -67,27 +67,20 @@
     </tbody>
 </table>
 
-<div style="display:none" id="dialog-driver" title="Update Driver">
-    @using (Html.BeginForm("SetDriver", "Vehicles", FormMethod.Post))
+<div style="display:none" id="dialog" title="Update Driver/A-Driver">
+    @using (Html.BeginForm("SetDriver", "Vehicles", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
-        <b id="title"></b>
-
         <input id="vehicleId" name="vehicleId" type="hidden" />
 
-        @Html.DropDownList("driverId", (IEnumerable<SelectListItem>)ViewBag.Soldiers, "-- Select Driver --")
+        <div class="form-group form-group-lg">
+            @Html.Label("Driver")
+            @Html.DropDownList("driverId", (IEnumerable<SelectListItem>)ViewBag.Soldiers, "-- Select Driver --")
+        </div>
 
-        <button type="submit" id="save">Save</button>
-    }
-</div>
-
-<div style="display:none" id="dialog-adriver" title="Update A-Driver">
-    @using (Html.BeginForm("SetADriver", "Vehicles", FormMethod.Post))
-    {
-        <b id="title"></b>
-
-        <input id="vehicleId" name="vehicleId" type="hidden" />
-
-        @Html.DropDownList("adriverId", (IEnumerable<SelectListItem>)ViewBag.Soldiers, "-- Select A-Driver --")
+        <div class="form-group form-group-lg">
+            @Html.Label("A-Driver")
+            @Html.DropDownList("adriverId", (IEnumerable<SelectListItem>)ViewBag.Soldiers, "-- Select A-Driver --")
+        </div>
 
         <button type="submit" id="save">Save</button>
     }
@@ -98,20 +91,11 @@
         $(document).ready(function () {
             $("td .update-driver").click(function (e) {
                 e.preventDefault();
-                $("#title").html('Driver for: ' + $(this).data('bumper'));
                 $("#vehicleId").val($(this).data('vehicle'));
+                $("#driverId").val($(this).data('driver'));
+                $("#adriverId").val($(this).data('adriver'));
 
-                $("#dialog-driver").dialog({
-                    modal: true
-                });
-            });
-
-            $("td .update-adriver").click(function (e) {
-                e.preventDefault();
-                $("#title").html('A-Driver for: ' + $(this).data('bumper'));
-                $("#vehicleId").val($(this).data('vehicle'));
-
-                $("#dialog-adriver").dialog({
+                $("#dialog").dialog({
                     modal: true
                 });
             });
