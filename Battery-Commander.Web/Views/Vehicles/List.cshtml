@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Vehicle Tracker";
 
+    var fmc_count = Model.Where(_ => _.Status == Vehicle.VehicleStatus.FMC).Count();
     var driver_count = Model.Where(_ => _.DriverId.HasValue).Count();
     var adriver_count = Model.Where(_ => _.A_DriverId.HasValue).Count();
     var pax_count = driver_count + adriver_count;
@@ -12,7 +13,7 @@
     <h1>
         @ViewBag.Title
         @Html.ActionLink("Add New", "New", "Vehicles", null, new { @class = "btn btn-default" })
-        <small>FMC: <span class="badge">@Model.Where(_ => _.Status == Vehicle.VehicleStatus.FMC).Count()</span> PAX: <span class="badge">@pax_count</span></small>
+        <small>FMC: <span class="badge">fmc_count</span> PAX: <span class="badge">@pax_count</span></small>
     </h1>
 </div>
 
