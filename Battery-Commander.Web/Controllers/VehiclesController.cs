@@ -1,7 +1,10 @@
 ﻿using BatteryCommander.Web.Models;
+using BatteryCommander.Web.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -36,7 +39,7 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> New()
         {
-            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db);
+            ViewBag.Soldiers = await Get_Available_Drivers(db);
             ViewBag.Units = await UnitsController.GetDropDownList(db);
 
             return View(nameof(Edit), new Vehicle { });
@@ -44,7 +47,7 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db);
+            ViewBag.Soldiers = await Get_Available_Drivers(db);
             ViewBag.Units = await UnitsController.GetDropDownList(db);
 
             var model =
@@ -86,6 +89,42 @@ namespace BatteryCommander.Web.Controllers
             await db.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
+        }
+
+        public static async Task<IEnumerable<SelectListItem>> Get_Available_Drivers(Database db)
+        {
+            var available_drivers = new List<Soldier>();
+
+            // Current soldiers currently driving
+
+            var current_drivers =
+                await db
+                .Vehicles
+                .Select(vehicle => vehicle.Driver)
+                .Select(driver => driver.Id)
+                .ToListAsync();
+
+            // Get all soldiers
+
+            foreach (var soldier in await SoldierSearchService.Filter(db, new SoldierSearchService.Query { }))
+            {
+                // TODO Remove ones unlicensed
+
+                // Remove ones that are already driving other vehicles
+
+                if (!current_drivers.Contains(soldier.Id))
+                {
+                    available_drivers.Add(soldier);
+                }
+            }
+
+            return from soldier in available_drivers
+                   orderby soldier.LastName
+                   select new SelectListItem
+                   {
+                       Text = $"{soldier}",
+                       Value = $"{soldier.Id}"
+                   };
         }
     }
 }
