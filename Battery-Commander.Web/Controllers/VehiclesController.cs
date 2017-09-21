@@ -1,10 +1,8 @@
 ﻿using BatteryCommander.Web.Models;
-using BatteryCommander.Web.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -89,6 +87,23 @@ namespace BatteryCommander.Web.Controllers
 
             vehicle.DriverId = driverId;
             vehicle.A_DriverId = adriverId;
+
+            await db.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> SetStatus(int vehicleId, Vehicle.VehicleStatus status, String notes)
+        {
+            var vehicle =
+                await db
+                .Vehicles
+                .Where(_ => _.Id == vehicleId)
+                .SingleOrDefaultAsync();
+
+            vehicle.Status = status;
+            vehicle.Notes = notes;
 
             await db.SaveChangesAsync();
 

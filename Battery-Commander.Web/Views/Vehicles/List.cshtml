@@ -31,7 +31,11 @@
         @foreach (var vehicle in Model)
         {
             <tr>
-                <td>@Html.DisplayFor(_ => vehicle, "VehicleStatus")</td>
+                <td>
+                    <span class="update-status" data-vehicle="@vehicle.Id" data-status="@((int)vehicle.Status)" data-notes="@vehicle.Notes">
+                        @Html.DisplayFor(_ => vehicle, "VehicleStatus")
+                    </span>
+                </td>
                 <td>@Html.DisplayFor(_ => vehicle.Unit)</td>
                 <td>@Html.DisplayFor(_ => vehicle.Bumper)</td>
                 <td>@Html.DisplayFor(_ => vehicle.Type)</td>
@@ -67,7 +71,7 @@
     </tbody>
 </table>
 
-<div style="display:none" id="dialog" title="Update Driver/A-Driver">
+<div style="display:none" id="set-driver" title="Update Driver/A-Driver">
     @using (Html.BeginForm("SetDriver", "Vehicles", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
         <input id="vehicleId" name="vehicleId" type="hidden" />
@@ -86,16 +90,45 @@
     }
 </div>
 
+<div style="display:none" id="set-status" title="Update Vehicle Status">
+    @using (Html.BeginForm("SetStatus", "Vehicles", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        <input id="vehicleId" name="vehicleId" type="hidden" />
+
+        <div class="form-group form-group-lg">
+            @Html.Label("Status")
+            @Html.DropDownList("status", Html.GetEnumSelectList<Vehicle.VehicleStatus>())
+        </div>
+
+        <div class="form-group form-group-lg">
+            @Html.Label("Notes")
+            @Html.TextArea("notes")
+        </div>
+
+        <button type="submit" id="save">Save</button>
+    }
+</div>
+
 @section Scripts{
     <script type="text/javascript">
         $(document).ready(function () {
             $("td .update-driver").click(function (e) {
                 e.preventDefault();
-                $("#vehicleId").val($(this).data('vehicle'));
+                $("[name='vehicleId']").val($(this).data('vehicle'));
                 $("#driverId").val($(this).data('driver'));
                 $("#adriverId").val($(this).data('adriver'));
 
-                $("#dialog").dialog({
+                $("#set-driver").dialog({
+                    modal: true
+                });
+            });
+
+            $("td .update-status").click(function (e) {
+                $("[name='vehicleId']").val($(this).data('vehicle'));
+                $("#status").val($(this).data('status'));
+                $("#notes").val($(this).data('notes'));
+
+                $("#set-status").dialog({
                     modal: true
                 });
             });
