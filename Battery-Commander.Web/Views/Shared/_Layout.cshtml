@@ -106,6 +106,7 @@
             $('#dt').DataTable({
                 stateSave: true,
                 dom: 'Bfrtip',
+                responsive: true,
                 buttons: [
                     { extend: 'csvHtml5', title: '@ViewBag.Title @DateTime.Today.ToString("u")', exportOptions: { columns: ':visible', orthogonal: 'sort' } },
                     { extend: 'excelHtml5', title: '@ViewBag.Title @DateTime.Today.ToString("u")', exportOptions: { columns: ':visible', orthogonal: 'sort' } },
