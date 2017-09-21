@@ -133,11 +133,11 @@ namespace BatteryCommander.Web.Controllers
             return soldiers.SingleOrDefault();
         }
 
-        public static async Task<IEnumerable<SelectListItem>> GetDropDownList(Database db)
+        public static async Task<IEnumerable<SelectListItem>> GetDropDownList(Database db, Boolean includeIgnoredUnits = true)
         {
             var soldiers = await SoldierSearchService.Filter(db, new SoldierSearchService.Query
             {
-                IncludeIgnoredUnits = true
+                IncludeIgnoredUnits = includeIgnoredUnits
             });
 
             return soldiers.Select(soldier => new SelectListItem
