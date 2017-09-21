@@ -58,6 +58,7 @@ namespace BatteryCommander.Web.Models
 
         public Soldier Driver { get; set; }
 
+        [Display(Name = "A-Driver")]
         public Soldier A_Driver { get; set; }
 
         // Passengers
