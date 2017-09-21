@@ -40,8 +40,26 @@
                 <td>@Html.DisplayFor(_ => vehicle.Registration)</td>
                 <td>@Html.DisplayFor(_ => vehicle.Serial)</td>
                 <td>@Html.DisplayFor(_ => vehicle.LIN)</td>
-                <td><span class="update-driver" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper">@Html.DisplayFor(_ => vehicle.Driver)</span></td>
-                <td><span class="update-adriver" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper">@Html.DisplayFor(_ => vehicle.A_Driver)</span></td>
+                <td >
+                    @if (vehicle.DriverId.HasValue)
+                    {
+                        <span class="update-driver" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper">@Html.DisplayFor(_ => vehicle.Driver)</span>
+                    }
+                    else
+                    {
+                        <span class="update-driver label label-info" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper">(Empty)</span>
+                    }
+                </td>
+                <td class="update-adriver" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper">
+                    @if (vehicle.DriverId.HasValue)
+                    {
+                        <span class="update-adriver" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper">@Html.DisplayFor(_ => vehicle.A_Driver)</span>
+                    }
+                    else
+                    {
+                        <span class="update-adriver label label-info" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper">(Empty)</span>
+                    }
+                </td>
                 <td>@Html.DisplayFor(_ => vehicle.Notes)</td>
                 <td>@Html.ActionLink("Edit", "Edit", new { vehicle.Id })
             </tr>
@@ -49,7 +67,7 @@
     </tbody>
 </table>
 
-<div style="display:none" id="dialog" title="Update Driver">
+<div style="display:none" id="dialog-driver" title="Update Driver">
     @using (Html.BeginForm("SetDriver", "Vehicles", FormMethod.Post))
     {
         <b id="title"></b>
@@ -60,7 +78,19 @@
 
         <button type="submit" id="save">Save</button>
     }
+</div>
 
+<div style="display:none" id="dialog-adriver" title="Update A-Driver">
+    @using (Html.BeginForm("SetADriver", "Vehicles", FormMethod.Post))
+    {
+        <b id="title"></b>
+
+        <input id="vehicleId" name="vehicleId" type="hidden" />
+
+        @Html.DropDownList("adriverId", (IEnumerable<SelectListItem>)ViewBag.Soldiers, "-- Select A-Driver --")
+
+        <button type="submit" id="save">Save</button>
+    }
 </div>
 
 @section Scripts{
@@ -71,7 +101,17 @@
                 $("#title").html('Driver for: ' + $(this).data('bumper'));
                 $("#vehicleId").val($(this).data('vehicle'));
 
-                $("#dialog").dialog({
+                $("#dialog-driver").dialog({
+                    modal: true
+                });
+            });
+
+            $("td .update-adriver").click(function (e) {
+                e.preventDefault();
+                $("#title").html('A-Driver for: ' + $(this).data('bumper'));
+                $("#vehicleId").val($(this).data('vehicle'));
+
+                $("#dialog-adriver").dialog({
                     modal: true
                 });
             });

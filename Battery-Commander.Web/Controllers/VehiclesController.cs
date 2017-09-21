@@ -95,6 +95,22 @@ namespace BatteryCommander.Web.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> SetADriver(int vehicleId, int? adriverId)
+        {
+            var vehicle =
+                await db
+                .Vehicles
+                .Where(_ => _.Id == vehicleId)
+                .SingleOrDefaultAsync();
+
+            vehicle.A_DriverId = adriverId;
+
+            await db.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
             var vehicle = await db
