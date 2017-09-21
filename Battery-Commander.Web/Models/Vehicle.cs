@@ -17,11 +17,13 @@ namespace BatteryCommander.Web.Models
         [Required]
         public VehicleStatus Status { get; set; } = VehicleStatus.FMC;
 
-        [Required, StringLength(10)]
-        public String Bumper { get; set; }
-
         [Required]
         public VehicleType Type { get; set; } = VehicleType.HMMWV;
+
+        // Bumper, Registration, and Serial should be UNIQUE -- configured in Database.OnModelCreating
+
+        [Required, StringLength(10)]
+        public String Bumper { get; set; }
 
         [StringLength(10)]
         public String Registration { get; set; }
@@ -31,6 +33,9 @@ namespace BatteryCommander.Web.Models
 
         [StringLength(20)]
         public String Nomenclature { get; set; }
+
+        [StringLength(10)]
+        public String LIN { get; set; }
 
         [Required]
         public int Seats { get; set; } = 2;

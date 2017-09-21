@@ -19,6 +19,7 @@
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Nomenclature)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Registration)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Serial)</th>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().LIN)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Notes)</th>
             <th></th>
         </tr>
@@ -36,6 +37,7 @@
                 <td>@Html.DisplayFor(_ => vehicle.Nomenclature)</td>
                 <td>@Html.DisplayFor(_ => vehicle.Registration)</td>
                 <td>@Html.DisplayFor(_ => vehicle.Serial)</td>
+                <td>@Html.DisplayFor(_ => vehicle.LIN)</td>
                 <td>@Html.DisplayFor(_ => vehicle.Notes)</td>
                 <td>@Html.ActionLink("Edit", "Edit", new { vehicle.Id })
             </tr>

@@ -21,6 +21,23 @@ namespace BatteryCommander.Web.Models
             builder.UseSqlite("Data Source=Data.db");
         }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder
+                .Entity<Vehicle>()
+                .HasIndex(vehicle => vehicle.Registration)
+                .IsUnique();
+
+            builder
+                .Entity<Vehicle>()
+                .HasIndex(vehicle => vehicle.Serial)
+                .IsUnique();
+
+            builder.Entity<Vehicle>()
+                .HasIndex(vehicle => new { vehicle.UnitId, vehicle.Bumper })
+                .IsUnique();
+        }
+
         public static void Init(Database db)
         {
             db.Database.Migrate();

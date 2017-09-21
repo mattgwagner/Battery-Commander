@@ -8,9 +8,10 @@ using BatteryCommander.Web.Models;
 namespace BatteryCommander.Web.Migrations
 {
     [DbContext(typeof(Database))]
-    partial class DatabaseModelSnapshot : ModelSnapshot
+    [Migration("20170921142152_Vehicle-Model-Tweaks")]
+    partial class VehicleModelTweaks
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1");
