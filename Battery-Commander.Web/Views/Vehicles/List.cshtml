@@ -124,8 +124,8 @@
             $("td .update-driver").click(function (e) {
                 e.preventDefault();
                 $("[name='vehicleId']").val($(this).data('vehicle'));
-                $("#driverId").val($(this).data('driver'));
-                $("#adriverId").val($(this).data('adriver'));
+                $("#driverId").val($(this).data('driver')).trigger('change');
+                $("#adriverId").val($(this).data('adriver')).trigger('change');
 
                 $("#set-driver").dialog({
                     modal: true
@@ -134,7 +134,7 @@
 
             $("td .update-status").click(function (e) {
                 $("[name='vehicleId']").val($(this).data('vehicle'));
-                $("#status").val($(this).data('status'));
+                $("#status").val($(this).data('status')).trigger('change');
                 $("#notes").val($(this).data('notes'));
 
                 $("#set-status").dialog({
