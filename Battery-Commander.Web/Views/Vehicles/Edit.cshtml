@@ -53,12 +53,12 @@
 
     <div class="form-group form-group-lg">
         @Html.DisplayNameFor(model => model.Driver)
-        @Html.DropDownListFor(model => model.Driver, (IEnumerable<SelectListItem>)ViewBag.Soldiers, "-- Select Driver --")
+        @Html.DropDownListFor(model => model.DriverId, (IEnumerable<SelectListItem>)ViewBag.Soldiers, "-- Select Driver --")
     </div>
 
     <div class="form-group form-group-lg">
         @Html.DisplayNameFor(model => model.A_Driver)
-        @Html.DropDownListFor(model => model.A_Driver, (IEnumerable<SelectListItem>)ViewBag.Soldiers, "-- Select A-Driver --")
+        @Html.DropDownListFor(model => model.A_DriverId, (IEnumerable<SelectListItem>)ViewBag.Soldiers, "-- Select A-Driver --")
     </div>
 
     <div class="form-group form-group-lg">

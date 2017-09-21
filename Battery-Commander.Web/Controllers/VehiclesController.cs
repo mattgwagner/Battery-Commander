@@ -100,6 +100,7 @@ namespace BatteryCommander.Web.Controllers
             var current_drivers =
                 await db
                 .Vehicles
+                .Where(vehicle => vehicle.Driver != null)
                 .Select(vehicle => vehicle.Driver)
                 .Select(driver => driver.Id)
                 .ToListAsync();
