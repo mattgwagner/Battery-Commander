@@ -1,47 +1,41 @@
-﻿@model IEnumerable<Vehicle>
+﻿@model VehicleListViewModel
 
 @{
     ViewBag.Title = "Vehicle Tracker";
-
-    var fmc_count = Model.Where(_ => _.Status == Vehicle.VehicleStatus.FMC).Count();
-    var driver_count = Model.Where(_ => _.Status == Vehicle.VehicleStatus.FMC).Where(_ => _.DriverId.HasValue).Count();
-    var adriver_count = Model.Where(_ => _.Status == Vehicle.VehicleStatus.FMC).Where(_ => _.A_DriverId.HasValue).Count();
-    var pax_count = driver_count + adriver_count;
-    var seats = Model.Where(_ => _.Status == Vehicle.VehicleStatus.FMC).Select(_ => _.Seats).Sum();
 }
 
 <div class="page-header">
     <h1>
         @ViewBag.Title
         @Html.ActionLink("Add New", "New", "Vehicles", null, new { @class = "btn btn-default" })
-        <small>FMC: <span class="badge">@fmc_count</span> PAX: <span class="badge">@pax_count</span> SEATS: <span class="badge">@seats</span></small>
+        <small>FMC: <span class="badge">@Model.FMC</span> PAX: <span class="badge">@Model.PAX</span> SEATS: <span class="badge">@Model.Seats</span></small>
     </h1>
 </div>
 
 <table class="table table-striped display nowrap" width="100%" id="dt">
     <thead>
         <tr>
-            <th data-priority="1">@Html.DisplayNameFor(_ => _.FirstOrDefault().Status)</th>
-            <th data-priority="10001">@Html.DisplayNameFor(_ => _.FirstOrDefault().Unit)</th>
-            <th data-priority="1">@Html.DisplayNameFor(_ => _.FirstOrDefault().Bumper)</th>
-            <th data-priority="4">@Html.DisplayNameFor(_ => _.FirstOrDefault().Type)</th>
-            <th data-priority="4">@Html.DisplayNameFor(_ => _.FirstOrDefault().Seats)</th>
-            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Nomenclature)</th>
-            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Registration)</th>
-            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Serial)</th>
-            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().LIN)</th>
-            <th data-priority="2">@Html.DisplayNameFor(_ => _.FirstOrDefault().Driver)</th>
-            <th data-priority="2">@Html.DisplayNameFor(_ => _.FirstOrDefault().A_Driver)</th>
-            <th data-priority="3">@Html.DisplayNameFor(_ => _.FirstOrDefault().HasFuelCard)</th>
-            <th data-priority="3">@Html.DisplayNameFor(_ => _.FirstOrDefault().HasTowBar)</th>
-            <th data-priority="3">@Html.DisplayNameFor(_ => _.FirstOrDefault().HasJBCP)</th>
-            <th data-priority="3">@Html.DisplayNameFor(_ => _.FirstOrDefault().Notes)</th>
+            <th data-priority="1">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Status)</th>
+            <th data-priority="10001">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Unit)</th>
+            <th data-priority="1">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Bumper)</th>
+            <th data-priority="4">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Type)</th>
+            <th data-priority="4">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Seats)</th>
+            <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Nomenclature)</th>
+            <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Registration)</th>
+            <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Serial)</th>
+            <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().LIN)</th>
+            <th data-priority="2">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Driver)</th>
+            <th data-priority="2">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().A_Driver)</th>
+            <th data-priority="3">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().HasFuelCard)</th>
+            <th data-priority="3">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().HasTowBar)</th>
+            <th data-priority="3">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().HasJBCP)</th>
+            <th data-priority="3">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Notes)</th>
             <th>Edit</th>
         </tr>
     </thead>
 
     <tbody>
-        @foreach (var vehicle in Model)
+        @foreach (var vehicle in Model.Vehicles)
         {
             <tr>
                 <td>
@@ -94,12 +88,12 @@
 
         <div class="form-group form-group-lg">
             @Html.Label("Driver")
-            @Html.DropDownList("driverId", (IEnumerable<SelectListItem>)ViewBag.Soldiers, "-- Select Driver --")
+            @Html.DropDownList("driverId", Model.Soldiers, "-- Select Driver --")
         </div>
 
         <div class="form-group form-group-lg">
             @Html.Label("A-Driver")
-            @Html.DropDownList("adriverId", (IEnumerable<SelectListItem>)ViewBag.Soldiers, "-- Select A-Driver --")
+            @Html.DropDownList("adriverId", Model.Soldiers, "-- Select A-Driver --")
         </div>
 
         <button type="submit" id="save">Save</button>

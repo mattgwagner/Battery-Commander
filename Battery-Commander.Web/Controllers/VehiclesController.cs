@@ -22,19 +22,19 @@ namespace BatteryCommander.Web.Controllers
         {
             // List of Vehicles - by unit, by status
 
-            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, includeIgnoredUnits: false);
-
-            var vehicles =
-                await db
-                .Vehicles
-                .Include(vehicle => vehicle.Unit)
-                .Include(vehicle => vehicle.Driver)
-                .Include(vehicle => vehicle.A_Driver)
-                .Where(vehicle => !vehicle.Unit.IgnoreForReports)
-                .OrderBy(vehicle => vehicle.Bumper)
-                .ToListAsync();
-
-            return View("List", vehicles);
+            return View("List", new VehicleListViewModel
+            {
+                Soldiers = await SoldiersController.GetDropDownList(db, includeIgnoredUnits: false),
+                Vehicles =
+                    await db
+                    .Vehicles
+                    .Include(vehicle => vehicle.Unit)
+                    .Include(vehicle => vehicle.Driver)
+                    .Include(vehicle => vehicle.A_Driver)
+                    .Where(vehicle => !vehicle.Unit.IgnoreForReports)
+                    .OrderBy(vehicle => vehicle.Bumper)
+                    .ToListAsync()
+            });
         }
 
         public async Task<IActionResult> New()
