@@ -34,6 +34,7 @@
             <th data-priority="2">@Html.DisplayNameFor(_ => _.FirstOrDefault().A_Driver)</th>
             <th data-priority="3">@Html.DisplayNameFor(_ => _.FirstOrDefault().HasFuelCard)</th>
             <th data-priority="3">@Html.DisplayNameFor(_ => _.FirstOrDefault().HasTowBar)</th>
+            <th data-priority="3">@Html.DisplayNameFor(_ => _.FirstOrDefault().HasJBCP)</th>
             <th data-priority="3">@Html.DisplayNameFor(_ => _.FirstOrDefault().Notes)</th>
             <th>Edit</th>
         </tr>
@@ -78,6 +79,7 @@
                 </td>
                 <td>@Html.DisplayFor(_ => vehicle.HasFuelCard)</td>
                 <td>@Html.DisplayFor(_ => vehicle.HasTowBar)</td>
+                <td>@Html.DisplayFor(_ => vehicle.HasJBCP)</td>
                 <td>@Html.DisplayFor(_ => vehicle.Notes)</td>
                 <td>@Html.ActionLink("Edit", "Edit", new { vehicle.Id })
             </tr>

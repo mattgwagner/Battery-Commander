@@ -50,9 +50,10 @@ namespace BatteryCommander.Web.Models
         [Display(Name = "Tow Bar")]
         public Boolean HasTowBar { get; set; }
 
-        // Fuel Level?
+        [Display(Name = "JBC-P")]
+        public Boolean HasJBCP { get; set; }
 
-        // Has JBC-P?
+        // Fuel Level?
 
         // Location?
 
