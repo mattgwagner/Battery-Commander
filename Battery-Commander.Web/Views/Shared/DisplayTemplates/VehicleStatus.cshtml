@@ -8,9 +8,9 @@
 
     case Vehicle.VehicleStatus.NMC:
         <span class="label label-danger">NMC</span>
-        return;
+                return;
 
-    default:
-        <span class="label label-warning">@Model</span>
+    case Vehicle.VehicleStatus.Unknown:
+        <span class="label label-warning">Unknown</span>
         return;
 }
