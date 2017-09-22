@@ -31,6 +31,8 @@
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().LIN)</th>
             <th data-priority="2">@Html.DisplayNameFor(_ => _.FirstOrDefault().Driver)</th>
             <th data-priority="2">@Html.DisplayNameFor(_ => _.FirstOrDefault().A_Driver)</th>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().HasFuelCard)</th>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().HasTowBar)</th>
             <th data-priority="3">@Html.DisplayNameFor(_ => _.FirstOrDefault().Notes)</th>
             <th>Edit</th>
         </tr>
@@ -73,6 +75,8 @@
                         <span class="update-driver label label-default" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper" data-driver="@vehicle.DriverId" data-adriver="@vehicle.A_DriverId">(Empty)</span>
                     }
                 </td>
+                <td>@Html.DisplayFor(_ => vehicle.HasFuelCard)</td>
+                <td>@Html.DisplayFor(_ => vehicle.HasTowBar)</td>
                 <td>@Html.DisplayFor(_ => vehicle.Notes)</td>
                 <td>@Html.ActionLink("Edit", "Edit", new { vehicle.Id })
             </tr>

@@ -44,11 +44,9 @@ namespace BatteryCommander.Web.Models
 
         // Chalk Order?
 
-        //public Boolean HasFuelCard { get; set; }
+        public Boolean HasFuelCard { get; set; }
 
-        //public Boolean HasTowBar { get; set; }
-
-        //public Boolean HasWaterBuffalo { get; set; }
+        public Boolean HasTowBar { get; set; }
 
         // Fuel Level?
 
