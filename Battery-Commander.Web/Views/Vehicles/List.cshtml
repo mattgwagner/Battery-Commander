@@ -71,9 +71,24 @@
                         <span class="update-driver label label-default" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper" data-driver="@vehicle.DriverId" data-adriver="@vehicle.A_DriverId">(Empty)</span>
                     }
                 </td>
-                <td>@Html.DisplayFor(_ => vehicle.HasFuelCard)</td>
-                <td>@Html.DisplayFor(_ => vehicle.HasTowBar)</td>
-                <td>@Html.DisplayFor(_ => vehicle.HasJBCP)</td>
+                <td>
+                    @if(vehicle.HasFuelCard)
+                    {
+                        <span class="label label-success">Fuel Card</span>
+                    }
+                </td>
+                <td>
+                    @if(vehicle.HasTowBar)
+                    {
+                        <span class="label label-success">TowBar</span>
+                    }
+                </td>
+                <td>
+                    @if(vehicle.HasJBCP)
+                    {
+                        <span class="label label-default">JBC-P</span>
+                    }
+                </td>
                 <td>@Html.DisplayFor(_ => vehicle.Notes)</td>
                 <td>@Html.ActionLink("Edit", "Edit", new { vehicle.Id })
             </tr>
