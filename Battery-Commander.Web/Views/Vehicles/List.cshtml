@@ -7,7 +7,7 @@
     var driver_count = Model.Where(_ => _.DriverId.HasValue).Count();
     var adriver_count = Model.Where(_ => _.A_DriverId.HasValue).Count();
     var pax_count = driver_count + adriver_count;
-    var seats = Model.Select(_ => _.Seats).Sum();
+    var seats = Model.Where(_ => _.Status == Vehicle.VehicleStatus.FMC).Select(_ => _.Seats).Sum();
 }
 
 <div class="page-header">
