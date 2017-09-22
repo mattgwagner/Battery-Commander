@@ -17,6 +17,8 @@ namespace BatteryCommander.Web.Models
         [Required]
         public VehicleStatus Status { get; set; } = VehicleStatus.FMC;
 
+        public Boolean FMC => VehicleStatus.FMC == Status;
+
         [Required]
         public VehicleType Type { get; set; } = VehicleType.HMMWV;
 

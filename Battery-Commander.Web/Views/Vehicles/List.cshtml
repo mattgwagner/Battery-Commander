@@ -57,26 +57,36 @@
                 <td>@Html.DisplayFor(_ => vehicle.Registration)</td>
                 <td>@Html.DisplayFor(_ => vehicle.Serial)</td>
                 <td>@Html.DisplayFor(_ => vehicle.LIN)</td>
-                <td>
-                    @if (vehicle.DriverId.HasValue)
-                    {
-                        <span class="update-driver" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper" data-driver="@vehicle.DriverId" data-adriver="@vehicle.A_DriverId">@Html.DisplayFor(_ => vehicle.Driver)</span>
-                    }
-                    else
-                    {
-                        <span class="update-driver label label-default" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper" data-driver="@vehicle.DriverId" data-adriver="@vehicle.A_DriverId">(Empty)</span>
-                    }
-                </td>
-                <td>
-                    @if (vehicle.A_DriverId.HasValue)
-                    {
-                        <span class="update-driver" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper" data-driver="@vehicle.DriverId" data-adriver="@vehicle.A_DriverId">@Html.DisplayFor(_ => vehicle.A_Driver)</span>
-                    }
-                    else
-                    {
-                        <span class="update-driver label label-default" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper" data-driver="@vehicle.DriverId" data-adriver="@vehicle.A_DriverId">(Empty)</span>
-                    }
-                </td>
+                @if (vehicle.FMC)
+                {
+                    <td>
+                        @if (vehicle.DriverId.HasValue)
+                        {
+                            <span class="update-driver" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper" data-driver="@vehicle.DriverId" data-adriver="@vehicle.A_DriverId">@Html.DisplayFor(_ => vehicle.Driver)</span>
+                        }
+                        else
+                        {
+                            <span class="update-driver label label-default" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper" data-driver="@vehicle.DriverId" data-adriver="@vehicle.A_DriverId">(Empty)</span>
+                        }
+                    </td>
+                    <td>
+                        @if (vehicle.A_DriverId.HasValue)
+                        {
+                            <span class="update-driver" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper" data-driver="@vehicle.DriverId" data-adriver="@vehicle.A_DriverId">@Html.DisplayFor(_ => vehicle.A_Driver)</span>
+                        }
+                        else
+                        {
+                            <span class="update-driver label label-default" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper" data-driver="@vehicle.DriverId" data-adriver="@vehicle.A_DriverId">(Empty)</span>
+                        }
+
+                        }
+                    </td>
+                }
+                else
+                {
+                    <td></td>
+                    <td></td>
+                }
                 <td>
                     @if (vehicle.HasJBCP)
                     {
