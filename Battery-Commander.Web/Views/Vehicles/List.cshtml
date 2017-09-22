@@ -4,8 +4,8 @@
     ViewBag.Title = "Vehicle Tracker";
 
     var fmc_count = Model.Where(_ => _.Status == Vehicle.VehicleStatus.FMC).Count();
-    var driver_count = Model.Where(_ => _.DriverId.HasValue).Count();
-    var adriver_count = Model.Where(_ => _.A_DriverId.HasValue).Count();
+    var driver_count = Model.Where(_ => _.Status == Vehicle.VehicleStatus.FMC).Where(_ => _.DriverId.HasValue).Count();
+    var adriver_count = Model.Where(_ => _.Status == Vehicle.VehicleStatus.FMC).Where(_ => _.A_DriverId.HasValue).Count();
     var pax_count = driver_count + adriver_count;
     var seats = Model.Where(_ => _.Status == Vehicle.VehicleStatus.FMC).Select(_ => _.Seats).Sum();
 }
