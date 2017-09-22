@@ -26,8 +26,6 @@
             <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().LIN)</th>
             <th data-priority="2">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Driver)</th>
             <th data-priority="2">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().A_Driver)</th>
-            <th data-priority="5">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().HasFuelCard)</th>
-            <th data-priority="3">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().HasTowBar)</th>
             <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().HasJBCP)</th>
             <th data-priority="3">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Notes)</th>
             <th>Edit</th>
@@ -42,6 +40,14 @@
                     <span class="update-status" data-vehicle="@vehicle.Id" data-status="@((int)vehicle.Status)" data-notes="@vehicle.Notes">
                         @Html.DisplayFor(_ => vehicle, "VehicleStatus")
                     </span>
+                    @if (vehicle.HasFuelCard)
+                    {
+                        <span class="label label-success">Fuel Card</span>
+                    }
+                    @if (vehicle.HasTowBar)
+                    {
+                        <span class="label label-success">TowBar</span>
+                    }
                 </td>
                 <td>@Html.DisplayFor(_ => vehicle.Unit)</td>
                 <td>@Html.DisplayFor(_ => vehicle)</td>
@@ -72,19 +78,7 @@
                     }
                 </td>
                 <td>
-                    @if(vehicle.HasFuelCard)
-                    {
-                        <span class="label label-success">Fuel Card</span>
-                    }
-                </td>
-                <td>
-                    @if(vehicle.HasTowBar)
-                    {
-                        <span class="label label-success">TowBar</span>
-                    }
-                </td>
-                <td>
-                    @if(vehicle.HasJBCP)
+                    @if (vehicle.HasJBCP)
                     {
                         <span class="label label-default">JBC-P</span>
                     }
