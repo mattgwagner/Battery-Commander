@@ -1,0 +1,6 @@
+﻿@model Vehicle
+
+@if (Model != null)
+{
+    <div>@Html.ActionLink(Model.Bumper, "Edit", "Vehicles", new { Model.Id })</div>
+}
