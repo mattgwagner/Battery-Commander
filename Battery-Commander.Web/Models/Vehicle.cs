@@ -44,8 +44,10 @@ namespace BatteryCommander.Web.Models
 
         // Chalk Order?
 
+        [Display(Name = "Fuel Card")]
         public Boolean HasFuelCard { get; set; }
 
+        [Display(Name = "Tow Bar")]
         public Boolean HasTowBar { get; set; }
 
         // Fuel Level?
