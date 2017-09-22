@@ -1,6 +1,6 @@
 @model Vehicle
 
-@switch(Model.Status)
+@switch (Model.Status)
 {
     case Vehicle.VehicleStatus.FMC:
         <span class="label label-success">FMC</span>
@@ -8,7 +8,7 @@
 
     case Vehicle.VehicleStatus.NMC:
         <span class="label label-danger">NMC</span>
-                return;
+        return;
 
     case Vehicle.VehicleStatus.Unknown:
         <span class="label label-warning">Unknown</span>
