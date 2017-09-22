@@ -21,7 +21,7 @@
             <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().TimeInGrade)</th>
             <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().TimeTillETS)</th>
             <th data-priority="5">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().APFTs)</th>
-            <th data-priority="5" >@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().ABCPs)</th>
+            <th data-priority="5">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().ABCPs)</th>
             <th data-priority="4">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().SSDStatus)</th>
             <th data-priority="6">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().IwqQualified)</th>
             <th data-priority="6">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().DscaQualified)</th>
@@ -33,7 +33,13 @@
         @foreach (var soldier in Model.Soldiers)
         {
             <tr>
-                <td>@Html.RouteLink("Details", "Soldier.Details", new { soldier.Id })</td>
+                <td>
+                    @Html.RouteLink("Details", "Soldier.Details", new { soldier.Id })
+                    @if (!soldier.HasDoB)
+                    {
+                        <span class="label label-danger">Missing DoB</span>
+                    }
+                </td>
                 <td data-sort="@((int)soldier.Rank)">@Html.DisplayFor(s => soldier.RankHumanized)</td>
                 <td>@Html.DisplayFor(s => soldier.LastName)</td>
                 <td>@Html.DisplayFor(s => soldier.FirstName)</td>
@@ -69,15 +75,9 @@
                 <td>@Html.DisplayFor(s => soldier, "IWQ")</td>
                 <td>@Html.DisplayFor(s => soldier, "DSCA")</td>
                 <td>
-                    @if (!soldier.HasDoB)
-                    {
-                        <span class="label label-danger">Missing DoB</span>
-                    }
-                    else
-                    {
-                        @Html.ActionLink("Add ABCP", "New", "ABCP", new { soldier = soldier.Id }, new { @class = "btn btn-default btn-xs" })
-                        @Html.ActionLink("Add APFT", "New", "APFT", new { soldier = soldier.Id }, new { @class = "btn btn-default btn-xs" })
-                    }
+                    @Html.ActionLink("Add ABCP", "New", "ABCP", new { soldier = soldier.Id }, new { @class = "btn btn-default btn-xs" })
+                    @Html.ActionLink("Add APFT", "New", "APFT", new { soldier = soldier.Id }, new { @class = "btn btn-default btn-xs" })
+
                 </td>
             </tr>
         }
