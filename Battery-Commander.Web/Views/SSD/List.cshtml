@@ -8,7 +8,7 @@
     <h1>@ViewBag.Title <span class="badge">@Model.Count()</span></h1>
 </div>
 
-<table class="table table-striped" id="dt">
+<table class="table table-striped display nowrap" id="dt" width="100%" data-page-length="25">
     <thead>
         <tr>
             <th>Soldier</th>
@@ -28,14 +28,14 @@
         @foreach (var soldier in Model)
         {
             <tr>
-                <td>@Html.DisplayFor(s => soldier)</td>
+                <td data-priority="1">@Html.DisplayFor(s => soldier)</td>
                 <td>@Html.DisplayFor(s => soldier.Unit, additionalViewData: new { controller = "SSD" })</td>
                 <td>@Html.DisplayFor(s => soldier.EducationLevel)</td>
                 <td data-sort="@soldier.TimeInGrade?.TotalDays">
                     @Html.DisplayFor(s => soldier.TimeInGradeHumanized)
                 </td>
                 <td data-sort="@soldier.SSDStatus.Updated?.TotalDays">@Html.DisplayFor(s => soldier.SSDStatus.UpdatedHumanized)</td>
-                <td>
+                <td  data-priority="2">
                     <span class="update" data-name="@soldier" data-soldier="@soldier.Id" data-ssd="SSD_1" data-completion="@soldier.SSDStatus.SSD_1">
                         @Html.DisplayFor(s => soldier.SSDStatus.SSD_1)
                     </span>
