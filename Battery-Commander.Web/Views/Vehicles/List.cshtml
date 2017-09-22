@@ -91,7 +91,7 @@
                         <span class="label label-default">JBC-P</span>
                     }
                 </td>
-                <td>@Html.DisplayFor(_ => vehicle.Notes)</td>
+                <td class="update-status" data-vehicle="@vehicle.Id" data-status="@((int)vehicle.Status)" data-notes="@vehicle.Notes">@Html.DisplayFor(_ => vehicle.Notes)</td>
                 <td>@Html.ActionLink("Edit", "Edit", new { vehicle.Id })
             </tr>
         }
