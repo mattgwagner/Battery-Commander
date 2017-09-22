@@ -8,6 +8,8 @@ namespace BatteryCommander.Web.Models
 {
     public class UnitStatsViewModel
     {
+        // Vehicle Breakdown - FMC/On-Hand, HMMWV, LMTV
+
         public Unit Unit { get; set; }
 
         // Assigned	Passed	Failed	Not Tested	% Pass/Assigned

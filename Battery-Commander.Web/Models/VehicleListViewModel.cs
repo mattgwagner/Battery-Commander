@@ -10,16 +10,12 @@ namespace BatteryCommander.Web.Models
 
         public IEnumerable<Vehicle> Vehicles { get; set; } = Enumerable.Empty<Vehicle>();
 
-        private IEnumerable<Vehicle> fmc_vehicles => Vehicles.Where(_ => _.Status == Vehicle.VehicleStatus.FMC);
+        public int FMC => Vehicles.Where(_ => _.FMC).Count();
 
-        private int drivers => fmc_vehicles.Where(_ => _.DriverId.HasValue).Count();
+        public int OnHand => Vehicles.Where(_ => _.Status != Vehicle.VehicleStatus.Unknown).Count();
 
-        private int adrivers => fmc_vehicles.Where(_ => _.A_DriverId.HasValue).Count();
+        public int PAX => Vehicles.Where(_ => _.FMC).Where(_ => _.DriverId.HasValue).Count() + Vehicles.Where(_ => _.FMC).Where(_ => _.A_DriverId.HasValue).Count();
 
-        public int FMC => fmc_vehicles.Count();
-
-        public int PAX => drivers + adrivers;
-
-        public int Seats => fmc_vehicles.Select(_ => _.Seats).Sum();
+        public int Seats => Vehicles.Where(_ => _.FMC).Select(_ => _.Seats).Sum();
     }
 }
