@@ -14,10 +14,10 @@
     @Html.ActionLink("Only Delinquent (> 60 Days)", "Index", "Evaluations", new { onlyDelinquent = true }, new { @class = "btn btn-default" })
 </div>
 
-<table class="table table-striped  display nowrap" id="dt" width="100%" data-page-length="25">
+<table class="table table-striped display nowrap" id="dt" width="100%" data-page-length="25">
     <thead>
         <tr>
-            <th>Details</th>
+            <th data-priority="1">Details</th>
             <th data-priority="1">@Html.DisplayNameFor(_ => _.FirstOrDefault().Ratee)</th>
             <th data-priority="1">@Html.DisplayNameFor(_ => _.FirstOrDefault().ThruDate)</th>
             <th data-priority="3">@Html.DisplayNameFor(_ => _.FirstOrDefault().Status)</th>
