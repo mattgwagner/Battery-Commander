@@ -20,6 +20,6 @@ namespace BatteryCommander.Web.Models
 
         public int PAX => drivers + adrivers;
 
-        public int Seats => fmc_vehicles.Select(_ => _.Seats).Count();
+        public int Seats => fmc_vehicles.Select(_ => _.Seats).Sum();
     }
 }
