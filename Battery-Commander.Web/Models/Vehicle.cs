@@ -40,10 +40,6 @@ namespace BatteryCommander.Web.Models
         [Required]
         public int Seats { get; set; } = 2;
 
-        // TroopCapacity?
-
-        // Chalk Order?
-
         [Display(Name = "Fuel Card")]
         public Boolean HasFuelCard { get; set; }
 
@@ -52,10 +48,6 @@ namespace BatteryCommander.Web.Models
 
         [Display(Name = "JBC-P")]
         public Boolean HasJBCP { get; set; }
-
-        // Fuel Level?
-
-        // Location?
 
         public Soldier Driver { get; set; }
 
@@ -67,6 +59,10 @@ namespace BatteryCommander.Web.Models
         public int? A_DriverId { get; set; }
 
         // Passengers
+
+        // TroopCapacity?
+
+        // Chalk, Order of March?
 
         public String Notes { get; set; }
 
