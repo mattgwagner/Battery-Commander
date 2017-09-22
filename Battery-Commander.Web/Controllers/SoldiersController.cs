@@ -24,16 +24,22 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> Index(SoldierSearchService.Query query)
         {
-            return View("List", await SoldierSearchService.Filter(db, query));
+            return View("List", new SoldierListViewModel
+            {
+                Soldiers = await SoldierSearchService.Filter(db, query)
+            });
         }
 
         [Route("~/Soldiers/All", Name = "Soldiers.List")]
         public async Task<IActionResult> All()
         {
-            return View("List", await SoldierSearchService.Filter(db, new SoldierSearchService.Query
+            return View("List", new SoldierListViewModel
             {
-                IncludeIgnoredUnits = true
-            }));
+                Soldiers = await SoldierSearchService.Filter(db, new SoldierSearchService.Query
+                {
+                    IncludeIgnoredUnits = true
+                })
+            });
         }
 
         [Route("~/Soldiers/{id}", Name = "Soldier.Details")]
