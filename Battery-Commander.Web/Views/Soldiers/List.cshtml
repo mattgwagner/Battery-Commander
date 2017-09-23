@@ -36,7 +36,7 @@
                 <td data-sort="@soldier.LastName">
                     @Html.RouteLink("Details", "Soldier.Details", new { soldier.Id })
                 </td>
-                <td>@Html.DisplayFor(s => soldier, "SoldierStatus")</td>
+                <td data-soldier="@soldier.Id" data-status="@soldier.Status">@Html.DisplayFor(s => soldier, "SoldierStatus")</td>
                 <td data-sort="@((int)soldier.Rank)">@Html.DisplayFor(s => soldier.RankHumanized)</td>
                 <td>@Html.DisplayFor(s => soldier.LastName)</td>
                 <td>@Html.DisplayFor(s => soldier.FirstName)</td>                
@@ -82,3 +82,32 @@
         }
     </tbody>
 </table>
+
+<div style="display:none" id="set-status" title="Update Soldier Status">
+    @using (Html.BeginForm("SetStatus", "Soldiers", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        <input id="soldierId" name="soldierId" type="hidden" />
+
+        <div class="form-group form-group-lg">
+            @Html.Label("Status")
+            @Html.DropDownList("status", Html.GetEnumSelectList<Soldier.SoldierStatus>())
+        </div>
+
+        <button type="submit" id="save">Save</button>
+    }
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("td .update-status").click(function (e) {
+                $("[name='soldierId']").val($(this).data('soldier'));
+                $("#status").val($(this).data('status')).trigger('change');
+
+                $("#set-status").dialog({
+                    modal: true
+                });
+            });
+        });
+    </script>
+}

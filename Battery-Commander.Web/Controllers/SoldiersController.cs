@@ -132,6 +132,18 @@ namespace BatteryCommander.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> SetStatus(int soldierId, Soldier.SoldierStatus status)
+        {
+            var soldier = await Get(db, soldierId);
+
+            soldier.Status = status;
+
+            await db.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
         public static async Task<Soldier> Get(Database db, int id)
         {
             var soldiers = await SoldierSearchService.Filter(db, new SoldierSearchService.Query { Id = id, IncludeIgnoredUnits = true });
