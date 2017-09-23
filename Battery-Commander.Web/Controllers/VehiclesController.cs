@@ -120,6 +120,20 @@ namespace BatteryCommander.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> Reset()
+        {
+            foreach (var vehicle in db.Vehicles)
+            {
+                vehicle.DriverId = null;
+                vehicle.A_DriverId = null;
+            }
+
+            await db.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
         private void Reassign_Passengers(int vehicleId, int? driverId, int? adriverId)
         {
             foreach (var vehicle in db.Vehicles)

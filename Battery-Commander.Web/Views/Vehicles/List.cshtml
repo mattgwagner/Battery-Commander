@@ -9,6 +9,10 @@
         @ViewBag.Title
         @Html.ActionLink("Add New", "New", "Vehicles", null, new { @class = "btn btn-default" })
         <small>FMC: <span class="badge">@Model.FMC</span> On-Hand: <span class="badge">@Model.OnHand </span> PAX: <span class="badge">@Model.PAX</span> SEATS: <span class="badge">@Model.Seats</span></small>
+        <form method="post" action="@Url.Action("Reset", "Vehicles")">
+            @Html.AntiForgeryToken()
+            <button class="btn btn-default btn-xs">Reset PAX</button>
+        </form>
     </h1>
 </div>
 
