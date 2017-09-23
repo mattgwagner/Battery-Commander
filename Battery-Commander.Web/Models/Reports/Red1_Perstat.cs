@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace BatteryCommander.Web.Models
+namespace BatteryCommander.Web.Models.Reports
 {
     public class Red1_Perstat
     {
