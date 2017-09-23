@@ -36,7 +36,11 @@
                 <td data-sort="@soldier.LastName">
                     @Html.RouteLink("Details", "Soldier.Details", new { soldier.Id })
                 </td>
-                <td data-soldier="@soldier.Id" data-status="@soldier.Status">@Html.DisplayFor(s => soldier, "SoldierStatus")</td>
+                <td>
+                    <span class="update-status" data-soldier="@soldier.Id" data-status="@soldier.Status">
+                        @Html.DisplayFor(s => soldier, "SoldierStatus")
+                    </span>
+                </td>
                 <td data-sort="@((int)soldier.Rank)">@Html.DisplayFor(s => soldier.RankHumanized)</td>
                 <td>@Html.DisplayFor(s => soldier.LastName)</td>
                 <td>@Html.DisplayFor(s => soldier.FirstName)</td>                
@@ -101,7 +105,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $("td .update-status").click(function (e) {
-                $("[name='soldierId']").val($(this).data('soldier'));
+                $("#soldierId").val($(this).data('soldier'));
                 $("#status").val($(this).data('status')).trigger('change');
 
                 $("#set-status").dialog({
