@@ -106,7 +106,7 @@ namespace BatteryCommander.Web.Models
 
             OnPass = 3,
 
-            OnTDY = 4,
+            TDY = 4,
 
             AWOL = 5,
 
