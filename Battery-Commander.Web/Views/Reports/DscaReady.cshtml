@@ -20,13 +20,13 @@
     </thead>
 
     <tbody>
-        @for (var i = 0; i < Model.Rows.Count; ++i)
+        @foreach(var soldier in Model)
         {
             <tr>
-                <td>@Html.DisplayFor(_ => Model.Rows[i].Soldier.Unit)</td>
-                <td>@Html.DisplayFor(_ => Model.Rows[i].Soldier)</td>
-                <td>@Html.DisplayFor(_ => Model.Rows[i].IwqQualificationDate)</td>
-                <td>@Html.DisplayFor(_ => Model.Rows[i].DscaQualificationDate)</td>
+                <td>@Html.DisplayFor(_ => soldier.Unit)</td>
+                <td>@Html.DisplayFor(_ => soldier)</td>
+                <td>@Html.DisplayFor(_ => soldier.IwqQualificationDate)</td>
+                <td>@Html.DisplayFor(_ => soldier.DscaQualificationDate)</td>
             </tr>
         }
     </tbody>
