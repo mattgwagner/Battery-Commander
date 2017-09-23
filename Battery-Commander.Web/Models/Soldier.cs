@@ -100,16 +100,19 @@ namespace BatteryCommander.Web.Models
 
             Unknown = 0,
 
+            [Display(Name = "Present")]
             PresentForDuty = 1,
 
             Detached = 2,
 
+            [Display(Name = "Pass")]
             OnPass = 3,
 
             TDY = 4,
 
             AWOL = 5,
 
+            [Display(Name = "Rear Det")]
             RearDetachment = 6
         }
     }
