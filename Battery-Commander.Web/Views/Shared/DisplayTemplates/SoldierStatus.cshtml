@@ -3,7 +3,7 @@
 @switch (Model.Status)
 {
     case Soldier.SoldierStatus.PresentForDuty:
-        <span class="label label-success">P</span>
+        <span class="label label-success">Present</span>
         return;
 
     case Soldier.SoldierStatus.Unknown:
@@ -11,6 +11,6 @@
         return;
 
     default:
-        <span class="label label-warning">@Model</span>
+        <span class="label label-warning">@Model.Status</span>
         return;
 }
