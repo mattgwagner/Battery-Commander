@@ -71,6 +71,8 @@ namespace BatteryCommander.Web.Controllers
                 db.Vehicles.Update(model);
             }
 
+            Reassign_Passengers(model.Id, model.DriverId, model.A_DriverId);
+
             await db.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
@@ -79,19 +81,7 @@ namespace BatteryCommander.Web.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> SetDriver(int vehicleId, int? driverId, int? adriverId)
         {
-            foreach (var vehicle in db.Vehicles)
-            {
-                if (vehicle.Id == vehicleId)
-                {
-                    vehicle.DriverId = driverId;
-                    vehicle.A_DriverId = adriverId;
-                }
-                else
-                {
-                    if (vehicle.DriverId == driverId) vehicle.DriverId = null;
-                    if (vehicle.A_DriverId == adriverId) vehicle.A_DriverId = null;
-                }
-            }
+            Reassign_Passengers(vehicleId, driverId, adriverId);
 
             await db.SaveChangesAsync();
 
@@ -128,6 +118,25 @@ namespace BatteryCommander.Web.Controllers
             await db.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
+        }
+
+        private void Reassign_Passengers(int vehicleId, int? driverId, int? adriverId)
+        {
+            foreach (var vehicle in db.Vehicles)
+            {
+                if (vehicle.Id == vehicleId)
+                {
+                    vehicle.DriverId = driverId;
+                    vehicle.A_DriverId = adriverId;
+                }
+                else
+                {
+                    if (vehicle.DriverId == driverId) vehicle.DriverId = null;
+                    if (vehicle.A_DriverId == adriverId) vehicle.A_DriverId = null;
+                }
+
+                // TODO Handle passengers
+            }
         }
     }
 }
