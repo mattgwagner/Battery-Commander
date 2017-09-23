@@ -5,15 +5,15 @@
     <a href="@Url.Action("Details", "Soldier", new { Model.Id })">
         @if (Model.IwqQualified)
         {
-            <span class="label label-success">Qualified</span>
+            <span class="label label-success">GO</span>
         }
         else if (Model.IwqQualificationDate.HasValue)
         {
-            <span class="label label-warning">Qualified (Overdue)</span>
+            <span class="label label-warning">GO (Due)</span>
         }
         else
         {
-            <span class="label label-danger">Unqualified</span>
+            <span class="label label-danger">NOGO</span>
         }
     </a>
 </div>
