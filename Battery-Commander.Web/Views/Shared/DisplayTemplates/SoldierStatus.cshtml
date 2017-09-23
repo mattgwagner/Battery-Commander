@@ -1,8 +1,8 @@
-@model Soldier.SoldierStatus
+@model Soldier
 
-@switch (Model)
+@switch (Model.Status)
 {
-    case Soldier.SoldierStatus.Present:
+    case Soldier.SoldierStatus.PresentForDuty:
         <span class="label label-success">P</span>
         return;
 
