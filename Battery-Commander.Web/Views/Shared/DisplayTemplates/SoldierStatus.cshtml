@@ -1,0 +1,16 @@
+@model Soldier.SoldierStatus
+
+@switch (Model)
+{
+    case Soldier.SoldierStatus.Present:
+        <span class="label label-success">P</span>
+        return;
+
+    case Soldier.SoldierStatus.Unknown:
+        <span class="label label-danger">Unknown</span>
+        return;
+
+    default:
+        <span class="label label-warning">@Model</span>
+        return;
+}

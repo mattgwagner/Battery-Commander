@@ -77,6 +77,8 @@ namespace BatteryCommander.Web.Models
 
         public virtual Unit Unit { get; set; }
 
+        public SoldierStatus Status { get; set; } = SoldierStatus.Unknown;
+
         // Position
 
         // Security Clearance
@@ -90,6 +92,25 @@ namespace BatteryCommander.Web.Models
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (DateOfBirth > DateTime.Today.AddYears(-17)) yield return new ValidationResult("DateOfBirth doesn't seem right", new[] { nameof(DateOfBirth) });
+        }
+
+        public enum SoldierStatus : byte
+        {
+            // Where do RSP, IET, and OCS fall in here?
+
+            Unknown = 0,
+
+            PresentForDuty = 1,
+
+            Detached = 2,
+
+            OnPass = 3,
+
+            OnTDY = 4,
+
+            AWOL = 5,
+
+            RearDetachment = 6
         }
     }
 }
