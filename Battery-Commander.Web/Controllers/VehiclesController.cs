@@ -100,6 +100,14 @@ namespace BatteryCommander.Web.Controllers
             vehicle.Status = status;
             vehicle.Notes = notes;
 
+            if (Vehicle.VehicleStatus.FMC != status)
+            {
+                // Changing to FMC, remove passengers
+
+                vehicle.DriverId = null;
+                vehicle.A_DriverId = null;
+            }
+
             await db.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
