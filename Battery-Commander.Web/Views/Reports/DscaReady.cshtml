@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Soldier>
+
+@{
+    ViewBag.Title = "DSCA Roster";
+}
+
+<div class="page-header">
+    <h1>@ViewBag.Title <span class="badge">@Model.Count()</span></h1>
+</div>
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Unit</th>
+            <th>Soldier</th>
+            <th>IWQ Date</th>
+            <th>DSCA Date</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @for (var i = 0; i < Model.Rows.Count; ++i)
+        {
+            <tr>
+                <td>@Html.DisplayFor(_ => Model.Rows[i].Soldier.Unit)</td>
+                <td>@Html.DisplayFor(_ => Model.Rows[i].Soldier)</td>
+                <td>@Html.DisplayFor(_ => Model.Rows[i].IwqQualificationDate)</td>
+                <td>@Html.DisplayFor(_ => Model.Rows[i].DscaQualificationDate)</td>
+            </tr>
+        }
+    </tbody>
+</table>

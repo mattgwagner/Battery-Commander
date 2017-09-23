@@ -47,5 +47,16 @@ namespace BatteryCommander.Web.Controllers
 
             return Json(model);
         }
+
+        public async Task<IActionResult> DscaReady()
+        {
+            var soldiers = await SoldierSearchService.Filter(db, new SoldierSearchService.Query
+            {
+                IWQ = true,
+                DSCA = true
+            });
+
+            return Json(soldiers);
+        }
     }
 }
