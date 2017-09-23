@@ -56,7 +56,7 @@ namespace BatteryCommander.Web.Controllers
                 DSCA = true
             });
 
-            return Json(soldiers);
+            return View(soldiers);
         }
     }
 }
