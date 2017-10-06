@@ -60,7 +60,12 @@
                 <td>@Html.DisplayFor(_ => vehicle)</td>
                 <td>@Html.DisplayFor(_ => vehicle.Type)</td>
                 <td>@Html.DisplayFor(_ => vehicle.Seats)</td>
-                <td>@Html.DisplayFor(_ => vehicle.Nomenclature)</td>
+                <td>
+                    @if(!String.IsNullOrWhiteSpace(vehicle.Nomenclature))
+                    {
+                        <a href="@vehicle.GoogleSearchUrl">@vehicle.Nomenclature</a>
+                    }
+                </td>
                 <td>@Html.DisplayFor(_ => vehicle.Registration)</td>
                 <td>@Html.DisplayFor(_ => vehicle.Serial)</td>
                 <td>@Html.DisplayFor(_ => vehicle.LIN)</td>

@@ -68,6 +68,8 @@ namespace BatteryCommander.Web.Models
 
         public String Notes { get; set; }
 
+        public String GoogleSearchUrl => String.IsNullOrWhiteSpace(Nomenclature) ? String.Empty : $"https://www.google.com/search?q={Nomenclature}";
+
         public enum VehicleType : byte
         {
             HMMWV = 0,
