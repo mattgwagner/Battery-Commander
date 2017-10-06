@@ -18,6 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Views\Shared\DisplayTemplates\MilitaryEducationLevel.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Include="Models\Data\ABCP.csv" />
     <EmbeddedResource Include="Models\Data\DA4856.pdf" />
     <EmbeddedResource Include="Models\Data\DA5500.pdf" />
