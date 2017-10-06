@@ -8,5 +8,7 @@ namespace BatteryCommander.Web.Models
         public IEnumerable<Soldier> Soldiers { get; set; } = Enumerable.Empty<Soldier>();
 
         public int Count => Soldiers.Count();
+
+        public int Present => Soldiers.Where(_ => _.Status == Soldier.SoldierStatus.PresentForDuty).Count();
     }
 }

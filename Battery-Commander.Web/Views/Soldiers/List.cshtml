@@ -5,7 +5,11 @@
 }
 
 <div class="page-header">
-    <h1>@ViewBag.Title <span class="badge">@Model.Count</span> @Html.ActionLink("View All", "All", "Soldiers", null, new { @class = "btn btn-default" }) @Html.ActionLink("Add New", "New", "Soldiers", null, new { @class = "btn btn-default" })</h1>
+    <h1>@ViewBag.Title @Html.ActionLink("View All", "All", "Soldiers", null, new { @class = "btn btn-default" }) @Html.ActionLink("Add New", "New", "Soldiers", null, new { @class = "btn btn-default" })</h1>
+    <h4>
+        Assigned <span class="badge">@Model.Count</span> 
+        Present <span class="badge">@Model.Present</span>
+    </h4>
 </div>
 
 <table class="table table-striped display nowrap" id="dt" width="100%" data-page-length="25">
