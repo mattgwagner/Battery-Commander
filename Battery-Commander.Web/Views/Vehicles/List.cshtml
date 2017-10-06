@@ -63,7 +63,7 @@
                 <td>
                     @if(!String.IsNullOrWhiteSpace(vehicle.Nomenclature))
                     {
-                        <a href="@vehicle.GoogleSearchUrl">@vehicle.Nomenclature</a>
+                        <a href="@vehicle.GoogleSearchUrl" target="_blank">@vehicle.Nomenclature</a>
                     }
                 </td>
                 <td>@Html.DisplayFor(_ => vehicle.Registration)</td>
