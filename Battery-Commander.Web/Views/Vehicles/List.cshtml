@@ -7,9 +7,16 @@
 <div class="page-header">
     <h1>
         @ViewBag.Title
-        @Html.ActionLink("Add New", "New", "Vehicles", null, new { @class = "btn btn-default" })
-        <small>FMC: <span class="badge">@Model.FMC</span> On-Hand: <span class="badge">@Model.OnHand </span> PAX: <span class="badge">@Model.PAX</span> SEATS: <span class="badge">@Model.Seats</span></small>
+        @Html.ActionLink("Add New", "New", "Vehicles", null, new { @class = "btn btn-default" })        
     </h1>
+    <h4>
+        <small>
+            FMC: <span class="badge">@Model.FMC</span> 
+            On-Hand: <span class="badge">@Model.OnHand </span> 
+            PAX: <span class="badge">@Model.PAX</span> 
+            SEATS: <span class="badge">@Model.Seats</span>
+        </small>
+    </h4>
 </div>
 
 <table class="table table-striped display nowrap" width="100%" id="dt">
