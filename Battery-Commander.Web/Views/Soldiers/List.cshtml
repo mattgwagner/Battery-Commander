@@ -11,7 +11,7 @@
 <table class="table table-striped display nowrap" id="dt" width="100%" data-page-length="25">
     <thead>
         <tr>
-            <th data-priority="1">Details</th>
+            <th data-priority="1"></th>
             <th data-priority="2">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().Status)</th>
             <th data-priority="2">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().Rank)</th>
             <th data-priority="1">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastName)</th>
@@ -25,7 +25,7 @@
             <th data-priority="4">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().SSDStatus)</th>
             <th data-priority="6">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().IwqQualified)</th>
             <th data-priority="6">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().DscaQualified)</th>
-            <th>Links</th>
+            <th></th>
         </tr>
     </thead>
 
@@ -33,9 +33,7 @@
         @foreach (var soldier in Model.Soldiers)
         {
             <tr>
-                <td data-sort="@soldier.LastName">
-                    @Html.RouteLink("Details", "Soldier.Details", new { soldier.Id })
-                </td>
+                <td></td>
                 <td>
                     <span class="update-status" data-soldier="@soldier.Id" data-status="@soldier.Status">
                         @Html.DisplayFor(s => soldier, "SoldierStatus")
@@ -74,7 +72,8 @@
                 <td>@Html.DisplayFor(s => soldier.SSDStatus)</td>
                 <td>@Html.DisplayFor(s => soldier, "IWQ")</td>
                 <td>@Html.DisplayFor(s => soldier, "DSCA")</td>
-                <td>
+                <td data-sort="@soldier.LastName">
+                    @Html.RouteLink("Details", "Soldier.Details", new { soldier.Id }, new { @class = "btn btn-default btn-xs" })
                     @if (!soldier.HasDoB)
                     {
                         <span class="label label-warning">Needs Birthdate</span>

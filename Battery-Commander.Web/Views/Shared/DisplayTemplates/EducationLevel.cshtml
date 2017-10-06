@@ -1,0 +1,12 @@
+@model MilitaryEducationLevel
+
+@switch (Model)
+{
+    case MilitaryEducationLevel.Unknown:
+        <span class="label label-failure">@Model.ShortName()</span>
+        return;
+
+    default:
+        <span class="label label-success">@Model.ShortName()</span>
+        return;
+}
