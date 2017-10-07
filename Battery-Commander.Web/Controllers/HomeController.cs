@@ -18,6 +18,11 @@ namespace BatteryCommander.Web.Controllers
             this.db = db;
         }
 
+        public IActionResult Index()
+        {
+            return RedirectToRoute("Units.List");
+        }
+
         [AllowAnonymous]
         public IActionResult Login(String returnUrl = "/")
         {
@@ -29,7 +34,7 @@ namespace BatteryCommander.Web.Controllers
         {
             await HttpContext.Authentication.SignOutAsync("Auth0", new AuthenticationProperties
             {
-                RedirectUri = Url.RouteUrl("Units.List")
+                RedirectUri = Url.Action(nameof(Login))
             });
 
             await HttpContext.Authentication.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
