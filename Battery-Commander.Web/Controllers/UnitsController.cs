@@ -20,6 +20,7 @@ namespace BatteryCommander.Web.Controllers
             this.db = db;
         }
 
+        [Route("~/Units", Name = "Units.List")]
         public async Task<IActionResult> Index()
         {
             return View("List", await UnitService.List(db, includeIgnored: true));

@@ -1,5 +1,4 @@
 ﻿using BatteryCommander.Web.Models;
-using BatteryCommander.Web.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Authentication;
@@ -19,11 +18,6 @@ namespace BatteryCommander.Web.Controllers
             this.db = db;
         }
 
-        public async Task<IActionResult> Index()
-        {
-            return View(await UnitService.List(db));
-        }
-
         [AllowAnonymous]
         public IActionResult Login(String returnUrl = "/")
         {
@@ -35,7 +29,7 @@ namespace BatteryCommander.Web.Controllers
         {
             await HttpContext.Authentication.SignOutAsync("Auth0", new AuthenticationProperties
             {
-                RedirectUri = Url.Action(nameof(Index))
+                RedirectUri = Url.RouteUrl("Units.List")
             });
 
             await HttpContext.Authentication.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
