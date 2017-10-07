@@ -4,19 +4,20 @@
 
     var sections = new[]
     {
-            "Personnel",
+            "PERSTAT",
             "ABCP",
             "APFT",
             "SSD",
-            "Education",
+            "EDUCATION",
             "DSCA",
             "IWQ",
             "OrgChart"
-        };
+    };
 }
 
 <div class="page-header">
     <h1>@Html.DisplayFor(_ => Model)</h1>
+    <h4>@Html.ActionLink("Edit", "Edit", new { Model.Id }, new { @class = "btn btn-default btn-xs" })</h4>
 </div>
 
 <div>
@@ -29,7 +30,7 @@
     </ul>
 
     <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="Personnel">
+        <div role="tabpanel" class="tab-pane active" id="PERSTAT">
             <h2>@Html.DisplayNameFor(model => model.PERSTAT)</h2>
             @Html.DisplayFor(model => model, "Red1_Perstat")
         </div>
@@ -129,7 +130,7 @@
             </table>
         </div>
 
-        <div role="tabpanel" class="tab-pane" id="Education">
+        <div role="tabpanel" class="tab-pane" id="EDUCATION">
             <h2>@Html.DisplayNameFor(_ => Model.Education)</h2>
             <table class="table table-striped">
                 <thead>
