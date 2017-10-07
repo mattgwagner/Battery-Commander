@@ -22,7 +22,7 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View("List", await db.Units.ToListAsync());
+            return View("List", await UnitService.List(db, includeIgnored: true));
         }
 
         public async Task<IActionResult> Details(int id)

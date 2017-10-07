@@ -7,6 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\Reports\ABCP_Status.cs" />
+    <Compile Remove="Models\Reports\APFT_Status.cs" />
+    <Compile Remove="Models\Reports\Education_Status.cs" />
+    <Compile Remove="Models\Reports\SSD_Status.cs" />
+    <Compile Remove="Models\UnitStatsViewModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Models\Data\ABCP.csv" />
     <None Remove="Models\Data\DA4856.pdf" />
     <None Remove="Models\Data\DA5500.pdf" />
