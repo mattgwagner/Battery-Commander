@@ -1,0 +1,19 @@
+@using BatteryCommander.Web.Models
+@model Soldier
+
+<div>
+    <a href="@Url.Action("Details", "Soldier", new { Model.Id })">
+        @if (Model.ClsQualified)
+        {
+            <span class="label label-success">GO</span>
+        }
+        else if (Model.ClsQualificationDate.HasValue)
+        {
+            <span class="label label-warning">GO (Due)</span>
+        }
+        else
+        {
+            <span class="label label-danger">NOGO</span>
+        }
+    </a>
+</div>

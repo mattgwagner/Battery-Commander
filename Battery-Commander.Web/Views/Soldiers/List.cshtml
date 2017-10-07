@@ -29,6 +29,7 @@
             <th data-priority="4">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().SSDStatus)</th>
             <th data-priority="6">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().IwqQualified)</th>
             <th data-priority="6">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().DscaQualified)</th>
+            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().ClsQualified)</th>
             <th></th>
         </tr>
     </thead>
@@ -76,6 +77,7 @@
                 <td>@Html.DisplayFor(s => soldier.SSDStatus)</td>
                 <td>@Html.DisplayFor(s => soldier, "IWQ")</td>
                 <td>@Html.DisplayFor(s => soldier, "DSCA")</td>
+                <td>@Html.DisplayFor(s => soldier, "CLS")</td>
                 <td data-sort="@soldier.LastName">
                     @Html.RouteLink("Details", "Soldier.Details", new { soldier.Id }, new { @class = "btn btn-default btn-xs" })
                     @if (!soldier.HasDoB)

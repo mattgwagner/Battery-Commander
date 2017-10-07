@@ -48,9 +48,14 @@
             <td>@Html.DisplayFor(model => model.Soldier.DscaQualified) (@Html.DisplayFor(model => model.Soldier.DscaQualificationDate))</td>
         </tr>
 
-               <tr>
+        <tr>
             <td>@Html.DisplayNameFor(model => model.Soldier.IwqQualified)</td>
             <td>@Html.DisplayFor(model => model.Soldier.IwqQualified) (@Html.DisplayFor(model => model.Soldier.IwqQualificationDate))</td>
+        </tr>
+
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Soldier.ClsQualified)</td>
+            <td>@Html.DisplayFor(model => model.Soldier.ClsQualified) (@Html.DisplayFor(model => model.Soldier.ClsQualificationDate))</td>
         </tr>
 
         @if (Model.Soldier.SupervisorId.HasValue)
@@ -279,7 +284,7 @@
 </div>
 
 @section Scripts
-{
+    {
     @{
         var apft_data =
             Model
