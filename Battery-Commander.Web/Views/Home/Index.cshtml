@@ -125,6 +125,7 @@
                 <tfoot>
                     <tr>
                         <th></th>
+                        <th></th>
                         <th>@Html.ActionLink(unit.EducationTotal.Assigned.ToString(), "Index", "Soldiers", new { unit = unit.Id })</th>
                         <th>@Html.ActionLink(unit.EducationTotal.Incomplete.ToString(), "Index", "Soldiers", new { unit = unit.Id, education = false })</th>
                         <th>@Html.ActionLink(unit.EducationTotal.Completed.ToString(), "Index", "Soldiers", new { unit = unit.Id, education = false })</th>
