@@ -91,6 +91,11 @@ namespace BatteryCommander.Web.Services
                 soldiers = soldiers.Where(_ => _.ClsQualified == query.CLS);
             }
 
+            if (query.Status.HasValue)
+            {
+                soldiers = soldiers.Where(_ => _.Status == query.Status);
+            }
+
             return
                 await soldiers
                 .OrderBy(soldier => soldier.LastName)
@@ -127,6 +132,8 @@ namespace BatteryCommander.Web.Services
             public Boolean? CLS { get; set; }
 
             public Boolean? EducationComplete { get; set; }
+
+            public Soldier.SoldierStatus? Status { get; set; }
         }
     }
 }
