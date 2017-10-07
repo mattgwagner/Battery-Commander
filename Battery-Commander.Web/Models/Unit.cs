@@ -148,7 +148,7 @@ namespace BatteryCommander.Web.Models
         }
 
         [NotMapped]
-        public virtual Red1_Perstat Perstat
+        public virtual Red1_Perstat PERSTAT
         {
             get { return new Red1_Perstat { Soldiers = Soldiers }; }
         }
