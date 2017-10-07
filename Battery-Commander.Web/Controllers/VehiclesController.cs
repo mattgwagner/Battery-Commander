@@ -1,4 +1,5 @@
 ﻿using BatteryCommander.Web.Models;
+using BatteryCommander.Web.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,22 +19,14 @@ namespace BatteryCommander.Web.Controllers
             this.db = db;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(VehicleService.Query query)
         {
             // List of Vehicles - by unit, by status
 
             return View("List", new VehicleListViewModel
             {
                 Soldiers = await SoldiersController.GetDropDownList(db, includeIgnoredUnits: false),
-                Vehicles =
-                    await db
-                    .Vehicles
-                    .Include(vehicle => vehicle.Unit)
-                    .Include(vehicle => vehicle.Driver)
-                    .Include(vehicle => vehicle.A_Driver)
-                    .Where(vehicle => !vehicle.Unit.IgnoreForReports)
-                    .OrderBy(vehicle => vehicle.Bumper)
-                    .ToListAsync()
+                Vehicles = await VehicleService.Filter(db, query)
             });
         }
 
@@ -131,13 +124,7 @@ namespace BatteryCommander.Web.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Reset()
         {
-            foreach (var vehicle in db.Vehicles)
-            {
-                vehicle.DriverId = null;
-                vehicle.A_DriverId = null;
-            }
-
-            await db.SaveChangesAsync();
+            await VehicleService.Reset_Drivers(db);
 
             return RedirectToAction(nameof(Index));
         }
