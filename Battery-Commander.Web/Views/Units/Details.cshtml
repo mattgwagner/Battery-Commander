@@ -199,7 +199,7 @@
         </div>
 
         <div role="tabpanel" class="tab-pane" id="CLS">
-            <h2>@Html.DisplayNameFor(_ => Model.CLS)</h2>
+            <h2>@Html.DisplayNameFor(_ => Model.CLS) <span class="badge">@Model.CLS.Count()</span></h2>
             <table>
                 <tbody>
                     @foreach (var soldier in Model.CLS)
