@@ -2,7 +2,7 @@
 @model Soldier
 
 <div>
-    <a href="@Url.Action("Details", "Soldier", new { Model.Id })">
+    <a href="@Url.RouteUrl("Soldier.Details", new { Model.Id })">
         @if (Model.IwqQualified)
         {
             <span class="label label-success">GO</span>
