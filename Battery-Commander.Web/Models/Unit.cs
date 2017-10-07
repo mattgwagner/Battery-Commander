@@ -23,6 +23,12 @@ namespace BatteryCommander.Web.Models
         public virtual ICollection<Vehicle> Vehicles { get; set; }
 
         [NotMapped]
+        public virtual IEnumerable<Soldier> CLS
+        {
+            get { return Soldiers.Where(soldier => soldier.ClsQualified); }
+        }
+
+        [NotMapped]
         public virtual IEnumerable<Row> SSD
         {
             get

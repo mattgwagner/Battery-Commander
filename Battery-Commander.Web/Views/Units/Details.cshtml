@@ -11,6 +11,7 @@
             "EDUCATION",
             "DSCA",
             "IWQ",
+            "CLS",
             "OrgChart"
     };
 }
@@ -193,6 +194,20 @@
                         <td>@Html.DisplayNameFor(_ => Model.DSCA.PercentPass)</td>
                         <td>@Html.DisplayFor(_ => Model.DSCA.PercentPass)</td>
                     </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="CLS">
+            <h2>@Html.DisplayNameFor(_ => Model.CLS)</h2>
+            <table>
+                <tbody>
+                    @foreach (var soldier in Model.CLS)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(_ => soldier)</td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
