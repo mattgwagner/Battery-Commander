@@ -27,10 +27,9 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> Details(int id)
         {
-            var model = await SoldierSearchService.Filter(db, new SoldierSearchService.Query
-            {
-                Unit = id
-            });
+            var units = await UnitService.List(db, includeIgnored: true);
+
+            var model = units.Where(_ => _.Id == id).First();
 
             return View(model);
         }

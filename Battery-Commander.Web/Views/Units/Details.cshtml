@@ -1,12 +1,200 @@
-﻿@model IEnumerable<Soldier>
+﻿@model Unit
 
-<div id="chart_div"></div>
+<div class="panel col-md-4">
+    <div class="panel-heading">
+        <div class="panel-title"><h2>@Html.DisplayFor(_ => Model)</h2></div>
+    </div>
+
+    <div id="chart_div"></div>
+
+    <div class="panel-body">
+        <h2>@Html.DisplayNameFor(_ => Model.ABCP)</h2>
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td>@Html.DisplayNameFor(_ => Model.ABCP.Assigned)</td>
+                    <td>@Html.DisplayFor(_ => Model.ABCP.Assigned)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(_ => Model.ABCP.Passed)</td>
+                    <td>@Html.ActionLink(Model.ABCP.Passed.ToString(), "Index", "Soldiers", new { Model = Model.Id, abcp = EventStatus.Passed })</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(_ => Model.ABCP.Failed)</td>
+                    <td>@Html.ActionLink(Model.ABCP.Failed.ToString(), "Index", "Soldiers", new { Model = Model.Id, abcp = EventStatus.Failed })</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(_ => Model.ABCP.NotTested)</td>
+                    <td>@Html.ActionLink(Model.ABCP.NotTested.ToString(), "Index", "Soldiers", new { Model = Model.Id, abcp = EventStatus.NotTested })</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(_ => Model.ABCP.PercentPass)</td>
+                    <td>@Html.DisplayFor(_ => Model.ABCP.PercentPass)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>@Html.DisplayNameFor(_ => Model.APFT)</h2>
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td>@Html.DisplayNameFor(_ => Model.APFT.Assigned)</td>
+                    <td>@Html.DisplayFor(_ => Model.APFT.Assigned)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(_ => Model.APFT.Passed)</td>
+                    <td>@Html.ActionLink(Model.APFT.Passed.ToString(), "Index", "Soldiers", new { Model = Model.Id, apft = EventStatus.Passed })</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(_ => Model.APFT.Failed)</td>
+                    <td>@Html.ActionLink(Model.APFT.Failed.ToString(), "Index", "Soldiers", new { Model = Model.Id, apft = EventStatus.Failed })</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(_ => Model.APFT.NotTested)</td>
+                    <td>@Html.ActionLink(Model.APFT.NotTested.ToString(), "Index", "Soldiers", new { Model = Model.Id, apft = EventStatus.NotTested })</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(_ => Model.APFT.PercentPass)</td>
+                    <td>@Html.DisplayFor(_ => Model.APFT.PercentPass)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>@Html.DisplayNameFor(_ => Model.SSD)</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(_ => Model.SSD.FirstOrDefault().Rank)</th>
+                    <th>Level</th>
+                    <th>@Html.DisplayNameFor(_ => Model.SSD.FirstOrDefault().Assigned)</th>
+                    <th>@Html.DisplayNameFor(_ => Model.SSD.FirstOrDefault().Incomplete)</th>
+                    <th>@Html.DisplayNameFor(_ => Model.SSD.FirstOrDefault().Completed)</th>
+                    <th>@Html.DisplayNameFor(_ => Model.SSD.FirstOrDefault().Percentage)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var row in Model.SSD)
+                {
+                    <tr>
+                        <td>@Html.ActionLink(row.Rank.DisplayName(), "Index", "SSD", new { Model = Model.Id, rank = row.Rank })</td>
+                        <td>@SSDExtensions.RequiredSSD(row.Rank).DisplayName()</td>
+                        <td>@Html.ActionLink(row.Assigned.ToString(), "Index", "SSD", new { Model = Model.Id, rank = row.Rank })</td>
+                        <td>@Html.ActionLink(row.Incomplete.ToString(), "Index", "SSD", new { Model = Model.Id, rank = row.Rank, complete = false })</td>
+                        <td>@Html.ActionLink(row.Completed.ToString(), "Index", "SSD", new { Model = Model.Id, rank = row.Rank, complete = true })</td>
+                        <td>@Html.ActionLink(row.Percentage.ToString("P0"), "Index", "SSD", new { Model = Model.Id, rank = row.Rank })</td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>@Html.ActionLink(Model.SSDTotal.Assigned.ToString(), "Index", "SSD", new { Model = Model.Id })</th>
+                    <th>@Html.ActionLink(Model.SSDTotal.Incomplete.ToString(), "Index", "SSD", new { Model = Model.Id, SSD = false })</th>
+                    <th>@Html.ActionLink(Model.SSDTotal.Completed.ToString(), "Index", "SSD", new { Model = Model.Id, SSD = true })</th>
+                    <th>@Html.ActionLink(Model.SSDTotal.Percentage.ToString("P0"), "Index", "SSD", new { Model = Model.Id })</th>
+                </tr>
+            </tfoot>
+        </table>
+
+        <h2>@Html.DisplayNameFor(_ => Model.Education)</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(_ => Model.Education.FirstOrDefault().Rank)</th>
+                    <th>Level</th>
+                    <th>@Html.DisplayNameFor(_ => Model.Education.FirstOrDefault().Assigned)</th>
+                    <th>@Html.DisplayNameFor(_ => Model.Education.FirstOrDefault().Incomplete)</th>
+                    <th>@Html.DisplayNameFor(_ => Model.Education.FirstOrDefault().Completed)</th>
+                    <th>@Html.DisplayNameFor(_ => Model.Education.FirstOrDefault().Percentage)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var row in Model.Education)
+                {
+                    <tr>
+                        <td>@Html.ActionLink(row.Rank.DisplayName(), "Index", "Soldiers", new { Model = Model.Id, rank = row.Rank })</td>
+                        <td>@EducationExtensions.RequiredEducation(row.Rank).ShortName()</td>
+                        <td>@Html.ActionLink(row.Assigned.ToString(), "Index", "Soldiers", new { Model = Model.Id, rank = row.Rank })</td>
+                        <td>@Html.ActionLink(row.Incomplete.ToString(), "Index", "Soldiers", new { Model = Model.Id, rank = row.Rank, educationStatus = false })</td>
+                        <td>@Html.ActionLink(row.Completed.ToString(), "Index", "Soldiers", new { Model = Model.Id, rank = row.Rank, educationStatus = true })</td>
+                        <td>@Html.ActionLink(row.Percentage.ToString("P0"), "Index", "Soldiers", new { Model = Model.Id, rank = row.Rank })</td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>@Html.ActionLink(Model.EducationTotal.Assigned.ToString(), "Index", "Soldiers", new { Model = Model.Id })</th>
+                    <th>@Html.ActionLink(Model.EducationTotal.Incomplete.ToString(), "Index", "Soldiers", new { Model = Model.Id, education = false })</th>
+                    <th>@Html.ActionLink(Model.EducationTotal.Completed.ToString(), "Index", "Soldiers", new { Model = Model.Id, education = false })</th>
+                    <th>@Html.ActionLink(Model.EducationTotal.Percentage.ToString("P0"), "Index", "Soldiers", new { Model = Model.Id })</th>
+                </tr>
+            </tfoot>
+        </table>
+
+        <h2>@Html.DisplayNameFor(_ => Model.DSCA)</h2>
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td>@Html.DisplayNameFor(_ => Model.DSCA.Assigned)</td>
+                    <td>@Html.DisplayFor(_ => Model.DSCA.Assigned)</td>
+                </tr>
+                <tr>
+                    <td>Qualified</td>
+                    <td>@Html.ActionLink(Model.DSCA.Passed.ToString(), "Index", "Soldiers", new { Model = Model.Id, dsca = true })</td>
+                </tr>
+                <tr>
+                    <td>Qualified (Overdue)</td>
+                    <td>@Html.ActionLink(Model.DSCA.Failed.ToString(), "Index", "Soldiers", new { Model = Model.Id, dsca = true })</td>
+                </tr>
+                <tr>
+                    <td>Unqualified</td>
+                    <td>@Html.ActionLink(Model.DSCA.NotTested.ToString(), "Index", "Soldiers", new { Model = Model.Id, dsca = false })</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(_ => Model.DSCA.PercentPass)</td>
+                    <td>@Html.DisplayFor(_ => Model.DSCA.PercentPass)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>@Html.DisplayNameFor(_ => Model.IWQ)</h2>
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td>@Html.DisplayNameFor(_ => Model.IWQ.Assigned)</td>
+                    <td>@Html.DisplayFor(_ => Model.IWQ.Assigned)</td>
+                </tr>
+                <tr>
+                    <td>Qualified</td>
+                    <td>@Html.ActionLink(Model.IWQ.Passed.ToString(), "Index", "Soldiers", new { Model = Model.Id, iwq = true })</td>
+                </tr>
+                <tr>
+                    <td>Qualified (Overdue)</td>
+                    <td>@Html.ActionLink(Model.IWQ.Failed.ToString(), "Index", "Soldiers", new { Model = Model.Id, iwq = true })</td>
+                </tr>
+                <tr>
+                    <td>Unqualified</td>
+                    <td>@Html.ActionLink(Model.IWQ.NotTested.ToString(), "Index", "Soldiers", new { Model = Model.Id, iwq = false })</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(_ => Model.IWQ.PercentPass)</td>
+                    <td>@Html.DisplayFor(_ => Model.IWQ.PercentPass)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
 
 @section Scripts
-{
+    {
     @{
         var soldiers =
             Model
+            .Soldiers
             .Select(soldier => new
             {
                 Name = soldier.ToString(),
@@ -21,21 +209,21 @@
         // Load the Visualization API and the corechart package.
         google.charts.load('current', { 'packages': ['orgchart'] });
 
-        var unit_org = JSON.parse('@Json.Serialize(soldiers)');
+        var Model_org = JSON.parse('@Json.Serialize(soldiers)');
 
         // Set a callback to run when the Google Visualization API is loaded.
-        google.charts.setOnLoadCallback(draw_unit_org);
+        google.charts.setOnLoadCallback(draw_Model_org);
 
-        function draw_unit_org() {
+        function draw_Model_org() {
             // Create the data table.
             var data = new google.visualization.DataTable();
 
             data.addColumn('string', 'Name');
             data.addColumn('string', 'Supervisor');
 
-            for (var i = 0; i < unit_org.length; i++)
+            for (var i = 0; i < Model_org.length; i++)
             {
-                data.addRow([unit_org[i].name, unit_org[i].supervisor]);
+                data.addRow([Model_org[i].name, Model_org[i].supervisor]);
             }
 
             var chart = new google.visualization.OrgChart(document.getElementById('chart_div'));
