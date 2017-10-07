@@ -65,25 +65,30 @@ namespace BatteryCommander.Web.Services
                     soldiers = soldiers.Where(_ => _.SSDStatus.CurrentProgress < Decimal.One);
                 }
             }
-			
-			if(query.DSCA.HasValue)
-			{
-				soldiers = soldiers.Where(_ => _.DscaQualified == query.DSCA);
-			}
 
-			if(query.Gender.HasValue)
-			{
-				soldiers = soldiers.Where(_ => _.Gender == query.Gender);
-			}
+            if (query.DSCA.HasValue)
+            {
+                soldiers = soldiers.Where(_ => _.DscaQualified == query.DSCA);
+            }
+
+            if (query.Gender.HasValue)
+            {
+                soldiers = soldiers.Where(_ => _.Gender == query.Gender);
+            }
 
             if (query.IWQ.HasValue)
             {
                 soldiers = soldiers.Where(_ => _.IwqQualified == query.IWQ);
             }
-			
+
             if (query.EducationComplete.HasValue)
             {
                 soldiers = soldiers.Where(_ => _.IsEducationComplete == query.EducationComplete);
+            }
+
+            if (query.CLS.HasValue)
+            {
+                soldiers = soldiers.Where(_ => _.ClsQualified == query.CLS);
             }
 
             return
@@ -110,14 +115,16 @@ namespace BatteryCommander.Web.Services
             public EventStatus? ABCP { get; set; }
 
             public EventStatus? APFT { get; set; }
-			
-			public Boolean? DSCA { get; set; }
-			
-			public Boolean? IWQ { get; set; }
-			
-			public Gender? Gender { get; set; }
+
+            public Boolean? DSCA { get; set; }
+
+            public Boolean? IWQ { get; set; }
+
+            public Gender? Gender { get; set; }
 
             public Boolean? SSD { get; set; }
+
+            public Boolean? CLS { get; set; }
 
             public Boolean? EducationComplete { get; set; }
         }
