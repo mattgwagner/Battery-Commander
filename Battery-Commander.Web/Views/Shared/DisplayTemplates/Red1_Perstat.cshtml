@@ -1,0 +1,22 @@
+@model Red1_Perstat
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Officer</th>
+            <th>Enlisted</th>
+            <th>Warrant</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Html.DisplayNameFor(_ => Model.Assigned)</td>
+            <td>@Html.DisplayFor(_ => Model.Assigned.Officer)</td>
+            <td>@Html.DisplayFor(_ => Model.Assigned.Warrant)</td>
+            <td>@Html.DisplayFor(_ => Model.Assigned.Enlisted)</td>
+            <td>@Html.DisplayFor(_ => Model.Assigned.Total)</td>
+        </tr>
+    </tbody>
+</table>

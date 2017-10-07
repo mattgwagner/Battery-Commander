@@ -146,5 +146,11 @@ namespace BatteryCommander.Web.Models
                 };
             }
         }
+
+        [NotMapped]
+        public virtual Red1_Perstat Perstat
+        {
+            get { return new Red1_Perstat { Soldiers = Soldiers }; }
+        }
     }
 }
