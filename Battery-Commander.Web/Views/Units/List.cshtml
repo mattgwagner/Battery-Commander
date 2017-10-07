@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Unit>
 
 <div class="page-header">
-    <h1>Units @Html.ActionLink("Add New", "New", "Units", null, new { @class = "btn btn-default" })</h1>
+    <h1>Units @Html.ActionLink("Add New", "New", "Units", null, new { @class = "btn btn-default btn-xs" })</h1>
 </div>
 
 <table class="table table-striped">
@@ -9,7 +9,8 @@
         <tr>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Name)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().UIC)</th>
-            <th></th>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Soldiers)</th>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Vehicles)</th>
         </tr>
     </thead>
 
@@ -19,10 +20,9 @@
             <tr>
                 <td>@Html.DisplayFor(s => unit)</td>
                 <td>@Html.DisplayFor(s => unit.UIC)</td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { unit.Id })
-                    @Html.ActionLink("Soldiers", "Index", "Soldiers", new { unit = unit.Id })
-                </td>
+                <td>@Html.ActionLink("Soldiers", "Index", "Soldiers", new { unit = unit.Id })</td>
+                <td>@Html.ActionLink("Vehicles", "Index", "Vehicles", new { unit = unit.Id })</td>
+                <td>@Html.ActionLink("Edit", "Edit", new { unit.Id })</td>
             </tr>
         }
     </tbody>
