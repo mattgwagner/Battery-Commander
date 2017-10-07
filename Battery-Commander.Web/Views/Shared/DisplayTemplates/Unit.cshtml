@@ -2,7 +2,5 @@
 
 @if (Model != null)
 {
-    String controller = (String)ViewData["controller"] ?? "Soldiers";
-
-    <div>@Html.ActionLink(Model.Name, "Index", controller, new { unit = Model.Id })</div>
+    <div>@Html.RouteLink(Model.Name, "Unit.Details", new { Model.Id })</div>
 }

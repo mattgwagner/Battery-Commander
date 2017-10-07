@@ -25,6 +25,7 @@ namespace BatteryCommander.Web.Controllers
             return View("List", await UnitService.List(db, includeIgnored: true));
         }
 
+        [Route("~/Units/{id}", Name = "Unit.Details")]
         public async Task<IActionResult> Details(int id)
         {
             var units = await UnitService.List(db, includeIgnored: true);
