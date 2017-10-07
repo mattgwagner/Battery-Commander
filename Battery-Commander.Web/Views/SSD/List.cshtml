@@ -30,7 +30,7 @@
             <tr>
                 <td data-priority="1">@Html.DisplayFor(s => soldier)</td>
                 <td>@Html.DisplayFor(s => soldier.Unit, additionalViewData: new { controller = "SSD" })</td>
-                <td>@Html.DisplayFor(s => soldier, "EducationLevel")</td>
+                <td>@Html.DisplayFor(s => soldier, "MilitaryEducationLevel")</td>
                 <td data-sort="@soldier.TimeInGrade?.TotalDays">
                     @Html.DisplayFor(s => soldier.TimeInGradeHumanized)
                 </td>
