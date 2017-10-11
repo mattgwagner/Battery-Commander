@@ -68,7 +68,7 @@ namespace BatteryCommander.Web.Models
                 return
                     RankExtensions
                     .All()
-                    .Where(rank => Rank.Cadet != rank)
+                    .Where(rank => Rank.CDT != rank)
                     .Select(rank => new Row
                     {
                         Rank = rank,
