@@ -22,6 +22,8 @@ namespace BatteryCommander.Web.Controllers
             this.db = db;
         }
 
+
+        [Route("~/Soldiers", Name = "Soldiers.List")]
         public async Task<IActionResult> Index(SoldierSearchService.Query query)
         {
             return View("List", new SoldierListViewModel
@@ -30,7 +32,7 @@ namespace BatteryCommander.Web.Controllers
             });
         }
 
-        [Route("~/Soldiers/All", Name = "Soldiers.List")]
+        [Route("~/Soldiers/All")]
         public async Task<IActionResult> All()
         {
             return View("List", new SoldierListViewModel

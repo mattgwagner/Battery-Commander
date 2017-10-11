@@ -1,5 +1,9 @@
 @model Unit
 
+@{
+    var officers = new[] { Rank.O1, Rank.O2, Rank.O3, Rank.O4, Rank.O5, Rank.O6 };
+}
+
 <table class="table table-condensed">
     <thead>
         <tr>
@@ -18,7 +22,7 @@
         <tr>
             <td>Line 2</td>
             <td>@Html.DisplayNameFor(_ => Model.PERSTAT.Assigned)</td>
-            <td>@Html.DisplayFor(_ => Model.PERSTAT.Assigned.Officer)</td>
+            <td>@Html.RouteLink($"{Model.PERSTAT.Assigned.Officer}", "Soldiers.List", new { Unit = Model.Id, Ranks = officers })</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.Assigned.Enlisted)</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.Assigned.Warrant)</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.Assigned.Total)</td>
@@ -34,7 +38,7 @@
         <tr>
             <td>Line 4</td>
             <td>@Html.DisplayNameFor(_ => Model.PERSTAT.Detached)</td>
-            <td>@Html.DisplayFor(_ => Model.PERSTAT.Detached.Officer)</td>
+            <td>@Html.RouteLink($"{Model.PERSTAT.Detached.Officer}", "Soldiers.List", new { Unit = Model.Id, Ranks = officers, Status = Soldier.SoldierStatus.Detached })</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.Detached.Enlisted)</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.Detached.Warrant)</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.Detached.Total)</td>
@@ -42,7 +46,7 @@
         <tr>
             <td>Line 5</td>
             <td>@Html.DisplayNameFor(_ => Model.PERSTAT.Total)</td>
-            <td>@Html.DisplayFor(_ => Model.PERSTAT.Total.Officer)</td>
+            <td>@Html.RouteLink($"{Model.PERSTAT.Total.Officer}", "Soldiers.List", new { Unit = Model.Id, Ranks = officers })</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.Total.Enlisted)</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.Total.Warrant)</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.Total.Total)</td>
@@ -50,7 +54,7 @@
         <tr>
             <td>Line 6</td>
             <td>@Html.DisplayNameFor(_ => Model.PERSTAT.PresentForDuty)</td>
-            <td>@Html.DisplayFor(_ => Model.PERSTAT.PresentForDuty.Officer)</td>
+            <td>@Html.RouteLink($"{Model.PERSTAT.PresentForDuty.Officer}", "Soldiers.List", new { Unit = Model.Id, Ranks = officers, Status = Soldier.SoldierStatus.PresentForDuty })</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.PresentForDuty.Enlisted)</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.PresentForDuty.Warrant)</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.PresentForDuty.Total)</td>
@@ -66,7 +70,7 @@
         <tr>
             <td>Line 8</td>
             <td>@Html.DisplayNameFor(_ => Model.PERSTAT.KilledInAction)</td>
-            <td>@Html.DisplayFor(_ => Model.PERSTAT.KilledInAction.Officer)</td>
+            <td>@Html.DisplayFor(_ => Model.PERSTAT.KilledInAction.Enlisted)</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.KilledInAction.Enlisted)</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.KilledInAction.Warrant)</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.KilledInAction.Total)</td>
@@ -74,7 +78,7 @@
         <tr>
             <td>Line 9</td>
             <td>@Html.DisplayNameFor(_ => Model.PERSTAT.MissingInAction)</td>
-            <td>@Html.DisplayFor(_ => Model.PERSTAT.MissingInAction.Officer)</td>
+            <td>@Html.DisplayFor(_ => Model.PERSTAT.MissingInAction.Enlisted)</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.MissingInAction.Enlisted)</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.MissingInAction.Warrant)</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.MissingInAction.Total)</td>
@@ -82,7 +86,7 @@
         <tr>
             <td>Line 10</td>
             <td>@Html.DisplayNameFor(_ => Model.PERSTAT.OnLeaveOrPass)</td>
-            <td>@Html.DisplayFor(_ => Model.PERSTAT.OnLeaveOrPass.Officer)</td>
+            <td>@Html.RouteLink($"{Model.PERSTAT.OnLeaveOrPass.Officer}", "Soldiers.List", new { Unit = Model.Id, Ranks = officers, Status = Soldier.SoldierStatus.OnPass })</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.OnLeaveOrPass.Enlisted)</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.OnLeaveOrPass.Warrant)</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.OnLeaveOrPass.Total)</td>
@@ -90,7 +94,7 @@
         <tr>
             <td>Line 11</td>
             <td>@Html.DisplayNameFor(_ => Model.PERSTAT.TDY)</td>
-            <td>@Html.DisplayFor(_ => Model.PERSTAT.TDY.Officer)</td>
+            <td>@Html.RouteLink($"{Model.PERSTAT.TDY.Officer}", "Soldiers.List", new { Unit = Model.Id, Ranks = officers, Status = Soldier.SoldierStatus.TDY })</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.TDY.Enlisted)</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.TDY.Warrant)</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.TDY.Total)</td>
@@ -98,7 +102,7 @@
         <tr>
             <td>Line 12</td>
             <td>@Html.DisplayNameFor(_ => Model.PERSTAT.AWOL)</td>
-            <td>@Html.DisplayFor(_ => Model.PERSTAT.AWOL.Officer)</td>
+            <td>@Html.RouteLink($"{Model.PERSTAT.AWOL.Officer}", "Soldiers.List", new { Unit = Model.Id, Ranks = officers, Status = Soldier.SoldierStatus.AWOL })</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.AWOL.Enlisted)</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.AWOL.Warrant)</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.AWOL.Total)</td>
@@ -106,7 +110,7 @@
         <tr>
             <td>Line 13</td>
             <td>@Html.DisplayNameFor(_ => Model.PERSTAT.RearDetachment)</td>
-            <td>@Html.DisplayFor(_ => Model.PERSTAT.RearDetachment.Officer)</td>
+            <td>@Html.RouteLink($"{Model.PERSTAT.RearDetachment.Officer}", "Soldiers.List", new { Unit = Model.Id, Ranks = officers, Status = Soldier.SoldierStatus.RearDetachment })</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.RearDetachment.Enlisted)</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.RearDetachment.Warrant)</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.RearDetachment.Total)</td>
