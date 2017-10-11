@@ -194,6 +194,8 @@ namespace BatteryCommander.Web.Models
                 case Rank.E9:
                     return SSD.SSD_5;
 
+                // SSD_6 is in Development for E9's
+
                 default:
                     return null;
             }
