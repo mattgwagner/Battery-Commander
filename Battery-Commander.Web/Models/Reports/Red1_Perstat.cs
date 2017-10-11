@@ -11,7 +11,7 @@ namespace BatteryCommander.Web.Models.Reports
         [Display(Name = "Personnel Assigned")]
         public Row Assigned => new Row
         {
-            Enlisted = Soldiers.Where(_ => _.IsEnlisted).Count(),
+            Enlisted = Soldiers.Where(_ => __.IsEnlisted || _.IsNCO).Count(),
             Officer = Soldiers.Where(_ => _.IsOfficer).Count()
         };
 
@@ -21,7 +21,7 @@ namespace BatteryCommander.Web.Models.Reports
         [Display(Name = "Personnel Detached")]
         public Row Detached => new Row
         {
-            Enlisted = Soldiers.Where(_ => _.IsEnlisted).Where(_ => _.Status == Soldier.SoldierStatus.Detached).Count(),
+            Enlisted = Soldiers.Where(_ => _.IsEnlisted || _.IsNCO).Where(_ => _.Status == Soldier.SoldierStatus.Detached).Count(),
             Officer = Soldiers.Where(_ => _.IsOfficer).Where(_ => _.Status == Soldier.SoldierStatus.Detached).Count()
         };
 
