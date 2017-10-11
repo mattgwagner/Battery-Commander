@@ -34,7 +34,7 @@ namespace BatteryCommander.Web.Services
                 soldiers = soldiers.Where(_ => !_.Unit.IgnoreForReports);
             }
 
-            if (query.Ranks.Any())
+            if (query.Ranks?.Any() == true)
             {
                 soldiers = soldiers.Where(_ => query.Ranks.Contains(_.Rank));
             }
@@ -110,7 +110,7 @@ namespace BatteryCommander.Web.Services
 
             public int? Unit { get; set; }
 
-            public IEnumerable<Rank> Ranks { get; set; } = Enumerable.Empty<Rank>();
+            public IEnumerable<Rank> Ranks { get; set; }
 
             public Boolean? OnlyEnlisted { get; set; }
 
