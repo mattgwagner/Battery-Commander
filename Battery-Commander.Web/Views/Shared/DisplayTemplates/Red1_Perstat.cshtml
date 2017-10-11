@@ -41,7 +41,7 @@
             <td>@Html.RouteLink($"{Model.PERSTAT.Detached.Officer}", "Soldiers.List", new { Unit = Model.Id, Ranks = officers, Status = Soldier.SoldierStatus.Detached })</td>
             <td>@Html.RouteLink($"{Model.PERSTAT.Detached.Enlisted}", "Soldiers.List", new { Unit = Model.Id, OnlyEnlisted = true, Status = Soldier.SoldierStatus.Detached })</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.Detached.Warrant)</td>
-            <td>@Html.DisplayFor(_ => Model.PERSTAT.Detached.Total)</td>
+            <td>@Html.RouteLink($"{Model.PERSTAT.Detached.Total}", "Soldiers.List", new { Unit = Model.Id, Status = Soldier.SoldierStatus.Detached })</td>
         </tr>
         <tr>
             <td>Line 5</td>
@@ -49,7 +49,7 @@
             <td>@Html.RouteLink($"{Model.PERSTAT.Total.Officer}", "Soldiers.List", new { Unit = Model.Id, Ranks = officers })</td>
             <td>@Html.RouteLink($"{Model.PERSTAT.Total.Enlisted}", "Soldiers.List", new { Unit = Model.Id, OnlyEnlisted = true })</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.Total.Warrant)</td>
-            <td>@Html.DisplayFor(_ => Model.PERSTAT.Total.Total)</td>
+            <td>@Html.RouteLink($"{Model.PERSTAT.Total.Total}", "Soldiers.List", new { Unit = Model.Id })</td>
         </tr>
         <tr>
             <td>Line 6</td>
@@ -89,7 +89,7 @@
             <td>@Html.RouteLink($"{Model.PERSTAT.OnLeaveOrPass.Officer}", "Soldiers.List", new { Unit = Model.Id, Ranks = officers, Status = Soldier.SoldierStatus.OnPass })</td>
             <td>@Html.RouteLink($"{Model.PERSTAT.OnLeaveOrPass.Enlisted}", "Soldiers.List", new { Unit = Model.Id, OnlyEnlisted = true, Status = Soldier.SoldierStatus.OnPass })</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.OnLeaveOrPass.Warrant)</td>
-            <td>@Html.DisplayFor(_ => Model.PERSTAT.OnLeaveOrPass.Total)</td>
+            <td>@Html.RouteLink($"{Model.PERSTAT.Detached.Total}", "Soldiers.List", new { Unit = Model.Id, Status = Soldier.SoldierStatus.OnPass })</td>
         </tr>
         <tr>
             <td>Line 11</td>
@@ -97,7 +97,7 @@
             <td>@Html.RouteLink($"{Model.PERSTAT.TDY.Officer}", "Soldiers.List", new { Unit = Model.Id, Ranks = officers, Status = Soldier.SoldierStatus.TDY })</td>
             <td>@Html.RouteLink($"{Model.PERSTAT.TDY.Enlisted}", "Soldiers.List", new { Unit = Model.Id, OnlyEnlisted = true, Status = Soldier.SoldierStatus.TDY })</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.TDY.Warrant)</td>
-            <td>@Html.DisplayFor(_ => Model.PERSTAT.TDY.Total)</td>
+            <td>@Html.RouteLink($"{Model.PERSTAT.Detached.Total}", "Soldiers.List", new { Unit = Model.Id, Status = Soldier.SoldierStatus.TDY })</td>
         </tr>
         <tr>
             <td>Line 12</td>
@@ -105,7 +105,7 @@
             <td>@Html.RouteLink($"{Model.PERSTAT.AWOL.Officer}", "Soldiers.List", new { Unit = Model.Id, Ranks = officers, Status = Soldier.SoldierStatus.AWOL })</td>
             <td>@Html.RouteLink($"{Model.PERSTAT.AWOL.Enlisted}", "Soldiers.List", new { Unit = Model.Id, OnlyEnlisted = true, Status = Soldier.SoldierStatus.AWOL })</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.AWOL.Warrant)</td>
-            <td>@Html.DisplayFor(_ => Model.PERSTAT.AWOL.Total)</td>
+            <td>@Html.RouteLink($"{Model.PERSTAT.Detached.Total}", "Soldiers.List", new { Unit = Model.Id, Status = Soldier.SoldierStatus.AWOL })</td>
         </tr>
         <tr>
             <td>Line 13</td>
@@ -113,7 +113,7 @@
             <td>@Html.RouteLink($"{Model.PERSTAT.RearDetachment.Officer}", "Soldiers.List", new { Unit = Model.Id, Ranks = officers, Status = Soldier.SoldierStatus.RearDetachment })</td>
             <td>@Html.RouteLink($"{Model.PERSTAT.RearDetachment.Enlisted}", "Soldiers.List", new { Unit = Model.Id, OnlyEnlisted = true, Status = Soldier.SoldierStatus.RearDetachment })</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.RearDetachment.Warrant)</td>
-            <td>@Html.DisplayFor(_ => Model.PERSTAT.RearDetachment.Total)</td>
+            <td>@Html.RouteLink($"{Model.PERSTAT.Detached.Total}", "Soldiers.List", new { Unit = Model.Id, Status = Soldier.SoldierStatus.RearDetachment })</td>
         </tr>
         <tr>
             <td>Line 14</td>
