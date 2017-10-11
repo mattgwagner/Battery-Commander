@@ -99,18 +99,18 @@ namespace BatteryCommander.Web.Models
             internal const String Format = "{0:P0}";
 
             public Rank Rank { get; set; }
-            
+
             public String CssClass
             {
-             get
-             {
-                if(CurrentProgress >= Decimal.One)
+                get
                 {
-                 return "label label-success";   
+                    if (CurrentProgress >= Decimal.One)
+                    {
+                        return "label label-success";
+                    }
+
+                    return "label label-danger";
                 }
-                 
-                 return "label label-danger";
-             }
             }
 
             public Decimal? CurrentProgress
@@ -174,6 +174,7 @@ namespace BatteryCommander.Web.Models
         {
             switch (rank)
             {
+                case Rank.CDT:
                 case Rank.E1:
                 case Rank.E2:
                 case Rank.E3:
@@ -190,6 +191,7 @@ namespace BatteryCommander.Web.Models
                     return SSD.SSD_4;
 
                 case Rank.E8:
+                case Rank.E9:
                     return SSD.SSD_5;
 
                 default:
