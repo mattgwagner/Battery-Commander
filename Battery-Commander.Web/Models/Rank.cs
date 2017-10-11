@@ -115,20 +115,7 @@ namespace BatteryCommander.Web.Models
             }
         }
 
-        public static Boolean IsEnlisted(this Rank rank)
-        {
-            switch (rank)
-            {
-                case Rank.E1:
-                case Rank.E2:
-                case Rank.E3:
-                case Rank.E4:
-                    return true;
-
-                default:
-                    return false;
-            }
-        }
+        public static Boolean IsEnlisted(this Rank rank) => !IsOfficer(rank);
 
         public static Boolean IsNCO(this Rank rank)
         {
