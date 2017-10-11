@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace BatteryCommander.Web.Models
 {
@@ -100,6 +101,8 @@ namespace BatteryCommander.Web.Models
 
             return result;
         }
+
+        public static IEnumerable<Rank> Officers => All().Where(rank => rank.IsOfficer());
 
         public static IEnumerable<Rank> All()
         {
