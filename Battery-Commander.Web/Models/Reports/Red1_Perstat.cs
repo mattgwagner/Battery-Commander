@@ -35,7 +35,7 @@ namespace BatteryCommander.Web.Models.Reports
         [Display(Name = "Total Present for Duty")]
         public Row PresentForDuty => new Row
         {
-            Enlisted = Soldiers.Where(_ => _.IsEnlisted).Where(_ => _.Status == Soldier.SoldierStatus.PresentForDuty).Count(),
+            Enlisted = Soldiers.Where(_ => _.IsEnlisted || _.IsNCO).Where(_ => _.Status == Soldier.SoldierStatus.PresentForDuty).Count(),
             Officer = Soldiers.Where(_ => _.IsOfficer).Where(_ => _.Status == Soldier.SoldierStatus.PresentForDuty).Count()
         };
 
@@ -51,28 +51,28 @@ namespace BatteryCommander.Web.Models.Reports
         [Display(Name = "Personnel On Leave / Pass")]
         public Row OnLeaveOrPass => new Row
         {
-            Enlisted = Soldiers.Where(_ => _.IsEnlisted).Where(_ => _.Status == Soldier.SoldierStatus.OnPass).Count(),
+            Enlisted = Soldiers.Where(_ => _.IsEnlisted || _.IsNCO).Where(_ => _.Status == Soldier.SoldierStatus.OnPass).Count(),
             Officer = Soldiers.Where(_ => _.IsOfficer).Where(_ => _.Status == Soldier.SoldierStatus.OnPass).Count()
         };
 
         [Display(Name = "Personnel TDY")]
         public Row TDY => new Row
         {
-            Enlisted = Soldiers.Where(_ => _.IsEnlisted).Where(_ => _.Status == Soldier.SoldierStatus.TDY).Count(),
+            Enlisted = Soldiers.Where(_ => _.IsEnlisted || _.IsNCO).Where(_ => _.Status == Soldier.SoldierStatus.TDY).Count(),
             Officer = Soldiers.Where(_ => _.IsOfficer).Where(_ => _.Status == Soldier.SoldierStatus.TDY).Count()
         };
 
         [Display(Name = "Personnel AWOL")]
         public Row AWOL => new Row
         {
-            Enlisted = Soldiers.Where(_ => _.IsEnlisted).Where(_ => _.Status == Soldier.SoldierStatus.AWOL).Count(),
+            Enlisted = Soldiers.Where(_ => _.IsEnlisted || _.IsNCO).Where(_ => _.Status == Soldier.SoldierStatus.AWOL).Count(),
             Officer = Soldiers.Where(_ => _.IsOfficer).Where(_ => _.Status == Soldier.SoldierStatus.AWOL).Count()
         };
 
         [Display(Name = "Rear Detachment")]
         public Row RearDetachment => new Row
         {
-            Enlisted = Soldiers.Where(_ => _.IsEnlisted).Where(_ => _.Status == Soldier.SoldierStatus.RearDetachment).Count(),
+            Enlisted = Soldiers.Where(_ => _.IsEnlisted || _.IsNCO).Where(_ => _.Status == Soldier.SoldierStatus.RearDetachment).Count(),
             Officer = Soldiers.Where(_ => _.IsOfficer).Where(_ => _.Status == Soldier.SoldierStatus.RearDetachment).Count()
         };
 
