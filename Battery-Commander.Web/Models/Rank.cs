@@ -8,6 +8,9 @@ namespace BatteryCommander.Web.Models
 {
     public enum Rank : byte
     {
+        [Display(Name = "Cadet", ShortName = "CDT")]
+        CDT = 0,
+
         [Display(Name = "Private", ShortName = "PV1")]
         E1 = 1,
 
@@ -29,11 +32,11 @@ namespace BatteryCommander.Web.Models
         [Display(Name = "Sergeant First Class", ShortName = "SFC")]
         E7 = 7,
 
-        [Display(Name = "First Sergeant", ShortName = "1SG")]
+        [Display(Name = "Master Sergeant/First Sergeant", ShortName = "MSG/1SG")]
         E8 = 8,
 
-        [Display(Name = "Cadet", ShortName = "CDT")]
-        Cadet = 9,
+        [Display(Name = "Sergeant Major", ShortName = "SGM")]
+        E9 = 9,
 
         [Display(Name = "Second Lieutenant", ShortName = "2LT")]
         O1 = 10,
@@ -72,7 +75,7 @@ namespace BatteryCommander.Web.Models
         public Boolean IsOfficer => Rank.IsOfficer();
 
         [NotMapped]
-        public Boolean IsCadet => Rank.Cadet == Rank;
+        public Boolean IsCadet => Rank.CDT == Rank;
     }
 
     public static class RankExtensions
