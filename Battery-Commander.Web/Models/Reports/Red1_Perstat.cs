@@ -11,7 +11,7 @@ namespace BatteryCommander.Web.Models.Reports
         [Display(Name = "Personnel Assigned")]
         public Row Assigned => new Row
         {
-            Enlisted = Soldiers.Where(_ => __.IsEnlisted || _.IsNCO).Count(),
+            Enlisted = Soldiers.Where(_ => _.IsEnlisted || _.IsNCO).Count(),
             Officer = Soldiers.Where(_ => _.IsOfficer).Count()
         };
 
