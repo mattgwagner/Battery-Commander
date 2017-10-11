@@ -107,6 +107,8 @@ namespace BatteryCommander.Web.Models
 
         public static IEnumerable<Rank> Officers => All().Where(rank => rank.IsOfficer());
 
+        public static IEnumerable<Rank> Enlisted => All().Where(rank => rank.IsEnlisted());
+
         public static IEnumerable<Rank> All()
         {
             foreach (Rank rank in Enum.GetValues(typeof(Rank)))

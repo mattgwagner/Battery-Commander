@@ -34,13 +34,14 @@ namespace BatteryCommander.Web.Services
                 soldiers = soldiers.Where(_ => !_.Unit.IgnoreForReports);
             }
 
+            if (query.OnlyEnlisted == true)
+            {
+                query.Ranks = RankExtensions.Enlisted;
+            }
+
             if (query.Ranks?.Any() == true)
             {
                 soldiers = soldiers.Where(_ => query.Ranks.Contains(_.Rank));
-            }
-            else if (query.OnlyEnlisted == true)
-            {
-                soldiers = soldiers.Where(_ => _.IsEnlisted || _.IsNCO);
             }
 
             if (query.ABCP.HasValue)
