@@ -174,7 +174,6 @@ namespace BatteryCommander.Web.Models
         {
             switch (rank)
             {
-                case Rank.CDT:
                 case Rank.E1:
                 case Rank.E2:
                 case Rank.E3:
