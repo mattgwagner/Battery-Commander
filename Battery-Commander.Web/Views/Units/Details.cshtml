@@ -151,8 +151,8 @@
                             <td>@Html.ActionLink(row.Rank.DisplayName(), "Index", "Soldiers", new { Model = Model.Id, Ranks = new[] { row.Rank } })</td>
                             <td>@EducationExtensions.RequiredEducation(row.Rank).ShortName()</td>
                             <td>@Html.ActionLink(row.Assigned.ToString(), "Index", "Soldiers", new { Model = Model.Id, Ranks = new[] { row.Rank } })</td>
-                            <td>@Html.ActionLink(row.Incomplete.ToString(), "Index", "Soldiers", new { Model = Model.Id, Ranks = new[] { row.Rank }, educationStatus = false })</td>
-                            <td>@Html.ActionLink(row.Completed.ToString(), "Index", "Soldiers", new { Model = Model.Id, Ranks = new[] { row.Rank }, educationStatus = true })</td>
+                            <td>@Html.ActionLink(row.Incomplete.ToString(), "Index", "Soldiers", new { Model = Model.Id, Ranks = new[] { row.Rank }, educationcomplete = false })</td>
+                            <td>@Html.ActionLink(row.Completed.ToString(), "Index", "Soldiers", new { Model = Model.Id, Ranks = new[] { row.Rank }, educationcompletes = true })</td>
                             <td>@Html.ActionLink(row.Percentage.ToString("P0"), "Index", "Soldiers", new { Model = Model.Id, Ranks = new[] { row.Rank } })</td>
                         </tr>
                     }
