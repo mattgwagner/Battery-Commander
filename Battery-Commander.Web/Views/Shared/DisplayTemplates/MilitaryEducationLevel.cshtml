@@ -1,12 +1,10 @@
 @model Soldier
 
-@switch (Model.EducationLevel)
+@if (Model.IsEducationComplete)
 {
-    case MilitaryEducationLevel.Unknown:
-        <span class="label label-failure">@Model.EducationLevel.ShortName()</span>
-        return;
-
-    default:
-        <span class="label label-default">@Model.EducationLevel.ShortName()</span>
-        return;
+    <span class="label label-default">@Model.EducationLevel.ShortName()</span>
+}
+else
+{
+    <span class="label label-failure">@Model.EducationLevel.ShortName()</span>
 }
