@@ -26,14 +26,14 @@ namespace BatteryCommander.Web.Models
         [Display(Name = "(SMC) Sergeants Major Course", ShortName = "SMC")]
         SMC = 6,
 
+        [Display(Name = "(CST) Cadet Summer Training", ShortName = "CST")]
+        CST = 7,
+
         [Display(Name = "(BOLC) Basic Officer Leaders Course", ShortName = "BOLC")]
         BOLC = 10,
 
         [Display(Name = "(CCC) Captains Career Course", ShortName = "CCC")]
-        CCC = 11,
-
-        [Display(Name = "(CST) Cadet Summer Training", ShortName = "CST")]
-        CST = 12
+        CCC = 11
     }
 
     public static class EducationExtensions
