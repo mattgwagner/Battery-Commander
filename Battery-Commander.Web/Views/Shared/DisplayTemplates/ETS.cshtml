@@ -4,7 +4,7 @@
 {
     <span class="label label-default">@Html.DisplayFor(s => Model.TimeTillETSHumanized)</span>
 }
-else if (soldier.TimeTillETS > TimeSpan.FromDays(180))
+else if (Model.TimeTillETS > TimeSpan.FromDays(180))
 {
     <span class="label label-warning">@Html.DisplayFor(s => Model.TimeTillETSHumanized)</span>
 }
