@@ -32,7 +32,7 @@ namespace BatteryCommander.Web.Models
         [Display(Name = "(CCC) Captains Career Course", ShortName = "CCC")]
         CCC = 11,
 
-        [Display(Name = "(CST) Cadet Summer Training", ShortName = = "CST")]
+        [Display(Name = "(CST) Cadet Summer Training", ShortName = "CST")]
         CST = 12
     }
 
