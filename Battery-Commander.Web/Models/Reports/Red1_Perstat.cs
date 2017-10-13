@@ -76,6 +76,7 @@ namespace BatteryCommander.Web.Models.Reports
             Officer = Soldiers.Where(_ => _.IsOfficer).Where(_ => _.Status == Soldier.SoldierStatus.RearDetachment).Count()
         };
 
+        [Display(Name = "Replacements Requested")]
         public Row ReplacementsRequested => new Row { };
 
         public class Row
