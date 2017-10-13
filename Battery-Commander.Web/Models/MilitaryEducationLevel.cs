@@ -30,7 +30,10 @@ namespace BatteryCommander.Web.Models
         BOLC = 10,
 
         [Display(Name = "(CCC) Captains Career Course", ShortName = "CCC")]
-        CCC = 11
+        CCC = 11,
+
+        [Display(Name = "(CST) Cadet Summer Training", ShortName = = "CST")]
+        CST = 12
     }
 
     public static class EducationExtensions
@@ -50,6 +53,9 @@ namespace BatteryCommander.Web.Models
 
                 case Rank.E8:
                     return MilitaryEducationLevel.MLC;
+
+                case Rank.CDT:
+                    return MilitaryEducationLevel.CST;
 
                 case Rank.O1:
                 case Rank.O2:
