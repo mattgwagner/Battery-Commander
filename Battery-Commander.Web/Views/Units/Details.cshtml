@@ -152,7 +152,7 @@
                             <td>@EducationExtensions.RequiredEducation(row.Rank).ShortName()</td>
                             <td>@Html.ActionLink(row.Assigned.ToString(), "Index", "Soldiers", new { Unit = Model.Id, Ranks = new[] { row.Rank } })</td>
                             <td>@Html.ActionLink(row.Incomplete.ToString(), "Index", "Soldiers", new { Unit = Model.Id, Ranks = new[] { row.Rank }, educationcomplete = false })</td>
-                            <td>@Html.ActionLink(row.Completed.ToString(), "Index", "Soldiers", new { Unit = Model.Id, Ranks = new[] { row.Rank }, educationcompletes = true })</td>
+                            <td>@Html.ActionLink(row.Completed.ToString(), "Index", "Soldiers", new { Unit = Model.Id, Ranks = new[] { row.Rank }, educationcomplete = true })</td>
                             <td>@Html.ActionLink(row.Percentage.ToString("P0"), "Index", "Soldiers", new { Unit = Model.Id, Ranks = new[] { row.Rank } })</td>
                         </tr>
                     }
@@ -162,8 +162,8 @@
                         <th></th>
                         <th></th>
                         <th>@Html.ActionLink(Model.EducationTotal.Assigned.ToString(), "Index", "Soldiers", new { Unit = Model.Id })</th>
-                        <th>@Html.ActionLink(Model.EducationTotal.Incomplete.ToString(), "Index", "Soldiers", new { Unit = Model.Id, education = false })</th>
-                        <th>@Html.ActionLink(Model.EducationTotal.Completed.ToString(), "Index", "Soldiers", new { Unit = Model.Id, education = false })</th>
+                        <th>@Html.ActionLink(Model.EducationTotal.Incomplete.ToString(), "Index", "Soldiers", new { Unit = Model.Id, educationcomplete = false })</th>
+                        <th>@Html.ActionLink(Model.EducationTotal.Completed.ToString(), "Index", "Soldiers", new { Unit = Model.Id, educationcomplete = false })</th>
                         <th>@Html.ActionLink(Model.EducationTotal.Percentage.ToString("P0"), "Index", "Soldiers", new { Unit = Model.Id })</th>
                     </tr>
                 </tfoot>
