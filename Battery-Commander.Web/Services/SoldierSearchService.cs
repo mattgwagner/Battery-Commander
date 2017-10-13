@@ -1,4 +1,7 @@
 ﻿using BatteryCommander.Web.Models;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -134,6 +137,14 @@ namespace BatteryCommander.Web.Services
             public Boolean? EducationComplete { get; set; }
 
             public Soldier.SoldierStatus? Status { get; set; }
+        }
+    }
+
+    public static class SoldierHtmlHelper
+    {
+        public static IHtmlContent Soldiers(this HtmlHelper helper, String link_text, SoldierSearchService.Query query)
+        {
+            return helper.RouteLink(link_text, "Soldiers.List", query);
         }
     }
 }
