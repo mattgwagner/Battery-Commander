@@ -52,20 +52,7 @@
                 <td data-sort="@soldier.TimeInGrade?.TotalDays">
                     <span class="label label-default">@Html.DisplayFor(s => soldier.TimeInGradeHumanized)</span>
                 </td>
-                <td data-sort="@soldier.TimeTillETS?.TotalDays">
-                    @if (soldier.TimeTillETS > TimeSpan.FromDays(365))
-                    {
-                        <span class="label label-default">@Html.DisplayFor(s => soldier.TimeTillETSHumanized)</span>
-                    }
-                    else if (soldier.TimeTillETS > TimeSpan.FromDays(180))
-                    {
-                        <span class="label label-warning">@Html.DisplayFor(s => soldier.TimeTillETSHumanized)</span>
-                    }
-                    else
-                    {
-                        <span class="label label-danger">@Html.DisplayFor(s => soldier.TimeTillETSHumanized)</span>
-                    }
-                </td>
+                <td data-sort="@soldier.TimeTillETS?.TotalDays">@Html.DisplayFor(s => soldier, "ETS")</td>
                 <td data-sort="@soldier.LastApft?.TotalScore">
                     @Html.DisplayFor(s => soldier.LastApft)
                     @if (soldier.LastApft?.IsAlternateAerobicEvent == true)

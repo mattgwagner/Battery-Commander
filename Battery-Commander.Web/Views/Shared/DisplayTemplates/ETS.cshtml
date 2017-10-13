@@ -1,0 +1,14 @@
+@model Soldier
+
+@if (Model.TimeTillETS > TimeSpan.FromDays(365))
+{
+    <span class="label label-default">@Html.DisplayFor(s => Model.TimeTillETSHumanized)</span>
+}
+else if (soldier.TimeTillETS > TimeSpan.FromDays(180))
+{
+    <span class="label label-warning">@Html.DisplayFor(s => Model.TimeTillETSHumanized)</span>
+}
+else
+{
+    <span class="label label-danger">@Html.DisplayFor(s => Model.TimeTillETSHumanized)</span>
+}
