@@ -88,7 +88,7 @@
 
     <div class="form-group form-group-lg">
         @Html.DisplayNameFor(model => model.Supervisor)
-        @Html.DropDownListFor(model => model.SupervisorId, (IEnumerable<SelectListItem>)ViewBag.Soldiers, "-- Select a Supervisor --")
+        @Html.DropDownListFor(model => model.SupervisorId, (IEnumerable<SelectListItem>)ViewBag.Soldiers, "-- Select a Supervisor --", new { @class = "select2" })
     </div>
 
     <button type="submit">Save</button>
