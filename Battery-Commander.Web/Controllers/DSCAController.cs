@@ -11,7 +11,7 @@ using BatteryCommander.Web.Services;
 
 namespace BatteryCommander.Web.Controllers
 {
-    [Authorize]
+    [Authorize, ApiExplorerSettings(IgnoreApi = true)]
     public class DSCAController : Controller
     {
         private readonly Database db;
