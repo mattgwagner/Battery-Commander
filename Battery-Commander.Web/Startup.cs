@@ -1,5 +1,6 @@
 ﻿using BatteryCommander.Web.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -73,6 +74,13 @@ namespace BatteryCommander.Web
             app.UseDeveloperExceptionPage();
 
             app.UseStaticFiles();
+
+            app.UseJwtBearerAuthentication(new JwtBearerOptions
+            {
+                Authority = $"https://{auth0Settings.Value.Domain}",
+                Audience = auth0Settings.Value.ApiIdentifier,
+                RequireHttpsMetadata = !env.IsDevelopment()
+            });
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {

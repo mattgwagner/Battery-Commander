@@ -1,5 +1,6 @@
 ﻿using BatteryCommander.Web.Models;
 using BatteryCommander.Web.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 namespace BatteryCommander.Web.Controllers.API
 {
     [Route("api/[controller]")]
+    [Authorize]
     public class SoldiersController : Controller
     {
         private readonly Database db;
