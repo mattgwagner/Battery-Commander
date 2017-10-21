@@ -1,6 +1,5 @@
 ﻿using BatteryCommander.Web.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -18,6 +18,10 @@ namespace BatteryCommander.Web
 {
     public class Startup
     {
+        public static String API_Version => "v1";
+
+        public static String API_Name => $"Battery Commander {API_Version}";
+
         private static Boolean IsDevelopment;
 
         public Startup(IHostingEnvironment env)
@@ -58,6 +62,14 @@ namespace BatteryCommander.Web
             services.Configure<TwilioSettings>(Configuration.GetSection("Twilio"));
 
             services.AddDbContext<Database>();
+
+            // Register the Swagger generator, defining one or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                c.DescribeAllEnumsAsStrings();
+                //c.IncludeXmlComments();
+                c.SwaggerDoc(API_Version, new Info { Title = API_Name, Version = API_Version });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -80,6 +92,15 @@ namespace BatteryCommander.Web
                 Authority = $"https://{auth0Settings.Value.Domain}",
                 Audience = auth0Settings.Value.ApiIdentifier,
                 RequireHttpsMetadata = !env.IsDevelopment()
+            });
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", API_Name);
             });
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions

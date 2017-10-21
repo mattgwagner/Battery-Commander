@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Controllers
 {
-    [Authorize]
+    [Authorize, ApiExplorerSettings(IgnoreApi = true)]
     public class EvaluationsController : Controller
     {
         private readonly Database db;
