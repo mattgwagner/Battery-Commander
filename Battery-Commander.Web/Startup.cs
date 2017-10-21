@@ -9,8 +9,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.PlatformAbstractions;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
+using System.IO;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -67,8 +69,10 @@ namespace BatteryCommander.Web
             services.AddSwaggerGen(c =>
             {
                 c.DescribeAllEnumsAsStrings();
-                //c.IncludeXmlComments();
+
                 c.SwaggerDoc(API_Version, new Info { Title = API_Name, Version = API_Version });
+
+                c.IncludeXmlComments(Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "BatteryCommander.Web.xml"));
             });
         }
 
