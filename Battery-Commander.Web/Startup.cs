@@ -66,6 +66,8 @@ namespace BatteryCommander.Web
             // Register the Swagger generator, defining one or more Swagger documents
             services.AddSwaggerGen(c =>
             {
+                c.DescribeAllEnumsAsStrings();
+                //c.IncludeXmlComments();
                 c.SwaggerDoc(API_Version, new Info { Title = API_Name, Version = API_Version });
             });
         }
