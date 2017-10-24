@@ -22,6 +22,9 @@ namespace BatteryCommander.Web.Models
         [Required]
         public VehicleType Type { get; set; } = VehicleType.HMMWV;
 
+        [Required]
+        public VehicleLocation Location { get; set; } = VehicleLocation.HS;
+
         // Bumper, Registration, and Serial should be UNIQUE -- configured in Database.OnModelCreating
 
         [Required, StringLength(10)]
@@ -84,6 +87,24 @@ namespace BatteryCommander.Web.Models
             FMC = 1,
 
             NMC = byte.MaxValue
+        }
+
+        public enum VehicleLocation : byte
+        {
+            [Display(Name = "Home Station")]
+            HS,
+
+            [Display(Name = "Forward Support Company")]
+            FSC,
+
+            [Display(Name = "Field Maintenance Shop")]
+            FMS,
+
+            [Display(Name = "Combined Support Maintenance Shop")]
+            CSMS,
+
+            [Display(Name = "Maneuver Area Training Equipment Site")]
+            MATES
         }
     }
 }

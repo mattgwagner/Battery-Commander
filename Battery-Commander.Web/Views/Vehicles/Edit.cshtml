@@ -27,6 +27,11 @@
     </div>
 
     <div class="form-group form-group-lg">
+        @Html.DisplayNameFor(model => model.Location)
+        @Html.DropDownListFor(model => model.Location, Html.GetEnumSelectList<Vehicle.VehicleLocation>())
+    </div>
+
+    <div class="form-group form-group-lg">
         @Html.DisplayNameFor(model => model.Serial)
         @Html.EditorFor(model => model.Serial)
     </div>
