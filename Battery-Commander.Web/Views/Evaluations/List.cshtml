@@ -27,6 +27,7 @@
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Rater)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().SeniorRater)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Reviewer)</th>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().EvaluationId)</th>
         </tr>
     </thead>
 
@@ -55,6 +56,7 @@
                 <td>@Html.DisplayFor(_ => evaluation.Rater)</td>
                 <td>@Html.DisplayFor(_ => evaluation.SeniorRater)</td>
                 <td>@Html.DisplayFor(_ => evaluation.Reviewer)</td>
+                <td>@Html.DisplayFor(_ => evaluationEvaluationId)</td>
             </tr>
         }
     </tbody>
