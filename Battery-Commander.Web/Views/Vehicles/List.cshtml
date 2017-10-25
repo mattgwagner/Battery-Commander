@@ -45,7 +45,7 @@
         {
             <tr>
                 <td>
-                    <span class="update-status" data-vehicle="@vehicle.Id" data-status="@((int)vehicle.Status)" data-notes="@vehicle.Notes">
+                    <span class="update-status" data-vehicle="@vehicle.Id" data-status="@((int)vehicle.Status)" data-notes="@vehicle.Notes" data-location="@vehicle.Location">
                         @Html.DisplayFor(_ => vehicle, "VehicleStatus")
                     </span>
                     @if (vehicle.HasFuelCard)
@@ -155,6 +155,11 @@
         </div>
 
         <div class="form-group form-group-lg">
+            @Html.Label("Location")
+            @Html.DropDownList("location", Html.GetEnumSelectList<Vehicle.VehicleLocation>())
+        </div>
+
+        <div class="form-group form-group-lg">
             @Html.Label("Notes")
             @Html.TextArea("notes")
         </div>
@@ -181,6 +186,7 @@
                 $("[name='vehicleId']").val($(this).data('vehicle'));
                 $("#status").val($(this).data('status')).trigger('change');
                 $("#notes").val($(this).data('notes'));
+                $("#location").val($(this).data('location'));
 
                 $("#set-status").dialog({
                     modal: true

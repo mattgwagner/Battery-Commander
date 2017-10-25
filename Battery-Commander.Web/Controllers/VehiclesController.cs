@@ -82,7 +82,7 @@ namespace BatteryCommander.Web.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> SetStatus(int vehicleId, Vehicle.VehicleStatus status, String notes)
+        public async Task<IActionResult> SetStatus(int vehicleId, Vehicle.VehicleStatus status, Vehicle.VehicleLocation location, String notes)
         {
             var vehicle =
                 await db
@@ -92,6 +92,7 @@ namespace BatteryCommander.Web.Controllers
 
             vehicle.Status = status;
             vehicle.Notes = notes;
+            vehicle.Location = location;
 
             if (Vehicle.VehicleStatus.FMC != status)
             {
