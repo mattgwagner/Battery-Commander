@@ -103,7 +103,7 @@
                         <span class="label label-default">JBC-P</span>
                     }
                 </td>
-                <td>@Html.DisplayFor(_ => vehicle, "VehicleLocation")</td>
+                <td class="update-status">@Html.DisplayFor(_ => vehicle, "VehicleLocation")</td>
                 <td>
                     <span class="update-status" data-vehicle="@vehicle.Id" data-status="@((int)vehicle.Status)" data-notes="@vehicle.Notes">
                         @Html.DisplayFor(_ => vehicle.Notes)
