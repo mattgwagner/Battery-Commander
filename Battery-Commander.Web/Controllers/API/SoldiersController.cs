@@ -2,6 +2,7 @@
 using BatteryCommander.Web.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,16 +20,17 @@ namespace BatteryCommander.Web.Controllers.API
         }
 
         [HttpGet]
-        public async Task<IEnumerable<dynamic>> Get(SoldierSearchService.Query query)
+        public async Task<IEnumerable<SoldierDTO>> Get(SoldierSearchService.Query query)
         {
             // GET: api/soldiers
 
             return (await SoldierSearchService.Filter(db, query))
-                .Select(s => new
+                .Select(s => new SoldierDTO
                 {
-                    s.Id,
-                    s.LastName,
-                    s.FirstName
+                    Id = s.Id,
+                    LastName = s.LastName,
+                    FirstName = s.FirstName,
+                    Rank = s.Rank
                 })
                 .ToList();
         }
@@ -53,5 +55,16 @@ namespace BatteryCommander.Web.Controllers.API
         //{
         //    // TODO
         //}
+
+        public class SoldierDTO
+        {
+            public int Id { get; set; }
+
+            public String FirstName { get; set; }
+
+            public String LastName { get; set; }
+
+            public Rank Rank { get; set; }
+        }
     }
 }
