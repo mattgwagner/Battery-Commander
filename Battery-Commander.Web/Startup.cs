@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.PlatformAbstractions;
+using Newtonsoft.Json.Converters;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.IO;
@@ -52,6 +53,10 @@ namespace BatteryCommander.Web
                 {
                     options.Filters.Add(new RequireHttpsAttribute { });
                 }
+            })
+            .AddJsonOptions(options =>
+            {
+                options.SerializerSettings.Converters.Add(new StringEnumConverter { });
             });
 
             // Add functionality to inject IOptions<T>
