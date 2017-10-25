@@ -1,0 +1,12 @@
+@model Vehicle
+
+@switch (Model.Location)
+{
+    case Vehicle.VehicleLocation.HS:
+        <span class="label label-success">HS</span>
+        return;
+
+    default:
+        <span class="label label-warning">@Model.Location</span>
+        return;
+}
