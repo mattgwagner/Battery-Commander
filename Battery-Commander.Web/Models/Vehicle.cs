@@ -104,7 +104,9 @@ namespace BatteryCommander.Web.Models
             CSMS,
 
             [Display(Name = "Maneuver Area Training Equipment Site")]
-            MATES
+            MATES,
+
+            Other = byte.MaxValue
         }
     }
 }
