@@ -96,7 +96,7 @@ namespace BatteryCommander.Web.Controllers
 
             if (Vehicle.VehicleStatus.FMC != status)
             {
-                // Changing to FMC, remove passengers
+                // Changing to !FMC, remove passengers
 
                 vehicle.DriverId = null;
                 vehicle.A_DriverId = null;
