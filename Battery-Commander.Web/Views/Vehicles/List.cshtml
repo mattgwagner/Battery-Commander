@@ -181,7 +181,7 @@
                 $("[name='vehicleId']").val($(this).data('vehicle'));
                 $("#status").val($(this).data('status')).trigger('change');
                 $("#notes").val($(this).data('notes'));
-                $("#location").val($(this).data('location'));
+                $("#location").val($(this).data('location')).trigger('change');
 
                 $("#set-status").dialog({
                     modal: true
