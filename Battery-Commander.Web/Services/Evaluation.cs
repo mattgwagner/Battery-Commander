@@ -83,9 +83,6 @@ namespace BatteryCommander.Web.Models
                     .Permit(Trigger.Return_to_Rater, EvaluationStatus.At_Rater)
                     .Permit(Trigger.Accepted_to_iPerms, EvaluationStatus.Accepted_to_iPerms);
 
-                machine.Configure(EvaluationStatus.Submitted_to_HQDA)
-                    .Permit(Trigger.Return_to_Rater, EvaluationStatus.At_Rater);
-
                 return machine;
             }
         }
