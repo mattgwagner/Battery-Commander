@@ -141,7 +141,12 @@ namespace BatteryCommander.Web.Controllers
                 }
                 else
                 {
+                    // TODO This is sloppy, should probably be a better way
+
                     if (vehicle.DriverId == driverId) vehicle.DriverId = null;
+                    if (vehicle.A_DriverId == driverId) vehicle.A_DriverId = null;
+
+                    if (vehicle.DriverId == adriverId) vehicle.DriverId = null;
                     if (vehicle.A_DriverId == adriverId) vehicle.A_DriverId = null;
                 }
 
