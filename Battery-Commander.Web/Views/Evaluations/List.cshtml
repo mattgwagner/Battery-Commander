@@ -51,7 +51,7 @@
                         <span class="label label-danger">Overdue @Html.DisplayFor(_ => evaluation.DelinquencyHumanized)</span>
                     }
                 </td>
-                <td data-sort="@evaluation.LastUpdated">@Html.DisplayFor(_ => evaluation.LastUpdatedHumanized)</td>
+                <td data-sort="@evaluation.LastUpdated?.UtcTicks">@Html.DisplayFor(_ => evaluation.LastUpdatedHumanized)</td>
                 <td>@Html.DisplayFor(_ => evaluation.Type)</td>
                 <td>@Html.DisplayFor(_ => evaluation.Rater)</td>
                 <td>@Html.DisplayFor(_ => evaluation.SeniorRater)</td>
