@@ -47,7 +47,7 @@
         {
             <tr class="@(evaluation.IsDelinquent ? "alert alert-danger" : "")">
                 <td>@Html.ActionLink("Details", "Details", new { evaluation.Id })</td>
-                <td>@Html.DisplayFor(_ => evaluation.Ratee.Rank)</td>
+                <td>@evaluation.Ratee.Rank.ShortName()</td>
                 <td>@Html.DisplayFor(_ => evaluation.Ratee.LastName)</td>
                 <td>@Html.DisplayFor(_ => evaluation.Ratee.FirstName)</td>
                 <td>@Html.DisplayFor(_ => evaluation.ThruDate)</td>
