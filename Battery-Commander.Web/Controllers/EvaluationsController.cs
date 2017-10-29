@@ -20,21 +20,22 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> Index(Boolean includeComplete = false, EvaluationStatus? status = null, Boolean onlyDelinquent = false)
         {
-            var evaluations =
-                await db
-                .Evaluations
-                .Include(_ => _.Ratee)
-                .Include(_ => _.Rater)
-                .Include(_ => _.SeniorRater)
-                .Include(_ => _.Reviewer)
-                .Include(_ => _.Events)
-                .Where(_ => !status.HasValue || _.Status == status)
-                .Where(_ => includeComplete || !_.IsCompleted)
-                .Where(_ => !onlyDelinquent || _.IsDelinquent)
-                .OrderBy(_ => _.ThruDate)
-                .ToListAsync();
-
-            return View("List", evaluations);
+            return View("List", new EvaluationListViewModel
+            {
+                Evaluations =
+                    await db
+                    .Evaluations
+                    .Include(_ => _.Ratee)
+                    .Include(_ => _.Rater)
+                    .Include(_ => _.SeniorRater)
+                    .Include(_ => _.Reviewer)
+                    .Include(_ => _.Events)
+                    .Where(_ => !status.HasValue || _.Status == status)
+                    .Where(_ => includeComplete || !_.IsCompleted)
+                    .Where(_ => !onlyDelinquent || _.IsDelinquent)
+                    .OrderBy(_ => _.ThruDate)
+                    .ToListAsync()
+            });
         }
 
         public async Task<IActionResult> Details(int id)
@@ -131,7 +132,7 @@ namespace BatteryCommander.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<Evaluation> Get(Database db, int id)
+        public static async Task<Evaluation> Get(Database db, int id)
         {
             return
                 await db
