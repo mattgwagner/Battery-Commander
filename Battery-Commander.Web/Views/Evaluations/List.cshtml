@@ -27,8 +27,10 @@
     <thead>
         <tr>
             <th data-priority="1">Details</th>
-            <th data-priority="1">@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Ratee)</th>
-            <th data-priority="1">@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().ThruDate)</th>
+            <th data-priority="2">@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Ratee.Rank)</th>
+            <th data-priority="1">@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Ratee.LastName)</th>
+            <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Ratee.FirstName)</th>
+            <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().ThruDate)</th>
             <th data-priority="3">@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Status)</th>
             <th data-priority="2">@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Delinquency)</th>
             <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().LastUpdated)</th>
@@ -45,7 +47,9 @@
         {
             <tr class="@(evaluation.IsDelinquent ? "alert alert-danger" : "")">
                 <td>@Html.ActionLink("Details", "Details", new { evaluation.Id })</td>
-                <td>@Html.DisplayFor(_ => evaluation.Ratee)</td>
+                <td>@Html.DisplayFor(_ => evaluation.Ratee.Rank)</td>
+                <td>@Html.DisplayFor(_ => evaluation.Ratee.LastName)</td>
+                <td>@Html.DisplayFor(_ => evaluation.Ratee.FirstName)</td>
                 <td>@Html.DisplayFor(_ => evaluation.ThruDate)</td>
                 <td>
                     @Html.ActionLink(evaluation.Status.DisplayName(), "Index", "Evaluations", new { status = evaluation.Status })
