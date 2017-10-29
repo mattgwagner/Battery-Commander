@@ -5,7 +5,16 @@
 }
 
 <div class="page-header">
-    <h1>@ViewBag.Title <span class="badge">@Model.Evaluations.Count()</span></h1>
+    <h1>@ViewBag.Title</h1>
+    <h4>
+        <small>
+            @Html.DisplayNameFor(_ => Model.Delinquent): <span class="badge">@Model.Delinquent</span>
+            @Html.DisplayNameFor(_ => Model.Due): <span class="badge">@Model.Due</span>
+            @Html.DisplayNameFor(_ => Model.Next30): <span class="badge">@Model.Next30</span>
+            @Html.DisplayNameFor(_ => Model.Next60): <span class="badge">@Model.Next60</span>
+            @Html.DisplayNameFor(_ => Model.Next90): <span class="badge">@Model.Next90</span>
+        </small>
+    </h4>
 </div>
 
 <div class="btn-group">
