@@ -27,6 +27,9 @@
             <th>Result</th>
             <th>Date</th>
             <th>Score</th>
+            <th>Push-Ups</th>
+            <th>Sit-Ups</th>
+            <th>Aerobic</th>
             <th>Add</th>
         </tr>
     </thead>
@@ -49,10 +52,13 @@
                             <span class="label">Alt. Aerobic</span>
                         }
                     </td>
+                    <td>@Html.DisplayFor(_ => soldier.LastApft.PushUps)</td>
+                    <td>@Html.DisplayFor(_ => soldier.LastApft.SitUps)</td>
+                    <td>@Html.DisplayFor(_ => soldier.LastApft.Run)</td>
                 }
                 else
                 {
-                    <td colspan="3"></td>
+                    <td colspan="6"></td>
                 }
                 <td>@Html.ActionLink("Add", "New", "APFT", new { soldier = soldier.Id }, new { @class = "btn btn-default btn-xs" })</td>
             </tr>
