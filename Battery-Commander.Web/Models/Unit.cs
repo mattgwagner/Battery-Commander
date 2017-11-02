@@ -43,6 +43,7 @@ namespace BatteryCommander.Web.Models
                         Assigned = Soldiers.Where(soldier => soldier.Rank == rank).Count(),
                         Completed = Soldiers.Where(soldier => soldier.Rank == rank).Where(soldier => soldier.SSDStatus.CurrentProgress >= Decimal.One).Count()
                     })
+                    .Where(row => row.Assigned > 0)
                     .ToList();
             }
         }
