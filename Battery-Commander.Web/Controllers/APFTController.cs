@@ -1,8 +1,8 @@
 ﻿using BatteryCommander.Web.Models;
+using BatteryCommander.Web.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,21 +18,9 @@ namespace BatteryCommander.Web.Controllers
             this.db = db;
         }
 
-        public async Task<IActionResult> Index(int? unit = null, DateTime? date = null)
+        public async Task<IActionResult> Index(SoldierSearchService.Query query)
         {
-            // TODO Filtering by pass/fail
-
-            var tests =
-                await db
-                .APFTs
-                .Where(apft => !date.HasValue || apft.Date.Date == date.Value)
-                .Where(apft => !unit.HasValue || apft.Soldier.UnitId == unit)
-                .OrderByDescending(apft => apft.Date)
-                .Include(apft => apft.Soldier)
-                .Include(apft => apft.Soldier.Unit)
-                .ToListAsync();
-
-            return View("List", tests);
+            return View("List", await SoldierSearchService.Filter(db, query));
         }
 
         public async Task<IActionResult> Details(int id)
