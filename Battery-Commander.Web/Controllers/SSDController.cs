@@ -19,9 +19,14 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> Index(SoldierSearchService.Query query)
         {
-            // Ensure we're only displaying Soldiers we care about here
-
-            if (!query.Ranks.Any()) query.OnlyEnlisted = true;
+            if (query?.Ranks?.Any() == true)
+            {
+                // Cool, we're searching for one or more specific ranks
+            }
+            else
+            {
+                query.OnlyEnlisted = true;
+            }
 
             return View("List", await SoldierSearchService.Filter(db, query));
         }
