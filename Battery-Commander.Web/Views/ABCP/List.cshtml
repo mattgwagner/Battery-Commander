@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ABCP>
+﻿@model IEnumerable<Soldier>
 
 @{
     ViewBag.Title = "ABCP Tracker";
@@ -13,38 +13,32 @@
         <tr>
             <th>Soldier</th>
             <th>Unit</th>
+            <th>Result</th>
             <th>Date</th>
             <th>Height</th>
             <th>Weight</th>
-            <th>Result</th>
-            <th>Details</th>
+            <th></th>
         </tr>
     </thead>
 
     <tbody>
-        @foreach (var model in Model)
+        @foreach (var soldier in Model)
         {
             <tr>
-                <td>@Html.DisplayFor(_ => model.Soldier)</td>
-                <td>@Html.DisplayFor(_ => model.Soldier.Unit, additionalViewData: new { controller = "ABCP" })</td>
-                <td>
-                    <a href="@Url.Action("Index", new { date = model.Date })">
-                        @Html.DisplayFor(_ => model.Date)
-                    </a>
-                </td>
-                <td>@Html.DisplayFor(_ => model.Height)</td>
-                <td>@Html.DisplayFor(_ => model.Weight)</td>
-                <td>
-                    @if (!model.IsPassing)
-                    {
-                        <span class="label label-danger">Failure</span>
-                    }
-                    else
-                    {
-                        <span class="label label-success">Passing</span>
-                    }
-                </td>
-                <td>@Html.ActionLink("Details", "Details", new { model.Id })</td>
+                <td>@Html.DisplayFor(_ => soldier)</td>
+                <td>@Html.DisplayFor(_ => soldier.Unit)</td>
+                @if (soldier.LastAbcp != null)
+                {
+                    <td>@Html.DisplayFor(_ => soldier.LastAbcp, "ABCP")</td>
+                    <td>@Html.DisplayFor(_ => soldier.LastAbcp.Date)</td>
+                    <td>@Html.DisplayFor(_ => soldier.LastAbcp.Height)</td>
+                    <td>@Html.DisplayFor(_ => soldier.LastAbcp.Weight)</td>
+                }
+                else
+                {
+                    <td colspan="4"></td>
+                }
+                <td>@Html.ActionLink("Add", "New", "ABCP", new { soldier = soldier.Id }, new { @class = "btn btn-default btn-xs" })</td>
             </tr>
         }
     </tbody>

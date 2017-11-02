@@ -13,9 +13,10 @@
         <tr>
             <th>Soldier</th>
             <th>Unit</th>
+            <th>Result</th>
             <th>Date</th>
             <th>Score</th>
-            <th>Result</th>
+            <th></th>
         </tr>
     </thead>
 
@@ -27,6 +28,7 @@
                 <td>@Html.DisplayFor(_ => soldier.Unit)</td>
                 @if (soldier.LastApft != null)
                 {
+                    <td>@Html.DisplayFor(_ => soldier.LastApft, "APFT")</td>
                     <td>@Html.DisplayFor(_ => soldier.LastApft.Date)</td>
                     <td data-sort="@soldier.LastApft.TotalScore">
                         @Html.DisplayFor(_ => soldier.LastApft.TotalScore)
@@ -36,12 +38,12 @@
                             <span class="label">Alt. Aerobic</span>
                         }
                     </td>
-                    <td>@Html.DisplayFor(_ => soldier.LastApft, "APFT")</td>
                 }
                 else
                 {
                     <td colspan="3"></td>
                 }
+                <td>@Html.ActionLink("Add", "New", "APFT", new { soldier = soldier.Id }, new { @class = "btn btn-default btn-xs" })</td>
             </tr>
         }
     </tbody>
