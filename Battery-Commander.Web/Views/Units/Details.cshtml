@@ -46,15 +46,15 @@
                     </tr>
                     <tr>
                         <td>@Html.DisplayNameFor(_ => Model.ABCP.Passed)</td>
-                        <td>@Html.ActionLink(Model.ABCP.Passed.ToString(), "Index", "Soldiers", new { Unit = Model.Id, abcp = EventStatus.Passed })</td>
+                        <td>@Html.ActionLink(Model.ABCP.Passed.ToString(), "Index", "Soldiers", new SoldierSearchService.Query { Unit = Model.Id, ABCP = EventStatus.Passed })</td>
                     </tr>
                     <tr>
                         <td>@Html.DisplayNameFor(_ => Model.ABCP.Failed)</td>
-                        <td>@Html.ActionLink(Model.ABCP.Failed.ToString(), "Index", "Soldiers", new { Unit = Model.Id, abcp = EventStatus.Failed })</td>
+                        <td>@Html.ActionLink(Model.ABCP.Failed.ToString(), "Index", "Soldiers", new SoldierSearchService.Query { Unit = Model.Id, ABCP = EventStatus.Failed })</td>
                     </tr>
                     <tr>
                         <td>@Html.DisplayNameFor(_ => Model.ABCP.NotTested)</td>
-                        <td>@Html.ActionLink(Model.ABCP.NotTested.ToString(), "Index", "Soldiers", new { Unit = Model.Id, abcp = EventStatus.NotTested })</td>
+                        <td>@Html.ActionLink(Model.ABCP.NotTested.ToString(), "Index", "Soldiers", new SoldierSearchService.Query { Unit = Model.Id, ABCP = EventStatus.NotTested })</td>
                     </tr>
                     <tr>
                         <td>@Html.DisplayNameFor(_ => Model.ABCP.PercentPass)</td>
@@ -74,15 +74,15 @@
                     </tr>
                     <tr>
                         <td>@Html.DisplayNameFor(_ => Model.APFT.Passed)</td>
-                        <td>@Html.ActionLink(Model.APFT.Passed.ToString(), "Index", "Soldiers", new { Unit = Model.Id, apft = EventStatus.Passed })</td>
+                        <td>@Html.ActionLink(Model.APFT.Passed.ToString(), "Index", "Soldiers", new SoldierSearchService.Query { Unit = Model.Id, APFT = EventStatus.Passed })</td>
                     </tr>
                     <tr>
                         <td>@Html.DisplayNameFor(_ => Model.APFT.Failed)</td>
-                        <td>@Html.ActionLink(Model.APFT.Failed.ToString(), "Index", "Soldiers", new { Unit = Model.Id, apft = EventStatus.Failed })</td>
+                        <td>@Html.ActionLink(Model.APFT.Failed.ToString(), "Index", "Soldiers", new SoldierSearchService.Query { Unit = Model.Id, APFT = EventStatus.Failed })</td>
                     </tr>
                     <tr>
                         <td>@Html.DisplayNameFor(_ => Model.APFT.NotTested)</td>
-                        <td>@Html.ActionLink(Model.APFT.NotTested.ToString(), "Index", "Soldiers", new { Unit = Model.Id, apft = EventStatus.NotTested })</td>
+                        <td>@Html.ActionLink(Model.APFT.NotTested.ToString(), "Index", "Soldiers", new SoldierSearchService.Query { Unit = Model.Id, APFT = EventStatus.NotTested })</td>
                     </tr>
                     <tr>
                         <td>@Html.DisplayNameFor(_ => Model.APFT.PercentPass)</td>
@@ -109,12 +109,12 @@
                     @foreach (var row in Model.SSD)
             {
                         <tr>
-                            <td>@Html.ActionLink(row.Rank.DisplayName(), "Index", "SSD", new { Unit = Model.Id, Ranks = new[] { row.Rank } })</td>
+                            <td>@Html.ActionLink(row.Rank.DisplayName(), "Index", "SSD", new SoldierSearchService.Query { Unit = Model.Id, Ranks = new[] { row.Rank } })</td>
                             <td>@SSDExtensions.RequiredSSD(row.Rank).DisplayName()</td>
-                            <td>@Html.ActionLink(row.Assigned.ToString(), "Index", "SSD", new { Unit = Model.Id, Ranks = new[] { row.Rank } })</td>
-                            <td>@Html.ActionLink(row.Incomplete.ToString(), "Index", "SSD", new { Unit = Model.Id, Ranks = new[] { row.Rank }, complete = false })</td>
-                            <td>@Html.ActionLink(row.Completed.ToString(), "Index", "SSD", new { Unit = Model.Id, Ranks = new[] { row.Rank }, complete = true })</td>
-                            <td>@Html.ActionLink(row.Percentage.ToString("P0"), "Index", "SSD", new { Unit = Model.Id, Ranks = new[] { row.Rank } })</td>
+                            <td>@Html.ActionLink(row.Assigned.ToString(), "Index", "SSD", new SoldierSearchService.Query { Unit = Model.Id, Ranks = new[] { row.Rank } })</td>
+                            <td>@Html.ActionLink(row.Incomplete.ToString(), "Index", "SSD", new SoldierSearchService.Query { Unit = Model.Id, Ranks = new[] { row.Rank }, SSD = false })</td>
+                            <td>@Html.ActionLink(row.Completed.ToString(), "Index", "SSD", new SoldierSearchService.Query { Unit = Model.Id, Ranks = new[] { row.Rank }, SSD = true })</td>
+                            <td>@Html.ActionLink(row.Percentage.ToString("P0"), "Index", "SSD", new SoldierSearchService.Query { Unit = Model.Id, Ranks = new[] { row.Rank } })</td>
                         </tr>
                     }
                 </tbody>
@@ -122,10 +122,10 @@
                     <tr>
                         <th></th>
                         <th></th>
-                        <th>@Html.ActionLink(Model.SSDTotal.Assigned.ToString(), "Index", "SSD", new { Unit = Model.Id })</th>
-                        <th>@Html.ActionLink(Model.SSDTotal.Incomplete.ToString(), "Index", "SSD", new { Unit = Model.Id, SSD = false })</th>
-                        <th>@Html.ActionLink(Model.SSDTotal.Completed.ToString(), "Index", "SSD", new { Unit = Model.Id, SSD = true })</th>
-                        <th>@Html.ActionLink(Model.SSDTotal.Percentage.ToString("P0"), "Index", "SSD", new { Unit = Model.Id })</th>
+                        <th>@Html.ActionLink(Model.SSDTotal.Assigned.ToString(), "Index", "SSD", new SoldierSearchService.Query { Unit = Model.Id })</th>
+                        <th>@Html.ActionLink(Model.SSDTotal.Incomplete.ToString(), "Index", "SSD", new SoldierSearchService.Query { Unit = Model.Id, SSD = false })</th>
+                        <th>@Html.ActionLink(Model.SSDTotal.Completed.ToString(), "Index", "SSD", new SoldierSearchService.Query { Unit = Model.Id, SSD = true })</th>
+                        <th>@Html.ActionLink(Model.SSDTotal.Percentage.ToString("P0"), "Index", "SSD", new SoldierSearchService.Query { Unit = Model.Id })</th>
                     </tr>
                 </tfoot>
             </table>
@@ -148,12 +148,12 @@
                     @foreach (var row in Model.Education)
             {
                         <tr>
-                            <td>@Html.ActionLink(row.Rank.DisplayName(), "Index", "Soldiers", new { Unit = Model.Id, Ranks = new[] { row.Rank } })</td>
+                            <td>@Html.ActionLink(row.Rank.DisplayName(), "Index", "Soldiers", new SoldierSearchService.Query { Unit = Model.Id, Ranks = new[] { row.Rank } })</td>
                             <td>@EducationExtensions.RequiredEducation(row.Rank).ShortName()</td>
-                            <td>@Html.ActionLink(row.Assigned.ToString(), "Index", "Soldiers", new { Unit = Model.Id, Ranks = new[] { row.Rank } })</td>
-                            <td>@Html.ActionLink(row.Incomplete.ToString(), "Index", "Soldiers", new { Unit = Model.Id, Ranks = new[] { row.Rank }, educationcomplete = false })</td>
-                            <td>@Html.ActionLink(row.Completed.ToString(), "Index", "Soldiers", new { Unit = Model.Id, Ranks = new[] { row.Rank }, educationcomplete = true })</td>
-                            <td>@Html.ActionLink(row.Percentage.ToString("P0"), "Index", "Soldiers", new { Unit = Model.Id, Ranks = new[] { row.Rank } })</td>
+                            <td>@Html.ActionLink(row.Assigned.ToString(), "Index", "Soldiers", new SoldierSearchService.Query { Unit = Model.Id, Ranks = new[] { row.Rank } })</td>
+                            <td>@Html.ActionLink(row.Incomplete.ToString(), "Index", "Soldiers", new SoldierSearchService.Query { Unit = Model.Id, Ranks = new[] { row.Rank }, EducationComplete = false })</td>
+                            <td>@Html.ActionLink(row.Completed.ToString(), "Index", "Soldiers", new SoldierSearchService.Query { Unit = Model.Id, Ranks = new[] { row.Rank }, EducationComplete = true })</td>
+                            <td>@Html.ActionLink(row.Percentage.ToString("P0"), "Index", "Soldiers", new SoldierSearchService.Query { Unit = Model.Id, Ranks = new[] { row.Rank } })</td>
                         </tr>
                     }
                 </tbody>
@@ -161,10 +161,10 @@
                     <tr>
                         <th></th>
                         <th></th>
-                        <th>@Html.ActionLink(Model.EducationTotal.Assigned.ToString(), "Index", "Soldiers", new { Unit = Model.Id })</th>
-                        <th>@Html.ActionLink(Model.EducationTotal.Incomplete.ToString(), "Index", "Soldiers", new { Unit = Model.Id, educationcomplete = false })</th>
-                        <th>@Html.ActionLink(Model.EducationTotal.Completed.ToString(), "Index", "Soldiers", new { Unit = Model.Id, educationcomplete = false })</th>
-                        <th>@Html.ActionLink(Model.EducationTotal.Percentage.ToString("P0"), "Index", "Soldiers", new { Unit = Model.Id })</th>
+                        <th>@Html.ActionLink(Model.EducationTotal.Assigned.ToString(), "Index", "Soldiers", new SoldierSearchService.Query { Unit = Model.Id })</th>
+                        <th>@Html.ActionLink(Model.EducationTotal.Incomplete.ToString(), "Index", "Soldiers", new SoldierSearchService.Query { Unit = Model.Id, EducationComplete = false })</th>
+                        <th>@Html.ActionLink(Model.EducationTotal.Completed.ToString(), "Index", "Soldiers", new SoldierSearchService.Query { Unit = Model.Id, EducationComplete = false })</th>
+                        <th>@Html.ActionLink(Model.EducationTotal.Percentage.ToString("P0"), "Index", "Soldiers", new SoldierSearchService.Query { Unit = Model.Id })</th>
                     </tr>
                 </tfoot>
             </table>
@@ -180,15 +180,15 @@
                     </tr>
                     <tr>
                         <td>Qualified</td>
-                        <td>@Html.ActionLink(Model.DSCA.Passed.ToString(), "Index", "Soldiers", new { Unit = Model.Id, dsca = true })</td>
+                        <td>@Html.ActionLink(Model.DSCA.Passed.ToString(), "Index", "Soldiers", new SoldierSearchService.Query { Unit = Model.Id, DSCA = true })</td>
                     </tr>
                     <tr>
                         <td>Qualified (Overdue)</td>
-                        <td>@Html.ActionLink(Model.DSCA.Failed.ToString(), "Index", "Soldiers", new { Unit = Model.Id, dsca = true })</td>
+                        <td>@Html.ActionLink(Model.DSCA.Failed.ToString(), "Index", "Soldiers", new SoldierSearchService.Query { Unit = Model.Id, DSCA = true })</td>
                     </tr>
                     <tr>
                         <td>Unqualified</td>
-                        <td>@Html.ActionLink(Model.DSCA.NotTested.ToString(), "Index", "Soldiers", new { Unit = Model.Id, dsca = false })</td>
+                        <td>@Html.ActionLink(Model.DSCA.NotTested.ToString(), "Index", "Soldiers", new SoldierSearchService.Query { Unit = Model.Id, DSCA = false })</td>
                     </tr>
                     <tr>
                         <td>@Html.DisplayNameFor(_ => Model.DSCA.PercentPass)</td>
@@ -225,15 +225,15 @@
                     </tr>
                     <tr>
                         <td>Qualified</td>
-                        <td>@Html.ActionLink(Model.IWQ.Passed.ToString(), "Index", "Soldiers", new { Unit = Model.Id, iwq = true })</td>
+                        <td>@Html.ActionLink(Model.IWQ.Passed.ToString(), "Index", "Soldiers", new SoldierSearchService.Query { Unit = Model.Id, IWQ = true })</td>
                     </tr>
                     <tr>
                         <td>Qualified (Overdue)</td>
-                        <td>@Html.ActionLink(Model.IWQ.Failed.ToString(), "Index", "Soldiers", new { Unit = Model.Id, iwq = true })</td>
+                        <td>@Html.ActionLink(Model.IWQ.Failed.ToString(), "Index", "Soldiers", new SoldierSearchService.Query { Unit = Model.Id, IWQ = true })</td>
                     </tr>
                     <tr>
                         <td>Unqualified</td>
-                        <td>@Html.ActionLink(Model.IWQ.NotTested.ToString(), "Index", "Soldiers", new { Unit = Model.Id, iwq = false })</td>
+                        <td>@Html.ActionLink(Model.IWQ.NotTested.ToString(), "Index", "Soldiers", new SoldierSearchService.Query { Unit = Model.Id, IWQ = false })</td>
                     </tr>
                     <tr>
                         <td>@Html.DisplayNameFor(_ => Model.IWQ.PercentPass)</td>
