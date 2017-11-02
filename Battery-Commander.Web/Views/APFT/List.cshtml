@@ -5,7 +5,7 @@
 }
 
 <div class="page-header">
-    <h1>@ViewBag.Title </h1>
+    <h1>@ViewBag.Title</h1>
     <h4>
         <small>
             @Html.DisplayNameFor(_ => Model.Go): <span class="badge">@Model.Go</span>
@@ -19,7 +19,7 @@
     @Html.ActionLink("Add New", "New", "APFT", null, new { @class = "btn btn-default" })
 </div>
 
-<table class="table table-striped" id="dt">
+<table class="table table-striped display nowrap" id="dt" width="100%">
     <thead>
         <tr>
             <th>Soldier</th>
@@ -41,14 +41,14 @@
                 {
                     <td>@Html.DisplayFor(_ => soldier.LastApft, "APFT")</td>
                     <td>@Html.DisplayFor(_ => soldier.LastApft.Date)</td>
-                        <td data-sort="@soldier.LastApft.TotalScore">
-                            @Html.DisplayFor(_ => soldier.LastApft.TotalScore)
+                    <td data-sort="@soldier.LastApft.TotalScore">
+                        @Html.DisplayFor(_ => soldier.LastApft.TotalScore)
 
-                            @if (soldier.LastApft.IsAlternateAerobicEvent)
-                            {
-                                <span class="label">Alt. Aerobic</span>
-                            }
-                        </td>
+                        @if (soldier.LastApft.IsAlternateAerobicEvent)
+                        {
+                            <span class="label">Alt. Aerobic</span>
+                        }
+                    </td>
                 }
                 else
                 {
