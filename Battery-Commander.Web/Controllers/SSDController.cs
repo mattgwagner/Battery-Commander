@@ -2,7 +2,7 @@
 using BatteryCommander.Web.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Controllers
@@ -21,7 +21,7 @@ namespace BatteryCommander.Web.Controllers
         {
             // Ensure we're only displaying Soldiers we care about here
 
-            query.OnlyEnlisted = true;
+            if (!query.Ranks.Any()) query.OnlyEnlisted = true;
 
             return View("List", await SoldierSearchService.Filter(db, query));
         }
