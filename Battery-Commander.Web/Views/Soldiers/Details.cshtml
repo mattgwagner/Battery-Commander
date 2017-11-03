@@ -45,17 +45,35 @@
 
         <tr>
             <td>@Html.DisplayNameFor(model => model.Soldier.DscaQualified)</td>
-            <td>@Html.DisplayFor(model => model.Soldier, "DSCA") (@Html.DisplayFor(model => model.Soldier.DscaQualificationDate))</td>
+            <td>
+                @Html.DisplayFor(model => model.Soldier, "DSCA") 
+                @if (Model.Soldier.DscaQualified)
+                {
+                    <span>(@Html.DisplayFor(model => model.Soldier.DscaQualificationDate))</span>
+                }
+            </td>
         </tr>
 
         <tr>
             <td>@Html.DisplayNameFor(model => model.Soldier.IwqQualified)</td>
-            <td>@Html.DisplayFor(model => model.Soldier, "IWQ") (@Html.DisplayFor(model => model.Soldier.IwqQualificationDate))</td>
+            <td>
+                @Html.DisplayFor(model => model.Soldier, "IWQ") 
+                @if (Model.Soldier.IwqQualified)
+                {
+                    <span>(@Html.DisplayFor(model => model.Soldier.IwqQualificationDate))</span>
+                }
+            </td>
         </tr>
 
         <tr>
             <td>@Html.DisplayNameFor(model => model.Soldier.ClsQualified)</td>
-            <td>@Html.DisplayFor(model => model.Soldier, "CLS") (@Html.DisplayFor(model => model.Soldier.ClsQualificationDate))</td>
+            <td>
+                @Html.DisplayFor(model => model.Soldier, "CLS") 
+                @if (Model.Soldier.ClsQualified)
+                {
+                    <span>(@Html.DisplayFor(model => model.Soldier.ClsQualificationDate))</span>
+                }
+            </td>
         </tr>
 
         @if (Model.Soldier.SupervisorId.HasValue)
