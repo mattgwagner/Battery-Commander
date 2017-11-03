@@ -23,10 +23,15 @@ namespace BatteryCommander.Web.Controllers
             return RedirectToRoute("Units.List");
         }
 
-        [AllowAnonymous]
-        public IActionResult Login(String returnUrl = "/")
+        public IActionResult PrivacyAct()
         {
-            return new ChallengeResult("Auth0", new AuthenticationProperties { RedirectUri = returnUrl });
+            return View();
+        }
+
+        [AllowAnonymous]
+        public IActionResult Login(String returnUrl)
+        {
+            return new ChallengeResult("Auth0", new AuthenticationProperties { RedirectUri = Url.Action(nameof(PrivacyAct)) });
         }
 
         [Route("~/Logout")]
