@@ -56,6 +56,7 @@ namespace BatteryCommander.Web.Models
         [Required]
         public int SeniorRaterId { get; set; }
 
+        [Display(Name = "Senior Rater")]
         public virtual Soldier SeniorRater { get; set; }
 
         public int? ReviewerId { get; set; }
@@ -65,7 +66,7 @@ namespace BatteryCommander.Web.Models
         [Required, DataType(DataType.Date), Column(TypeName = "date"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime StartDate { get; set; } = DateTime.Today;
 
-        [Required, DataType(DataType.Date), Column(TypeName = "date"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
+        [Required, DataType(DataType.Date), Column(TypeName = "date"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}"), Display(Name = "Thru Date")]
         public DateTime ThruDate { get; set; }
 
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}"), Display(Name = "Sign On/After")]
@@ -92,7 +93,7 @@ namespace BatteryCommander.Web.Models
         [NotMapped]
         public virtual Event LastEvent => Events.OrderByDescending(e => e.Timestamp).FirstOrDefault();
 
-        [NotMapped, DataType(DataType.Date)]
+        [NotMapped, DataType(DataType.Date), Display(Name = "Last Updated")]
         public DateTimeOffset? LastUpdated => LastEvent?.Timestamp;
 
         [NotMapped, Display(Name = "Last Updated")]
