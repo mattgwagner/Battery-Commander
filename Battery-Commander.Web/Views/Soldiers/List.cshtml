@@ -15,21 +15,21 @@
 <table class="table table-striped display nowrap" id="dt" width="100%" data-page-length="25">
     <thead>
         <tr>
-            <th data-priority="1"></th>
-            <th data-priority="2">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().Status)</th>
+            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().Status)</th>
             <th data-priority="2">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().Rank)</th>
             <th data-priority="1">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastName)</th>
             <th data-priority="3">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().FirstName)</th>            
-            <th data-priority="10001">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().Unit)</th>
+            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().Unit)</th>
             <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().EducationLevel)</th>
             <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().TimeInGrade)</th>
             <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().TimeTillETS)</th>
-            <th data-priority="5">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().APFTs)</th>
-            <th data-priority="5">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().ABCPs)</th>
-            <th data-priority="4">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().SSDStatus)</th>
-            <th data-priority="6">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().IwqQualified)</th>
-            <th data-priority="6">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().DscaQualified)</th>
+            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().APFTs)</th>
+            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().ABCPs)</th>
+            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().SSDStatus)</th>
+            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().IwqQualified)</th>
+            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().DscaQualified)</th>
             <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().ClsQualified)</th>
+            <th data-priority="10001"></th>
             <th></th>
         </tr>
     </thead>
@@ -38,7 +38,6 @@
         @foreach (var soldier in Model.Soldiers)
         {
             <tr>
-                <td></td>
                 <td>
                     <span class="update-status" data-soldier="@soldier.Id" data-status="@soldier.Status">
                         @Html.DisplayFor(s => soldier, "SoldierStatus")
@@ -74,6 +73,7 @@
                     @Html.ActionLink("Add ABCP", "New", "ABCP", new { soldier = soldier.Id }, new { @class = "btn btn-default btn-xs" })
                     @Html.ActionLink("Add APFT", "New", "APFT", new { soldier = soldier.Id }, new { @class = "btn btn-default btn-xs" })
                 </td>
+                <td></td>
             </tr>
         }
     </tbody>

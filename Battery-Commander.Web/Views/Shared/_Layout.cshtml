@@ -97,7 +97,18 @@
                 paging: false,
                 stateSave: true,
                 dom: 'Bfrtip',
-                responsive: true,
+                responsive: {
+                    details: {
+                        display: $.fn.dataTable.Responsive.display.childRow,
+                        type: 'column',
+                        target: -1
+                    }
+                },
+                columnDefs: [{
+                    className: 'control',
+                    orderable: false,
+                    targets: -1
+                }],
                 buttons: [
                     { extend: 'csvHtml5', title: '@ViewBag.Title @DateTime.Today.ToString("u")', exportOptions: { columns: ':visible', orthogonal: 'sort' } },
                     { extend: 'excelHtml5', title: '@ViewBag.Title @DateTime.Today.ToString("u")', exportOptions: { columns: ':visible', orthogonal: 'sort' } },
