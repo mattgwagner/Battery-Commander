@@ -26,8 +26,8 @@
 <table class="table table-striped display nowrap" id="dt" width="100%">
     <thead>
         <tr>
-            <th data-priority="1">Details</th>
-            <th data-priority="2">@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Ratee.Rank)</th>
+            <th>Details</th>
+            <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Ratee.Rank)</th>
             <th data-priority="1">@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Ratee.LastName)</th>
             <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Ratee.FirstName)</th>
             <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().ThruDate)</th>
@@ -39,6 +39,7 @@
             <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().SeniorRater)</th>
             <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Reviewer)</th>
             <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().EvaluationId)</th>
+            <th></th>
         </tr>
     </thead>
 
@@ -70,6 +71,7 @@
                 <td>@Html.DisplayFor(_ => evaluation.SeniorRater)</td>
                 <td>@Html.DisplayFor(_ => evaluation.Reviewer)</td>
                 <td>@Html.DisplayFor(_ => evaluation.EvaluationId)</td>
+                <td></td>
             </tr>
         }
     </tbody>
