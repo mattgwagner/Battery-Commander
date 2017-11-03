@@ -39,7 +39,7 @@
         {
             <tr>
                 <td>
-                    <span class="update-status" data-soldier="@soldier.Id" data-status="@soldier.Status">
+                    <span class="update-status" data-soldier="@soldier.Id" data-status="@((int)soldier.Status)">
                         @Html.DisplayFor(s => soldier, "SoldierStatus")
                     </span>
                 </td>
