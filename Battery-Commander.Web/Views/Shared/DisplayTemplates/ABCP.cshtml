@@ -4,7 +4,7 @@
 {
     <div>
         <a href="@Url.Action("Details", "ABCP", new { Model.Id })">
-            @if (Model.IsValid)
+            @if (Model.IsValid && Model.IsPassing)
             {
                 <span class="label label-success">GO</span>
             }
