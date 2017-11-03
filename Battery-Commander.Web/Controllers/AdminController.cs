@@ -1,6 +1,7 @@
 ﻿using BatteryCommander.Web.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Controllers
@@ -28,27 +29,20 @@ namespace BatteryCommander.Web.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Scrub()
-        {
-            // Go through each soldier and fix casing on their name
-
-            foreach(var soldier in db.Soldiers)
-            {
-                soldier.FirstName = soldier.FirstName.ToTitleCase();
-                soldier.MiddleName = soldier.MiddleName.ToTitleCase();
-                soldier.LastName = soldier.LastName.ToTitleCase();
-            }
-
-            await db.SaveChangesAsync();
-
-            return RedirectToAction(nameof(Index));
-        }
-
         public IActionResult Backup()
         {
             var data = System.IO.File.ReadAllBytes("Data.db");
 
             var mimeType = "application/octet-stream";
+
+            return File(data, mimeType);
+        }
+
+        public IActionResult Logs()
+        {
+            var data = System.IO.File.ReadAllBytes($@"logs\{DateTime.Today:yyyyMMdd}.log");
+
+            var mimeType = "text/plain";
 
             return File(data, mimeType);
         }
