@@ -40,8 +40,8 @@
         {
             <tr>
                 <td>@soldier.Rank.ShortName()</td>
-                <td>@Html.DisplayFor(_ => soldier.LastName)</td>
-                <td>@Html.DisplayFor(_ => soldier.FirstName)</td>
+                <td>@Html.RouteLink(soldier.LastName, "Soldier.Details", new { soldier.Id })</td>
+                <td>@Html.RouteLink(soldier.FirstName, "Soldier.Details", new { soldier.Id })</td>
                 <td>@Html.DisplayFor(_ => soldier.Unit)</td>
                 @if (soldier.LastAbcp != null)
                 {
