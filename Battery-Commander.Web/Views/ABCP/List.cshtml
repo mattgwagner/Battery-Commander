@@ -22,7 +22,7 @@
 <table class="table table-striped display nowrap" id="dt" width="100%">
     <thead>
         <tr>
-            <th data-priority="2">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().Rank)</th>
+            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().Rank)</th>
             <th data-priority="1">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastName)</th>
             <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().FirstName)</th>
             <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().Unit)</th>
@@ -30,7 +30,8 @@
             <th>Date</th>
             <th>Height</th>
             <th>Weight</th>
-            <th>Add</th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
 
@@ -57,6 +58,7 @@
                     <td></td>
                 }
                 <td>@Html.ActionLink("Add", "New", "ABCP", new { soldier = soldier.Id }, new { @class = "btn btn-default btn-xs" })</td>
+                <td></td>
             </tr>
         }
     </tbody>
