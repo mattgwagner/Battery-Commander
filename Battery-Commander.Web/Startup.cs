@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.PlatformAbstractions;
 using Newtonsoft.Json.Converters;
+using Serilog;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.IO;
@@ -29,6 +30,12 @@ namespace BatteryCommander.Web
 
         public Startup(IHostingEnvironment env)
         {
+            Log.Logger = new LoggerConfiguration()
+                .Enrich.FromLogContext()
+                .WriteTo.RollingFile(pathFormat: @"logs\{Date}.log")
+                .MinimumLevel.Information()
+                .CreateLogger();
+
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -85,6 +92,7 @@ namespace BatteryCommander.Web
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IOptions<Auth0Settings> auth0Settings, Database db)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory.AddSerilog();
             loggerFactory.AddDebug();
 
             if (env.IsDevelopment())
