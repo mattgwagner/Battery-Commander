@@ -96,7 +96,10 @@
         {
             <tr>
                 <td>@Html.DisplayNameFor(model => model.Soldier.ETSDate)</td>
-                <td>@Html.DisplayFor(model => model.Soldier, "ETS")</td>
+                <td>
+                    @Html.DisplayFor(model => model.Soldier, "ETS")
+                    (@Html.DisplayFor(model => model.Soldier.ETSDate))
+                </td>
             </tr>
         }
 
