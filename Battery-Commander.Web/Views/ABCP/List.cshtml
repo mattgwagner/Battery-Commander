@@ -22,9 +22,11 @@
 <table class="table table-striped display nowrap" id="dt" width="100%">
     <thead>
         <tr>
-            <th>Soldier</th>
-            <th>Unit</th>
-            <th>Result</th>
+            <th data-priority="2">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().Rank)</th>
+            <th data-priority="1">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastName)</th>
+            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().FirstName)</th>
+            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().Unit)</th>
+            <th data-priority="1">Result</th>
             <th>Date</th>
             <th>Height</th>
             <th>Weight</th>
@@ -36,7 +38,9 @@
         @foreach (var soldier in Model.Soldiers)
         {
             <tr>
-                <td>@Html.DisplayFor(_ => soldier)</td>
+                <td>@soldier.Rank.ShortName()</td>
+                <td>@Html.DisplayFor(_ => soldier.LastName)</td>
+                <td>@Html.DisplayFor(_ => soldier.FirstName)</td>
                 <td>@Html.DisplayFor(_ => soldier.Unit)</td>
                 @if (soldier.LastAbcp != null)
                 {

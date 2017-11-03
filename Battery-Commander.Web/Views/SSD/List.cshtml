@@ -11,11 +11,14 @@
 <table class="table table-striped display nowrap" id="dt" width="100%" data-page-length="25">
     <thead>
         <tr>
-            <th>Soldier</th>
+            <th data-priority="2">@Html.DisplayNameFor(_ => _.FirstOrDefault().Rank)</th>
+            <th data-priority="1">@Html.DisplayNameFor(_ => _.FirstOrDefault().LastName)</th>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().FirstName)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Unit)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().EducationLevel)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().TimeInGrade)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().SSDStatus.Updated)</th>
+            <th data-priority="1">@Html.DisplayNameFor(_ => _.FirstOrDefault().SSDStatus)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().SSDStatus.SSD_1)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().SSDStatus.SSD_2)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().SSDStatus.SSD_3)</th>
@@ -28,14 +31,17 @@
         @foreach (var soldier in Model)
         {
             <tr>
-                <td data-priority="1">@Html.DisplayFor(s => soldier)</td>
+                <td>@soldier.Rank.ShortName()</td>
+                <td>@Html.DisplayFor(s => soldier.LastName)</td>
+                <td>@Html.DisplayFor(s => soldier.FirstName)</td>
                 <td>@Html.DisplayFor(s => soldier.Unit, additionalViewData: new { controller = "SSD" })</td>
                 <td>@Html.DisplayFor(s => soldier, "MilitaryEducationLevel")</td>
                 <td data-sort="@soldier.TimeInGrade?.TotalDays">
                     @Html.DisplayFor(s => soldier.TimeInGradeHumanized)
                 </td>
                 <td data-sort="@soldier.SSDStatus.Updated?.TotalDays">@Html.DisplayFor(s => soldier.SSDStatus.UpdatedHumanized)</td>
-                <td  data-priority="2">
+                <td>@Html.DisplayFor(_ => soldier.SSDStatus, "SSD")</td>
+                <td data-priority="2">
                     <span class="update" data-name="@soldier" data-soldier="@soldier.Id" data-ssd="SSD_1" data-completion="@soldier.SSDStatus.SSD_1">
                         @Html.DisplayFor(s => soldier.SSDStatus.SSD_1)
                     </span>
