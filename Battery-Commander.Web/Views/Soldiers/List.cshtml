@@ -44,8 +44,8 @@
                     </span>
                 </td>
                 <td data-sort="@((int)soldier.Rank)">@Html.DisplayFor(s => soldier.RankHumanized)</td>
-                <td>@Html.DisplayFor(s => soldier.LastName)</td>
-                <td>@Html.DisplayFor(s => soldier.FirstName)</td>
+                <td>@Html.RouteLink(soldier.LastName, "Soldier.Details", new { soldier.Id })</td>
+                <td>@Html.RouteLink(soldier.FirstName, "Soldier.Details", new { soldier.Id })</td>
                 <td>@Html.DisplayFor(s => soldier.Unit)</td>
                 <td>@Html.DisplayFor(s => soldier, "MilitaryEducationLevel")</td>
                 <td data-sort="@soldier.TimeInGrade?.TotalDays">
