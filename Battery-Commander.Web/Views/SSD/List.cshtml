@@ -11,7 +11,7 @@
 <table class="table table-striped display nowrap" id="dt" width="100%" data-page-length="25">
     <thead>
         <tr>
-            <th data-priority="2">@Html.DisplayNameFor(_ => _.FirstOrDefault().Rank)</th>
+            <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Rank)</th>
             <th data-priority="1">@Html.DisplayNameFor(_ => _.FirstOrDefault().LastName)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().FirstName)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Unit)</th>
@@ -24,6 +24,7 @@
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().SSDStatus.SSD_3)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().SSDStatus.SSD_4)</th>
             <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().SSDStatus.SSD_5)</th>
+            <th></th>
         </tr>
     </thead>
 
@@ -66,6 +67,7 @@
                         @Html.DisplayFor(s => soldier.SSDStatus.SSD_5)
                     </span>
                 </td>
+                <td></td>
             </tr>
         }
     </tbody>
