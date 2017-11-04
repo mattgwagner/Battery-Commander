@@ -126,27 +126,27 @@
             {
                 return new[]
                 {
-                    new Entry { AgeGroup = APFTAgeGroup.Group_17_to_21, Gender = Gender.Male, Reps = (int)TimeSpan.FromMinutes(20).TotalSeconds },
-                    new Entry { AgeGroup = APFTAgeGroup.Group_22_to_26, Gender = Gender.Male, Reps = (int)TimeSpan.FromMinutes(20.5).TotalSeconds },
-                    new Entry { AgeGroup = APFTAgeGroup.Group_27_to_31, Gender = Gender.Male, Reps = (int)TimeSpan.FromMinutes(21).TotalSeconds },
-                    new Entry { AgeGroup = APFTAgeGroup.Group_32_to_36, Gender = Gender.Male, Reps = (int)TimeSpan.FromMinutes(21.5).TotalSeconds },
-                    new Entry { AgeGroup = APFTAgeGroup.Group_37_to_41, Gender = Gender.Male, Reps = (int)TimeSpan.FromMinutes(22).TotalSeconds },
-                    new Entry { AgeGroup = APFTAgeGroup.Group_42_to_46, Gender = Gender.Male, Reps = (int)TimeSpan.FromMinutes(22.5).TotalSeconds },
-                    new Entry { AgeGroup = APFTAgeGroup.Group_47_to_51, Gender = Gender.Male, Reps = (int)TimeSpan.FromMinutes(23).TotalSeconds },
-                    new Entry { AgeGroup = APFTAgeGroup.Group_52_to_56, Gender = Gender.Male, Reps = (int)TimeSpan.FromMinutes(24).TotalSeconds },
-                    new Entry { AgeGroup = APFTAgeGroup.Group_57_to_61, Gender = Gender.Male, Reps = (int)TimeSpan.FromMinutes(24.5).TotalSeconds },
-                    new Entry { AgeGroup = APFTAgeGroup.Group_62_Plus, Gender = Gender.Male, Reps = (int)TimeSpan.FromMinutes(25).TotalSeconds },
+                    new Entry { AgeGroup = APFTAgeGroup.Group_17_to_21, Gender = Gender.Male, Reps = (int)TimeSpan.FromMinutes(34).TotalSeconds },
+                    new Entry { AgeGroup = APFTAgeGroup.Group_22_to_26, Gender = Gender.Male, Reps = (int)TimeSpan.FromMinutes(34.5).TotalSeconds },
+                    new Entry { AgeGroup = APFTAgeGroup.Group_27_to_31, Gender = Gender.Male, Reps = (int)TimeSpan.FromMinutes(35).TotalSeconds },
+                    new Entry { AgeGroup = APFTAgeGroup.Group_32_to_36, Gender = Gender.Male, Reps = (int)TimeSpan.FromMinutes(35.5).TotalSeconds },
+                    new Entry { AgeGroup = APFTAgeGroup.Group_37_to_41, Gender = Gender.Male, Reps = (int)TimeSpan.FromMinutes(36).TotalSeconds },
+                    new Entry { AgeGroup = APFTAgeGroup.Group_42_to_46, Gender = Gender.Male, Reps = (int)TimeSpan.FromMinutes(36.5).TotalSeconds },
+                    new Entry { AgeGroup = APFTAgeGroup.Group_47_to_51, Gender = Gender.Male, Reps = (int)TimeSpan.FromMinutes(37).TotalSeconds },
+                    new Entry { AgeGroup = APFTAgeGroup.Group_52_to_56, Gender = Gender.Male, Reps = (int)TimeSpan.FromMinutes(37.5).TotalSeconds },
+                    new Entry { AgeGroup = APFTAgeGroup.Group_57_to_61, Gender = Gender.Male, Reps = (int)TimeSpan.FromMinutes(38).TotalSeconds },
+                    new Entry { AgeGroup = APFTAgeGroup.Group_62_Plus, Gender = Gender.Male, Reps = (int)TimeSpan.FromMinutes(38.5).TotalSeconds },
 
-                    new Entry { AgeGroup = APFTAgeGroup.Group_17_to_21, Gender = Gender.Female, Reps = (int)TimeSpan.FromMinutes(21).TotalSeconds },
-                    new Entry { AgeGroup = APFTAgeGroup.Group_22_to_26, Gender = Gender.Female, Reps = (int)TimeSpan.FromMinutes(21.5).TotalSeconds },
-                    new Entry { AgeGroup = APFTAgeGroup.Group_27_to_31, Gender = Gender.Female, Reps = (int)TimeSpan.FromMinutes(22).TotalSeconds },
-                    new Entry { AgeGroup = APFTAgeGroup.Group_32_to_36, Gender = Gender.Female, Reps = (int)TimeSpan.FromMinutes(22.5).TotalSeconds },
-                    new Entry { AgeGroup = APFTAgeGroup.Group_37_to_41, Gender = Gender.Female, Reps = (int)TimeSpan.FromMinutes(23).TotalSeconds },
-                    new Entry { AgeGroup = APFTAgeGroup.Group_42_to_46, Gender = Gender.Female, Reps = (int)TimeSpan.FromMinutes(23.5).TotalSeconds },
-                    new Entry { AgeGroup = APFTAgeGroup.Group_47_to_51, Gender = Gender.Female, Reps = (int)TimeSpan.FromMinutes(24).TotalSeconds },
-                    new Entry { AgeGroup = APFTAgeGroup.Group_52_to_56, Gender = Gender.Female, Reps = (int)TimeSpan.FromMinutes(25).TotalSeconds },
-                    new Entry { AgeGroup = APFTAgeGroup.Group_57_to_61, Gender = Gender.Female, Reps = (int)TimeSpan.FromMinutes(25.5).TotalSeconds },
-                    new Entry { AgeGroup = APFTAgeGroup.Group_62_Plus, Gender = Gender.Female, Reps = (int)TimeSpan.FromMinutes(26).TotalSeconds }
+                    new Entry { AgeGroup = APFTAgeGroup.Group_17_to_21, Gender = Gender.Female, Reps = (int)TimeSpan.FromMinutes(37).TotalSeconds },
+                    new Entry { AgeGroup = APFTAgeGroup.Group_22_to_26, Gender = Gender.Female, Reps = (int)TimeSpan.FromMinutes(37.5).TotalSeconds },
+                    new Entry { AgeGroup = APFTAgeGroup.Group_27_to_31, Gender = Gender.Female, Reps = (int)TimeSpan.FromMinutes(38).TotalSeconds },
+                    new Entry { AgeGroup = APFTAgeGroup.Group_32_to_36, Gender = Gender.Female, Reps = (int)TimeSpan.FromMinutes(38.5).TotalSeconds },
+                    new Entry { AgeGroup = APFTAgeGroup.Group_37_to_41, Gender = Gender.Female, Reps = (int)TimeSpan.FromMinutes(39).TotalSeconds },
+                    new Entry { AgeGroup = APFTAgeGroup.Group_42_to_46, Gender = Gender.Female, Reps = (int)TimeSpan.FromMinutes(39.5).TotalSeconds },
+                    new Entry { AgeGroup = APFTAgeGroup.Group_47_to_51, Gender = Gender.Female, Reps = (int)TimeSpan.FromMinutes(40).TotalSeconds },
+                    new Entry { AgeGroup = APFTAgeGroup.Group_52_to_56, Gender = Gender.Female, Reps = (int)TimeSpan.FromMinutes(40.5).TotalSeconds },
+                    new Entry { AgeGroup = APFTAgeGroup.Group_57_to_61, Gender = Gender.Female, Reps = (int)TimeSpan.FromMinutes(41).TotalSeconds },
+                    new Entry { AgeGroup = APFTAgeGroup.Group_62_Plus, Gender = Gender.Female, Reps = (int)TimeSpan.FromMinutes(41.5).TotalSeconds }
                 };
             }
         }
