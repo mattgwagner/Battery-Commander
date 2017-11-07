@@ -45,7 +45,7 @@
         {
             <tr>
                 <td>
-                    <span class="update-status" data-vehicle="@vehicle.Id" data-status="@((int)vehicle.Status)" data-notes="@vehicle.Notes" data-location="@vehicle.Location">
+                    <span class="update-status" data-vehicle="@vehicle.Id" data-status="@((int)vehicle.Status)" data-notes="@vehicle.Notes" data-location="@vehicle.Location" data-sort="@((int)vehicle.Status)">
                         @Html.DisplayFor(_ => vehicle, "VehicleStatus")
                     </span>
                     @if (vehicle.HasFuelCard)
