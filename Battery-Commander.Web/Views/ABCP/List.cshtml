@@ -30,6 +30,7 @@
             <th>Date</th>
             <th>Height</th>
             <th>Weight</th>
+            <th>Measurements</th>
             <th></th>
             <th></th>
         </tr>
@@ -49,9 +50,18 @@
                     <td>@Html.DisplayFor(_ => soldier.LastAbcp.Date)</td>
                     <td>@Html.DisplayFor(_ => soldier.LastAbcp.Height)</td>
                     <td>@Html.DisplayFor(_ => soldier.LastAbcp.Weight)</td>
+                    <td>
+                        <ol>
+                            @foreach (var measurement in soldier.LastAbcp.Measurements)
+                            {
+                                <li>@Html.DisplayFor(_ => measurement.Waist) / @Html.DisplayFor(_ => measurement.Neck)</li>
+                            }
+                        </ol>
+                    </td>
                 }
                 else
                 {
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
