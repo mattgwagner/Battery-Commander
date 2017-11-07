@@ -27,6 +27,7 @@
             <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().FirstName)</th>
             <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().Unit)</th>
             <th data-priority="1">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastApft.IsPassing)</th>
+            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastApft.Date)</th>
             <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastApft.TotalScore)</th>
             <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastApft.PushUps)</th>
             <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastApft.PushUpScore)</th>
@@ -78,7 +79,7 @@
                     <td></td>
                     <td></td>
                 }
-                <td>@Html.ActionLink("Add", "New", "APFT", new { soldier = soldier.Id }, new { @class = "btn btn-default btn-xs" })</td>
+                <td>@Html.ActionLink("New", "New", "APFT", new { soldier = soldier.Id }, new { @class = "btn btn-default btn-xs" })</td>
                 <td></td>
             </tr>
         }
