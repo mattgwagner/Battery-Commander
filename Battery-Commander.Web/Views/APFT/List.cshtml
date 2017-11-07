@@ -26,12 +26,14 @@
             <th data-priority="1">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastName)</th>
             <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().FirstName)</th>
             <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().Unit)</th>
-            <th data-priority="1">Result</th>
-            <th>Date</th>
-            <th>Score</th>
-            <th>Push-Ups</th>
-            <th>Sit-Ups</th>
-            <th>Aerobic</th>
+            <th data-priority="1">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastApft.IsPassing)</th>
+            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastApft.TotalScore)</th>
+            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastApft.PushUps)</th>
+            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastApft.PushUpScore)</th>
+            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastApft.SitUps)</th>
+            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastApft.SitUpScore)</th>
+            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastApft.Run)</th>
+            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastApft.RunScore)</th>
             <th></th>
             <th></th>
         </tr>
@@ -58,11 +60,17 @@
                         }
                     </td>
                     <td>@Html.DisplayFor(_ => soldier.LastApft.PushUps)</td>
+                    <td>@Html.DisplayFor(_ => soldier.LastApft.PushUpScore)</td>
                     <td>@Html.DisplayFor(_ => soldier.LastApft.SitUps)</td>
+                    <td>@Html.DisplayFor(_ => soldier.LastApft.SitUpScore)</td>
                     <td>@Html.DisplayFor(_ => soldier.LastApft.Run)</td>
+                    <td>@Html.DisplayFor(_ => soldier.LastApft.RunScore)</td>
                 }
                 else
                 {
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
