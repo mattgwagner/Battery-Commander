@@ -31,7 +31,10 @@ namespace BatteryCommander.Web.Controllers
         [AllowAnonymous]
         public IActionResult Login(String returnUrl)
         {
-            return new ChallengeResult("Auth0", new AuthenticationProperties { RedirectUri = Url.Action(nameof(PrivacyAct)) });
+            return new ChallengeResult("Auth0", new AuthenticationProperties
+            {
+                RedirectUri = "/".Equals(returnUrl) ? Url.Action(nameof(PrivacyAct)) : returnUrl
+        });
         }
 
         [Route("~/Logout")]
