@@ -35,7 +35,7 @@ namespace BatteryCommander.Web
             Log.Logger = new LoggerConfiguration()
                 .Enrich.FromLogContext()
                 .WriteTo.RollingFile(pathFormat: @"logs\{Date}.log")
-                .WriteTo.ApplicationInsightsEvents(APP_INSIGHTS_KEY)
+                .WriteTo.ApplicationInsightsTraces(APP_INSIGHTS_KEY)
                 .MinimumLevel.Information()
                 .CreateLogger();
 
