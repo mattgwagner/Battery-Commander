@@ -26,6 +26,8 @@ namespace BatteryCommander.Web
 
         public static String API_Name => $"Battery Commander {API_Version}";
 
+        public static String APP_INSIGHTS_KEY = "66d7081f-e4a1-421f-b57a-38656917ee3d";
+
         private static Boolean IsDevelopment;
 
         public Startup(IHostingEnvironment env)
@@ -33,6 +35,7 @@ namespace BatteryCommander.Web
             Log.Logger = new LoggerConfiguration()
                 .Enrich.FromLogContext()
                 .WriteTo.RollingFile(pathFormat: @"logs\{Date}.log")
+                .WriteTo.ApplicationInsightsTraces(APP_INSIGHTS_KEY)
                 .MinimumLevel.Information()
                 .CreateLogger();
 
