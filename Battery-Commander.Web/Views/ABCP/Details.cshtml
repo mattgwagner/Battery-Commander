@@ -7,7 +7,7 @@
     </div>
 }
 
-@if (Model.AreMeasurementsValid)
+@if (!Model.AreMeasurementsValid)
 {
     <div class="alert alert-danger">
         Measurements are outside of tolerance (i.e. greater than 1 inch difference!). Please revisit your taping measurements before continuing.
