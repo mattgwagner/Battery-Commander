@@ -38,6 +38,9 @@
 
         <div role="tabpanel" class="tab-pane" id="ABCP">
             <h2>@Html.DisplayNameFor(_ => Model.ABCP)</h2>
+
+            <div id="abcp_chart"></div>
+
             <table class="table table-bordered">
                 <tbody>
                     <tr>
@@ -66,6 +69,9 @@
 
         <div role="tabpanel" class="tab-pane" id="APFT">
             <h2>@Html.DisplayNameFor(_ => Model.APFT)</h2>
+
+            <div id="apft_chart"></div>
+
             <table class="table table-bordered">
                 <tbody>
                     <tr>
@@ -94,6 +100,9 @@
 
         <div role="tabpanel" class="tab-pane" id="SSD">
             <h2>@Html.DisplayNameFor(_ => Model.SSD)</h2>
+
+            <div id="ssd_chart"></div>
+
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -133,6 +142,9 @@
 
         <div role="tabpanel" class="tab-pane" id="EDUCATION">
             <h2>@Html.DisplayNameFor(_ => Model.Education)</h2>
+
+            <div id="education_chart"></div>
+
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -172,6 +184,9 @@
 
         <div role="tabpanel" class="tab-pane" id="DSCA">
             <h2>@Html.DisplayNameFor(_ => Model.DSCA)</h2>
+
+            <div id="dsca_chart"></div>
+
             <table class="table table-bordered">
                 <tbody>
                     <tr>
@@ -217,6 +232,9 @@
 
         <div role="tabpanel" class="tab-pane" id="IWQ">
             <h2>@Html.DisplayNameFor(_ => Model.IWQ)</h2>
+
+            <div id="iwq_chart"></div>
+
             <table class="table table-bordered">
                 <tbody>
                     <tr>
@@ -260,6 +278,76 @@
                 Supervisor = soldier.Supervisor?.ToString()
             })
             .ToList();
+
+        var apft =
+            Model
+            .Soldiers
+            .GroupBy(soldier => soldier.ApftStatus)
+            .Select(group => new
+            {
+                Status = group.Key,
+                Total = group.Count()
+            })
+            .ToList();
+
+        var abcp =
+            Model
+            .Soldiers
+            .GroupBy(soldier => soldier.AbcpStatus)
+            .Select(group => new
+            {
+                Status = group.Key,
+                Total = group.Count()
+            })
+            .ToList();
+
+        var ssd =
+            Model
+            .Soldiers
+            .Select(soldier => new
+            {
+                IsComplete = soldier.SSDStatus.CurrentProgress >= Decimal.One
+            })
+            .GroupBy(status => status.IsComplete)
+            .Select(group => new
+            {
+                Status = group.Key ? "Complete" : "Incomplete",
+                Total = group.Count()
+            })
+            .ToList();
+
+        var education =
+            Model
+            .Soldiers
+            .GroupBy(soldier => soldier.IsEducationComplete)
+            .Select(group => new
+            {
+                Status = group.Key ? "Complete" : "Incomplete",
+                Total = group.Count()
+            })
+            .ToList();
+
+        var iwq =
+            Model
+            .Soldiers
+            .GroupBy(soldier => soldier.IwqQualified)
+            .Select(group => new
+            {
+                Status = group.Key ? "Qualified" : "Not Qualified",
+                Total = group.Count()
+            })
+            .ToList();
+
+        var dsca =
+            Model
+            .Soldiers
+            .GroupBy(soldier => soldier.DscaQualified)
+            .Select(group => new
+            {
+                Status = group.Key ? "Qualified" : "Not Qualified",
+                Total = group.Count()
+            })
+            .ToList();
     }
 
     <!--Load the AJAX API-->
@@ -289,5 +377,32 @@
 
             chart.draw(data, { allowHtml: true });
         });
+
+        google.charts.setOnLoadCallback(Draw_Pie_Charts);
+
+        function Draw_Pie_Charts() {
+            Render_Pie_Chart('apft_chart', JSON.parse('@Json.Serialize(apft)'));
+            Render_Pie_Chart('abcp_chart', JSON.parse('@Json.Serialize(abcp)'));
+            Render_Pie_Chart('ssd_chart', JSON.parse('@Json.Serialize(ssd)'));
+            Render_Pie_Chart('education_chart', JSON.parse('@Json.Serialize(education)'));
+            Render_Pie_Chart('iwq_chart', JSON.parse('@Json.Serialize(iwq)'));
+            Render_Pie_Chart('dsca_chart', JSON.parse('@Json.Serialize(dsca)'));
+        }
+
+        function Render_Pie_Chart(element, model) {
+
+            var table = new google.visualization.DataTable();
+
+            table.addColumn('string', 'Status');
+            table.addColumn('number', 'Total');
+
+            for (var i = 0; i < model.length; i++) {
+                table.addRow([model[i].status, model[i].total]);
+            }
+
+            var chart = new google.visualization.PieChart(document.getElementById(element));
+
+            chart.draw(table);
+        }
     </script>
 }
