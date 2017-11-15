@@ -265,29 +265,29 @@
     <!--Load the AJAX API-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
+
         // Load the Visualization API and the corechart package.
-        google.charts.load('current', { 'packages': ['orgchart'] });
+        google.charts.load('current', { 'packages': ['corechart', 'orgchart'] });
 
-        var Model_org = JSON.parse('@Json.Serialize(soldiers)');
+        google.charts.setOnLoadCallback(function () {
 
-        // Set a callback to run when the Google Visualization API is loaded.
-        google.charts.setOnLoadCallback(draw_Model_org);
+            // Build the org chart visualization
 
-        function draw_Model_org() {
+            var model = JSON.parse('@Json.Serialize(soldiers)');
+
             // Create the data table.
             var data = new google.visualization.DataTable();
 
             data.addColumn('string', 'Name');
             data.addColumn('string', 'Supervisor');
 
-            for (var i = 0; i < Model_org.length; i++)
-            {
-                data.addRow([Model_org[i].name, Model_org[i].supervisor]);
+            for (var i = 0; i < model.length; i++) {
+                data.addRow([model[i].name, model[i].supervisor]);
             }
 
             var chart = new google.visualization.OrgChart(document.getElementById('OrgChart'));
 
             chart.draw(data, { allowHtml: true });
-        }
+        });
     </script>
 }
