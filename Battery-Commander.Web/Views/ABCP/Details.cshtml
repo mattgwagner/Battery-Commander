@@ -7,7 +7,13 @@
     </div>
 }
 
-@if (Model.Measurements.Any())
+@if (Model.AreMeasurementsValid)
+{
+    <div class="alert alert-danger">
+        Measurements are outside of tolerance (i.e. greater than 1 inch difference!). Please revisit your taping measurements before continuing.
+    </div>
+}
+else if (Model.Measurements.Any())
 {
     @Html.ActionLink("Generate Worksheet", "Worksheet", "ABCP", new { Model.Id }, new { @class = "btn btn-default" })
 }

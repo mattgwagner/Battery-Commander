@@ -35,6 +35,11 @@ namespace BatteryCommander.Web.Models
     
     public class ABCP : IValidatableObject
     {
+        /// <summary>
+        /// Measurements are considered invalid if they're greater than 1 inch apart
+        /// </summary>
+        public const int MAX_DIFFERNCE = 1;
+
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
@@ -102,6 +107,20 @@ namespace BatteryCommander.Web.Models
         {
             get { return JsonConvert.DeserializeObject<List<Measurement>>(MeasurementsJson); }
             set { MeasurementsJson = JsonConvert.SerializeObject(value); }
+        }
+
+        [NotMapped]
+        public Boolean AreMeasurementsValid
+        {
+            get
+            {
+                if(Measurements.Any())
+                {
+
+                }
+
+                return true;
+            }
         }
 
         public Double WaistAverage => Average_To_Half(Measurements.Select(_ => _.Waist));
