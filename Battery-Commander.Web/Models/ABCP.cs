@@ -32,7 +32,7 @@ namespace BatteryCommander.Web.Models
             }
         }
     }
-    
+
     public class ABCP : IValidatableObject
     {
         /// <summary>
@@ -112,11 +112,15 @@ namespace BatteryCommander.Web.Models
         [NotMapped]
         public Boolean AreMeasurementsValid
         {
+            // Returns false if any measurement is greater than 1 inch away from another measurement
+
             get
             {
-                if(Measurements.Any())
+                foreach (var measurement in Measurements)
                 {
-
+                    if (Measurements.Any(check => Math.Abs(check.Waist - measurement.Waist) > MAX_DIFFERNCE)) return false;
+                    if (Measurements.Any(check => Math.Abs(check.Neck - measurement.Neck) > MAX_DIFFERNCE)) return false;
+                    if (Measurements.Any(check => Math.Abs(check.Hips - measurement.Hips) > MAX_DIFFERNCE)) return false;
                 }
 
                 return true;
