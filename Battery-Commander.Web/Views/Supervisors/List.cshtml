@@ -1,0 +1,42 @@
+﻿@model BatteryCommander.Web.Controllers.SupervisorsController.SupervisorListModel
+
+@{
+    ViewBag.Title = "Batch Update Supervisors";
+}
+
+<div class="page-header">
+    <h1>@ViewBag.Title <span class="badge">@Model.Rows.Count</span></h1>
+</div>
+
+@using (Html.BeginForm("Save", "Supervisors", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Unit</th>
+                <th>Soldier</th>
+                <th>Supervisor</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @for (var i = 0; i < Model.Rows.Count; ++i)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(_ => Model.Rows[i].Soldier.Unit)</td>
+                    <td>
+                        @Html.HiddenFor(_ => Model.Rows[i].SoldierId)
+                        @Html.DisplayFor(_ => Model.Rows[i].Soldier)
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(_ => Model.Rows[i].SupervisorId, Model.Soldiers, "-- Select a Supervisor --", new { @class = "select2" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <button type="submit" name="Save">Save Updates</button>
+}

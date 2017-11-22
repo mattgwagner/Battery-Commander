@@ -1,0 +1,82 @@
+﻿using BatteryCommander.Web.Models;
+using BatteryCommander.Web.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace BatteryCommander.Web.Controllers
+{
+    [Authorize, ApiExplorerSettings(IgnoreApi = true)]
+    public class SupervisorsController : Controller
+    {
+        private readonly Database db;
+
+        public SupervisorsController(Database db)
+        {
+            this.db = db;
+        }
+
+        // List status for all soldiers by - filter by unit
+
+        // Bulk update supervisors
+
+        public async Task<IActionResult> Index(SoldierSearchService.Query query)
+        {
+            return View("List", new SupervisorListModel
+            {
+                Soldiers = await SoldiersController.GetDropDownList(db, includeIgnoredUnits: true),
+
+                Rows =
+                    (await SoldierSearchService.Filter(db, query))
+                    .Select(soldier => new SupervisorListModel.Row
+                    {
+                        Soldier = soldier,
+                        SoldierId = soldier.Id,
+                        SupervisorId = soldier.SupervisorId
+                    })
+                    .ToList()
+            });
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> Save(SupervisorListModel model)
+        {
+            // For each DTO posted, update the soldier info
+
+            foreach (var dto in model.Rows)
+            {
+                var soldier =
+                    await db
+                    .Soldiers
+                    .Where(_ => _.Id == dto.SoldierId)
+                    .SingleOrDefaultAsync();
+
+                soldier.SupervisorId = dto.SupervisorId;
+            }
+
+            await db.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public class SupervisorListModel
+        {
+            public IList<Row> Rows { get; set; }
+
+            public IEnumerable<SelectListItem> Soldiers { get; set; } = Enumerable.Empty<SelectListItem>();
+
+            public class Row
+            {
+                public Soldier Soldier { get; set; }
+
+                public int SoldierId { get; set; }
+
+                public int? SupervisorId { get; set; }
+            }
+        }
+    }
+}
