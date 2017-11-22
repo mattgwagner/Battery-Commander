@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Authentication;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Controllers
@@ -29,12 +28,12 @@ namespace BatteryCommander.Web.Controllers
         }
 
         [AllowAnonymous]
-        public IActionResult Login(String returnUrl)
+        public IActionResult Login()
         {
             return new ChallengeResult("Auth0", new AuthenticationProperties
             {
-                RedirectUri = "/".Equals(returnUrl) ? Url.Action(nameof(PrivacyAct)) : returnUrl
-        });
+                RedirectUri = Url.Action(nameof(PrivacyAct))
+            });
         }
 
         [Route("~/Logout")]
