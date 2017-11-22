@@ -22,12 +22,12 @@ namespace BatteryCommander.Web.Controllers
             this.db = db;
         }
 
-
         [Route("~/Soldiers", Name = "Soldiers.List")]
         public async Task<IActionResult> Index(SoldierSearchService.Query query)
         {
             return View("List", new SoldierListViewModel
             {
+                Query = query,
                 Soldiers = await SoldierSearchService.Filter(db, query)
             });
         }
@@ -37,6 +37,7 @@ namespace BatteryCommander.Web.Controllers
         {
             return View("List", new SoldierListViewModel
             {
+                Query = new SoldierSearchService.Query { IncludeIgnoredUnits = true },
                 Soldiers = await SoldierSearchService.Filter(db, new SoldierSearchService.Query
                 {
                     IncludeIgnoredUnits = true

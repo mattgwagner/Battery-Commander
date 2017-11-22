@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using BatteryCommander.Web.Services;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace BatteryCommander.Web.Models
 {
     public class SoldierListViewModel
     {
+        public SoldierSearchService.Query Query { get; set; } = new SoldierSearchService.Query { };
+
         public IEnumerable<Soldier> Soldiers { get; set; } = Enumerable.Empty<Soldier>();
 
         public int Count => Soldiers.Count();

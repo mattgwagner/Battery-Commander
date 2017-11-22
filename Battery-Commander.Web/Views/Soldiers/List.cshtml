@@ -11,7 +11,7 @@
         Present <span class="badge">@Model.Present</span>
     </h4>
     <div class="btn-group">
-        <a class="btn btn-link" asp-area="" asp-controller="Supervisors" asp-action="Index">Update Supervisors</a>
+        @Html.ActionLink("Update Supervisors", "Index", "Supervisors", Model.Query, new { @class = "btn btn-link" })
     </div>
 </div>
 
