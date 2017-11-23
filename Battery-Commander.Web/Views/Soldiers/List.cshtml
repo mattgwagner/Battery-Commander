@@ -4,103 +4,113 @@
     ViewBag.Title = "Battle Roster";
 }
 
-<div class="page-header">
-    <h1>@ViewBag.Title @Html.ActionLink("Add New", "New", "Soldiers", null, new { @class = "btn btn-default" })</h1>
-    <h4>
-        Assigned <span class="badge">@Model.Count</span>
-        Present <span class="badge">@Model.Present</span>
-    </h4>
-    <div class="btn-group">
-        @Html.ActionLink("View All", "All", "Soldiers", null, new { @class = "btn btn-link" })
-        @Html.ActionLink("Update Statuses", "Index", "Statuses", Model.Query, new { @class = "btn btn-link" })
-        @Html.ActionLink("Update Supervisors", "Index", "Supervisors", Model.Query, new { @class = "btn btn-link" })
-        @Html.ActionLink("Update DSCA", "Index", "DSCA", Model.Query, new { @class = "btn btn-link" })
-        @Html.ActionLink("Update IWQ", "Index", "IWQ", Model.Query, new { @class = "btn btn-link" })
-    </div>
-</div>
+<div id="battle-roster">
 
-<table class="table table-striped display nowrap" id="dt" width="100%" data-page-length="25">
-    <thead>
-        <tr>
-            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().Status)</th>
-            <th data-priority="2">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().Rank)</th>
-            <th data-priority="1">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastName)</th>
-            <th data-priority="3">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().FirstName)</th>
-            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().Unit)</th>
-            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().EducationLevel)</th>
-            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().TimeInGrade)</th>
-            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().TimeTillETS)</th>
-            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().APFTs)</th>
-            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().ABCPs)</th>
-            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().SSDStatus)</th>
-            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().IwqQualified)</th>
-            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().DscaQualified)</th>
-            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().ClsQualified)</th>
-            <th data-priority="10001"></th>
-            <th></th>
-        </tr>
-    </thead>
+    <div class="page-header">
+        <h1>@ViewBag.Title @Html.ActionLink("Add New", "New", "Soldiers", null, new { @class = "btn btn-default" })</h1>
+        <h4>
+            Assigned <span class="badge">@Model.Count</span>
+            Present <span class="badge">@Model.Present</span>
+        </h4>
 
-    <tbody>
-        @foreach (var soldier in Model.Soldiers)
-        {
-            <tr>
-                <td>
-                    <span class="update-status" data-soldier="@soldier.Id" data-status="@((int)soldier.Status)">
-                        @Html.DisplayFor(s => soldier, "SoldierStatus")
-                    </span>
-                </td>
-                <td data-sort="@((int)soldier.Rank)">@Html.DisplayFor(s => soldier.RankHumanized)</td>
-                <td>@Html.RouteLink(soldier.LastName, "Soldier.Details", new { soldier.Id })</td>
-                <td>@Html.RouteLink(soldier.FirstName, "Soldier.Details", new { soldier.Id })</td>
-                <td>@Html.DisplayFor(s => soldier.Unit)</td>
-                <td>@Html.DisplayFor(s => soldier, "MilitaryEducationLevel")</td>
-                <td data-sort="@soldier.TimeInGrade?.TotalDays">
-                    <span class="label label-default">@Html.DisplayFor(s => soldier.TimeInGradeHumanized)</span>
-                </td>
-                <td data-sort="@soldier.TimeTillETS?.TotalDays">@Html.DisplayFor(s => soldier, "ETS")</td>
-                <td data-sort="@soldier.LastApft?.TotalScore">
-                    @Html.DisplayFor(s => soldier.LastApft)
-                    @if (soldier.LastApft?.IsAlternateAerobicEvent == true)
-                    {
-                        <span class="label">Alt. Aerobic</span>
-                    }
-                </td>
-                <td>@Html.DisplayFor(s => soldier.LastAbcp)</td>
-                <td>@Html.DisplayFor(s => soldier.SSDStatus)</td>
-                <td>@Html.DisplayFor(s => soldier, "IWQ")</td>
-                <td>@Html.DisplayFor(s => soldier, "DSCA")</td>
-                <td>@Html.DisplayFor(s => soldier, "CLS")</td>
-                <td data-sort="@soldier.LastName">
-                    @Html.RouteLink("Details", "Soldier.Details", new { soldier.Id }, new { @class = "btn btn-default btn-xs" })
-                    @if (!soldier.HasDoB)
-                    {
-                        <span class="label label-warning">Needs Birthdate</span>
-                    }
-                    else
-                    {
-                        @Html.ActionLink("Add ABCP", "New", "ABCP", new { soldier = soldier.Id }, new { @class = "btn btn-default btn-xs" })
-                        @Html.ActionLink("Add APFT", "New", "APFT", new { soldier = soldier.Id }, new { @class = "btn btn-default btn-xs" })
-                    }
-                </td>
-                <td></td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-<div style="display:none" id="set-status" title="Update Soldier Status">
-    @using (Html.BeginForm("SetStatus", "Soldiers", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-    {
-        <input id="soldierId" name="soldierId" type="hidden" />
-
-        <div class="form-group form-group-lg">
-            @Html.Label("Status")
-            @Html.DropDownList("status", Html.GetEnumSelectList<Soldier.SoldierStatus>())
+        <div class="btn-group">
+            <select data-bind="value: selected_unit, options: units, optionsText: 'name', optionsValue: 'id', optionsCaption: '-- Filter by Unit --', event: { change: unit_changed }">
+            </select>
         </div>
 
-        <button type="submit" id="save">Save</button>
-    }
+        <div class="btn-group">
+            @Html.ActionLink("View All", "All", "Soldiers", null, new { @class = "btn btn-link" })
+            @Html.ActionLink("Update Statuses", "Index", "Statuses", Model.Query, new { @class = "btn btn-link" })
+            @Html.ActionLink("Update Supervisors", "Index", "Supervisors", Model.Query, new { @class = "btn btn-link" })
+            @Html.ActionLink("Update DSCA", "Index", "DSCA", Model.Query, new { @class = "btn btn-link" })
+            @Html.ActionLink("Update IWQ", "Index", "IWQ", Model.Query, new { @class = "btn btn-link" })
+        </div>
+    </div>
+
+    <table class="table table-striped display nowrap" id="dt">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().Status)</th>
+                <th data-priority="2">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().Rank)</th>
+                <th data-priority="1">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastName)</th>
+                <th data-priority="3">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().FirstName)</th>
+                <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().Unit)</th>
+                <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().EducationLevel)</th>
+                <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().TimeInGrade)</th>
+                <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().TimeTillETS)</th>
+                <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().APFTs)</th>
+                <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().ABCPs)</th>
+                <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().SSDStatus)</th>
+                <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().IwqQualified)</th>
+                <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().DscaQualified)</th>
+                <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().ClsQualified)</th>
+                <th data-priority="10001"></th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var soldier in Model.Soldiers)
+            {
+                <tr>
+                    <td>
+                        <span class="update-status" data-soldier="@soldier.Id" data-status="@((int)soldier.Status)">
+                            @Html.DisplayFor(s => soldier, "SoldierStatus")
+                        </span>
+                    </td>
+                    <td data-sort="@((int)soldier.Rank)">@Html.DisplayFor(s => soldier.RankHumanized)</td>
+                    <td>@Html.RouteLink(soldier.LastName, "Soldier.Details", new { soldier.Id })</td>
+                    <td>@Html.RouteLink(soldier.FirstName, "Soldier.Details", new { soldier.Id })</td>
+                    <td>@Html.DisplayFor(s => soldier.Unit)</td>
+                    <td>@Html.DisplayFor(s => soldier, "MilitaryEducationLevel")</td>
+                    <td data-sort="@soldier.TimeInGrade?.TotalDays">
+                        <span class="label label-default">@Html.DisplayFor(s => soldier.TimeInGradeHumanized)</span>
+                    </td>
+                    <td data-sort="@soldier.TimeTillETS?.TotalDays">@Html.DisplayFor(s => soldier, "ETS")</td>
+                    <td data-sort="@soldier.LastApft?.TotalScore">
+                        @Html.DisplayFor(s => soldier.LastApft)
+                        @if (soldier.LastApft?.IsAlternateAerobicEvent == true)
+                        {
+                            <span class="label">Alt. Aerobic</span>
+                        }
+                    </td>
+                    <td>@Html.DisplayFor(s => soldier.LastAbcp)</td>
+                    <td>@Html.DisplayFor(s => soldier.SSDStatus)</td>
+                    <td>@Html.DisplayFor(s => soldier, "IWQ")</td>
+                    <td>@Html.DisplayFor(s => soldier, "DSCA")</td>
+                    <td>@Html.DisplayFor(s => soldier, "CLS")</td>
+                    <td data-sort="@soldier.LastName">
+                        @Html.RouteLink("Details", "Soldier.Details", new { soldier.Id }, new { @class = "btn btn-default btn-xs" })
+                        @if (!soldier.HasDoB)
+                        {
+                            <span class="label label-warning">Needs Birthdate</span>
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Add ABCP", "New", "ABCP", new { soldier = soldier.Id }, new { @class = "btn btn-default btn-xs" })
+                            @Html.ActionLink("Add APFT", "New", "APFT", new { soldier = soldier.Id }, new { @class = "btn btn-default btn-xs" })
+                        }
+                    </td>
+                    <td></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div style="display:none" id="set-status" title="Update Soldier Status">
+        @using (Html.BeginForm("SetStatus", "Soldiers", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            <input id="soldierId" name="soldierId" type="hidden" />
+
+            <div class="form-group form-group-lg">
+                @Html.Label("Status")
+                @Html.DropDownList("status", Html.GetEnumSelectList<Soldier.SoldierStatus>())
+            </div>
+
+            <button type="submit" id="save">Save</button>
+        }
+    </div>
+
 </div>
 
 @section Scripts{
@@ -114,6 +124,24 @@
                     modal: true
                 });
             });
+
+            var viewModel = {
+                query: ko.mapping.fromJSON('@Html.Raw(JsonConvert.SerializeObject(Model.Query))'),
+
+                selected_unit: ko.observable(null),
+
+                units: ko.observableArray(),
+
+                unit_changed: function (view) {
+                    window.location = '/Soldiers?unit=' + view.selected_unit();
+                }
+            };
+
+            $.get('/api/units', function (result) {
+                viewModel.units(result);
+            });
+
+            ko.applyBindings(viewModel, document.getElementById('battle-roster'));
         });
     </script>
 }
