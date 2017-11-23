@@ -8,6 +8,10 @@
     <h1>@ViewBag.Title <span class="badge">@Model.Rows.Count</span></h1>
 </div>
 
+<div class="btn-group">
+    <button id="reset-perstat">Reset PERSTAT</button>
+</div>
+
 @using (Html.BeginForm("Save", "Statuses", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
@@ -15,9 +19,10 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Unit</th>
-                <th>Soldier</th>
                 <th>Status</th>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Rank</th>
             </tr>
         </thead>
 
@@ -25,18 +30,29 @@
             @for (var i = 0; i < Model.Rows.Count; ++i)
             {
                 <tr>
-                    <td>@Html.DisplayFor(_ => Model.Rows[i].Soldier.Unit)</td>
                     <td>
                         @Html.HiddenFor(_ => Model.Rows[i].SoldierId)
-                        @Html.DisplayFor(_ => Model.Rows[i].Soldier)
+                        @Html.DropDownListFor(_ => Model.Rows[i].Status, Html.GetEnumSelectList<Soldier.SoldierStatus>(), null, new { @class = "status" })
                     </td>
-                    <td>
-                        @Html.DropDownListFor(_ => Model.Rows[i].Status, Html.GetEnumSelectList<Soldier.SoldierStatus>(), null, new { @class = "select2" })
-                    </td>
+                    <td>@Html.DisplayFor(_ => Model.Rows[i].Soldier.LastName)</td>
+                    <td>@Html.DisplayFor(_ => Model.Rows[i].Soldier.FirstName)</td>
+                    <td>@Model.Rows[i].Soldier.Rank.ShortName()</td>
                 </tr>
             }
         </tbody>
     </table>
 
     <button type="submit" name="Save">Save Updates</button>
+}
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#reset-perstat").click(function () {
+                if (confirm("Are you sure you wish to reset all Soldiers to UNKNOWN?")) {
+                    $("select.status").val(@((int)Soldier.SoldierStatus.Unknown));
+                } 
+            });
+        });
+    </script>
 }
