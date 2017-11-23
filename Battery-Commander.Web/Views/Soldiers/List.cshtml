@@ -125,10 +125,10 @@
                 });
             });
 
-            var viewModel = {
-                query: ko.mapping.fromJSON('@Html.Raw(JsonConvert.SerializeObject(Model.Query))'),
+            var query = ko.mapping.fromJSON('@Html.Raw(JsonConvert.SerializeObject(Model.Query))');
 
-                selected_unit: ko.observable(null),
+            var viewModel = {
+                selected_unit: ko.observable(),
 
                 units: ko.observableArray(),
 
@@ -139,7 +139,8 @@
 
             $.get('/api/units', function (result) {
                 viewModel.units(result);
-            });
+                viewModel.selected_unit(query.Unit());
+            });           
 
             ko.applyBindings(viewModel, document.getElementById('battle-roster'));
         });
