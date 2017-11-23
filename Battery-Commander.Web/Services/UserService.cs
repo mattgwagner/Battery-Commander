@@ -1,5 +1,4 @@
 ﻿using BatteryCommander.Web.Models;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Security.Claims;
@@ -18,13 +17,9 @@ namespace BatteryCommander.Web.Services
         {
             var email = Get_Email(user);
 
-            var soldiers =
-                await db
-                .Soldiers
-                .Where(soldier => soldier.CivilianEmail == email || soldier.MilitaryEmail == email)
-                .ToListAsync();
+            var soldiers = await SoldierSearchService.Filter(db, new SoldierSearchService.Query { Email = email });
 
-            if (soldiers.Count > 1) throw new Exception($"Found multiple matching soldiers with the same email: {email}");
+            if (soldiers.Count() > 1) throw new Exception($"Found multiple matching soldiers with the same email: {email}");
 
             return soldiers.SingleOrDefault();
         }

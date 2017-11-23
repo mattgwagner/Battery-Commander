@@ -99,6 +99,11 @@ namespace BatteryCommander.Web.Services
                 soldiers = soldiers.Where(_ => _.Status == query.Status);
             }
 
+            if (!String.IsNullOrWhiteSpace(query.Email))
+            {
+                soldiers = soldiers.Where(soldier => soldier.CivilianEmail == query.Email || soldier.MilitaryEmail == query.Email);
+            }
+
             return
                 await soldiers
                 .OrderBy(soldier => soldier.LastName)
@@ -137,6 +142,8 @@ namespace BatteryCommander.Web.Services
             public Boolean? EducationComplete { get; set; }
 
             public Soldier.SoldierStatus? Status { get; set; }
+
+            public String Email { get; set; }
         }
     }
 
