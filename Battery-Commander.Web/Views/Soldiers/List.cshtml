@@ -53,10 +53,8 @@
             @foreach (var soldier in Model.Soldiers)
             {
                 <tr>
-                    <td>
-                        <span class="update-status" data-soldier="@soldier.Id" data-status="@((int)soldier.Status)">
-                            @Html.DisplayFor(s => soldier, "SoldierStatus")
-                        </span>
+                    <td data-bind="click: update_status.bind($data, @soldier.Id, @((int)soldier.Status))">
+                        @Html.DisplayFor(s => soldier, "SoldierStatus")
                     </td>
                     <td data-sort="@((int)soldier.Rank)">@Html.DisplayFor(s => soldier.RankHumanized)</td>
                     <td>@Html.RouteLink(soldier.LastName, "Soldier.Details", new { soldier.Id })</td>
@@ -116,14 +114,6 @@
 @section Scripts{
     <script type="text/javascript">
         $(document).ready(function () {
-            $("td .update-status").click(function (e) {
-                $("#soldierId").val($(this).data('soldier'));
-                $("#status").val($(this).data('status')).trigger('change');
-
-                $("#set-status").dialog({
-                    modal: true
-                });
-            });
 
             var query = ko.mapping.fromJSON('@Html.Raw(JsonConvert.SerializeObject(Model.Query))');
 
@@ -134,12 +124,23 @@
 
                 unit_changed: function (view) {
                     window.location = '/Soldiers?unit=' + view.selected_unit();
+                },
+
+                update_status: function (id, status) {
+                    $("#soldierId").val(id);
+                    $("#status").val(status).trigger('change');
+
+                    $("#set-status").dialog({
+                        modal: true
+                    });
                 }
             };
 
             $.get('/api/units', function (result) {
                 viewModel.units(result);
-                viewModel.selected_unit(query.Unit());
+                if (query.Unit()) {
+                    viewModel.selected_unit(query.Unit());
+                }
             });           
 
             ko.applyBindings(viewModel, document.getElementById('battle-roster'));
