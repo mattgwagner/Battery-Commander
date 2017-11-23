@@ -12,6 +12,7 @@
     </h4>
     <div class="btn-group">
         @Html.ActionLink("View All", "All", "Soldiers", null, new { @class = "btn btn-link" })
+        @Html.ActionLink("Update Statuses", "Index", "Statuses", Model.Query, new { @class = "btn btn-link" })
         @Html.ActionLink("Update Supervisors", "Index", "Supervisors", Model.Query, new { @class = "btn btn-link" })
         @Html.ActionLink("Update DSCA", "Index", "DSCA", Model.Query, new { @class = "btn btn-link" })
         @Html.ActionLink("Update IWQ", "Index", "IWQ", Model.Query, new { @class = "btn btn-link" })
