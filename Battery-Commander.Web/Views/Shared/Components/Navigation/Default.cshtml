@@ -1,4 +1,4 @@
-﻿//@model Soldier
+﻿@model Soldier
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div>
@@ -33,14 +33,7 @@
                 <li><a asp-area="" asp-controller="Units" asp-action="Index">Units</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <li><a asp-controller="Home" asp-action="Logout">Logout</a></li>
-                }
-                else
-                {
-                    <li><a asp-controller="Home" asp-action="Login">Login</a></li>
-                }
+                <li><a asp-controller="Home" asp-action="Logout">Logout</a></li>
             </ul>
         </div>
     </div>
