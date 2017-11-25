@@ -17,51 +17,7 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div>
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Battery Commander</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a class="nav-link" asp-area="" asp-controller="Soldiers" asp-action="Index">Soldiers</a></li>
-                    <li><a class="nav-link" asp-area="" asp-controller="Vehicles" asp-action="Index">Vehicles</a></li>
-                    <li><a class="nav-link" asp-area="" asp-controller="SSD" asp-action="Index">SSD</a></li>
-                    <li><a class="nav-link" asp-area="" asp-controller="Evaluations" asp-action="Index">Evaluations</a></li>
-                    <li><a class="dropdown-item" asp-area="" asp-controller="APFT" asp-action="Index">APFT</a></li>
-                    <li><a class="dropdown-item" asp-area="" asp-controller="ABCP" asp-action="Index">ABCP</a></li>
-                    <li><a class="dropdown-item" asp-area="" asp-controller="DSCA" asp-action="Index">DSCA</a></li>                    
-                    <li><a class="dropdown-item" asp-area="" asp-controller="IWQ" asp-action="Index">IWQ</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Reports</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" asp-area="" asp-controller="Reports" asp-action="Red1">RED 1</a>
-                            <a class="dropdown-item" asp-area="" asp-controller="Reports" asp-action="SadPerstat">SAD PERSTAT</a>
-                            <a class="dropdown-item" asp-area="" asp-controller="Reports" asp-action="DscaReady">DSCA Ready</a>
-                        </div>
-                    </li>
-                    <li><a asp-area="" asp-controller="Units" asp-action="Index">Units</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <li><a asp-controller="Home" asp-action="Logout">Logout</a></li>
-                    }
-                    else
-                    {
-                        <li><a asp-controller="Home" asp-action="Login">Login</a></li>
-                    }
-                </ul>
-            </div>
-        </div>
-    </nav>
+    @await Component.InvokeAsync("Navigation", this.User)
     <div class="body-content">
         @RenderBody()
         <hr />
@@ -122,6 +78,6 @@
             });
         });
     </script>
-    <script type="text/javascript">  var appInsights=window.appInsights||function(config){    function i(config){t[config]=function(){var i=arguments;t.queue.push(function(){t[config].apply(t,i)})}}var t={config:config},u=document,e=window,o="script",s="AuthenticatedUserContext",h="start",c="stop",l="Track",a=l+"Event",v=l+"Page",y=u.createElement(o),r,f;y.src=config.url||"https://az416426.vo.msecnd.net/scripts/a/ai.0.js";u.getElementsByTagName(o)[0].parentNode.appendChild(y);try{t.cookie=u.cookie}catch(p){}for(t.queue=[],t.version="1.0",r=["Event","Exception","Metric","PageView","Trace","Dependency"];r.length;)i("track"+r.pop());return i("set"+s),i("clear"+s),i(h+a),i(c+a),i(h+v),i(c+v),i("flush"),config.disableExceptionTracking||(r="onerror",i("_"+r),f=e[r],e[r]=function(config,i,u,e,o){var s=f&&f(config,i,u,e,o);return s!==!0&&t["_"+r](config,i,u,e,o),s}),t    }({        instrumentationKey:"66d7081f-e4a1-421f-b57a-38656917ee3d"    });           window.appInsights=appInsights;    appInsights.trackPageView();</script>
+    <script type="text/javascript">  var appInsights = window.appInsights || function (config) { function i(config) { t[config] = function () { var i = arguments; t.queue.push(function () { t[config].apply(t, i) }) } } var t = { config: config }, u = document, e = window, o = "script", s = "AuthenticatedUserContext", h = "start", c = "stop", l = "Track", a = l + "Event", v = l + "Page", y = u.createElement(o), r, f; y.src = config.url || "https://az416426.vo.msecnd.net/scripts/a/ai.0.js"; u.getElementsByTagName(o)[0].parentNode.appendChild(y); try { t.cookie = u.cookie } catch (p) { } for (t.queue = [], t.version = "1.0", r = ["Event", "Exception", "Metric", "PageView", "Trace", "Dependency"]; r.length;)i("track" + r.pop()); return i("set" + s), i("clear" + s), i(h + a), i(c + a), i(h + v), i(c + v), i("flush"), config.disableExceptionTracking || (r = "onerror", i("_" + r), f = e[r], e[r] = function (config, i, u, e, o) { var s = f && f(config, i, u, e, o); return s !== !0 && t["_" + r](config, i, u, e, o), s }), t }({ instrumentationKey: "66d7081f-e4a1-421f-b57a-38656917ee3d" }); window.appInsights = appInsights; appInsights.trackPageView();</script>
 </body>
 </html>
