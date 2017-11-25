@@ -24,6 +24,6 @@ namespace BatteryCommander.Web.Services
             return soldiers.SingleOrDefault();
         }
 
-        private static String Get_Email(ClaimsPrincipal user) => user.Identity.Name;
+        private static String Get_Email(ClaimsPrincipal user) => user?.Identity?.Name;
     }
 }
