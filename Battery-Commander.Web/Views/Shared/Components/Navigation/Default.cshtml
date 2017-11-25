@@ -14,15 +14,21 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a class="nav-link" asp-controller="Home" asp-action="Index">Home</a></li>
-                <li>@Html.RouteLink("My Unit", "Unit.Details", new { id = Model.UnitId }))</li>
+                
+                @if(Model != null)
+                {
+                    <li>@Html.RouteLink("My Unit", "Unit.Details", new { id = Model.UnitId }))</li>
+                    <li>@Html.RouteLink("My Profile", "Soldier.Details", new { id = Model.Id }))</li>
+                }
+     
                 <li><a class="nav-link" asp-controller="Soldiers" asp-action="Index">Soldiers</a></li>
                 <li><a class="nav-link" asp-controller="Vehicles" asp-action="Index">Vehicles</a></li>
                 <li><a class="nav-link" asp-controller="SSD" asp-action="Index">SSD</a></li>
                 <li><a class="nav-link" asp-controller="Evaluations" asp-action="Index">Evaluations</a></li>
                 <li><a class="nav-link" asp-controller="APFT" asp-action="Index">APFT</a></li>
                 <li><a class="nav-link" asp-controller="ABCP" asp-action="Index">ABCP</a></li>
-                <li><a class="nav-link" asp-controller="DSCA" asp-action="Index">DSCA</a></li>
-                <li><a class="nav-link" asp-controller="IWQ" asp-action="Index">IWQ</a></li>
+                @*<li><a class="nav-link" asp-controller="DSCA" asp-action="Index">DSCA</a></li>
+                <li><a class="nav-link" asp-controller="IWQ" asp-action="Index">IWQ</a></li>*@
                 @*<li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Reports</a>
                     <div class="dropdown-menu">
