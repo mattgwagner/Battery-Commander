@@ -16,7 +16,12 @@ namespace BatteryCommander.Web.Models
 
         public async Task<IViewComponentResult> InvokeAsync(ClaimsPrincipal user)
         {
-            return View(await UserService.FindAsync(db, user));
+            return View(new ViewModel { Soldier = await UserService.FindAsync(db, user) });
+        }
+
+        public class ViewModel
+        {
+            public Soldier Soldier { get; set; }
         }
     }
 }

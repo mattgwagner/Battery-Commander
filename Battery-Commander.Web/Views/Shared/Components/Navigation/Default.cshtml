@@ -1,4 +1,4 @@
-﻿@model Soldier
+﻿@model NavigationViewComponent.ViewModel
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div>
@@ -14,10 +14,10 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 
-                @if(Model != null)
+                @if(Model.Soldier != null)
                 {
-                    <li>@Html.RouteLink("My Unit", "Unit.Details", new { id = Model.UnitId }))</li>
-                    <li>@Html.RouteLink("My Profile", "Soldier.Details", new { id = Model.Id }))</li>
+                    <li>@Html.RouteLink("My Unit", "Unit.Details", new { id = Model.Soldier.UnitId }))</li>
+                    <li>@Html.RouteLink("My Profile", "Soldier.Details", new { id = Model.Soldier.Id }))</li>
                 }
      
                 <li><a class="nav-link" asp-controller="Soldiers" asp-action="Index">Soldiers</a></li>
