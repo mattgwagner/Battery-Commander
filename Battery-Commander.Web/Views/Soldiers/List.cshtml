@@ -56,7 +56,7 @@
                     <td data-bind="click: update_status.bind($data, @soldier.Id, @((int)soldier.Status))">
                         @Html.DisplayFor(s => soldier, "SoldierStatus")
                     </td>
-                    <td data-sort="@((int)soldier.Rank)">@Html.DisplayFor(s => soldier.RankHumanized)</td>
+                    <td>@Html.DisplayFor(s => soldier.RankHumanized)</td>
                     <td>@Html.RouteLink(soldier.LastName, "Soldier.Details", new { soldier.Id })</td>
                     <td>@Html.RouteLink(soldier.FirstName, "Soldier.Details", new { soldier.Id })</td>
                     <td>@Html.DisplayFor(s => soldier.Unit)</td>
