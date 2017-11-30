@@ -14,14 +14,21 @@ namespace BatteryCommander.Web.Services
     {
         public static async Task<IEnumerable<Soldier>> Subordinates(Database db, int soldierId)
         {
-            var subordinates =
-                await db
-                .Soldiers
-                .Where(soldier => soldier.SupervisorId == soldierId)
-                .Select(soldier => soldier.Id)
-                .ToArrayAsync();
+            var subordinates = new List<Soldier>();
 
-            return await Filter(db, new Query { Ids = subordinates });
+            // Recursively call and find subordinates of the given soldier
+
+            foreach (Soldier soldier in db.Soldiers)
+            {
+                if (soldier.SupervisorId == soldierId)
+                {
+                    subordinates.Add(soldier);
+
+                    subordinates.AddRange(await Subordinates(db, soldier.Id));
+                }
+            }
+
+            return subordinates;
         }
 
         public static async Task<IEnumerable<Soldier>> Filter(Database db, Query query)

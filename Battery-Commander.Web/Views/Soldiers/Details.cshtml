@@ -340,7 +340,7 @@
             .Select(s => new
             {
                 Name = s.ToString(),
-                Supervisor = Model.Soldier.ToString()
+                Supervisor = s.Supervisor.ToString()
             })
             .ToList();
     }
