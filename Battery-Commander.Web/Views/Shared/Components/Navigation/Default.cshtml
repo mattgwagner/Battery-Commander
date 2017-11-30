@@ -16,8 +16,8 @@
                 
                 @if(Model.Soldier != null)
                 {
-                    <li>@Html.RouteLink("My Unit", "Unit.Details", new { id = Model.Soldier.UnitId }))</li>
-                    <li>@Html.RouteLink("My Profile", "Soldier.Details", new { id = Model.Soldier.Id }))</li>
+                    <li>@Html.RouteLink("My Unit", "Unit.Details", new { id = Model.Soldier.UnitId }, new { @class = "nav-link" })</li>
+                    <li>@Html.RouteLink("My Profile", "Soldier.Details", new { id = Model.Soldier.Id }, new { @class = "nav-link" })</li>
                 }
      
                 <li><a class="nav-link" asp-controller="Soldiers" asp-action="Index">Soldiers</a></li>
