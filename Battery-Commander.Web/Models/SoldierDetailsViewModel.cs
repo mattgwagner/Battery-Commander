@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BatteryCommander.Web.Models
 {
@@ -7,9 +8,9 @@ namespace BatteryCommander.Web.Models
     {
         public virtual Soldier Soldier { get; set; }
 
-        public ICollection<EvaluationViewModel> Evaluations { get; set; } = new List<EvaluationViewModel>();
+        public IEnumerable<EvaluationViewModel> Evaluations { get; set; } = Enumerable.Empty<EvaluationViewModel>();
 
-        public ICollection<Soldier> Subordinates { get; set; } = new List<Soldier>();
+        public IEnumerable<Soldier> Subordinates { get; set; } = Enumerable.Empty<Soldier>();
 
         public class EvaluationViewModel
         {
