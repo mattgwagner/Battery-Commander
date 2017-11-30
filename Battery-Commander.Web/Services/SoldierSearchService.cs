@@ -12,6 +12,18 @@ namespace BatteryCommander.Web.Services
 {
     public class SoldierSearchService
     {
+        public static async Task<IEnumerable<Soldier>> Subordinates(Database db, int soldierId)
+        {
+            var subordinates =
+                await db
+                .Soldiers
+                .Where(soldier => soldier.SupervisorId == soldierId)
+                .Select(soldier => soldier.Id)
+                .ToArrayAsync();
+
+            return await Filter(db, new Query { Ids = subordinates });
+        }
+
         public static async Task<IEnumerable<Soldier>> Filter(Database db, Query query)
         {
             IQueryable<Soldier> soldiers =
@@ -26,6 +38,11 @@ namespace BatteryCommander.Web.Services
             if (query.Id.HasValue)
             {
                 soldiers = soldiers.Where(_ => _.Id == query.Id);
+            }
+
+            if (query.Ids?.Any() == true)
+            {
+                soldiers = soldiers.Where(_ => query.Ids.Contains(_.Id));
             }
 
             if (query.Unit.HasValue)
@@ -116,6 +133,8 @@ namespace BatteryCommander.Web.Services
             // TODO Filtering by MOS, Position, Name, Status
 
             public int? Id { get; set; }
+
+            public int[] Ids { get; set; }
 
             public int? Unit { get; set; }
 
