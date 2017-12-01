@@ -8,7 +8,7 @@
     <h1>
         @ViewBag.Title
         @Html.ActionLink("Add New", "New", "Vehicles", null, new { @class = "btn btn-default" })  
-        @Html.ActionLink("Only Available", "List", "Vehicles", new VehicleService.Query { Available = true }, new { @class = "btn btn-default" })
+        @Html.ActionLink("Only Available", "Index", "Vehicles", new VehicleService.Query { Available = true }, new { @class = "btn btn-default" })
     </h1>
     <h4>
         <small>
