@@ -25,6 +25,9 @@ namespace BatteryCommander.Web.Models
         [Required]
         public VehicleLocation Location { get; set; } = VehicleLocation.HS;
 
+        [NotMapped]
+        public Boolean Available => Status == VehicleStatus.FMC && Location == VehicleLocation.HS;
+
         // Bumper, Registration, and Serial should be UNIQUE -- configured in Database.OnModelCreating
 
         [Required, StringLength(10)]

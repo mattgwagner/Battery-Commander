@@ -38,6 +38,11 @@ namespace BatteryCommander.Web.Services
                 vehicles = vehicles.Where(vehicle => !vehicle.Unit.IgnoreForReports);
             }
 
+            if (query.Available.HasValue)
+            {
+                vehicles = vehicles.Where(vehicle => vehicle.Available == query.Available);
+            }
+
             return
                 await vehicles
                 .OrderBy(vehicle => vehicle.Bumper)
@@ -49,6 +54,8 @@ namespace BatteryCommander.Web.Services
             public int? Unit { get; set; }
 
             public Boolean? IncludeIgnoredUnits { get; set; } = false;
+
+            public Boolean? Available { get; set; }
         }
     }
 }
