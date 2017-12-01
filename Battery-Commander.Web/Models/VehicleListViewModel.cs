@@ -12,7 +12,7 @@ namespace BatteryCommander.Web.Models
 
         public int FMC => Vehicles.Where(_ => _.Available).Count();
 
-        public int PAX => Vehicles.Where(_ => _.Available).Where(_ => _.DriverId.HasValue).Count() + Available.Where(_ => _.FMC).Where(_ => _.A_DriverId.HasValue).Count();
+        public int PAX => Vehicles.Where(_ => _.Available).Where(_ => _.DriverId.HasValue).Count() + Vehicles.Where(_ => _.Available).Where(_ => _.A_DriverId.HasValue).Count();
 
         public int Seats => Vehicles.Where(_ => _.Available).Select(_ => _.Seats).Sum();
     }
