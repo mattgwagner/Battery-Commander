@@ -71,7 +71,7 @@
                 <td>@Html.DisplayFor(_ => vehicle.Registration)</td>
                 <td>@Html.DisplayFor(_ => vehicle.Serial)</td>
                 <td>@Html.DisplayFor(_ => vehicle.LIN)</td>
-                @if (vehicle.FMC)
+                @if (vehicle.Available)
                 {
                     <td>
                         @if (vehicle.DriverId.HasValue)
