@@ -7,13 +7,13 @@
 <div class="page-header">
     <h1>
         @ViewBag.Title
-        @Html.ActionLink("Add New", "New", "Vehicles", null, new { @class = "btn btn-default" })  
+        @Html.ActionLink("Add New", "New", "Vehicles", null, new { @class = "btn btn-default" })
         @Html.ActionLink("Only Available", "Index", "Vehicles", new VehicleService.Query { Available = true }, new { @class = "btn btn-default" })
     </h1>
     <h4>
         <small>
-            FMC at HS: <span class="badge">@Model.FMC</span> 
-            PAX: <span class="badge">@Model.PAX</span> 
+            FMC at HS: <span class="badge">@Model.FMC</span>
+            PAX: <span class="badge">@Model.PAX</span>
             SEATS: <span class="badge">@Model.Seats</span>
         </small>
     </h4>
@@ -25,7 +25,7 @@
             <th data-priority="1">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Status)</th>
             <th data-priority="10001">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Unit)</th>
             <th data-priority="1">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Bumper)</th>
-            <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Type)</th>            
+            <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Type)</th>
             <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Seats)</th>
             <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Nomenclature)</th>
             <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Registration)</th>
@@ -63,7 +63,7 @@
                 <td>@Html.DisplayFor(_ => vehicle.Type)</td>
                 <td>@Html.DisplayFor(_ => vehicle.Seats)</td>
                 <td>
-                    @if(!String.IsNullOrWhiteSpace(vehicle.Nomenclature))
+                    @if (!String.IsNullOrWhiteSpace(vehicle.Nomenclature))
                     {
                         <a href="@vehicle.GoogleSearchUrl" target="_blank">@vehicle.Nomenclature</a>
                     }
@@ -130,12 +130,12 @@
 
         <div class="form-group form-group-lg">
             @Html.Label("Driver")
-            @Html.DropDownList("driverId", Model.Soldiers, "-- Select Driver --")
+            @Html.DropDownList("driverId", Model.Soldiers, "-- Select Driver --", new { @class = "select2" })
         </div>
 
         <div class="form-group form-group-lg">
             @Html.Label("A-Driver")
-            @Html.DropDownList("adriverId", Model.Soldiers, "-- Select A-Driver --")
+            @Html.DropDownList("adriverId", Model.Soldiers, "-- Select A-Driver --", new { @class = "select2" })
         </div>
 
         <button type="submit" id="save">Save</button>

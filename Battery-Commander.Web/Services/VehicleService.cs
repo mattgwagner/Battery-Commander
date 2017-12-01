@@ -29,9 +29,9 @@ namespace BatteryCommander.Web.Services
                 .Include(vehicle => vehicle.Driver)
                 .Include(vehicle => vehicle.A_Driver);
 
-            if (query.Unit.HasValue)
+            if (query.Units?.Any() == true)
             {
-                vehicles = vehicles.Where(vehicle => vehicle.UnitId == query.Unit);
+                vehicles = vehicles.Where(vehicle => query.Units.Contains(vehicle.UnitId));
             }
             else if (query.IncludeIgnoredUnits == false)
             {
@@ -51,7 +51,7 @@ namespace BatteryCommander.Web.Services
 
         public class Query
         {
-            public int? Unit { get; set; }
+            public int[] Units { get; set; }
 
             public Boolean? IncludeIgnoredUnits { get; set; } = false;
 
