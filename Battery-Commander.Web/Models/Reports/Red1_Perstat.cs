@@ -12,7 +12,7 @@ namespace BatteryCommander.Web.Models.Reports
         public Row Assigned => new Row
         {
             Enlisted = Soldiers.Where(_ => _.IsEnlisted).Count(),
-            Officer = Soldiers.Where(_ => _ => _.IsOfficer || _.IsCadet).Count()
+            Officer = Soldiers.Where(_ => _.IsOfficer || _.IsCadet).Count()
         };
 
         [Display(Name = "Personnel Attached")]
@@ -22,7 +22,7 @@ namespace BatteryCommander.Web.Models.Reports
         public Row Detached => new Row
         {
             Enlisted = Soldiers.Where(_ => _.IsEnlisted).Where(_ => _.Status == Soldier.SoldierStatus.Detached).Count(),
-            Officer = Soldiers.Where(_ => _ => _.IsOfficer || _.IsCadet).Where(_ => _.Status == Soldier.SoldierStatus.Detached).Count()
+            Officer = Soldiers.Where(_ => _.IsOfficer || _.IsCadet).Where(_ => _.Status == Soldier.SoldierStatus.Detached).Count()
         };
 
         [Display(Name = "Total Personnel")]
@@ -36,7 +36,7 @@ namespace BatteryCommander.Web.Models.Reports
         public Row PresentForDuty => new Row
         {
             Enlisted = Soldiers.Where(_ => _.IsEnlisted).Where(_ => _.Status == Soldier.SoldierStatus.PresentForDuty).Count(),
-            Officer = Soldiers.Where(_ => _ => _.IsOfficer || _.IsCadet).Where(_ => _.Status == Soldier.SoldierStatus.PresentForDuty).Count()
+            Officer = Soldiers.Where(_ => _.IsOfficer || _.IsCadet).Where(_ => _.Status == Soldier.SoldierStatus.PresentForDuty).Count()
         };
 
         [Display(Name = "Wounded in Action")]
@@ -52,28 +52,28 @@ namespace BatteryCommander.Web.Models.Reports
         public Row OnLeaveOrPass => new Row
         {
             Enlisted = Soldiers.Where(_ => _.IsEnlisted).Where(_ => _.Status == Soldier.SoldierStatus.OnPass).Count(),
-            Officer = Soldiers.Where(_ => _ => _.IsOfficer || _.IsCadet).Where(_ => _.Status == Soldier.SoldierStatus.OnPass).Count()
+            Officer = Soldiers.Where(_ => _.IsOfficer || _.IsCadet).Where(_ => _.Status == Soldier.SoldierStatus.OnPass).Count()
         };
 
         [Display(Name = "Personnel TDY")]
         public Row TDY => new Row
         {
             Enlisted = Soldiers.Where(_ => _.IsEnlisted).Where(_ => _.Status == Soldier.SoldierStatus.TDY).Count(),
-            Officer = Soldiers.Where(_ => _ => _.IsOfficer || _.IsCadet).Where(_ => _.Status == Soldier.SoldierStatus.TDY).Count()
+            Officer = Soldiers.Where(_ => _.IsOfficer || _.IsCadet).Where(_ => _.Status == Soldier.SoldierStatus.TDY).Count()
         };
 
         [Display(Name = "Personnel AWOL")]
         public Row AWOL => new Row
         {
             Enlisted = Soldiers.Where(_ => _.IsEnlisted).Where(_ => _.Status == Soldier.SoldierStatus.AWOL).Count(),
-            Officer = Soldiers.Where(_ => _ => _.IsOfficer || _.IsCadet).Where(_ => _.Status == Soldier.SoldierStatus.AWOL).Count()
+            Officer = Soldiers.Where(_ => _.IsOfficer || _.IsCadet).Where(_ => _.Status == Soldier.SoldierStatus.AWOL).Count()
         };
 
         [Display(Name = "Rear Detachment")]
         public Row RearDetachment => new Row
         {
             Enlisted = Soldiers.Where(_ => _.IsEnlisted).Where(_ => _.Status == Soldier.SoldierStatus.RearDetachment).Count(),
-            Officer = Soldiers.Where(_ => _ => _.IsOfficer || _.IsCadet).Where(_ => _.Status == Soldier.SoldierStatus.RearDetachment).Count()
+            Officer = Soldiers.Where(_ => _.IsOfficer || _.IsCadet).Where(_ => _.Status == Soldier.SoldierStatus.RearDetachment).Count()
         };
 
         [Display(Name = "Replacements Requested")]
