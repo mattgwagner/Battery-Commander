@@ -69,11 +69,11 @@ namespace BatteryCommander.Web.Models
 
                 machine.Configure(EvaluationStatus.Ready_for_Signatures)
                     .Permit(Trigger.Return_to_Rater, EvaluationStatus.At_Rater)
-                    .Permit(Trigger.Signed, EvaluationStatus.Pending_S1_Review);
+                    .Permit(Trigger.Signed, EvaluationStatus.Pending_HQDA_Submission);
 
-                machine.Configure(EvaluationStatus.Pending_S1_Review)
-                    .Permit(Trigger.Return_to_Rater, EvaluationStatus.At_Rater)
-                    .Permit(Trigger.S1_Review_Completed, EvaluationStatus.Pending_HQDA_Submission);
+                //machine.Configure(EvaluationStatus.Pending_S1_Review)
+                    //.Permit(Trigger.Return_to_Rater, EvaluationStatus.At_Rater)
+                    //.Permit(Trigger.S1_Review_Completed, EvaluationStatus.Pending_HQDA_Submission);
 
                 machine.Configure(EvaluationStatus.Pending_HQDA_Submission)
                     .Permit(Trigger.Return_to_Rater, EvaluationStatus.At_Rater)
