@@ -52,19 +52,18 @@
                 {
                     <td>@Html.DisplayFor(_ => soldier.LastApft, "APFT")</td>
                     <td>@Html.DisplayFor(_ => soldier.LastApft.Date)</td>
-                    <td data-sort="@soldier.LastApft.TotalScore">
-                        @Html.DisplayFor(_ => soldier.LastApft.TotalScore)
-
-                        @if (soldier.LastApft.IsAlternateAerobicEvent)
-                        {
-                            <span class="label label-info">Alt. Aerobic</span>
-                        }
-                    </td>
+                    <td data-sort="@soldier.LastApft.TotalScore">@Html.DisplayFor(_ => soldier.LastApft.TotalScore)</td>
                     <td>@Html.DisplayFor(_ => soldier.LastApft.PushUps)</td>
                     <td>@Html.DisplayFor(_ => soldier.LastApft.PushUpScore)</td>
                     <td>@Html.DisplayFor(_ => soldier.LastApft.SitUps)</td>
                     <td>@Html.DisplayFor(_ => soldier.LastApft.SitUpScore)</td>
-                    <td>@Html.DisplayFor(_ => soldier.LastApft.Run)</td>
+                    <td>
+                        @Html.DisplayFor(_ => soldier.LastApft.Run)
+                        @if (soldier.LastApft.IsAlternateAerobicEvent)
+                        {
+                            <span class="label label-info">Alt.</span>
+                        }
+                    </td>
                     <td>@Html.DisplayFor(_ => soldier.LastApft.RunScore)</td>
                 }
                 else
