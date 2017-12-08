@@ -183,7 +183,13 @@
                         <td>@Html.DisplayFor(_ => apft.Date)</td>
                         <td>@Html.DisplayFor(_ => apft.PushUps)</td>
                         <td>@Html.DisplayFor(_ => apft.SitUps)</td>
-                        <td>@Html.DisplayFor(_ => apft.Run)</td>
+                        <td>
+                            @Html.DisplayFor(_ => apft.Run)
+                            @if (apft.IsAlternateAerobicEvent)
+                            {
+                                <span class="label label-info">Alt.</span>
+                            }
+                        </td>
                         <td>@Html.DisplayFor(_ => apft.TotalScore)</td>
                         <td>
                             @if (apft.IsPassing)
