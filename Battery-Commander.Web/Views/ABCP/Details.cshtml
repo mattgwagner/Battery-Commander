@@ -1,5 +1,7 @@
 ﻿@model ABCP
 
+@Html.ActionLink("Back to ABCP", "Index", "ABCP")
+
 @if (Model.RequiresTape && !Model.Measurements.Any())
 {
     <div class="alert alert-danger">

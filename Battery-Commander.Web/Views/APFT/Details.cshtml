@@ -1,5 +1,6 @@
 ﻿@model APFT
 
+@Html.ActionLink("Back to APFT", "Index", "APFT")
 @Html.ActionLink("Edit", "Edit", new { Model.Id }, new { @class = "btn btn-default" })
 
 @if (!Model.IsPassing)
