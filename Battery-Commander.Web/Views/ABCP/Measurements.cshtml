@@ -1,5 +1,17 @@
 ﻿@model ABCP
 
+@{
+    if(!Model.Measurements.Any())
+    {
+        Model.Measurements = new[]
+        {
+            new ABCP.Measurement{ },
+            new ABCP.Measurement{ },
+            new ABCP.Measurement{ }
+        };
+    }
+}
+
 <panel class="panel">
     <div class="panel-heading">
         <h1>ABCP for @Html.DisplayFor(model => model.Soldier) on @Html.DisplayFor(model => model.Date)</h1>
@@ -22,14 +34,14 @@
                 </tr>
             </thead>
 
-            @for (int i = 0; i < 3; i++)
+            @for (int i = 0; i < Model.Measurements.Count(); i++)
             {
                 <tr>
-                    <td><input name="measurements[@i].Waist" /></td>
-                    <td><input name="measurements[@i].Neck" /></td>
+                    <td><input name="measurements[@i].Waist" value="@Model.Measurements.ElementAt(i).Waist" /></td>
+                    <td><input name="measurements[@i].Neck" value="@Model.Measurements.ElementAt(i).Neck" /></td>
                     @if (Model.Soldier.Gender == Gender.Female)
                     {
-                        <td><input name="measurements[@i].Hips" /></td>
+                        <td><input name="measurements[@i].Hips" value="@Model.Measurements.ElementAt(i).Hips" /></td>
                     }
                 </tr>
             }
