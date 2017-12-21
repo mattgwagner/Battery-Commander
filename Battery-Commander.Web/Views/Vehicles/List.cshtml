@@ -19,151 +19,155 @@
     </h4>
 </div>
 
-<table class="table table-striped display nowrap" width="100%" id="dt">
-    <thead>
-        <tr>
-            <th data-priority="1">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Status)</th>
-            <th data-priority="10001">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Unit)</th>
-            <th data-priority="1">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Bumper)</th>
-            <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Type)</th>
-            <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Seats)</th>
-            <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Nomenclature)</th>
-            <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Registration)</th>
-            <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Serial)</th>
-            <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().LIN)</th>
-            <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Driver)</th>
-            <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().A_Driver)</th>
-            <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().HasJBCP)</th>
-            <th data-priority="2">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Location)</th>
-            <th data-priority="2">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Notes)</th>
-            <th></th>
-            <th></th>
-        </tr>
-    </thead>
+<div id="vehicle-list">
 
-    <tbody>
-        @foreach (var vehicle in Model.Vehicles)
-        {
+    <table class="table table-striped display nowrap" width="100%" id="dt">
+        <thead>
             <tr>
-                <td>
-                    <span class="update-status" data-vehicle="@vehicle.Id" data-status="@((int)vehicle.Status)" data-notes="@vehicle.Notes" data-location="@vehicle.Location" data-sort="@((int)vehicle.Status)">
-                        @Html.DisplayFor(_ => vehicle, "VehicleStatus")
-                    </span>
-                    @if (vehicle.HasFuelCard)
-                    {
-                        <span class="label label-primary">GC</span>
-                    }
-                    @if (vehicle.HasTowBar)
-                    {
-                        <span class="label label-primary">TB</span>
-                    }
-                </td>
-                <td>@Html.DisplayFor(_ => vehicle.Unit)</td>
-                <td>@Html.DisplayFor(_ => vehicle)</td>
-                <td>@Html.DisplayFor(_ => vehicle.Type)</td>
-                <td>@Html.DisplayFor(_ => vehicle.Seats)</td>
-                <td>
-                    @if (!String.IsNullOrWhiteSpace(vehicle.Nomenclature))
-                    {
-                        <a href="@vehicle.GoogleSearchUrl" target="_blank">@vehicle.Nomenclature</a>
-                    }
-                </td>
-                <td>@Html.DisplayFor(_ => vehicle.Registration)</td>
-                <td>@Html.DisplayFor(_ => vehicle.Serial)</td>
-                <td>@Html.DisplayFor(_ => vehicle.LIN)</td>
-                @if (vehicle.Available)
-                {
-                    <td>
-                        @if (vehicle.DriverId.HasValue)
-                        {
-                            <span class="update-driver" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper" data-driver="@vehicle.DriverId" data-adriver="@vehicle.A_DriverId">@Html.DisplayFor(_ => vehicle.Driver)</span>
-                        }
-                        else
-                        {
-                            <span class="update-driver label label-default" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper" data-driver="@vehicle.DriverId" data-adriver="@vehicle.A_DriverId">(Empty)</span>
-                        }
-                    </td>
-                    <td>
-                        @if (vehicle.A_DriverId.HasValue)
-                        {
-                            <span class="update-driver" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper" data-driver="@vehicle.DriverId" data-adriver="@vehicle.A_DriverId">@Html.DisplayFor(_ => vehicle.A_Driver)</span>
-                        }
-                        else
-                        {
-                            <span class="update-driver label label-default" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper" data-driver="@vehicle.DriverId" data-adriver="@vehicle.A_DriverId">(Empty)</span>
-                        }
-                    </td>
-                }
-                else
-                {
-                    <td></td>
-                    <td></td>
-                }
-                <td>
-                    @if (vehicle.HasJBCP)
-                    {
-                        <span class="label label-default">JBC-P</span>
-                    }
-                </td>
-                <td class="update-status">@Html.DisplayFor(_ => vehicle, "VehicleLocation")</td>
-                <td>
-                    <span class="update-status" data-vehicle="@vehicle.Id" data-status="@((int)vehicle.Status)" data-notes="@vehicle.Notes">
-                        @Html.DisplayFor(_ => vehicle.Notes)
-                    </span>
-                </td>
-                <td>@Html.ActionLink("Edit", "Edit", new { vehicle.Id })</td>
-                <td></td>
+                <th data-priority="1">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Status)</th>
+                <th data-priority="10001">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Unit)</th>
+                <th data-priority="1">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Bumper)</th>
+                <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Type)</th>
+                <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Seats)</th>
+                <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Nomenclature)</th>
+                <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Registration)</th>
+                <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Serial)</th>
+                <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().LIN)</th>
+                <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Driver)</th>
+                <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().A_Driver)</th>
+                <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().HasJBCP)</th>
+                <th data-priority="2">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Location)</th>
+                <th data-priority="2">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Notes)</th>
+                <th></th>
+                <th></th>
             </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var vehicle in Model.Vehicles)
+            {
+                <tr>
+                    <td>
+                        <span class="update-status" data-vehicle="@vehicle.Id" data-status="@((int)vehicle.Status)" data-notes="@vehicle.Notes" data-location="@vehicle.Location" data-sort="@((int)vehicle.Status)">
+                            @Html.DisplayFor(_ => vehicle, "VehicleStatus")
+                        </span>
+                        @if (vehicle.HasFuelCard)
+                        {
+                            <span class="label label-primary">GC</span>
+                        }
+                        @if (vehicle.HasTowBar)
+                        {
+                            <span class="label label-primary">TB</span>
+                        }
+                    </td>
+                    <td>@Html.DisplayFor(_ => vehicle.Unit)</td>
+                    <td>@Html.DisplayFor(_ => vehicle)</td>
+                    <td>@Html.DisplayFor(_ => vehicle.Type)</td>
+                    <td>@Html.DisplayFor(_ => vehicle.Seats)</td>
+                    <td>
+                        @if (!String.IsNullOrWhiteSpace(vehicle.Nomenclature))
+                        {
+                            <a href="@vehicle.GoogleSearchUrl" target="_blank">@vehicle.Nomenclature</a>
+                        }
+                    </td>
+                    <td>@Html.DisplayFor(_ => vehicle.Registration)</td>
+                    <td>@Html.DisplayFor(_ => vehicle.Serial)</td>
+                    <td>@Html.DisplayFor(_ => vehicle.LIN)</td>
+                    @if (vehicle.Available)
+                {
+                        <td>
+                            @if (vehicle.DriverId.HasValue)
+                            {
+                                <span class="update-driver" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper" data-driver="@vehicle.DriverId" data-adriver="@vehicle.A_DriverId">@Html.DisplayFor(_ => vehicle.Driver)</span>
+                            }
+                            else
+                            {
+                                <span class="update-driver label label-default" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper" data-driver="@vehicle.DriverId" data-adriver="@vehicle.A_DriverId">(Empty)</span>
+                            }
+                        </td>
+                        <td>
+                            @if (vehicle.A_DriverId.HasValue)
+                            {
+                                <span class="update-driver" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper" data-driver="@vehicle.DriverId" data-adriver="@vehicle.A_DriverId">@Html.DisplayFor(_ => vehicle.A_Driver)</span>
+                            }
+                            else
+                            {
+                                <span class="update-driver label label-default" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper" data-driver="@vehicle.DriverId" data-adriver="@vehicle.A_DriverId">(Empty)</span>
+                            }
+                        </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                        <td></td>
+                    }
+                    <td>
+                        @if (vehicle.HasJBCP)
+                        {
+                            <span class="label label-default">JBC-P</span>
+                        }
+                    </td>
+                    <td class="update-status">@Html.DisplayFor(_ => vehicle, "VehicleLocation")</td>
+                    <td>
+                        <span class="update-status" data-vehicle="@vehicle.Id" data-status="@((int)vehicle.Status)" data-notes="@vehicle.Notes">
+                            @Html.DisplayFor(_ => vehicle.Notes)
+                        </span>
+                    </td>
+                    <td>@Html.ActionLink("Edit", "Edit", new { vehicle.Id })</td>
+                    <td></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <form method="post" action="@Url.Action("Reset", "Vehicles")">
+        @Html.AntiForgeryToken()
+        <button class="btn btn-danger btn-xs">Reset PAX</button>
+    </form>
+
+    <div style="display:none" id="set-driver" title="Update Driver/A-Driver">
+        @using (Html.BeginForm("SetDriver", "Vehicles", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            <input id="vehicleId" name="vehicleId" type="hidden" />
+
+            <div class="form-group form-group-lg">
+                @Html.Label("Driver")
+                <select id="driverId" data-bind="options: soldiers, optionsText: 'Text', optionsValue: 'Value', optionsCaption: 'Choose a Driver'"class="select2"></select>
+            </div>
+
+            <div class="form-group form-group-lg">
+                @Html.Label("A-Driver")
+                <select id="adriverId" data-bind="options: soldiers, optionsText: 'Text', optionsValue: 'Value', optionsCaption: 'Choose an A-Driver'" class="select2"></select>
+            </div>
+
+            <button type="submit" id="save">Save</button>
         }
-    </tbody>
-</table>
+    </div>
 
-<form method="post" action="@Url.Action("Reset", "Vehicles")">
-    @Html.AntiForgeryToken()
-    <button class="btn btn-danger btn-xs">Reset PAX</button>
-</form>
+    <div style="display:none" id="set-status" title="Update Vehicle Status">
+        @using (Html.BeginForm("SetStatus", "Vehicles", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            <input id="vehicleId" name="vehicleId" type="hidden" />
 
-<div style="display:none" id="set-driver" title="Update Driver/A-Driver">
-    @using (Html.BeginForm("SetDriver", "Vehicles", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-    {
-        <input id="vehicleId" name="vehicleId" type="hidden" />
+            <div class="form-group form-group-lg">
+                @Html.Label("Status")
+                @Html.DropDownList("status", Html.GetEnumSelectList<Vehicle.VehicleStatus>())
+            </div>
 
-        <div class="form-group form-group-lg">
-            @Html.Label("Driver")
-            @Html.DropDownList("driverId", Model.Soldiers, "-- Select Driver --", new { @class = "select2" })
-        </div>
+            <div class="form-group form-group-lg">
+                @Html.Label("Location")
+                @Html.DropDownList("location", Html.GetEnumSelectList<Vehicle.VehicleLocation>())
+            </div>
 
-        <div class="form-group form-group-lg">
-            @Html.Label("A-Driver")
-            @Html.DropDownList("adriverId", Model.Soldiers, "-- Select A-Driver --", new { @class = "select2" })
-        </div>
+            <div class="form-group form-group-lg">
+                @Html.Label("Notes")
+                @Html.TextArea("notes")
+            </div>
 
-        <button type="submit" id="save">Save</button>
-    }
-</div>
+            <button type="submit" id="save">Save</button>
+        }
+    </div>
 
-<div style="display:none" id="set-status" title="Update Vehicle Status">
-    @using (Html.BeginForm("SetStatus", "Vehicles", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-    {
-        <input id="vehicleId" name="vehicleId" type="hidden" />
-
-        <div class="form-group form-group-lg">
-            @Html.Label("Status")
-            @Html.DropDownList("status", Html.GetEnumSelectList<Vehicle.VehicleStatus>())
-        </div>
-
-        <div class="form-group form-group-lg">
-            @Html.Label("Location")
-            @Html.DropDownList("location", Html.GetEnumSelectList<Vehicle.VehicleLocation>())
-        </div>
-
-        <div class="form-group form-group-lg">
-            @Html.Label("Notes")
-            @Html.TextArea("notes")
-        </div>
-
-        <button type="submit" id="save">Save</button>
-    }
 </div>
 
 @section Scripts{
@@ -190,6 +194,14 @@
                     modal: true
                 });
             });
+
+            var viewModel = {
+                soldiers: ko.mapping.fromJSON('@Html.Raw(JsonConvert.SerializeObject(Model.Soldiers))')
+            };
+
+            window.viewModel = viewModel;
+
+            ko.applyBindings(viewModel, document.getElementById('vehicle-list'));
         });
     </script>
 }
