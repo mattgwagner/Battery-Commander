@@ -60,6 +60,10 @@
                     {
                         <span class="label label-default">Due in @Html.DisplayFor(_ => evaluation.DelinquencyHumanized)</span>
                     }
+                    else if (evaluation.IsCompleted)
+                    {
+                        <span class="label label-success">Completed</span>
+                    }
                     else
                     {
                         <span class="label label-danger">Overdue @Html.DisplayFor(_ => evaluation.DelinquencyHumanized)</span>
