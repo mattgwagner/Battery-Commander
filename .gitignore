@@ -109,3 +109,4 @@ appsettings.*.json
 /.vs
 /output
 /Battery-Commander.Web/logs
+Battery-Commander.Web/Data.db

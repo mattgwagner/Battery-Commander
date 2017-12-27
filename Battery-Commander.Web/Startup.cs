@@ -26,9 +26,7 @@ namespace BatteryCommander.Web
         public static String APP_INSIGHTS_KEY = "66d7081f-e4a1-421f-b57a-38656917ee3d";
 
         private static Boolean IsDevelopment;
-
-        private static String ContentRoot;
-
+        
         public Startup(IHostingEnvironment env)
         {
             Log.Logger = new LoggerConfiguration()
@@ -44,7 +42,6 @@ namespace BatteryCommander.Web
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
-            ContentRoot = env.ContentRootPath;
             IsDevelopment = env.IsDevelopment();
         }
 
@@ -160,7 +157,7 @@ namespace BatteryCommander.Web
 
                 c.SwaggerDoc(API_Version, new Info { Title = API_Name, Version = API_Version });
 
-                c.IncludeXmlComments(Path.Combine(ContentRoot, "BatteryCommander.Web.xml"));
+                c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "BatteryCommander.Web.xml"));
             });
         }
 
