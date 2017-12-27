@@ -8,8 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Microsoft.Extensions.PlatformAbstractions;
 using Newtonsoft.Json.Converters;
 using Serilog;
 using Swashbuckle.AspNetCore.Swagger;
@@ -53,8 +51,101 @@ namespace BatteryCommander.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Add functionality to inject IOptions<T>
+            services.AddOptions();
+
+            // Add the Auth0 Settings object so it can be injected
+            services.Configure<Auth0Settings>(Configuration.GetSection("Auth0"));
+
+            var auth0Settings = new Auth0Settings { };
+
+            Configuration.GetSection("Auth0").Bind(auth0Settings);
+
             // Add authentication services
-            services.AddAuthentication(options => options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme);
+
+            services
+                .AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                })
+                .AddCookie(o => o.LoginPath = new PathString("/Home/Login"))
+                .AddOpenIdConnect("Auth0", options =>
+                {
+                    // Set the authority to your Auth0 Domain
+                    options.Authority = $"https://{auth0Settings.Domain}";
+
+                    // Configure the Auth0 Client ID and Client Secret
+                    options.ClientId = auth0Settings.ClientId;
+                    options.ClientSecret = auth0Settings.ClientSecret;
+
+                    // Do not automatically authenticate and challenge
+                    //options.AutomaticAuthenticate = false;
+                    //options.AutomaticChallenge = false;
+
+                    // Set response type to code
+                    options.ResponseType = "code";
+
+                    // Configure the scope
+                    options.Scope.Clear();
+                    options.Scope.Add("openid");
+
+                    // Set the callback path, so Auth0 will call back to http://localhost:5000/signin-auth0
+                    // Also ensure that you have added the URL as an Allowed Callback URL in your Auth0 dashboard
+                    options.CallbackPath = new PathString("/signin-auth0");
+
+                    // Configure the Claims Issuer to be Auth0
+                    options.ClaimsIssuer = "Auth0";
+
+                    options.Events = new OpenIdConnectEvents
+                    {
+                        OnTicketReceived = (context) =>
+                        {
+                            var identity = context.Principal.Identity as ClaimsIdentity;
+
+                            if (identity != null)
+                            {
+                                var name = identity.FindFirst("name");
+
+                                if (name != null)
+                                {
+                                    identity.AddClaim(new Claim(ClaimTypes.Name, name.Value));
+                                }
+                            }
+
+                            return Task.CompletedTask;
+                        },
+
+                        OnRedirectToIdentityProviderForSignOut = (context) =>
+                        {
+                            var logoutUri = $"https://{auth0Settings.Domain}/v2/logout?client_id={auth0Settings.ClientId}";
+
+                            var postLogoutUri = context.Properties.RedirectUri;
+                            if (!string.IsNullOrEmpty(postLogoutUri))
+                            {
+                                if (postLogoutUri.StartsWith("/"))
+                                {
+                                    // transform to absolute
+                                    var request = context.Request;
+                                    postLogoutUri = request.Scheme + "://" + request.Host + request.PathBase + postLogoutUri;
+                                }
+                                logoutUri += $"&returnTo={ Uri.EscapeDataString(postLogoutUri) }";
+                            }
+
+                            context.Response.Redirect(logoutUri);
+                            context.HandleResponse();
+
+                            return Task.CompletedTask;
+                        }
+                    };
+                })
+                .AddJwtBearer(o =>
+                {
+                    o.Authority = $"https://{auth0Settings.Domain}";
+                    o.Audience = auth0Settings.ApiIdentifier;
+                    o.RequireHttpsMetadata = !IsDevelopment;
+                });
 
             // Add framework services.
             services.AddMvc(options =>
@@ -72,9 +163,6 @@ namespace BatteryCommander.Web
             // Add functionality to inject IOptions<T>
             services.AddOptions();
 
-            // Add the Auth0 Settings object so it can be injected
-            services.Configure<Auth0Settings>(Configuration.GetSection("Auth0"));
-
             // Add the Twilio settings so it can be injected
             services.Configure<TwilioSettings>(Configuration.GetSection("Twilio"));
 
@@ -87,12 +175,12 @@ namespace BatteryCommander.Web
 
                 c.SwaggerDoc(API_Version, new Info { Title = API_Name, Version = API_Version });
 
-                c.IncludeXmlComments(Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "BatteryCommander.Web.xml"));
+                c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "BatteryCommander.Web.xml"));
             });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IOptions<Auth0Settings> auth0Settings, Database db)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, Database db)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddSerilog();
@@ -107,13 +195,6 @@ namespace BatteryCommander.Web
 
             app.UseStaticFiles();
 
-            app.UseJwtBearerAuthentication(new JwtBearerOptions
-            {
-                Authority = $"https://{auth0Settings.Value.Domain}",
-                Audience = auth0Settings.Value.ApiIdentifier,
-                RequireHttpsMetadata = !env.IsDevelopment()
-            });
-
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 
@@ -123,87 +204,7 @@ namespace BatteryCommander.Web
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", API_Name);
             });
 
-            app.UseCookieAuthentication(new CookieAuthenticationOptions
-            {
-                AutomaticChallenge = true,
-                LoginPath = new PathString("/Home/Login")
-            });
-
-            var options = new OpenIdConnectOptions("Auth0")
-            {
-                // Set the authority to your Auth0 Domain
-                Authority = $"https://{auth0Settings.Value.Domain}",
-
-                // Configure the Auth0 Client ID and Client Secret
-                ClientId = auth0Settings.Value.ClientId,
-                ClientSecret = auth0Settings.Value.ClientSecret,
-
-                // Do not automatically authenticate and challenge
-                AutomaticAuthenticate = false,
-                AutomaticChallenge = false,
-
-                // Set response type to code
-                ResponseType = "code",
-
-                // Set the callback path, so Auth0 will call back to http://localhost:5000/signin-auth0
-                // Also ensure that you have added the URL as an Allowed Callback URL in your Auth0 dashboard
-                CallbackPath = new PathString("/signin-auth0"),
-
-                // Configure the Claims Issuer to be Auth0
-                ClaimsIssuer = "Auth0",
-
-                // Saves tokens to the AuthenticationProperties
-                SaveTokens = true,
-
-                Events = new OpenIdConnectEvents
-                {
-                    OnTicketReceived = (context) =>
-                    {
-                        var identity = context.Principal.Identity as ClaimsIdentity;
-
-                        if (identity != null)
-                        {
-                            var name = identity.FindFirst("name");
-
-                            if (name != null)
-                            {
-                                identity.AddClaim(new Claim(ClaimTypes.Name, name.Value));
-                            }
-                        }
-
-                        return Task.CompletedTask;
-                    },
-
-                    OnRedirectToIdentityProviderForSignOut = (context) =>
-                    {
-                        var logoutUri = $"https://{auth0Settings.Value.Domain}/v2/logout?client_id={auth0Settings.Value.ClientId}";
-
-                        var postLogoutUri = context.Properties.RedirectUri;
-                        if (!string.IsNullOrEmpty(postLogoutUri))
-                        {
-                            if (postLogoutUri.StartsWith("/"))
-                            {
-                                // transform to absolute
-                                var request = context.Request;
-                                postLogoutUri = request.Scheme + "://" + request.Host + request.PathBase + postLogoutUri;
-                            }
-                            logoutUri += $"&returnTo={ Uri.EscapeDataString(postLogoutUri) }";
-                        }
-
-                        context.Response.Redirect(logoutUri);
-                        context.HandleResponse();
-
-                        return Task.CompletedTask;
-                    }
-                }
-            };
-
-            options.Scope.Clear();
-            options.Scope.Add("openid");
-            options.Scope.Add("name");
-            options.Scope.Add("email");
-
-            app.UseOpenIdConnectAuthentication(options);
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
