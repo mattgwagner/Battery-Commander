@@ -204,6 +204,8 @@ namespace BatteryCommander.Web
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", API_Name);
             });
 
+            app.UseAuthentication();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
