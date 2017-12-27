@@ -17,10 +17,7 @@ namespace BatteryCommander.Web.Services
         {
             var email = Get_Email(user);
 
-            if(String.IsNullOrWhiteSpace(email))
-            {
-                return null;
-            }
+            if (String.IsNullOrWhiteSpace(email)) return null;
 
             var soldiers = await SoldierSearchService.Filter(db, new SoldierSearchService.Query { Email = email });
 
