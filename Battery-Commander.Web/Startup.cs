@@ -73,6 +73,8 @@ namespace BatteryCommander.Web
                 .AddCookie(o => o.LoginPath = new PathString("/Home/Login"))
                 .AddOpenIdConnect("Auth0", options =>
                 {
+                    options.GetClaimsFromUserInfoEndpoint = true;
+
                     // Set the authority to your Auth0 Domain
                     options.Authority = $"https://{auth0Settings.Domain}";
 
@@ -106,7 +108,7 @@ namespace BatteryCommander.Web
 
                             if (identity != null)
                             {
-                                var name = identity.FindFirst("name");
+                                var name = identity.FindFirst("email");
 
                                 if (name != null)
                                 {
