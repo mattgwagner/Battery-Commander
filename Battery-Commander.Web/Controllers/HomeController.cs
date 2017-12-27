@@ -30,7 +30,7 @@ namespace BatteryCommander.Web.Controllers
         [AllowAnonymous]
         public IActionResult Login()
         {
-            return new ChallengeResult("Auth0", new AuthenticationProperties
+            return new ChallengeResult("Auth0", new Microsoft.AspNetCore.Authentication.AuthenticationProperties
             {
                 RedirectUri = Url.Action(nameof(PrivacyAct))
             });
