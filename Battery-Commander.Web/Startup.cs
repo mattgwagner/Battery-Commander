@@ -13,6 +13,7 @@ using Serilog;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.IO;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace BatteryCommander.Web
@@ -26,7 +27,7 @@ namespace BatteryCommander.Web
         public static String APP_INSIGHTS_KEY = "66d7081f-e4a1-421f-b57a-38656917ee3d";
 
         private static Boolean IsDevelopment;
-        
+
         public Startup(IHostingEnvironment env)
         {
             Log.Logger = new LoggerConfiguration()
@@ -105,6 +106,23 @@ namespace BatteryCommander.Web
 
                     options.Events = new OpenIdConnectEvents
                     {
+                        OnTicketReceived = (context) =>
+                        {
+                            var identity = context.Principal.Identity as ClaimsIdentity;
+
+                            if (identity != null)
+                            {
+                                var name = identity.FindFirst("name");
+
+                                if (name != null)
+                                {
+                                    identity.AddClaim(new Claim(ClaimTypes.Name, name.Value));
+                                }
+                            }
+
+                            return Task.CompletedTask;
+                        },
+
                         OnRedirectToIdentityProviderForSignOut = (context) =>
                         {
                             var logoutUri = $"https://{auth0Settings.Domain}/v2/logout?client_id={auth0Settings.ClientId}";
