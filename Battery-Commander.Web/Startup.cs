@@ -1,6 +1,5 @@
 ﻿using BatteryCommander.Web.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Converters;
 using Serilog;
 using Swashbuckle.AspNetCore.Swagger;
@@ -29,6 +27,8 @@ namespace BatteryCommander.Web
 
         private static Boolean IsDevelopment;
 
+        private static String ContentRoot;
+
         public Startup(IHostingEnvironment env)
         {
             Log.Logger = new LoggerConfiguration()
@@ -44,6 +44,7 @@ namespace BatteryCommander.Web
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
+            ContentRoot = env.ContentRootPath;
             IsDevelopment = env.IsDevelopment();
         }
 
@@ -70,6 +71,12 @@ namespace BatteryCommander.Web
                     options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                     options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                     options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(o =>
+                {
+                    o.Authority = $"https://{auth0Settings.Domain}";
+                    o.Audience = auth0Settings.ApiIdentifier;
+                    o.RequireHttpsMetadata = !IsDevelopment;
                 })
                 .AddCookie(o => o.LoginPath = new PathString("/Home/Login"))
                 .AddOpenIdConnect("Auth0", options =>
@@ -140,7 +147,7 @@ namespace BatteryCommander.Web
 
             // Add functionality to inject IOptions<T>
             services.AddOptions();
-            
+
             // Add the Twilio settings so it can be injected
             services.Configure<TwilioSettings>(Configuration.GetSection("Twilio"));
 
@@ -153,12 +160,12 @@ namespace BatteryCommander.Web
 
                 c.SwaggerDoc(API_Version, new Info { Title = API_Name, Version = API_Version });
 
-                c.IncludeXmlComments(Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "BatteryCommander.Web.xml"));
+                c.IncludeXmlComments(Path.Combine(ContentRoot, "BatteryCommander.Web.xml"));
             });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IOptions<Auth0Settings> auth0Settings, Database db)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, Database db)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddSerilog();
@@ -172,13 +179,6 @@ namespace BatteryCommander.Web
             app.UseDeveloperExceptionPage();
 
             app.UseStaticFiles();
-
-            app.UseJwtBearerAuthentication(new JwtBearerOptions
-            {
-                Authority = $"https://{auth0Settings.Value.Domain}",
-                Audience = auth0Settings.Value.ApiIdentifier,
-                RequireHttpsMetadata = !env.IsDevelopment()
-            });
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
