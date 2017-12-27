@@ -50,7 +50,13 @@
                 <td>@Html.DisplayFor(_ => soldier.Unit)</td>
                 @if (soldier.LastApft != null)
                 {
-                    <td>@Html.DisplayFor(_ => soldier.LastApft, "APFT")</td>
+                    <td>
+                        @Html.DisplayFor(_ => soldier.LastApft, "APFT")
+                        @if(!soldier.LastApft.IsPassing)
+                        {
+                            <span class="badge">@(soldier.ConsecutiveApftFailures)x</span>
+                        }
+                    </td>
                     <td>@Html.DisplayFor(_ => soldier.LastApft.Date)</td>
                     <td data-sort="@soldier.LastApft.TotalScore">@Html.DisplayFor(_ => soldier.LastApft.TotalScore)</td>
                     <td>@Html.DisplayFor(_ => soldier.LastApft.PushUps)</td>

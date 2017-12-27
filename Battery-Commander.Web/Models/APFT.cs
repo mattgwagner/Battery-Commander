@@ -14,6 +14,23 @@ namespace BatteryCommander.Web.Models
 
         public virtual APFT LastApft => APFTs?.OrderByDescending(apft => apft.Date).FirstOrDefault();
 
+        public virtual int ConsecutiveApftFailures
+        {
+            get
+            {
+                var count = 0;
+
+                foreach(var apft in APFTs?.OrderByDescending(_ => _.Date))
+                {
+                    if (apft.IsPassing) break;
+
+                    count++;
+                }
+
+                return count;
+            }
+        }
+
         public virtual EventStatus ApftStatus
         {
             get
