@@ -46,7 +46,13 @@
                 <td>@Html.DisplayFor(_ => soldier.Unit)</td>
                 @if (soldier.LastAbcp != null)
                 {
-                    <td>@Html.DisplayFor(_ => soldier.LastAbcp, "ABCP")</td>
+                    <td>
+                        @Html.DisplayFor(_ => soldier.LastAbcp, "ABCP")
+                        @if (!soldier.LastAbcp.IsPassing)
+                        {
+                            <span class="badge">@(soldier.ConsecutiveAbcpFailures)x</span>
+                        }
+                    </td>
                     <td>@Html.DisplayFor(_ => soldier.LastAbcp.Date)</td>
                     <td>@Html.DisplayFor(_ => soldier.LastAbcp.Height)</td>
                     <td>@Html.DisplayFor(_ => soldier.LastAbcp.Weight)</td>

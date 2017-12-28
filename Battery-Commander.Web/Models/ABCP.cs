@@ -15,6 +15,23 @@ namespace BatteryCommander.Web.Models
 
         public virtual ABCP LastAbcp => ABCPs?.OrderByDescending(abcp => abcp.Date).FirstOrDefault();
 
+        public virtual int ConsecutiveAbcpFailures
+        {
+            get
+            {
+                var count = 0;
+
+                foreach (var abcp in ABCPs?.OrderByDescending(_ => _.Date))
+                {
+                    if (abcp.IsPassing) break;
+
+                    count++;
+                }
+
+                return count;
+            }
+        }
+
         public virtual EventStatus AbcpStatus
         {
             get
