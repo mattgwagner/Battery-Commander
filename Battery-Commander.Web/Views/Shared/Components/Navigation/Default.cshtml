@@ -13,29 +13,23 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                
-                @if(Model.Soldier != null)
+
+                @if (Model.Soldier != null)
                 {
                     <li>@Html.RouteLink("My Unit", "Unit.Details", new { id = Model.Soldier.UnitId }, new { @class = "nav-link" })</li>
+                    <li>@Html.RouteLink("My Soldiers", "Soldiers.List", new SoldierSearchService.Query { Unit = Model.Soldier.UnitId }, new { @class = "nav-link" })</li>
                     <li>@Html.RouteLink("My Profile", "Soldier.Details", new { id = Model.Soldier.Id }, new { @class = "nav-link" })</li>
                 }
-     
-                <li><a class="nav-link" asp-controller="Soldiers" asp-action="Index">Soldiers</a></li>
+                else
+                {
+                    <li><a class="nav-link" asp-controller="Soldiers" asp-action="Index">Soldiers</a></li>
+                }
+
                 <li><a class="nav-link" asp-controller="Vehicles" asp-action="Index">Vehicles</a></li>
                 <li><a class="nav-link" asp-controller="SSD" asp-action="Index">SSD</a></li>
                 <li><a class="nav-link" asp-controller="Evaluations" asp-action="Index">Evaluations</a></li>
                 <li><a class="nav-link" asp-controller="APFT" asp-action="Index">APFT</a></li>
                 <li><a class="nav-link" asp-controller="ABCP" asp-action="Index">ABCP</a></li>
-                @*<li><a class="nav-link" asp-controller="DSCA" asp-action="Index">DSCA</a></li>
-                <li><a class="nav-link" asp-controller="IWQ" asp-action="Index">IWQ</a></li>*@
-                @*<li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Reports</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" asp-controller="Reports" asp-action="Red1">RED 1</a>
-                        <a class="dropdown-item" asp-controller="Reports" asp-action="SadPerstat">SAD PERSTAT</a>
-                        <a class="dropdown-item" asp-controller="Reports" asp-action="DscaReady">DSCA Ready</a>
-                    </div>
-                </li>*@
                 <li><a asp-controller="Units" asp-action="Index">Units</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
