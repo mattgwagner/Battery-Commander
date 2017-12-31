@@ -132,9 +132,10 @@ namespace BatteryCommander.Web.Models
                             return SSD_3;
 
                         case Rank.E7:
+                        case Rank.E8:
                             return SSD_4;
 
-                        case Rank.E8:
+                        case Rank.E9:
                             return SSD_5;
 
                         default:
