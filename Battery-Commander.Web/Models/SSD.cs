@@ -188,9 +188,9 @@ namespace BatteryCommander.Web.Models
                     return SSD.SSD_3;
 
                 case Rank.E7:
+                case Rank.E8:
                     return SSD.SSD_4;
 
-                case Rank.E8:
                 case Rank.E9:
                     return SSD.SSD_5;
 
