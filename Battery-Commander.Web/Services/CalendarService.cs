@@ -32,6 +32,7 @@ namespace BatteryCommander.Web.Services
             var evaluations =
                 await db
                 .Evaluations
+                .Include(evaluation => evaluation.Ratee)
                 .Where(evaluation => !evaluation.IsCompleted)
                 .ToListAsync();
 
