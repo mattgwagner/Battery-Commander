@@ -70,7 +70,7 @@ namespace BatteryCommander.Web.Services
             {
                 yield return new Entry
                 {
-                    Description = $"{evaluation.Ratee.Rank} {evaluation.Ratee.LastName} Eval Thru-Date",
+                    Description = $"{evaluation.Ratee.Rank.ShortName()} {evaluation.Ratee.LastName} Eval Thru-Date",
                     Date = evaluation.ThruDate
                 };
             }
@@ -84,7 +84,7 @@ namespace BatteryCommander.Web.Services
                 {
                     yield return new Entry
                     {
-                        Description = $"{soldier.Rank} {soldier.LastName} ETS",
+                        Description = $"{soldier.Rank.ShortName()} {soldier.LastName} ETS",
                         Date = soldier.ETSDate.Value
                     };
                 }
@@ -101,7 +101,7 @@ namespace BatteryCommander.Web.Services
                     {
                         yield return new Entry
                         {
-                            Description = $"{soldier.Rank} {soldier.LastName} Birthday",
+                            Description = $"{soldier.Rank.ShortName()} {soldier.LastName} Birthday",
                             Date = new DateTime(year, soldier.DateOfBirth.Month, soldier.DateOfBirth.Day)
                         };
                     }
