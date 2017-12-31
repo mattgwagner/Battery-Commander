@@ -29,7 +29,7 @@ namespace BatteryCommander.Web.Services
 
             var soldiers = await SoldierSearchService.Filter(db, new SoldierSearchService.Query { Unit = unitId });
 
-            var evaluations = 
+            var evaluations =
                 await db
                 .Evaluations
                 .Where(evaluation => !evaluation.IsCompleted)
@@ -43,15 +43,16 @@ namespace BatteryCommander.Web.Services
                 .AppendLine("VERSION:2.0")
                 .AppendLine("METHOD:PUBLISH");
 
-            foreach (var entry in Generate_For_Birthdays(soldiers))
+            new[]
             {
-                sb = sb.Append(To_Event(entry));
+                Generate_For_Birthdays(soldiers),
+                Generate_For_ETS_Dates(soldiers),
+                Generate_For_Evaluations(evaluations)
             }
-
-            foreach (var entry in Generate_For_Evaluations(evaluations))
-            {
-                sb = sb.Append(To_Event(entry));
-            }
+            .SelectMany(_ => _)
+            .Select(entry => To_Event(entry))
+            .ToList()
+            .ForEach(entry => sb.Append(entry));
 
             sb = sb.AppendLine("END:VCALENDAR");
 
@@ -71,6 +72,21 @@ namespace BatteryCommander.Web.Services
                     Description = $"{evaluation.Ratee.Rank} {evaluation.Ratee.LastName} Eval Thru-Date",
                     Date = evaluation.ThruDate
                 };
+            }
+        }
+
+        private static IEnumerable<Entry> Generate_For_ETS_Dates(IEnumerable<Soldier> soldiers)
+        {
+            foreach (var soldier in soldiers)
+            {
+                if (soldier.ETSDate.HasValue)
+                {
+                    yield return new Entry
+                    {
+                        Description = $"{soldier.Rank} {soldier.LastName} ETS",
+                        Date = soldier.ETSDate.Value
+                    };
+                }
             }
         }
 
