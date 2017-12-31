@@ -1,4 +1,5 @@
 ﻿using BatteryCommander.Web.Models;
+using BatteryCommander.Web.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -45,6 +46,14 @@ namespace BatteryCommander.Web.Controllers
             var mimeType = "text/plain";
 
             return File(data, mimeType);
+        }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> Calendar(int unitId, String apiKey)
+        {
+            var data = await CalendarService.Generate(this.db, unitId, apiKey);
+
+            return File(data, "text/calendar");
         }
     }
 }

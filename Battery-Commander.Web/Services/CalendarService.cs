@@ -15,7 +15,7 @@ namespace BatteryCommander.Web.Services
         private static IEnumerable<int> YearsToGenerate => Enumerable.Range(DateTime.Today.Year, 3);
 
         //[AllowAnonymous, Route("~/Calendar")]
-        public async Task<byte[]> Generate(Database db, int unitId, String apikey)
+        public static async Task<byte[]> Generate(Database db, int unitId, String apikey)
         {
             var unit =
                 await db
