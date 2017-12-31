@@ -62,7 +62,7 @@ namespace BatteryCommander.Web.Services
             return Encoding.UTF8.GetBytes(sb.ToString());
         }
 
-        private IEnumerable<Entry> Generate_For_Evaluations(IEnumerable<Evaluation> evaluations)
+        private static IEnumerable<Entry> Generate_For_Evaluations(IEnumerable<Evaluation> evaluations)
         {
             foreach (var evaluation in evaluations)
             {
@@ -74,7 +74,7 @@ namespace BatteryCommander.Web.Services
             }
         }
 
-        private IEnumerable<Entry> Generate_For_Birthdays(IEnumerable<Soldier> soldiers)
+        private static IEnumerable<Entry> Generate_For_Birthdays(IEnumerable<Soldier> soldiers)
         {
             foreach (var soldier in soldiers)
             {
