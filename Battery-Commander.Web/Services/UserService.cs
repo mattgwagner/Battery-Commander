@@ -55,7 +55,7 @@ namespace BatteryCommander.Web.Services
             return Handler.WriteToken(token);
         }
 
-        internal static readonly TimeSpan Expiry = TimeSpan.FromDays(100);
+        internal static readonly TimeSpan Expiry = TimeSpan.FromDays(1000);
 
         internal static readonly String TokenIssuer = "red-leg-dev.com";
 
