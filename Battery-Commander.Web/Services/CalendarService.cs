@@ -20,7 +20,7 @@ namespace BatteryCommander.Web.Services
         {
             var apiKey = UserService.Generate_Token(user);
 
-            return urlHelper.RouteUrl("Unit.Calendar", new { unitId, apiKey });
+            return urlHelper.Action("Calendar", "Units", new { unitId, apiKey });
         }
 
         public static async Task<byte[]> Generate(Database db, int unitId, String apikey)
