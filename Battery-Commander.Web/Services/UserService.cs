@@ -36,7 +36,8 @@ namespace BatteryCommander.Web.Services
             var user = Handler.ValidateToken(apiKey, new TokenValidationParameters
             {
                 IssuerSigningKey = Key,
-                ValidIssuer = TokenIssuer
+                ValidIssuer = TokenIssuer,
+                ValidateAudience = false
             },
             out token);
 
