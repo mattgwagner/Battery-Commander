@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -61,6 +62,14 @@ namespace BatteryCommander.Web.Controllers
             await db.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
+        }
+
+        [AllowAnonymous, Route("Calendar")]
+        public async Task<IActionResult> Calendar(int unitId, String apiKey)
+        {
+            var data = await CalendarService.Generate(this.db, unitId, apiKey);
+
+            return File(data, "text/calendar");
         }
 
         public static async Task<IEnumerable<SelectListItem>> GetDropDownList(Database db)

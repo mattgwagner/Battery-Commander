@@ -31,9 +31,14 @@ namespace BatteryCommander.Web.Services
 
         public static Boolean Try_Validate_Token(String apiKey)
         {
-            // TODO Add actual validation here
+            SecurityToken token;
 
-            SecurityToken token = Handler.ReadJwtToken(apiKey);
+            var user = Handler.ValidateToken(apiKey, new TokenValidationParameters
+            {
+                IssuerSigningKey = Key,
+                ValidIssuer = TokenIssuer
+            },
+            out token);
 
             return true;
         }
