@@ -34,6 +34,8 @@ namespace BatteryCommander.Web.Controllers
 
             var model = units.Where(_ => _.Id == id).First();
 
+            ViewBag.CalendarUrl = CalendarService.GenerateUrl(User, Url, id);
+
             return View(model);
         }
 

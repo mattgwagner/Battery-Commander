@@ -1,6 +1,5 @@
 ﻿using BatteryCommander.Web.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,7 +16,7 @@ namespace BatteryCommander.Web.Services
 
         private static IEnumerable<int> YearsToGenerate => Enumerable.Range(DateTime.Today.Year, 3);
 
-        public static String GenerateUrl(ClaimsPrincipal user, UrlHelper urlHelper, int unitId)
+        public static String GenerateUrl(ClaimsPrincipal user, IUrlHelper urlHelper, int unitId)
         {
             var apiKey = UserService.Generate_Token(user);
 
