@@ -47,7 +47,7 @@ namespace BatteryCommander.Web.Services
         public static String Generate_Token(ClaimsPrincipal user)
         {
             var token = new JwtSecurityToken(
-                claims: new[] { new Claim("name", Get_Email(user)},
+                claims: new[] { new Claim("name", Get_Email(user))},
                 expires: DateTime.Today.Add(Expiry),
                 signingCredentials: Credential);
 
