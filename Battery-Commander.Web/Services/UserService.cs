@@ -60,7 +60,7 @@ namespace BatteryCommander.Web.Services
 
         internal static readonly JwtSecurityTokenHandler Handler = new JwtSecurityTokenHandler();
 
-        internal static readonly String InternalKey = "change-me";
+        internal static readonly String InternalKey = "change-me-to-something-secure";
 
         internal static readonly SymmetricSecurityKey Key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(InternalKey));
 
