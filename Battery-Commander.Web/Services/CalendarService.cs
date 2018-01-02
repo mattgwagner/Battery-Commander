@@ -23,13 +23,8 @@ namespace BatteryCommander.Web.Services
             return urlHelper.Action("Calendar", "Units", new { unitId, apiKey });
         }
 
-        public static async Task<byte[]> Generate(Database db, int unitId, String apikey)
+        public static async Task<byte[]> Generate(Database db, int unitId)
         {
-            if (!UserService.Try_Validate_Token(apikey))
-            {
-                throw new Exception("Unable to validate apiKey");
-            }
-
             // Get the raw data
 
             var unit =

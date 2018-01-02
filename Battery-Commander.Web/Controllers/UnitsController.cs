@@ -4,9 +4,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Controllers
@@ -69,7 +71,16 @@ namespace BatteryCommander.Web.Controllers
         [AllowAnonymous, Route("Calendar")]
         public async Task<IActionResult> Calendar(int unitId, String apiKey)
         {
-            var data = await CalendarService.Generate(this.db, unitId, apiKey);
+            ClaimsPrincipal user;
+
+            if (!UserService.Try_Validate_Token(apiKey, out user))
+            {
+                throw new Exception("Unable to validate apiKey");
+            }
+
+            Log.Information("Generating Calendar Feed for {User}", UserService.Get_Email(user));
+
+            var data = await CalendarService.Generate(this.db, unitId);
 
             return File(data, "text/calendar");
         }

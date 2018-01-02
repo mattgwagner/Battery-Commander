@@ -29,11 +29,11 @@ namespace BatteryCommander.Web.Services
             return soldiers.SingleOrDefault();
         }
 
-        public static Boolean Try_Validate_Token(String apiKey)
+        public static Boolean Try_Validate_Token(String apiKey, out ClaimsPrincipal user)
         {
             SecurityToken token;
 
-            var user = Handler.ValidateToken(apiKey, new TokenValidationParameters
+            user = Handler.ValidateToken(apiKey, new TokenValidationParameters
             {
                 IssuerSigningKey = Key,
                 ValidIssuer = TokenIssuer,
