@@ -36,7 +36,7 @@ namespace BatteryCommander.Web.Services
             user = Handler.ValidateToken(apiKey, new TokenValidationParameters
             {
                 IssuerSigningKey = Key,
-                ValidIssuer = TokenIssuer,
+                ValidateIssuer = false,
                 ValidateAudience = false
             },
             out token);
@@ -47,8 +47,7 @@ namespace BatteryCommander.Web.Services
         public static String Generate_Token(ClaimsPrincipal user)
         {
             var token = new JwtSecurityToken(
-                issuer: TokenIssuer,
-                claims: user.Claims,
+                claims: new[] { new Claim("name", Get_Email(user)},
                 expires: DateTime.Today.Add(Expiry),
                 signingCredentials: Credential);
 
@@ -56,8 +55,6 @@ namespace BatteryCommander.Web.Services
         }
 
         internal static readonly TimeSpan Expiry = TimeSpan.FromDays(1000);
-
-        internal static readonly String TokenIssuer = "red-leg-dev.com";
 
         internal static readonly JwtSecurityTokenHandler Handler = new JwtSecurityTokenHandler();
 
