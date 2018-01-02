@@ -48,7 +48,7 @@ namespace BatteryCommander.Web.Controllers
             return File(data, mimeType);
         }
 
-        [AllowAnonymous]
+        [AllowAnonymous, Route("Calendar")]
         public async Task<IActionResult> Calendar(int unitId, String apiKey)
         {
             var data = await CalendarService.Generate(this.db, unitId, apiKey);

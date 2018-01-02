@@ -1,8 +1,11 @@
 ﻿using BatteryCommander.Web.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,18 +17,27 @@ namespace BatteryCommander.Web.Services
 
         private static IEnumerable<int> YearsToGenerate => Enumerable.Range(DateTime.Today.Year, 3);
 
-        //[AllowAnonymous, Route("~/Calendar")]
+        public static String GenerateUrl(ClaimsPrincipal user, UrlHelper urlHelper, int unitId)
+        {
+            var apiKey = UserService.Generate_Token(user);
+
+            return urlHelper.RouteUrl("Unit.Calendar", new { unitId, apiKey });
+        }
+
         public static async Task<byte[]> Generate(Database db, int unitId, String apikey)
         {
+            if (!UserService.Try_Validate_Token(apikey))
+            {
+                throw new Exception("Unable to validate apiKey");
+            }
+
+            // Get the raw data
+
             var unit =
                 await db
                 .Units
                 .Where(_ => _.Id == unitId)
                 .SingleOrDefaultAsync();
-
-            // TODO Verify API key
-
-            // Get the raw data
 
             var soldiers = await SoldierSearchService.Filter(db, new SoldierSearchService.Query { Unit = unitId });
 

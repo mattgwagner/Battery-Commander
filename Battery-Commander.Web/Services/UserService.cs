@@ -1,7 +1,10 @@
 ﻿using BatteryCommander.Web.Models;
+using Microsoft.IdentityModel.Tokens;
 using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Services
@@ -26,6 +29,38 @@ namespace BatteryCommander.Web.Services
             return soldiers.SingleOrDefault();
         }
 
-        private static String Get_Email(ClaimsPrincipal user) => user?.Identity?.Name;
+        public static Boolean Try_Validate_Token(String apiKey)
+        {
+            // TODO Add actual validation here
+
+            SecurityToken token = Handler.ReadJwtToken(apiKey);
+
+            return true;
+        }
+
+        public static String Generate_Token(ClaimsPrincipal user)
+        {
+            var token = new JwtSecurityToken(
+                issuer: TokenIssuer,
+                claims: user.Claims,
+                expires: DateTime.Today.Add(Expiry),
+                signingCredentials: Credential);
+
+            return Handler.WriteToken(token);
+        }
+
+        internal static readonly TimeSpan Expiry = TimeSpan.FromDays(100);
+
+        internal static readonly String TokenIssuer = "red-leg-dev.com";
+
+        internal static readonly JwtSecurityTokenHandler Handler = new JwtSecurityTokenHandler();
+
+        internal static readonly String InternalKey = "change-me";
+
+        internal static readonly SymmetricSecurityKey Key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(InternalKey));
+
+        internal static readonly SigningCredentials Credential = new SigningCredentials(Key, SecurityAlgorithms.HmacSha256);
+
+        internal static String Get_Email(ClaimsPrincipal user) => user?.Identity?.Name;
     }
 }
