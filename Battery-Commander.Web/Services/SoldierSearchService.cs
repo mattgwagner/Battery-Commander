@@ -33,14 +33,15 @@ namespace BatteryCommander.Web.Services
 
         public static async Task<IEnumerable<Soldier>> Filter(Database db, Query query)
         {
-            IQueryable<Soldier> soldiers =
-                db
+            IEnumerable<Soldier> soldiers =
+                await db
                 .Soldiers
                 .Include(s => s.Supervisor)
                 .Include(s => s.SSDSnapshots)
                 .Include(s => s.ABCPs)
                 .Include(s => s.APFTs)
-                .Include(s => s.Unit);
+                .Include(s => s.Unit)
+                .ToListAsync();
 
             if (query.Id.HasValue)
             {
@@ -129,10 +130,10 @@ namespace BatteryCommander.Web.Services
             }
 
             return
-                await soldiers
+                soldiers
                 .OrderBy(soldier => soldier.LastName)
                 .ThenBy(soldier => soldier.FirstName)
-                .ToListAsync();
+                .ToList();
         }
 
         public class Query
