@@ -2,6 +2,7 @@
 using BatteryCommander.Web.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -10,12 +11,14 @@ namespace BatteryCommander.Web.Controllers.API
     [Route("api/[controller]"), Authorize]
     public class UsersController : Controller
     {
+        private readonly IMemoryCache cache;
         private readonly Database db;
 
-        private async Task<Soldier> CurrentUser() => await UserService.FindAsync(db, User);
+        private async Task<Soldier> CurrentUser() => await UserService.FindAsync(db, User, cache);
 
-        public UsersController(Database db)
+        public UsersController(IMemoryCache cache, Database db)
         {
+            this.cache = cache;
             this.db = db;
         }
 
