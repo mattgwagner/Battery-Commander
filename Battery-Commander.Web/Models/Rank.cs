@@ -145,6 +145,7 @@ namespace BatteryCommander.Web.Models
                 case Rank.E6:
                 case Rank.E7:
                 case Rank.E8:
+                case Rank.E9:
                     return true;
 
                 default:
