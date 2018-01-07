@@ -135,6 +135,7 @@ namespace BatteryCommander.Web.Controllers
                 .Include(_ => _.Rater)
                 .Include(_ => _.SeniorRater)
                 .Include(_ => _.Reviewer)
-                .Include(_ => _.Events);
+                .Include(_ => _.Events)
+                .OrderBy(_ => _.ThruDate);
     }
 }
