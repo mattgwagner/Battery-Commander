@@ -1,4 +1,5 @@
 ﻿using BatteryCommander.Web.Models;
+using BatteryCommander.Web.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,7 +23,8 @@ namespace BatteryCommander.Web.Controllers
         {
             return View("List", new EvaluationListViewModel
             {
-                Evaluations = await Evaluations.Where(_ => !_.IsCompleted).ToListAsync()
+                Evaluations = await Evaluations.Where(_ => !_.IsCompleted).ToListAsync(),
+                Soldiers = await SoldierSearchService.Filter(db, new SoldierSearchService.Query { Ranks = RankExtensions.All().Where(_ => _.IsNCO() || _.IsOfficer()) })
             });
         }
 
@@ -30,7 +32,8 @@ namespace BatteryCommander.Web.Controllers
         {
             return View("List", new EvaluationListViewModel
             {
-                Evaluations = await Evaluations.ToListAsync()
+                Evaluations = await Evaluations.ToListAsync(),
+                Soldiers = await SoldierSearchService.Filter(db, new SoldierSearchService.Query { Ranks = RankExtensions.All().Where(_ => _.IsNCO() || _.IsOfficer()) })
             });
         }
 

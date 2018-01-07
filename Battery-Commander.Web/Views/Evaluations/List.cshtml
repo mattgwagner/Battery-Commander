@@ -25,12 +25,12 @@
 @if (Model.Soldiers_Missing_Evaluations.Any())
 {
     <div class="alert alert-danger">
-        There are @Model.Soldiers_Missing_Evaluations.Count() Soldiers missing upcoming evaluations! Please add one to the system for tracking.
+        The following Soldiers do not have an upcoming evaluation in the system! Please add one to the system for tracking.
 
         <ul>
             @foreach (var soldier in Model.Soldiers_Missing_Evaluations)
             {
-                <li>@Html.DisplayFor(_ => soldier)</li>
+                <li>@Html.ActionLink(soldier.ToString(), "New", "Evaluations", new { soldier = soldier.Id })</li>
             }
         </ul>
     </div>
