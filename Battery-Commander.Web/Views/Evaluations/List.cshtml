@@ -22,6 +22,20 @@
     @Html.ActionLink("Show All", "All", "Evaluations", null, new { @class = "btn btn-default" })
 </div>
 
+@if (Model.Soldiers_Missing_Evaluations.Any())
+{
+    <div class="alert alert-danger">
+        There are @Model.Soldiers_Missing_Evaluations.Count() Soldiers missing upcoming evaluations! Please add one to the system for tracking.
+
+        <ul>
+            @foreach (var soldier in Model.Soldiers_Missing_Evaluations)
+            {
+                <li>@Html.DisplayFor(_ => soldier)</li>
+            }
+        </ul>
+    </div>
+}
+
 <table class="table table-striped display nowrap" id="dt" width="100%">
     <thead>
         <tr>

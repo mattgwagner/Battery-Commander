@@ -9,6 +9,22 @@ namespace BatteryCommander.Web.Models
     {
         public IEnumerable<Evaluation> Evaluations { get; set; } = Enumerable.Empty<Evaluation>();
 
+        public IEnumerable<Soldier> Soldiers { get; set; } = Enumerable.Empty<Soldier>();
+
+        public IEnumerable<Soldier> Soldiers_Missing_Evaluations
+        {
+            get
+            {
+                foreach (var soldier in Soldiers)
+                {
+                    if (!Evaluations.Where(evaluation => !evaluation.IsCompleted).Any(evaluation => evaluation.RateeId == soldier.Id))
+                    {
+                        yield return soldier;
+                    }
+                }
+            }
+        }
+
         [Display(Name = "Delinquent > 60 Days")]
         public int Delinquent => Evaluations.Where(_ => !_.IsCompleted).Where(_ => _.IsDelinquent).Count();
 
