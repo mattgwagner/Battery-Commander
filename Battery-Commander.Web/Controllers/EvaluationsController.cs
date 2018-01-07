@@ -22,17 +22,7 @@ namespace BatteryCommander.Web.Controllers
         {
             return View("List", new EvaluationListViewModel
             {
-                Evaluations =
-                    await db
-                    .Evaluations
-                    .Include(_ => _.Ratee)
-                    .Include(_ => _.Rater)
-                    .Include(_ => _.SeniorRater)
-                    .Include(_ => _.Reviewer)
-                    .Include(_ => _.Events)
-                    .Where(_ => !_.IsCompleted)
-                    .OrderBy(_ => _.ThruDate)
-                    .ToListAsync()
+                Evaluations = await Evaluations.Where(_ => !_.IsCompleted).ToListAsync()
             });
         }
 
@@ -40,22 +30,13 @@ namespace BatteryCommander.Web.Controllers
         {
             return View("List", new EvaluationListViewModel
             {
-                Evaluations =
-                    await db
-                    .Evaluations
-                    .Include(_ => _.Ratee)
-                    .Include(_ => _.Rater)
-                    .Include(_ => _.SeniorRater)
-                    .Include(_ => _.Reviewer)
-                    .Include(_ => _.Events)
-                    .OrderBy(_ => _.ThruDate)
-                    .ToListAsync()
+                Evaluations = await Evaluations.ToListAsync()
             });
         }
 
         public async Task<IActionResult> Details(int id)
         {
-            return View(await Get(db, id));
+            return View(await Evaluations.SingleOrDefaultAsync(_ => _.Id == id););
         }
 
         public async Task<IActionResult> New(int soldier = 0)
@@ -69,7 +50,7 @@ namespace BatteryCommander.Web.Controllers
         {
             ViewBag.Soldiers = await SoldiersController.GetDropDownList(db);
 
-            return View(await Get(db, id));
+            return View(await Evaluations.SingleOrDefaultAsync(_ => _.Id == id););
         }
 
         [HttpPost, ValidateAntiForgeryToken]
@@ -104,7 +85,7 @@ namespace BatteryCommander.Web.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Transition(int id, Evaluation.Trigger trigger)
         {
-            var evaluation = await Get(db, id);
+            var evaluation = await Evaluations.SingleOrDefaultAsync(_ => _.Id == id);
 
             evaluation.Transition(trigger);
 
@@ -122,7 +103,7 @@ namespace BatteryCommander.Web.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Comment(int id, String message)
         {
-            var evaluation = await Get(db, id);
+            var evaluation = await Evaluations.SingleOrDefaultAsync(_ => _.Id == id);
 
             evaluation.Events.Add(new Evaluation.Event
             {
@@ -138,7 +119,7 @@ namespace BatteryCommander.Web.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            var evaluation = await Get(db, id);
+            var evaluation = await Evaluations.SingleOrDefaultAsync(_ => _.Id == id);
 
             db.Evaluations.Remove(evaluation);
 
@@ -147,18 +128,13 @@ namespace BatteryCommander.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public static async Task<Evaluation> Get(Database db, int id)
-        {
-            return
-                await db
+        public IQueryable<Evaluation> Evaluations =>
+                db
                 .Evaluations
                 .Include(_ => _.Ratee)
                 .Include(_ => _.Rater)
                 .Include(_ => _.SeniorRater)
                 .Include(_ => _.Reviewer)
-                .Include(_ => _.Events)
-                .Where(_ => _.Id == id)
-                .SingleOrDefaultAsync();
-        }
+                .Include(_ => _.Events);
     }
 }
