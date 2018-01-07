@@ -52,9 +52,7 @@
                 <td>@Html.RouteLink(evaluation.Ratee.LastName, "Soldier.Details", new { evaluation.Ratee.Id })</td>
                 <td>@Html.RouteLink(evaluation.Ratee.FirstName, "Soldier.Details", new { evaluation.Ratee.Id })</td>
                 <td>@Html.DisplayFor(_ => evaluation.ThruDate)</td>
-                <td>
-                    @Html.ActionLink(evaluation.Status.DisplayName(), "Index", "Evaluations", new { status = evaluation.Status })
-                </td>
+                <td>@evaluation.Status.DisplayName()</td>
                 <td data-sort="@evaluation.Delinquency.TotalDays">
                     @if (evaluation.Delinquency > TimeSpan.Zero)
                     {
