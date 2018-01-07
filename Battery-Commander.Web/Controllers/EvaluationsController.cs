@@ -50,7 +50,7 @@ namespace BatteryCommander.Web.Controllers
         {
             ViewBag.Soldiers = await SoldiersController.GetDropDownList(db);
 
-            return View(await Evaluations.SingleOrDefaultAsync(_ => _.Id == id););
+            return View(await Evaluations.SingleOrDefaultAsync(_ => _.Id == id));
         }
 
         [HttpPost, ValidateAntiForgeryToken]
