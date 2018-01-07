@@ -18,7 +18,7 @@ namespace BatteryCommander.Web.Controllers
             this.db = db;
         }
 
-        public async Task<IActionResult> Index(Boolean includeComplete = false, EvaluationStatus? status = null, Boolean onlyDelinquent = false)
+        public async Task<IActionResult> Index(Boolean includeComplete = false, Boolean onlyDelinquent = false)
         {
             return View("List", new EvaluationListViewModel
             {
@@ -30,9 +30,24 @@ namespace BatteryCommander.Web.Controllers
                     .Include(_ => _.SeniorRater)
                     .Include(_ => _.Reviewer)
                     .Include(_ => _.Events)
-                    .Where(_ => !status.HasValue || _.Status == status)
-                    .Where(_ => includeComplete || !_.IsCompleted)
-                    .Where(_ => !onlyDelinquent || _.IsDelinquent)
+                    .Where(_ => !_.IsCompleted)
+                    .OrderBy(_ => _.ThruDate)
+                    .ToListAsync()
+            });
+        }
+
+        public async Task<IActionResult> All()
+        {
+            return View("List", new EvaluationListViewModel
+            {
+                Evaluations =
+                    await db
+                    .Evaluations
+                    .Include(_ => _.Ratee)
+                    .Include(_ => _.Rater)
+                    .Include(_ => _.SeniorRater)
+                    .Include(_ => _.Reviewer)
+                    .Include(_ => _.Events)
                     .OrderBy(_ => _.ThruDate)
                     .ToListAsync()
             });
