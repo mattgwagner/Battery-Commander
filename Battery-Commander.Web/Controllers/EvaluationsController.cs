@@ -128,7 +128,7 @@ namespace BatteryCommander.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IQueryable<Evaluation> Evaluations =>
+        private IQueryable<Evaluation> Evaluations =>
                 db
                 .Evaluations
                 .Include(_ => _.Ratee)
