@@ -46,7 +46,19 @@ namespace BatteryCommander.Web.Controllers
         {
             ViewBag.Soldiers = await SoldiersController.GetDropDownList(db);
 
-            return View("Edit", new Evaluation { RateeId = soldier });
+            if (soldier > 0)
+            {
+                var soldierModel = await SoldiersController.Get(db, soldier);
+
+                return View("Edit", new Evaluation
+                {
+                    RateeId = soldier,
+                    RaterId = soldierModel.SupervisorId ?? 0,
+                    SeniorRaterId = soldierModel.Supervisor.SupervisorId ?? 0
+                });
+            }
+
+            return View("Edit");
         }
 
         public async Task<IActionResult> Edit(int id)
