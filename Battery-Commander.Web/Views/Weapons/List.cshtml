@@ -31,6 +31,10 @@
                 <th>@Html.DisplayNameFor(_ => _.Weapons.FirstOrDefault().OpticSerial)</th>
                 <th>@Html.DisplayNameFor(_ => _.Weapons.FirstOrDefault().OpticType)</th>
                 <th>@Html.DisplayNameFor(_ => _.Weapons.FirstOrDefault().Assigned)</th>
+                <th>Date/Time Out</th>
+                <th>Signature</th>
+                <th>Date/Time In</th>
+                <th>Signature</th>
                 <th></th>
             </tr>
         </thead>
@@ -46,6 +50,10 @@
                     <td>@Html.DisplayFor(_ => weapon.OpticSerial)</td>
                     <td>@Html.DisplayFor(_ => weapon.OpticType)</td>
                     <td>@Html.DisplayFor(_ => weapon.Assigned)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <td>@Html.ActionLink("Edit", "Edit", new { weapon.Id })</td>
                 </tr>
             }
