@@ -57,20 +57,55 @@ namespace BatteryCommander.Web.Models
             M320 = 4
         }
 
+        [NotMapped]
+        public virtual String Description
+        {
+            get
+            {
+                switch (Type)
+                {
+                    case WeaponType.M4:
+                        return "Rifle, 5.56mm, M4";
+
+                    // TODO The rest of the descriptions
+
+                    default:
+                        return String.Empty;
+                }
+            }
+        }
+
+        [NotMapped]
+        public virtual String StockNumber
+        {
+            get
+            {
+                switch (Type)
+                {
+                    case WeaponType.M4:
+                        return "1005-01-231-0973";
+
+                    // TODO The rest of the descriptions
+                    default:
+                        return String.Empty;
+                }
+            }
+        }
+
         public virtual byte[] GenerateReceipt()
         {
             // TODO What to do if the assigned person is null?
 
-            // TODO Weapon Type - Description & Stock Number
-
             return PDFService.Generate_DA3749(new PDFService.EquipmentReceipt
             {
-                Name = $"{Assigned.LastName}, {Assigned.FirstName}",
-                Grade = Assigned.Rank,
+                Name = $"{Assigned?.LastName}, {Assigned?.FirstName}",
+                Grade = Assigned?.Rank,
                 From = "Arms Room",
                 ReceiptNumber = $"{Type}-{AdminNumber}",
                 SerialNumber = Serial,
                 Unit = Unit.Name,
+                Description = Description,
+                StockNumber = StockNumber
             });
         }
     }

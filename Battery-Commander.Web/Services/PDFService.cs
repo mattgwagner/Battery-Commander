@@ -162,7 +162,7 @@ namespace BatteryCommander.Web.Services
                 form.SetField($"{prefix}.DESCRIPT[0]", $"{model.Description}");
                 form.SetField($"{prefix}.FROM[0]", $"{model.From}");
                 form.SetField($"{prefix}.NAME[0]", $"{model.Name}");
-                form.SetField($"{prefix}.GRADE[0]", $"{model.Grade.ShortName()}");
+                form.SetField($"{prefix}.GRADE[0]", $"{model.Grade?.ShortName()}");
 
                 stamper.Close();
 
@@ -270,7 +270,7 @@ namespace BatteryCommander.Web.Services
 
             public String Name { get; set; }
 
-            public Rank Grade { get; set; }
+            public Rank? Grade { get; set; }
         }
 
         public class Counseling

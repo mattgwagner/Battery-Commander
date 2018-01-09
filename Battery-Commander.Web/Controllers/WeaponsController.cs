@@ -93,12 +93,7 @@ namespace BatteryCommander.Web.Controllers
                 .Include(_ => _.Unit)
                 .SingleAsync(_ => _.Id == id);
 
-            if (!weapon.AssignedId.HasValue)
-            {
-                throw new Exception("Cannot generate receipt for un-assigned weapon");
-            }
-
-            var filename = $"{weapon.Unit.Name}_DA3749_{weapon.Assigned.LastName}_{DateTime.Today:yyyyMMdd}.pdf";
+            var filename = $"{weapon.Unit.Name}_DA3749_{weapon.Assigned?.LastName}_{DateTime.Today:yyyyMMdd}.pdf";
 
             return File(weapon.GenerateReceipt(), "application/pdf", filename);
         }

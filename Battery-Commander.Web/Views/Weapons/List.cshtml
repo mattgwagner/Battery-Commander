@@ -35,7 +35,7 @@
                 <th>Date/Time Out</th>
                 <th>Signature</th>
                 <th>Date/Time In</th>
-                <th>Signature</th> 
+                <th>Signature</th>
             </tr>
         </thead>
 
@@ -45,10 +45,7 @@
                 <tr>
                     <td>
                         @Html.ActionLink("Edit", "Edit", "Weapons", new { weapon.Id })
-                        @if (weapon.AssignedId.HasValue)
-                        {
-                            @Html.ActionLink("Receipt", "Receipt", "Weapons", new { weapon.Id })
-                        }           
+                        @Html.ActionLink("Receipt", "Receipt", "Weapons", new { weapon.Id })
                     </td>
                     <td data-priority="10001">@Html.DisplayFor(_ => weapon.Unit)</td>
                     <td>@Html.DisplayFor(_ => weapon.Type)</td>
