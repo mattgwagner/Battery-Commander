@@ -21,10 +21,10 @@
         </thead>
 
         <tbody>
-            @foreach (var vehicle in Model.Weapons)
+            @foreach (var weapon in Model.Weapons)
             {
                 <tr>
-                    <td>@Html.DisplayFor(_ => vehicle.Unit)</td>
+                    <td>@Html.DisplayFor(_ => weapon.Unit)</td>
                 </tr>
             }
         </tbody>

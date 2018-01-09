@@ -26,6 +26,8 @@ namespace BatteryCommander.Web.Controllers
                 Weapons =
                     await db
                     .Weapons
+                    .Include(weapon => weapon.Unit)
+                    .Include(weapon => weapon.Assigned)
                     .ToListAsync()
             });
         }
