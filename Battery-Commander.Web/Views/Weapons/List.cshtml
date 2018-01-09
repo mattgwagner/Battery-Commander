@@ -17,6 +17,13 @@
         <thead>
             <tr>
                 <th>@Html.DisplayNameFor(_ => _.Weapons.FirstOrDefault().Unit)</th>
+                <th>@Html.DisplayNameFor(_ => _.Weapons.FirstOrDefault().Type)</th>
+                <th>@Html.DisplayNameFor(_ => _.Weapons.FirstOrDefault().AdminNumber)</th>
+                <th>@Html.DisplayNameFor(_ => _.Weapons.FirstOrDefault().Serial)</th>
+                <th>@Html.DisplayNameFor(_ => _.Weapons.FirstOrDefault().OpticSerial)</th>
+                <th>@Html.DisplayNameFor(_ => _.Weapons.FirstOrDefault().OpticType)</th>
+                <th>@Html.DisplayNameFor(_ => _.Weapons.FirstOrDefault().Assigned)</th>
+                <th></th>
             </tr>
         </thead>
 
@@ -25,6 +32,13 @@
             {
                 <tr>
                     <td>@Html.DisplayFor(_ => weapon.Unit)</td>
+                    <td>@Html.DisplayFor(_ => weapon.Type)</td>
+                    <td>@Html.DisplayFor(_ => weapon.AdminNumber)</td>
+                    <td>@Html.DisplayFor(_ => weapon.Serial)</td>
+                    <td>@Html.DisplayFor(_ => weapon.OpticSerial)</td>
+                    <td>@Html.DisplayFor(_ => weapon.OpticType)</td>
+                    <td>@Html.DisplayFor(_ => weapon.Assigned)</td>
+                    <td>@Html.ActionLink("Edit", "Edit", new { weapon.Id })</td>
                 </tr>
             }
         </tbody>
