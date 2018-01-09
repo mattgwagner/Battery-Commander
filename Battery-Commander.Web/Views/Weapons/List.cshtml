@@ -24,6 +24,7 @@
     <table class="table table-striped display nowrap" width="100%" id="dt">
         <thead>
             <tr>
+                <th>Links</th>
                 <th>@Html.DisplayNameFor(_ => _.Weapons.FirstOrDefault().Unit)</th>
                 <th>@Html.DisplayNameFor(_ => _.Weapons.FirstOrDefault().Type)</th>
                 <th>@Html.DisplayNameFor(_ => _.Weapons.FirstOrDefault().AdminNumber)</th>
@@ -34,8 +35,7 @@
                 <th>Date/Time Out</th>
                 <th>Signature</th>
                 <th>Date/Time In</th>
-                <th>Signature</th>
-                <th></th>
+                <th>Signature</th> 
             </tr>
         </thead>
 
@@ -43,6 +43,13 @@
             @foreach (var weapon in Model.Weapons)
             {
                 <tr>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", "Weapons", new { weapon.Id })
+                        @if (weapon.AssignedId.HasValue)
+                        {
+                            @Html.ActionLink("Receipt", "Receipt", "Weapons", new { weapon.Id })
+                        }           
+                    </td>
                     <td>@Html.DisplayFor(_ => weapon.Unit)</td>
                     <td>@Html.DisplayFor(_ => weapon.Type)</td>
                     <td>@Html.DisplayFor(_ => weapon.AdminNumber)</td>
@@ -54,10 +61,6 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { weapon.Id })
-                        @Html.ActionLink("Receipt", "Receipt", new { weapon.Id })
-                    </td>
                 </tr>
             }
         </tbody>
