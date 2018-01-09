@@ -44,8 +44,7 @@ namespace BatteryCommander.Web.Models
 
         public enum WeaponType : byte
         {
-            // TODO Add Full Display Description, i.e. Rifle, 5.56mm M16A2
-
+            [Display(Name = "Rifle, 5.56mm, M4")]
             M4 = 0,
 
             M9 = 1,
@@ -55,24 +54,6 @@ namespace BatteryCommander.Web.Models
             M249 = 3,
 
             M320 = 4
-        }
-
-        [NotMapped]
-        public virtual String Description
-        {
-            get
-            {
-                switch (Type)
-                {
-                    case WeaponType.M4:
-                        return "Rifle, 5.56mm, M4";
-
-                    // TODO The rest of the descriptions
-
-                    default:
-                        return String.Empty;
-                }
-            }
         }
 
         [NotMapped]
@@ -102,7 +83,7 @@ namespace BatteryCommander.Web.Models
                 ReceiptNumber = $"{Type}-{AdminNumber}",
                 SerialNumber = Serial,
                 Unit = Unit.Name,
-                Description = Description,
+                Description = Type.DisplayName(),
                 StockNumber = StockNumber
             });
         }
