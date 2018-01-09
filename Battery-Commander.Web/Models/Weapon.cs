@@ -98,7 +98,7 @@ namespace BatteryCommander.Web.Models
 
             return PDFService.Generate_DA3749(new PDFService.EquipmentReceipt
             {
-                Name = $"{Assigned?.LastName}, {Assigned?.FirstName}",
+                Name = $"{Assigned?.LastName} {Assigned?.FirstName}",
                 Grade = Assigned?.Rank,
                 From = "Arms Room",
                 ReceiptNumber = $"{Type}-{AdminNumber}",
