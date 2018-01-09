@@ -1,0 +1,56 @@
+﻿@model Weapon
+
+@using (Html.BeginForm("Save", "Weapons", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+    @Html.ValidationSummary()
+
+    <div class="form-group form-group-lg">
+        @Html.DisplayNameFor(model => model.Unit)
+        @Html.DropDownListFor(model => model.UnitId, (IEnumerable<SelectListItem>)ViewBag.Units, "-- Select Unit --")
+    </div>
+
+    <div class="form-group form-group-lg">
+        @Html.DisplayNameFor(model => model.Type)
+        @Html.DropDownListFor(model => model.Type, Html.GetEnumSelectList<Weapon.WeaponType>())
+    </div>
+
+    <div class="form-group form-group-lg">
+        @Html.DisplayNameFor(model => model.AdminNumber)
+        @Html.TextBoxFor(model => model.AdminNumber)
+    </div>
+
+    <div class="form-group form-group-lg">
+        @Html.DisplayNameFor(model => model.Serial)
+        @Html.TextBoxFor(model => model.Serial)
+    </div>
+
+    <div class="form-group form-group-lg">
+        @Html.DisplayNameFor(model => model.OpticSerial)
+        @Html.TextBoxFor(model => model.OpticSerial)
+    </div>
+
+    <div class="form-group form-group-lg">
+        @Html.DisplayNameFor(model => model.OpticType)
+        @Html.DropDownListFor(model => model.OpticType, Html.GetEnumSelectList<Weapon.WeaponOptic>())
+    </div>
+
+    <div class="form-group form-group-lg">
+        @Html.DisplayNameFor(model => model.Assigned)
+        @Html.DropDownListFor(model => model.AssignedId, (IEnumerable<SelectListItem>)ViewBag.Soldiers, "-- Select Soldier --")
+    </div>
+
+    <button type="submit">Save</button>
+}
+
+@if (Model.Id > 0)
+{
+    <div>
+        @using (Html.BeginForm("Delete", "Weapons", new { Model.Id }, FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this?')">Delete</button>
+        }
+    </div>
+}

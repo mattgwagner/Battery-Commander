@@ -1,0 +1,32 @@
+﻿@model WeaponListViewModel
+
+@{
+    ViewBag.Title = "Master Authorization List";
+}
+
+<div class="page-header">
+    <h1>
+        @ViewBag.Title
+        @Html.ActionLink("Add New", "New", "Weapons", null, new { @class = "btn btn-default" })
+    </h1>
+</div>
+
+<div id="weapon-list">
+
+    <table class="table table-striped display nowrap" width="100%" id="dt">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(_ => _.Weapons.FirstOrDefault().Unit)</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var vehicle in Model.Weapons)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(_ => vehicle.Unit)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
