@@ -16,6 +16,8 @@ namespace BatteryCommander.Web.Models
 
         public virtual DbSet<Vehicle> Vehicles { get; set; }
 
+        public virtual DbSet<Weapon> Weapons { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
             builder.UseSqlite("Data Source=Data.db");
@@ -50,6 +52,11 @@ namespace BatteryCommander.Web.Models
 
             builder.Entity<Vehicle>()
                 .HasIndex(vehicle => new { vehicle.UnitId, vehicle.Bumper })
+                .IsUnique();
+
+            builder
+                .Entity<Weapon>()
+                .HasIndex(weapon => new { weapon.Serial, weapon.Type })
                 .IsUnique();
         }
 
