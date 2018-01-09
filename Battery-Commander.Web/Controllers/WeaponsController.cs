@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -81,6 +82,25 @@ namespace BatteryCommander.Web.Controllers
             await db.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Receipt(int id)
+        {
+            var weapon =
+                await db
+                .Weapons
+                .Include(_ => _.Assigned)
+                .Include(_ => _.Unit)
+                .SingleAsync(_ => _.Id == id);
+
+            if (!weapon.AssignedId.HasValue)
+            {
+                throw new Exception("Cannot generate receipt for un-assigned weapon");
+            }
+
+            var filename = $"{weapon.Unit.Name}_DA3749_{weapon.Assigned.LastName}_{DateTime.Today:yyyyMMdd}.pdf";
+
+            return File(weapon.GenerateReceipt(), "application/pdf", filename);
         }
     }
 }

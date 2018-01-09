@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BatteryCommander.Web.Services;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -54,6 +55,23 @@ namespace BatteryCommander.Web.Models
             M249 = 3,
 
             M320 = 4
+        }
+
+        public virtual byte[] GenerateReceipt()
+        {
+            // TODO What to do if the assigned person is null?
+
+            // TODO Weapon Type - Description & Stock Number
+
+            return PDFService.Generate_DA3749(new PDFService.EquipmentReceipt
+            {
+                Name = $"{Assigned.LastName}, {Assigned.FirstName}",
+                Grade = Assigned.Rank,
+                From = "Arms Room",
+                ReceiptNumber = $"{Type}-{AdminNumber}",
+                SerialNumber = Serial,
+                Unit = Unit.Name,
+            });
         }
     }
 }
