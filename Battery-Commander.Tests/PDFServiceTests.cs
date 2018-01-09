@@ -29,5 +29,27 @@ namespace BatteryCommander.Tests
                 file.Write(data, 0, data.Length);
             }
         }
+
+        [Fact]
+        public void Generate_Equipment_Receipt()
+        {
+            using (var file = new FileStream("TestReceipt.pdf", FileMode.Create))
+            {
+                var data = PDFService.Generate_DA3749(new PDFService.EquipmentReceipt
+                {
+                    Unit = "C BAT 2 116th FA",
+                    ReceiptNumber = "M4-01",
+                    StockNumber = "1005-01-231-0973",
+                    SerialNumber = "W630890",
+                    ItemDescription = "Rifle, 5.56mm M4",
+                    Source = "Arms Room",
+                    Soldier = "Snuffy, Joe",
+                    SoldierIdentifer = "XXX-XX-2890",
+                    Grade = Rank.E2
+                });
+
+                file.Write(data, 0, data.Length);
+            }
+        }
     }
 }

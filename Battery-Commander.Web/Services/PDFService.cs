@@ -134,6 +134,45 @@ namespace BatteryCommander.Web.Services
             }
         }
 
+        public static byte[] Generate_DA3749(EquipmentReceipt model)
+        {
+            const String prefix = "form1[0]";
+
+            using (var stream = typeof(Program).GetTypeInfo().Assembly.GetManifestResourceStream("BatteryCommander.Web.Models.Data.DA3749.pdf"))
+            using (var output = new MemoryStream())
+            {
+                var reader = new PdfReader(stream);
+                var stamper = new PdfStamper(reader, output);
+
+                var form = stamper.AcroFields;
+
+#if DEBUG
+                foreach (DictionaryEntry de in form.Fields)
+                {
+                    Console.WriteLine($"{de.Key}");
+                }
+#endif
+
+                // Update the form fields as appropriate
+
+                //form.SetField($"{prefix}.NAME[0]", $"{model.Soldier.LastName} {model.Soldier.FirstName}");
+                //form.SetField($"{prefix}.RANK[0]", $"{model.Soldier.Rank.ShortName()}");
+
+                //form.SetField($"{prefix}.HEIGHT[0]", $"{model.Height}");
+                //form.SetField($"{prefix}.WEIGHT[0]", $"{model.Weight}");
+                //form.SetField($"{prefix}.AGE[0]", $"{model.Soldier.AgeAsOf(model.Date)}");
+
+                //form.SetField($"{prefix}.DATE[0]", $"{model.Date:yyyyMMdd}");
+                //form.SetField($"{prefix}.DATE_B[0]", $"{model.Date:yyyyMMdd}");
+
+                // form.SetField($"{prefix}.Page1[0].Name[0]", model.Name);
+
+                stamper.Close();
+
+                return output.ToArray();
+            }
+        }
+
         public static byte[] Generate_DA5501(ABCP model)
         {
             const String prefix = "form1[0]";
@@ -216,6 +255,27 @@ namespace BatteryCommander.Web.Services
 
                 return output.ToArray();
             }
+        }
+
+        public class EquipmentReceipt
+        {
+            public String Unit { get; set; }
+
+            public String ReceiptNumber { get; set; }
+
+            public String StockNumber { get; set; }
+
+            public String SerialNumber { get; set; }
+
+            public String ItemDescription { get; set; }
+
+            public String Source { get; set; }
+
+            public String Soldier { get; set; }
+
+            public String SoldierIdentifer { get; set; }
+
+            public Rank Grade { get; set; }
         }
 
         public class Counseling
