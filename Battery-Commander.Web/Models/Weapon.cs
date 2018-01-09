@@ -94,8 +94,6 @@ namespace BatteryCommander.Web.Models
 
         public virtual byte[] GenerateReceipt()
         {
-            // TODO What to do if the assigned person is null?
-
             return PDFService.Generate_DA3749(new PDFService.EquipmentReceipt
             {
                 Name = $"{Assigned?.LastName} {Assigned?.FirstName}",
