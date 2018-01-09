@@ -13,7 +13,7 @@
         <small>
             @foreach (var by_type in Model.Count_By_Type)
             {
-                @Html.DisplayFor(_ => by_type.Key): <span class="badge">@by_type.Value</span>
+                <div>@by_type.Key.DisplayName(): <span class="badge">@by_type.Value</span></div>
             }
         </small>
     </h4>
