@@ -136,7 +136,7 @@ namespace BatteryCommander.Web.Services
 
         public static byte[] Generate_DA3749(EquipmentReceipt model)
         {
-            const String prefix = "form1[0]";
+            const String prefix = "form1[0].Page1[0]";
 
             using (var stream = typeof(Program).GetTypeInfo().Assembly.GetManifestResourceStream("BatteryCommander.Web.Models.Data.DA3749.pdf"))
             using (var output = new MemoryStream())
@@ -153,19 +153,16 @@ namespace BatteryCommander.Web.Services
                 }
 #endif
 
-                // Update the form fields as appropriate
+                // Update the form fields as appropriate -- 4 per page, _B, _C, _D
 
-                //form.SetField($"{prefix}.NAME[0]", $"{model.Soldier.LastName} {model.Soldier.FirstName}");
-                //form.SetField($"{prefix}.RANK[0]", $"{model.Soldier.Rank.ShortName()}");
-
-                //form.SetField($"{prefix}.HEIGHT[0]", $"{model.Height}");
-                //form.SetField($"{prefix}.WEIGHT[0]", $"{model.Weight}");
-                //form.SetField($"{prefix}.AGE[0]", $"{model.Soldier.AgeAsOf(model.Date)}");
-
-                //form.SetField($"{prefix}.DATE[0]", $"{model.Date:yyyyMMdd}");
-                //form.SetField($"{prefix}.DATE_B[0]", $"{model.Date:yyyyMMdd}");
-
-                // form.SetField($"{prefix}.Page1[0].Name[0]", model.Name);
+                form.SetField($"{prefix}.UNIT[0]", $"{model.Unit}");
+                form.SetField($"{prefix}.RECEIPT[0]", $"{model.ReceiptNumber}");
+                form.SetField($"{prefix}.STOCK[0]", $"{model.StockNumber}");
+                form.SetField($"{prefix}.SERIAL[0]", $"{model.SerialNumber}");
+                form.SetField($"{prefix}.DESCRIPT[0]", $"{model.Description}");
+                form.SetField($"{prefix}.FROM[0]", $"{model.From}");
+                form.SetField($"{prefix}.NAME[0]", $"{model.Name}");
+                form.SetField($"{prefix}.GRADE[0]", $"{model.Grade.ShortName()}");
 
                 stamper.Close();
 
@@ -267,13 +264,11 @@ namespace BatteryCommander.Web.Services
 
             public String SerialNumber { get; set; }
 
-            public String ItemDescription { get; set; }
+            public String Description { get; set; }
 
-            public String Source { get; set; }
+            public String From { get; set; }
 
-            public String Soldier { get; set; }
-
-            public String SoldierIdentifer { get; set; }
+            public String Name { get; set; }
 
             public Rank Grade { get; set; }
         }

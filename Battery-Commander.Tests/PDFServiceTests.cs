@@ -41,10 +41,9 @@ namespace BatteryCommander.Tests
                     ReceiptNumber = "M4-01",
                     StockNumber = "1005-01-231-0973",
                     SerialNumber = "W630890",
-                    ItemDescription = "Rifle, 5.56mm M4",
-                    Source = "Arms Room",
-                    Soldier = "Snuffy, Joe",
-                    SoldierIdentifer = "XXX-XX-2890",
+                    Description = "Rifle, 5.56mm M4",
+                    From = "Arms Room",
+                    Name = "Snuffy, Joe",
                     Grade = Rank.E2
                 });
 
