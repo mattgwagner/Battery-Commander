@@ -54,7 +54,10 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td>@Html.ActionLink("Edit", "Edit", new { weapon.Id })</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { weapon.Id })
+                        @Html.ActionLink("Receipt", "Receipt", new { weapon.Id })
+                    </td>
                 </tr>
             }
         </tbody>
