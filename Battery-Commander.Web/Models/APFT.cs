@@ -20,11 +20,14 @@ namespace BatteryCommander.Web.Models
             {
                 var count = 0;
 
-                foreach(var apft in APFTs?.OrderByDescending(_ => _.Date))
+                if (APFTs?.Any() == true)
                 {
-                    if (apft.IsPassing) break;
+                    foreach (var apft in APFTs?.OrderByDescending(_ => _.Date))
+                    {
+                        if (apft.IsPassing) break;
 
-                    count++;
+                        count++;
+                    }
                 }
 
                 return count;

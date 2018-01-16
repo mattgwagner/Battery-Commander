@@ -21,11 +21,14 @@ namespace BatteryCommander.Web.Models
             {
                 var count = 0;
 
-                foreach (var abcp in ABCPs?.OrderByDescending(_ => _.Date))
+                if (ABCPs?.Any() == true)
                 {
-                    if (abcp.IsPassing) break;
+                    foreach (var abcp in ABCPs?.OrderByDescending(_ => _.Date))
+                    {
+                        if (abcp.IsPassing) break;
 
-                    count++;
+                        count++;
+                    }
                 }
 
                 return count;
