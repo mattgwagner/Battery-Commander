@@ -289,6 +289,13 @@ Continue to monitor your weight loss every week (choose a day each week)
 Continue to develop and improve your diet and exercise plan, utilize the Battery PT Plan to assist you.
 
 Individualized Plan of Action from Soldier below.
+",
+
+                LeadersResponsibilities = $@"
+Identify reasons for failure and help overcome
+Evaluate nutrition and PT training program for effectiveness
+Discuss ways to develop a better, lasting, diet
+Encourage and support
 "
             });
         }
