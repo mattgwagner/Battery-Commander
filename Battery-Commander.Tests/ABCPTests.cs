@@ -95,7 +95,7 @@ namespace BatteryCommander.Tests
                     }
                 };
 
-                var data = score.GenerateCounseling();
+                var data = score.GenerateWorksheet();
 
                 file.Write(data, 0, data.Length);
             }
@@ -127,7 +127,7 @@ namespace BatteryCommander.Tests
                     }
                 };
 
-                var data = score.GenerateCounseling();
+                var data = score.GenerateWorksheet();
 
                 file.Write(data, 0, data.Length);
             }

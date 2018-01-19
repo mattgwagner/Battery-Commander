@@ -222,7 +222,7 @@ namespace BatteryCommander.Web.Models
             public Double Hips { get; set; }
         }
 
-        public byte[] GenerateCounseling()
+        public byte[] GenerateWorksheet()
         {
             switch (Soldier?.Gender)
             {
