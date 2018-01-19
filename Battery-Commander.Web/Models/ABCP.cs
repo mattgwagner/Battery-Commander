@@ -244,6 +244,8 @@ namespace BatteryCommander.Web.Models
                 Organization = $"{Soldier.Unit.Name}",
                 Date = Date,
 
+                // TODO If subsequent weigh-in, add previous
+
                 Purpose = $@"
 Failure to meet weight and tape standard per AR 600-9.
 
@@ -255,6 +257,8 @@ Authorized Weight: {Screening_Weight}lbs
 MAW Body Fat: {MaximumAllowableBodyFat}%
 Current Body Fat: {BodyFatPercentage}%
 ",
+
+                // TODO Adjust 1ST/2ND time counseling
 
                 KeyPointsOfDiscussion = $@"You failed to meet weight and tape standards as per AR 600-9 for the 1ST time on {Date:yyyyMMdd}.
 
