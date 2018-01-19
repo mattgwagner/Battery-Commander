@@ -281,6 +281,14 @@ If a Soldier again exceeds the body fat standard within 12 months after release 
 
 If, after 12 months but less than 36 months from the date of release from the ABCP, it is determined that a Soldier again exceeds the body fat standard, a DA Form 268 will be initiated on the Soldier.
 (1) Solider will have 90 days to meet the standards
+",
+
+                PlanOfAction = $@"
+Continue to monitor your weight loss every week (choose a day each week)
+
+Continue to develop and improve your diet and exercise plan, utilize the Battery PT Plan to assist you.
+
+Individualized Plan of Action from Soldier below.
 "
             });
         }
