@@ -51,6 +51,7 @@ namespace BatteryCommander.Web.Services
                 form.SetField($"{prefix}.Page1[0].Purpose_Counseling[0]", model.Purpose);
                 form.SetField($"{prefix}.Page1[0].Organization[0]", model.Organization);
                 form.SetField($"{prefix}.Page2[0].Plan_Action[0]", model.PlanOfAction);
+                form.SetField($"{prefix}.Page2[0].Assessment[0]", model.Assessment);
 
                 stamper.Close();
 
@@ -292,6 +293,8 @@ namespace BatteryCommander.Web.Services
             public String PlanOfAction { get; set; }
 
             public String LeadersResponsibilities { get; set; }
+
+            public String Assessment { get; set; }
         }
     }
 }

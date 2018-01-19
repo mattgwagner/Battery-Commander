@@ -245,7 +245,6 @@ namespace BatteryCommander.Web.Models
 
         public byte[] GenerateCounseling()
         {
-
             var consecutive_failures = 1;
 
             foreach (var abcp in Soldier.ABCPs.Where(_ => _.Date < Date).OrderByDescending(_ => _.Date))
@@ -313,7 +312,11 @@ Identify reasons for failure and help overcome
 Evaluate nutrition and PT training program for effectiveness
 Discuss ways to develop a better, lasting, diet
 Encourage and support
-"
+",
+
+                Assessment = $@"
+SATISFACTORY progress for the month: -7lbs, -2% body fat.
+"               
             });
         }
 
