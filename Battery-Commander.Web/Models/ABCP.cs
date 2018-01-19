@@ -211,6 +211,21 @@ namespace BatteryCommander.Web.Models
         [Display(Name = "Is Passing?")]
         public Boolean IsPassing => !RequiresTape || IsPassingTape;
 
+        /// <summary>
+        /// Returns true if the Soldier made satisfactory progress since the last ABCP weigh-in
+        /// </summary>
+        [NotMapped]
+        public Boolean IsSatisfactory
+        {
+            get
+            {
+                var delta_weight = Previous.Weight - Weight;
+                var delta_bodyfat = Previous.BodyFatPercentage - BodyFatPercentage;
+
+                return (3 <= delta_weight || 1 <= delta_bodyfat);
+            }
+        }
+
         public virtual ABCP Previous =>
             Soldier
                 .ABCPs
@@ -315,8 +330,8 @@ Encourage and support
 ",
 
                 Assessment = $@"
-SATISFACTORY progress for the month: -7lbs, -2% body fat.
-"               
+{(Previous == null ? String.Empty : $"{(IsSatisfactory ? "SATISFACTORY" : "UNSATISFACTORY")} progress for the month: {Previous.Weight - Weight}lbs, {Previous.BodyFatPercentage - BodyFatPercentage}% body fat.")}
+"
             });
         }
 
