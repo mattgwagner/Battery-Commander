@@ -244,7 +244,7 @@ namespace BatteryCommander.Web.Models
                 .OrderByDescending(abcp => abcp.Date)
                 .FirstOrDefault();
 
-            var consecutive_failures = 0;
+            var consecutive_failures = 1;
 
             foreach (var abcp in Soldier.ABCPs.Where(_ => _.Date < Date).OrderByDescending(_ => _.Date))
             {
