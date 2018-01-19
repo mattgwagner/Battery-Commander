@@ -211,6 +211,13 @@ namespace BatteryCommander.Web.Models
         [Display(Name = "Is Passing?")]
         public Boolean IsPassing => !RequiresTape || IsPassingTape;
 
+        public virtual ABCP Previous =>
+            Soldier
+                .ABCPs
+                .Where(abcp => abcp.Date < Date)
+                .OrderByDescending(abcp => abcp.Date)
+                .FirstOrDefault();
+
         public class Measurement
         {
             [Range(0, 50)]
@@ -238,12 +245,6 @@ namespace BatteryCommander.Web.Models
 
         public byte[] GenerateCounseling()
         {
-            var previous =
-                Soldier
-                .ABCPs
-                .Where(abcp => abcp.Date < Date)
-                .OrderByDescending(abcp => abcp.Date)
-                .FirstOrDefault();
 
             var consecutive_failures = 1;
 
@@ -263,13 +264,13 @@ namespace BatteryCommander.Web.Models
 
                 Purpose = $@"
 Failure to meet weight and tape standard per AR 600-9.
-{(previous == null ? "Enrollment into the ABCP program." : "")}
+{(Previous == null ? "Enrollment into the ABCP program." : "")}
 Height: {Height}in
-{(previous != null ? $"Previous Weight: {previous.Weight}lbs" : "")}
+{(Previous != null ? $"Previous Weight: {Previous.Weight}lbs" : "")}
 Weight: {Weight}lbs
 Authorized Weight: {Screening_Weight}lbs
 MAW Body Fat: {MaximumAllowableBodyFat}%
-{(previous != null ? $"Previous Body Fat: {previous.BodyFatPercentage}%" : "")}
+{(Previous != null ? $"Previous Body Fat: {Previous.BodyFatPercentage}%" : "")}
 Current Body Fat: {BodyFatPercentage}%
 ",
 
