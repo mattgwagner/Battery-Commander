@@ -54,7 +54,7 @@ namespace BatteryCommander.Web.Controllers
                 {
                     RateeId = soldier,
                     RaterId = soldierModel.SupervisorId ?? 0,
-                    SeniorRaterId = soldierModel.Supervisor.SupervisorId ?? 0
+                    SeniorRaterId = soldierModel.Supervisor?.SupervisorId ?? 0
                 });
             }
 
