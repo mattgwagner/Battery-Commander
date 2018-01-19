@@ -1,5 +1,6 @@
 ﻿using BatteryCommander.Web.Models.Data;
 using BatteryCommander.Web.Services;
+using Humanizer;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -272,7 +273,7 @@ MAW Body Fat: {MaximumAllowableBodyFat}%
 Current Body Fat: {BodyFatPercentage}%
 ",
 
-                KeyPointsOfDiscussion = $@"You failed to meet weight and tape standards as per AR 600-9 for the {consecutive_failures} time on {Date:yyyyMMdd}.
+                KeyPointsOfDiscussion = $@"You failed to meet weight and tape standards as per AR 600-9 for the {consecutive_failures.Ordinalize()} time on {Date:yyyyMMdd}.
 
 A flag has been initiated against you for failing to meet weight and tape standards as per AR 600-9, AR 600-8-2, and/or NGR 600-200 chapter 7, as appropriate.
 (1) Soldiers who are flagged for weight control normally are not eligible to receive awards or attend schools IAW AR 600-8-2. The only exception to receive    awards is that the commander may submit a waiver permitting the Soldier to be recommended for and receive awards when the award is for valor, heroism, or length of service.
