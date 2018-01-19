@@ -235,6 +235,56 @@ namespace BatteryCommander.Web.Models
             }
         }
 
+        public byte[] GenerateCounseling()
+        {
+            return PDFService.Generate_DA4856(new PDFService.Counseling
+            {
+                Name = $"{Soldier.LastName}, {Soldier.FirstName}",
+                Rank = Soldier.Rank,
+                Organization = $"{Soldier.Unit.Name}",
+                Date = Date,
+
+                Purpose = $@"
+Failure to meet weight and tape standard per AR 600-9.
+
+Enrollment into the ABCP program.
+
+Height: {Height}in
+Weight: {Weight}lbs
+Authorized Weight: {Screening_Weight}lbs
+MAW Body Fat: {MaximumAllowableBodyFat}%
+Current Body Fat: {BodyFatPercentage}%
+",
+
+                KeyPointsOfDiscussion = $@"
+You failed to meet weight and tape standards as per AR 600-9 for the 1ST time on {Date}.
+
+A flag has been initiated against you for failing to meet weight and tape standards as per AR 600-9, AR 600-8-2, and/or NGR 600-200 chapter 7, as appropriate.
+(1) Soldiers who are flagged for weight control normally are not eligible to receive awards or attend schools IAW AR 600-8-2. The only exception to receive    awards is that the commander may submit a waiver permitting the Soldier to be recommended for and receive awards when the award is for valor, heroism, or length of service.
+
+You are REQUIRED to be weighed in and taped monthly to monitor your progress by The Army Body Composition Program Officer and NCO IAW AR 600-9 Chapter 3 Para 9, it is your responsibility to ensure you get weighted monthly.
+
+IAW AR 600-9 Chapter 3 Para 12
+Satisfactory progress in the ABCP is defined as a monthly weight loss of either 3 to 8 pounds or 1 percent body fat.
+
+A Soldier enrolled in the ABCP is considered to be failing the program if:
+(1) He or she exhibits less than satisfactory progress on two consecutive monthly ABCP assessments; or
+(2) After 6 months in the ABCP he or she still exceeds body fat standards, and exhibits less than satisfactory progress for three or more (nonconsecutive) monthly ABCP assessments.
+
+You will be informed, in writing, that a bar to reenlistment, separation action, or a transfer to the IRR is being initiated under the following applicable regulation(s): AR 135–175; AR 135–178; AR 600–8–24 (see eliminations and miscellaneous types of separations); AR 601–280; AR 635–200; AR 140–10; National Guard Regulation (NGR) (AR) 600–5; NGR 600–101; NGR 600–200; or NGR 635–100.
+
+You will be removed administratively from the ABCP as soon as the body fat standard is achieved. Soldiers that meet the screening table weight must remain in the ABCP program until they no longer exceed the required body fat standard.
+
+IAW AR 600-9 Chapter 3 Para 14 
+If a Soldier again exceeds the body fat standard within 12 months after release from the ABCP, a DA Form 268 will be initiated on the Soldier.
+(1) Commander will initiate administrative action up to and including separation and discharge 
+
+If, after 12 months but less than 36 months from the date of release from the ABCP, it is determined that a Soldier again exceeds the body fat standard, a DA Form 268 will be initiated on the Soldier.
+(1) Solider will have 90 days to meet the standards
+"
+            });
+        }
+
         private static Double Average_To_Half(IEnumerable<Double> values)
         {
             if (values.Any())
