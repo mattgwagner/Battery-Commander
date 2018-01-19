@@ -117,8 +117,8 @@ namespace BatteryCommander.Web.Controllers
             return
                 await db
                 .ABCPs
-                .Include(_ => _.Soldier)
-                .ThenInclude(_ => _.Unit)
+                .Include(_ => _.Soldier).ThenInclude(_ => _.Unit)
+                .Include(_ => _.Soldier).ThenInclude(_ => _.ABCPs)
                 .Where(_ => _.Id == id)
                 .SingleOrDefaultAsync();
         }

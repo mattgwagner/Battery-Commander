@@ -237,6 +237,13 @@ namespace BatteryCommander.Web.Models
 
         public byte[] GenerateCounseling()
         {
+            var previous =
+                Soldier
+                .ABCPs
+                .Where(abcp => abcp.Date < Date)
+                .OrderByDescending(abcp => abcp.Date)
+                .SingleOrDefault();
+
             return PDFService.Generate_DA4856(new PDFService.Counseling
             {
                 Name = $"{Soldier.LastName}, {Soldier.FirstName}",
@@ -244,17 +251,17 @@ namespace BatteryCommander.Web.Models
                 Organization = $"{Soldier.Unit.Name}",
                 Date = Date,
 
-                // TODO If subsequent weigh-in, add previous
-
                 Purpose = $@"
 Failure to meet weight and tape standard per AR 600-9.
 
-Enrollment into the ABCP program.
+{(previous == null ? "Enrollment into the ABCP program." : "")}
 
 Height: {Height}in
+{(previous != null ? $"Previous Weight: {previous.Weight}lbs" : "")}
 Weight: {Weight}lbs
 Authorized Weight: {Screening_Weight}lbs
 MAW Body Fat: {MaximumAllowableBodyFat}%
+{(previous != null ? $"Previous Body Fat: {previous.BodyFatPercentage}%" : "")}
 Current Body Fat: {BodyFatPercentage}%
 ",
 
