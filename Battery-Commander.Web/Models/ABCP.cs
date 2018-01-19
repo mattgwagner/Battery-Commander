@@ -244,6 +244,15 @@ namespace BatteryCommander.Web.Models
                 .OrderByDescending(abcp => abcp.Date)
                 .FirstOrDefault();
 
+            var consecutive_failures = 0;
+
+            foreach (var abcp in Soldier.ABCPs.Where(_ => _.Date < Date).OrderByDescending(_ => _.Date))
+            {
+                if (abcp.IsPassing) break;
+
+                consecutive_failures++;
+            }
+
             return PDFService.Generate_DA4856(new PDFService.Counseling
             {
                 Name = $"{Soldier.LastName}, {Soldier.FirstName}",
@@ -253,9 +262,7 @@ namespace BatteryCommander.Web.Models
 
                 Purpose = $@"
 Failure to meet weight and tape standard per AR 600-9.
-
 {(previous == null ? "Enrollment into the ABCP program." : "")}
-
 Height: {Height}in
 {(previous != null ? $"Previous Weight: {previous.Weight}lbs" : "")}
 Weight: {Weight}lbs
@@ -265,9 +272,7 @@ MAW Body Fat: {MaximumAllowableBodyFat}%
 Current Body Fat: {BodyFatPercentage}%
 ",
 
-                // TODO Adjust 1ST/2ND time counseling
-
-                KeyPointsOfDiscussion = $@"You failed to meet weight and tape standards as per AR 600-9 for the 1ST time on {Date:yyyyMMdd}.
+                KeyPointsOfDiscussion = $@"You failed to meet weight and tape standards as per AR 600-9 for the {consecutive_failures} time on {Date:yyyyMMdd}.
 
 A flag has been initiated against you for failing to meet weight and tape standards as per AR 600-9, AR 600-8-2, and/or NGR 600-200 chapter 7, as appropriate.
 (1) Soldiers who are flagged for weight control normally are not eligible to receive awards or attend schools IAW AR 600-8-2. The only exception to receive    awards is that the commander may submit a waiver permitting the Soldier to be recommended for and receive awards when the award is for valor, heroism, or length of service.
@@ -285,9 +290,9 @@ You will be informed, in writing, that a bar to reenlistment, separation action,
 
 You will be removed administratively from the ABCP as soon as the body fat standard is achieved. Soldiers that meet the screening table weight must remain in the ABCP program until they no longer exceed the required body fat standard.
 
-IAW AR 600-9 Chapter 3 Para 14 
+IAW AR 600-9 Chapter 3 Para 14
 If a Soldier again exceeds the body fat standard within 12 months after release from the ABCP, a DA Form 268 will be initiated on the Soldier.
-(1) Commander will initiate administrative action up to and including separation and discharge 
+(1) Commander will initiate administrative action up to and including separation and discharge
 
 If, after 12 months but less than 36 months from the date of release from the ABCP, it is determined that a Soldier again exceeds the body fat standard, a DA Form 268 will be initiated on the Soldier.
 (1) Solider will have 90 days to meet the standards
