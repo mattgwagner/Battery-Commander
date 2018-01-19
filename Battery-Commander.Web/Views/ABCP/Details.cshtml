@@ -12,7 +12,7 @@
 @if (!Model.AreMeasurementsValid)
 {
     <div class="alert alert-danger">
-        Measurements are outside of tolerance (i.e. greater than 1 inch difference!). Please revisit your taping measurements before continuing.
+        @Html.ActionLink("Measurements", "Measurements", "ABCP", new { Model.Id }, new { @class = "btn btn-danger" }) are outside of tolerance (i.e. greater than 1 inch difference!). Please revisit your taping measurements before continuing.
     </div>
 }
 else if (Model.Measurements.Any())
