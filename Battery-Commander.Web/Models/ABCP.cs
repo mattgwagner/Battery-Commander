@@ -242,7 +242,7 @@ namespace BatteryCommander.Web.Models
                 .ABCPs
                 .Where(abcp => abcp.Date < Date)
                 .OrderByDescending(abcp => abcp.Date)
-                .SingleOrDefault();
+                .FirstOrDefault();
 
             return PDFService.Generate_DA4856(new PDFService.Counseling
             {
