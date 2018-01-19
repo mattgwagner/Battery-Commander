@@ -214,7 +214,7 @@ namespace BatteryCommander.Web.Models
         /// <summary>
         /// Returns true if the Soldier made satisfactory progress since the last ABCP weigh-in
         /// </summary>
-        [NotMapped]
+        [NotMapped, Display("Is Satisfactory Progress?")]
         public Boolean IsSatisfactory
         {
             get
