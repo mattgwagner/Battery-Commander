@@ -57,7 +57,11 @@
                             <span class="badge">@(soldier.ConsecutiveApftFailures)x</span>
                         }
                     </td>
-                    <td>@Html.DisplayFor(_ => soldier.LastApft.Date)</td>
+                    <td>
+                        <a href="@Url.Action("Details", new { soldier.LastApft?.Id })">
+                            @Html.DisplayFor(_ => soldier.LastApft.Date)
+                        </a>
+                    </td>
                     <td data-sort="@soldier.LastApft.TotalScore">@Html.DisplayFor(_ => soldier.LastApft.TotalScore)</td>
                     <td>@Html.DisplayFor(_ => soldier.LastApft.PushUps)</td>
                     <td>@Html.DisplayFor(_ => soldier.LastApft.PushUpScore)</td>
