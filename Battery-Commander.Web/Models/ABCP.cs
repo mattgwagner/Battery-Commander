@@ -335,7 +335,7 @@ Encourage and support
 ",
 
                 Assessment = $@"
-{(IsSatisfactory.HasValue ? String.Empty : $"{(IsSatisfactory == true ? "SATISFACTORY" : "UNSATISFACTORY")} progress for the month: {Weight - Previous.Weight}lbs, {BodyFatPercentage - Previous.BodyFatPercentage}% body fat.")}
+{(IsSatisfactory.HasValue ? $"{(IsSatisfactory == true ? "SATISFACTORY" : "UNSATISFACTORY")} progress for the month: {Weight - Previous.Weight}lbs, {BodyFatPercentage - Previous.BodyFatPercentage}% body fat." : "")}
 "
             });
         }
