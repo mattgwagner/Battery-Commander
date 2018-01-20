@@ -35,16 +35,16 @@ else if (Model.Measurements.Any())
     <h3><a href="http://www.armyg1.army.mil/hr/bodyComposition/docs/AR600_9_28-June-2013.pdf">AR 600-9 The Army Body Composition Program</a></h3>
 
     <table class="table table-bordered">
-        @if (Model.Measurements.Any())
+        @if (Model.IsSatisfactory.HasValue)
         {
             <tr>
                 <td>@Html.DisplayNameFor(model => model.IsSatisfactory)</td>
                 <td>
-                    @if(Model.IsSatisfactory)
+                    @if(Model.IsSatisfactory == true)
                     {
                         <span class="alert alert-success">Satifactory</span>
                     }
-                    else
+                    else if(Model.IsSatisfactory == false)
                     {
                         <span class="alert alert-warning">Unsatisfactory</span>
                     }

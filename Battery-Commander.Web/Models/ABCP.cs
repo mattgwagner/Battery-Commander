@@ -215,7 +215,7 @@ namespace BatteryCommander.Web.Models
         /// Returns true if the Soldier made satisfactory progress since the last ABCP weigh-in
         /// </summary>
         [NotMapped, Display(Name = "Is Satisfactory Progress?")]
-        public Boolean IsSatisfactory
+        public Boolean? IsSatisfactory
         {
             get
             {
@@ -227,7 +227,7 @@ namespace BatteryCommander.Web.Models
                     return (delta_weight <= -3 || delta_bodyfat <= -1);
                 }
 
-                return true;
+                return null;
             }
         }
 
