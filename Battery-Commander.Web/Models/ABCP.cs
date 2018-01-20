@@ -219,10 +219,15 @@ namespace BatteryCommander.Web.Models
         {
             get
             {
-                var delta_weight = Weight - Previous.Weight;
-                var delta_bodyfat = BodyFatPercentage - Previous.BodyFatPercentage;
+                if(Previous != null)
+                {
+                    var delta_weight = Weight - Previous.Weight;
+                    var delta_bodyfat = BodyFatPercentage - Previous.BodyFatPercentage;
 
-                return (delta_weight <= -3 || delta_bodyfat <= -1);
+                    return (delta_weight <= -3 || delta_bodyfat <= -1);
+                }
+
+                return true;
             }
         }
 
