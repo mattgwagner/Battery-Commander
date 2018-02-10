@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -62,6 +63,17 @@ namespace BatteryCommander.Web
             var auth0Settings = new Auth0Settings { };
 
             Configuration.GetSection("Auth0").Bind(auth0Settings);
+
+            services.AddCors(options =>
+            {
+                var policy = new CorsPolicy { };
+
+                policy.Origins.Add("*");
+                policy.Headers.Add("*");
+                policy.Methods.Add("*");
+
+                options.AddPolicy("Policy", policy);
+            });
 
             // Add authentication services
 
@@ -209,6 +221,8 @@ namespace BatteryCommander.Web
             });
 
             app.UseAuthentication();
+
+            app.UseCors("Policy");
 
             app.UseMvc(routes =>
             {
