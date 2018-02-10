@@ -49,5 +49,17 @@ namespace BatteryCommander.Web.Controllers.API
 
             return Ok();
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var weapon = await db.Weapons.FindAsync(id);
+
+            db.Weapons.Remove(weapon);
+
+            await db.SaveChangesAsync();
+
+            return Ok();
+        }
     }
 }
