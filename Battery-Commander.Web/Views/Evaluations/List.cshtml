@@ -82,8 +82,12 @@
                 </td>
                 <td data-sort="@evaluation.LastUpdated?.UtcTicks">@Html.DisplayFor(_ => evaluation.LastUpdatedHumanized)</td>
                 <td>@Html.DisplayFor(_ => evaluation.Type)</td>
-                <td>@Html.DisplayFor(_ => evaluation.Rater)</td>
-                <td>@Html.DisplayFor(_ => evaluation.SeniorRater)</td>
+                <td class="@(evaluation.Ratee.SupervisorId != evaluation.RaterId ? "label label-danger" : "")">
+                    @Html.DisplayFor(_ => evaluation.Rater)
+                </td>
+                <td class="@(evaluation.Rater.SupervisorId != evaluation.SeniorRaterId ? "label label-danger" : "")">
+                    @Html.DisplayFor(_ => evaluation.SeniorRater)
+                </td>
                 <td>@Html.DisplayFor(_ => evaluation.Reviewer)</td>
                 <td>@Html.DisplayFor(_ => evaluation.EvaluationId)</td>
                 <td></td>
