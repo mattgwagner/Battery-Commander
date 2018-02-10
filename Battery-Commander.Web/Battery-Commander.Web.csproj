@@ -48,7 +48,7 @@
   <ItemGroup>
     <PackageReference Include="epplus.core" Version="1.5.4" />
     <PackageReference Include="Humanizer.Core" Version="2.2.0" />
-    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.4.0" />
+    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.4.2" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.1" />
