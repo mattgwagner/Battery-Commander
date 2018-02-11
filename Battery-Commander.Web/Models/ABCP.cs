@@ -232,8 +232,8 @@ namespace BatteryCommander.Web.Models
         }
 
         public virtual ABCP Previous =>
-            Soldier
-                .ABCPs
+            Soldier?
+                .ABCPs?
                 .Where(abcp => abcp.Date < Date)
                 .OrderByDescending(abcp => abcp.Date)
                 .FirstOrDefault();
