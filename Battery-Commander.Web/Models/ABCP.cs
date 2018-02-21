@@ -73,7 +73,7 @@ namespace BatteryCommander.Web.Models
         public DateTime Date { get; set; } = DateTime.Today;
 
         [DataType(DataType.Date)]
-        public DateTime ValidThru => Date.AddDays(Soldier.DaysPerYear);
+        public DateTime ValidThru => Date.AddMonths(6);
 
         public Boolean IsValid => DateTime.Today <= ValidThru;
 
