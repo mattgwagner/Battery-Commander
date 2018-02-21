@@ -15,6 +15,12 @@
         @Html.ActionLink("Measurements", "Measurements", "ABCP", new { Model.Id }, new { @class = "btn btn-link" }) are outside of tolerance (i.e. greater than 1 inch difference!). Please revisit your taping measurements before continuing.
     </div>
 }
+else if(Model.Previous != null && Math.Abs(Model.Previous.Height - Model.Height) > ABCP.MAX_DIFFERNCE)
+{
+    <div class="alert alert-danger">
+        HEIGHT measurement differs from previous measurement by greater than @ABCP.MAX_DIFFERNCE inch! Re-check this!
+    </div>
+}
 else if (Model.Measurements.Any())
 {
     @Html.ActionLink("Generate Worksheet", "Worksheet", "ABCP", new { Model.Id }, new { @class = "btn btn-default" })
