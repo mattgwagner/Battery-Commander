@@ -64,7 +64,6 @@
     <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
     <PackageReference Include="Stateless" Version="4.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="1.1.0" />
-    <PackageReference Include="twilio" Version="5.9.2" />
   </ItemGroup>
 
   <ItemGroup>

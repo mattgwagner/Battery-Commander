@@ -179,9 +179,6 @@ namespace BatteryCommander.Web
             // Add functionality to inject IOptions<T>
             services.AddOptions();
 
-            // Add the Twilio settings so it can be injected
-            services.Configure<TwilioSettings>(Configuration.GetSection("Twilio"));
-
             services.AddDbContext<Database>();
 
             // Register the Swagger generator, defining one or more Swagger documents
