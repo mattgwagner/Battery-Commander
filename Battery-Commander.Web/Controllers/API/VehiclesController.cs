@@ -1,6 +1,4 @@
 ﻿using BatteryCommander.Web.Models;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -9,14 +7,11 @@ using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Controllers.API
 {
-    [Route("api/[controller]"), Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    public class VehiclesController : Controller
+    public class VehiclesController : ApiController
     {
-        private readonly Database db;
-
-        public VehiclesController(Database db)
+        public VehiclesController(Database db) : base(db)
         {
-            this.db = db;
+            // Nothing to do here
         }
 
         [HttpGet]

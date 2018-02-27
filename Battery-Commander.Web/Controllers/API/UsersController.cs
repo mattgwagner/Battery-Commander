@@ -1,7 +1,5 @@
 ﻿using BatteryCommander.Web.Models;
 using BatteryCommander.Web.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using System.Net;
@@ -9,18 +7,15 @@ using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Controllers.API
 {
-    [Route("api/[controller]"), Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    public class UsersController : Controller
+    public class UsersController : ApiController
     {
         private readonly IMemoryCache cache;
-        private readonly Database db;
 
         private async Task<Soldier> CurrentUser() => await UserService.FindAsync(db, User, cache);
 
-        public UsersController(IMemoryCache cache, Database db)
+        public UsersController(IMemoryCache cache, Database db) : base(db)
         {
             this.cache = cache;
-            this.db = db;
         }
 
         [HttpGet("me")]
