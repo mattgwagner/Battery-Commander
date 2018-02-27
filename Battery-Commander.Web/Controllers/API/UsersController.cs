@@ -1,5 +1,6 @@
 ﻿using BatteryCommander.Web.Models;
 using BatteryCommander.Web.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Controllers.API
 {
-    [Route("api/[controller]"), Authorize]
+    [Route("api/[controller]"), Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class UsersController : Controller
     {
         private readonly IMemoryCache cache;

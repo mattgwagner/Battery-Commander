@@ -1,15 +1,15 @@
 ﻿using BatteryCommander.Web.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Controllers.API
 {
-    [Route("api/[controller]"), Authorize]
+    [Route("api/[controller]"), Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class WeaponsController : Controller
     {
         private readonly Database db;
