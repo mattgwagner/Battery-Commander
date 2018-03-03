@@ -84,6 +84,19 @@ namespace BatteryCommander.Web
                     options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                     options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 })
+                .AddJwtBearer(o =>
+                {
+                    o.Authority = $"https://{auth0Settings.Domain}";
+                    o.Audience = auth0Settings.ApiIdentifier;
+                    o.RequireHttpsMetadata = !IsDevelopment;
+
+                    //o.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                    //{
+                    //    ValidateIssuer = true,
+                    //    ValidateAudience = true,
+                    //    ValidateLifetime = true
+                    //};
+                })
                 .AddCookie(o => o.LoginPath = new PathString("/Home/Login"))
                 .AddOpenIdConnect("Auth0", options =>
                 {
@@ -155,12 +168,6 @@ namespace BatteryCommander.Web
                             return Task.CompletedTask;
                         }
                     };
-                })
-                .AddJwtBearer(o =>
-                {
-                    o.Authority = $"https://{auth0Settings.Domain}";
-                    o.Audience = auth0Settings.ApiIdentifier;
-                    o.RequireHttpsMetadata = !IsDevelopment;
                 });
 
             // Add framework services.
