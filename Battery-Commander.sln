@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.3
+VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Battery-Commander.Web", "Battery-Commander.Web\Battery-Commander.Web.csproj", "{3D68C84C-78BC-4883-B8C7-1A0E004FD207}"
 EndProject
@@ -16,6 +16,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		Package.ps1 = Package.ps1
 		README.md = README.md
 		Test.ps1 = Test.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{ECA5AE33-1102-4E6A-8954-3CFA446521B0}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\_Helpers.psm1 = scripts\_Helpers.psm1
+		scripts\Bulk-Load-Weapons.ps1 = scripts\Bulk-Load-Weapons.ps1
 	EndProjectSection
 EndProject
 Global
@@ -55,5 +61,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7F8964B9-892A-44B1-B3C4-F5F9F06EF547}
 	EndGlobalSection
 EndGlobal
