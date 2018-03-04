@@ -88,7 +88,7 @@ namespace BatteryCommander.Web
                 {
                     o.Authority = $"https://{auth0Settings.Domain}/";
                     o.Audience = auth0Settings.ApiIdentifier;
-                    o.RequireHttpsMetadata = !IsDevelopment;
+                    //o.RequireHttpsMetadata = !IsDevelopment;
 
                     //o.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
                     //{
