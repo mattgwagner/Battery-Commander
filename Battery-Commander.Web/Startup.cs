@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -67,13 +66,14 @@ namespace BatteryCommander.Web
 
             services.AddCors(options =>
             {
-                var policy = new CorsPolicy { };
-
-                policy.Origins.Add("*");
-                policy.Headers.Add("*");
-                policy.Methods.Add("*");
-
-                options.AddPolicy("Policy", policy);
+                options.AddPolicy("Policy", builder =>
+                    builder
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowAnyOrigin()
+                        .AllowCredentials()
+                        .Build()
+                    );
             });
 
             // Add authentication services
@@ -91,15 +91,16 @@ namespace BatteryCommander.Web
                     o.Audience = auth0Settings.ApiIdentifier;
                     o.RequireHttpsMetadata = !IsDevelopment;
 
-                    //o.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-                    //{
-                    //    ValidateIssuer = true,
-                    //    ValidateAudience = true,
-                    //    ValidateLifetime = true,
-                    //    ValidateIssuerSigningKey = true,
-                    //    ValidIssuer = "",
-                    //    ValidAudience = auth0Settings.ApiIdentifier
-                    //};
+                    o.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = "",
+                        ValidAudience = auth0Settings.ApiIdentifier
+                    };
                 })
                 .AddCookie(o => o.LoginPath = new PathString("/Home/Login"))
                 .AddOpenIdConnect("Auth0", options =>
