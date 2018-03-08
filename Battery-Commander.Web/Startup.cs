@@ -91,16 +91,16 @@ namespace BatteryCommander.Web
                     o.Audience = auth0Settings.ApiIdentifier;
                     o.RequireHttpsMetadata = !IsDevelopment;
 
-                    o.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-                    {
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
-                        ValidateLifetime = true,
+                    //o.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                    //{
+                    //    ValidateIssuer = true,
+                    //    ValidateAudience = true,
+                    //    ValidateLifetime = true,
 
-                        ValidateIssuerSigningKey = true,
-                        ValidIssuer = "",
-                        ValidAudience = auth0Settings.ApiIdentifier
-                    };
+                    //    ValidateIssuerSigningKey = true,
+                    //    ValidIssuer = "",
+                    //    ValidAudience = auth0Settings.ApiIdentifier
+                    //};
                 })
                 .AddCookie(o => o.LoginPath = new PathString("/Home/Login"))
                 .AddOpenIdConnect("Auth0", options =>
