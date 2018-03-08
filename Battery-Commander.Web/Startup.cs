@@ -108,7 +108,7 @@ namespace BatteryCommander.Web
                     options.GetClaimsFromUserInfoEndpoint = true;
 
                     // Set the authority to your Auth0 Domain
-                    options.Authority = $"https://{auth0Settings.Domain}";
+                    options.Authority = $"https://{auth0Settings.Domain}/";
 
                     // Configure the Auth0 Client ID and Client Secret
                     options.ClientId = auth0Settings.ClientId;
