@@ -83,7 +83,7 @@ namespace BatteryCommander.Web
                 {
                     options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                     options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                    options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 })
                 .AddJwtBearer(o =>
                 {
@@ -141,7 +141,7 @@ namespace BatteryCommander.Web
                                 return Task.CompletedTask;
                             }
 
-                            // TODO Do I need to follow the redirect?
+                            context.Response.Redirect(context.Options.SignedOutRedirectUri);
 
                             return Task.CompletedTask;
                         },
