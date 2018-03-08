@@ -6,7 +6,7 @@ Import-Module "$Here\_Helpers" -DisableNameChecking
 
 # Clear out existing -- this is not what we're looking for if we've got multiple units
 
-foreach($Weapon in (BC-Get -Uri "$URL/weapons"))
+foreach($Weapon in (BC-Get -Uri "$URL/weapons?unit=$Unit"))
 {
 	Write-Output "Removing Weapon with ID $($Weapon.Id)"
 
