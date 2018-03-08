@@ -36,7 +36,7 @@ namespace BatteryCommander.Web.Controllers.API
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(Weapon weapon)
+        public async Task<IActionResult> Post([FromBody]Weapon weapon)
         {
             await db.Weapons.AddAsync(weapon);
 
