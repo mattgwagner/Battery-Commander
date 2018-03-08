@@ -91,6 +91,9 @@ namespace BatteryCommander.Web.Models
         public Boolean IsEnlisted => Rank.IsEnlisted();
 
         [NotMapped]
+        public Boolean IsWarrant => Rank.IsWarrantOfficer();
+
+        [NotMapped]
         public Boolean IsNCO => Rank.IsNCO();
 
         [NotMapped]

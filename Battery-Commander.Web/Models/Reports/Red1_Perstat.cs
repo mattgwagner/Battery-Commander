@@ -12,6 +12,7 @@ namespace BatteryCommander.Web.Models.Reports
         public Row Assigned => new Row
         {
             Enlisted = Soldiers.Where(_ => _.IsEnlisted).Count(),
+            Warrant = Soldiers.Where(_ => _.IsWarrant).Count(),
             Officer = Soldiers.Where(_ => _.IsOfficer || _.IsCadet).Count()
         };
 
@@ -22,6 +23,7 @@ namespace BatteryCommander.Web.Models.Reports
         public Row Detached => new Row
         {
             Enlisted = Soldiers.Where(_ => _.IsEnlisted).Where(_ => _.Status == Soldier.SoldierStatus.Detached).Count(),
+            Warrant = Soldiers.Where(_ => _.IsWarrant).Where(_ => _.Status == Soldier.SoldierStatus.Detached).Count(),
             Officer = Soldiers.Where(_ => _.IsOfficer || _.IsCadet).Where(_ => _.Status == Soldier.SoldierStatus.Detached).Count()
         };
 
@@ -29,6 +31,7 @@ namespace BatteryCommander.Web.Models.Reports
         public Row Total => new Row
         {
             Enlisted = Assigned.Enlisted + Attached.Enlisted - Detached.Enlisted,
+            Warrant = Assigned.Warrant + Attached.Warrant - Detached.Warrant,
             Officer = Assigned.Officer + Attached.Officer - Detached.Officer
         };
 
@@ -36,6 +39,7 @@ namespace BatteryCommander.Web.Models.Reports
         public Row PresentForDuty => new Row
         {
             Enlisted = Soldiers.Where(_ => _.IsEnlisted).Where(_ => _.Status == Soldier.SoldierStatus.PresentForDuty).Count(),
+            Warrant = Soldiers.Where(_ => _.IsWarrant).Where(_ => _.Status == Soldier.SoldierStatus.PresentForDuty).Count(),
             Officer = Soldiers.Where(_ => _.IsOfficer || _.IsCadet).Where(_ => _.Status == Soldier.SoldierStatus.PresentForDuty).Count()
         };
 
@@ -52,6 +56,7 @@ namespace BatteryCommander.Web.Models.Reports
         public Row OnLeaveOrPass => new Row
         {
             Enlisted = Soldiers.Where(_ => _.IsEnlisted).Where(_ => _.Status == Soldier.SoldierStatus.OnPass).Count(),
+            Warrant = Soldiers.Where(_ => _.IsWarrant).Where(_ => _.Status == Soldier.SoldierStatus.OnPass).Count(),
             Officer = Soldiers.Where(_ => _.IsOfficer || _.IsCadet).Where(_ => _.Status == Soldier.SoldierStatus.OnPass).Count()
         };
 
@@ -59,6 +64,7 @@ namespace BatteryCommander.Web.Models.Reports
         public Row TDY => new Row
         {
             Enlisted = Soldiers.Where(_ => _.IsEnlisted).Where(_ => _.Status == Soldier.SoldierStatus.TDY).Count(),
+            Warrant = Soldiers.Where(_ => _.IsWarrant).Where(_ => _.Status == Soldier.SoldierStatus.TDY).Count(),
             Officer = Soldiers.Where(_ => _.IsOfficer || _.IsCadet).Where(_ => _.Status == Soldier.SoldierStatus.TDY).Count()
         };
 
@@ -66,6 +72,7 @@ namespace BatteryCommander.Web.Models.Reports
         public Row AWOL => new Row
         {
             Enlisted = Soldiers.Where(_ => _.IsEnlisted).Where(_ => _.Status == Soldier.SoldierStatus.AWOL).Count(),
+            Warrant = Soldiers.Where(_ => _.IsWarrant).Where(_ => _.Status == Soldier.SoldierStatus.AWOL).Count(),
             Officer = Soldiers.Where(_ => _.IsOfficer || _.IsCadet).Where(_ => _.Status == Soldier.SoldierStatus.AWOL).Count()
         };
 
@@ -73,6 +80,7 @@ namespace BatteryCommander.Web.Models.Reports
         public Row RearDetachment => new Row
         {
             Enlisted = Soldiers.Where(_ => _.IsEnlisted).Where(_ => _.Status == Soldier.SoldierStatus.RearDetachment).Count(),
+            Warrant = Soldiers.Where(_ => _.IsWarrant).Where(_ => _.Status == Soldier.SoldierStatus.RearDetachment).Count(),
             Officer = Soldiers.Where(_ => _.IsOfficer || _.IsCadet).Where(_ => _.Status == Soldier.SoldierStatus.RearDetachment).Count()
         };
 
