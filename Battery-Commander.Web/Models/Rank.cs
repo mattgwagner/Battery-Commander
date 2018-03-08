@@ -32,7 +32,7 @@ namespace BatteryCommander.Web.Models
         [Display(Name = "Sergeant First Class", ShortName = "SFC")]
         E7 = 7,
 
-        [Display(Name = "Master Sergeant/First Sergeant", ShortName = "MSG/1SG")]
+        [Display(Name = "First Sergeant", ShortName = "1SG")]
         E8 = 8,
 
         [Display(Name = "Sergeant Major", ShortName = "SGM")]
@@ -54,7 +54,28 @@ namespace BatteryCommander.Web.Models
         O5 = 14,
 
         [Display(Name = "Colonel", ShortName = "COL")]
-        O6 = 15
+        O6 = 15,
+
+        [Display(Name = "Master Sergeant", ShortName = "MSG")]
+        E8_MSG = 16,
+
+        [Display(Name = "Warrant Officer", ShortName = "WO1")]
+        WO1 = 17,
+
+        [Display(Name = "Chief Warrant Officer", ShortName = "WO2")]
+        WO2 = 18,
+
+        [Display(Name = "Chief Warrant Officer", ShortName = "WO3")]
+        WO3 = 19,
+
+        [Display(Name = "Chief Warrant Officer", ShortName = "WO4")]
+        WO4 = 20,
+
+        [Display(Name = "Chief Warrant Officer", ShortName = "WO5")]
+        WO5 = 21,
+
+        [Display(Name = "Corporal", ShortName = "CPL")]
+        E4_CPL = 22
     }
 
     public partial class Soldier
@@ -125,10 +146,12 @@ namespace BatteryCommander.Web.Models
                 case Rank.E2:
                 case Rank.E3:
                 case Rank.E4:
+                case Rank.E4_CPL:
                 case Rank.E5:
                 case Rank.E6:
                 case Rank.E7:
                 case Rank.E8:
+                case Rank.E8_MSG:
                 case Rank.E9:
                     return true;
 
@@ -141,10 +164,12 @@ namespace BatteryCommander.Web.Models
         {
             switch (rank)
             {
+                case Rank.E4_CPL:
                 case Rank.E5:
                 case Rank.E6:
                 case Rank.E7:
                 case Rank.E8:
+                case Rank.E8_MSG:
                 case Rank.E9:
                     return true;
 
