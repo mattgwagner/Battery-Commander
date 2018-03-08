@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -144,6 +145,18 @@ namespace BatteryCommander.Web.Models
                 Rank.CDT,
                 Rank.O1, Rank.O2, Rank.O3,Rank.O4, Rank.O5, Rank.O6
             };
+        }
+
+        public static IEnumerable<SelectListItem> ForSelectList()
+        {
+            foreach (var rank in All())
+            {
+                yield return new SelectListItem
+                {
+                    Text = rank.DisplayName(),
+                    Value = ((int)rank).ToString()
+                };
+            }
         }
 
         public static Boolean IsEnlisted(this Rank rank)
