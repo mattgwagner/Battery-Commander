@@ -82,19 +82,22 @@ namespace BatteryCommander.Web
                 {
                     options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                     options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
                 })
                 .AddJwtBearer(o =>
                 {
                     o.Authority = $"https://{auth0Settings.Domain}/";
                     o.Audience = auth0Settings.ApiIdentifier;
-                    //o.RequireHttpsMetadata = !IsDevelopment;
+                    o.RequireHttpsMetadata = !IsDevelopment;
 
                     //o.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
                     //{
                     //    ValidateIssuer = true,
                     //    ValidateAudience = true,
-                    //    ValidateLifetime = true
+                    //    ValidateLifetime = true,
+                    //    ValidateIssuerSigningKey = true,
+                    //    ValidIssuer = "",
+                    //    ValidAudience = auth0Settings.ApiIdentifier
                     //};
                 })
                 .AddCookie(o => o.LoginPath = new PathString("/Home/Login"))
