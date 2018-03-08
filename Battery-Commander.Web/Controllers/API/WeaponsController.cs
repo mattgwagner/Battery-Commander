@@ -1,7 +1,6 @@
 ﻿using BatteryCommander.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,13 +14,14 @@ namespace BatteryCommander.Web.Controllers.API
         }
 
         [HttpGet]
-        public async Task<IEnumerable<dynamic>> Get()
+        public async Task<IActionResult> Get(int? unit)
         {
             // GET: api/weapons
 
-            return
+            return Ok(
                 await db
                 .Weapons
+                .Where(weapon => !unit.HasValue || weapon.UnitId == unit)
                 .Select(_ => new
                 {
                     _.Id,
@@ -32,7 +32,7 @@ namespace BatteryCommander.Web.Controllers.API
                     _.Type,
                     _.UnitId
                 })
-                .ToListAsync();
+                .ToListAsync());
         }
 
         [HttpPost]
