@@ -123,6 +123,7 @@ namespace BatteryCommander.Web.Models
                         case Rank.E2:
                         case Rank.E3:
                         case Rank.E4:
+                        case Rank.E4_CPL:
                             return SSD_1;
 
                         case Rank.E5:
@@ -133,6 +134,7 @@ namespace BatteryCommander.Web.Models
 
                         case Rank.E7:
                         case Rank.E8:
+                        case Rank.E8_MSG:
                             return SSD_4;
 
                         case Rank.E9:
@@ -179,6 +181,7 @@ namespace BatteryCommander.Web.Models
                 case Rank.E2:
                 case Rank.E3:
                 case Rank.E4:
+                case Rank.E4_CPL:
                     return SSD.SSD_1;
 
                 case Rank.E5:
@@ -189,6 +192,7 @@ namespace BatteryCommander.Web.Models
 
                 case Rank.E7:
                 case Rank.E8:
+                case Rank.E8_MSG:
                     return SSD.SSD_4;
 
                 case Rank.E9:
