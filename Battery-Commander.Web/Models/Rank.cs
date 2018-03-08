@@ -130,12 +130,20 @@ namespace BatteryCommander.Web.Models
 
         public static IEnumerable<Rank> Enlisted => All().Where(rank => rank.IsEnlisted());
 
+        public static IEnumerable<Rank> Warrants => All().Where(rank => rank.IsWarrantOfficer());
+
+        /// <summary>
+        /// Returns an ordered list of ranks for display
+        /// </summary>
         public static IEnumerable<Rank> All()
         {
-            foreach (Rank rank in Enum.GetValues(typeof(Rank)))
+            return new[]
             {
-                yield return rank;
-            }
+                Rank.E1, Rank.E2, Rank.E3, Rank.E4, Rank.E4_CPL, Rank.E5, Rank.E6, Rank.E7, Rank.E8_MSG, Rank.E8, Rank.E9,
+                Rank.WO1, Rank.WO2, Rank.WO3, Rank.WO4, Rank.WO5,
+                Rank.CDT,
+                Rank.O1, Rank.O2, Rank.O3,Rank.O4, Rank.O5, Rank.O6
+            };
         }
 
         public static Boolean IsEnlisted(this Rank rank)
@@ -153,6 +161,22 @@ namespace BatteryCommander.Web.Models
                 case Rank.E8:
                 case Rank.E8_MSG:
                 case Rank.E9:
+                    return true;
+
+                default:
+                    return false;
+            }
+        }
+
+        public static Boolean IsWarrantOfficer(this Rank rank)
+        {
+            switch (rank)
+            {
+                case Rank.WO1:
+                case Rank.WO2:
+                case Rank.WO3:
+                case Rank.WO4:
+                case Rank.WO5:
                     return true;
 
                 default:
