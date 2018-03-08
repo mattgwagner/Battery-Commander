@@ -14,6 +14,7 @@ using Serilog;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.IO;
+using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -132,6 +133,19 @@ namespace BatteryCommander.Web
 
                     options.Events = new OpenIdConnectEvents
                     {
+                        OnRedirectToIdentityProvider = (context) =>
+                        {
+                            if (context.Request.Path.StartsWithSegments("/api"))
+                            {
+                                context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                                return Task.CompletedTask;
+                            }
+
+                            // TODO Do I need to follow the redirect?
+
+                            return Task.CompletedTask;
+                        },
+
                         OnTicketReceived = (context) =>
                         {
                             var identity = context.Principal.Identity as ClaimsIdentity;
