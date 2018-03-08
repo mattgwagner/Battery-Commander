@@ -13,14 +13,26 @@ foreach($Weapon in (BC-Get -Uri "$URL/weapons?unit=$Unit"))
 	BC-Delete -Uri "$URL/weapons?id=$($Weapon.Id)"
 }
 
+
+$Soldiers = (BC-Get "$URL/soldiers?unit=$Unit")
+
 # Get weapons from CSV file
 
 foreach($Weapon in (Import-Csv -Path $Here\WEAPONS_ROSTER.csv))
 {
 	# Create new weapon with info
 
-	Write-Output "Create new MAL entry for $Weapon"
+	$Soldier = @{}
 
-	BC-Post -Uri "$URL/Weapons" -Body @{ UnitId = $Unit; AdminNumber = $Weapon.NUM; Serial = $Weapon.SERIAL; OpticSerial = $Weapon.CCO; }
+	if($Weapon.NAME) 
+	{
+		Write-Host "Finding SM"
+
+		$Soldier = $Soldiers | Where-Object -Property lastName -Like -Value "$($Weapon.NAME.Split(' ')[0])*" | Select-Object -First 1
+	}
+
+	Write-Output "Create new MAL entry for $Weapon to $Soldier"
+
+	BC-Post -Uri "$URL/Weapons" -Body @{ UnitId = $Unit; AdminNumber = $Weapon.NUM; Serial = $Weapon.SERIAL; OpticSerial = $Weapon.CCO; AssignedId = $Soldier.id; }
 }
 
