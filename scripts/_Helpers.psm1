@@ -1,6 +1,7 @@
 $Here = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
 
 $URL = 'https://bc.red-leg-dev.com/api'
+#$URL = 'http://localhost:50832/api'
 
 $SolutionRoot = (Split-Path -parent $Here)
 
