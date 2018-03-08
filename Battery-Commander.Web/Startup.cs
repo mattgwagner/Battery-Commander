@@ -87,7 +87,7 @@ namespace BatteryCommander.Web
                 })
                 .AddJwtBearer(o =>
                 {
-                    //o.Authority = $"https://{auth0Settings.Domain}/";
+                    o.Authority = $"https://{auth0Settings.Domain}/";
                     o.Audience = auth0Settings.ApiIdentifier;
                     o.RequireHttpsMetadata = !IsDevelopment;
 
