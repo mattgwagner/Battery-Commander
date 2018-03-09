@@ -4,13 +4,24 @@
 {
     <div>
         <a href="@Url.Action("Details", "ABCP", new { Model.Id })">
-            @if (Model.IsValid && Model.IsPassing)
+            @if (Model.IsPassing)
             {
-                <span class="label label-success">GO</span>
-            }
-            else if (Model.IsPassing)
-            {
-                <span class="label label-warning">GO (Due)</span>
+                // Per request, if the weigh-in is within the last 6 months, it's GREEN
+                // If it's 6-9 months, AMBER
+                // 9 months+, RED
+
+                if (Model.Date < DateTime.Today.AddMonths(-6))
+                {
+                    <span class="label label-success">GO</span>
+                }
+                else if (Model.Date < DateTime.Today.AddMonths(-9))
+                {
+                    <span class="label label-warning">GO</span>
+                }
+                else
+                {
+                    <span class="label label-danger">GO</span>
+                }
             }
             else
             {
