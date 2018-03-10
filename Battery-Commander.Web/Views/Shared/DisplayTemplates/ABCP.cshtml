@@ -10,11 +10,11 @@
                 // If it's 6-9 months, AMBER
                 // 9 months+, RED
 
-                if (Model.Date < DateTime.Today.AddMonths(-6))
+                if (Model.Date > DateTime.Today.AddMonths(-6))
                 {
                     <span class="label label-success">GO</span>
                 }
-                else if (Model.Date < DateTime.Today.AddMonths(-9))
+                else if (Model.Date > DateTime.Today.AddMonths(-9))
                 {
                     <span class="label label-warning">GO</span>
                 }
