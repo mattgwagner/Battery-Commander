@@ -52,7 +52,7 @@
                 {
                     <td>
                         @Html.DisplayFor(_ => soldier.LastApft, "APFT")
-                        @if(!soldier.LastApft.IsPassing)
+                        @if (!soldier.LastApft.IsPassing)
                         {
                             <span class="badge">@(soldier.ConsecutiveApftFailures)x</span>
                         }
@@ -67,17 +67,24 @@
                     <td>@Html.DisplayFor(_ => soldier.LastApft.PushUpScore)</td>
                     <td>@Html.DisplayFor(_ => soldier.LastApft.SitUps)</td>
                     <td>@Html.DisplayFor(_ => soldier.LastApft.SitUpScore)</td>
-                    <td>                        
+                    <td>
+
+                        @Html.DisplayFor(_ => soldier.LastApft.Run)
+                        @if (soldier.LastApft.IsAlternateAerobicEvent)
+                        {
+                            <span class="label label-info">Alt.</span>
+                        }
+                    </td>
+                    <td>
                         @if (soldier.LastApft.IsAlternateAerobicEvent)
                         {
                             <span class="label label-info">Alt.</span>
                         }
                         else
                         {
-                            @Html.DisplayFor(_ => soldier.LastApft.Run)
+                            @Html.DisplayFor(_ => soldier.LastApft.RunScore)
                         }
                     </td>
-                    <td>@Html.DisplayFor(_ => soldier.LastApft.RunScore)</td>
                 }
                 else
                 {
