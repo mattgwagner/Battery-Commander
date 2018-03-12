@@ -20,11 +20,15 @@ namespace BatteryCommander.Tests
                     Gender = Gender.Male,
                     DateOfBirth = DateTime.Today.AddYears(-25)
                 },
+                PushUps = 100,
+                SitUps = 100,
                 AerobicEvent = Event.Walk,
                 Run = TimeSpan.FromMinutes(16)
             };
 
-            Assert.Equal(60, score.RunScore);
+            Assert.Equal(0, score.RunScore);
+            Assert.True(score.IsAlternateAerobicEvent);
+            Assert.True(score.IsPassing);
         }
 
         [Fact]
@@ -44,6 +48,8 @@ namespace BatteryCommander.Tests
             };
 
             Assert.Equal(0, score.RunScore);
+            Assert.True(score.IsAlternateAerobicEvent);
+            Assert.False(score.IsPassing);
         }
 
         [Fact]
@@ -58,11 +64,15 @@ namespace BatteryCommander.Tests
                     Gender = Gender.Male,
                     DateOfBirth = DateTime.Today.AddYears(-29)
                 },
+                PushUps = 100,
+                SitUps = 100,
                 AerobicEvent = Event.Walk,
                 Run = TimeSpan.FromMinutes(30.25)
             };
 
-            Assert.Equal(60, score.RunScore);
+            Assert.Equal(0, score.RunScore);
+            Assert.True(score.IsAlternateAerobicEvent);
+            Assert.True(score.IsPassing);
         }
 
         [Fact]
@@ -84,7 +94,7 @@ namespace BatteryCommander.Tests
             Assert.Equal(86, score.SitUpScore);
             Assert.Equal(84, score.RunScore);
             Assert.Equal(236, score.TotalScore);
-            Assert.Equal(true, score.IsPassing);
+            Assert.True(score.IsPassing);
         }
 
         [Theory]
