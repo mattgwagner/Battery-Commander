@@ -182,7 +182,7 @@ namespace BatteryCommander.Web.Models
         }
 
         [Display(Name = "Total")]
-        public int TotalScore => PushUpScore + SitUpScore + RunScore;
+        public int TotalScore => PushUpScore + SitUpScore + (IsAlternateAerobicEvent ? 0 : RunScore);
 
         [Display(Name = "Is Passing?")]
         public Boolean IsPassing => new[] { PushUpScore, SitUpScore, RunScore }.All(s => s >= MinimumPerEvent);
