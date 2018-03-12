@@ -152,40 +152,57 @@ namespace BatteryCommander.Web.Models
         {
             get
             {
-                switch (AerobicEvent)
-                {
-                    // Alternate aerobic events are pass/fail. To clear the other logical checks, just return 60 here if they meet standards.
+                // Alternate aerobic events are pass/fail, and score as 0 points.
 
-                    case Event.Bike_Moving:
-                    case Event.Bike_Stationary:
-                        return APFTScoreTables.Bicycle.Where(row => row.AgeGroup == AgeGroup).Where(row => row.Gender == Soldier?.Gender).Select(row => row.Reps).SingleOrDefault() >= RunSeconds ? MinimumPerEvent : 0;
+                if (IsAlternateAerobicEvent) return 0;
 
-                    case Event.Walk:
-                        return APFTScoreTables.Walk.Where(row => row.AgeGroup == AgeGroup).Where(row => row.Gender == Soldier?.Gender).Select(row => row.Reps).SingleOrDefault() >= RunSeconds ? MinimumPerEvent : 0;
-
-                    case Event.Swim:
-                        return APFTScoreTables.Swim.Where(row => row.AgeGroup == AgeGroup).Where(row => row.Gender == Soldier?.Gender).Select(row => row.Reps).SingleOrDefault() >= RunSeconds ? MinimumPerEvent : 0;
-
-                    case Event.Run:
-                    default:
-                        return
-                            APFTScoreTables
-                            .Run
-                            .OrderBy(row => row.Reps)
-                            .Where(row => row.AgeGroup == AgeGroup)
-                            .Where(row => row.Gender == Soldier?.Gender)
-                            .Where(row => row.Reps >= Run.TotalSeconds)
-                            .Select(row => row.Score)
-                            .FirstOrDefault();
-                }
+                return
+                    APFTScoreTables
+                    .Run
+                    .OrderBy(row => row.Reps)
+                    .Where(row => row.AgeGroup == AgeGroup)
+                    .Where(row => row.Gender == Soldier?.Gender)
+                    .Where(row => row.Reps >= Run.TotalSeconds)
+                    .Select(row => row.Score)
+                    .FirstOrDefault();
             }
         }
 
         [Display(Name = "Total")]
-        public int TotalScore => PushUpScore + SitUpScore + (IsAlternateAerobicEvent ? 0 : RunScore);
+        public int TotalScore => PushUpScore + SitUpScore + RunScore;
 
         [Display(Name = "Is Passing?")]
-        public Boolean IsPassing => new[] { PushUpScore, SitUpScore, RunScore }.All(s => s >= MinimumPerEvent);
+        public Boolean IsPassing
+        {
+            get
+            {
+                int aerobic_score = 0;
+
+                switch (AerobicEvent)
+                {
+                    // Check their aerobic event performance against the standard -- return the minimum here so that the check below is simpler
+
+                    case Event.Bike_Moving:
+                    case Event.Bike_Stationary:
+                        aerobic_score = APFTScoreTables.Bicycle.Where(row => row.AgeGroup == AgeGroup).Where(row => row.Gender == Soldier?.Gender).Select(row => row.Reps).SingleOrDefault() >= RunSeconds ? MinimumPerEvent : 0;
+                        break;
+
+                    case Event.Walk:
+                        aerobic_score = APFTScoreTables.Walk.Where(row => row.AgeGroup == AgeGroup).Where(row => row.Gender == Soldier?.Gender).Select(row => row.Reps).SingleOrDefault() >= RunSeconds ? MinimumPerEvent : 0;
+                        break;
+
+                    case Event.Swim:
+                        aerobic_score = APFTScoreTables.Swim.Where(row => row.AgeGroup == AgeGroup).Where(row => row.Gender == Soldier?.Gender).Select(row => row.Reps).SingleOrDefault() >= RunSeconds ? MinimumPerEvent : 0;
+                        break;
+
+                    default:
+                        aerobic_score = RunScore;
+                        break;
+                }
+
+                return new[] { PushUpScore, SitUpScore, aerobic_score }.All(s => s >= MinimumPerEvent);
+            }
+        }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
