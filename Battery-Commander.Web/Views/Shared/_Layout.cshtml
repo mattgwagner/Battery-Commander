@@ -68,7 +68,7 @@
                 buttons: [
                     { extend: 'csvHtml5', title: '@ViewBag.Title @DateTime.Today.ToString("u")', exportOptions: { columns: ':visible', orthogonal: 'sort' } },
                     { extend: 'excelHtml5', title: '@ViewBag.Title @DateTime.Today.ToString("u")', exportOptions: { columns: ':visible', orthogonal: 'sort' } },
-                    { extend: 'pdfHtml5', title: '@ViewBag.Title @DateTime.Today.ToString("u")', exportOptions: { columns: ':visible' } },
+                    { extend: 'pdfHtml5', title: '@ViewBag.Title @DateTime.Today.ToString("u")', exportOptions: { columns: ':visible' }, orientation: 'landscape' },
                     'colvis'
                 ]
             });
