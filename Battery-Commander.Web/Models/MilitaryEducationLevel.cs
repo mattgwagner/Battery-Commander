@@ -42,6 +42,8 @@ namespace BatteryCommander.Web.Models
         {
             switch (rank)
             {
+                // Do Warrant Officers have requirements?
+
                 case Rank.E5:
                     return MilitaryEducationLevel.BLC;
 
@@ -52,6 +54,8 @@ namespace BatteryCommander.Web.Models
                     return MilitaryEducationLevel.SLC;
 
                 case Rank.E8:
+                case Rank.E8_MSG:
+                case Rank.E9:
                     return MilitaryEducationLevel.MLC;
 
                 case Rank.CDT:
@@ -62,6 +66,7 @@ namespace BatteryCommander.Web.Models
                     return MilitaryEducationLevel.BOLC;
 
                 case Rank.O3:
+                case Rank.O4:
                     return MilitaryEducationLevel.CCC;
 
                 default:
