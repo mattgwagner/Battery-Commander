@@ -68,7 +68,6 @@
                     <td>@Html.DisplayFor(_ => soldier.LastApft.SitUps)</td>
                     <td>@Html.DisplayFor(_ => soldier.LastApft.SitUpScore)</td>
                     <td>
-
                         @Html.DisplayFor(_ => soldier.LastApft.Run)
                         @if (soldier.LastApft.IsAlternateAerobicEvent)
                         {
@@ -76,11 +75,7 @@
                         }
                     </td>
                     <td>
-                        @if (soldier.LastApft.IsAlternateAerobicEvent)
-                        {
-                            <span class="label label-info">Alt.</span>
-                        }
-                        else
+                        @if (!soldier.LastApft.IsAlternateAerobicEvent)
                         {
                             @Html.DisplayFor(_ => soldier.LastApft.RunScore)
                         }
