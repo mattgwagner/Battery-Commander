@@ -24,14 +24,14 @@
     <table class="table table-striped display nowrap" width="100%" id="dt">
         <thead>
             <tr>
-                <th>Links</th>
-                <th>@Html.DisplayNameFor(_ => _.Weapons.FirstOrDefault().Unit)</th>
+                <th data-priority="10001">Links</th>
+                <th data-priority="10001">@Html.DisplayNameFor(_ => _.Weapons.FirstOrDefault().Unit)</th>
                 <th>@Html.DisplayNameFor(_ => _.Weapons.FirstOrDefault().Type)</th>
-                <th>@Html.DisplayNameFor(_ => _.Weapons.FirstOrDefault().AdminNumber)</th>
-                <th>@Html.DisplayNameFor(_ => _.Weapons.FirstOrDefault().Serial)</th>
-                <th>@Html.DisplayNameFor(_ => _.Weapons.FirstOrDefault().OpticSerial)</th>
+                <th data-priority="1">@Html.DisplayNameFor(_ => _.Weapons.FirstOrDefault().AdminNumber)</th>
+                <th data-priority="1">@Html.DisplayNameFor(_ => _.Weapons.FirstOrDefault().Serial)</th>
+                <th data-priority="1">@Html.DisplayNameFor(_ => _.Weapons.FirstOrDefault().OpticSerial)</th>
                 <th>@Html.DisplayNameFor(_ => _.Weapons.FirstOrDefault().OpticType)</th>
-                <th>@Html.DisplayNameFor(_ => _.Weapons.FirstOrDefault().Assigned)</th>
+                <th data-priority="2">@Html.DisplayNameFor(_ => _.Weapons.FirstOrDefault().Assigned)</th>
                 <th>Date/Time Out</th>
                 <th>Signature</th>
                 <th>Date/Time In</th>
