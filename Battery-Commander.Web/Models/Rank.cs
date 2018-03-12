@@ -184,6 +184,30 @@ namespace BatteryCommander.Web.Models
             }
         }
 
+        public static Boolean GetsEvaluation(this Rank rank)
+        {
+            switch (rank)
+            {
+                case Rank.E5:
+                case Rank.E6:
+                case Rank.E7:
+                case Rank.E8:
+                case Rank.E8_MSG:
+                case Rank.E9:
+
+                case Rank.O1:
+                case Rank.O2:
+                case Rank.O3:
+                case Rank.O4:
+                case Rank.O5:
+                case Rank.O6:
+                    return true;
+
+                default:
+                    return false;
+            }
+        }
+
         public static Boolean IsWarrantOfficer(this Rank rank)
         {
             switch (rank)
@@ -204,7 +228,7 @@ namespace BatteryCommander.Web.Models
         {
             switch (rank)
             {
-                // case Rank.E4_CPL:
+                case Rank.E4_CPL:
                 case Rank.E5:
                 case Rank.E6:
                 case Rank.E7:
