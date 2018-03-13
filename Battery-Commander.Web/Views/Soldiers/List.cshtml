@@ -65,7 +65,7 @@
                         <span class="label label-default">@Html.DisplayFor(s => soldier.TimeInGradeHumanized)</span>
                     </td>
                     <td data-sort="@soldier.TimeTillETS?.TotalDays">@Html.DisplayFor(s => soldier, "ETS")</td>
-                    <td data-sort="@soldier.LastApft?.TotalScore">
+                    <td data-sort="@soldier.LastApft?.IsPassing">
                         @Html.DisplayFor(s => soldier.LastApft)
                         @if (soldier.LastApft?.IsAlternateAerobicEvent == true)
                         {
