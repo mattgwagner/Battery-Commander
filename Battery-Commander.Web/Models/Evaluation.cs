@@ -121,6 +121,8 @@ namespace BatteryCommander.Web.Models
             public string Author { get; set; }
 
             public string Message { get; set; }
+
+            public override string ToString() => $"{Author}: {Message}";
         }
     }
 
