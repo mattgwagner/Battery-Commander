@@ -2,6 +2,12 @@
 
 @{
     ViewBag.Title = "Master Authorization List";
+
+    var has_unit_mismatch =
+        Model
+        .Weapons
+        .Where(weapon => weapon.AssignedId.HasValue && weapon.UnitId != weapon.Assigned?.UnitId)
+        .Any();
 }
 
 <div class="page-header">
@@ -18,6 +24,13 @@
         </small>
     </h4>
 </div>
+
+@if(has_unit_mismatch)
+{
+    <div class="alert alert-warning">
+        Highlighted rows below are assigned to Soldiers not affiliated with the weapon's assigned unit.
+    </div>
+}
 
 <div id="weapon-list">
 
@@ -42,7 +55,9 @@
         <tbody>
             @foreach (var weapon in Model.Weapons)
             {
-                <tr>
+                var weapon_class = weapon.AssignedId.HasValue && weapon.Assigned?.UnitId != weapon.UnitId ? "warning" : "";
+
+                <tr class="@weapon_class">
                     <td>
                         @Html.ActionLink("Edit", "Edit", "Weapons", new { weapon.Id })
                         @Html.ActionLink("Receipt", "Receipt", "Weapons", new { weapon.Id })
