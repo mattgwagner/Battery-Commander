@@ -1,6 +1,8 @@
-﻿using BatteryCommander.Web.Services;
+﻿using BatteryCommander.Web.Controllers;
+using BatteryCommander.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
+using System;
 using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Models
@@ -11,6 +13,8 @@ namespace BatteryCommander.Web.Models
         private readonly Database db;
 
         public Soldier Soldier { get; private set; }
+
+        public Boolean ShowNavigation => !String.Equals(nameof(HomeController.PrivacyAct), RouteData.Values["action"]);
 
         public NavigationViewComponent(IMemoryCache cache, Database db)
         {
