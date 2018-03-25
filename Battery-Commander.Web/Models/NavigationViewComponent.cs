@@ -1,7 +1,6 @@
 ﻿using BatteryCommander.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Models
@@ -11,20 +10,19 @@ namespace BatteryCommander.Web.Models
         private readonly IMemoryCache cache;
         private readonly Database db;
 
+        public Soldier Soldier { get; private set; }
+
         public NavigationViewComponent(IMemoryCache cache, Database db)
         {
             this.cache = cache;
             this.db = db;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(ClaimsPrincipal user)
+        public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View(new ViewModel { Soldier = await UserService.FindAsync(db, user, cache) });
-        }
+            Soldier = await UserService.FindAsync(db, this.UserClaimsPrincipal, cache);
 
-        public class ViewModel
-        {
-            public Soldier Soldier { get; set; }
+            return View(this);
         }
     }
 }
