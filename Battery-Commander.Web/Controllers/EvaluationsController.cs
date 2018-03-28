@@ -17,7 +17,12 @@ namespace BatteryCommander.Web.Controllers
 
         private readonly IMemoryCache cache;
 
-        private async Task<Soldier> CurrentUser() => await UserService.FindAsync(db, User, cache);
+        private async Task<String> GetDisplayName()
+        {
+            var user = await UserService.FindAsync(db, User, cache);
+
+            return user?.ToString() ?? User.Identity.Name;
+        }
 
         public EvaluationsController(IMemoryCache cache, Database db)
         {
@@ -77,15 +82,11 @@ namespace BatteryCommander.Web.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Save(Evaluation model)
         {
-            var user = await CurrentUser();
-
-            var display_name = user?.ToString() ?? User.Identity.Name;
-
             if (await db.Evaluations.AnyAsync(evaluation => evaluation.Id == model.Id) == false)
             {
                 model.Events.Add(new Evaluation.Event
                 {
-                    Author = display_name,
+                    Author = await GetDisplayName(),
                     Message = "Added Evaluation"
                 });
 
@@ -95,7 +96,7 @@ namespace BatteryCommander.Web.Controllers
             {
                 model.Events.Add(new Evaluation.Event
                 {
-                    Author = display_name,
+                    Author = await GetDisplayName(),
                     Message = "Evaluation Updated"
                 });
 
@@ -116,7 +117,7 @@ namespace BatteryCommander.Web.Controllers
 
             evaluation.Events.Add(new Evaluation.Event
             {
-                Author = User.Identity.Name,
+                Author = await GetDisplayName(),
                 Message = trigger.DisplayName()
             });
 
@@ -132,7 +133,7 @@ namespace BatteryCommander.Web.Controllers
 
             evaluation.Events.Add(new Evaluation.Event
             {
-                Author = User.Identity.Name,
+                Author = await GetDisplayName(),
                 Message = message
             });
 
