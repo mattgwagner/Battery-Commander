@@ -1,7 +1,6 @@
 ﻿using BatteryCommander.Web.Models;
-using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -30,21 +29,18 @@ namespace BatteryCommander.Web.Controllers
         [AllowAnonymous]
         public IActionResult Login()
         {
-            return new ChallengeResult("Auth0", new Microsoft.AspNetCore.Authentication.AuthenticationProperties
+            return new ChallengeResult("Auth0", new AuthenticationProperties
             {
                 RedirectUri = Url.Action(nameof(PrivacyAct))
             });
         }
 
         [Route("~/Logout")]
-        public async Task Logout()
+        public async Task<IActionResult> Logout()
         {
-            await HttpContext.Authentication.SignOutAsync("Auth0", new AuthenticationProperties
-            {
-                RedirectUri = Url.Action(nameof(Login))
-            });
+            await HttpContext.SignOutAsync();
 
-            await HttpContext.Authentication.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction(nameof(Login));
         }
 
         public IActionResult Error()
