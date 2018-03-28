@@ -3,6 +3,7 @@ using BatteryCommander.Web.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,9 +15,14 @@ namespace BatteryCommander.Web.Controllers
     {
         private readonly Database db;
 
-        public EvaluationsController(Database db)
+        private readonly IMemoryCache cache;
+
+        private async Task<Soldier> CurrentUser() => await UserService.FindAsync(db, User, cache);
+
+        public EvaluationsController(IMemoryCache cache, Database db)
         {
-            this.db = db;
+            this.cache = cache;
+            this.cache = cache;
         }
 
         public async Task<IActionResult> Index(Boolean includeComplete = false, Boolean onlyDelinquent = false)
@@ -71,11 +77,15 @@ namespace BatteryCommander.Web.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Save(Evaluation model)
         {
+            var user = await CurrentUser();
+
+            var display_name = user?.ToString() ?? User.Identity.Name;
+
             if (await db.Evaluations.AnyAsync(evaluation => evaluation.Id == model.Id) == false)
             {
                 model.Events.Add(new Evaluation.Event
                 {
-                    Author = User.Identity.Name,
+                    Author = display_name,
                     Message = "Added Evaluation"
                 });
 
@@ -85,7 +95,7 @@ namespace BatteryCommander.Web.Controllers
             {
                 model.Events.Add(new Evaluation.Event
                 {
-                    Author = User.Identity.Name,
+                    Author = display_name,
                     Message = "Evaluation Updated"
                 });
 
