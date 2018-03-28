@@ -21,7 +21,7 @@ namespace BatteryCommander.Web.Controllers
 
         public EvaluationsController(IMemoryCache cache, Database db)
         {
-            this.cache = cache;
+            this.db = db;
             this.cache = cache;
         }
 
