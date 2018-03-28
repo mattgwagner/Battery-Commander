@@ -213,6 +213,8 @@ namespace BatteryCommander.Web
 
                 c.SwaggerDoc(API_Version, new Info { Title = API_Name, Version = API_Version });
 
+                c.CustomSchemaIds(x => x.FullName);
+
                 c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "BatteryCommander.Web.xml"));
             });
         }
