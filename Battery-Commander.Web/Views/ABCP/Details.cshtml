@@ -18,7 +18,7 @@
 else if(Model.Previous != null && Math.Abs(Model.Previous.Height - Model.Height) > ABCP.MAX_DIFFERNCE)
 {
     <div class="alert alert-danger">
-        HEIGHT measurement differs from previous measurement by greater than @ABCP.MAX_DIFFERNCE inch! Re-check this!
+        HEIGHT measurement differs from previous measurement by greater than @ABCP.MAX_DIFFERNCE inch! Previous @Model.Previous.Height Re-check this!
     </div>
 }
 else if (Model.Measurements.Any())
