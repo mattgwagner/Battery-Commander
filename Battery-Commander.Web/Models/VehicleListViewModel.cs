@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,6 +8,10 @@ namespace BatteryCommander.Web.Models
     public class VehicleListViewModel
     {
         public IEnumerable<SelectListItem> Soldiers { get; set; } = Enumerable.Empty<SelectListItem>();
+
+        public Array Statuses => Enum.GetNames(typeof(Vehicle.VehicleStatus));
+
+        public Array Locations => Enum.GetNames(typeof(Vehicle.VehicleLocation));
 
         public IEnumerable<Vehicle> Vehicles { get; set; } = Enumerable.Empty<Vehicle>();
 

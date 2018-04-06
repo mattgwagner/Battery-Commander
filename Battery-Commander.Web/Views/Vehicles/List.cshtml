@@ -48,7 +48,7 @@
             {
                 <tr>
                     <td>
-                        <span class="update-status" data-vehicle="@vehicle.Id" data-status="@((int)vehicle.Status)" data-notes="@vehicle.Notes" data-location="@vehicle.Location" data-sort="@((int)vehicle.Status)">
+                        <span class="update-status" data-vehicle="@vehicle.Id" data-status="@vehicle.Status" data-notes="@vehicle.Notes" data-location="@vehicle.Location" data-sort="@vehicle.Status">
                             @Html.DisplayFor(_ => vehicle, "VehicleStatus")
                         </span>
                         @if (vehicle.HasFuelCard)
@@ -74,7 +74,7 @@
                     <td>@Html.DisplayFor(_ => vehicle.Serial)</td>
                     <td>@Html.DisplayFor(_ => vehicle.LIN)</td>
                     @if (vehicle.Available)
-                {
+                    {
                         <td>
                             @if (vehicle.DriverId.HasValue)
                             {
@@ -128,7 +128,7 @@
     <div style="display:none" id="set-driver" title="Update Driver/A-Driver">
         <div class="form-group form-group-lg">
             @Html.Label("Driver")
-            <select data-bind="value: driverId, options: soldiers, optionsText: 'Text', optionsValue: 'Value', optionsCaption: 'Choose a Driver'"class="select2"></select>
+            <select data-bind="value: driverId, options: soldiers, optionsText: 'Text', optionsValue: 'Value', optionsCaption: 'Choose a Driver'" class="select2"></select>
         </div>
 
         <div class="form-group form-group-lg">
@@ -140,27 +140,22 @@
     </div>
 
     <div style="display:none" id="set-status" title="Update Vehicle Status">
-        @using (Html.BeginForm("SetStatus", "Vehicles", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-        {
-            <input id="vehicleId" name="vehicleId" type="hidden" />
+        <div class="form-group form-group-lg">
+            @Html.Label("Status")
+            <select data-bind="value: status, options: statuses"></select>
+        </div>
 
-            <div class="form-group form-group-lg">
-                @Html.Label("Status")
-                @Html.DropDownList("status", Html.GetEnumSelectList<Vehicle.VehicleStatus>())
-            </div>
+        <div class="form-group form-group-lg">
+            @Html.Label("Location")
+            <select data-bind="value: location, options: locations"></select>
+        </div>
 
-            <div class="form-group form-group-lg">
-                @Html.Label("Location")
-                @Html.DropDownList("location", Html.GetEnumSelectList<Vehicle.VehicleLocation>())
-            </div>
+        <div class="form-group form-group-lg">
+            @Html.Label("Notes")
+            <input type="text" data-bind="value: notes" />
+        </div>
 
-            <div class="form-group form-group-lg">
-                @Html.Label("Notes")
-                @Html.TextArea("notes")
-            </div>
-
-            <button type="submit" id="save">Save</button>
-        }
+        <button data-bind="click: save_vehicle">Save</button>
     </div>
 
 </div>
@@ -168,21 +163,15 @@
 @section Scripts{
     <script type="text/javascript">
         $(document).ready(function () {
-            $("td .update-status").click(function (e) {
-                $("[name='vehicleId']").val($(this).data('vehicle'));
-                $("#status").val($(this).data('status')).trigger('change');
-                $("#notes").val($(this).data('notes'));
-                $("#location").val($(this).data('location')).trigger('change');
-
-                $("#set-status").dialog({
-                    modal: true
-                });
-            });
-
             var viewModel = {
                 driverId: ko.observable(),
                 adriverId: ko.observable(),
                 vehicleId: ko.observable(),
+                status: ko.observable(),
+                notes: ko.observable(''),
+                location: ko.observable(),
+                locations: ko.mapping.fromJSON('@Html.Raw(JsonConvert.SerializeObject(Model.Locations))'),
+                statuses: ko.mapping.fromJSON('@Html.Raw(JsonConvert.SerializeObject(Model.Statuses))'),
                 soldiers: ko.mapping.fromJSON('@Html.Raw(JsonConvert.SerializeObject(Model.Soldiers))')
             };
 
@@ -195,15 +184,33 @@
                 location.reload();
             };
 
+            viewModel.save_vehicle = function () {
+                $.post('@Url.Action("SetStatus")', {
+                    vehicleId: viewModel.vehicleId,
+                    status: viewModel.status,
+                    notes: viewModel.notes,
+                    location: viewModel.location
+                });
+                location.reload();
+            };
+
+            $("td .update-status").click(function (e) {
+                e.preventDefault();
+                viewModel.vehicleId($(this).data('vehicle'));
+                viewModel.status($(this).data('status'));
+                viewModel.notes($(this).data('notes'));
+                viewModel.location($(this).data('location'));
+
+                $("#set-status").dialog({ modal: true });
+            });
+
             $("td .update-driver").click(function (e) {
                 e.preventDefault();
                 viewModel.vehicleId($(this).data('vehicle'));
                 viewModel.driverId($(this).data('driver'));
                 viewModel.adriverId($(this).data('adriver'));
 
-                $("#set-driver").dialog({
-                    modal: true
-                });
+                $("#set-driver").dialog({ modal: true });
             });
 
             window.viewModel = viewModel;
