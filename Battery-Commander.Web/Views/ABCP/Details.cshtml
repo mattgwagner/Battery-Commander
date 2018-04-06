@@ -1,6 +1,7 @@
 ﻿@model ABCP
 
 @Html.ActionLink("Back to ABCP", "Index", "ABCP")
+@Html.ActionLink("Edit", "Edit", "ABCP", new { Model.Id })
 
 @if (Model.RequiresTape && !Model.Measurements.Any())
 {
