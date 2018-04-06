@@ -126,22 +126,17 @@
     </form>
 
     <div style="display:none" id="set-driver" title="Update Driver/A-Driver">
-        @using (Html.BeginForm("SetDriver", "Vehicles", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-        {
-            <input id="vehicleId" name="vehicleId" type="hidden" />
+        <div class="form-group form-group-lg">
+            @Html.Label("Driver")
+            <select data-bind="value: driverId, options: soldiers, optionsText: 'Text', optionsValue: 'Value', optionsCaption: 'Choose a Driver'"class="select2"></select>
+        </div>
 
-            <div class="form-group form-group-lg">
-                @Html.Label("Driver")
-                <select id="driverId" data-bind="options: soldiers, optionsText: 'Text', optionsValue: 'Value', optionsCaption: 'Choose a Driver'"class="select2"></select>
-            </div>
+        <div class="form-group form-group-lg">
+            @Html.Label("A-Driver")
+            <select data-bind="value: adriverId, options: soldiers, optionsText: 'Text', optionsValue: 'Value', optionsCaption: 'Choose an A-Driver'" class="select2"></select>
+        </div>
 
-            <div class="form-group form-group-lg">
-                @Html.Label("A-Driver")
-                <select id="adriverId" data-bind="options: soldiers, optionsText: 'Text', optionsValue: 'Value', optionsCaption: 'Choose an A-Driver'" class="select2"></select>
-            </div>
-
-            <button type="submit" id="save">Save</button>
-        }
+        <button data-bind="click: save_drivers" type="submit" id="save">Save</button>
     </div>
 
     <div style="display:none" id="set-status" title="Update Vehicle Status">
@@ -173,17 +168,6 @@
 @section Scripts{
     <script type="text/javascript">
         $(document).ready(function () {
-            $("td .update-driver").click(function (e) {
-                e.preventDefault();
-                $("[name='vehicleId']").val($(this).data('vehicle'));
-                $("#driverId").val($(this).data('driver')).trigger('change');
-                $("#adriverId").val($(this).data('adriver')).trigger('change');
-
-                $("#set-driver").dialog({
-                    modal: true
-                });
-            });
-
             $("td .update-status").click(function (e) {
                 $("[name='vehicleId']").val($(this).data('vehicle'));
                 $("#status").val($(this).data('status')).trigger('change');
@@ -196,8 +180,31 @@
             });
 
             var viewModel = {
+                driverId: ko.observable(),
+                adriverId: ko.observable(),
+                vehicleId: ko.observable(),
                 soldiers: ko.mapping.fromJSON('@Html.Raw(JsonConvert.SerializeObject(Model.Soldiers))')
             };
+
+            viewModel.save_drivers = function () {
+                $.post('@Url.Action("SetDriver")', {
+                    driverId: viewModel.driverId,
+                    adriverId: viewModel.adriverId,
+                    vehicleId: viewModel.vehicleId
+                });
+                location.reload();
+            };
+
+            $("td .update-driver").click(function (e) {
+                e.preventDefault();
+                viewModel.vehicleId($(this).data('vehicle'));
+                viewModel.driverId($(this).data('driver'));
+                viewModel.adriverId($(this).data('adriver'));
+
+                $("#set-driver").dialog({
+                    modal: true
+                });
+            });
 
             window.viewModel = viewModel;
 

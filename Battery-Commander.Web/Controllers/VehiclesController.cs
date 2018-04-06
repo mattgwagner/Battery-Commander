@@ -71,7 +71,7 @@ namespace BatteryCommander.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost]
         public async Task<IActionResult> SetDriver(int vehicleId, int? driverId, int? adriverId)
         {
             Reassign_Passengers(vehicleId, driverId, adriverId);
@@ -81,7 +81,7 @@ namespace BatteryCommander.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost]
         public async Task<IActionResult> SetStatus(int vehicleId, Vehicle.VehicleStatus status, Vehicle.VehicleLocation location, String notes)
         {
             var vehicle =
