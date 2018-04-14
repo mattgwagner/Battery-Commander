@@ -22,7 +22,8 @@ else if(Model.Previous != null && Math.Abs(Model.Previous.Height - Model.Height)
         HEIGHT measurement differs from previous measurement by greater than @ABCP.MAX_DIFFERNCE inch! Previous @Model.Previous.Height Re-check this!
     </div>
 }
-else if (Model.Measurements.Any())
+
+@if (Model.Measurements.Any())
 {
     @Html.ActionLink("Generate Worksheet", "Worksheet", "ABCP", new { Model.Id }, new { @class = "btn btn-default" })
     @Html.ActionLink("Generate Counseling", "Counseling", "ABCP", new { Model.Id }, new { @class = "btn btn-default" })
