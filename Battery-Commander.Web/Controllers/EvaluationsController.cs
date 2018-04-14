@@ -61,11 +61,22 @@ namespace BatteryCommander.Web.Controllers
             {
                 var soldierModel = await SoldiersController.Get(db, soldier);
 
+                var lastEval =
+                    await db
+                    .Evaluations
+                    .Where(evaluation => evaluation.RateeId == soldier)
+                    .OrderByDescending(evaluation => evaluation.ThruDate)
+                    .FirstOrDefaultAsync();
+
+                // Try to backtrack into their next evaluation period based on the last eval we have for them
+
                 return View("Edit", new Evaluation
                 {
                     RateeId = soldier,
                     RaterId = soldierModel.SupervisorId ?? 0,
-                    SeniorRaterId = soldierModel.Supervisor?.SupervisorId ?? 0
+                    SeniorRaterId = soldierModel.Supervisor?.SupervisorId ?? 0,
+                    StartDate = lastEval?.ThruDate.AddDays(1) ?? DateTime.Today,
+                    ThruDate = lastEval?.ThruDate.AddDays(1).AddYears(1) ?? DateTime.Today.AddYears(1)
                 });
             }
 
