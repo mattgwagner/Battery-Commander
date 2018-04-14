@@ -50,7 +50,7 @@
                 <td>@Html.DisplayFor(_ => soldier.Unit)</td>
                 @if (soldier.LastApft != null)
                 {
-                    <td>
+                    <td data-sort="@soldier.LastApft.IsPassing">
                         @Html.DisplayFor(_ => soldier.LastApft, "APFT")
                         @if (!soldier.LastApft.IsPassing)
                         {
