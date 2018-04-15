@@ -28,7 +28,6 @@
             <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().Unit)</th>
             <th data-priority="1">Result</th>
             <th>Date</th>
-            <th>Progress</th>
             <th>Height</th>
             <th>Weight</th>
             <th>Measurements</th>
@@ -59,7 +58,6 @@
                             @Html.DisplayFor(_ => soldier.LastAbcp.Date)
                         </a>
                     </td>
-                    <td>@Html.DisplayFor(_ => soldier.LastAbcp.IsSatisfactory)</td>
                     <td>@Html.DisplayFor(_ => soldier.LastAbcp.Height)</td>
                     <td>@Html.DisplayFor(_ => soldier.LastAbcp.Weight)</td>
                     <td>
