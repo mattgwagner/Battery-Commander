@@ -6,12 +6,8 @@
     <RootNamespace>BatteryCommander.Web</RootNamespace>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\netcoreapp1.1\BatteryCommander.Web.xml</DocumentationFile>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\netcoreapp1.1\BatteryCommander.Web.xml</DocumentationFile>
+  <PropertyGroup>
+    <DocumentationFile>bin\$(Configuration)\netcoreapp2.0\BatteryCommander.Web.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
