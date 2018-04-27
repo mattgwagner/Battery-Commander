@@ -15,6 +15,11 @@ namespace BatteryCommander.Web.Services
             {
                 vehicle.DriverId = null;
                 vehicle.A_DriverId = null;
+
+                foreach (var passenger in vehicle.Passengers.ToList())
+                {
+                    vehicle.Passengers.Remove(passenger);
+                }
             }
 
             await db.SaveChangesAsync();
