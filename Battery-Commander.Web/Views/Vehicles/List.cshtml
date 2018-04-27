@@ -29,6 +29,7 @@
                 <th data-priority="1">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Bumper)</th>
                 <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Type)</th>
                 <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Seats)</th>
+                <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().TroopCapacity)</th>
                 <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Nomenclature)</th>
                 <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Registration)</th>
                 <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Serial)</th>
@@ -64,6 +65,7 @@
                     <td>@Html.DisplayFor(_ => vehicle)</td>
                     <td>@Html.DisplayFor(_ => vehicle.Type)</td>
                     <td>@Html.DisplayFor(_ => vehicle.Seats)</td>
+                    <td>@Html.DisplayFor(_ => vehicle.TroopCapacity)</td>
                     <td>
                         @if (!String.IsNullOrWhiteSpace(vehicle.Nomenclature))
                         {
@@ -157,7 +159,6 @@
 
         <button data-bind="click: save_vehicle">Save</button>
     </div>
-
 </div>
 
 @section Scripts{

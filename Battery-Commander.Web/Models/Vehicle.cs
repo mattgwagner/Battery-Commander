@@ -66,9 +66,10 @@ namespace BatteryCommander.Web.Models
 
         public int? A_DriverId { get; set; }
 
-        // Passengers
+        [Display(Name = "Troop Capacity")]
+        public int TroopCapacity { get; set; }
 
-        // TroopCapacity?
+        // Passengers
 
         // Chalk, Order of March?
 
