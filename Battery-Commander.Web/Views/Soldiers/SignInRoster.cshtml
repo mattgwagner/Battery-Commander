@@ -14,30 +14,24 @@
 
 <div>
 
-    <h1 class="center-block">@Html.DisplayFor(_ => unit, "Unit")</h1>
+    <h1 class="center-block">@(unit?.Name)</h1>
 
-    <table class="table table-striped">
-        <tbody>
-            <tr>
-                <td>Class:</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Date:</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Instructor:</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Asst. Instructor:</td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <b>Class:</b>
+        </li>
+        <li class="list-group-item">
+            <b>Date:</b>
+        </li>
+        <li class="list-group-item">
+            <b>Instructor:</b>
+        </li>
+        <li class="list-group-item">
+            <b>Asst. Instructor:</b>
+        </li>
+    </ul>
 
-    <table class="table">
+    <table class="table table-bordered">
         <thead>
             <tr>
                 <th></th>
