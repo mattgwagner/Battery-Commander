@@ -32,6 +32,8 @@ namespace BatteryCommander.Web.Controllers
             });
         }
 
+
+
         [Route("~/Soldiers/All")]
         public async Task<IActionResult> All()
         {
@@ -42,6 +44,16 @@ namespace BatteryCommander.Web.Controllers
                 {
                     IncludeIgnoredUnits = true
                 })
+            });
+        }
+
+        [Route("~/Soldiers/SignInRoster")]
+        public async Task<IActionResult> SignInRoster(SoldierSearchService.Query query)
+        {
+            return View(new SoldierListViewModel
+            {
+                Query = query,
+                Soldiers = await SoldierSearchService.Filter(db, query)
             });
         }
 

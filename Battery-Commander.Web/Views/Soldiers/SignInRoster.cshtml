@@ -1,0 +1,68 @@
+﻿@model SoldierListViewModel
+
+@{
+    ViewBag.Title = "Sign In Roster";
+
+    // TODO For now, assuming roster is only for one unit
+
+    var unit =
+        Model
+        .Soldiers
+        .Select(soldier => soldier.Unit)
+        .FirstOrDefault();
+}
+
+<div>
+
+    <h1 class="center-block">@Html.DisplayFor(_ => unit, "Unit")</h1>
+
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <td>Class:</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Date:</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Instructor:</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Asst. Instructor:</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th data-priority="2">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastName)</th>
+                <th data-priority="3">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().FirstName)</th>
+                <th data-priority="3">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().DoDId)</th>
+                <th data-priority="2">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().Rank)</th>
+                <th class="col-md-6">Signature</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @{ int row = 1; }
+
+            @foreach (var soldier in Model.Soldiers)
+            {
+                <tr>
+                    <td>@(row++)</td>
+                    <td>@Html.DisplayFor(s => soldier.LastName)</td>
+                    <td>@Html.DisplayFor(s => soldier.FirstName)</td>
+                    <td>@Html.DisplayFor(s => soldier.DoDId)</td>
+                    <td>@Html.DisplayFor(s => soldier.RankHumanized)</td>
+                    <td></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

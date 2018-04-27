@@ -37,7 +37,7 @@ namespace BatteryCommander.Web.Models
         [NotMapped, Display(Name = "Time in Grade")]
         public String TimeInGradeHumanized => TimeInGrade?.Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year, minUnit: Humanizer.Localisation.TimeUnit.Day);
 
-        [StringLength(12)]
+        [StringLength(12), Display(Name = "DOD ID")]
         public String DoDId { get; set; }
 
         [DataType(DataType.EmailAddress), StringLength(50)]
