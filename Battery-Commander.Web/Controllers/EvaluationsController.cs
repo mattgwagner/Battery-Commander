@@ -3,7 +3,6 @@ using BatteryCommander.Web.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,19 +14,16 @@ namespace BatteryCommander.Web.Controllers
     {
         private readonly Database db;
 
-        private readonly IMemoryCache cache;
-
         private async Task<String> GetDisplayName()
         {
-            var user = await UserService.FindAsync(db, User, cache);
+            var user = await UserService.FindAsync(db, User);
 
             return user?.ToString() ?? User.Identity.Name;
         }
 
-        public EvaluationsController(IMemoryCache cache, Database db)
+        public EvaluationsController(Database db)
         {
             this.db = db;
-            this.cache = cache;
         }
 
         public async Task<IActionResult> Index(Boolean includeComplete = false, Boolean onlyDelinquent = false)

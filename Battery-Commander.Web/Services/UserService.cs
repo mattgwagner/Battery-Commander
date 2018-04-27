@@ -1,5 +1,4 @@
 ﻿using BatteryCommander.Web.Models;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
@@ -19,22 +18,17 @@ namespace BatteryCommander.Web.Services
         /// Will throw an exception if more than Soldier is found.
         /// Will return null if none was found.
         /// </summary>
-        public static async Task<Soldier> FindAsync(Database db, ClaimsPrincipal user, IMemoryCache cache)
+        public static async Task<Soldier> FindAsync(Database db, ClaimsPrincipal user)
         {
             var email = Get_Email(user);
 
             if (String.IsNullOrWhiteSpace(email)) return null;
 
-            return await cache.GetOrCreateAsync($"UserService.FindAsync:{email}", async entry =>
-            {
-                var soldiers = await SoldierSearchService.Filter(db, new SoldierSearchService.Query { Email = email });
+            var soldiers = await SoldierSearchService.Filter(db, new SoldierSearchService.Query { Email = email });
 
-                if (soldiers.Count() > 1) throw new Exception($"Found multiple matching soldiers with the same email: {email}");
+            if (soldiers.Count() > 1) throw new Exception($"Found multiple matching soldiers with the same email: {email}");
 
-                entry.SlidingExpiration = CacheDuration;
-
-                return soldiers.SingleOrDefault();
-            });
+            return soldiers.SingleOrDefault();
         }
 
         public static Boolean Try_Validate_Token(String apiKey, out ClaimsPrincipal user)

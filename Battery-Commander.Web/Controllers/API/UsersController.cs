@@ -2,7 +2,6 @@
 using BatteryCommander.Web.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System;
@@ -17,15 +16,12 @@ namespace BatteryCommander.Web.Controllers.API
     {
         private static readonly HttpClient http = new HttpClient();
 
-        private readonly IMemoryCache cache;
-
         private readonly IOptions<Auth0Settings> auth0;
 
-        private async Task<Soldier> CurrentUser() => await UserService.FindAsync(db, User, cache);
+        private async Task<Soldier> CurrentUser() => await UserService.FindAsync(db, User);
 
-        public UsersController(IMemoryCache cache, Database db, IOptions<Auth0Settings> auth0) : base(db)
+        public UsersController(Database db, IOptions<Auth0Settings> auth0) : base(db)
         {
-            this.cache = cache;
             this.auth0 = auth0;
         }
 
