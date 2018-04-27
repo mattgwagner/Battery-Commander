@@ -11,7 +11,7 @@ namespace BatteryCommander.Web.Services
     {
         public static async Task Reset_Drivers(Database db)
         {
-            foreach (var vehicle in db.Vehicles)
+            foreach (var vehicle in await Filter(db, new Query { }))
             {
                 vehicle.DriverId = null;
                 vehicle.A_DriverId = null;
