@@ -147,12 +147,11 @@ namespace BatteryCommander.Web.Controllers
                     vehicle.DriverId = driverId;
                     vehicle.A_DriverId = adriverId;
 
-                    foreach (var passenger in vehicle.Passengers)
+                    // Remove any soldier that was listed as a passenger that's not in the current list
+
+                    foreach (var passenger in vehicle.Passengers.Where(passenger => !passengers.Contains(passenger.SoldierId)))
                     {
-                        if (!passengers.Contains(passenger.SoldierId))
-                        {
-                            vehicle.Passengers.Remove(passenger);
-                        }
+                        vehicle.Passengers.Remove(passenger);
                     }
                 }
                 else
@@ -166,12 +165,11 @@ namespace BatteryCommander.Web.Controllers
                     if (vehicle.A_DriverId == adriverId) vehicle.A_DriverId = null;
                 }
 
-                foreach (var passenger in vehicle.Passengers)
+                // We added this soldier to another vehicle, remove them from this one
+
+                foreach (var passenger in vehicle.Passengers.Where(passenger => passengers.Contains(passenger.SoldierId)))
                 {
-                    if (passengers.Contains(passenger.SoldierId))
-                    {
-                        vehicle.Passengers.Remove(passenger);
-                    }
+                    vehicle.Passengers.Remove(passenger);
                 }
             }
         }
