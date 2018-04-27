@@ -67,12 +67,7 @@ namespace BatteryCommander.Web.Controllers
                 db.Vehicles.Update(model);
             }
 
-            foreach (var passenger in passengers)
-            {
-                model.Passengers.Add(new Vehicle.Passenger { Vehicle = model, SoldierId = passenger });
-            }
-
-            Reassign_Passengers(model.Id, model.DriverId, model.A_DriverId, passengers.ToArray());
+            Reassign_Passengers(model.Id, model.DriverId, model.A_DriverId, passengers);
 
             await db.SaveChangesAsync();
 
@@ -82,7 +77,7 @@ namespace BatteryCommander.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> SetDriver(int vehicleId, int? driverId, int? adriverId)
         {
-            Reassign_Passengers(vehicleId, driverId, adriverId);
+            Reassign_Passengers(vehicleId, driverId, adriverId, Enumerable.Empty<int>());
 
             await db.SaveChangesAsync();
 
@@ -138,7 +133,7 @@ namespace BatteryCommander.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private void Reassign_Passengers(int vehicleId, int? driverId, int? adriverId, params int[] passengers)
+        private void Reassign_Passengers(int vehicleId, int? driverId, int? adriverId, IEnumerable<int> passengers)
         {
             foreach (var vehicle in db.Vehicles.Include(_ => _.Passengers))
             {
@@ -147,28 +142,42 @@ namespace BatteryCommander.Web.Controllers
                     vehicle.DriverId = driverId;
                     vehicle.A_DriverId = adriverId;
 
-                    // Remove any soldier that was listed as a passenger that's not in the current list
-
-                    foreach (var passenger in vehicle.Passengers.Where(passenger => !passengers.Contains(passenger.SoldierId)).ToList())
+                    if (passengers.Any())
                     {
-                        vehicle.Passengers.Remove(passenger);
+                        foreach (var passenger in passengers)
+                        {
+                            if (!vehicle.Passengers.Any(existing => existing.SoldierId == passenger))
+                            {
+                                vehicle.Passengers.Add(new Vehicle.Passenger { SoldierId = passenger });
+                            }
+                        }
+
+                        // Remove any soldier that was listed as a passenger that's not in the current list
+
+                        foreach (var passenger in vehicle.Passengers.Where(passenger => !passengers.Contains(passenger.SoldierId)).ToList())
+                        {
+                            vehicle.Passengers.Remove(passenger);
+                        }
                     }
-                }
-                else
-                {
-                    // TODO This is sloppy, should probably be a better way
-
-                    if (vehicle.DriverId == driverId) vehicle.DriverId = null;
-                    if (vehicle.A_DriverId == driverId) vehicle.A_DriverId = null;
-
-                    if (vehicle.DriverId == adriverId) vehicle.DriverId = null;
-                    if (vehicle.A_DriverId == adriverId) vehicle.A_DriverId = null;
-
-                    // We added this soldier to another vehicle, remove them from this one
-
-                    foreach (var passenger in vehicle.Passengers.Where(passenger => passengers.Contains(passenger.SoldierId)).ToList())
+                    else
                     {
-                        vehicle.Passengers.Remove(passenger);
+                        // TODO This is sloppy, should probably be a better way
+
+                        if (vehicle.DriverId == driverId) vehicle.DriverId = null;
+                        if (vehicle.A_DriverId == driverId) vehicle.A_DriverId = null;
+
+                        if (vehicle.DriverId == adriverId) vehicle.DriverId = null;
+                        if (vehicle.A_DriverId == adriverId) vehicle.A_DriverId = null;
+                    }
+
+                    if (passengers.Any())
+                    {
+                        // We added this soldier to another vehicle, remove them from this one
+
+                        foreach (var passenger in vehicle.Passengers.Where(passenger => passengers.Contains(passenger.SoldierId)).ToList())
+                        {
+                            vehicle.Passengers.Remove(passenger);
+                        }
                     }
                 }
             }
