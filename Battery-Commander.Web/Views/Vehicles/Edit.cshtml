@@ -93,7 +93,17 @@
 
     <div class="form-group form-group-lg">
         @Html.DisplayNameFor(model => model.Passengers)
-        <select asp-for="Passengers" multiple="multiple" asp-items="ViewBag.Soldiers"></select>
+        <select asp-for="Passengers" multiple="multiple">
+            @foreach (var soldier in ViewBag.Soldiers)
+            {
+                var selected =
+                    Model
+                    .Passengers?
+                    .Any(passenger => $"{passenger.SoldierId}" == soldier.Value);
+
+                <option value="@soldier.Value" selected="@(selected)">@soldier.Text</option>
+            }
+        </select>
     </div>
 
     <button type="submit">Save</button>

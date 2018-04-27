@@ -47,6 +47,8 @@ namespace BatteryCommander.Web.Controllers
             var model =
                 await db
                 .Vehicles
+                .Include(vehicle => vehicle.Passengers)
+                .ThenInclude(passenger => passenger.Soldier)
                 .Where(_ => _.Id == id)
                 .SingleOrDefaultAsync();
 
