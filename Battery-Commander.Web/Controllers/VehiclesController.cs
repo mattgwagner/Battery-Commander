@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -53,7 +54,7 @@ namespace BatteryCommander.Web.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> Save(Vehicle model)
+        public async Task<IActionResult> Save(Vehicle model, IEnumerable<int> passengers)
         {
             if (await db.Vehicles.AnyAsync(vehicles => vehicles.Id == model.Id) == false)
             {
@@ -62,6 +63,11 @@ namespace BatteryCommander.Web.Controllers
             else
             {
                 db.Vehicles.Update(model);
+            }
+
+            foreach (var passenger in passengers)
+            {
+                model.Passengers.Add(new Vehicle.Passenger { Vehicle = model, SoldierId = passenger });
             }
 
             Reassign_Passengers(model.Id, model.DriverId, model.A_DriverId);

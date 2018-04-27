@@ -57,11 +57,6 @@
     </div>
 
     <div class="form-group form-group-lg">
-        @Html.DisplayNameFor(model => model.TroopCapacity) (Not Belted Seats)
-        @Html.EditorFor(model => model.TroopCapacity)
-    </div>
-
-    <div class="form-group form-group-lg">
         @Html.DisplayNameFor(model => model.Driver)
         @Html.DropDownListFor(model => model.DriverId, (IEnumerable<SelectListItem>)ViewBag.Soldiers, "-- Select Driver --", new { @class = "select2" })
     </div>
@@ -89,6 +84,16 @@
     <div class="form-group form-group-lg">
         @Html.DisplayNameFor(model => model.Notes)
         @Html.TextAreaFor(model => model.Notes)
+    </div>
+
+    <div class="form-group form-group-lg">
+        @Html.DisplayNameFor(model => model.TroopCapacity) (Not Belted Seats)
+        @Html.EditorFor(model => model.TroopCapacity)
+    </div>
+
+    <div class="form-group form-group-lg">
+        @Html.DisplayNameFor(model => model.Passengers)
+        <select asp-for="Passengers" multiple="multiple" asp-items="ViewBag.Soldiers"></select>
     </div>
 
     <button type="submit">Save</button>
