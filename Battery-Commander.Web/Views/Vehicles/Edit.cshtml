@@ -93,7 +93,7 @@
 
     <div class="form-group form-group-lg">
         @Html.DisplayNameFor(model => model.Passengers)
-        <select asp-for="Passengers" multiple="multiple">
+        <select asp-for="Passengers" multiple="multiple" class="select2">
             @foreach (var soldier in ViewBag.Soldiers)
             {
                 var selected =
