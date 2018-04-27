@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -71,14 +73,25 @@ namespace BatteryCommander.Web.Models
 
         [Display(Name = "Capacity")]
         public int TotalCapacity => Seats + TroopCapacity;
-
-        // Passengers
+        
+        public virtual ICollection<Passenger> Passengers { get; set; }
 
         // Chalk, Order of March?
 
         public String Notes { get; set; }
 
         public String GoogleSearchUrl => String.IsNullOrWhiteSpace(Nomenclature) ? String.Empty : $"https://www.google.com/search?q={Nomenclature}";
+
+        public class Passenger
+        {
+            public int VehicleId { get; set; }
+
+            public virtual Vehicle Vehicle { get; set; }
+
+            public int SoldierId { get; set; }
+
+            public virtual Soldier Soldier { get; set; }
+        }
 
         public enum VehicleType : byte
         {
