@@ -72,7 +72,7 @@ namespace BatteryCommander.Web.Controllers
                 model.Passengers.Add(new Vehicle.Passenger { Vehicle = model, SoldierId = passenger });
             }
 
-            Reassign_Passengers(model.Id, model.DriverId, model.A_DriverId);
+            Reassign_Passengers(model.Id, model.DriverId, model.A_DriverId, passengers.ToArray());
 
             await db.SaveChangesAsync();
 
@@ -149,7 +149,7 @@ namespace BatteryCommander.Web.Controllers
 
                     // Remove any soldier that was listed as a passenger that's not in the current list
 
-                    foreach (var passenger in vehicle.Passengers.Where(passenger => !passengers.Contains(passenger.SoldierId)))
+                    foreach (var passenger in vehicle.Passengers.Where(passenger => !passengers.Contains(passenger.SoldierId)).ToList())
                     {
                         vehicle.Passengers.Remove(passenger);
                     }
@@ -163,13 +163,13 @@ namespace BatteryCommander.Web.Controllers
 
                     if (vehicle.DriverId == adriverId) vehicle.DriverId = null;
                     if (vehicle.A_DriverId == adriverId) vehicle.A_DriverId = null;
-                }
 
-                // We added this soldier to another vehicle, remove them from this one
+                    // We added this soldier to another vehicle, remove them from this one
 
-                foreach (var passenger in vehicle.Passengers.Where(passenger => passengers.Contains(passenger.SoldierId)))
-                {
-                    vehicle.Passengers.Remove(passenger);
+                    foreach (var passenger in vehicle.Passengers.Where(passenger => passengers.Contains(passenger.SoldierId)).ToList())
+                    {
+                        vehicle.Passengers.Remove(passenger);
+                    }
                 }
             }
         }
