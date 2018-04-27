@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -46,6 +47,8 @@ namespace BatteryCommander.Web.Controllers
             var model =
                 await db
                 .Vehicles
+                .Include(vehicle => vehicle.Passengers)
+                .ThenInclude(passenger => passenger.Soldier)
                 .Where(_ => _.Id == id)
                 .SingleOrDefaultAsync();
 
@@ -53,7 +56,7 @@ namespace BatteryCommander.Web.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> Save(Vehicle model)
+        public async Task<IActionResult> Save(Vehicle model, IEnumerable<int> passengers)
         {
             if (await db.Vehicles.AnyAsync(vehicles => vehicles.Id == model.Id) == false)
             {
@@ -64,7 +67,7 @@ namespace BatteryCommander.Web.Controllers
                 db.Vehicles.Update(model);
             }
 
-            Reassign_Passengers(model.Id, model.DriverId, model.A_DriverId);
+            Reassign_Passengers(model.Id, model.DriverId, model.A_DriverId, passengers);
 
             await db.SaveChangesAsync();
 
@@ -74,7 +77,7 @@ namespace BatteryCommander.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> SetDriver(int vehicleId, int? driverId, int? adriverId)
         {
-            Reassign_Passengers(vehicleId, driverId, adriverId);
+            Reassign_Passengers(vehicleId, driverId, adriverId, Enumerable.Empty<int>());
 
             await db.SaveChangesAsync();
 
@@ -130,14 +133,31 @@ namespace BatteryCommander.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private void Reassign_Passengers(int vehicleId, int? driverId, int? adriverId)
+        private void Reassign_Passengers(int vehicleId, int? driverId, int? adriverId, IEnumerable<int> passengers)
         {
-            foreach (var vehicle in db.Vehicles)
+            foreach (var vehicle in db.Vehicles.Include(_ => _.Passengers))
             {
                 if (vehicle.Id == vehicleId)
                 {
                     vehicle.DriverId = driverId;
                     vehicle.A_DriverId = adriverId;
+
+                    foreach (var passenger in passengers)
+                    {
+                        // Add in any passenger we don't already have
+
+                        if (!vehicle.Passengers.Any(existing => existing.SoldierId == passenger))
+                        {
+                            vehicle.Passengers.Add(new Vehicle.Passenger { SoldierId = passenger });
+                        }
+                    }
+
+                    // Remove any soldier that was listed as a passenger that's not in the current list
+
+                    foreach (var passenger in vehicle.Passengers.Where(passenger => !passengers.Contains(passenger.SoldierId)).ToList())
+                    {
+                        vehicle.Passengers.Remove(passenger);
+                    }
                 }
                 else
                 {
@@ -148,9 +168,17 @@ namespace BatteryCommander.Web.Controllers
 
                     if (vehicle.DriverId == adriverId) vehicle.DriverId = null;
                     if (vehicle.A_DriverId == adriverId) vehicle.A_DriverId = null;
-                }
 
-                // TODO Handle passengers
+                    if (passengers.Any())
+                    {
+                        // We added this soldier to another vehicle, remove them from this one
+
+                        foreach (var passenger in vehicle.Passengers.Where(passenger => passengers.Contains(passenger.SoldierId)).ToList())
+                        {
+                            vehicle.Passengers.Remove(passenger);
+                        }
+                    }
+                }
             }
         }
     }

@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BatteryCommander.Web.Models
 {
-    public class Vehicle
+    public class Vehicle : IValidatableObject
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -72,13 +73,29 @@ namespace BatteryCommander.Web.Models
         [Display(Name = "Capacity")]
         public int TotalCapacity => Seats + TroopCapacity;
 
-        // Passengers
+        public virtual ICollection<Passenger> Passengers { get; set; }
 
         // Chalk, Order of March?
 
         public String Notes { get; set; }
 
         public String GoogleSearchUrl => String.IsNullOrWhiteSpace(Nomenclature) ? String.Empty : $"https://www.google.com/search?q={Nomenclature}";
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (Passengers.Count > TroopCapacity) yield return new ValidationResult("Passenger count is greater than troop capacity");
+        }
+
+        public class Passenger
+        {
+            public int VehicleId { get; set; }
+
+            public virtual Vehicle Vehicle { get; set; }
+
+            public int SoldierId { get; set; }
+
+            public virtual Soldier Soldier { get; set; }
+        }
 
         public enum VehicleType : byte
         {

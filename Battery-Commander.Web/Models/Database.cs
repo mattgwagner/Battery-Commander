@@ -58,6 +58,11 @@ namespace BatteryCommander.Web.Models
                 .Entity<Weapon>()
                 .HasIndex(weapon => new { weapon.Serial, weapon.Type })
                 .IsUnique();
+
+            builder
+                .Entity<Vehicle.Passenger>()
+                .ToTable("Passengers")
+                .HasKey(passenger => new { passenger.VehicleId, passenger.SoldierId });
         }
 
         public static void Init(Database db)
