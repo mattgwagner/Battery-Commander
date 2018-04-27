@@ -142,33 +142,32 @@ namespace BatteryCommander.Web.Controllers
                     vehicle.DriverId = driverId;
                     vehicle.A_DriverId = adriverId;
 
-                    if (passengers.Any())
+                    foreach (var passenger in passengers)
                     {
-                        foreach (var passenger in passengers)
-                        {
-                            if (!vehicle.Passengers.Any(existing => existing.SoldierId == passenger))
-                            {
-                                vehicle.Passengers.Add(new Vehicle.Passenger { SoldierId = passenger });
-                            }
-                        }
+                        // Add in any passenger we don't already have
 
-                        // Remove any soldier that was listed as a passenger that's not in the current list
-
-                        foreach (var passenger in vehicle.Passengers.Where(passenger => !passengers.Contains(passenger.SoldierId)).ToList())
+                        if (!vehicle.Passengers.Any(existing => existing.SoldierId == passenger))
                         {
-                            vehicle.Passengers.Remove(passenger);
+                            vehicle.Passengers.Add(new Vehicle.Passenger { SoldierId = passenger });
                         }
                     }
-                    else
+
+                    // Remove any soldier that was listed as a passenger that's not in the current list
+
+                    foreach (var passenger in vehicle.Passengers.Where(passenger => !passengers.Contains(passenger.SoldierId)).ToList())
                     {
-                        // TODO This is sloppy, should probably be a better way
-
-                        if (vehicle.DriverId == driverId) vehicle.DriverId = null;
-                        if (vehicle.A_DriverId == driverId) vehicle.A_DriverId = null;
-
-                        if (vehicle.DriverId == adriverId) vehicle.DriverId = null;
-                        if (vehicle.A_DriverId == adriverId) vehicle.A_DriverId = null;
+                        vehicle.Passengers.Remove(passenger);
                     }
+                }
+                else
+                {
+                    // TODO This is sloppy, should probably be a better way
+
+                    if (vehicle.DriverId == driverId) vehicle.DriverId = null;
+                    if (vehicle.A_DriverId == driverId) vehicle.A_DriverId = null;
+
+                    if (vehicle.DriverId == adriverId) vehicle.DriverId = null;
+                    if (vehicle.A_DriverId == adriverId) vehicle.A_DriverId = null;
 
                     if (passengers.Any())
                     {
@@ -183,4 +182,5 @@ namespace BatteryCommander.Web.Controllers
             }
         }
     }
+}
 }
