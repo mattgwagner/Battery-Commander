@@ -27,7 +27,9 @@ namespace BatteryCommander.Web.Services
                 .Vehicles
                 .Include(vehicle => vehicle.Unit)
                 .Include(vehicle => vehicle.Driver)
-                .Include(vehicle => vehicle.A_Driver);
+                .Include(vehicle => vehicle.A_Driver)
+                .Include(vehicle => vehicle.Passengers)
+                .ThenInclude(passenger => passenger.Soldier);
 
             if (query.Units?.Any() == true)
             {
