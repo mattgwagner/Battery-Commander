@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BatteryCommander.Web.Models
 {
-    public class Vehicle : IValidatableObject
+    public class Vehicle
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -82,11 +82,6 @@ namespace BatteryCommander.Web.Models
         public String Notes { get; set; }
 
         public String GoogleSearchUrl => String.IsNullOrWhiteSpace(Nomenclature) ? String.Empty : $"https://www.google.com/search?q={Nomenclature}";
-
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            if (Passengers.Count > TroopCapacity) yield return new ValidationResult("Passenger count is greater than troop capacity");
-        }
 
         public class Passenger
         {
