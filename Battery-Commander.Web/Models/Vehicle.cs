@@ -69,7 +69,7 @@ namespace BatteryCommander.Web.Models
         [Display(Name = "Troop Capacity")]
         public int TroopCapacity { get; set; }
 
-        [Display(Name = "Total Capacity")]
+        [Display(Name = "Capacity")]
         public int TotalCapacity => Seats + TroopCapacity;
 
         // Passengers
