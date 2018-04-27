@@ -138,14 +138,22 @@ namespace BatteryCommander.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private void Reassign_Passengers(int vehicleId, int? driverId, int? adriverId)
+        private void Reassign_Passengers(int vehicleId, int? driverId, int? adriverId, params int[] passengers)
         {
-            foreach (var vehicle in db.Vehicles)
+            foreach (var vehicle in db.Vehicles.Include(_ => _.Passengers))
             {
                 if (vehicle.Id == vehicleId)
                 {
                     vehicle.DriverId = driverId;
                     vehicle.A_DriverId = adriverId;
+
+                    foreach (var passenger in vehicle.Passengers)
+                    {
+                        if (!passengers.Contains(passenger.SoldierId))
+                        {
+                            vehicle.Passengers.Remove(passenger);
+                        }
+                    }
                 }
                 else
                 {
@@ -158,7 +166,13 @@ namespace BatteryCommander.Web.Controllers
                     if (vehicle.A_DriverId == adriverId) vehicle.A_DriverId = null;
                 }
 
-                // TODO Handle passengers
+                foreach (var passenger in vehicle.Passengers)
+                {
+                    if (passengers.Contains(passenger.SoldierId))
+                    {
+                        vehicle.Passengers.Remove(passenger);
+                    }
+                }
             }
         }
     }
