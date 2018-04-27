@@ -40,6 +40,7 @@
                 <th data-priority="3">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Notes)</th>
                 <th></th>
                 <th></th>
+                <th></th>
             </tr>
         </thead>
 
@@ -114,6 +115,14 @@
                         </span>
                     </td>
                     <td>@Html.ActionLink("Edit", "Edit", new { vehicle.Id })</td>
+                    <td>
+                        <ul>
+                            @foreach (var passenger in vehicle.Passengers)
+                            {
+                                <li>@Html.DisplayFor(passenger, "Soldier")</li>
+                            }
+                        </ul>
+                    </td>
                     <td></td>
                 </tr>
             }
