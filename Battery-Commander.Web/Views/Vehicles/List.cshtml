@@ -14,7 +14,7 @@
         <small>
             FMC at HS: <span class="badge">@Model.FMC</span>
             PAX: <span class="badge">@Model.PAX</span>
-            SEATS: <span class="badge">@Model.Seats</span>
+            CAPACITY: <span class="badge">@Model.Capacity</span>
         </small>
     </h4>
 </div>
@@ -28,7 +28,6 @@
                 <th data-priority="10001">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Unit)</th>
                 <th data-priority="1">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Bumper)</th>
                 <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Type)</th>
-                <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Seats)</th>
                 <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().TroopCapacity)</th>
                 <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Nomenclature)</th>
                 <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Registration)</th>
@@ -64,7 +63,6 @@
                     <td>@Html.DisplayFor(_ => vehicle.Unit)</td>
                     <td>@Html.DisplayFor(_ => vehicle)</td>
                     <td>@Html.DisplayFor(_ => vehicle.Type)</td>
-                    <td>@Html.DisplayFor(_ => vehicle.Seats)</td>
                     <td>@Html.DisplayFor(_ => vehicle.TroopCapacity)</td>
                     <td>
                         @if (!String.IsNullOrWhiteSpace(vehicle.Nomenclature))

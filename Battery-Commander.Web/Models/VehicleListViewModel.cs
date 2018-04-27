@@ -19,6 +19,6 @@ namespace BatteryCommander.Web.Models
 
         public int PAX => Vehicles.Where(_ => _.Available).Where(_ => _.DriverId.HasValue).Count() + Vehicles.Where(_ => _.Available).Where(_ => _.A_DriverId.HasValue).Count();
 
-        public int Seats => Vehicles.Where(_ => _.Available).Select(_ => _.Seats).Sum();
+        public int Capacity => Vehicles.Where(_ => _.Available).Select(_ => _.TotalCapacity).Sum();
     }
 }
