@@ -117,7 +117,7 @@
                 </thead>
                 <tbody>
                     @foreach (var row in Model.SSD)
-            {
+                    {
                         <tr>
                             <td>@Html.ActionLink(row.Rank.DisplayName(), "Index", "SSD", new SoldierSearchService.Query { Unit = Model.Id, Ranks = new[] { row.Rank } })</td>
                             <td>@SSDExtensions.RequiredSSD(row.Rank).DisplayName()</td>
@@ -303,19 +303,11 @@
             .ToList();
 
         var ssd =
-            Model
-            .Soldiers
-            .Select(soldier => new
+            new[]
             {
-                IsComplete = soldier.SSDStatus.CurrentProgress >= Decimal.One
-            })
-            .GroupBy(status => status.IsComplete)
-            .Select(group => new
-            {
-                Status = group.Key ? "Complete" : "Incomplete",
-                Total = group.Count()
-            })
-            .ToList();
+                new { Status = "Incomplete", Total = Model.SSDTotal.Incomplete },
+                new { Status = "Complete", Total = Model.SSDTotal.Completed }
+            };
 
         var education =
             Model
