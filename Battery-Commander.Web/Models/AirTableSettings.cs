@@ -5,4 +5,5 @@
         public string BaseId { get; set; }
 
         public string AppKey { get; set; }
+    }
 }
