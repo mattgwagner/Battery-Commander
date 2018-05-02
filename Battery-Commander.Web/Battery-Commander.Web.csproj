@@ -46,6 +46,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Airtable" Version="0.9.2" />
     <PackageReference Include="epplus.core" Version="1.5.4" />
     <PackageReference Include="Humanizer.Core" Version="2.2.0" />
     <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.4.2" />
