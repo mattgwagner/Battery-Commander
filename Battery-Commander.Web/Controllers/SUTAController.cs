@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BatteryCommander.Web.Controllers
 {
+    [AllowAnonymous]
     public class SUTAController : Controller
     {
         private readonly AirTableService airtable;
@@ -15,10 +16,14 @@ namespace BatteryCommander.Web.Controllers
 
         public IActionResult Index()
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction(nameof(Create));
+            }
+
             return View();
         }
 
-        [AllowAnonymous]
         public IActionResult Create()
         {
             return View();

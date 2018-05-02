@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Controllers
 {
+    [AllowAnonymous]
     public class PurchaseOrdersController : Controller
     {
         private readonly AirTableService airtable;
@@ -17,16 +18,19 @@ namespace BatteryCommander.Web.Controllers
 
         public IActionResult Index()
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction(nameof(Create));
+            }
+
             return View();
         }
 
-        [AllowAnonymous]
         public IActionResult Create()
         {
             return View();
         }
 
-        [AllowAnonymous]
         public async Task<IActionResult> VendorRequest(String id)
         {
             // Unique record IDs look like reclJK6G3IFjFlXE1
