@@ -50,7 +50,7 @@ namespace BatteryCommander.Tests
         {
             if (String.IsNullOrWhiteSpace(AppKey)) return;
 
-            var unit = await Service.GetUnit(id: "rece9eMRk3joCkNYG");
+            var unit = await Service.GetUnit(id: "rect9UQLk2IuVMVCo");
 
             // TODO
         }

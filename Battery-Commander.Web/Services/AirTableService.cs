@@ -30,13 +30,13 @@ namespace BatteryCommander.Web.Services
 
             return new PurchaseOrder.PurchaseOrderUnit
             {
-                Name = (String)record.Fields["Name"],
-                CommandOrTaskForce = (String)record.Fields["CommandOrTaskForce"],
-                Phone = (String)record.Fields["Unit Phone #"],
+                Name = (String)record.GetField("Name"),
+                CommandOrTaskForce = (String)record.GetField("CommandOrTaskForce"),
+                Phone = (String)record.GetField("Unit Phone #"),
                 POC = new PurchaseOrder.PointOfContact
                 {
-                    Name = (String)record.Fields["Point of Contact Name"],
-                    PhoneNumber = (String)record.Fields["Point of Contact Mobile #"]
+                    Name = (String)record.GetField("Point of Contact Name"),
+                    PhoneNumber = (String)record.GetField("Point of Contact Mobile #")
                 }
             };
         }
@@ -55,35 +55,35 @@ namespace BatteryCommander.Web.Services
             return new PurchaseOrder
             {
                 Category = category,
-                Date = (DateTime)record.Fields["Date"],
-                Identifier = (String)record.Fields["Purchase Request #"],
+                Date = (DateTime)record.GetField("Date"),
+                Identifier = (String)record.GetField("Purchase Request #"),
                 Justification = justification,
-                Operation = (String)record.Fields["Operation"],
-                Unit = await GetUnit((String)record.Fields["Unit"]),
+                Operation = (String)record.GetField("Operation"),
+                Unit = await GetUnit((String)record.GetField("Unit")),
                 Vendor = new PurchaseOrder.OrderVendor
                 {
-                    BusinessPhone = (String)record.Fields[""],
-                    FedID = (String)record.Fields[""],
-                    Name = (String)record.Fields[""],
+                    BusinessPhone = (String)record.GetField(""),
+                    FedID = (String)record.GetField(""),
+                    Name = (String)record.GetField(""),
                     PhysicalAddress = new PurchaseOrder.Address
                     {
-                        Line1 = (String)record.Fields[""],
-                        City = (String)record.Fields[""],
-                        State = (String)record.Fields[""],
-                        ZipCode = (String)record.Fields[""]
+                        Line1 = (String)record.GetField(""),
+                        City = (String)record.GetField(""),
+                        State = (String)record.GetField(""),
+                        ZipCode = (String)record.GetField("")
                     },
                     RemitToAddress = new PurchaseOrder.Address
                     {
-                        Line1 = (String)record.Fields[""],
-                        City = (String)record.Fields[""],
-                        State = (String)record.Fields[""],
-                        ZipCode = (String)record.Fields[""]
+                        Line1 = (String)record.GetField(""),
+                        City = (String)record.GetField(""),
+                        State = (String)record.GetField(""),
+                        ZipCode = (String)record.GetField("")
                     },
                     POC = new PurchaseOrder.PointOfContact
                     {
-                        Name = (String)record.Fields[""],
-                        PhoneNumber = (String)record.Fields[""],
-                        Role = (String)record.Fields[""]
+                        Name = (String)record.GetField(""),
+                        PhoneNumber = (String)record.GetField(""),
+                        Role = (String)record.GetField("")
                     }
                 }
             };
