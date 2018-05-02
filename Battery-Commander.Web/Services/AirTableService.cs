@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static BatteryCommander.Web.Services.PDFService;
 
 namespace BatteryCommander.Web.Services
 {
@@ -20,6 +21,20 @@ namespace BatteryCommander.Web.Services
         }
 
         private AirtableBase Client => new AirtableBase(settings.Value.AppKey, settings.Value.BaseId);
+
+        public async Task<PurchaseOrder> GetPurchaseOrder(string id)
+        {
+            var record = await GetById(id, PURCHASE_ORDER_TABLE);
+
+            var order = new PurchaseOrder { };
+
+            foreach (var field in record.Fields)
+            {
+                // Fill in the DTO for the PDF Service
+            }
+
+            return order;
+        }
 
         public async Task<AirtableRecord> GetById(string id, string table = PURCHASE_ORDER_TABLE)
         {
