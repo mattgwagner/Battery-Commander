@@ -1,4 +1,5 @@
 ﻿using BatteryCommander.Web.Models;
+using BatteryCommander.Web.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
@@ -65,6 +66,8 @@ namespace BatteryCommander.Web
             var auth0Settings = new Auth0Settings { };
 
             Configuration.GetSection("Auth0").Bind(auth0Settings);
+
+            services.AddTransient<AirTableService>();
 
             services.AddCors(options =>
             {
