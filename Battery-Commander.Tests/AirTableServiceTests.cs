@@ -13,22 +13,24 @@ namespace BatteryCommander.Tests
 
         private const String BaseId = "";
 
+        private AirTableService Service
+        {
+            get
+            {
+                var options = Options.Create(new AirTableSettings { AppKey = AppKey, BaseId = BaseId });
+
+                var service = new AirTableService(options);
+
+                return service;
+            }
+        }
+
         [Fact]
         public async Task Try_Get_Records()
         {
             if (String.IsNullOrWhiteSpace(AppKey)) return;
 
-            // Arrange
-
-            var options = Options.Create(new AirTableSettings { AppKey = AppKey, BaseId = BaseId });
-
-            var service = new AirTableService(options);
-
-            // Act
-
-            var records = await service.GetRecords();
-
-            // Assert
+            var records = await Service.GetRecords();
 
             Assert.NotEmpty(records);
         }
@@ -38,17 +40,7 @@ namespace BatteryCommander.Tests
         {
             if (String.IsNullOrWhiteSpace(AppKey)) return;
 
-            // Arrange
-
-            var options = Options.Create(new AirTableSettings { AppKey = AppKey, BaseId = BaseId });
-
-            var service = new AirTableService(options);
-
-            // Act
-
-            var order = await service.GetPurchaseOrder(id: "reclJK6G3IFjFlXE1");
-
-            // Assert
+            var order = await Service.GetPurchaseOrder(id: "reclJK6G3IFjFlXE1");
 
             // TODO
         }
@@ -58,17 +50,7 @@ namespace BatteryCommander.Tests
         {
             if (String.IsNullOrWhiteSpace(AppKey)) return;
 
-            // Arrange
-
-            var options = Options.Create(new AirTableSettings { AppKey = AppKey, BaseId = BaseId });
-
-            var service = new AirTableService(options);
-
-            // Act
-
-            var unit = await service.GetUnit(id: "rece9eMRk3joCkNYG");
-
-            // Assert
+            var unit = await Service.GetUnit(id: "rece9eMRk3joCkNYG");
 
             // TODO
         }
