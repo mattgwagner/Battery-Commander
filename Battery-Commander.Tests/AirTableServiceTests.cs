@@ -52,5 +52,25 @@ namespace BatteryCommander.Tests
 
             // TODO
         }
+
+        [Fact]
+        public async Task Get_Unit()
+        {
+            if (String.IsNullOrWhiteSpace(AppKey)) return;
+
+            // Arrange
+
+            var options = Options.Create(new AirTableSettings { AppKey = AppKey, BaseId = BaseId });
+
+            var service = new AirTableService(options);
+
+            // Act
+
+            var unit = await service.GetUnit(id: "rece9eMRk3joCkNYG");
+
+            // Assert
+
+            // TODO
+        }
     }
 }

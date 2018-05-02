@@ -15,6 +15,8 @@ namespace BatteryCommander.Web.Services
 
         private const string PURCHASE_ORDER_TABLE = "Purchase Orders";
 
+        private const string UNITS_TABLE = "Units";
+
         public AirTableService(IOptions<AirTableSettings> settings)
         {
             this.settings = settings;
@@ -22,52 +24,66 @@ namespace BatteryCommander.Web.Services
 
         private AirtableBase Client => new AirtableBase(settings.Value.AppKey, settings.Value.BaseId);
 
+        public async Task<PurchaseOrder.PurchaseOrderUnit> GetUnit(string id)
+        {
+            var record = await GetById(id, UNITS_TABLE);
+
+            return new PurchaseOrder.PurchaseOrderUnit
+            {
+                Name = (String)record.Fields["Name"],
+                CommandOrTaskForce = (String)record.Fields["CommandOrTaskForce"],
+                Phone = (String)record.Fields["Unit Phone #"],
+                POC = new PurchaseOrder.PointOfContact
+                {
+                    Name = (String)record.Fields["Point of Contact Name"],
+                    PhoneNumber = (String)record.Fields["Point of Contact Mobile #"]
+                }
+            };
+        }
+
         public async Task<PurchaseOrder> GetPurchaseOrder(string id)
         {
             var record = await GetById(id, PURCHASE_ORDER_TABLE);
 
+            var category = PurchaseCategory.Meals;
+
+            // TODO Can we auto-generate the justification?
+            // Perhaps we need another form field for # of SMs and location but that might be a vestige of past exercises
+
+            var justification = "";
+
             return new PurchaseOrder
             {
-                Category = PurchaseCategory.EquipmentRental,
-                Date = DateTime.Now,
-                Identifier = "",
-                Justification = "",
-                Operation = "",
-                Unit = new PurchaseOrder.PurchaseOrderUnit
-                {
-                    Name = "",
-                    CommandOrTaskForce = "",
-                    Phone = "",
-                    POC = new PurchaseOrder.PointOfContact
-                    {
-                        Name = "",
-                        PhoneNumber = ""
-                    }
-                },
+                Category = category,
+                Date = (DateTime)record.Fields["Date"],
+                Identifier = (String)record.Fields["Purchase Request #"],
+                Justification = justification,
+                Operation = (String)record.Fields["Operation"],
+                Unit = await GetUnit((String)record.Fields["Unit"]),
                 Vendor = new PurchaseOrder.OrderVendor
                 {
-                    BusinessPhone = "",
-                    FedID = "",
-                    Name = "",
+                    BusinessPhone = (String)record.Fields[""],
+                    FedID = (String)record.Fields[""],
+                    Name = (String)record.Fields[""],
                     PhysicalAddress = new PurchaseOrder.Address
                     {
-                        Line1 = "",
-                        City = "",
-                        State = "",
-                        ZipCode = ""
+                        Line1 = (String)record.Fields[""],
+                        City = (String)record.Fields[""],
+                        State = (String)record.Fields[""],
+                        ZipCode = (String)record.Fields[""]
                     },
                     RemitToAddress = new PurchaseOrder.Address
                     {
-                        Line1 = "",
-                        City = "",
-                        State = "",
-                        ZipCode = ""
+                        Line1 = (String)record.Fields[""],
+                        City = (String)record.Fields[""],
+                        State = (String)record.Fields[""],
+                        ZipCode = (String)record.Fields[""]
                     },
                     POC = new PurchaseOrder.PointOfContact
                     {
-                        Name = "",
-                        PhoneNumber = "",
-                        Role = ""
+                        Name = (String)record.Fields[""],
+                        PhoneNumber = (String)record.Fields[""],
+                        Role = (String)record.Fields[""]
                     }
                 }
             };
