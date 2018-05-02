@@ -1,6 +1,7 @@
 ﻿using AirtableApiClient;
 using BatteryCommander.Web.Models;
 using Microsoft.Extensions.Options;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,83 +12,61 @@ namespace BatteryCommander.Web.Services
     {
         private readonly IOptions<AirTableSettings> settings;
 
-        private const string TABLE = "Purchase Orders";
+        private const string PURCHASE_ORDER_TABLE = "Purchase Orders";
 
         public AirTableService(IOptions<AirTableSettings> settings)
         {
             this.settings = settings;
         }
 
-        public async Task<AirtableRecord> GetById(string id)
-        {
-            using (AirtableBase airtableBase = new AirtableBase(settings.Value.AppKey, settings.Value.BaseId))
-            {
-                var response = await airtableBase.RetrieveRecord(TABLE, id);
+        private AirtableBase Client => new AirtableBase(settings.Value.AppKey, settings.Value.BaseId);
 
-                // TODO Check for errors
+        public async Task<AirtableRecord> GetById(string id, string table = PURCHASE_ORDER_TABLE)
+        {
+            using (AirtableBase airtableBase = Client)
+            {
+                var response = await airtableBase.RetrieveRecord(table, id);
+
+                CheckForErrors(response);
 
                 return response.Record;
             }
         }
 
-        public async Task<IEnumerable<AirtableRecord>> GetRecords()
+        public async Task<IEnumerable<AirtableRecord>> GetRecords(string table = PURCHASE_ORDER_TABLE)
         {
             string offset = null;
-            string errorMessage = null;
+
             var records = new List<AirtableRecord>();
 
-            using (AirtableBase airtableBase = new AirtableBase(settings.Value.AppKey, settings.Value.BaseId))
+            using (AirtableBase airtableBase = Client)
             {
-                //
-                // Use 'offset' and 'pageSize' to specify the records that you want
-                // to retrieve.
-                // Only use a 'do while' loop if you want to get multiple pages
-                // of records.
-                //
-
                 do
                 {
-                    //Task<AirtableListRecordsResponse> task = airtableBase.ListRecords(
-                    //       YOUR_TABLE_NAME,
-                    //       offset,
-                    //       fieldsArray,
-                    //       filterByFormula,
-                    //       maxRecords,
-                    //       pageSize,
-                    //       sort,
-                    //       view);
+                    var response = await airtableBase.ListRecords(table);
 
-                    var response = await airtableBase.ListRecords(TABLE);
+                    CheckForErrors(response);
 
-                    if (response.Success)
-                    {
-                        records.AddRange(response.Records.ToList());
-                        offset = response.Offset;
-                    }
-                    else if (response.AirtableApiError is AirtableApiException)
-                    {
-                        errorMessage = response.AirtableApiError.ErrorMessage;
-                        break;
-                    }
-                    else
-                    {
-                        errorMessage = "Unknown error";
-                        break;
-                    }
-                } while (offset != null);
-            }
-
-            if (!string.IsNullOrEmpty(errorMessage))
-            {
-                // Error reporting
-            }
-            else
-            {
-                // Do something with the retrieved 'records' and the 'offset'
-                // for the next page of the record list.
+                    records.AddRange(response.Records.ToList());
+                    offset = response.Offset;
+                }
+                while (offset != null);
             }
 
             return records;
+        }
+
+        private void CheckForErrors(AirtableApiResponse response)
+        {
+            if (!response.Success)
+            {
+                if (response.AirtableApiError is AirtableApiException)
+                {
+                    throw response.AirtableApiError;
+                }
+
+                throw new Exception("Unknown error from AirTable API");
+            }
         }
     }
 }
