@@ -11,9 +11,23 @@ namespace BatteryCommander.Web.Services
     {
         private readonly IOptions<AirTableSettings> settings;
 
+        private const string TABLE = "Purchase Orders";
+
         public AirTableService(IOptions<AirTableSettings> settings)
         {
             this.settings = settings;
+        }
+
+        public async Task<AirtableRecord> GetById(string id)
+        {
+            using (AirtableBase airtableBase = new AirtableBase(settings.Value.AppKey, settings.Value.BaseId))
+            {
+                var response = await airtableBase.RetrieveRecord(TABLE, id);
+
+                // TODO Check for errors
+
+                return response.Record;
+            }
         }
 
         public async Task<IEnumerable<AirtableRecord>> GetRecords()
@@ -43,7 +57,7 @@ namespace BatteryCommander.Web.Services
                     //       sort,
                     //       view);
 
-                    var response = await airtableBase.ListRecords(tableName: "Purchase Orders");
+                    var response = await airtableBase.ListRecords(TABLE);
 
                     if (response.Success)
                     {
