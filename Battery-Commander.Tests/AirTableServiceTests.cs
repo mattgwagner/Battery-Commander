@@ -16,6 +16,8 @@ namespace BatteryCommander.Tests
         [Fact]
         public async Task Try_Get_Records()
         {
+            if (String.IsNullOrWhiteSpace(AppKey)) return;
+
             // Arrange
 
             var options = Options.Create(new AirTableSettings { AppKey = AppKey, BaseId = BaseId });
