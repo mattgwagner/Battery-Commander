@@ -43,7 +43,7 @@ namespace BatteryCommander.Web.Services
                     //       sort,
                     //       view);
 
-                    var response = await airtableBase.ListRecords(tableName: "");
+                    var response = await airtableBase.ListRecords(tableName: "Purchase Orders");
 
                     if (response.Success)
                     {
