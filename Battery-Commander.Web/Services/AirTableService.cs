@@ -47,6 +47,29 @@ namespace BatteryCommander.Web.Services
 
             var category = PurchaseCategory.Meals;
 
+            switch((String)record.GetField("Category"))
+            {
+                case "Office Supplies":
+                    category = PurchaseCategory.OfficeSupplies;
+                    break;
+
+                case "Rental Vehicles":
+                    category = PurchaseCategory.RentalVehicles;
+                    break;
+
+                case "Repair Parts":
+                    category = PurchaseCategory.RepairParts;
+                    break;
+
+                case "Equipment Rental":
+                    category = PurchaseCategory.EquipmentRental;
+                    break;
+
+                default:
+                    category = Enum.Parse<PurchaseCategory>((String)record.GetField("Category"));
+                    break;
+            }
+
             // TODO Can we auto-generate the justification?
             // Perhaps we need another form field for # of SMs and location but that might be a vestige of past exercises
 
@@ -62,9 +85,9 @@ namespace BatteryCommander.Web.Services
                 Unit = await GetUnit((String)record.GetField("Unit")),
                 Vendor = new PurchaseOrder.OrderVendor
                 {
-                    BusinessPhone = (String)record.GetField(""),
-                    FedID = (String)record.GetField(""),
-                    Name = (String)record.GetField(""),
+                    Name = (String)record.GetField("Vendor"),
+                    BusinessPhone = (String)record.GetField("Vendor Phone"),
+                    FedID = (String)record.GetField("Vendor Federal ID"),                    
                     PhysicalAddress = new PurchaseOrder.Address
                     {
                         Line1 = (String)record.GetField(""),
