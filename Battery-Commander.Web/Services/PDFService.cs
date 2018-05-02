@@ -255,7 +255,7 @@ namespace BatteryCommander.Web.Services
             }
         }
 
-        public virtual byte[] Generate_Vendor_Request_Form(PurchaseOrder order)
+        public static byte[] Generate_Vendor_Request_Form(PurchaseOrder order)
         {
             using (var stream = typeof(Program).GetTypeInfo().Assembly.GetManifestResourceStream("BatteryCommander.Web.Models.Data.FLNG_FORM 49D_SAD_Vendor_Request_Form.pdf"))
             using (var output = new MemoryStream())
