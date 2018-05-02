@@ -26,14 +26,51 @@ namespace BatteryCommander.Web.Services
         {
             var record = await GetById(id, PURCHASE_ORDER_TABLE);
 
-            var order = new PurchaseOrder { };
-
-            foreach (var field in record.Fields)
+            return new PurchaseOrder
             {
-                // Fill in the DTO for the PDF Service
-            }
-
-            return order;
+                Category = PurchaseCategory.EquipmentRental,
+                Date = DateTime.Now,
+                Identifier = "",
+                Justification = "",
+                Operation = "",
+                Unit = new PurchaseOrder.PurchaseOrderUnit
+                {
+                    Name = "",
+                    CommandOrTaskForce = "",
+                    Phone = "",
+                    POC = new PurchaseOrder.PointOfContact
+                    {
+                        Name = "",
+                        PhoneNumber = ""
+                    }
+                },
+                Vendor = new PurchaseOrder.OrderVendor
+                {
+                    BusinessPhone = "",
+                    FedID = "",
+                    Name = "",
+                    PhysicalAddress = new PurchaseOrder.Address
+                    {
+                        Line1 = "",
+                        City = "",
+                        State = "",
+                        ZipCode = ""
+                    },
+                    RemitToAddress = new PurchaseOrder.Address
+                    {
+                        Line1 = "",
+                        City = "",
+                        State = "",
+                        ZipCode = ""
+                    },
+                    POC = new PurchaseOrder.PointOfContact
+                    {
+                        Name = "",
+                        PhoneNumber = "",
+                        Role = ""
+                    }
+                }
+            };
         }
 
         public async Task<AirtableRecord> GetById(string id, string table = PURCHASE_ORDER_TABLE)
