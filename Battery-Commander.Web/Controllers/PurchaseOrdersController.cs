@@ -29,46 +29,7 @@ namespace BatteryCommander.Web.Controllers
 
             // var order = await db.PurchaseOrders.FindAsync(id);
 
-            var order = new PurchaseOrder
-            {
-                Unit = new PurchaseOrder.PurchaseOrderUnit
-                {
-                    Name = "C BTRY",
-                    POC = new PurchaseOrder.PointOfContact
-                    {
-                        Name = "Me",
-                        PhoneNumber = "My #",
-                        Role = "Boss"
-                    },
-                    CommandOrTaskForce = "53 IBCT",
-                    Phone = "123456789"
-                },
-                Vendor = new PurchaseOrder.OrderVendor
-                {
-                    Name = "Vendor Name",
-                    BusinessPhone = "987654321",
-                    FedID = "999999999",
-                    PhysicalAddress = new PurchaseOrder.Address
-                    {
-                        City = "Lakeland",
-                        Line1 = "321 Fake Street",
-                        State = "TX",
-                        ZipCode = "54321"
-                    },
-                    RemitToAddress = new PurchaseOrder.Address
-                    {
-                        City = "Tampa",
-                        Line1 = "123 Happy Street",
-                        State = "FL",
-                        ZipCode = "12345"
-                    },
-                    POC = new PurchaseOrder.PointOfContact
-                    {
-                        Name = "Mr Mgr",
-                        Role = "Grcery Manager"
-                    }
-                }
-            };
+            var order = new PurchaseOrder { };
 
             var filename = $"FLNG_49D_{order.Unit?.Name}_{order.Vendor?.Name}_{order.Date:yyyyMMdd}.pdf";
 

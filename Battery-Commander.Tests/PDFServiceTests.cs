@@ -3,11 +3,64 @@ using BatteryCommander.Web.Services;
 using System;
 using System.IO;
 using Xunit;
+using static BatteryCommander.Web.Services.PDFService;
 
 namespace BatteryCommander.Tests
 {
     public class PDFServiceTests
     {
+        [Fact]
+        public void Generate_FLNG_Vendor_Request_Form()
+        {
+            using (var file = new FileStream("Test_VendorRequest.pdf", FileMode.Create))
+            {
+                var order = new PurchaseOrder
+                {
+                    Unit = new PurchaseOrder.PurchaseOrderUnit
+                    {
+                        Name = "C BTRY",
+                        POC = new PurchaseOrder.PointOfContact
+                        {
+                            Name = "Me",
+                            PhoneNumber = "My #",
+                            Role = "Boss"
+                        },
+                        CommandOrTaskForce = "53 IBCT",
+                        Phone = "123456789"
+                    },
+                    Vendor = new PurchaseOrder.OrderVendor
+                    {
+                        Name = "Vendor Name",
+                        BusinessPhone = "987654321",
+                        FedID = "999999999",
+                        PhysicalAddress = new PurchaseOrder.Address
+                        {
+                            City = "Lakeland",
+                            Line1 = "321 Fake Street",
+                            State = "TX",
+                            ZipCode = "54321"
+                        },
+                        RemitToAddress = new PurchaseOrder.Address
+                        {
+                            City = "Tampa",
+                            Line1 = "123 Happy Street",
+                            State = "FL",
+                            ZipCode = "12345"
+                        },
+                        POC = new PurchaseOrder.PointOfContact
+                        {
+                            Name = "Mr Mgr",
+                            Role = "Grcery Manager"
+                        }
+                    }
+                };
+
+                var data = PDFService.Generate_Vendor_Request_Form(order);
+
+                file.Write(data, 0, data.Length);
+            }
+        }
+
         [Fact]
         public void Generate_Counseling()
         {
