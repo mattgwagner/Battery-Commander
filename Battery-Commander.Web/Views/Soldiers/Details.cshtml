@@ -226,6 +226,7 @@
                     <th>@Html.DisplayNameFor(_ => _.Soldier.ABCPs.FirstOrDefault().Weight)</th>
                     <th>@Html.DisplayNameFor(_ => _.Soldier.ABCPs.FirstOrDefault().Screening_Weight)</th>
                     <th>@Html.DisplayNameFor(_ => _.Soldier.ABCPs.FirstOrDefault().IsPassing)</th>
+                    <th>@Html.DisplayNameFor(_ => _.Soldier.ABCPs.FirstOrDefault().IsSatisfactory)</th>
                     <th></th>
                 </tr>
             </thead>
@@ -248,6 +249,7 @@
                                 <span class="label label-danger">Failure</span>
                             }
                         </td>
+                        <td>@Html.DisplayFor(_ => abcp.IsSatisfactory)</td>
                         <td>@Html.ActionLink("Details", "Details", "ABCP", new { abcp.Id })</td>
                     </tr>
                 }
