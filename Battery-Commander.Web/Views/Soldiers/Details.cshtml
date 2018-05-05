@@ -222,6 +222,7 @@
             <thead>
                 <tr>
                     <th>@Html.DisplayNameFor(_ => _.Soldier.ABCPs.FirstOrDefault().Date)</th>
+                    <th>@Html.DisplayNameFor(_ => _.Soldier.ABCPs.FirstOrDefault().Height)</th>
                     <th>@Html.DisplayNameFor(_ => _.Soldier.ABCPs.FirstOrDefault().Weight)</th>
                     <th>@Html.DisplayNameFor(_ => _.Soldier.ABCPs.FirstOrDefault().Screening_Weight)</th>
                     <th>@Html.DisplayNameFor(_ => _.Soldier.ABCPs.FirstOrDefault().IsPassing)</th>
@@ -234,6 +235,7 @@
                 {
                     <tr>
                         <td>@Html.DisplayFor(_ => abcp.Date)</td>
+                        <td>@Html.DisplayFor(_ => abcp.Height)</td>
                         <td>@Html.DisplayFor(_ => abcp.Weight)</td>
                         <td>@Html.DisplayFor(_ => abcp.Screening_Weight)</td>
                         <td>
