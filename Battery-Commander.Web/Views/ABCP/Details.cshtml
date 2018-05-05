@@ -26,8 +26,12 @@ else if(Model.Previous != null && Math.Abs(Model.Previous.Height - Model.Height)
 @if (Model.Measurements.Any())
 {
     @Html.ActionLink("Generate Worksheet", "Worksheet", "ABCP", new { Model.Id }, new { @class = "btn btn-default" })
-    @Html.ActionLink("Generate Counseling", "Counseling", "ABCP", new { Model.Id }, new { @class = "btn btn-default" })
     @Html.ActionLink("Edit Measurements", "Measurements", "ABCP", new { Model.Id }, new { @class = "btn btn-default" })
+}
+
+@if (Model.IsPassing == false)
+{
+    @Html.ActionLink("Generate Counseling", "Counseling", "ABCP", new { Model.Id }, new { @class = "btn btn-default" })
 }
 
 <div class="panel panel-default">
