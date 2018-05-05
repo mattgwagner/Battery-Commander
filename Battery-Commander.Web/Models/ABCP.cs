@@ -268,9 +268,9 @@ namespace BatteryCommander.Web.Models
 
         public byte[] GenerateCounseling()
         {
-            var consecutive_failures = 1;
+            var consecutive_failures = 0;
 
-            foreach (var abcp in Soldier.ABCPs.Where(_ => _.Date < Date).OrderByDescending(_ => _.Date))
+            foreach (var abcp in Soldier.ABCPs.OrderByDescending(_ => _.Date))
             {
                 if (abcp.IsPassing) break;
 
