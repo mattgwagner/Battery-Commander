@@ -1,7 +1,7 @@
 Battery Commander
 ======================
 
-Overview of functionality: https://docs.google.com/document/d/e/2PACX-1vTa2gB9CVNwRjd9e36igvAxmP1DioesYUJKGlovcctvb2Z1ushIfy_C9zPlQCcma27jN7_7ZqixmftR/pub
+Overview of functionality: https://docs.google.com/document/d/1l8zPeZ6fdzgo9_fAJvtvi1b1_9XoYQDUw-FCn3P_Ghw/edit?usp=sharing
 
 Battery Commander is a small web application that I'm writing to assist with and maintain a few common unit-level tasks for a military (or other organization) unit.
 
