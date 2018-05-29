@@ -250,11 +250,11 @@
                             }
                         </td>
                         <td>
-                            @if (abcp.IsSatisfactory == true)
+                            @if (!abcp.IsPassing && abcp.IsSatisfactory == true)
                             {
                                 <span class="alert alert-success">Satisfactory</span>
                             }
-                            else if (abcp.IsSatisfactory == false)
+                            else if (!abcp.IsPassing && abcp.IsSatisfactory == false)
                             {
                                 <span class="alert alert-warning">Unsatisfactory</span>
                             }
