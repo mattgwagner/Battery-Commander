@@ -64,11 +64,15 @@ namespace BatteryCommander.Web
             services.Configure<AirTableSettings>(Configuration.GetSection("AirTable"));
             services.Configure<SendGridSettings>(Configuration.GetSection("SendGrid"));
 
+            // Register jobs as services for IoC
+            services.AddTransient<SqliteBackupJob>();
+
             var auth0Settings = new Auth0Settings { };
 
             Configuration.GetSection("Auth0").Bind(auth0Settings);
 
             services.AddTransient<AirTableService>();
+            services.AddTransient<IEmailService, EmailService>();
 
             services.AddCors(options =>
             {
