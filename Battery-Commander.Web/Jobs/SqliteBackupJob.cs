@@ -27,6 +27,14 @@ namespace BatteryCommander.Web.Jobs
             {
                 From = new EmailAddress("Battery-Commander@redlegdev.com"),
                 Subject = "Nightly Db Backup",
+                Contents = new List<Content>()
+                {
+                    new Content
+                    {
+                        Type = "text/plain",
+                        Value = "Please find the nightly database backup attached."
+                    }
+                },
                 Attachments = new List<Attachment>()
                 {
                     new Attachment
