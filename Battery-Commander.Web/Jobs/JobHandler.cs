@@ -7,7 +7,7 @@ namespace BatteryCommander.Web.Jobs
 {
     internal static class JobHandler
     {
-        public static void WithScheduler(this IApplicationBuilder app, ILoggerFactory loggerFactory)
+        public static void UseJobScheduler(this IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
             var logger = loggerFactory.CreateLogger(typeof(JobHandler));
 
@@ -24,6 +24,8 @@ namespace BatteryCommander.Web.Jobs
             var registry = new Registry();
 
             registry.Schedule<SqliteBackupJob>().ToRunEvery(1).Days().At(hours: 12, minutes: 0);
+
+            registry.Schedule<EvaluationDueReminderJob>().ToRunNow();
 
             JobManager.Initialize(registry);
         }

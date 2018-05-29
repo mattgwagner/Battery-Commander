@@ -66,6 +66,7 @@ namespace BatteryCommander.Web
 
             // Register jobs as services for IoC
             services.AddTransient<SqliteBackupJob>();
+            services.AddTransient<EvaluationDueReminderJob>();
 
             var auth0Settings = new Auth0Settings { };
 
@@ -265,7 +266,7 @@ namespace BatteryCommander.Web
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            app.WithScheduler(loggerFactory);
+            app.UseJobScheduler(loggerFactory);
 
             Database.Init(db);
         }
