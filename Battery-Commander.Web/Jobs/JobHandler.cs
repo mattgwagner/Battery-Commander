@@ -23,9 +23,11 @@ namespace BatteryCommander.Web.Jobs
 
             var registry = new Registry();
 
-            registry.Schedule<SqliteBackupJob>().ToRunEvery(1).Days().At(hours: 12, minutes: 0);
+            registry.Schedule<SqliteBackupJob>().ToRunEvery(1).Days().At(hours: 11, minutes: 0);
 
             registry.Schedule<EvaluationDueReminderJob>().ToRunNow();
+
+            // registry.Schedule<EvaluationDueReminderJob>().ToRunEvery(1).Weeks().On(DayOfWeek.Friday).At(hours: 12, minutes: 0);
 
             JobManager.Initialize(registry);
         }

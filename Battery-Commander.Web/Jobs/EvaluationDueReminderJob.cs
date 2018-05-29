@@ -65,6 +65,7 @@ namespace BatteryCommander.Web.Jobs
             //    .ToList();
 
             email.AddTo(email: "mattgwagner+evals@gmail.com");
+            email.AddTo(email: "erich.mccartney@gmail.com ");
 
             emailSvc.Send(email).Wait();
         }
