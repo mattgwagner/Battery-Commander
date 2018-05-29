@@ -62,6 +62,7 @@ namespace BatteryCommander.Web
             // Add the Auth0 Settings object so it can be injected
             services.Configure<Auth0Settings>(Configuration.GetSection("Auth0"));
             services.Configure<AirTableSettings>(Configuration.GetSection("AirTable"));
+            services.Configure<SendGridSettings>(Configuration.GetSection("SendGrid"));
 
             var auth0Settings = new Auth0Settings { };
 
