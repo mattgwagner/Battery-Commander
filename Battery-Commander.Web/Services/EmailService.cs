@@ -11,7 +11,7 @@ namespace BatteryCommander.Web.Services
 
     public class EmailService : IEmailService
     {
-        public static readonly EmailAddress FROM_ADDRESS = new EmailAddress("BatteryCommander@red-leg-dev.com");
+        public static readonly EmailAddress FROM_ADDRESS = new EmailAddress("BatteryCommander@redleg.app");
 
         private readonly IOptions<SendGridSettings> settings;
 
