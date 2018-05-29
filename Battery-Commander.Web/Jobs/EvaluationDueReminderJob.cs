@@ -57,15 +57,12 @@ namespace BatteryCommander.Web.Jobs
                 HtmlContent = sb.ToString()
             };
 
-            // TODO Pull configured recipients, i.e. E-7+, Officers
-
-            var recipients =
-                db
-                .Soldiers
-                .Include(soldier => soldier.Unit)
-                .Where(soldier => soldier.Unit.IgnoreForReports == false)
-                .Where(soldier => soldier.IsOfficer == true)
-                .ToList();
+            var recipients = SoldierSearchService.Filter(db, new SoldierSearchService.Query
+            {
+                Ranks = new[] { Rank.E7, Rank.E8, Rank.O1, Rank.O2, Rank.O3 }
+            })
+            .GetAwaiter()
+            .GetResult();
 
             foreach (var recipient in recipients)
             {
