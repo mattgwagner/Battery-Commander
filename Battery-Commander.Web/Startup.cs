@@ -1,4 +1,5 @@
-﻿using BatteryCommander.Web.Models;
+﻿using BatteryCommander.Web.Jobs;
+using BatteryCommander.Web.Models;
 using BatteryCommander.Web.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
@@ -60,7 +61,6 @@ namespace BatteryCommander.Web
 
             // Add the Auth0 Settings object so it can be injected
             services.Configure<Auth0Settings>(Configuration.GetSection("Auth0"));
-
             services.Configure<AirTableSettings>(Configuration.GetSection("AirTable"));
 
             var auth0Settings = new Auth0Settings { };
@@ -259,6 +259,8 @@ namespace BatteryCommander.Web
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            app.WithScheduler(loggerFactory);
 
             Database.Init(db);
         }
