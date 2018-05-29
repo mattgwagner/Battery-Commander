@@ -25,7 +25,7 @@ namespace BatteryCommander.Web.Jobs
 
             var message = new SendGridMessage
             {
-                From = new EmailAddress("Battery-Commander@redlegdev.com"),
+                From = EmailService.FROM_ADDRESS,
                 Subject = "Nightly Db Backup",
                 Contents = new List<Content>()
                 {
