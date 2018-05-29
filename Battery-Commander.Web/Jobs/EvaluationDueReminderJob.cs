@@ -59,13 +59,21 @@ namespace BatteryCommander.Web.Jobs
 
             // TODO Pull configured recipients, i.e. E-7+, Officers
 
-            //var recipients =
-            //    db
-            //    .Soldiers
-            //    .ToList();
+            var recipients =
+                db
+                .Soldiers
+                .Include(soldier => soldier.Unit)
+                .Where(soldier => soldier.Unit.IgnoreForReports == false)
+                .Where(soldier => soldier.IsOfficer == true)
+                .ToList();
 
-            email.AddTo(email: "mattgwagner+evals@gmail.com");
-            email.AddTo(email: "erich.mccartney@gmail.com ");
+            foreach (var recipient in recipients)
+            {
+                if (!String.IsNullOrWhiteSpace(recipient.CivilianEmail))
+                {
+                    email.AddTo(recipient.CivilianEmail, name: recipient.ToString());
+                }
+            }
 
             emailSvc.Send(email).Wait();
         }
