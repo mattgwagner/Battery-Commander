@@ -70,7 +70,7 @@ namespace BatteryCommander.Web.Models
         [Display(Name = "Troop Capacity")]
         public int TroopCapacity { get; set; }
 
-        public int Occupancy => Passengers.Count + (DriverId.HasValue ? 1 : 0) + (A_DriverId.HasValue ? 1 : 0);
+        public int? Occupancy => Passengers?.Count + (DriverId.HasValue ? 1 : 0) + (A_DriverId.HasValue ? 1 : 0);
 
         [Display(Name = "Capacity")]
         public int TotalCapacity => Seats + TroopCapacity;
