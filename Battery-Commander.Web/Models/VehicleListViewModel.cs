@@ -17,7 +17,7 @@ namespace BatteryCommander.Web.Models
 
         public int FMC => Vehicles.Where(_ => _.Available).Count();
 
-        public int PAX => Vehicles.Where(_ => _.Available).Select(_ => _.Occupancy).Sum();
+        public int? PAX => Vehicles.Where(_ => _.Available).Select(_ => _.Occupancy).Sum();
 
         public int Capacity => Vehicles.Where(_ => _.Available).Select(_ => _.TotalCapacity).Sum();
     }
