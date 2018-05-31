@@ -62,7 +62,7 @@ namespace BatteryCommander.Web.Services
 
             public Boolean? IncludeIgnoredUnits { get; set; } = false;
 
-            public Boolean? Available { get; set; }
+            public Boolean? Available { get; set; } = true;
         }
     }
 }
