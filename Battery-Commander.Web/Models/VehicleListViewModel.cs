@@ -15,6 +15,8 @@ namespace BatteryCommander.Web.Models
 
         public IEnumerable<Vehicle> Vehicles { get; set; } = Enumerable.Empty<Vehicle>();
 
+        public int Seats => Vehicles.Where(_ => _.Available).Select(_ => _.Seats).Sum();
+
         public int FMC => Vehicles.Where(_ => _.Available).Count();
 
         public int? PAX => Vehicles.Where(_ => _.Available).Select(_ => _.Occupancy).Sum();
