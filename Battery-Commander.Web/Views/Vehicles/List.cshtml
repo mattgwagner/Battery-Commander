@@ -9,7 +9,7 @@
         @ViewBag.Title
         @Html.ActionLink("Add New", "New", "Vehicles", null, new { @class = "btn btn-default" })
         <!-- Not sure why Available = null wasn't working, but alas -->
-        <a href="@Url.Action("Index", "Vehicles")?Available=" class="btn btn-default"?>Show All</a>
+        <a href="@Url.Action("Index", "Vehicles")?Available=&IncludeIgnoredUnits=true" class="btn btn-default"?>Show All</a>
     </h1>
     <h4>
         <small>
