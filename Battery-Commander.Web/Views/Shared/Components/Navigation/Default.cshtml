@@ -33,8 +33,14 @@
                     <li><a class="nav-link" asp-controller="Evaluations" asp-action="Index">Evaluations</a></li>
                     <li><a class="nav-link" asp-controller="APFT" asp-action="Index">APFT</a></li>
                     <li><a class="nav-link" asp-controller="ABCP" asp-action="Index">ABCP</a></li>
-                    <li><a class="nav-link" asp-controller="PurchaseOrders" asp-action="Index">Purchase Orders</a></li>
-                    <li><a class="nav-link" asp-controller="SUTA" asp-action="Index">SUTA</a></li>
+                    @if (Model.ShowPOTracker)
+                    {
+                        <li><a class="nav-link" asp-controller="PurchaseOrders" asp-action="Index">Purchase Orders</a></li>
+                    }
+                    @if (Model.ShowSUTATracker)
+                    {
+                        <li><a class="nav-link" asp-controller="SUTA" asp-action="Index">SUTA</a></li>
+                    }
                     <li><a class="nav-link" asp-controller="Units" asp-action="Index">Units</a></li>
                 </ul>
             }
