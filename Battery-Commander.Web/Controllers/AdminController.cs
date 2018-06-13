@@ -39,11 +39,15 @@ namespace BatteryCommander.Web.Controllers
 
         public IActionResult Logs()
         {
-            var data = System.IO.File.ReadAllBytes($@"logs\{DateTime.Today:yyyyMMdd}.log");
+            byte[] data;
 
-            var mimeType = "text/plain";
+            using (var stream = new FileStream($@"logs\{DateTime.Today:yyyyMMdd}.log"), FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (var reader = new StreamReader(stream))
+            {
+                data = System.Text.Encoding.Default.GetBytes(reader.ReadToEnd());
+            }
 
-            return File(data, mimeType);
+            return File(data, "text/plain");
         }
     }
 }
