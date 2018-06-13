@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.IO;
 
 namespace BatteryCommander.Web.Controllers
 {
@@ -41,7 +42,7 @@ namespace BatteryCommander.Web.Controllers
         {
             byte[] data;
 
-            using (var stream = new FileStream($@"logs\{DateTime.Today:yyyyMMdd}.log"), FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (var stream = new FileStream($@"logs\{DateTime.Today:yyyyMMdd}.log", FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             using (var reader = new StreamReader(stream))
             {
                 data = System.Text.Encoding.Default.GetBytes(reader.ReadToEnd());
