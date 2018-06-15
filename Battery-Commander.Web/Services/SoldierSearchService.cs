@@ -126,7 +126,7 @@ namespace BatteryCommander.Web.Services
 
             if (!String.IsNullOrWhiteSpace(query.Email))
             {
-                soldiers = soldiers.Where(soldier => soldier.CivilianEmail == query.Email || soldier.MilitaryEmail == query.Email);
+                soldiers = soldiers.Where(soldier => String.Equals(soldier.CivilianEmail, query.Email, StringComparison.CurrentCultureIgnoreCase) || String.Equals(soldier.MilitaryEmail, query.Email, StringComparison.CurrentCultureIgnoreCase));
             }
 
             return
