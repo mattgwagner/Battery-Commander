@@ -19,24 +19,20 @@ namespace BatteryCommander.Web.Controllers
             this.db = db;
         }
 
-        public IActionResult Index()
+        public async Task<ActionResult> Index()
         {
+            var user = await CurrentUser();
+
+            if (user?.UnitId > 0)
+            {
+                return RedirectToRoute("Unit.Details", new { id = user.UnitId });
+            }
+
             return RedirectToRoute("Units.List");
         }
 
         public async Task<ActionResult> PrivacyAct()
         {
-            var user = await CurrentUser();
-
-            if(user?.UnitId > 0)
-            {
-                ViewBag.RedirectUrl = Url.RouteUrl("Unit.Details", new { id = user.UnitId });
-            }
-            else
-            {
-                ViewBag.RedirectUrl = Url.Action(nameof(Index));
-            }
-
             return View();
         }
 
