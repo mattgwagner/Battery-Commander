@@ -31,7 +31,7 @@ namespace BatteryCommander.Web.Controllers
             return RedirectToRoute("Units.List");
         }
 
-        public async Task<ActionResult> PrivacyAct()
+        public ActionResult PrivacyAct()
         {
             return View();
         }
