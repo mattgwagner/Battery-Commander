@@ -49,7 +49,10 @@ namespace BatteryCommander.Web.Jobs
                 sb.AppendLine($"<li>{evaluation.Ratee} due {evaluation.ThruDate:d} - Last Update: {evaluation.LastUpdatedHumanized}</li>");
             }
 
-            sb = sb.AppendLine("</ul>");
+            sb =
+                sb.AppendLine("</ul>")
+                .AppendLine("<br />")
+                .AppendLine(@"<a href=""https://bc.redleg.app/Evaluations"">Tracker</a>");
 
             var recipients = SoldierSearchService.Filter(db, new SoldierSearchService.Query
             {
