@@ -66,6 +66,7 @@ namespace BatteryCommander.Web
             // Register jobs as services for IoC
             services.AddTransient<SqliteBackupJob>();
             services.AddTransient<EvaluationDueReminderJob>();
+            services.AddTransient<PERSTATReportJob>();
 
             var auth0Settings = new Auth0Settings { };
 

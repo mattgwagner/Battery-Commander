@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
@@ -7,6 +8,8 @@ namespace BatteryCommander.Web.Models.Reports
     public class Red1_Perstat
     {
         public IEnumerable<Soldier> Soldiers { get; set; } = Enumerable.Empty<Soldier>();
+
+        public String DateTimeGroup => DateTime.UtcNow.ConvertToEst().ToDateTimeGroup();
 
         [Display(Name = "Personnel Assigned")]
         public Row Assigned => new Row

@@ -27,6 +27,8 @@ namespace BatteryCommander.Web.Jobs
 
             registry.Schedule<EvaluationDueReminderJob>().ToRunEvery(0).Weeks().On(DayOfWeek.Tuesday).At(hours: 13, minutes: 0);
 
+            registry.Schedule<PERSTATReportJob>().ToRunNow();
+
             JobManager.Initialize(registry);
         }
 
