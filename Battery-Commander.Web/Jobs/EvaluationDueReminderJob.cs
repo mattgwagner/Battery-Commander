@@ -1,8 +1,9 @@
 ﻿using BatteryCommander.Web.Models;
 using BatteryCommander.Web.Services;
+using FluentEmail.Core;
+using FluentEmail.Core.Models;
 using FluentScheduler;
 using Microsoft.EntityFrameworkCore;
-using SendGrid.Helpers.Mail;
 using System;
 using System.Linq;
 using System.Text;
@@ -13,9 +14,9 @@ namespace BatteryCommander.Web.Jobs
     {
         private readonly Database db;
 
-        private readonly IEmailService emailSvc;
+        private readonly IFluentEmail emailSvc;
 
-        public EvaluationDueReminderJob(Database db, IEmailService emailSvc)
+        public EvaluationDueReminderJob(Database db, IFluentEmail emailSvc)
         {
             this.db = db;
             this.emailSvc = emailSvc;
@@ -50,29 +51,21 @@ namespace BatteryCommander.Web.Jobs
 
             sb = sb.AppendLine("</ul>");
 
-            var email = new SendGridMessage
-            {
-                From = EmailService.FROM_ADDRESS,
-                Subject = "Upcoming and Past Due Evaluations",
-                HtmlContent = sb.ToString()
-            };
-
             var recipients = SoldierSearchService.Filter(db, new SoldierSearchService.Query
             {
                 Ranks = new[] { Rank.E7, Rank.E8, Rank.O1, Rank.O2, Rank.O3 }
             })
             .GetAwaiter()
-            .GetResult();
+            .GetResult()
+            .Where(soldier => !String.IsNullOrWhiteSpace(soldier.CivilianEmail))
+            .Select(soldier => new Address { EmailAddress = soldier.CivilianEmail, Name = soldier.ToString() })
+            .ToList();
 
-            foreach (var recipient in recipients)
-            {
-                if (!String.IsNullOrWhiteSpace(recipient.CivilianEmail))
-                {
-                    email.AddTo(recipient.CivilianEmail, name: recipient.ToString());
-                }
-            }
-
-            emailSvc.Send(email).Wait();
+            emailSvc
+                .To(recipients)
+                .Subject("Upcoming and Past Due Evaluations")
+                .Body(sb.ToString())
+                .Send();
         }
     }
 }

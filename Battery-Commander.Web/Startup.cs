@@ -73,7 +73,11 @@ namespace BatteryCommander.Web
             Configuration.GetSection("Auth0").Bind(auth0Settings);
 
             services.AddTransient<AirTableService>();
-            services.AddTransient<IEmailService, EmailService>();
+
+            services
+                .AddFluentEmail(defaultFromEmail: "BatteryCommander@redleg.app", defaultFromName: "Battery Commander App")
+                .AddRazorRenderer()
+                .AddSendGridSender(apiKey: Configuration.GetSection("SendGrid").GetValue<String>("ApiKey"));
 
             services.AddCors(options =>
             {
