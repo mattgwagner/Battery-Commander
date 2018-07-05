@@ -36,7 +36,7 @@ namespace BatteryCommander.Web.Jobs
 
             emailSvc
                 .To(Recipients)
-                .ReplyTo(Matt.EmailAddress, Matt.Name)
+                .SetFrom(Matt.EmailAddress, Matt.Name)
                 .Subject($"{unit.Name} | RED 1 PERSTAT")
                 .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/Reports/Red1_Perstat.cshtml", unit)
                 .Send();
