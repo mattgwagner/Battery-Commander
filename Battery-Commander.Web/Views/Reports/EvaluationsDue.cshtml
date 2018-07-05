@@ -1,0 +1,29 @@
+@model IEnumerable<BatteryCommander.Web.Models.Evaluation>
+
+<h1>Past Due and Upcoming Evaluations</h1>
+
+<table class="table table-condensed">
+    <thead>
+        <tr>
+            <th>Ratee</th>
+            <th>Rater</th>
+            <th>Senior Rater</th>
+            <th>Due Date</th>
+            <th>Last Update</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var eval in Model)
+        {
+            <tr>
+                <td>@eval.Ratee</td>
+                <td>@eval.Rater</td>
+                <td>@eval.SeniorRater</td>
+                <td>@eval.ThruDate.ToString("yyyy-MM-dd")</td>
+                <td>@eval.LastUpdatedHumanized</td>
+            </tr>            
+        }
+    </tbody>
+</table>
+
+<a href="https://bc.redleg.app/Evaluations">Evaluation Tracker</a>

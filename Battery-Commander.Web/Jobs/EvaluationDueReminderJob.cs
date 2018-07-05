@@ -5,8 +5,8 @@ using FluentEmail.Core.Models;
 using FluentScheduler;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.IO;
 using System.Linq;
-using System.Text;
 
 namespace BatteryCommander.Web.Jobs
 {
@@ -26,8 +26,6 @@ namespace BatteryCommander.Web.Jobs
         {
             var soon = DateTime.Today.AddDays(15);
 
-            // TODO Filter this if multiple units in-use
-
             var evaluations_due_soon =
                 db
                 .Evaluations
@@ -41,23 +39,9 @@ namespace BatteryCommander.Web.Jobs
                 .OrderBy(evaluation => evaluation.ThruDate)
                 .ToList();
 
-            var sb =
-                new StringBuilder()
-                .Append("<ul>");
-
-            foreach (var evaluation in evaluations_due_soon)
-            {
-                sb.AppendLine($"<li>{evaluation.Ratee} due {evaluation.ThruDate:d} - Last Update: {evaluation.LastUpdatedHumanized}</li>");
-            }
-
-            sb =
-                sb.AppendLine("</ul>")
-                .AppendLine("<br />")
-                .AppendLine(@"<a href=""https://bc.redleg.app/Evaluations"">Tracker</a>");
-
             var recipients = SoldierSearchService.Filter(db, new SoldierSearchService.Query
             {
-                Ranks = new[] { Rank.E7, Rank.E8, Rank.O1, Rank.O2, Rank.O3 }
+                Ranks = new[] { Rank.E6, Rank.E7, Rank.E8, Rank.O1, Rank.O2, Rank.O3 }
             })
             .GetAwaiter()
             .GetResult()
@@ -67,8 +51,8 @@ namespace BatteryCommander.Web.Jobs
 
             emailSvc
                 .To(recipients)
-                .Subject("Upcoming and Past Due Evaluations")
-                .Body(sb.ToString(), isHtml: true)
+                .Subject("Past Due and Upcoming Evaluations")
+                .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/Reports/EvaluationsDue.cshtml", evaluations_due_soon)
                 .Send();
         }
     }
