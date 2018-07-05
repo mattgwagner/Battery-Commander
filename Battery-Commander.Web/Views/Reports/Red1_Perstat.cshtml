@@ -14,12 +14,12 @@
     <tbody>
         <tr>
             <td>Line 1</td>
-            <td colspan="5"><h2>@(Model.Name)</h2> / <small>@Model.PERSTAT.DateTimeGroup</small></td>
+            <td colspan="5"><h2>@(Model.Name)</h2> / @(Model.PERSTAT.DateTimeGroup)</td>
         </tr>
         <tr>
             <td>Line 2</td>
             <td>Personnel Assigned</td>
-            <td>@($"{Model.PERSTAT.Assigned.Officer}"))</td>
+            <td>@($"{Model.PERSTAT.Assigned.Officer}")</td>
             <td>@($"{Model.PERSTAT.Assigned.Enlisted}")</td>
             <td>@(Model.PERSTAT.Assigned.Warrant)</td>
             <td>@(Model.PERSTAT.Assigned.Total)</td>
@@ -43,7 +43,7 @@
         <tr>
             <td>Line 5</td>
             <td>Total Personnel</td>
-            <td>@($"{Model.PERSTAT.Total.Officer}"))</td>
+            <td>@($"{Model.PERSTAT.Total.Officer}")</td>
             <td>@($"{Model.PERSTAT.Total.Enlisted}")</td>
             <td>@(Model.PERSTAT.Total.Warrant)</td>
             <td>@($"{Model.PERSTAT.Total.Total}")</td>
