@@ -32,9 +32,7 @@ namespace BatteryCommander.Web.Controllers
         [Route("~/Units/{id}", Name = "Unit.Details")]
         public async Task<IActionResult> Details(int id)
         {
-            var units = await UnitService.List(db, includeIgnored: true);
-
-            var model = units.Where(_ => _.Id == id).First();
+            var model = await UnitService.Get(db, id);
 
             ViewBag.CalendarUrl = CalendarService.GenerateUrl(User, Url, id);
 

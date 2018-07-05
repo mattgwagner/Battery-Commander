@@ -9,6 +9,11 @@ namespace BatteryCommander.Web.Services
 {
     public class UnitService
     {
+        public static async Task<Unit> Get(Database db, int unitId)
+        {
+            return (await List(db, includeIgnored: true)).Single(unit => unit.Id == unitId);
+        }
+
         public static async Task<IEnumerable<Unit>> List(Database db, Boolean includeIgnored = false)
         {
             return
