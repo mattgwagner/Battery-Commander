@@ -9,7 +9,7 @@ namespace BatteryCommander.Web.Models.Reports
     {
         public IEnumerable<Soldier> Soldiers { get; set; } = Enumerable.Empty<Soldier>();
 
-        public String DateTimeGroup => DateTime.UtcNow.ConvertToEst().ToDateTimeGroup();
+        public String DateTimeGroup => DateTime.UtcNow.ToEst().ToDateTimeGroup();
 
         [Display(Name = "Personnel Assigned")]
         public Row Assigned => new Row

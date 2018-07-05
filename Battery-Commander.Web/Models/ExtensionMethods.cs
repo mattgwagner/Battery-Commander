@@ -7,16 +7,16 @@ namespace BatteryCommander.Web.Models
 {
     public static class ExtensionMethods
     {
+        public static TimeZoneInfo EASTERN_TIME => TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+
         public static String ToDateTimeGroup(this DateTime timestamp)
         {
             return timestamp.ToString("ddHH00MMMMyyyy");
         }
 
-        public static DateTime ConvertToEst(this DateTime timeInUtc)
+        public static DateTime ToEst(this DateTime timeInUtc)
         {
-            var timezone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
-
-            return TimeZoneInfo.ConvertTimeFromUtc(timeInUtc, timezone);
+            return TimeZoneInfo.ConvertTimeFromUtc(timeInUtc, EASTERN_TIME);
         }
 
         public static string ToTitleCase(this string str)
