@@ -35,6 +35,7 @@ namespace BatteryCommander.Web.Jobs
                 .Include(evaluation => evaluation.Rater)
                 .Include(evaluation => evaluation.SeniorRater)
                 .Include(evaluation => evaluation.Reviewer)
+                .Include(evaluation => evaluation.Events)
                 .Where(evaluation => evaluation.IsCompleted == false)
                 .Where(evaluation => evaluation.ThruDate < soon)
                 .OrderBy(evaluation => evaluation.ThruDate)
@@ -67,7 +68,7 @@ namespace BatteryCommander.Web.Jobs
             emailSvc
                 .To(recipients)
                 .Subject("Upcoming and Past Due Evaluations")
-                .Body(sb.ToString())
+                .Body(sb.ToString(), isHtml: true)
                 .Send();
         }
     }
