@@ -46,7 +46,7 @@ namespace BatteryCommander.Web.Jobs
 
             foreach (var evaluation in evaluations_due_soon)
             {
-                sb.AppendLine($"<li>{evaluation.Ratee} due {evaluation.ThruDate:d}</li>");
+                sb.AppendLine($"<li>{evaluation.Ratee} due {evaluation.ThruDate:d} - Last Update: {evaluation.LastUpdatedHumanized}</li>");
             }
 
             sb = sb.AppendLine("</ul>");
