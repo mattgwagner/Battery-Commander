@@ -10,15 +10,13 @@ namespace BatteryCommander.Web.Jobs
 {
     public class PERSTATReportJob : IJob
     {
-        private static IList<Address> CC = new List<Address>(new[]
+        private static IList<Address> Recipients => new List<Address>(new Address[]
         {
-            new Address { Name = "Matt Wagner", EmailAddress = "MattGWagner@Gmail.com" }
-        });
-
-        private static IList<Address> Recipients = new List<Address>(new Address[]
-        {
+            Matt
             // new Address { Name = "2-116 FA BN TOC", EmailAddress = "ng.fl.flarng.list.ngfl-2-116-fa-bn-toc@mail.mil" }
         });
+
+        internal static Address Matt => new Address { Name = "1LT Wagner", EmailAddress = "MattGWagner@gmail.com" };
 
         private readonly Database db;
 
@@ -37,9 +35,9 @@ namespace BatteryCommander.Web.Jobs
             var unit = UnitService.Get(db, unitId: 3).Result; // C Batt
 
             emailSvc
-                .To(CC)
-                .CC(CC)
-                .Subject($"RED 1 PERSTAT")
+                .To(Recipients)
+                .ReplyTo(Matt.EmailAddress, Matt.Name)
+                .Subject($"{unit.Name} | RED 1 PERSTAT")
                 .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/Reports/Red1_Perstat.cshtml", unit)
                 .Send();
         }
