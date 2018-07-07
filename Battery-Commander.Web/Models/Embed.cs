@@ -6,6 +6,8 @@ namespace BatteryCommander.Web.Models
 {
     public class Embed
     {
+        // FIXME: Need to figure out how to deconflict multiple embeds with the same route, i.e. multiple units allocated /Calendar or /SUTA.
+
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
