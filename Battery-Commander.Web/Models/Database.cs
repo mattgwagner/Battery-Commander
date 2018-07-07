@@ -18,6 +18,8 @@ namespace BatteryCommander.Web.Models
 
         public virtual DbSet<Weapon> Weapons { get; set; }
 
+        public virtual DbSet<Embed> Embeds { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
             builder.UseSqlite("Data Source=Data.db");

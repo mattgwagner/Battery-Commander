@@ -1,5 +1,4 @@
 ﻿@model NavigationViewComponent
-
 <nav class="navbar navbar-inverse navbar-fixed-top no-print">
     <div>
         <div class="navbar-header">
@@ -15,7 +14,6 @@
             @if (Model.ShowNavigation)
             {
                 <ul class="nav navbar-nav">
-
                     @if (Model.Soldier != null)
                     {
                         <li>@Html.RouteLink("My Unit", "Unit.Details", new { id = Model.Soldier.UnitId }, new { @class = "nav-link" })</li>
@@ -26,25 +24,19 @@
                     {
                         <li><a class="nav-link" asp-controller="Soldiers" asp-action="Index">Soldiers</a></li>
                     }
-
                     <li><a class="nav-link" asp-controller="Vehicles" asp-action="Index">Vehicles</a></li>
                     <li><a class="nav-link" asp-controller="Weapons" asp-action="Index">Weapons</a></li>
                     <li><a class="nav-link" asp-controller="SSD" asp-action="Index">SSD</a></li>
                     <li><a class="nav-link" asp-controller="Evaluations" asp-action="Index">Evaluations</a></li>
                     <li><a class="nav-link" asp-controller="APFT" asp-action="Index">APFT</a></li>
                     <li><a class="nav-link" asp-controller="ABCP" asp-action="Index">ABCP</a></li>
-                    @if (Model.ShowPOTracker)
+                    @foreach (var embed in Model.NavItems)
                     {
-                        <li><a class="nav-link" asp-controller="PurchaseOrders" asp-action="Index">Purchase Orders</a></li>
-                    }
-                    @if (Model.ShowSUTATracker)
-                    {
-                        <li><a class="nav-link" asp-controller="SUTA" asp-action="Index">SUTA</a></li>
+                        <li><a class="nav-link" href="/@embed.Route">@embed.Name</a></li>
                     }
                     <li><a class="nav-link" asp-controller="Units" asp-action="Index">Units</a></li>
                 </ul>
             }
-
             @if (User.Identity.IsAuthenticated)
             {
                 <ul class="nav navbar-nav navbar-right">

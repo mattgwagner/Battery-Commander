@@ -2,6 +2,7 @@
 using BatteryCommander.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Models
@@ -14,11 +15,23 @@ namespace BatteryCommander.Web.Models
 
         public Boolean ShowNavigation => !String.Equals(nameof(HomeController.PrivacyAct), RouteData.Values["action"]);
 
-        // TODO Fix this to actually check a feature flag
+        public IEnumerable<Embed> NavItems
+        {
+            get
+            {
+                // TODO Only for nav items
+                // TODO Only for the logged in unit
 
-        public Boolean ShowSUTATracker => UserClaimsPrincipal?.Identity.Name == "mattgwagner@gmail.com";
+                yield return new Embed { Name = "PO Tracker" };
 
-        public Boolean ShowPOTracker => UserClaimsPrincipal?.Identity.Name == "mattgwagner@gmail.com";
+                yield return new Embed { Name = "SUTA" };
+
+                //return
+                //    db
+                //    .Embeds
+                //    .ToList();
+            }
+        }
 
         public NavigationViewComponent(Database db)
         {
