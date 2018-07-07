@@ -9,9 +9,9 @@ namespace BatteryCommander.Web.Models
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        //public int? UnitId { get; set; }
+        public int? UnitId { get; set; }
 
-        //public virtual Unit Unit { get; set; }
+        public virtual Unit Unit { get; set; }
 
         [StringLength(20)]
         public String Name { get; set; }

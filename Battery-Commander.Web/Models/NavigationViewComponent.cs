@@ -21,11 +21,10 @@ namespace BatteryCommander.Web.Models
             get
             {
                 // TODO Only for nav items
-                // TODO Only for the logged in uni
-
                 return
                     db
                     .Embeds
+                    .Where(embed => !embed.UnitId.HasValue || Soldier == null || embed.UnitId == Soldier.UnitId)
                     .ToList();
             }
         }
