@@ -3,6 +3,8 @@ using BatteryCommander.Web.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Controllers
@@ -56,6 +58,24 @@ namespace BatteryCommander.Web.Controllers
         public IActionResult Error()
         {
             return View();
+        }
+
+        public async Task<IActionResult> UnknownRoute(String url)
+        {
+            // Try to find an embed matching the given route
+
+            var embed = await db.Embeds.SingleOrDefaultAsync(_ => _.Route == url);
+
+            if (embed != null)
+            {
+                // If found, return that
+
+                return View("Embed", embed);
+            }
+
+            // If not, return 404
+
+            return NotFound();
         }
     }
 }
