@@ -33,7 +33,7 @@ namespace BatteryCommander.Web.Controllers.API
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var embed = db.Embeds.SingleOrDefaultAsync(_ => _.Id == id);
+            var embed = await db.Embeds.SingleOrDefaultAsync(_ => _.Id == id);
 
             db.Embeds.Remove(embed);
 
