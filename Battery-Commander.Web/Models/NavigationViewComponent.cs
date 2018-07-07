@@ -3,6 +3,7 @@ using BatteryCommander.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Models
@@ -20,16 +21,12 @@ namespace BatteryCommander.Web.Models
             get
             {
                 // TODO Only for nav items
-                // TODO Only for the logged in unit
+                // TODO Only for the logged in uni
 
-                yield return new Embed { Name = "PO Tracker" };
-
-                yield return new Embed { Name = "SUTA" };
-
-                //return
-                //    db
-                //    .Embeds
-                //    .ToList();
+                return
+                    db
+                    .Embeds
+                    .ToList();
             }
         }
 
