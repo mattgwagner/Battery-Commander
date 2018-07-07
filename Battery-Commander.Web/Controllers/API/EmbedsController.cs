@@ -15,9 +15,20 @@ namespace BatteryCommander.Web.Controllers.API
         }
 
         [HttpGet]
-        public IEnumerable<Embed> List()
+        public async Task<IEnumerable<dynamic>> List()
         {
-            return db.Embeds.ToList();
+            return
+                await db
+                .Embeds
+                .Select(embed => new
+                {
+                    embed.Id,
+                    embed.UnitId,
+                    embed.Name,
+                    embed.Route,
+                    embed.Source
+                })
+                .ToListAsync();
         }
 
         [HttpPost]
