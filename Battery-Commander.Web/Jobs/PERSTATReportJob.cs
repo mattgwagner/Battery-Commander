@@ -12,11 +12,11 @@ namespace BatteryCommander.Web.Jobs
     {
         private static IList<Address> Recipients => new List<Address>(new Address[]
         {
-            Matt
+            FROM
             // new Address { Name = "2-116 FA BN TOC", EmailAddress = "ng.fl.flarng.list.ngfl-2-116-fa-bn-toc@mail.mil" }
         });
 
-        internal static Address Matt => new Address { Name = "1LT Wagner", EmailAddress = "MattGWagner@gmail.com" };
+        internal static Address FROM => new Address { Name = "C-2-116 FA", EmailAddress = "C-2-116FA@redleg.app" };
 
         private readonly Database db;
 
@@ -36,7 +36,7 @@ namespace BatteryCommander.Web.Jobs
 
                 emailSvc
                     .To(Recipients)
-                    .SetFrom(Matt.EmailAddress, Matt.Name)
+                    .SetFrom(FROM.EmailAddress, FROM.Name)
                     .Subject($"{unit.Name} | RED 1 PERSTAT")
                     .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/Reports/Red1_Perstat.cshtml", unit)
                     .Send();
