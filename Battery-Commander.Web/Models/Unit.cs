@@ -1,4 +1,5 @@
 ﻿using BatteryCommander.Web.Models.Reports;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -21,6 +22,26 @@ namespace BatteryCommander.Web.Models
         public virtual ICollection<Soldier> Soldiers { get; set; }
 
         public virtual ICollection<Vehicle> Vehicles { get; set; }
+
+        // This feels a bit hacky, but it'll do for now
+
+        [NotMapped]
+        public UnitConfiguration Configuration
+        {
+            get { return JsonConvert.DeserializeObject<UnitConfiguration>(_configuration); }
+            set { _configuration = JsonConvert.SerializeObject(value); }
+        }
+
+        public String _configuration { get; set; } = "[]";
+
+        public class UnitConfiguration
+        {
+            public Boolean SendPERSTAT { get; set; }
+
+            public String PERSTAT_From { get; set; } = "Reports@redleg.app";
+
+            public ICollection<String> PERSTAT_Recipients { get; set; } = new List<String>();
+        }
 
         [NotMapped]
         public virtual IEnumerable<Soldier> CLS

@@ -3,21 +3,13 @@ using BatteryCommander.Web.Services;
 using FluentEmail.Core;
 using FluentEmail.Core.Models;
 using FluentScheduler;
-using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace BatteryCommander.Web.Jobs
 {
     public class PERSTATReportJob : IJob
     {
-        private static IList<Address> Recipients => new List<Address>(new Address[]
-        {
-            FROM
-            // new Address { Name = "2-116 FA BN TOC", EmailAddress = "ng.fl.flarng.list.ngfl-2-116-fa-bn-toc@mail.mil" }
-        });
-
-        internal static Address FROM => new Address { Name = "C-2-116 FA", EmailAddress = "C-2-116FA@redleg.app" };
-
         private readonly Database db;
 
         private readonly IFluentEmail emailSvc;
@@ -30,16 +22,29 @@ namespace BatteryCommander.Web.Jobs
 
         public virtual void Execute()
         {
-            foreach (var unit in UnitService.List(db).GetAwaiter().GetResult())
+            foreach (var unit in UnitService.List(db, includeIgnored: true).GetAwaiter().GetResult())
             {
-                // HACK - Configure the recipients and units that this is going to be wired up for
+                if (unit.Configuration.SendPERSTAT)
+                {
+                    var recipients =
+                        unit
+                        .Configuration
+                        .PERSTAT_Recipients
+                        .Select(address => new Address
+                        {
+                            EmailAddress = address
+                        })
+                        .ToList();
 
-                emailSvc
-                    .To(Recipients)
-                    .SetFrom(FROM.EmailAddress, FROM.Name)
-                    .Subject($"{unit.Name} | RED 1 PERSTAT")
-                    .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/Reports/Red1_Perstat.cshtml", unit)
-                    .Send();
+                    var from_address = unit.Configuration.PERSTAT_From;
+
+                    emailSvc
+                        .To(recipients)
+                        .SetFrom(from_address)
+                        .Subject($"{unit.Name} | RED 1 PERSTAT")
+                        .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/Reports/Red1_Perstat.cshtml", unit)
+                        .Send();
+                }
             }
         }
     }
