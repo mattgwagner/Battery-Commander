@@ -12,7 +12,7 @@ namespace BatteryCommander.Web.Migrations
                 name: "_configuration",
                 table: "Units",
                 nullable: true, 
-                defaultValue: "[]");
+                defaultValue: "{}");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
