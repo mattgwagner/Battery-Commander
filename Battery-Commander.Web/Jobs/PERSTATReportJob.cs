@@ -3,6 +3,7 @@ using BatteryCommander.Web.Services;
 using FluentEmail.Core;
 using FluentEmail.Core.Models;
 using FluentScheduler;
+using Serilog;
 using System.Collections.Generic;
 using System.IO;
 
@@ -10,6 +11,8 @@ namespace BatteryCommander.Web.Jobs
 {
     public class PERSTATReportJob : IJob
     {
+        private static readonly ILogger Log = Serilog.Log.ForContext<PERSTATReportJob>();
+
         private static IList<Address> Recipients => new List<Address>(new Address[]
         {
             FROM
@@ -33,6 +36,8 @@ namespace BatteryCommander.Web.Jobs
             foreach (var unit in UnitService.List(db).GetAwaiter().GetResult())
             {
                 // HACK - Configure the recipients and units that this is going to be wired up for
+
+                Log.Information("Building PERSTAT report for {@unit} to {@recipients}", new { unit.Id, unit.Name }, Recipients);
 
                 emailSvc
                     .To(Recipients)

@@ -4,6 +4,7 @@ using FluentEmail.Core;
 using FluentEmail.Core.Models;
 using FluentScheduler;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using System;
 using System.IO;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace BatteryCommander.Web.Jobs
 {
     public class EvaluationDueReminderJob : IJob
     {
+        private static readonly ILogger Log = Serilog.Log.ForContext<EvaluationDueReminderJob>();
+
         private readonly Database db;
 
         private readonly IFluentEmail emailSvc;
@@ -25,6 +28,8 @@ namespace BatteryCommander.Web.Jobs
         public void Execute()
         {
             var soon = DateTime.Today.AddDays(15);
+
+            Log.Information("Building Evaluations Due email for evals due before {soon}", soon);
 
             var evaluations_due_soon =
                 db
@@ -48,6 +53,8 @@ namespace BatteryCommander.Web.Jobs
             .Where(soldier => !String.IsNullOrWhiteSpace(soldier.CivilianEmail))
             .Select(soldier => new Address { EmailAddress = soldier.CivilianEmail, Name = soldier.ToString() })
             .ToList();
+
+            Log.Information("Sending evaluations email to {@recipients}", recipients);
 
             emailSvc
                 .To(recipients)
