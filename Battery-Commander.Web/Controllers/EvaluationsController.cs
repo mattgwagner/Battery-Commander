@@ -66,13 +66,15 @@ namespace BatteryCommander.Web.Controllers
 
                 // Try to backtrack into their next evaluation period based on the last eval we have for them
 
+                var startDate = lastEval?.ThruDate.AddDays(1) ?? soldierModel.DateOfRank ?? DateTime.Today;
+
                 return View("Edit", new Evaluation
                 {
                     RateeId = soldier,
                     RaterId = soldierModel.SupervisorId ?? 0,
                     SeniorRaterId = soldierModel.Supervisor?.SupervisorId ?? 0,
-                    StartDate = lastEval?.ThruDate.AddDays(1) ?? DateTime.Today,
-                    ThruDate = lastEval?.ThruDate.AddDays(1).AddYears(1) ?? DateTime.Today.AddYears(1)
+                    StartDate = startDate,
+                    ThruDate = startDate.AddYears(1)
                 });
             }
 
