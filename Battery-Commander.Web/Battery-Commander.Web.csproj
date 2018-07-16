@@ -64,7 +64,6 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.2" PrivateAssets="All" />
     <PackageReference Include="Serilog.Extensions.Logging.File" Version="1.1.0" />
-    <PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="2.6.0" />
     <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
     <PackageReference Include="Stateless" Version="4.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="2.4.0" />
