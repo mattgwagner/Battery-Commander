@@ -8,6 +8,8 @@
 
   <PropertyGroup>
     <DocumentationFile>bin\$(Configuration)\netcoreapp2.0\BatteryCommander.Web.xml</DocumentationFile>
+    <ApplicationInsightsResourceId>/subscriptions/a9421f6a-e5c1-4c30-baf7-a483e4f301c2/resourcegroups/primary/providers/microsoft.insights/components/Battery-Commander</ApplicationInsightsResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/a9421f6a-e5c1-4c30-baf7-a483e4f301c2/resourcegroups/primary/providers/microsoft.insights/components/Battery-Commander</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -53,6 +55,7 @@
     <PackageReference Include="FluentScheduler" Version="5.3.0" />
     <PackageReference Include="Humanizer.Core" Version="2.4.2" />
     <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.4.4" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.3" />
@@ -75,5 +78,9 @@
   <ItemGroup>
     <Folder Include="Migrations\" />
     <Folder Include="Properties\PublishProfiles\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
   </ItemGroup>
 </Project>
