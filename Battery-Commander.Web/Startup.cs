@@ -238,11 +238,6 @@ namespace BatteryCommander.Web
             loggerFactory.AddSerilog();
             loggerFactory.AddDebug();
 
-            if (env.IsDevelopment())
-            {
-                app.UseBrowserLink();
-            }
-
             app.UseDeveloperExceptionPage();
 
             app.UseStaticFiles();
