@@ -27,16 +27,12 @@ namespace BatteryCommander.Web
 
         public static String API_Name => $"Battery Commander {API_Version}";
 
+        public static String Email_Address => "BatteryCommander@redleg.app";
+
         private static Boolean IsDevelopment;
 
         public Startup(IHostingEnvironment env)
         {
-            Log.Logger = new LoggerConfiguration()
-                .Enrich.FromLogContext()
-                .WriteTo.RollingFile(pathFormat: @"logs\{Date}.log")
-                .MinimumLevel.Information()
-                .CreateLogger();
-
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -51,6 +47,20 @@ namespace BatteryCommander.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            Log.Logger =
+                new LoggerConfiguration()
+                .Enrich.FromLogContext()
+                .WriteTo.RollingFile(pathFormat: @"logs\{Date}.log")
+                .WriteTo.Email(new Serilog.Sinks.Email.EmailConnectionInfo
+                {
+                    ToEmail = "Errors@RedLeg.app",
+                    FromEmail = Email_Address,
+                    SendGridClient = new SendGrid.SendGridClient(Configuration.GetSection("SendGrid").GetValue<String>("ApiKey"))
+                },
+                restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Warning)
+                .MinimumLevel.Information()
+                .CreateLogger();
+
             services.AddMemoryCache();
 
             // Add functionality to inject IOptions<T>
@@ -64,15 +74,14 @@ namespace BatteryCommander.Web
             services.AddTransient<SqliteBackupJob>();
             services.AddTransient<EvaluationDueReminderJob>();
             services.AddTransient<PERSTATReportJob>();
+            services.AddTransient<AirTableService>();
 
             var auth0Settings = new Auth0Settings { };
 
             Configuration.GetSection("Auth0").Bind(auth0Settings);
 
-            services.AddTransient<AirTableService>();
-
             services
-                .AddFluentEmail(defaultFromEmail: "BatteryCommander@redleg.app", defaultFromName: "Battery Commander App")
+                .AddFluentEmail(defaultFromEmail: Email_Address, defaultFromName: "Battery Commander App")
                 .AddRazorRenderer()
                 .AddSendGridSender(apiKey: Configuration.GetSection("SendGrid").GetValue<String>("ApiKey"));
 
