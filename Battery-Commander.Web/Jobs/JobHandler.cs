@@ -8,6 +8,8 @@ namespace BatteryCommander.Web.Jobs
 {
     internal static class JobHandler
     {
+        public static Boolean Send_Reports => true;
+
         public static void UseJobScheduler(this IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
             var logger = loggerFactory.CreateLogger(typeof(JobHandler));
@@ -28,10 +30,13 @@ namespace BatteryCommander.Web.Jobs
 
             registry.Schedule<EvaluationDueReminderJob>().ToRunEvery(0).Weeks().On(DayOfWeek.Tuesday).At(hours: 13, minutes: 0);
 
-            registry.Schedule<PERSTATReportJob>().ToRunEvery(1).Days().AtEst(hours: 6, minutes: 30);
+            if (Send_Reports)
+            {
+                registry.Schedule<PERSTATReportJob>().ToRunEvery(1).Days().AtEst(hours: 6, minutes: 30);
 
-            registry.Schedule<SensitiveItemsReport>().WithName("Green3_AM").ToRunEvery(1).Days().AtEst(hours: 7, minutes: 30);
-            registry.Schedule<SensitiveItemsReport>().WithName("Green3_PM").ToRunEvery(1).Days().AtEst(hours: 22, minutes: 30);
+                registry.Schedule<SensitiveItemsReport>().WithName("Green3_AM").ToRunEvery(1).Days().AtEst(hours: 7, minutes: 30);
+                registry.Schedule<SensitiveItemsReport>().WithName("Green3_PM").ToRunEvery(1).Days().AtEst(hours: 21, minutes: 30);
+            }
 
             JobManager.Initialize(registry);
         }
