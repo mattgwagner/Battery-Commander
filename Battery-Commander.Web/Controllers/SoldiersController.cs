@@ -32,7 +32,11 @@ namespace BatteryCommander.Web.Controllers
             });
         }
 
-
+        [Route("~/Units/{unitId}/Soldiers", Name = "Unit.Soldiers")]
+        public async Task<IActionResult> ForUnit(int unitId)
+        {
+            return await Index(new SoldierSearchService.Query { Unit = unitId, IncludeIgnoredUnits = true });
+        }
 
         [Route("~/Soldiers/All")]
         public async Task<IActionResult> All()

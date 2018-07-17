@@ -17,7 +17,7 @@
                     @if (Model.Soldier != null)
                     {
                         <li>@Html.RouteLink("My Unit", "Unit.Details", new { id = Model.Soldier.UnitId }, new { @class = "nav-link" })</li>
-                        <li>@Html.RouteLink("My Soldiers", "Soldiers.List", new SoldierSearchService.Query { Unit = Model.Soldier.UnitId }, new { @class = "nav-link" })</li>
+                        <li>@Html.RouteLink("My Soldiers", "Unit.Soldiers", new { Model.Soldier.UnitId }, new { @class = "nav-link" })</li>
                         <li>@Html.RouteLink("My Profile", "Soldier.Details", new { id = Model.Soldier.Id }, new { @class = "nav-link" })</li>
                     }
                     else
