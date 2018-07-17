@@ -43,7 +43,7 @@ namespace BatteryCommander.Web.Jobs
                 emailSvc
                     .To(Recipients)
                     .SetFrom(FROM.EmailAddress, FROM.Name)
-                    .Subject($"{unit.Name} | GREEN 3 Report | { unit.SensitiveItems.Status}")
+                    .Subject($"{unit.Name} | GREEN 3 Report | {unit.SensitiveItems.Status}")
                     .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/Reports/Green3_SensitiveItems.cshtml", unit)
                     .Send();
             }
