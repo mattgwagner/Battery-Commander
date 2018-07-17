@@ -30,6 +30,9 @@ namespace BatteryCommander.Web.Jobs
 
             registry.Schedule<PERSTATReportJob>().ToRunEvery(1).Days().AtEst(hours: 6, minutes: 30);
 
+            registry.Schedule<SensitiveItemsReport>().WithName("Green3_AM").ToRunEvery(1).Days().AtEst(hours: 7, minutes: 30);
+            registry.Schedule<SensitiveItemsReport>().WithName("Green3_PM").ToRunEvery(1).Days().AtEst(hours: 22, minutes: 30);
+
             JobManager.Initialize(registry);
         }
 

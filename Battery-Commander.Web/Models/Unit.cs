@@ -158,5 +158,12 @@ namespace BatteryCommander.Web.Models
         {
             get { return new Red1_Perstat { Soldiers = Soldiers }; }
         }
+
+
+        [NotMapped]
+        public virtual Green3_SensitiveItems SensitiveItems
+        {
+            get { return new Green3_SensitiveItems { }; }
+        }
     }
 }

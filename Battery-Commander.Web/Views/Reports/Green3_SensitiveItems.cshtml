@@ -2,7 +2,7 @@
 
 <div>
     <b>
-        PURPOSE:  To convey status of military equipment deemed sensitive by chain of command.									
+        PURPOSE:  To convey status of military equipment deemed sensitive by chain of command.
     </b>
 </div>
 
@@ -24,15 +24,15 @@
     <tbody>
         <tr>
             <td>Line 1 (DTG)</td>
-            <td></td>
+            <td>@(Model.SensitiveItems.DateTimeGroup)</td>
         </tr>
         <tr>
             <td>Line 2 (Unit)</td>
-            <td></td>
+            <td>@(Model.Name)</td>
         </tr>
         <tr>
             <td>Line 3 (Status (Green: 100% with no discrepancy; if green skip to line 10.  When discrepency noted, report Red and continue report)</td>
-            <td></td>
+            <td>@(Model.SensitiveItems.Status)</td>
         </tr>
         <tr>
             <td>Line 4 (Losing Unit (Unit making report loss))</td>
@@ -60,7 +60,7 @@
         </tr>
         <tr>
             <td>Line 10 (Authentication)</td>
-            <td></td>
+            <td>@(Model.SensitiveItems.Authentication)</td>
         </tr>
     </tbody>
 </table>

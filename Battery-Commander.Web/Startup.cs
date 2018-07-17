@@ -74,6 +74,7 @@ namespace BatteryCommander.Web
             services.AddTransient<SqliteBackupJob>();
             services.AddTransient<EvaluationDueReminderJob>();
             services.AddTransient<PERSTATReportJob>();
+            services.AddTransient<SensitiveItemsReport>();
             services.AddTransient<AirTableService>();
 
             var auth0Settings = new Auth0Settings { };
