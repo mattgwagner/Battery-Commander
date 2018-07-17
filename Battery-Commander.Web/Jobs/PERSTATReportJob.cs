@@ -16,6 +16,7 @@ namespace BatteryCommander.Web.Jobs
         private static IList<Address> Recipients => new List<Address>(new Address[]
         {
             FROM,
+            new Address { Name = "C-2-116 FA", EmailAddress = "ng.fl.flarng.list.2-116-fa-bn-c-btry@mail.mil" },
             new Address { Name = "2-116 FA BN TOC", EmailAddress = "ng.fl.flarng.list.ngfl-2-116-fa-bn-toc@mail.mil" }
         });
 
