@@ -54,9 +54,9 @@ namespace BatteryCommander.Web.Models.Reports
         [Display(Name = "Total Present for Duty")]
         public Row PresentForDuty => new Row
         {
-            Enlisted = Soldiers.Where(_ => _.IsEnlisted).Where(_ => _.Status == Soldier.SoldierStatus.PresentForDuty).Count(),
-            Warrant = Soldiers.Where(_ => _.IsWarrant).Where(_ => _.Status == Soldier.SoldierStatus.PresentForDuty).Count(),
-            Officer = Soldiers.Where(_ => _.IsOfficer || _.IsCadet).Where(_ => _.Status == Soldier.SoldierStatus.PresentForDuty).Count()
+            Enlisted = Soldiers.Where(_ => _.IsEnlisted).Where(_ => _.Status == Soldier.SoldierStatus.PresentForDuty).Count() + Attached.Enlisted,
+            Warrant = Soldiers.Where(_ => _.IsWarrant).Where(_ => _.Status == Soldier.SoldierStatus.PresentForDuty).Count() + Attached.Warrant,
+            Officer = Soldiers.Where(_ => _.IsOfficer || _.IsCadet).Where(_ => _.Status == Soldier.SoldierStatus.PresentForDuty).Count() + Attached.Officer
         };
 
         [Display(Name = "Wounded in Action")]
