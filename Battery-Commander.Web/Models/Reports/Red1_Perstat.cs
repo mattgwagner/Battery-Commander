@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -20,7 +20,20 @@ namespace BatteryCommander.Web.Models.Reports
         };
 
         [Display(Name = "Personnel Attached")]
-        public Row Attached => new Row { };
+        public Row Attached
+        {
+            get
+            {
+                // HACK: Still need to figure out how to count attached folks
+
+                if(DateTime.Now < new DateTime(2018, 07, 28))
+                {
+                    return new Row { Enlisted = 1 };
+                }
+
+                return new Row { };
+            }
+        }
 
         [Display(Name = "Personnel Detached")]
         public Row Detached => new Row
