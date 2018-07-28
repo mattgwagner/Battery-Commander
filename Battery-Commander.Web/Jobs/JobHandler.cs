@@ -8,7 +8,7 @@ namespace BatteryCommander.Web.Jobs
 {
     internal static class JobHandler
     {
-        public static Boolean Send_Reports => true;
+        public static Boolean Send_Reports => false;
 
         public static void UseJobScheduler(this IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
