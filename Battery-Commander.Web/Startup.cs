@@ -47,6 +47,11 @@ namespace BatteryCommander.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            String SendGridAPIKey = 
+                Configuration
+                .GetSection("SendGrid")
+                .GetValue<String>("ApiKey");
+
             Log.Logger =
                 new LoggerConfiguration()
                 .Enrich.FromLogContext()
@@ -55,7 +60,7 @@ namespace BatteryCommander.Web
                 {
                     ToEmail = "Errors@RedLeg.app",
                     FromEmail = Email_Address,
-                    SendGridClient = new SendGrid.SendGridClient(Configuration.GetSection("SendGrid").GetValue<String>("ApiKey"))
+                    SendGridClient = new SendGrid.SendGridClient(SendGridAPIKey)
                 },
                 restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Warning)
                 .MinimumLevel.Information()
@@ -84,7 +89,7 @@ namespace BatteryCommander.Web
             services
                 .AddFluentEmail(defaultFromEmail: Email_Address, defaultFromName: "Battery Commander App")
                 .AddRazorRenderer()
-                .AddSendGridSender(apiKey: Configuration.GetSection("SendGrid").GetValue<String>("ApiKey"));
+                .AddSendGridSender(SendGridAPIKey);
 
             services.AddCors(options =>
             {
