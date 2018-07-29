@@ -252,18 +252,19 @@ namespace BatteryCommander.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, Database db)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddSerilog();
-            loggerFactory.AddDebug();
-
             app.Use(async (context, next) =>
             {
                 // Enrich log entries with the logged in user, if available
 
-                LogContext.PushProperty("User", UserService.Get_Email(context.User));
-
-                await next.Invoke();
+                using (LogContext.PushProperty("User", UserService.Get_Email(context.User)))
+                {
+                    await next.Invoke();
+                }
             });
+
+            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory.AddSerilog();
+            loggerFactory.AddDebug();
 
             app.UseDeveloperExceptionPage();
 
