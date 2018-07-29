@@ -62,7 +62,7 @@ namespace BatteryCommander.Web
                     ToEmail = "Errors@RedLeg.app",
                     FromEmail = Email_Address,
                     SendGridClient = new SendGrid.SendGridClient(SendGridAPIKey),
-                    EmailSubject = "Log Email: {User}",
+                    EmailSubject = "Log Email: {Username}",
                     IsBodyHtml = true
                 },
                 restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Warning)
@@ -271,6 +271,16 @@ namespace BatteryCommander.Web
 
             app.UseAuthentication();
 
+            app.Use(async (context, next) =>
+            {
+                // Enrich log entries with the logged in user, if available
+
+                using (LogContext.PushProperty("Username", UserService.Get_Email(context.User)))
+                {
+                    await next.Invoke();
+                }
+            });
+
             app.UseCors("Policy");
 
             app.UseMvc(routes =>
@@ -287,16 +297,6 @@ namespace BatteryCommander.Web
             });
 
             app.UseJobScheduler(loggerFactory);
-
-            app.Use(async (context, next) =>
-            {
-                // Enrich log entries with the logged in user, if available
-
-                using (LogContext.PushProperty("User", UserService.Get_Email(context.User)))
-                {
-                    await next.Invoke();
-                }
-            });
 
             Database.Init(db);
         }
