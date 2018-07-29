@@ -36,16 +36,19 @@ namespace BatteryCommander.Web.Jobs
         {
             foreach (var unit in UnitService.List(db).GetAwaiter().GetResult())
             {
-                // HACK - Configure the recipients and units that this is going to be wired up for
+                if (this.ShouldSendReport(unit))
+                {
+                    // HACK - Configure the recipients and units that this is going to be wired up for
 
-                Log.Information("Building Green 3 report for {@unit} to {@recipients}", new { unit.Id, unit.Name }, Recipients);
+                    Log.Information("Building Green 3 report for {@unit} to {@recipients}", new { unit.Id, unit.Name }, Recipients);
 
-                emailSvc
-                    .To(Recipients)
-                    .SetFrom(FROM.EmailAddress, FROM.Name)
-                    .Subject($"{unit.Name} | GREEN 3 Report | {unit.SensitiveItems.Status}")
-                    .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/Reports/Green3_SensitiveItems.cshtml", unit)
-                    .Send();
+                    emailSvc
+                        .To(Recipients)
+                        .SetFrom(FROM.EmailAddress, FROM.Name)
+                        .Subject($"{unit.Name} | GREEN 3 Report | {unit.SensitiveItems.Status}")
+                        .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/Reports/Green3_SensitiveItems.cshtml", unit)
+                        .Send();
+                }
             }
         }
     }

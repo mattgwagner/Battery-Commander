@@ -36,16 +36,19 @@ namespace BatteryCommander.Web.Jobs
         {
             foreach (var unit in UnitService.List(db).GetAwaiter().GetResult())
             {
-                // HACK - Configure the recipients and units that this is going to be wired up for
+                if (this.ShouldSendReport(unit))
+                {
+                    // HACK - Configure the recipients and units that this is going to be wired up for
 
-                Log.Information("Building PERSTAT report for {@unit} to {@recipients}", new { unit.Id, unit.Name }, Recipients);
+                    Log.Information("Building PERSTAT report for {@unit} to {@recipients}", new { unit.Id, unit.Name }, Recipients);
 
-                emailSvc
-                    .To(Recipients)
-                    .SetFrom(FROM.EmailAddress, FROM.Name)
-                    .Subject($"{unit.Name} | RED 1 PERSTAT")
-                    .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/Reports/Red1_Perstat.cshtml", unit)
-                    .Send();
+                    emailSvc
+                        .To(Recipients)
+                        .SetFrom(FROM.EmailAddress, FROM.Name)
+                        .Subject($"{unit.Name} | RED 1 PERSTAT")
+                        .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/Reports/Red1_Perstat.cshtml", unit)
+                        .Send();
+                }
             }
         }
     }
