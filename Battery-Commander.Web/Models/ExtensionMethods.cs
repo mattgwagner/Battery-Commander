@@ -1,4 +1,5 @@
-﻿using FluentScheduler;
+﻿using BatteryCommander.Web.Jobs;
+using FluentScheduler;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
@@ -9,6 +10,28 @@ namespace BatteryCommander.Web.Models
     public static class ExtensionMethods
     {
         public static TimeZoneInfo EASTERN_TIME => TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+
+        /// <summary>
+        /// Return true if the given IJob Report should be sent for the given unit
+        /// </summary>
+        public static Boolean ShouldSendReport(this IJob reportJob, Unit unit)
+        {
+            // TODO We can check settings on the unit, or a date range, or a report type here
+
+            if (!unit.IgnoreForReports)
+            {
+                switch (reportJob)
+                {
+                    case PERSTATReportJob red1:
+                        return false;
+
+                    case SensitiveItemsReport green3:
+                        return false;
+                }
+            }
+
+            return false;
+        }
 
         public static IDayRestrictableUnit AtEst(this DayUnit schedule, int hours, int minutes = 0)
         {
