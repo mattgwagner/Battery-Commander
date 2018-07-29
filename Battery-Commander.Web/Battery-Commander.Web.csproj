@@ -12,6 +12,10 @@
     <ApplicationInsightsAnnotationResourceId>/subscriptions/a9421f6a-e5c1-4c30-baf7-a483e4f301c2/resourcegroups/primary/providers/microsoft.insights/components/Battery-Commander</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="Models\Reports\ABCP_Status.cs" />
     <Compile Remove="Models\Reports\APFT_Status.cs" />
