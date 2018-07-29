@@ -62,10 +62,10 @@ namespace BatteryCommander.Web
                     ToEmail = "Errors@RedLeg.app",
                     FromEmail = Email_Address,
                     SendGridClient = new SendGrid.SendGridClient(SendGridAPIKey),
-                    EmailSubject = "Log Email: {Username}",
                     IsBodyHtml = true
                 },
-                restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Warning)
+                restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Warning,
+                outputTemplate: "{Username} {Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level}] {Message}{NewLine}{Exception}")
                 .MinimumLevel.Information()
                 .CreateLogger();
 
