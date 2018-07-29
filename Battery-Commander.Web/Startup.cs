@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Converters;
 using Serilog;
+using Serilog.Context;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.IO;
@@ -47,7 +48,7 @@ namespace BatteryCommander.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            String SendGridAPIKey = 
+            String SendGridAPIKey =
                 Configuration
                 .GetSection("SendGrid")
                 .GetValue<String>("ApiKey");
@@ -253,6 +254,15 @@ namespace BatteryCommander.Web
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddSerilog();
             loggerFactory.AddDebug();
+
+            app.Use(async (context, next) =>
+            {
+                // Enrich log entries with the logged in user, if available
+
+                LogContext.PushProperty("User", UserService.Get_Email(context.User));
+
+                await next.Invoke();
+            });
 
             app.UseDeveloperExceptionPage();
 
