@@ -36,7 +36,7 @@ namespace BatteryCommander.Web.Jobs
                 db
                 .Evaluations
                 .Include(evaluation => evaluation.Events)
-                .Where(evaluation => evaluation.LastUpdated > since)
+                .Where(evaluation => evaluation.LastEvent != null && evaluation.LastEvent.Timestamp > since)
                 .ToList();
 
             foreach (var evaluation in evaluations)
