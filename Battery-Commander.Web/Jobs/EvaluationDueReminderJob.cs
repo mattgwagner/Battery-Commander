@@ -1,7 +1,6 @@
 ﻿using BatteryCommander.Web.Models;
 using BatteryCommander.Web.Services;
 using FluentEmail.Core;
-using FluentEmail.Core.Models;
 using FluentScheduler;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -50,8 +49,8 @@ namespace BatteryCommander.Web.Jobs
             })
             .GetAwaiter()
             .GetResult()
-            .Where(soldier => !String.IsNullOrWhiteSpace(soldier.CivilianEmail))
-            .Select(soldier => new Address { EmailAddress = soldier.CivilianEmail, Name = soldier.ToString() })
+            .Select(soldier => soldier.GetEmails())
+            .SelectMany(email => email)
             .ToList();
 
             Log.Information("Sending evaluations email to {@recipients}", recipients);
