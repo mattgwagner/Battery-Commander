@@ -54,7 +54,7 @@ namespace BatteryCommander.Web.Controllers
         {
             ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, new SoldierService.Query
             {
-                Ranks = new[] { Rank.E5, Rank.E6, Rank.E7, Rank.E8, Rank.E8_MSG, Rank.E9, Rank.O1, Rank.O2, Rank.O3, Rank.O4, Rank.O5 },
+                Ranks = RankExtensions.All().Where(rank => rank.GetsEvaluation()),
                 IncludeIgnoredUnits = true
             });
 
