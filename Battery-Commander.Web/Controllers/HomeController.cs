@@ -55,7 +55,7 @@ namespace BatteryCommander.Web.Controllers
             return RedirectToAction(nameof(Login));
         }
 
-        [Route("~/Error")]
+        [Route("~/Error"), AllowAnonymous]
         public IActionResult Error()
         {
             return View();
