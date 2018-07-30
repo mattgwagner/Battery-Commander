@@ -24,7 +24,7 @@
             <td>Link</td>
             <td><a href="https://bc.redleg.app/Evaluations/Details/@Model.Id">Evaluation</a></td>
         </tr>
-        @if(!String.IsNullOrWhiteSpace(Model.EvaluationLink))
+        @if(Model.EvaluationId.HasValue)
         {
             <tr>
                 <td>EES</td>
