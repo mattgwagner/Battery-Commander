@@ -5,6 +5,7 @@ using FluentScheduler;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -47,18 +48,7 @@ namespace BatteryCommander.Web.Jobs
             {
                 // If it's in a given window, fire off an email to the relevant people
 
-                // TODO Include 1SG?
-
-                //var recipients =
-                //        db
-                //        .Soldiers
-                //        .Include(soldier => soldier.Unit)
-                //        .Where(soldier => new[] { evaluation.RaterId, evaluation.SeniorRaterId, evaluation.ReviewerId }.Contains(soldier.Id))
-                //        .Where(soldier => !String.IsNullOrWhiteSpace(soldier.CivilianEmail))
-                //        .Select(soldier => new Address { EmailAddress = soldier.CivilianEmail, Name = soldier.ToString() })
-                //        .ToList();
-
-                var recipients = new[] { new Address { EmailAddress = "mattgwagner@gmail.com" } };
+                var recipients = Get_Recipients(evaluation).ToList();
 
                 Log.Information("Sending evaluation updated email to {@recipients}", recipients);
 
@@ -67,6 +57,30 @@ namespace BatteryCommander.Web.Jobs
                     .Subject($"Evaluation Updated | {evaluation.Ratee}")
                     .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/Reports/EvaluationUpdated.cshtml", evaluation)
                     .Send();
+            }
+        }
+
+        public IEnumerable<Address> Get_Recipients(Evaluation evaluation)
+        {
+            // TODO Include the unit 1SG on events
+
+            // TODO Remove after testing
+
+            yield return new Address { EmailAddress = "MattGWagner@Gmail.com" };
+
+            if (!String.IsNullOrWhiteSpace(evaluation.Rater?.CivilianEmail))
+            {
+                yield return new Address { EmailAddress = evaluation.Rater.CivilianEmail };
+            }
+
+            if (!String.IsNullOrWhiteSpace(evaluation.SeniorRater?.CivilianEmail))
+            {
+                yield return new Address { EmailAddress = evaluation.SeniorRater.CivilianEmail };
+            }
+
+            if (!String.IsNullOrWhiteSpace(evaluation.Reviewer?.CivilianEmail))
+            {
+                yield return new Address { EmailAddress = evaluation.Reviewer.CivilianEmail };
             }
         }
     }
