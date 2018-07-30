@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Controllers.API
@@ -34,6 +35,11 @@ namespace BatteryCommander.Web.Controllers.API
         [HttpPost]
         public async Task<IActionResult> Create([FromBody]Embed embed)
         {
+            if (await db.Embeds.AnyAsync(_ => _.Route == embed.Route))
+            {
+                return new StatusCodeResult((int)HttpStatusCode.Conflict);
+            }
+
             db.Embeds.Add(embed);
 
             await db.SaveChangesAsync();
