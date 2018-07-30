@@ -23,12 +23,12 @@ namespace BatteryCommander.Web.Controllers
 
         // Bulk update statuses
 
-        public async Task<IActionResult> Index(SoldierSearchService.Query query)
+        public async Task<IActionResult> Index(SoldierService.Query query)
         {
             return View("List", new StatusListModel
             {
                 Rows =
-                    (await SoldierSearchService.Filter(db, query))
+                    (await SoldierService.Filter(db, query))
                     .Select(soldier => new StatusListModel.Row
                     {
                         Soldier = soldier,

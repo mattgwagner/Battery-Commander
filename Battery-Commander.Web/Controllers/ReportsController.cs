@@ -28,21 +28,21 @@ namespace BatteryCommander.Web.Controllers
 
         // YELLOW 1 -- LOGSTAT
 
-        public async Task<IActionResult> Red1(SoldierSearchService.Query query)
+        public async Task<IActionResult> Red1(SoldierService.Query query)
         {
             var model = new Red1_Perstat
             {
-                Soldiers = await SoldierSearchService.Filter(db, query)
+                Soldiers = await SoldierService.Filter(db, query)
             };
 
             return Json(model);
         }
 
-        public async Task<IActionResult> SadPerstat(SoldierSearchService.Query query)
+        public async Task<IActionResult> SadPerstat(SoldierService.Query query)
         {
             var model = new StateActiveDuty_Perstat
             {
-                Soldiers = await SoldierSearchService.Filter(db, query)
+                Soldiers = await SoldierService.Filter(db, query)
             };
 
             return Json(model);
@@ -50,7 +50,7 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> DscaReady()
         {
-            var soldiers = await SoldierSearchService.Filter(db, new SoldierSearchService.Query
+            var soldiers = await SoldierService.Filter(db, new SoldierService.Query
             {
                 IWQ = true,
                 DSCA = true

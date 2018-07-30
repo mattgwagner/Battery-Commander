@@ -24,14 +24,14 @@ namespace BatteryCommander.Web.Controllers
 
         // Bulk update supervisors
 
-        public async Task<IActionResult> Index(SoldierSearchService.Query query)
+        public async Task<IActionResult> Index(SoldierService.Query query)
         {
             return View("List", new SupervisorListModel
             {
                 Soldiers = await SoldiersController.GetDropDownList(db, includeIgnoredUnits: true),
 
                 Rows =
-                    (await SoldierSearchService.Filter(db, query))
+                    (await SoldierService.Filter(db, query))
                     .Select(soldier => new SupervisorListModel.Row
                     {
                         Soldier = soldier,

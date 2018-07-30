@@ -25,12 +25,12 @@ namespace BatteryCommander.Web.Controllers
 
         // Bulk update qual status/date
 
-        public async Task<IActionResult> Index(SoldierSearchService.Query query)
+        public async Task<IActionResult> Index(SoldierService.Query query)
         {
             return View("List", new DSCAListViewModel
             {
                 Rows =
-                    (await SoldierSearchService.Filter(db, query))
+                    (await SoldierService.Filter(db, query))
                     .Select(soldier => new DSCAListViewModel.Row
                     {
                         Soldier = soldier,

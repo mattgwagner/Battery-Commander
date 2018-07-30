@@ -17,7 +17,7 @@ namespace BatteryCommander.Web.Controllers
             this.db = db;
         }
 
-        public async Task<IActionResult> Index(SoldierSearchService.Query query)
+        public async Task<IActionResult> Index(SoldierService.Query query)
         {
             if (query?.Ranks?.Any() == true)
             {
@@ -28,7 +28,7 @@ namespace BatteryCommander.Web.Controllers
                 query.OnlyEnlisted = true;
             }
 
-            return View("List", await SoldierSearchService.Filter(db, query));
+            return View("List", await SoldierService.Filter(db, query));
         }
 
         [HttpPost]

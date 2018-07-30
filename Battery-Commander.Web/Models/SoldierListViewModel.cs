@@ -6,7 +6,7 @@ namespace BatteryCommander.Web.Models
 {
     public class SoldierListViewModel
     {
-        public SoldierSearchService.Query Query { get; set; } = new SoldierSearchService.Query { };
+        public SoldierService.Query Query { get; set; } = new SoldierService.Query { };
 
         public IEnumerable<Soldier> Soldiers { get; set; } = Enumerable.Empty<Soldier>();
 

@@ -75,7 +75,7 @@ namespace BatteryCommander.Web.Jobs
 
             // Include the unit 1SG on event notifications
 
-            foreach (var soldier in SoldierSearchService.Filter(db, new SoldierSearchService.Query { Ranks = new[] { Rank.E8 }, Unit = evaluation.Ratee.UnitId }).GetAwaiter().GetResult())
+            foreach (var soldier in SoldierService.Filter(db, new SoldierService.Query { Ranks = new[] { Rank.E8 }, Unit = evaluation.Ratee.UnitId }).GetAwaiter().GetResult())
             {
                 foreach (var email in soldier.GetEmails()) yield return email;
             }

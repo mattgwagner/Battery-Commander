@@ -35,7 +35,7 @@ namespace BatteryCommander.Web.Jobs
                 .OrderBy(evaluation => evaluation.ThruDate)
                 .ToList();
 
-            var recipients = SoldierSearchService.Filter(db, new SoldierSearchService.Query
+            var recipients = SoldierService.Filter(db, new SoldierService.Query
             {
                 Ranks = new[] { Rank.E6, Rank.E7, Rank.E8, Rank.O1, Rank.O2, Rank.O3 }
             })

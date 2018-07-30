@@ -23,19 +23,19 @@ namespace BatteryCommander.Web.Controllers
         }
 
         [Route("~/Soldiers", Name = "Soldiers.List")]
-        public async Task<IActionResult> Index(SoldierSearchService.Query query)
+        public async Task<IActionResult> Index(SoldierService.Query query)
         {
             return View("List", new SoldierListViewModel
             {
                 Query = query,
-                Soldiers = await SoldierSearchService.Filter(db, query)
+                Soldiers = await SoldierService.Filter(db, query)
             });
         }
 
         [Route("~/Units/{unitId}/Soldiers", Name = "Unit.Soldiers")]
         public async Task<IActionResult> ForUnit(int unitId)
         {
-            return await Index(new SoldierSearchService.Query { Unit = unitId, IncludeIgnoredUnits = true });
+            return await Index(new SoldierService.Query { Unit = unitId, IncludeIgnoredUnits = true });
         }
 
         [Route("~/Soldiers/All")]
@@ -43,8 +43,8 @@ namespace BatteryCommander.Web.Controllers
         {
             return View("List", new SoldierListViewModel
             {
-                Query = new SoldierSearchService.Query { IncludeIgnoredUnits = true },
-                Soldiers = await SoldierSearchService.Filter(db, new SoldierSearchService.Query
+                Query = new SoldierService.Query { IncludeIgnoredUnits = true },
+                Soldiers = await SoldierService.Filter(db, new SoldierService.Query
                 {
                     IncludeIgnoredUnits = true
                 })
@@ -52,12 +52,12 @@ namespace BatteryCommander.Web.Controllers
         }
 
         [Route("~/Soldiers/SignInRoster")]
-        public async Task<IActionResult> SignInRoster(SoldierSearchService.Query query)
+        public async Task<IActionResult> SignInRoster(SoldierService.Query query)
         {
             return View(new SoldierListViewModel
             {
                 Query = query,
-                Soldiers = await SoldierSearchService.Filter(db, query)
+                Soldiers = await SoldierService.Filter(db, query)
             });
         }
 
@@ -67,7 +67,7 @@ namespace BatteryCommander.Web.Controllers
             var model = new SoldierDetailsViewModel
             {
                 Soldier = await Get(db, id),
-                Subordinates = await SoldierSearchService.Subordinates(db, id),
+                Subordinates = await SoldierService.Subordinates(db, id),
                 Evaluations =
                     await db
                     .Evaluations
@@ -161,14 +161,14 @@ namespace BatteryCommander.Web.Controllers
 
         public static async Task<Soldier> Get(Database db, int id)
         {
-            var soldiers = await SoldierSearchService.Filter(db, new SoldierSearchService.Query { Id = id, IncludeIgnoredUnits = true });
+            var soldiers = await SoldierService.Filter(db, new SoldierService.Query { Id = id, IncludeIgnoredUnits = true });
 
             return soldiers.SingleOrDefault();
         }
 
-        public static async Task<IEnumerable<SelectListItem>> GetDropDownList(Database db, SoldierSearchService.Query query)
+        public static async Task<IEnumerable<SelectListItem>> GetDropDownList(Database db, SoldierService.Query query)
         {
-            var soldiers = await SoldierSearchService.Filter(db, query);
+            var soldiers = await SoldierService.Filter(db, query);
 
             return soldiers.Select(soldier => new SelectListItem
             {
@@ -180,7 +180,7 @@ namespace BatteryCommander.Web.Controllers
         [Obsolete]
         public static async Task<IEnumerable<SelectListItem>> GetDropDownList(Database db, Boolean includeIgnoredUnits = true)
         {
-            return await GetDropDownList(db, SoldierSearchService.Query.ALL);
+            return await GetDropDownList(db, SoldierService.Query.ALL);
         }
     }
 }

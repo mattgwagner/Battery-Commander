@@ -33,7 +33,7 @@ namespace BatteryCommander.Web.Services
                 .Where(_ => _.Id == unitId)
                 .SingleOrDefaultAsync();
 
-            var soldiers = await SoldierSearchService.Filter(db, new SoldierSearchService.Query { Unit = unitId });
+            var soldiers = await SoldierService.Filter(db, new SoldierService.Query { Unit = unitId });
 
             var evaluations =
                 await db

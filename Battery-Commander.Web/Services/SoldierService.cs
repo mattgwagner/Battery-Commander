@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Services
 {
-    public class SoldierSearchService
+    public class SoldierService
     {
         public static async Task<IEnumerable<Soldier>> Subordinates(Database db, int soldierId)
         {
@@ -178,7 +178,7 @@ namespace BatteryCommander.Web.Services
 
     public static class SoldierHtmlHelper
     {
-        public static IHtmlContent Soldiers(this HtmlHelper helper, String link_text, SoldierSearchService.Query query)
+        public static IHtmlContent Soldiers(this HtmlHelper helper, String link_text, SoldierService.Query query)
         {
             return helper.RouteLink(link_text, "Soldiers.List", query);
         }

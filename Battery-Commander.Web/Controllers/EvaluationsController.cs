@@ -32,7 +32,7 @@ namespace BatteryCommander.Web.Controllers
             return View("List", new EvaluationListViewModel
             {
                 Evaluations = EvaluationService.Filter(db, new EvaluationService.Query { Unit = unitId, Complete = false }),
-                Soldiers = await SoldierSearchService.Filter(db, new SoldierSearchService.Query { Ranks = RankExtensions.All().Where(_ => _.GetsEvaluation()) })
+                Soldiers = await SoldierService.Filter(db, new SoldierService.Query { Ranks = RankExtensions.All().Where(_ => _.GetsEvaluation()) })
             });
         }
 
@@ -41,7 +41,7 @@ namespace BatteryCommander.Web.Controllers
             return View("List", new EvaluationListViewModel
             {
                 Evaluations = EvaluationService.Filter(db, new EvaluationService.Query { }),
-                Soldiers = await SoldierSearchService.Filter(db, new SoldierSearchService.Query { Ranks = RankExtensions.All().Where(_ => _.GetsEvaluation()) })
+                Soldiers = await SoldierService.Filter(db, new SoldierService.Query { Ranks = RankExtensions.All().Where(_ => _.GetsEvaluation()) })
             });
         }
 
@@ -54,7 +54,7 @@ namespace BatteryCommander.Web.Controllers
         {
             ViewBag.Soldiers = await SoldiersController.GetDropDownList(db);
 
-            ViewBag.Reviewers = await SoldiersController.GetDropDownList(db, new SoldierSearchService.Query
+            ViewBag.Reviewers = await SoldiersController.GetDropDownList(db, new SoldierService.Query
             {
                 Ranks = new[] { Rank.O3, Rank.O4, Rank.O5, Rank.O6 }
             });

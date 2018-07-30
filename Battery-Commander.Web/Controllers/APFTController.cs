@@ -18,11 +18,11 @@ namespace BatteryCommander.Web.Controllers
             this.db = db;
         }
 
-        public async Task<IActionResult> Index(SoldierSearchService.Query query)
+        public async Task<IActionResult> Index(SoldierService.Query query)
         {
             return View("List", new APFTListViewModel
             {
-                Soldiers = await SoldierSearchService.Filter(db, query)
+                Soldiers = await SoldierService.Filter(db, query)
             });
         }
 

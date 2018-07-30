@@ -16,11 +16,11 @@ namespace BatteryCommander.Web.Controllers.API
         }
 
         [HttpGet]
-        public async Task<IEnumerable<SoldierDTO>> Get(SoldierSearchService.Query query)
+        public async Task<IEnumerable<SoldierDTO>> Get(SoldierService.Query query)
         {
             // GET: api/soldiers
 
-            return (await SoldierSearchService.Filter(db, query))
+            return (await SoldierService.Filter(db, query))
                 .Select(s => new SoldierDTO
                 {
                     Id = s.Id,
