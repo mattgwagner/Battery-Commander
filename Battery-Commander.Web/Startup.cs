@@ -265,6 +265,8 @@ namespace BatteryCommander.Web
                 app.UseExceptionHandler("/Error");
             }
 
+            app.UseStatusCodePages();
+
             app.UseStaticFiles();
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
