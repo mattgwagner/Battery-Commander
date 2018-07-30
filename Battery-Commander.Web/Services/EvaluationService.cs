@@ -1,9 +1,66 @@
-﻿using Stateless;
+﻿using Microsoft.EntityFrameworkCore;
+using Stateless;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace BatteryCommander.Web.Models
 {
+    public class EvaluationService
+    {
+        public static IEnumerable<Evaluation> Filter(Database db, Query query)
+        {
+            IQueryable<Evaluation> evaluations =
+                db
+                .Evaluations
+                .Include(evaluation => evaluation.Ratee)
+                .Include(evaluation => evaluation.Rater)
+                .Include(evaluation => evaluation.SeniorRater)
+                .Include(evaluation => evaluation.Reviewer)
+                .Include(evaluation => evaluation.Events)
+                .AsQueryable();
+
+            if (query.Delinquent.HasValue)
+            {
+                evaluations = evaluations.Where(evaluation => evaluation.IsDelinquent == query.Delinquent);
+            }
+
+            if (query.Complete.HasValue)
+            {
+                evaluations = evaluations.Where(evaluation => evaluation.IsCompleted == query.Complete);
+            }
+
+            if (query.Unit.HasValue)
+            {
+                evaluations = evaluations.AsEnumerable().Where(evaluation =>
+                {
+                    if (evaluation.Ratee.UnitId == query.Unit) return true;
+
+                    if (evaluation.Rater.UnitId == query.Unit) return true;
+
+                    if (evaluation.SeniorRater.UnitId == query.Unit) return true;
+
+                    if (evaluation.Reviewer?.UnitId == query.Unit) return true;
+
+                    return false;
+                })
+                .AsQueryable();
+            }
+
+            return evaluations.ToList();
+        }
+
+        public class Query
+        {
+            public Boolean? Delinquent { get; set; }
+
+            public Boolean? Complete { get; set; }
+
+            public int? Unit { get; set; }
+        }
+    }
+
     public partial class Evaluation
     {
         public enum Trigger : byte
@@ -72,13 +129,13 @@ namespace BatteryCommander.Web.Models
                     .Permit(Trigger.Signed, EvaluationStatus.Pending_HQDA_Submission);
 
                 //machine.Configure(EvaluationStatus.Pending_S1_Review)
-                    //.Permit(Trigger.Return_to_Rater, EvaluationStatus.At_Rater)
-                    //.Permit(Trigger.S1_Review_Completed, EvaluationStatus.Pending_HQDA_Submission);
+                //.Permit(Trigger.Return_to_Rater, EvaluationStatus.At_Rater)
+                //.Permit(Trigger.S1_Review_Completed, EvaluationStatus.Pending_HQDA_Submission);
 
                 machine.Configure(EvaluationStatus.Pending_HQDA_Submission)
                     .Permit(Trigger.Return_to_Rater, EvaluationStatus.At_Rater)
                     .Permit(Trigger.Submitted_to_Hqda, EvaluationStatus.Submitted_to_HQDA);
-                
+
                 machine.Configure(EvaluationStatus.Submitted_to_HQDA)
                     .Permit(Trigger.Return_to_Rater, EvaluationStatus.At_Rater)
                     .Permit(Trigger.Accepted_to_iPerms, EvaluationStatus.Accepted_to_iPerms);

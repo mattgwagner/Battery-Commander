@@ -26,11 +26,12 @@ namespace BatteryCommander.Web.Controllers
             this.db = db;
         }
 
-        public async Task<IActionResult> Index(Boolean includeComplete = false, Boolean onlyDelinquent = false)
+        [Route("~/Units/{unitId}/Evaluations")]
+        public async Task<IActionResult> Index(int unitId)
         {
             return View("List", new EvaluationListViewModel
             {
-                Evaluations = await Evaluations.Where(_ => !_.IsCompleted).ToListAsync(),
+                Evaluations = EvaluationService.Filter(db, new EvaluationService.Query { Unit = unitId }),
                 Soldiers = await SoldierSearchService.Filter(db, new SoldierSearchService.Query { Ranks = RankExtensions.All().Where(_ => _.GetsEvaluation()) })
             });
         }
@@ -39,7 +40,7 @@ namespace BatteryCommander.Web.Controllers
         {
             return View("List", new EvaluationListViewModel
             {
-                Evaluations = await Evaluations.ToListAsync(),
+                Evaluations = EvaluationService.Filter(db, new EvaluationService.Query { }),
                 Soldiers = await SoldierSearchService.Filter(db, new SoldierSearchService.Query { Ranks = RankExtensions.All().Where(_ => _.GetsEvaluation()) })
             });
         }
