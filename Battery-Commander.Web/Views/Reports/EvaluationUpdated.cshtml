@@ -18,20 +18,19 @@
         </tr>
         <tr>
             <td>Last Message</td>
-            <td>@Model.LastEvent.Message</td>
-        </tr>
-        <tr>
-            <td>Author</td>
-            <td>@Model.LastEvent.Author</td>
-        </tr>
-        <tr>
-            <td>Timestamp</td>
-            <td>@Model.LastEvent.TimestampHumanized</td>
+            <td>@Model.LastEvent.Message by @Model.LastEvent.Author @Model.LastUpdatedHumanized</td>
         </tr>
         <tr>
             <td>Link</td>
             <td><a href="https://bc.redleg.app/Evaluations/Details/@Model.Id">Evaluation</a></td>
         </tr>
+        @if(!String.IsNullOrWhiteSpace(Model.EvaluationLink))
+        {
+            <tr>
+                <td>EES</td>
+                <td><a href="@Model.EvaluationLink">@Model.EvaluationId</a></td>
+            </tr>
+        }
     </tbody>
 </table>
 
