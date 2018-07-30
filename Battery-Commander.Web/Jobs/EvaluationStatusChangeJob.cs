@@ -40,6 +40,7 @@ namespace BatteryCommander.Web.Jobs
                 .Include(evaluation => evaluation.Ratee)
                 .Include(evaluation => evaluation.Rater)
                 .Include(evaluation => evaluation.SeniorRater)
+                .Include(evaluation => evaluation.Reviewer)
                 .AsEnumerable()
                 .Where(evaluation => evaluation.LastUpdated > since);
 
