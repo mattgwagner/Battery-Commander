@@ -53,6 +53,11 @@ namespace BatteryCommander.Web.Controllers
         {
             ViewBag.Soldiers = await SoldiersController.GetDropDownList(db);
 
+            ViewBag.Reviewers = await SoldiersController.GetDropDownList(db, new SoldierSearchService.Query
+            {
+                Ranks = new[] { Rank.O3, Rank.O4, Rank.O5, Rank.O6 }
+            });
+
             if (soldier > 0)
             {
                 var soldierModel = await SoldiersController.Get(db, soldier);
