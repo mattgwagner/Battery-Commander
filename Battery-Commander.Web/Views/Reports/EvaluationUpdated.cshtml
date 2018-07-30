@@ -5,16 +5,32 @@
 <table border="1">
     <tbody>
         <tr>
-            <td>Last Message</td><td>@Model.LastEvent.Message</td>
+            <td>Soldier</td>
+            <td>@Model.Ratee</td>
         </tr>
         <tr>
-            <td>Author</td><td>@Model.LastEvent.Author</td>
+            <td>Rater</td>
+            <td>@Model.Rater</td>
         </tr>
         <tr>
-            <td>Timestamp</td><td>@Model.LastEvent.TimestampHumanized</td>
+            <td>SR Rater</td>
+            <td>@Model.SeniorRater</td>
         </tr>
         <tr>
-            <td>Link</td><td><a href="https://bc.redleg.app/Evaluations/@Model.Id">Evaluation</a></td>
+            <td>Last Message</td>
+            <td>@Model.LastEvent.Message</td>
+        </tr>
+        <tr>
+            <td>Author</td>
+            <td>@Model.LastEvent.Author</td>
+        </tr>
+        <tr>
+            <td>Timestamp</td>
+            <td>@Model.LastEvent.TimestampHumanized</td>
+        </tr>
+        <tr>
+            <td>Link</td>
+            <td><a href="https://bc.redleg.app/Evaluations/@Model.Id">Evaluation</a></td>
         </tr>
     </tbody>
 </table>
