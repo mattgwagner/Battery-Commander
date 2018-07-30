@@ -180,7 +180,7 @@ namespace BatteryCommander.Web.Controllers
         [Obsolete]
         public static async Task<IEnumerable<SelectListItem>> GetDropDownList(Database db, Boolean includeIgnoredUnits = true)
         {
-            return await GetDropDownList(db, new SoldierSearchService.Query { IncludeIgnoredUnits = includeIgnoredUnits })
+            return await GetDropDownList(db, SoldierSearchService.Query.ALL);
         }
     }
 }

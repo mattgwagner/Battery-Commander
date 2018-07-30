@@ -138,6 +138,8 @@ namespace BatteryCommander.Web.Services
 
         public class Query
         {
+            public static Query ALL => new Query { IncludeIgnoredUnits = true };
+
             // TODO Filtering by MOS, Position, Name, Status
 
             public int? Id { get; set; }
