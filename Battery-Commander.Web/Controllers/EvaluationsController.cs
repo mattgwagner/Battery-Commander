@@ -52,11 +52,16 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> New(int soldier = 0)
         {
-            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db);
+            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, new SoldierService.Query
+            {
+                Ranks = new[] { Rank.E5, Rank.E6, Rank.E7, Rank.E8, Rank.E8_MSG, Rank.E9, Rank.O1, Rank.O2, Rank.O3, Rank.O4, Rank.O5 },
+                IncludeIgnoredUnits = true
+            });
 
             ViewBag.Reviewers = await SoldiersController.GetDropDownList(db, new SoldierService.Query
             {
-                Ranks = new[] { Rank.O3, Rank.O4, Rank.O5, Rank.O6 }
+                Ranks = new[] { Rank.O3, Rank.O4, Rank.O5, Rank.O6 },
+                IncludeIgnoredUnits = true
             });
 
             if (soldier > 0)
