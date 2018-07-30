@@ -15,7 +15,7 @@ namespace BatteryCommander.Web.Models.Reports
         [Display(Name = "Not Tested")]
         public int NotTested { get; set; }
 
-        [Display(Name = "Pass %"), DisplayFormat(DataFormatString = SSDStatusModel.Format)]
+        [Display(Name = "Pass %"), DisplayFormat(DataFormatString = SSDStatusModel.PercentFormat)]
         public Decimal PercentPass => (Decimal)Passed / Assigned;
     }
 
@@ -29,7 +29,7 @@ namespace BatteryCommander.Web.Models.Reports
 
         public int Completed { get; set; }
 
-        [DisplayFormat(DataFormatString = SSDStatusModel.Format)]
+        [DisplayFormat(DataFormatString = SSDStatusModel.PercentFormat)]
         public Decimal Percentage => Assigned > 0 ? (Decimal)Completed / Assigned : Decimal.Zero;
     }
 }

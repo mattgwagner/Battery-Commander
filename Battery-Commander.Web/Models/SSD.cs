@@ -96,7 +96,7 @@ namespace BatteryCommander.Web.Models
 
         public class SSDStatusModel
         {
-            internal const String Format = "{0:P0}";
+            internal const String PercentFormat = "{0:P0}";
 
             public Rank Rank { get; set; }
 
@@ -154,19 +154,19 @@ namespace BatteryCommander.Web.Models
             [Display(Name = "Updated")]
             public String UpdatedHumanized => Updated?.Humanize(minUnit: Humanizer.Localisation.TimeUnit.Minute);
 
-            [Display(Name = "SSD 1"), DisplayFormat(DataFormatString = Format)]
+            [Display(Name = "SSD 1"), DisplayFormat(DataFormatString = PercentFormat)]
             public decimal? SSD_1 { get; set; }
 
-            [Display(Name = "SSD 2"), DisplayFormat(DataFormatString = Format)]
+            [Display(Name = "SSD 2"), DisplayFormat(DataFormatString = PercentFormat)]
             public decimal? SSD_2 { get; set; }
 
-            [Display(Name = "SSD 3"), DisplayFormat(DataFormatString = Format)]
+            [Display(Name = "SSD 3"), DisplayFormat(DataFormatString = PercentFormat)]
             public decimal? SSD_3 { get; set; }
 
-            [Display(Name = "SSD 4"), DisplayFormat(DataFormatString = Format)]
+            [Display(Name = "SSD 4"), DisplayFormat(DataFormatString = PercentFormat)]
             public decimal? SSD_4 { get; set; }
 
-            [Display(Name = "SSD 5"), DisplayFormat(DataFormatString = Format)]
+            [Display(Name = "SSD 5"), DisplayFormat(DataFormatString = PercentFormat)]
             public decimal? SSD_5 { get; set; }
         }
     }
