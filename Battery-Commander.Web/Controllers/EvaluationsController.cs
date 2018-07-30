@@ -31,7 +31,7 @@ namespace BatteryCommander.Web.Controllers
         {
             return View("List", new EvaluationListViewModel
             {
-                Evaluations = EvaluationService.Filter(db, new EvaluationService.Query { Unit = unitId }),
+                Evaluations = EvaluationService.Filter(db, new EvaluationService.Query { Unit = unitId, Complete = false }),
                 Soldiers = await SoldierSearchService.Filter(db, new SoldierSearchService.Query { Ranks = RankExtensions.All().Where(_ => _.GetsEvaluation()) })
             });
         }
