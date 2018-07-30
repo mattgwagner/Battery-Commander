@@ -1,4 +1,5 @@
 ﻿using BatteryCommander.Web.Models;
+using BatteryCommander.Web.Services;
 using FluentEmail.Core;
 using FluentEmail.Core.Models;
 using FluentScheduler;
@@ -62,8 +63,6 @@ namespace BatteryCommander.Web.Jobs
 
         public IEnumerable<Address> Get_Recipients(Evaluation evaluation)
         {
-            // TODO Include the unit 1SG on events
-
             // TODO Remove after testing
 
             yield return new Address { EmailAddress = "MattGWagner@Gmail.com" };
@@ -81,6 +80,16 @@ namespace BatteryCommander.Web.Jobs
             if (!String.IsNullOrWhiteSpace(evaluation.Reviewer?.CivilianEmail))
             {
                 yield return new Address { EmailAddress = evaluation.Reviewer.CivilianEmail };
+            }
+
+            // Include the unit 1SG on event notifications
+
+            foreach (var soldier in SoldierSearchService.Filter(db, new SoldierSearchService.Query { Ranks = new[] { Rank.E8 }, Unit = evaluation.Ratee.UnitId }).GetAwaiter().GetResult())
+            {
+                if (!String.IsNullOrWhiteSpace(soldier.CivilianEmail))
+                {
+                    yield return new Address { EmailAddress = soldier.CivilianEmail };
+                }
             }
         }
     }
