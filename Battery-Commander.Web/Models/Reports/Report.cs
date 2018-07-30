@@ -18,5 +18,7 @@ namespace BatteryCommander.Web.Models.Reports
         // TO Recipient(s), CC/BCC
 
         // Schedule(s)
+
+        public virtual String DateTimeGroup => DateTime.UtcNow.ToEst().ToDateTimeGroup();
     }
 }

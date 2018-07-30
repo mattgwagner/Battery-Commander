@@ -2,10 +2,8 @@
 
 namespace BatteryCommander.Web.Models.Reports
 {
-    public class Green3_SensitiveItems
+    public class Green3_SensitiveItems : Report
     {
-        public String DateTimeGroup => DateTime.UtcNow.ToEst().ToDateTimeGroup();
-
         // You damn well better have a Green status
 
         public String Status => "GREEN";
