@@ -2,7 +2,6 @@
 using BatteryCommander.Web.Services;
 using FluentEmail.Core;
 using FluentScheduler;
-using Microsoft.EntityFrameworkCore;
 using Serilog;
 using System;
 using System.IO;
@@ -31,14 +30,7 @@ namespace BatteryCommander.Web.Jobs
             Log.Information("Building Evaluations Due email for evals due before {soon}", soon);
 
             var evaluations_due_soon =
-                db
-                .Evaluations
-                .Include(evaluation => evaluation.Ratee)
-                .Include(evaluation => evaluation.Rater)
-                .Include(evaluation => evaluation.SeniorRater)
-                .Include(evaluation => evaluation.Reviewer)
-                .Include(evaluation => evaluation.Events)
-                .Where(evaluation => evaluation.IsCompleted == false)
+                EvaluationService.Filter(db, new EvaluationService.Query { Complete = false })
                 .Where(evaluation => evaluation.ThruDate < soon)
                 .OrderBy(evaluation => evaluation.ThruDate)
                 .ToList();

@@ -9,7 +9,7 @@ namespace BatteryCommander.Web.Models
 {
     public class EvaluationService
     {
-        public static IEnumerable<Evaluation> Filter(Database db, Query query)
+        public static IQueryable<Evaluation> Filter(Database db, Query query)
         {
             IQueryable<Evaluation> evaluations =
                 db
@@ -48,7 +48,7 @@ namespace BatteryCommander.Web.Models
                 .AsQueryable();
             }
 
-            return evaluations.ToList();
+            return evaluations;
         }
 
         public class Query
