@@ -1,6 +1,8 @@
 ﻿using BatteryCommander.Web.Jobs;
+using FluentEmail.Core.Models;
 using FluentScheduler;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Reflection;
@@ -10,6 +12,18 @@ namespace BatteryCommander.Web.Models
     public static class ExtensionMethods
     {
         public static TimeZoneInfo EASTERN_TIME => TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+
+        public static IEnumerable<Address> GetEmails(this Soldier soldier)
+        {
+            if (soldier == null) yield break;
+
+            if (!String.IsNullOrWhiteSpace(soldier.CivilianEmail))
+            {
+                yield return new Address { Name = soldier.ToString(), EmailAddress = soldier.CivilianEmail };
+            }
+
+            // TODO Should we include military emails?
+        }
 
         /// <summary>
         /// Return true if the given IJob Report should be sent for the given unit
