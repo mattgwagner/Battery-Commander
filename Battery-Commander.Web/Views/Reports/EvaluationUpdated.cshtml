@@ -1,0 +1,24 @@
+@model BatteryCommander.Web.Models.Evaluation
+
+<h1>@Model.Ratee</h1>
+
+<table border="1">
+    <tbody>
+        <tr>
+            <td>Last Message</td><td>@Model.LastEvent.Message</td>
+        </tr>
+        <tr>
+            <td>Author</td><td>@Model.LastEvent.Author</td>
+        </tr>
+        <tr>
+            <td>Timestamp</td><td>@Model.LastEvent.TimestampHumanized</td>
+        </tr>
+        <tr>
+            <td>Link</td><td><a href="https://bc.redleg.app/Evaluations/@Model.Id">Evaluation</a></td>
+        </tr>
+    </tbody>
+</table>
+
+<hr />
+
+<a href="https://bc.redleg.app/Evaluations">Evaluation Tracker</a>

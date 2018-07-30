@@ -83,6 +83,7 @@ namespace BatteryCommander.Web
             services.AddTransient<EvaluationDueReminderJob>();
             services.AddTransient<PERSTATReportJob>();
             services.AddTransient<SensitiveItemsReport>();
+            services.AddTransient<EvaluationStatusChangeJob>();
             services.AddTransient<AirTableService>();
 
             var auth0Settings = new Auth0Settings { };
