@@ -67,29 +67,17 @@ namespace BatteryCommander.Web.Jobs
 
             yield return new Address { EmailAddress = "MattGWagner@Gmail.com" };
 
-            if (!String.IsNullOrWhiteSpace(evaluation.Rater?.CivilianEmail))
-            {
-                yield return new Address { EmailAddress = evaluation.Rater.CivilianEmail };
-            }
+            foreach (var email in evaluation.Rater.GetEmails()) yield return email;
 
-            if (!String.IsNullOrWhiteSpace(evaluation.SeniorRater?.CivilianEmail))
-            {
-                yield return new Address { EmailAddress = evaluation.SeniorRater.CivilianEmail };
-            }
+            foreach (var email in evaluation.SeniorRater.GetEmails()) yield return email;
 
-            if (!String.IsNullOrWhiteSpace(evaluation.Reviewer?.CivilianEmail))
-            {
-                yield return new Address { EmailAddress = evaluation.Reviewer.CivilianEmail };
-            }
+            foreach (var email in evaluation.Reviewer.GetEmails()) yield return email;
 
             // Include the unit 1SG on event notifications
 
             foreach (var soldier in SoldierSearchService.Filter(db, new SoldierSearchService.Query { Ranks = new[] { Rank.E8 }, Unit = evaluation.Ratee.UnitId }).GetAwaiter().GetResult())
             {
-                if (!String.IsNullOrWhiteSpace(soldier.CivilianEmail))
-                {
-                    yield return new Address { EmailAddress = soldier.CivilianEmail };
-                }
+                foreach (var email in soldier.GetEmails()) yield return email;
             }
         }
     }
