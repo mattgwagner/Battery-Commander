@@ -256,7 +256,14 @@ namespace BatteryCommander.Web
             loggerFactory.AddSerilog();
             loggerFactory.AddDebug();
 
-            app.UseDeveloperExceptionPage();
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+            }
 
             app.UseStaticFiles();
 
