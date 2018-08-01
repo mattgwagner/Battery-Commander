@@ -1,4 +1,5 @@
 ﻿using BatteryCommander.Web.Jobs;
+using FluentEmail.Core;
 using FluentEmail.Core.Models;
 using FluentScheduler;
 using System;
@@ -12,6 +13,20 @@ namespace BatteryCommander.Web.Models
     public static class ExtensionMethods
     {
         public static TimeZoneInfo EASTERN_TIME => TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+
+        public static void SendWithErrorCheck(this IFluentEmail email)
+        {
+            var log = Serilog.Log.ForContext<IFluentEmail>();
+
+            log.Information("Sending email via SendGrid, {@email}", email);
+
+            var response = email.Send();
+
+            if (!response.Successful)
+            {
+                log.Error("Error sending email via SendGrid, {@result}", response);
+            }
+        }
 
         public static IEnumerable<Address> GetEmails(this Soldier soldier)
         {
