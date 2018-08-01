@@ -68,7 +68,7 @@ namespace BatteryCommander.Web.Jobs
         {
             // TODO Remove after testing
 
-            yield return new Address { EmailAddress = "MattGWagner@Gmail.com" };
+            yield return new Address { EmailAddress = "Evaluations@RedLeg.app" };
 
             foreach (var email in evaluation.Rater.GetEmails()) yield return email;
 
