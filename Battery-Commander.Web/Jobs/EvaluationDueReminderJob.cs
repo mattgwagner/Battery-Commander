@@ -45,13 +45,11 @@ namespace BatteryCommander.Web.Jobs
             .SelectMany(email => email)
             .ToList();
 
-            Log.Information("Sending evaluations email to {@recipients}", recipients);
-
             emailSvc
                 .To(recipients)
                 .Subject("Past Due and Upcoming Evaluations")
                 .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/Reports/EvaluationsDue.cshtml", evaluations_due_soon)
-                .Send();
+                .SendWithErrorCheck();
         }
     }
 }

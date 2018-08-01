@@ -40,14 +40,12 @@ namespace BatteryCommander.Web.Jobs
                 {
                     // HACK - Configure the recipients and units that this is going to be wired up for
 
-                    Log.Information("Building PERSTAT report for {@unit} to {@recipients}", new { unit.Id, unit.Name }, Recipients);
-
                     emailSvc
                         .To(Recipients)
                         .SetFrom(FROM.EmailAddress, FROM.Name)
                         .Subject($"{unit.Name} | RED 1 PERSTAT")
                         .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/Reports/Red1_Perstat.cshtml", unit)
-                        .Send();
+                        .SendWithErrorCheck();
                 }
             }
         }

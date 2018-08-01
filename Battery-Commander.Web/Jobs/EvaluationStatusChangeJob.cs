@@ -51,16 +51,11 @@ namespace BatteryCommander.Web.Jobs
 
                 var recipients = Get_Recipients(evaluation).ToList();
 
-                Log.Information("Sending evaluation updated email to {@recipients}", recipients);
-
-                var response =
-                    emailSvc
+                emailSvc
                     .To(recipients)
                     .Subject($"Evaluation Updated | {evaluation.Ratee}")
                     .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/Reports/EvaluationUpdated.cshtml", evaluation)
-                    .Send();
-
-                Log.Information("Email Sending Response {@response}", response);
+                    .SendWithErrorCheck();
             }
         }
 

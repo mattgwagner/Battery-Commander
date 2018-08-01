@@ -1,4 +1,5 @@
-﻿using FluentEmail.Core;
+﻿using BatteryCommander.Web.Models;
+using FluentEmail.Core;
 using FluentScheduler;
 using System;
 
@@ -27,7 +28,7 @@ namespace BatteryCommander.Web.Jobs
                     Filename = "Data.db",
                     Data = System.IO.File.OpenRead("Data.db")
                 })
-                .Send();
+                .SendWithErrorCheck();
         }
     }
 }
