@@ -24,9 +24,9 @@ namespace BatteryCommander.Web.Jobs
 
         private readonly Database db;
 
-        private readonly IFluentEmail emailSvc;
+        private readonly IFluentEmailFactory emailSvc;
 
-        public PERSTATReportJob(Database db, IFluentEmail emailSvc)
+        public PERSTATReportJob(Database db, IFluentEmailFactory emailSvc)
         {
             this.db = db;
             this.emailSvc = emailSvc;
@@ -41,6 +41,7 @@ namespace BatteryCommander.Web.Jobs
                     // HACK - Configure the recipients and units that this is going to be wired up for
 
                     emailSvc
+                        .Create()
                         .To(Recipients)
                         .SetFrom(FROM.EmailAddress, FROM.Name)
                         .Subject($"{unit.Name} | RED 1 PERSTAT")

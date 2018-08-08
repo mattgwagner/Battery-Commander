@@ -15,9 +15,9 @@ namespace BatteryCommander.Web.Jobs
 
         private readonly Database db;
 
-        private readonly IFluentEmail emailSvc;
+        private readonly IFluentEmailFactory emailSvc;
 
-        public EvaluationDueReminderJob(Database db, IFluentEmail emailSvc)
+        public EvaluationDueReminderJob(Database db, IFluentEmailFactory emailSvc)
         {
             this.db = db;
             this.emailSvc = emailSvc;
@@ -46,6 +46,7 @@ namespace BatteryCommander.Web.Jobs
             .ToList();
 
             emailSvc
+                .Create()
                 .To(recipients)
                 .Subject("Past Due and Upcoming Evaluations")
                 .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/Reports/EvaluationsDue.cshtml", evaluations_due_soon)
