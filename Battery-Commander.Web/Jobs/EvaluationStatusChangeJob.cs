@@ -20,9 +20,9 @@ namespace BatteryCommander.Web.Jobs
 
         private readonly Database db;
 
-        private readonly IFluentEmail emailSvc;
+        private readonly IFluentEmailFactory emailSvc;
 
-        public EvaluationStatusChangeJob(Database db, IFluentEmail emailSvc)
+        public EvaluationStatusChangeJob(Database db, IFluentEmailFactory emailSvc)
         {
             this.db = db;
             this.emailSvc = emailSvc;
@@ -52,6 +52,7 @@ namespace BatteryCommander.Web.Jobs
                 var recipients = Get_Recipients(evaluation).ToList();
 
                 emailSvc
+                    .Create()
                     .To(recipients)
                     .Subject($"Evaluation Updated | {evaluation.Ratee}")
                     .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/Reports/EvaluationUpdated.cshtml", evaluation)
