@@ -10,7 +10,7 @@ using System;
 
 namespace BatteryCommander.Web.Migrations
 {
-    [DbContext(typeof(Database))]
+    [DbContext(typeof(Models.Database))]
     partial class DatabaseModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
