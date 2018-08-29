@@ -30,7 +30,7 @@ namespace BatteryCommander.Web.Models
         [NotMapped]
         public ICollection<ReportSettings> ReportSettings
         {
-            get { return JsonConvert.DeserializeObject<List<ReportSettings>>(ReportSettingsJson); }
+            get { return JsonConvert.DeserializeObject<List<ReportSettings>>(String.IsNullOrWhiteSpace(ReportSettingsJson) ? "[]" : ReportSettingsJson); }
             set { ReportSettingsJson = JsonConvert.SerializeObject(value); }
         }
 
