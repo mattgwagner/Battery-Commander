@@ -50,7 +50,11 @@ namespace BatteryCommander.Web.Controllers.API
         {
             var unit = await UnitService.Get(db, unitId);
 
-            unit.ReportSettings.Add(settings);
+            var model = unit.ReportSettings;
+
+            model.Add(settings);
+
+            unit.ReportSettings = model;
 
             await db.SaveChangesAsync();
 
