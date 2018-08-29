@@ -69,7 +69,7 @@ namespace BatteryCommander.Web.Controllers.API
             var to_remove =
                 unit
                 .ReportSettings
-                .Where(report => report.Type == type)
+                .Where(report => report.Type == reportType)
                 .FirstOrDefault();
 
             if (to_remove != null)
