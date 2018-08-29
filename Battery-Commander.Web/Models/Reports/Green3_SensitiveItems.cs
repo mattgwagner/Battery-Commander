@@ -11,5 +11,7 @@ namespace BatteryCommander.Web.Models.Reports
         // HACK: Make this configurable for a specific user
 
         public String Authentication => "1LT MW";
+
+        public override ReportType Type => ReportType.Sensitive_Items;
     }
 }

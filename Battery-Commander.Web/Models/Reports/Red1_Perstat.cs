@@ -6,6 +6,8 @@ namespace BatteryCommander.Web.Models.Reports
 {
     public class Red1_Perstat : Report
     {
+        public override ReportType Type => ReportType.Perstat;
+
         public IEnumerable<Soldier> Soldiers { get; set; } = Enumerable.Empty<Soldier>();
 
         [Display(Name = "Personnel Assigned")]

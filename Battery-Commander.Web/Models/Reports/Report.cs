@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Models.Reports
 {
-    public class Report
+    public abstract class Report
     {
-        // Standard Types of Reports - PERSTAT, Green 3 Sensitive Items, Yellow 1 LOGSTAT, TAN 1 COMSTAT
-
-        // Dynamic Report Generation from Markup & Placeholders?
-
         // Format - Text, HTML, PDF, Excel
 
         // FROM Unit
@@ -19,6 +12,21 @@ namespace BatteryCommander.Web.Models.Reports
 
         // Schedule(s)
 
+        public abstract ReportType Type { get; }
+
         public virtual String DateTimeGroup => DateTime.UtcNow.ToEst().ToDateTimeGroup();
+
+        public enum ReportType : byte
+        {
+            // Standard Types of Reports - PERSTAT, Green 3 Sensitive Items, Yellow 1 LOGSTAT, TAN 1 COMSTAT
+
+            Sensitive_Items,
+
+            Perstat,
+
+            Logstat,
+
+            Comstat
+        }
     }
 }
