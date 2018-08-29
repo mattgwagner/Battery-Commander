@@ -17,26 +17,9 @@ namespace BatteryCommander.Web.Controllers
             this.db = db;
         }
 
-        // Generate HTML/PDF version
-        // Email to configurable address on request / on schedule
-
-        // GREEN 3 -- Sensitive Items
-
-        // CONVOY MANIFEST?
-
         // TAN 1 -- Comstat
 
         // YELLOW 1 -- LOGSTAT
-
-        public async Task<IActionResult> Red1(SoldierService.Query query)
-        {
-            var model = new Red1_Perstat
-            {
-                Soldiers = await SoldierService.Filter(db, query)
-            };
-
-            return Json(model);
-        }
 
         public async Task<IActionResult> SadPerstat(SoldierService.Query query)
         {
