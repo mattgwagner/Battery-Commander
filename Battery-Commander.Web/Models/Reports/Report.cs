@@ -1,14 +1,59 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace BatteryCommander.Web.Models.Reports
 {
     public abstract class Report
     {
+        public Unit Unit { get; }
+
+        public Report(Unit unit)
+        {
+            Unit = unit;
+        }
+
         // Format - Text, HTML, PDF, Excel
 
-        // FROM Unit
+        public Boolean Enabled
+        {
+            get
+            {
+                return
+                    Unit
+                    .ReportSettings
+                    .Where(report => report.Type == Type)
+                    .Select(report => report.Enabled)
+                    .SingleOrDefault();
+            }
+        }
 
-        // TO Recipient(s), CC/BCC
+        [DataType(DataType.EmailAddress)]
+        public String From
+        {
+            get
+            {
+                return
+                    Unit
+                    .ReportSettings
+                    .Where(report => report.Type == Type)
+                    .Select(report => report.From)
+                    .SingleOrDefault();
+            }
+        }
+
+        public IEnumerable<String> Recipients
+        {
+            get
+            {
+                return
+                    Unit
+                    .ReportSettings
+                    .Where(report => report.Type == Type)
+                    .SelectMany(report => report.Recipients);
+            }
+        }
 
         // Schedule(s)
 

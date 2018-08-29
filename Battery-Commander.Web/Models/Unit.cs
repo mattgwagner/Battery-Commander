@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace BatteryCommander.Web.Models
 {
-    public class Unit
+    public partial class Unit
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -151,18 +151,6 @@ namespace BatteryCommander.Web.Models
                     NotTested = Soldiers.Where(soldier => !soldier.IwqQualificationDate.HasValue).Count()
                 };
             }
-        }
-
-        [NotMapped]
-        public virtual Red1_Perstat PERSTAT
-        {
-            get { return new Red1_Perstat { Soldiers = Soldiers }; }
-        }
-
-        [NotMapped]
-        public virtual Green3_SensitiveItems SensitiveItems
-        {
-            get { return new Green3_SensitiveItems { }; }
         }
     }
 }
