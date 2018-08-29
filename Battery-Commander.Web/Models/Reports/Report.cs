@@ -1,6 +1,6 @@
-﻿using System;
+﻿using FluentEmail.Core.Models;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace BatteryCommander.Web.Models.Reports
@@ -29,8 +29,7 @@ namespace BatteryCommander.Web.Models.Reports
             }
         }
 
-        [DataType(DataType.EmailAddress)]
-        public String From
+        public Address From
         {
             get
             {
@@ -43,7 +42,7 @@ namespace BatteryCommander.Web.Models.Reports
             }
         }
 
-        public IEnumerable<String> Recipients
+        public IList<Address> Recipients
         {
             get
             {
@@ -51,7 +50,8 @@ namespace BatteryCommander.Web.Models.Reports
                     Unit
                     .ReportSettings
                     .Where(report => report.Type == Type)
-                    .SelectMany(report => report.Recipients);
+                    .SelectMany(report => report.Recipients)
+                    .ToList();
             }
         }
 

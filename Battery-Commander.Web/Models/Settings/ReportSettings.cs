@@ -1,5 +1,6 @@
 ﻿using BatteryCommander.Web.Models.Reports;
 using BatteryCommander.Web.Models.Settings;
+using FluentEmail.Core.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -14,9 +15,9 @@ namespace BatteryCommander.Web.Models.Settings
 
         public Boolean Enabled { get; set; }
 
-        public IList<String> Recipients { get; set; } = new String[] { };
+        public IList<Address> Recipients { get; set; } = new List<Address>();
 
-        public String From { get; set; }
+        public Address From { get; set; } = new Address { };
     }
 }
 
