@@ -96,6 +96,9 @@ namespace BatteryCommander.Web.Models
         [NotMapped, DataType(DataType.Date), Display(Name = "Last Updated")]
         public DateTimeOffset? LastUpdated => LastEvent?.Timestamp;
 
+        [NotMapped]
+        public String LastUpdatedEst => $"{LastUpdated.ToEst()}";
+
         [NotMapped, Display(Name = "Last Updated")]
         public String LastUpdatedHumanized => LastUpdated?.Humanize();
 

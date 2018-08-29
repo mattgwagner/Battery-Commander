@@ -14,6 +14,16 @@ namespace BatteryCommander.Web.Models
     {
         public static TimeZoneInfo EASTERN_TIME => TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
 
+        public static DateTime? ToEst(this DateTimeOffset? dateTime)
+        {
+            if(dateTime.HasValue)
+            {
+                return TimeZoneInfo.ConvertTimeToUtc(dateTime.Value.UtcDateTime, EASTERN_TIME);
+            }
+
+            return default(DateTime?);
+        }
+
         public static void SendWithErrorCheck(this IFluentEmail email)
         {
             var log = Serilog.Log.ForContext<IFluentEmail>();
