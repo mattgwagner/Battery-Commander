@@ -66,18 +66,13 @@ namespace BatteryCommander.Web.Controllers.API
         {
             var unit = await UnitService.Get(db, unitId);
 
-            var to_remove =
+            unit.ReportSettings =
                 unit
                 .ReportSettings
-                .Where(report => report.Type == reportType)
-                .FirstOrDefault();
+                .Where(report => report.Type != reportType)
+                .ToList();
 
-            if (to_remove != null)
-            {
-                unit.ReportSettings.Remove(to_remove);
-
-                await db.SaveChangesAsync();
-            }
+            await db.SaveChangesAsync();
 
             return Ok();
         }
