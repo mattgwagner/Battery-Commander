@@ -62,7 +62,7 @@ namespace BatteryCommander.Web.Controllers.API
         }
 
         [HttpDelete("[controller]/{unitId}/reports/{reportType}")]
-        public async Task<IActionResult> AddReport([FromRoute]int unitId, [FromRoute]ReportType reportType)
+        public async Task<IActionResult> RemoveReport([FromRoute]int unitId, [FromRoute]ReportType reportType)
         {
             var unit = await UnitService.Get(db, unitId);
 
