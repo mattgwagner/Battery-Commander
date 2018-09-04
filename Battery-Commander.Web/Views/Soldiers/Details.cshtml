@@ -252,14 +252,7 @@
                             }
                         </td>
                         <td>
-                            @if (!abcp.IsPassing && abcp.IsSatisfactory == true)
-                            {
-                                <span>Satisfactory</span>
-                            }
-                            else if (!abcp.IsPassing && abcp.IsSatisfactory == false)
-                            {
-                                <span>Unsatisfactory</span>
-                            }
+                            @Html.DisplayFor(_ => abcp)
                         </td>
                         <td>@Html.ActionLink("Details", "Details", "ABCP", new { abcp.Id })</td>
                     </tr>
