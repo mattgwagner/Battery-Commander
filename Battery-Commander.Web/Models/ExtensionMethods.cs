@@ -18,7 +18,7 @@ namespace BatteryCommander.Web.Models
         {
             if(dateTime.HasValue)
             {
-                return TimeZoneInfo.ConvertTimeToUtc(dateTime.Value.UtcDateTime, EASTERN_TIME);
+                return TimeZoneInfo.ConvertTimeFromUtc(dateTime.Value.UtcDateTime, EASTERN_TIME);
             }
 
             return default(DateTime?);
