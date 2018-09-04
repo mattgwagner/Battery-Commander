@@ -234,7 +234,9 @@
             <tbody>
                 @foreach (var abcp in Model.Soldier.ABCPs.OrderByDescending(_ => _.Date))
                 {
-                    <tr>
+                    var column_class = abcp.IsPassing ? "active" : abcp.IsSatisfactory == true ? "success" : "danger";
+
+                    <tr class="@column_class">
                         <td>@Html.DisplayFor(_ => abcp.Date)</td>
                         <td>@Html.DisplayFor(_ => abcp.Height)</td>
                         <td>@Html.DisplayFor(_ => abcp.Weight)</td>
@@ -252,11 +254,11 @@
                         <td>
                             @if (!abcp.IsPassing && abcp.IsSatisfactory == true)
                             {
-                                <span class="alert alert-success">Satisfactory</span>
+                                <span>Satisfactory</span>
                             }
                             else if (!abcp.IsPassing && abcp.IsSatisfactory == false)
                             {
-                                <span class="alert alert-warning">Unsatisfactory</span>
+                                <span>Unsatisfactory</span>
                             }
                         </td>
                         <td>@Html.ActionLink("Details", "Details", "ABCP", new { abcp.Id })</td>
