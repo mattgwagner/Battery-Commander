@@ -48,10 +48,6 @@
                 {
                     <td>
                         @Html.DisplayFor(_ => soldier.LastAbcp, "ABCP")
-                        @if (!soldier.LastAbcp.IsPassing)
-                        {
-                            <span class="badge">@(soldier.ConsecutiveAbcpFailures)x</span>
-                        }
                     </td>
                     <td>
                         <a href="@Url.Action("Details", new { soldier.LastAbcp?.Id })">

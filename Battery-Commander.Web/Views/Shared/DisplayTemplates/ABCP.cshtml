@@ -16,16 +16,20 @@
                 }
                 else if (Model.Date > DateTime.Today.AddMonths(-9))
                 {
-                    <span class="label label-warning">GO</span>
+                    <span class="label label-info">GO</span>
                 }
                 else
                 {
-                    <span class="label label-danger">GO</span>
+                    <span class="label label-warning">GO</span>
                 }
+            }
+            else if (Model.IsSatisfactory == true)
+            {
+                <span class="label label-info">SAT</span>
             }
             else
             {
-                <span class="label label-danger">NOGO</span>
+                <span class="label label-danger">NOGO/UNSAT</span>
             }
         </a>
     </div>
