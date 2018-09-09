@@ -37,18 +37,7 @@ namespace BatteryCommander.Web.Controllers
 
             return File(data, mimeType);
         }
+        
 
-        public IActionResult Logs()
-        {
-            byte[] data;
-
-            using (var stream = new FileStream($@"logs\{DateTime.Today:yyyyMMdd}.log", FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-            using (var reader = new StreamReader(stream))
-            {
-                data = System.Text.Encoding.Default.GetBytes(reader.ReadToEnd());
-            }
-
-            return File(data, "text/plain");
-        }
     }
 }
