@@ -1,4 +1,5 @@
 ﻿using BatteryCommander.Web.Models;
+using FluentScheduler;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -38,6 +39,9 @@ namespace BatteryCommander.Web.Controllers
             return File(data, mimeType);
         }
         
-
+        public IActionResult Jobs()
+        {
+            return View(JobManager.AllSchedules);
+        }
     }
 }

@@ -1,0 +1,16 @@
+﻿@model IEnumerable<FluentScheduler.Schedule>
+
+<table>
+    @foreach (var schedule in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(_ => schedule.Name)</td>
+            <td>@Html.DisplayFor(_ => schedule.NextRun.ToEst()</td>
+            <td>
+                <form action="/api/Jobs/@schedule.Name" method="post">
+                    <button type="submit">Run Now</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
