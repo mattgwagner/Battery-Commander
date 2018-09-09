@@ -251,6 +251,18 @@ namespace BatteryCommander.Web.Models
 
             [Range(0, 50)]
             public Double Hips { get; set; }
+
+            public override string ToString()
+            {
+                var print = $"{Waist} / {Neck}";
+
+                if (Hips > 0)
+                {
+                    print += $" / {Hips}";
+                }
+
+                return print;
+            }
         }
 
         public byte[] GenerateWorksheet()

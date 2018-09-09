@@ -66,7 +66,7 @@
                             <ol>
                                 @foreach (var measurement in soldier.LastAbcp.Measurements)
                                 {
-                                    <li>@Html.DisplayFor(_ => measurement.Waist) / @Html.DisplayFor(_ => measurement.Neck)</li>
+                                    <li>@(measurement)</li>
                                 }
                             </ol>
                         }
