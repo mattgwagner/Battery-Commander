@@ -48,7 +48,9 @@ namespace BatteryCommander.Web.Models
                 .AsQueryable();
             }
 
-            return evaluations;
+            return
+                evaluations
+                .OrderBy(evaluation => evaluation.ThruDate);
         }
 
         public class Query
