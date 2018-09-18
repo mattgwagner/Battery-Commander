@@ -15,17 +15,6 @@
     }
 </div>
 
-@using (Html.BeginForm("Comment", "Evaluations", FormMethod.Post, new { @class = "form-horitzontal" }))
-{
-    @Html.AntiForgeryToken()
-    @Html.HiddenFor(model => model.Id)
-
-    <td colspan="3">
-        <textarea rows="4" cols="100" name="message"></textarea>
-        <button type="submit">Comment</button>
-    </td>
-}
-
 <hr />
 
 <table class="table table-bordered">
@@ -96,6 +85,19 @@
         </td>
     </tr>
 </table>
+
+<hr />
+            
+@using (Html.BeginForm("Comment", "Evaluations", FormMethod.Post, new { @class = "form-horitzontal" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+
+    <td colspan="3">
+        <textarea rows="4" cols="100" name="message"></textarea>
+        <button type="submit">Comment</button>
+    </td>
+}
 
 <hr />
 
