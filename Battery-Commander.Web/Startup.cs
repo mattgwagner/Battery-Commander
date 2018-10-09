@@ -235,7 +235,7 @@ namespace BatteryCommander.Web
             // Add functionality to inject IOptions<T>
             services.AddOptions();
 
-            services.AddDbContext<Database>();
+            services.AddDbContext<Database>(optionsLifetime: ServiceLifetime.Transient);
 
             // Register the Swagger generator, defining one or more Swagger documents
             services.AddSwaggerGen(c =>
