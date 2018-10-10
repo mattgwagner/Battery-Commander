@@ -9,12 +9,14 @@ namespace BatteryCommander.Web.Services
 {
     public class VehicleService
     {
-        public static async Task Reset_Drivers(Database db)
+        public static async Task Reset_Convoy(Database db)
         {
             foreach (var vehicle in await Filter(db, new Query { }))
             {
                 vehicle.DriverId = null;
                 vehicle.A_DriverId = null;
+                vehicle.Chalk = Vehicle.VehicleChalk.Unknown;
+                vehicle.OrderOfMarch = 0;
 
                 foreach (var passenger in vehicle.Passengers.ToList())
                 {

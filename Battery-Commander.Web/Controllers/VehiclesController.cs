@@ -128,7 +128,7 @@ namespace BatteryCommander.Web.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Reset()
         {
-            await VehicleService.Reset_Drivers(db);
+            await VehicleService.Reset_Convoy(db);
 
             return RedirectToAction(nameof(Index));
         }
