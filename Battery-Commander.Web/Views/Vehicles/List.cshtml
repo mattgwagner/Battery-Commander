@@ -52,85 +52,87 @@
         <tbody>
             @foreach (var vehicle in Model.Vehicles)
             {
-                <tr>
-                    <td>
-                        <span class="update-status" data-vehicle="@vehicle.Id" data-status="@vehicle.Status" data-notes="@vehicle.Notes" data-location="@vehicle.Location" data-sort="@vehicle.Status">
-                            @Html.DisplayFor(_ => vehicle, "VehicleStatus")
-                        </span>
-                        @if (vehicle.HasFuelCard)
-                        {
-                            <span class="label label-primary">GC</span>
-                        }
-                        @if (vehicle.HasTowBar)
-                        {
-                            <span class="label label-primary">TB</span>
-                        }
-                    </td>
-                    <td>@Html.DisplayFor(_ => vehicle.Unit)</td>
-                    <td>@Html.DisplayFor(_ => vehicle)</td>
-                    <td>@Html.DisplayFor(_ => vehicle.Type)</td>
-                    <td>@Html.DisplayFor(_ => vehicle.Seats)</td>
-                    <td>@Html.DisplayFor(_ => vehicle.TotalCapacity)</td>
-                    <td>
-                        @if (!String.IsNullOrWhiteSpace(vehicle.Nomenclature))
-                        {
-                            <a href="@vehicle.GoogleSearchUrl" target="_blank">@vehicle.Nomenclature</a>
-                        }
-                    </td>
-                    <td>@Html.DisplayFor(_ => vehicle.Registration)</td>
-                    <td>@Html.DisplayFor(_ => vehicle.Serial)</td>
-                    <td>@Html.DisplayFor(_ => vehicle.LIN)</td>
-                    @if (vehicle.Available)
+            <tr>
+                <td>
+                    <span class="update-status" data-vehicle="@vehicle.Id" data-status="@vehicle.Status" data-notes="@vehicle.Notes" data-location="@vehicle.Location" data-sort="@vehicle.Status">
+                        @Html.DisplayFor(_ => vehicle, "VehicleStatus")
+                    </span>
+                    @if (vehicle.HasFuelCard)
                     {
-                        <td>
-                            @if (vehicle.DriverId.HasValue)
-                            {
-                                <span class="update-driver" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper" data-driver="@vehicle.DriverId" data-adriver="@vehicle.A_DriverId">@Html.DisplayFor(_ => vehicle.Driver)</span>
-                            }
-                            else
-                            {
-                                <span class="update-driver label label-default" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper" data-driver="@vehicle.DriverId" data-adriver="@vehicle.A_DriverId">(Empty)</span>
-                            }
-                        </td>
-                        <td>
-                            @if (vehicle.A_DriverId.HasValue)
-                            {
-                                <span class="update-driver" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper" data-driver="@vehicle.DriverId" data-adriver="@vehicle.A_DriverId">@Html.DisplayFor(_ => vehicle.A_Driver)</span>
-                            }
-                            else
-                            {
-                                <span class="update-driver label label-default" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper" data-driver="@vehicle.DriverId" data-adriver="@vehicle.A_DriverId">(Empty)</span>
-                            }
-                        </td>
+                        <span class="label label-primary">GC</span>
                     }
-                    else
+                    @if (vehicle.HasTowBar)
                     {
-                        <td></td>
-                        <td></td>
+                        <span class="label label-primary">TB</span>
                     }
+                </td>
+                <td>@Html.DisplayFor(_ => vehicle.Unit)</td>
+                <td>@Html.DisplayFor(_ => vehicle)</td>
+                <td>@Html.DisplayFor(_ => vehicle.Type)</td>
+                <td>@Html.DisplayFor(_ => vehicle.Seats)</td>
+                <td>@Html.DisplayFor(_ => vehicle.Chalk)</td>
+                <td>@Html.DisplayFor(_ => vehicle.OrderOfMarch)</td>
+                <td>@Html.DisplayFor(_ => vehicle.TotalCapacity)</td>
+                <td>
+                    @if (!String.IsNullOrWhiteSpace(vehicle.Nomenclature))
+                    {
+                        <a href="@vehicle.GoogleSearchUrl" target="_blank">@vehicle.Nomenclature</a>
+                    }
+                </td>
+                <td>@Html.DisplayFor(_ => vehicle.Registration)</td>
+                <td>@Html.DisplayFor(_ => vehicle.Serial)</td>
+                <td>@Html.DisplayFor(_ => vehicle.LIN)</td>
+                @if (vehicle.Available)
+                {
                     <td>
-                        @if (vehicle.HasJBCP)
+                        @if (vehicle.DriverId.HasValue)
                         {
-                            <span class="label label-default">JBC-P</span>
+                            <span class="update-driver" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper" data-driver="@vehicle.DriverId" data-adriver="@vehicle.A_DriverId">@Html.DisplayFor(_ => vehicle.Driver)</span>
+                        }
+                        else
+                        {
+                            <span class="update-driver label label-default" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper" data-driver="@vehicle.DriverId" data-adriver="@vehicle.A_DriverId">(Empty)</span>
                         }
                     </td>
-                    <td class="update-status">@Html.DisplayFor(_ => vehicle, "VehicleLocation")</td>
                     <td>
-                        <span class="update-status" data-vehicle="@vehicle.Id" data-status="@((int)vehicle.Status)" data-notes="@vehicle.Notes">
-                            @Html.DisplayFor(_ => vehicle.Notes)
-                        </span>
+                        @if (vehicle.A_DriverId.HasValue)
+                        {
+                            <span class="update-driver" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper" data-driver="@vehicle.DriverId" data-adriver="@vehicle.A_DriverId">@Html.DisplayFor(_ => vehicle.A_Driver)</span>
+                        }
+                        else
+                        {
+                            <span class="update-driver label label-default" data-vehicle="@vehicle.Id" data-bumper="@vehicle.Bumper" data-driver="@vehicle.DriverId" data-adriver="@vehicle.A_DriverId">(Empty)</span>
+                        }
                     </td>
-                    <td>@Html.ActionLink("Edit", "Edit", new { vehicle.Id })</td>
-                    <td>
-                        <ul>
-                            @foreach (var passenger in vehicle.Passengers)
-                            {
-                                <li>@Html.DisplayFor(_ => passenger.Soldier, "Soldier")</li>
-                            }
-                        </ul>
-                    </td>
+                }
+                else
+                {
                     <td></td>
-                </tr>
+                    <td></td>
+                }
+                <td>
+                    @if (vehicle.HasJBCP)
+                    {
+                        <span class="label label-default">JBC-P</span>
+                    }
+                </td>
+                <td class="update-status">@Html.DisplayFor(_ => vehicle, "VehicleLocation")</td>
+                <td>
+                    <span class="update-status" data-vehicle="@vehicle.Id" data-status="@((int)vehicle.Status)" data-notes="@vehicle.Notes">
+                        @Html.DisplayFor(_ => vehicle.Notes)
+                    </span>
+                </td>
+                <td>@Html.ActionLink("Edit", "Edit", new { vehicle.Id })</td>
+                <td>
+                    <ul>
+                        @foreach (var passenger in vehicle.Passengers)
+                        {
+                            <li>@Html.DisplayFor(_ => passenger.Soldier, "Soldier")</li>
+                        }
+                    </ul>
+                </td>
+                <td></td>
+            </tr>
             }
         </tbody>
     </table>
