@@ -135,6 +135,7 @@ namespace BatteryCommander.Web.Models
 
         public enum VehicleChalk : byte
         {
+            [Display(Name = "")]
             Unknown = 0,
 
             [Display(Name = "Chalk 1")]
