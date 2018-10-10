@@ -52,7 +52,8 @@ namespace BatteryCommander.Web.Services
 
             return
                 await vehicles
-                .OrderBy(vehicle => vehicle.Bumper)
+                .OrderBy(vehicle => vehicle.Chalk)
+                .ThenBy(vehicle => vehicle.OrderOfMarch)
                 .ToListAsync();
         }
 
