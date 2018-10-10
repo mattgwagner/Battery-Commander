@@ -131,7 +131,7 @@ namespace BatteryCommander.Web.Controllers
         {
             await VehicleService.Reset_Convoy(db, query);
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), query);
         }
 
         private void Reassign_Passengers(int vehicleId, int? driverId, int? adriverId, IEnumerable<int> passengers)
