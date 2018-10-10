@@ -143,6 +143,9 @@
 
     <form method="post" action="@Url.Action("Reset", "Vehicles")">
         @Html.AntiForgeryToken()
+        @Html.HiddenFor(_ => _.Query.IncludeIgnoredUnits)
+        @Html.HiddenFor(_ => _.Query.Units)
+        @Html.HiddenFor(_ => _.Query.Available)
         <button class="btn btn-danger btn-xs">Reset Convoy</button>
     </form>
 

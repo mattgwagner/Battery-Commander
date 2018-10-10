@@ -26,6 +26,7 @@ namespace BatteryCommander.Web.Controllers
 
             return View("List", new VehicleListViewModel
             {
+                Query = query,
                 Soldiers = await SoldiersController.GetDropDownList(db, includeIgnoredUnits: false),
                 Vehicles = await VehicleService.Filter(db, query)
             });
@@ -126,9 +127,9 @@ namespace BatteryCommander.Web.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> Reset()
+        public async Task<IActionResult> Reset(VehicleService.Query query)
         {
-            await VehicleService.Reset_Convoy(db);
+            await VehicleService.Reset_Convoy(db, query);
 
             return RedirectToAction(nameof(Index));
         }
