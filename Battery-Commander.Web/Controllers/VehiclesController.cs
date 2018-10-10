@@ -20,6 +20,7 @@ namespace BatteryCommander.Web.Controllers
             this.db = db;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index(VehicleService.Query query)
         {
             // List of Vehicles - by unit, by status
