@@ -1,5 +1,4 @@
 ﻿@model Vehicle
-
 @using (Html.BeginForm("Save", "Vehicles", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
@@ -29,6 +28,16 @@
     <div class="form-group form-group-lg">
         @Html.DisplayNameFor(model => model.Location)
         @Html.DropDownListFor(model => model.Location, Html.GetEnumSelectList<Vehicle.VehicleLocation>())
+    </div>
+
+    <div class="form-group form-group-lg">
+        @Html.DisplayNameFor(model => model.Chalk)
+        @Html.DropDownListFor(model => model.Chalk, Html.GetEnumSelectList<Vehicle.VehicleChalk>())
+    </div>
+
+    <div class="form-group form-group-lg">
+        @Html.DisplayNameFor(model => model.OrderOfMarch)
+        @Html.EditorFor(model => model.OrderOfMarch)
     </div>
 
     <div class="form-group form-group-lg">
@@ -108,7 +117,6 @@
 
     <button type="submit">Save</button>
 }
-
 @if (Model.Id > 0)
 {
     <div>

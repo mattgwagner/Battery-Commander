@@ -77,7 +77,10 @@ namespace BatteryCommander.Web.Models
 
         public virtual ICollection<Passenger> Passengers { get; set; }
 
-        // Chalk, Order of March?
+        public VehicleChalk Chalk { get; set; } = VehicleChalk.Unknown;
+
+        [Display(Name = "Order of March")]
+        public int OrderOfMarch { get; set; } = 0;
 
         public String Notes { get; set; }
 
@@ -128,6 +131,26 @@ namespace BatteryCommander.Web.Models
             MATES,
 
             Other = byte.MaxValue
+        }
+
+        public enum VehicleChalk : byte
+        {
+            Unknown = 0,
+
+            [Display(Name = "Chalk 1")]
+            Chalk_1 = 1,
+
+            [Display(Name = "Chalk 2")]
+            Chalk_2 = 2,
+
+            [Display(Name = "Chalk 3")]
+            Chalk_3 = 3,
+
+            [Display(Name = "Chalk 4")]
+            Chalk_4 = 4,
+
+            [Display(Name = "Chalk 5")]
+            Chalk_5
         }
     }
 }
