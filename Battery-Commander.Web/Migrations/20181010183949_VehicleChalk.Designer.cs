@@ -10,7 +10,7 @@ using System;
 
 namespace BatteryCommander.Web.Migrations
 {
-    [DbContext(typeof(Database))]
+    [DbContext(typeof(Models.Database))]
     [Migration("20181010183949_VehicleChalk")]
     partial class VehicleChalk
     {
