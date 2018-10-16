@@ -299,19 +299,22 @@ namespace BatteryCommander.Web
                     {
                         if (!context.Request.Path.Value.Contains(nameof(HomeController.RequestAccess)))
                         {
-                            // Get the user in the system, if they exist, by email address
-
-                            var database = context.RequestServices.GetService<Database>();
-
-                            var user = await UserService.FindAsync(database, context.User);
-
-                            // Check if the user has been granted access to the system
-
-                            if (user == null)
+                            using (var scope = context.RequestServices.CreateScope())
                             {
-                                // If not, redirect to request access page
+                                // Get the user in the system, if they exist, by email address
 
-                                context.Response.Redirect($"{context.Request.PathBase}/Home/RequestAccess");
+                                var database = scope.ServiceProvider.GetService<Database>();
+
+                                var user = await UserService.FindAsync(database, context.User);
+
+                                // Check if the user has been granted access to the system
+
+                                if (user == null)
+                                {
+                                    // If not, redirect to request access page
+
+                                    context.Response.Redirect($"{context.Request.PathBase}/Home/RequestAccess");
+                                }
                             }
                         }
                     }
