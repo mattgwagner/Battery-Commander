@@ -1,4 +1,5 @@
-﻿using BatteryCommander.Web.Jobs;
+﻿using BatteryCommander.Web.Controllers;
+using BatteryCommander.Web.Jobs;
 using BatteryCommander.Web.Models;
 using BatteryCommander.Web.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -281,15 +282,43 @@ namespace BatteryCommander.Web
 
             app.UseAuthentication();
 
-            app.Use(async (context, next) =>
-            {
-                // Enrich log entries with the logged in user, if available
-
-                using (LogContext.PushProperty("Username", UserService.Get_Email(context.User)))
+            app
+                .Use(async (context, next) =>
                 {
+                    // Enrich log entries with the logged in user, if available
+
+                    using (LogContext.PushProperty("Username", UserService.Get_Email(context.User)))
+                    {
+                        await next.Invoke();
+                    }
+                })
+                .Use(async (context, next) =>
+                {
+                    // Are we already in the pipeline for our request access page? 'cuz it wouldn't make sense to redirect again
+
+                    if (context.Request.Path.HasValue)
+                    {
+                        if (!context.Request.Path.Value.Contains(nameof(HomeController.RequestAccess)))
+                        {
+                            // Get the user in the system, if they exist, by email address
+
+                            var database = context.RequestServices.GetService<Database>();
+
+                            var user = await UserService.FindAsync(database, context.User);
+
+                            // Check if the user has been granted access to the system
+
+                            if (user == null)
+                            {
+                                // If not, redirect to request access page
+
+                                context.Response.Redirect($"{context.Request.PathBase}/Home/RequestAccess");
+                            }
+                        }
+                    }
+
                     await next.Invoke();
-                }
-            });
+                });
 
             app.UseCors("Policy");
 

@@ -1,7 +1,9 @@
 ﻿using BatteryCommander.Web.Models;
+using FluentEmail.Core;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -29,6 +31,16 @@ namespace BatteryCommander.Web.Services
             if (soldiers.Count() > 1) throw new Exception($"Found multiple matching soldiers with the same email: {email}");
 
             return soldiers.SingleOrDefault();
+        }
+
+        public static void RequestAccess(IFluentEmailFactory emailSvc, RequestAccessModel model)
+        {
+            emailSvc
+                .Create()
+                .To("Access@RedLeg.app")
+                .Subject($"Access Request | {model.Name}")
+                .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/Home/RequestAccessEmail.cshtml", model)
+                .SendWithErrorCheck();
         }
 
         public static Boolean Try_Validate_Token(String apiKey, out ClaimsPrincipal user)
