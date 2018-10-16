@@ -11,7 +11,7 @@ namespace BatteryCommander.Web.Models
 
         public String Email { get; set; }
 
-        [Display(Name = "DOD ID")]
+        [Display(Name = "DOD ID (10 Digits, On Your CAC)")]
         public String DoDId { get; set; }
 
         public int Unit { get; set; }
