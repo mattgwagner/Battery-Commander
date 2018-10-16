@@ -77,7 +77,7 @@ namespace BatteryCommander.Web.Controllers
 
             // Redirect to thank you etc. etc.
 
-            ViewData["Message"] = "Your request has been submitted. Thank you!";
+            TempData["Message"] = "Your request has been submitted. Thank you!";
 
             return RedirectToAction(nameof(Index));
         }

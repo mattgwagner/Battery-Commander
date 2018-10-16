@@ -6,10 +6,10 @@
     <h1>@ViewBag.Title</h1>
 </div>
 
-@if (!String.IsNullOrWhiteSpace(ViewBag.Message))
+@if (!String.IsNullOrWhiteSpace($"{TempData["Message"]}"))
 {
     <div class="alert alert-success">
-        @ViewBag.Message
+        @TempData["Message"]
     </div>
 }
 
