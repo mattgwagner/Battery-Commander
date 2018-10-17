@@ -49,7 +49,7 @@ namespace BatteryCommander.Web.Controllers
             return View(await db.Units.FindAsync(id));
         }
 
-        [Route, HttpPost, ValidateAntiForgeryToken]
+        [Route("Save"), HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Save(Unit model)
         {
             if (await db.Units.AnyAsync(unit => unit.Id == model.Id) == false)
