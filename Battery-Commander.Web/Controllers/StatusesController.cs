@@ -3,6 +3,7 @@ using BatteryCommander.Web.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,10 +24,11 @@ namespace BatteryCommander.Web.Controllers
 
         // Bulk update statuses
 
-        public async Task<IActionResult> Index(SoldierService.Query query)
+        public async Task<IActionResult> Index(SoldierService.Query query, String redirectUrl)
         {
             return View("List", new StatusListModel
             {
+                RedirectUrl = redirectUrl,
                 Rows =
                     (await SoldierService.Filter(db, query))
                     .Select(soldier => new StatusListModel.Row
@@ -57,12 +59,18 @@ namespace BatteryCommander.Web.Controllers
 
             await db.SaveChangesAsync();
 
+            if(!String.IsNullOrWhiteSpace(model.RedirectUrl))
+            {
+                return Redirect(model.RedirectUrl);
+            }
+
             return RedirectToAction(nameof(Index));
         }
 
         public class StatusListModel
         {
             public IList<Row> Rows { get; set; }
+            public string RedirectUrl { get; internal set; }
 
             public class Row
             {
