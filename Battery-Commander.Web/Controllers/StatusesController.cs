@@ -28,7 +28,7 @@ namespace BatteryCommander.Web.Controllers
         {
             return View("List", new StatusListModel
             {
-                RedirectUrl = redirectUrl,
+                RedirectUrl = String.IsNullOrWhiteSpace(redirectUrl) ? $"{Request.Headers["Referrer"]}" : redirectUrl,
                 Rows =
                     (await SoldierService.Filter(db, query))
                     .Select(soldier => new StatusListModel.Row
