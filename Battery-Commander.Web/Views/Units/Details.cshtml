@@ -33,7 +33,7 @@
 
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="PERSTAT">
-            <h2>@Html.DisplayNameFor(model => model.PERSTAT)</h2>
+            <h2>@Html.DisplayNameFor(model => model.PERSTAT) (@Html.ActionLink("Update", "Index", "Statuses", new SoldierService.Query { Unit = Model.Id }, null))</h2>
             @Html.DisplayFor(model => model, "Red1_Perstat")
         </div>
 
