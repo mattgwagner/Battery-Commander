@@ -94,11 +94,16 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db);
+            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, new SoldierService.Query
+            {
+                Ranks = RankExtensions.All().Where(rank => rank.GetsEvaluation()),
+                IncludeIgnoredUnits = true
+            });
 
             ViewBag.Reviewers = await SoldiersController.GetDropDownList(db, new SoldierService.Query
             {
-                Ranks = new[] { Rank.O3, Rank.O4, Rank.O5, Rank.O6 }
+                Ranks = new[] { Rank.O3, Rank.O4, Rank.O5, Rank.O6 },
+                IncludeIgnoredUnits = true
             });
 
             return View(await Evaluations.SingleOrDefaultAsync(_ => _.Id == id));
