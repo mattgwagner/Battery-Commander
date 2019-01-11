@@ -39,11 +39,13 @@ namespace BatteryCommander.Web.Controllers
             return View(model);
         }
 
+        [Route("~/Units/New")]
         public IActionResult New()
         {
             return View("Edit", new Unit { });
         }
 
+        [Route("~/Units/{id}/Edit")]
         public async Task<IActionResult> Edit(int id)
         {
             return View(await db.Units.FindAsync(id));
