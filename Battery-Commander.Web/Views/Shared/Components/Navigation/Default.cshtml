@@ -19,7 +19,7 @@
                         <li>@Html.RouteLink("My Unit", "Unit.Details", new { id = Model.Soldier.UnitId }, new { @class = "nav-link" })</li>
                         <li>@Html.RouteLink("My Soldiers", "Unit.Soldiers", new { Model.Soldier.UnitId }, new { @class = "nav-link" })</li>
                         <li>@Html.RouteLink("My Profile", "Soldier.Details", new { id = Model.Soldier.Id }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Evaluations", "ByUnit", "Evaluations", new { unitId = Model.Soldier.UnitId }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Evaluations", "Index", "Evaluations", new { unitId = Model.Soldier.UnitId }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("My Vehicles", "Index", "Vehicles", new VehicleService.Query { Units = new[] { Model.Soldier.UnitId } }, new { @class = "nav-link" })</li>
                     }
                     else
