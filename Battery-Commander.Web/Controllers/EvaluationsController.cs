@@ -26,25 +26,17 @@ namespace BatteryCommander.Web.Controllers
             this.db = db;
         }
 
+        [Route("~/Units/{unitId}/Evaluations")]
         public async Task<IActionResult> Index(int unitId)
         {
             return View("List", new EvaluationListViewModel
             {
-                Evaluations = EvaluationService.Filter(db, new EvaluationService.Query { Complete = false }),
-                Soldiers = await SoldierService.Filter(db, new SoldierService.Query { Ranks = RankExtensions.All().Where(_ => _.GetsEvaluation()) })
-            });
-        }
-
-        [Route("~/Units/{unitId}/Evaluations")]
-        public async Task<IActionResult> ByUnit(int unitId)
-        {
-            return View("List", new EvaluationListViewModel
-            {
                 Evaluations = EvaluationService.Filter(db, new EvaluationService.Query { Unit = unitId, Complete = false }),
-                Soldiers = await SoldierService.Filter(db, new SoldierService.Query { Ranks = RankExtensions.All().Where(_ => _.GetsEvaluation()) })
+                Soldiers = await SoldierService.Filter(db, new SoldierService.Query { Unit = unitId, Ranks = RankExtensions.All().Where(_ => _.GetsEvaluation()) })
             });
         }
 
+        [Route("~/Evaluations")]
         public async Task<IActionResult> All()
         {
             return View("List", new EvaluationListViewModel
