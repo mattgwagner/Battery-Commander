@@ -18,14 +18,14 @@ namespace BatteryCommander.Web.Models
 
         public Boolean IgnoreForReports { get; set; }
 
-        public virtual ICollection<Soldier> Soldiers { get; set; }
+        public virtual ICollection<Soldier> Soldiers { get; set; } = new List<Soldier>();
 
-        public virtual ICollection<Vehicle> Vehicles { get; set; }
+        public virtual ICollection<Vehicle> Vehicles { get; set; } = new List<Vehicle>();
 
         [NotMapped]
         public virtual IEnumerable<Soldier> CLS
         {
-            get { return Soldiers?.Where(soldier => soldier.ClsQualified).OrderBy(soldier => soldier.LastName).ThenBy(soldier => soldier.FirstName); }
+            get { return Soldiers.Where(soldier => soldier.ClsQualified).OrderBy(soldier => soldier.LastName).ThenBy(soldier => soldier.FirstName); }
         }
 
         [NotMapped]
