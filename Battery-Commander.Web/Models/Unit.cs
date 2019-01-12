@@ -25,7 +25,7 @@ namespace BatteryCommander.Web.Models
         [NotMapped]
         public virtual IEnumerable<Soldier> CLS
         {
-            get { return Soldiers.Where(soldier => soldier.ClsQualified).OrderBy(soldier => soldier.LastName).ThenBy(soldier => soldier.FirstName); }
+            get { return Soldiers?.Where(soldier => soldier.ClsQualified).OrderBy(soldier => soldier.LastName).ThenBy(soldier => soldier.FirstName); }
         }
 
         [NotMapped]
