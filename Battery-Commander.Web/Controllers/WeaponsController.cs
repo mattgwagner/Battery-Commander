@@ -18,7 +18,7 @@ namespace BatteryCommander.Web.Controllers
             this.db = db;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? unit)
         {
             // List of Weapons - by unit, by status
 
@@ -29,6 +29,7 @@ namespace BatteryCommander.Web.Controllers
                     .Weapons
                     .Include(weapon => weapon.Unit)
                     .Include(weapon => weapon.Assigned)
+                    .Where(weapon => !unit.HasValue || weapon.UnitId == unit)
                     .ToListAsync()
             });
         }
