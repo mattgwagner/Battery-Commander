@@ -109,7 +109,7 @@ namespace BatteryCommander.Web.Controllers
         public async Task<IActionResult> Save(Soldier model)
         {
             ViewBag.Units = await UnitsController.GetDropDownList(db);
-            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db);\
+            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db);
 
             if (model.UnitId < 1)
             {
