@@ -13,31 +13,34 @@
         <div class="navbar-collapse collapse">
             @if (Model.ShowNavigation)
             {
-                <ul class="nav navbar-nav">
-                    @if (Model.Soldier != null)
-                    {
-                        <li>@Html.RouteLink("My Unit", "Unit.Details", new { id = Model.Soldier.UnitId }, new { @class = "nav-link" })</li>
-                        <li>@Html.RouteLink("My Soldiers", "Unit.Soldiers", new { Model.Soldier.UnitId }, new { @class = "nav-link" })</li>
-                        <li>@Html.RouteLink("My Profile", "Soldier.Details", new { id = Model.Soldier.Id }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Evaluations", "Index", "Evaluations", new { unitId = Model.Soldier.UnitId }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("My Vehicles", "Index", "Vehicles", new VehicleService.Query { Units = new[] { Model.Soldier.UnitId } }, new { @class = "nav-link" })</li>
-                    }
-                    else
-                    {
-                        <li><a class="nav-link" asp-controller="Soldiers" asp-action="Index">Soldiers</a></li>
-                        <li><a class="nav-link" asp-controller="Evaluations" asp-action="Index">Evaluations</a></li>
-                        <li><a class="nav-link" asp-controller="Vehicles" asp-action="Index">Vehicles</a></li>
-                    }
-                    <li><a class="nav-link" asp-controller="Weapons" asp-action="Index">Weapons</a></li>
-                    <li><a class="nav-link" asp-controller="SSD" asp-action="Index">SSD</a></li>
-                    <li><a class="nav-link" asp-controller="APFT" asp-action="Index">APFT</a></li>
+            <ul class="nav navbar-nav">
+                @if (Model.Soldier != null)
+                {
+                    <li>@Html.RouteLink("My Unit", "Unit.Details", new { id = Model.Soldier.UnitId }, new { @class = "nav-link" })</li>
+                    <li>@Html.RouteLink("My Soldiers", "Unit.Soldiers", new { Model.Soldier.UnitId }, new { @class = "nav-link" })</li>
+                    <li>@Html.RouteLink("My Profile", "Soldier.Details", new { id = Model.Soldier.Id }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Evaluations", "Index", "Evaluations", new { unitId = Model.Soldier.UnitId }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("My Vehicles", "Index", "Vehicles", new VehicleService.Query { Units = new[] { Model.Soldier.UnitId } }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("APFT", "Index", "APFT", new SoldierService.Query { Unit = Model.Soldier.UnitId }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("ABCP", "Index", "ABCP", new SoldierService.Query { Unit = Model.Soldier.UnitId }, new { @class = "nav-link" })</li>
+                }
+                else
+                {
+                    <li><a class="nav-link" asp-controller="Soldiers" asp-action="Index">Soldiers</a></li>
+                    <li><a class="nav-link" asp-controller="Evaluations" asp-action="Index">Evaluations</a></li>
+                    <li><a class="nav-link" asp-controller="Vehicles" asp-action="Index">Vehicles</a></li>
+                    <li><a class="nav-link" asp-controller="APFT" asp-action="Index">APFT</a></li>s
                     <li><a class="nav-link" asp-controller="ABCP" asp-action="Index">ABCP</a></li>
-                    @foreach (var embed in Model.NavItems)
-                    {
-                        <li><a class="nav-link" href="/@embed.Route">@embed.Name</a></li>
-                    }
-                    <li><a class="nav-link" asp-controller="Units" asp-action="Index">Units</a></li>
-                </ul>
+                }
+                <li><a class="nav-link" asp-controller="Weapons" asp-action="Index">Weapons</a></li>
+                <li><a class="nav-link" asp-controller="SSD" asp-action="Index">SSD</a></li>
+
+                @foreach (var embed in Model.NavItems)
+                {
+                    <li><a class="nav-link" href="/@embed.Route">@embed.Name</a></li>
+                }
+                <li><a class="nav-link" asp-controller="Units" asp-action="Index">Units</a></li>
+            </ul>
             }
             @if (User.Identity.IsAuthenticated)
             {
