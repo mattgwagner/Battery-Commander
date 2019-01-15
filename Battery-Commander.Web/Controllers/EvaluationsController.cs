@@ -55,14 +55,12 @@ namespace BatteryCommander.Web.Controllers
         {
             ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, new SoldierService.Query
             {
-                Ranks = RankExtensions.All().Where(rank => rank.GetsEvaluation()),
-                IncludeIgnoredUnits = true
+                Ranks = RankExtensions.All().Where(rank => rank.GetsEvaluation())
             });
 
             ViewBag.Reviewers = await SoldiersController.GetDropDownList(db, new SoldierService.Query
             {
-                Ranks = new[] { Rank.O3, Rank.O4, Rank.O5, Rank.O6 },
-                IncludeIgnoredUnits = true
+                Ranks = new[] { Rank.O3, Rank.O4, Rank.O5, Rank.O6 }
             });
 
             if (soldier > 0)
@@ -97,14 +95,12 @@ namespace BatteryCommander.Web.Controllers
         {
             ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, new SoldierService.Query
             {
-                Ranks = RankExtensions.All().Where(rank => rank.GetsEvaluation()),
-                IncludeIgnoredUnits = true
+                Ranks = RankExtensions.All().Where(rank => rank.GetsEvaluation())
             });
 
             ViewBag.Reviewers = await SoldiersController.GetDropDownList(db, new SoldierService.Query
             {
-                Ranks = new[] { Rank.O3, Rank.O4, Rank.O5, Rank.O6 },
-                IncludeIgnoredUnits = true
+                Ranks = new[] { Rank.O3, Rank.O4, Rank.O5, Rank.O6 }
             });
 
             return View(await Evaluations.SingleOrDefaultAsync(_ => _.Id == id));

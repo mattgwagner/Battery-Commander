@@ -35,7 +35,7 @@ namespace BatteryCommander.Web.Controllers
         [Route("~/Units/{unitId}/Soldiers", Name = "Unit.Soldiers")]
         public async Task<IActionResult> ForUnit(int unitId)
         {
-            return await Index(new SoldierService.Query { Unit = unitId, IncludeIgnoredUnits = true });
+            return await Index(new SoldierService.Query { Unit = unitId });
         }
 
         [Route("~/Soldiers/All")]
@@ -43,11 +43,8 @@ namespace BatteryCommander.Web.Controllers
         {
             return View("List", new SoldierListViewModel
             {
-                Query = new SoldierService.Query { IncludeIgnoredUnits = true },
-                Soldiers = await SoldierService.Filter(db, new SoldierService.Query
-                {
-                    IncludeIgnoredUnits = true
-                })
+                Query = SoldierService.Query.ALL,
+                Soldiers = await SoldierService.Filter(db, SoldierService.Query.ALL)
             });
         }
 
@@ -170,7 +167,7 @@ namespace BatteryCommander.Web.Controllers
 
         public static async Task<Soldier> Get(Database db, int id)
         {
-            var soldiers = await SoldierService.Filter(db, new SoldierService.Query { Id = id, IncludeIgnoredUnits = true });
+            var soldiers = await SoldierService.Filter(db, new SoldierService.Query { Id = id });
 
             return soldiers.SingleOrDefault();
         }

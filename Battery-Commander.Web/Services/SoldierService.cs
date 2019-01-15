@@ -134,7 +134,7 @@ namespace BatteryCommander.Web.Services
 
         public class Query
         {
-            public static Query ALL => new Query { IncludeIgnoredUnits = true };
+            public static Query ALL => new Query { };
 
             // TODO Filtering by MOS, Position, Name, Status
 
@@ -147,8 +147,6 @@ namespace BatteryCommander.Web.Services
             public IEnumerable<Rank> Ranks { get; set; }
 
             public Boolean? OnlyEnlisted { get; set; }
-
-            public Boolean? IncludeIgnoredUnits { get; set; } = false;
 
             public EventStatus? ABCP { get; set; }
 

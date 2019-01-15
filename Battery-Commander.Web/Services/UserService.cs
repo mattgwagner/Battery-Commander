@@ -26,7 +26,7 @@ namespace BatteryCommander.Web.Services
 
             if (String.IsNullOrWhiteSpace(email)) return null;
 
-            var soldiers = await SoldierService.Filter(db, new SoldierService.Query { Email = email, IncludeIgnoredUnits = true });
+            var soldiers = await SoldierService.Filter(db, new SoldierService.Query { Email = email });
 
             if (soldiers.Count() > 1) throw new Exception($"Found multiple matching soldiers with the same email: {email}");
 
