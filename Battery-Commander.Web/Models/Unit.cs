@@ -16,6 +16,7 @@ namespace BatteryCommander.Web.Models
 
         public String UIC { get; set; }
 
+        [Obsolete("This is being replaced by enabling or disabling specific functionality")]
         public Boolean IgnoreForReports { get; set; }
 
         public virtual ICollection<Soldier> Soldiers { get; set; } = new List<Soldier>();
