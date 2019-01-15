@@ -11,10 +11,10 @@ namespace BatteryCommander.Web.Services
     {
         public static async Task<Unit> Get(Database db, int unitId)
         {
-            return (await List(db, includeIgnored: true)).Single(unit => unit.Id == unitId);
+            return (await List(db)).Single(unit => unit.Id == unitId);
         }
 
-        public static async Task<IEnumerable<Unit>> List(Database db, Boolean includeIgnored = false)
+        public static async Task<IEnumerable<Unit>> List(Database db)
         {
             return
                 await db
@@ -26,7 +26,6 @@ namespace BatteryCommander.Web.Services
                     .ThenInclude(soldier => soldier.APFTs)
                 .Include(unit => unit.Soldiers)
                     .ThenInclude(soldier => soldier.SSDSnapshots)
-                .Where(unit => includeIgnored || !unit.IgnoreForReports)
                 .OrderBy(unit => unit.Name)
                 .ToListAsync();
         }
