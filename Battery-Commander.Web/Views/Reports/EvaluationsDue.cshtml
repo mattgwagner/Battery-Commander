@@ -14,16 +14,18 @@
         </tr>
     </thead>
     <tbody>
-        @foreach(var eval in Model)
+        @foreach (var eval in Model)
         {
-            <tr>
+            var style = eval.LastUpdated < DateTime.Now.AddDays(-30) ? "background-color:red" : "";
+
+            <tr style="@style">
                 <td>@eval.Ratee</td>
                 <td>@eval.Rater</td>
                 <td>@eval.SeniorRater</td>
                 <td>@eval.ThruDate.ToString("yyyy-MM-dd")</td>
                 <td>@eval.Status</td>
                 <td>@eval.LastUpdatedHumanized</td>
-            </tr>            
+            </tr>
         }
     </tbody>
 </table>
