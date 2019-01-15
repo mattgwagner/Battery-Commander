@@ -57,10 +57,6 @@ namespace BatteryCommander.Web.Services
             {
                 soldiers = soldiers.Where(_ => _.UnitId == query.Unit);
             }
-            else if (query.IncludeIgnoredUnits == false)
-            {
-                soldiers = soldiers.Where(_ => !_.Unit.IgnoreForReports);
-            }
 
             if (query.OnlyEnlisted == true)
             {
