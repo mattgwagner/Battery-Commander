@@ -62,6 +62,12 @@ namespace BatteryCommander.Web.Controllers
         {
             if (await db.Vehicles.AnyAsync(vehicles => vehicles.Id == model.Id) == false)
             {
+                if (await db.Vehicles.AnyAsync(vehicle => vehicle.UnitId == model.Id && vehicle.Bumper == model.Bumper))
+                {
+                    ModelState.AddModelError(nameof(model.Bumper), "Vehicle exists for this unit and bumper");
+                    return View("Edit", model);
+                }
+
                 db.Vehicles.Add(model);
             }
             else
