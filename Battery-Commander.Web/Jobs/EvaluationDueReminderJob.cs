@@ -41,6 +41,7 @@ namespace BatteryCommander.Web.Jobs
             })
             .GetAwaiter()
             .GetResult()
+            .Where(soldier => soldier.CanLogin)
             .Select(soldier => soldier.GetEmails())
             .SelectMany(email => email)
             .ToList();
