@@ -83,6 +83,10 @@
                         {
                             <span class="label label-warning">Needs Birthdate</span>
                         }
+                        @if(soldier.CanLogin)
+                        {
+                            <span class="label label-success">Login Enabled</span>
+                        }
                     </td>
                     <td></td>
                 </tr>
