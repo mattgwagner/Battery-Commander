@@ -14,7 +14,7 @@ namespace BatteryCommander.Web.Migrations
                 nullable: false,
                 defaultValue: false);
 
-            migrationBuilder.Sql("UPDATE dbo.Soldiers SET CanLogin = 1 WHERE CivilianEmail IS NOT NULL");
+            migrationBuilder.Sql("UPDATE Soldiers SET CanLogin = 1 WHERE CivilianEmail IS NOT NULL");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
