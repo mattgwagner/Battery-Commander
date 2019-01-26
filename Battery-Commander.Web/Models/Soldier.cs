@@ -90,6 +90,7 @@ namespace BatteryCommander.Web.Models
         /// <summary>
         /// If true, the user has been granted access to log in to the application
         /// </summary>
+        [Display(Name = "Login Enabled")]
         public Boolean CanLogin { get; set; } = false;
 
         public override string ToString() => $"{Rank.ShortName()} {LastName} {FirstName} {MiddleName}".ToUpper();
