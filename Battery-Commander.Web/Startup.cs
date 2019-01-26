@@ -309,7 +309,7 @@ namespace BatteryCommander.Web
 
                                 // Check if the user has been granted access to the system
 
-                                if (user == null)
+                                if (user?.CanLogin != true)
                                 {
                                     // If not, redirect to request access page
 
