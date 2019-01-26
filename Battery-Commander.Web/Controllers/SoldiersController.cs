@@ -105,11 +105,11 @@ namespace BatteryCommander.Web.Controllers
         [Route("~/Soldiers"), HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Save(Soldier model)
         {
-            ViewBag.Units = await UnitsController.GetDropDownList(db);
-            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db);
-
             if (model.UnitId < 1)
             {
+                ViewBag.Units = await UnitsController.GetDropDownList(db);
+                ViewBag.Soldiers = await SoldiersController.GetDropDownList(db);
+
                 ModelState.AddModelError(nameof(model.Unit), "Must select a unit");
                 return View("Edit", model);
             }

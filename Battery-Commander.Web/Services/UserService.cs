@@ -30,7 +30,14 @@ namespace BatteryCommander.Web.Services
 
             if (soldiers.Count() > 1) throw new Exception($"Found multiple matching soldiers with the same email: {email}");
 
-            return soldiers.SingleOrDefault();
+            var soldier = soldiers.SingleOrDefault();
+
+            if(soldier != null)
+            {
+                db.Entry(soldier).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
+            }
+
+            return soldier;
         }
 
         public static void RequestAccess(IFluentEmailFactory emailSvc, RequestAccessModel model)
