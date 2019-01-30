@@ -37,7 +37,7 @@ namespace BatteryCommander.Web.Jobs
 
             var recipients = SoldierService.Filter(db, new SoldierService.Query
             {
-                Ranks = new[] { Rank.E6, Rank.E7, Rank.E8, Rank.O1, Rank.O2, Rank.O3 }
+                Ranks = new[] { Rank.E5, Rank.E6, Rank.E7, Rank.E8, Rank.O1, Rank.O2, Rank.O3, Rank.O4, Rank.O5, Rank.O6 }
             })
             .GetAwaiter()
             .GetResult()
