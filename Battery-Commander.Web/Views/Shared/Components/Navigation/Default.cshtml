@@ -36,11 +36,6 @@
                 }
 
                 <li><a class="nav-link" asp-controller="SSD" asp-action="Index">SSD</a></li>
-
-                @foreach (var embed in Model.NavItems)
-                {
-                    <li><a class="nav-link" href="/@embed.Route">@embed.Name</a></li>
-                }
                 <li><a class="nav-link" asp-controller="Units" asp-action="Index">Units</a></li>
             </ul>
             }
