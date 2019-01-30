@@ -64,6 +64,9 @@ namespace BatteryCommander.Web.Controllers
             {
                 if (await db.Vehicles.AnyAsync(vehicle => vehicle.UnitId == model.UnitId && vehicle.Bumper == model.Bumper))
                 {
+                    ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, includeIgnoredUnits: false);
+                    ViewBag.Units = await UnitsController.GetDropDownList(db);
+
                     ModelState.AddModelError(nameof(model.Bumper), "Vehicle exists for this unit and bumper");
                     return View("Edit", model);
                 }
