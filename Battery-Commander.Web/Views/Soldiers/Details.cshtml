@@ -4,6 +4,16 @@
 
     <div class="panel-heading">
         <h1 class="panel-title">@Html.DisplayFor(model => model.Soldier) @Html.ActionLink("Edit", "Edit", new { Model.Soldier.Id }, new { @class = "btn btn-default" })</h1>
+        <h4>
+            @if (Model.Soldier.CanLogin)
+            {
+                <span class="label label-success">Can Login</span>
+            }
+            else
+            {
+                <span class="label label-warning">No Access</span>
+            }
+        </h4>
     </div>
 
     <div id="org_chart_div"></div>
@@ -14,20 +24,6 @@
     }
 
     <table class="table">
-
-        <tr>
-            <td colspan="2">
-                @if(Model.Soldier.CanLogin)
-                {
-                    <span class="label label-success">Can Login</span>
-                }
-                else
-                {
-                    <span class="label label-warning">No Access</span>
-                }
-            </td>
-        </tr>
-
         <tr>
             <td>@Html.DisplayNameFor(model => model.Soldier.Unit)</td>
             <td>@Html.DisplayFor(model => model.Soldier.Unit)</td>
