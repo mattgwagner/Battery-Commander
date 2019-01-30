@@ -16,8 +16,16 @@
     <table class="table">
 
         <tr>
-            <td>@Html.DisplayNameFor(model => model.Soldier.CanLogin)</td>
-            <td>@Html.DisplayFor(model => model.Soldier.CanLogin)</td>
+            <td colspan="2">
+                @if(Model.Soldier.CanLogin)
+                {
+                    <span class="label label-success">Can Login</span>
+                }
+                else
+                {
+                    <span class="label label-warning">No Access</span>
+                }
+            </td>
         </tr>
 
         <tr>
