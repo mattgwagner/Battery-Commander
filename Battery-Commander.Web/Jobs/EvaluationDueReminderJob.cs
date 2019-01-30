@@ -48,7 +48,8 @@ namespace BatteryCommander.Web.Jobs
 
             emailSvc
                 .Create()
-                .To(recipients)
+                .BCC(recipients)
+                .To(emailAddress: "Evaluations@RedLeg.app")
                 .Subject("Past Due and Upcoming Evaluations")
                 .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/Reports/EvaluationsDue.cshtml", evaluations_due_soon)
                 .SendWithErrorCheck();
