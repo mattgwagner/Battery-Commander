@@ -47,13 +47,11 @@ namespace BatteryCommander.Web.Services
 
                     var middle = names.Count() > 2 ? names[2] : "";
 
-                    var p = sheet.Cells[row, 8];
+                    var ets = $"{sheet.Cells[row, 8].Value}" == "-" ? (DateTime?)null : Convert.ToDateTime(sheet.Cells[row, 8].Value);
 
-                    var ets = $"{sheet.Cells[row, 8]}" == "-" ? (DateTime?)null : Convert.ToDateTime(sheet.Cells[row, 8]);
+                    var dor = Convert.ToDateTime(sheet.Cells[row, 7].Value);
 
-                    var dor = Convert.ToDateTime(sheet.Cells[row, 7]);
-
-                    var gender = $"{sheet.Cells[row, 4]}" == "M" ? Gender.Male : Gender.Female;
+                    var gender = $"{sheet.Cells[row, 4].Value}" == "M" ? Gender.Male : Gender.Female;
 
                     var parsed = new Soldier
                     {
