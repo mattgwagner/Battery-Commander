@@ -140,12 +140,13 @@ namespace BatteryCommander.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Route("~/Soldiers/Import")]
         public IActionResult Import()
         {
             return View();
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [Route("~/Soldiers/Import"), HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Import(IFormFile file)
         {
             await DTMSService.ImportSoldiers(db, file.OpenReadStream());
