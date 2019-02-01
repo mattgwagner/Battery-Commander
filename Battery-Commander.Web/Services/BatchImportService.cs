@@ -85,7 +85,8 @@ namespace BatteryCommander.Web.Services
                     {
                         // Update existing entries
 
-                        existing.MiddleName = parsed.MiddleName;
+                        if (string.IsNullOrWhiteSpace(existing.MiddleName)) existing.MiddleName = parsed.MiddleName;
+
                         existing.DateOfRank = parsed.DateOfRank;
                         existing.Rank = parsed.Rank;
                     }
