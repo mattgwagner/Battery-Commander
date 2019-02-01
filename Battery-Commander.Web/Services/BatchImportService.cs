@@ -47,7 +47,11 @@ namespace BatteryCommander.Web.Services
 
                     var middle = names.Count() > 2 ? names[2] : "";
 
-                    var dor = $"{sheet.Cells[row, 8]}" == "-" ? (DateTime?)null : Convert.ToDateTime(sheet.Cells[row, 8]);
+                    var p = sheet.Cells[row, 8];
+
+                    var ets = $"{sheet.Cells[row, 8]}" == "-" ? (DateTime?)null : Convert.ToDateTime(sheet.Cells[row, 8]);
+
+                    var dor = Convert.ToDateTime(sheet.Cells[row, 7]);
 
                     var gender = $"{sheet.Cells[row, 4]}" == "M" ? Gender.Male : Gender.Female;
 
@@ -58,6 +62,7 @@ namespace BatteryCommander.Web.Services
                         FirstName = names[1],
                         Rank = RankExtensions.Parse($"{sheet.Cells[row, 2].Value}"),
                         DateOfBirth = Convert.ToDateTime(sheet.Cells[row, 6].Value),
+                        ETSDate = ets,
                         DateOfRank = dor,
                         Gender = gender,
                         Unit = unit
