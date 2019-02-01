@@ -149,7 +149,7 @@ namespace BatteryCommander.Web.Controllers
         [Route("~/Soldiers/Import"), HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Import(IFormFile file)
         {
-            await DTMSService.ImportSoldiers(db, file.OpenReadStream());
+            await BatchImportService.ImportSoldiers(db, file.OpenReadStream());
 
             return RedirectToAction(nameof(Index));
         }
