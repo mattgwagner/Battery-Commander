@@ -31,6 +31,7 @@ namespace BatteryCommander.Web.Services
                 {
                     var unit =
                         units
+                        .Where(u => !String.IsNullOrWhiteSpace(u.UIC))
                         .Where(u => u.UIC.Contains((String)sheet.Cells[row, 1].Value))
                         .SingleOrDefault();
 
