@@ -87,6 +87,8 @@ namespace BatteryCommander.Web.Services
 
                         if (string.IsNullOrWhiteSpace(existing.MiddleName)) existing.MiddleName = parsed.MiddleName;
 
+                        existing.ETSDate = parsed.ETSDate;
+                        existing.DateOfBirth = parsed.DateOfBirth;
                         existing.DateOfRank = parsed.DateOfRank;
                         existing.Rank = parsed.Rank;
                     }
