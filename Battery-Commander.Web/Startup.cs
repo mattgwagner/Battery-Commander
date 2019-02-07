@@ -133,7 +133,11 @@ namespace BatteryCommander.Web
                     //    ValidAudience = auth0Settings.ApiIdentifier
                     //};
                 })
-                .AddCookie(o => o.LoginPath = new PathString("/Home/Login"))
+                .AddCookie(o =>
+                {
+                    o.LoginPath = new PathString("/Home/Login");
+                    o.Cookie.SameSite = SameSiteMode.None;
+                })
                 .AddOpenIdConnect("Auth0", options =>
                 {
                     options.GetClaimsFromUserInfoEndpoint = true;
