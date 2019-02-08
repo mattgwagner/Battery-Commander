@@ -57,13 +57,14 @@ namespace BatteryCommander.Web
             Log.Logger =
                 new LoggerConfiguration()
                 .Enrich.FromLogContext()
+
                 .WriteTo.RollingFile(pathFormat: @"logs\{Date}.log")
                 .WriteTo.Email(new Serilog.Sinks.Email.EmailConnectionInfo
                 {
                     ToEmail = "Errors@RedLeg.app",
                     FromEmail = Email_Address,
                     SendGridClient = new SendGrid.SendGridClient(SendGridAPIKey),
-                    IsBodyHtml = true
+                    IsBodyHtml = true,
                 },
                 restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Warning,
                 outputTemplate: "{Username} {Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level}] {Message}{NewLine}{Exception}")
@@ -288,9 +289,16 @@ namespace BatteryCommander.Web
             app
                 .Use(async (context, next) =>
                 {
-                    // Enrich log entries with the logged in user, if available
+                    if(context.User.Identity.IsAuthenticated)
+                    {
+                        // Enrich log entries with the logged in user, if available
 
-                    using (LogContext.PushProperty("Username", UserService.Get_Email(context.User)))
+                        using (LogContext.PushProperty("Username", UserService.Get_Email(context.User)))
+                        {
+                            await next.Invoke();
+                        }
+                    }
+                    else
                     {
                         await next.Invoke();
                     }
