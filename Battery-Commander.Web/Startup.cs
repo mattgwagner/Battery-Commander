@@ -284,9 +284,8 @@ namespace BatteryCommander.Web
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", API_Name);
             });
 
-            app.UseAuthentication();
-
             app
+                .UseAuthentication()
                 .Use(async (context, next) =>
                 {
                     if(context.User.Identity.IsAuthenticated)
