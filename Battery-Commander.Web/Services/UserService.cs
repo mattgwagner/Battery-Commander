@@ -45,6 +45,7 @@ namespace BatteryCommander.Web.Services
             emailSvc
                 .Create()
                 .To("Access@RedLeg.app")
+                .ReplyTo(model.Email)
                 .Subject($"Access Request | {model.Name}")
                 .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/Home/RequestAccessEmail.cshtml", model)
                 .SendWithErrorCheck();
