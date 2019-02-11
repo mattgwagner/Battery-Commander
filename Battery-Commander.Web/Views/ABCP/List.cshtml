@@ -72,7 +72,12 @@
                             </ol>
                         }
                     </td>
-                    <td>@Html.DisplayFor(_ => soldier.LastAbcp.BodyFatPercentage)</td>
+                    <td>
+                        @if (soldier.LastAbcp.RequiresTape)
+                        {
+                            @Html.DisplayFor(_ => soldier.LastAbcp.BodyFatPercentage)
+                        }
+                    </td>
                 }
                 else
                 {
