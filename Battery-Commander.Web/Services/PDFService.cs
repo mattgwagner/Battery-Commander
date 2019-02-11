@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 
 namespace BatteryCommander.Web.Services
 {
@@ -80,7 +81,13 @@ namespace BatteryCommander.Web.Services
 
                 // Update the form fields as appropriate
 
-                form.SetField($"{prefix}.NAME[0]", $"{model.Soldier.LastName}, {model.Soldier.FirstName} {model.Soldier.MiddleName?.ToCharArray().FirstOrDefault()}");
+                var name = $"{model.Soldier.LastName}, {model.Soldier.FirstName} {model.Soldier.MiddleName?.ToCharArray().FirstOrDefault()}";
+
+                var name_encoded = Encoding.Default.GetBytes(name);
+
+                name = Encoding.ASCII.GetString(name_encoded).Replace('\0', ' ');
+
+                form.SetField($"{prefix}.NAME[0]", name);
                 form.SetField($"{prefix}.RANK[0]", $"{model.Soldier.Rank.ShortName()}");
 
                 form.SetField($"{prefix}.HEIGHT[0]", $"{model.Height}");
