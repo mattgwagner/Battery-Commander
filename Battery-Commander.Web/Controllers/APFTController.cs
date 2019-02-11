@@ -59,6 +59,8 @@ namespace BatteryCommander.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
+                ViewBag.Soldiers = await SoldiersController.GetDropDownList(db);
+
                 return View("Edit", model);
             }
 
