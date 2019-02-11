@@ -31,6 +31,7 @@
             <th>Height</th>
             <th>Weight</th>
             <th>Measurements</th>
+            <th>BF %</th>
             <th></th>
             <th></th>
         </tr>
@@ -71,9 +72,11 @@
                             </ol>
                         }
                     </td>
+                    <td>@Html.DisplayFor(_ => soldier.LastAbcp.BodyFatPercentage)</td>
                 }
                 else
                 {
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
