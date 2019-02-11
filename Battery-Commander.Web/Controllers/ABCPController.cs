@@ -86,6 +86,11 @@ namespace BatteryCommander.Web.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Save(ABCP model)
         {
+            if(!ModelState.IsValid)
+            {
+                return View("Edit", model);
+            }
+
             if (await db.ABCPs.AnyAsync(abcp => abcp.Id == model.Id) == false)
             {
                 db.ABCPs.Add(model);
