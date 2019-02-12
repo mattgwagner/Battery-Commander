@@ -1,4 +1,5 @@
 ﻿using BatteryCommander.Web.Models;
+using BatteryCommander.Web.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -36,7 +37,7 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> New()
         {
-            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, includeIgnoredUnits: true);
+            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, SoldierService.Query.ALL);
             ViewBag.Units = await UnitsController.GetDropDownList(db);
 
             return View(nameof(Edit), new Weapon { });
@@ -44,7 +45,7 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, includeIgnoredUnits: true);
+            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, SoldierService.Query.ALL);
             ViewBag.Units = await UnitsController.GetDropDownList(db);
 
             var model =

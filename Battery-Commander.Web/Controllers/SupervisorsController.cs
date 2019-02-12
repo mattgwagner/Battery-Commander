@@ -28,7 +28,7 @@ namespace BatteryCommander.Web.Controllers
         {
             return View("List", new SupervisorListModel
             {
-                Soldiers = await SoldiersController.GetDropDownList(db, includeIgnoredUnits: true),
+                Soldiers = await SoldiersController.GetDropDownList(db, SoldierService.Query.ALL),
 
                 Rows =
                     (await SoldierService.Filter(db, query))

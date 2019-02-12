@@ -42,14 +42,14 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> New(int soldier = 0)
         {
-            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db);
+            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, SoldierService.Query.ALL);
 
             return View(nameof(Edit), new APFT { SoldierId = soldier });
         }
 
         public async Task<IActionResult> Edit(int id)
         {
-            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db);
+            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, SoldierService.Query.ALL);
 
             return View(await Get(db, id));
         }
@@ -59,7 +59,7 @@ namespace BatteryCommander.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.Soldiers = await SoldiersController.GetDropDownList(db);
+                ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, SoldierService.Query.ALL);
 
                 return View("Edit", model);
             }
