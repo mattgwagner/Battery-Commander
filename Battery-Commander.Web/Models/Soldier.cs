@@ -97,6 +97,8 @@ namespace BatteryCommander.Web.Models
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
+            if (UnitId < 1) yield return new ValidationResult("Must select a unit", new[] { nameof(Unit) });
+            if (String.IsNullOrWhiteSpace(FirstName)) yield return new ValidationResult("Must enter a FirstName (? is OK)", new[] { nameof(FirstName) });
             if (DateOfBirth > DateTime.Today.AddYears(-17)) yield return new ValidationResult("DateOfBirth doesn't seem right", new[] { nameof(DateOfBirth) });
         }
 

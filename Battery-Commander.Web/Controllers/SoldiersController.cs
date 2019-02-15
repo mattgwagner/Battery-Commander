@@ -93,9 +93,8 @@ namespace BatteryCommander.Web.Controllers
         [Route("~/Soldiers"), HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Save(Soldier model, Boolean force = false)
         {
-            if (model.UnitId < 1)
+            if (!ModelState.IsValid)
             {
-                ModelState.AddModelError(nameof(model.Unit), "Must select a unit");
                 return await Return_To_Edit(model);
             }
 
