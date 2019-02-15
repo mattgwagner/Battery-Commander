@@ -86,36 +86,30 @@ namespace BatteryCommander.Web.Controllers
         }
 
         [Route("~/Soldiers/New", Name = "Soldiers.New")]
-        public async Task<IActionResult> New()
-        {
-            ViewBag.Units = await UnitsController.GetDropDownList(db);
-            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, SoldierService.Query.ALL);
+        public async Task<IActionResult> New() => await Return_To_Edit(new Soldier { });
 
-            return View("Edit", new Soldier { });
-        }
-
-        public async Task<IActionResult> Edit(int id)
-        {
-            ViewBag.Units = await UnitsController.GetDropDownList(db);
-            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, SoldierService.Query.ALL);
-
-            return View(await Get(db, id));
-        }
+        public async Task<IActionResult> Edit(int id) => await Return_To_Edit(await Get(db, id));
 
         [Route("~/Soldiers"), HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> Save(Soldier model)
+        public async Task<IActionResult> Save(Soldier model, Boolean force = false)
         {
             if (model.UnitId < 1)
             {
-                ViewBag.Units = await UnitsController.GetDropDownList(db);
-                ViewBag.Soldiers = await SoldiersController.GetDropDownList(db);
-
                 ModelState.AddModelError(nameof(model.Unit), "Must select a unit");
-                return View("Edit", model);
+                return await Return_To_Edit(model);
             }
 
             if (await db.Soldiers.AnyAsync(soldier => soldier.Id == model.Id) == false)
             {
+                if (!force)
+                {
+                    if (await db.Soldiers.AnyAsync(soldier => soldier.FirstName == model.FirstName && soldier.LastName == model.LastName))
+                    {
+                        ModelState.AddModelError("", "Potential duplicate Soldier being added, go to Soldiers->View All first");
+                        return await Return_To_Edit(model);
+                    }
+                }
+
                 db.Soldiers.Add(model);
             }
             else
@@ -188,6 +182,14 @@ namespace BatteryCommander.Web.Controllers
         public static async Task<IEnumerable<SelectListItem>> GetDropDownList(Database db, Boolean includeIgnoredUnits = true)
         {
             return await GetDropDownList(db, SoldierService.Query.ALL);
+        }
+
+        private async Task<IActionResult> Return_To_Edit(Soldier soldier)
+        {
+            ViewBag.Units = await UnitsController.GetDropDownList(db);
+            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db);
+
+            return View("Edit", soldier);
         }
     }
 }
