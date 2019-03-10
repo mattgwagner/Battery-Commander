@@ -12,7 +12,7 @@ namespace BatteryCommander.Web.Models
         /// <summary>
         /// After this period of time, incomplete evaluations are considered delinquent
         /// </summary>
-        public static TimeSpan DelinquentAfter => TimeSpan.FromDays(-60);
+        public static TimeSpan DelinquentAfter => TimeSpan.FromDays(-90);
 
         /// <summary>
         /// List of statuses that represent completed evaluations
