@@ -165,12 +165,24 @@ namespace BatteryCommander.Web.Models
         At_Reviewer = 15,
 
         [Display(Name = "Pending 1SG/Admin Review")]
-        Pending_Internal_Review = 20,
+        At_1SG_Review = 20,
 
         [Display(Name = "Ready for Signatures")]
         Ready_for_Signatures = 30,
 
-        [Display(Name = "Pending S1 Review")]
+        [Display(Name = "Ready for Rater Signature")]
+        Pending_Rater_Signature = 31,
+
+        [Display(Name = "Ready for Senior Rater Signature")]
+        Pending_Senior_Rater_Signature = 32,
+
+        [Display(Name = "Ready for Soldier Signature")]
+        Pending_SM_Signature = 33,
+
+        [Display(Name = "Ready for Reviewer Signature")]
+        Pending_Reviewer_Signature = 34,
+
+        [Obsolete, Display(Name = "Pending S1 Review")]
         Pending_S1_Review = 80,
 
         [Display(Name = "Pending HQDA Submission")]

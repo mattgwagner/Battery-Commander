@@ -84,14 +84,20 @@ namespace BatteryCommander.Web.Models
             [Display(Name = "Admin/1SG Review Completed")]
             Internal_Review_Completed,
 
+            [Display(Name = "Rater Signature Completed")]
+            Rater_Signed,
+
+            [Display(Name = "Senior Rater Signature Completed")]
+            Senior_Rater_Signed,
+
+            [Display(Name = "Rated Solider Signature Completed")]
+            Soldier_Signed,
+
+            [Display(Name = "Reviewer Signature Completed")]
+            Reviewer_Signed,
+
             [Display(Name = "Signatures Completed")]
             Signed,
-
-            [Display(Name = "Sent to S1 for Review")]
-            Sent_To_S1,
-
-            [Display(Name = "S1 Review Completed")]
-            S1_Review_Completed,
 
             [Display(Name = "Submitted to HQDA")]
             Submitted_to_Hqda,
@@ -116,27 +122,33 @@ namespace BatteryCommander.Web.Models
                 machine.Configure(EvaluationStatus.At_Senior_Rater)
                     .Permit(Trigger.Return_to_Rater, EvaluationStatus.At_Rater)
                     .PermitIf(Trigger.Senior_Rater_Completed, EvaluationStatus.At_Reviewer, () => ReviewerId.HasValue)
-                    .PermitIf(Trigger.Senior_Rater_Completed, EvaluationStatus.Pending_Internal_Review, () => !ReviewerId.HasValue);
+                    .PermitIf(Trigger.Senior_Rater_Completed, EvaluationStatus.At_1SG_Review, () => !ReviewerId.HasValue);
 
                 machine.Configure(EvaluationStatus.At_Reviewer)
-                    .Permit(Trigger.Reviewer_Completed, EvaluationStatus.Pending_Internal_Review)
+                    .Permit(Trigger.Reviewer_Completed, EvaluationStatus.At_1SG_Review)
                     .Permit(Trigger.Return_to_Rater, EvaluationStatus.At_Rater);
 
-                machine.Configure(EvaluationStatus.Pending_Internal_Review)
+                machine.Configure(EvaluationStatus.At_1SG_Review)
                     .Permit(Trigger.Return_to_Rater, EvaluationStatus.At_Rater)
                     .Permit(Trigger.Internal_Review_Completed, EvaluationStatus.Ready_for_Signatures);
 
                 machine.Configure(EvaluationStatus.Ready_for_Signatures)
                     .Permit(Trigger.Return_to_Rater, EvaluationStatus.At_Rater)
-                    .Permit(Trigger.Signed, EvaluationStatus.Pending_HQDA_Submission);
+                    .Permit(Trigger.Rater_Signed, EvaluationStatus.Pending_Senior_Rater_Signature);
 
-                //machine.Configure(EvaluationStatus.Pending_S1_Review)
-                //.Permit(Trigger.Return_to_Rater, EvaluationStatus.At_Rater)
-                //.Permit(Trigger.S1_Review_Completed, EvaluationStatus.Pending_HQDA_Submission);
+                machine.Configure(EvaluationStatus.Pending_Senior_Rater_Signature)
+                    .PermitIf(Trigger.Senior_Rater_Signed, EvaluationStatus.Pending_SM_Signature);
+
+                machine.Configure(EvaluationStatus.Pending_SM_Signature)
+                    .PermitIf(Trigger.Soldier_Signed, EvaluationStatus.Pending_Reviewer_Signature, () => ReviewerId.HasValue)
+                    .PermitIf(Trigger.Soldier_Signed, EvaluationStatus.Pending_HQDA_Submission, () => !ReviewerId.HasValue);
+
+                machine.Configure(EvaluationStatus.Pending_Reviewer_Signature)
+                    .PermitIf(Trigger.Reviewer_Signed, EvaluationStatus.Pending_HQDA_Submission);
 
                 machine.Configure(EvaluationStatus.Pending_HQDA_Submission)
-                    .Permit(Trigger.Return_to_Rater, EvaluationStatus.At_Rater)
-                    .Permit(Trigger.Submitted_to_Hqda, EvaluationStatus.Submitted_to_HQDA);
+                    .Permit(Trigger.Submitted_to_Hqda, EvaluationStatus.Submitted_to_HQDA)
+                    .Permit(Trigger.Accepted_to_iPerms, EvaluationStatus.Accepted_to_iPerms);
 
                 machine.Configure(EvaluationStatus.Submitted_to_HQDA)
                     .Permit(Trigger.Return_to_Rater, EvaluationStatus.At_Rater)
