@@ -29,30 +29,37 @@ namespace BatteryCommander.Web.Jobs
 
             Log.Information("Building Evaluations Due email for evals due before {soon}", soon);
 
-            var evaluations_due_soon =
-                EvaluationService.Filter(db, new EvaluationService.Query { Complete = false })
-                .Where(evaluation => evaluation.ThruDate < soon)
-                .OrderBy(evaluation => evaluation.ThruDate)
-                .ToList();
-
-            var recipients = SoldierService.Filter(db, new SoldierService.Query
+            foreach (var unit in UnitService.List(db).GetAwaiter().GetResult())
             {
-                Ranks = new[] { Rank.E5, Rank.E6, Rank.E7, Rank.E8, Rank.O1, Rank.O2, Rank.O3, Rank.O4, Rank.O5, Rank.O6 }
-            })
-            .GetAwaiter()
-            .GetResult()
-            .Where(soldier => soldier.CanLogin)
-            .Select(soldier => soldier.GetEmails())
-            .SelectMany(email => email)
-            .ToList();
+                var evaluations_due_soon =
+                    EvaluationService.Filter(db, new EvaluationService.Query { Complete = false, Unit = unit.Id })
+                    .Where(evaluation => evaluation.ThruDate < soon)
+                    .OrderBy(evaluation => evaluation.ThruDate)
+                    .ToList();
 
-            emailSvc
-                .Create()
-                .BCC(recipients)
-                .To(emailAddress: "Evaluations@RedLeg.app")
-                .Subject("Past Due and Upcoming Evaluations")
-                .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/Reports/EvaluationsDue.cshtml", evaluations_due_soon)
-                .SendWithErrorCheck();
+                if (evaluations_due_soon.Any())
+                {
+                    var recipients = SoldierService.Filter(db, new SoldierService.Query
+                    {
+                        Unit = unit.Id,
+                        Ranks = new[] { Rank.E5, Rank.E6, Rank.E7, Rank.E8, Rank.O1, Rank.O2, Rank.O3, Rank.O4, Rank.O5, Rank.O6 }
+                    })
+                    .GetAwaiter()
+                    .GetResult()
+                    .Where(soldier => soldier.CanLogin)
+                    .Select(soldier => soldier.GetEmails())
+                    .SelectMany(email => email)
+                    .ToList();
+
+                    emailSvc
+                        .Create()
+                        .BCC(recipients)
+                        .To(emailAddress: "Evaluations@RedLeg.app")
+                        .Subject($"{unit.UIC} | Past Due and Upcoming Evaluations")
+                        .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/Reports/EvaluationsDue.cshtml", evaluations_due_soon)
+                        .SendWithErrorCheck();
+                }
+            }
         }
     }
 }
