@@ -42,7 +42,7 @@ namespace BatteryCommander.Web.Controllers
             return View("List", new EvaluationListViewModel
             {
                 Evaluations = EvaluationService.Filter(db, new EvaluationService.Query { }),
-                Soldiers = await SoldierService.Filter(db, new SoldierService.Query { Ranks = RankExtensions.All().Where(_ => _.GetsEvaluation()) })
+                Soldiers = Enumerable.Empty<Soldier>()
             });
         }
 
