@@ -44,11 +44,11 @@ namespace BatteryCommander.Web.Controllers
         }
 
         [AllowAnonymous]
-        public IActionResult Login()
+        public async Task Login(String ReturnUrl)
         {
-            return new ChallengeResult("Auth0", new AuthenticationProperties
+            await HttpContext.ChallengeAsync("Auth0", new AuthenticationProperties
             {
-                RedirectUri = Url.Action(nameof(PrivacyAct))
+                RedirectUri = String.IsNullOrWhiteSpace(ReturnUrl) ? Url.Action(nameof(PrivacyAct)) : ReturnUrl
             });
         }
 
