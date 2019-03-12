@@ -54,11 +54,17 @@ namespace BatteryCommander.Web
                 .GetSection("SendGrid")
                 .GetValue<String>("ApiKey");
 
+            var logglyConfig =
+                Configuration
+                .GetSection("Loggly")
+                .Get<Serilog.Sinks.Loggly.LogglyConfiguration>();
+
             Log.Logger =
                 new LoggerConfiguration()
                 .Enrich.FromLogContext()
 
                 .WriteTo.RollingFile(pathFormat: @"logs\{Date}.log")
+                .WriteTo.Loggly(restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Debug, logglyConfig: logglyConfig)
                 .WriteTo.Email(new Serilog.Sinks.Email.EmailConnectionInfo
                 {
                     ToEmail = "Errors@RedLeg.app",
@@ -287,7 +293,7 @@ namespace BatteryCommander.Web
                 .UseAuthentication()
                 .Use(async (context, next) =>
                 {
-                    if(context.User.Identity.IsAuthenticated)
+                    if (context.User.Identity.IsAuthenticated)
                     {
                         // Enrich log entries with the logged in user, if available
 
