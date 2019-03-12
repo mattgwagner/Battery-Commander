@@ -68,6 +68,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.3" PrivateAssets="All" />
     <PackageReference Include="Serilog.Extensions.Logging.File" Version="1.1.0" />
+    <PackageReference Include="Serilog.Sinks.Loggly" Version="5.3.0" />
     <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
     <PackageReference Include="Serilog.Sinks.SendGridEmail" Version="2.0.0" />
     <PackageReference Include="Stateless" Version="4.2.1" />
