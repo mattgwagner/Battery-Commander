@@ -35,12 +35,7 @@ namespace BatteryCommander.Web.Services
 
             var soldiers = await SoldierService.Filter(db, new SoldierService.Query { Unit = unitId });
 
-            var evaluations =
-                await db
-                .Evaluations
-                .Include(evaluation => evaluation.Ratee)
-                .Where(evaluation => !evaluation.IsCompleted)
-                .ToListAsync();
+            var evaluations = EvaluationService.Filter(db, new EvaluationService.Query { Unit = unitId });
 
             // Build model
 
