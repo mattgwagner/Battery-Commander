@@ -103,7 +103,6 @@ namespace BatteryCommander.Web
                         .AllowAnyHeader()
                         .AllowAnyMethod()
                         .AllowAnyOrigin()
-                        .AllowCredentials()
                         .Build()
                     );
             });
