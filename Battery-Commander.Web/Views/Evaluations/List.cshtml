@@ -4,100 +4,129 @@
     ViewBag.Title = "Evaluations Tracker";
 }
 
-<div class="page-header">
-    <h1>@ViewBag.Title</h1>
-    <h4>
-        <small>
-            @Html.DisplayNameFor(_ => Model.Delinquent): <span class="badge">@Model.Delinquent</span>
-            @Html.DisplayNameFor(_ => Model.Due): <span class="badge">@Model.Due</span>
-            @Html.DisplayNameFor(_ => Model.Next30): <span class="badge">@Model.Next30</span>
-            @Html.DisplayNameFor(_ => Model.Next60): <span class="badge">@Model.Next60</span>
-            @Html.DisplayNameFor(_ => Model.Next90): <span class="badge">@Model.Next90</span>
-        </small>
-    </h4>
-</div>
+<div id="evaluations-list">
+    <div class="page-header">
+        <h1>@ViewBag.Title</h1>
+        <h4>
+            <small>
+                @Html.DisplayNameFor(_ => Model.Delinquent): <span class="badge">@Model.Delinquent</span>
+                @Html.DisplayNameFor(_ => Model.Due): <span class="badge">@Model.Due</span>
+                @Html.DisplayNameFor(_ => Model.Next30): <span class="badge">@Model.Next30</span>
+                @Html.DisplayNameFor(_ => Model.Next60): <span class="badge">@Model.Next60</span>
+                @Html.DisplayNameFor(_ => Model.Next90): <span class="badge">@Model.Next90</span>
+            </small>
+        </h4>
 
-<div class="btn-group">
-    @Html.ActionLink("Add New", "New", "Evaluations", null, new { @class = "btn btn-default" })
-    @Html.ActionLink("Show All", "All", "Evaluations", null, new { @class = "btn btn-default" })
-</div>
+        <div class="btn-group">
+            <select data-bind="value: selected_unit, options: units, optionsText: 'name', optionsValue: 'id', optionsCaption: '-- Filter by Unit --', event: { change: unit_changed }"></select>
+        </div>
 
-@if (Model.Soldiers_Missing_Evaluations.Any())
-{
-    <div class="alert alert-danger">
-        The following Soldiers do not have an upcoming evaluation in the system! Please add one to the system for tracking.
-
-        <ul>
-            @foreach (var soldier in Model.Soldiers_Missing_Evaluations)
-            {
-                <li>@Html.ActionLink(soldier.ToString(), "New", "Evaluations", new { soldier = soldier.Id })</li>
-            }
-        </ul>
+        <div class="btn-group">
+            @Html.ActionLink("Add New", "New", "Evaluations", null, new { @class = "btn btn-default" })
+            @Html.ActionLink("Show All", "All", "Evaluations", null, new { @class = "btn btn-default" })
+        </div>
     </div>
-}
 
-<div class="alert alert-warning">
-    Raters and Senior Raters highlighted do not match the currently assigned @Html.ActionLink("Supervisor", "Index", "Supervisors") for the Soldier.
+    @if (Model.Soldiers_Missing_Evaluations.Any())
+    {
+        <div class="alert alert-danger">
+            The following Soldiers do not have an upcoming evaluation in the system! Please add one to the system for tracking.
+
+            <ul>
+                @foreach (var soldier in Model.Soldiers_Missing_Evaluations)
+                {
+                    <li>@Html.ActionLink(soldier.ToString(), "New", "Evaluations", new { soldier = soldier.Id })</li>
+                }
+            </ul>
+        </div>
+    }
+
+    <div class="alert alert-warning">
+        Raters and Senior Raters highlighted do not match the currently assigned @Html.ActionLink("Supervisor", "Index", "Supervisors") for the Soldier.
+    </div>
+
+    <table class="table table-striped display nowrap" id="dt" width="100%">
+        <thead>
+            <tr>
+                <th>Details</th>
+                <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Ratee.Rank)</th>
+                <th data-priority="1">@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Ratee.LastName)</th>
+                <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Ratee.FirstName)</th>
+                <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().ThruDate)</th>
+                <th data-priority="3">@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Status)</th>
+                <th data-priority="2">@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Delinquency)</th>
+                <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().LastUpdated)</th>
+                <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Type)</th>
+                <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Rater)</th>
+                <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().SeniorRater)</th>
+                <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Reviewer)</th>
+                <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().EvaluationId)</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var evaluation in Model.Evaluations)
+            {
+                <tr class="@(evaluation.IsDelinquent ? "alert alert-danger" : "")">
+                    <td>@Html.ActionLink("Details", "Details", new { evaluation.Id })</td>
+                    <td>@evaluation.Ratee.Rank.ShortName()</td>
+                    <td>@Html.RouteLink(evaluation.Ratee.LastName, "Soldier.Details", new { evaluation.Ratee.Id })</td>
+                    <td>@Html.RouteLink(evaluation.Ratee.FirstName, "Soldier.Details", new { evaluation.Ratee.Id })</td>
+                    <td>@Html.DisplayFor(_ => evaluation.ThruDate)</td>
+                    <td>@evaluation.Status.DisplayName()</td>
+                    <td data-sort="@evaluation.Delinquency.TotalDays" data-toggle="tooltip" title="@evaluation.LastEvent">
+                        @if (evaluation.Delinquency > TimeSpan.Zero)
+                        {
+                            <span class="label label-default">Due in @Html.DisplayFor(_ => evaluation.DelinquencyHumanized)</span>
+                        }
+                        else if (evaluation.IsCompleted)
+                        {
+                            <span class="label label-success">Completed</span>
+                        }
+                        else
+                        {
+                            <span class="label label-danger">Overdue @Html.DisplayFor(_ => evaluation.DelinquencyHumanized)</span>
+                        }
+                    </td>
+                    <td data-sort="@evaluation.LastUpdated?.UtcTicks" data-toggle="tooltip" title="@evaluation.LastEvent">
+                        @Html.DisplayFor(_ => evaluation.LastUpdatedHumanized)
+                    </td>
+                    <td>@Html.DisplayFor(_ => evaluation.Type)</td>
+                    <td class="@(evaluation.Ratee.SupervisorId != evaluation.RaterId ? "warning" : "")">
+                        @Html.DisplayFor(_ => evaluation.Rater)
+                    </td>
+                    <td class="@(evaluation.Rater.SupervisorId != evaluation.SeniorRaterId ? "warning" : "")">
+                        @Html.DisplayFor(_ => evaluation.SeniorRater)
+                    </td>
+                    <td>@Html.DisplayFor(_ => evaluation.Reviewer)</td>
+                    <td>@Html.DisplayFor(_ => evaluation.EvaluationId)</td>
+                    <td></td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
 
-<table class="table table-striped display nowrap" id="dt" width="100%">
-    <thead>
-        <tr>
-            <th>Details</th>
-            <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Ratee.Rank)</th>
-            <th data-priority="1">@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Ratee.LastName)</th>
-            <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Ratee.FirstName)</th>
-            <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().ThruDate)</th>
-            <th data-priority="3">@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Status)</th>
-            <th data-priority="2">@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Delinquency)</th>
-            <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().LastUpdated)</th>
-            <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Type)</th>
-            <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Rater)</th>
-            <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().SeniorRater)</th>
-            <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Reviewer)</th>
-            <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().EvaluationId)</th>
-            <th></th>
-        </tr>
-    </thead>
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
 
-    <tbody>
-        @foreach (var evaluation in Model.Evaluations)
-        {
-            <tr class="@(evaluation.IsDelinquent ? "alert alert-danger" : "")">
-                <td>@Html.ActionLink("Details", "Details", new { evaluation.Id })</td>
-                <td>@evaluation.Ratee.Rank.ShortName()</td>
-                <td>@Html.RouteLink(evaluation.Ratee.LastName, "Soldier.Details", new { evaluation.Ratee.Id })</td>
-                <td>@Html.RouteLink(evaluation.Ratee.FirstName, "Soldier.Details", new { evaluation.Ratee.Id })</td>
-                <td>@Html.DisplayFor(_ => evaluation.ThruDate)</td>
-                <td>@evaluation.Status.DisplayName()</td>
-                <td data-sort="@evaluation.Delinquency.TotalDays" data-toggle="tooltip" title="@evaluation.LastEvent">
-                    @if (evaluation.Delinquency > TimeSpan.Zero)
-                    {
-                        <span class="label label-default">Due in @Html.DisplayFor(_ => evaluation.DelinquencyHumanized)</span>
-                    }
-                    else if (evaluation.IsCompleted)
-                    {
-                        <span class="label label-success">Completed</span>
-                    }
-                    else
-                    {
-                        <span class="label label-danger">Overdue @Html.DisplayFor(_ => evaluation.DelinquencyHumanized)</span>
-                    }
-                </td>
-                <td data-sort="@evaluation.LastUpdated?.UtcTicks" data-toggle="tooltip" title="@evaluation.LastEvent">
-                    @Html.DisplayFor(_ => evaluation.LastUpdatedHumanized)
-                </td>
-                <td>@Html.DisplayFor(_ => evaluation.Type)</td>
-                <td class="@(evaluation.Ratee.SupervisorId != evaluation.RaterId ? "warning" : "")">
-                    @Html.DisplayFor(_ => evaluation.Rater)
-                </td>
-                <td class="@(evaluation.Rater.SupervisorId != evaluation.SeniorRaterId ? "warning" : "")">
-                    @Html.DisplayFor(_ => evaluation.SeniorRater)
-                </td>
-                <td>@Html.DisplayFor(_ => evaluation.Reviewer)</td>
-                <td>@Html.DisplayFor(_ => evaluation.EvaluationId)</td>
-                <td></td>
-            </tr>
-        }
-    </tbody>
-</table>
+            var viewModel = {
+                selected_unit: ko.observable(@ViewBag.UnitId),
+
+                units: ko.observableArray(),
+
+                unit_changed: function (view) {
+                    window.location = '/Units/' + wiew.selected_unit() + '/Evaluations';
+                }
+            };
+
+            $.get('/api/units', function (result) {
+                viewModel.units(result);
+            });
+
+            ko.applyBindings(viewModel, document.getElementById('evaluations-list'));
+        });
+    </script>
+}

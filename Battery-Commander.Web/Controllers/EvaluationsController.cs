@@ -29,6 +29,8 @@ namespace BatteryCommander.Web.Controllers
         [Route("~/Units/{unitId}/Evaluations")]
         public async Task<IActionResult> Index(int unitId)
         {
+            ViewBag.UnitId = unitId;
+
             return View("List", new EvaluationListViewModel
             {
                 Evaluations = EvaluationService.Filter(db, new EvaluationService.Query { Unit = unitId, Complete = false }),
