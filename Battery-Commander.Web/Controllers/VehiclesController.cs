@@ -60,33 +60,33 @@ namespace BatteryCommander.Web.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Save(Vehicle model, IEnumerable<int> passengers)
         {
+            Func<Task<IActionResult>> Return_To_View = async () =>
+            {
+                ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, includeIgnoredUnits: false);
+                ViewBag.Units = await UnitsController.GetDropDownList(db);
+
+                ModelState.AddModelError(nameof(model.Bumper), "Vehicle exists for this unit and bumper, please check 'View All'");
+                return View("Edit", model);
+            };
+
             if (await db.Vehicles.AnyAsync(vehicles => vehicles.Id == model.Id) == false)
             {
                 if (await db.Vehicles.AnyAsync(vehicle => vehicle.UnitId == model.UnitId && vehicle.Bumper == model.Bumper))
                 {
-                    ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, includeIgnoredUnits: false);
-                    ViewBag.Units = await UnitsController.GetDropDownList(db);
-
                     ModelState.AddModelError(nameof(model.Bumper), "Vehicle exists for this unit and bumper, please check 'View All'");
-                    return View("Edit", model);
+                    return await Return_To_View();
                 }
 
-                if(!String.IsNullOrWhiteSpace(model.Serial) && await db.Vehicles.AnyAsync(vehicle => vehicle.Serial == model.Serial))
+                if (!String.IsNullOrWhiteSpace(model.Serial) && await db.Vehicles.AnyAsync(vehicle => vehicle.Serial == model.Serial))
                 {
-                    ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, includeIgnoredUnits: false);
-                    ViewBag.Units = await UnitsController.GetDropDownList(db);
-
                     ModelState.AddModelError(nameof(model.Serial), "Duplicate vehicle serial found, please check 'View All'");
-                    return View("Edit", model);
+                    return await Return_To_View();
                 }
 
                 if (!String.IsNullOrWhiteSpace(model.Registration) && await db.Vehicles.AnyAsync(vehicle => vehicle.Registration == model.Registration))
                 {
-                    ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, includeIgnoredUnits: false);
-                    ViewBag.Units = await UnitsController.GetDropDownList(db);
-
                     ModelState.AddModelError(nameof(model.Registration), "Duplicate vehicle registration found, please check 'View All'");
-                    return View("Edit", model);
+                    return await Return_To_View();
                 }
 
                 db.Vehicles.Add(model);
