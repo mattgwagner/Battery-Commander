@@ -62,7 +62,7 @@ namespace BatteryCommander.Web.Controllers
         {
             Func<Task<IActionResult>> Return_To_View = async () =>
             {
-                ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, includeIgnoredUnits: false);
+                ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, SoldierService.Query.ALL);
                 ViewBag.Units = await UnitsController.GetDropDownList(db);
 
                 ModelState.AddModelError(nameof(model.Bumper), "Vehicle exists for this unit and bumper, please check 'View All'");
