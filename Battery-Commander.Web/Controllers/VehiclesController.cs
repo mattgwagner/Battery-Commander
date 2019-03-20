@@ -67,7 +67,25 @@ namespace BatteryCommander.Web.Controllers
                     ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, includeIgnoredUnits: false);
                     ViewBag.Units = await UnitsController.GetDropDownList(db);
 
-                    ModelState.AddModelError(nameof(model.Bumper), "Vehicle exists for this unit and bumper");
+                    ModelState.AddModelError(nameof(model.Bumper), "Vehicle exists for this unit and bumper, please check 'View All'");
+                    return View("Edit", model);
+                }
+
+                if(!String.IsNullOrWhiteSpace(model.Serial) && await db.Vehicles.AnyAsync(vehicle => vehicle.Serial == model.Serial))
+                {
+                    ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, includeIgnoredUnits: false);
+                    ViewBag.Units = await UnitsController.GetDropDownList(db);
+
+                    ModelState.AddModelError(nameof(model.Serial), "Duplicate vehicle serial found, please check 'View All'");
+                    return View("Edit", model);
+                }
+
+                if (!String.IsNullOrWhiteSpace(model.Registration) && await db.Vehicles.AnyAsync(vehicle => vehicle.Registration == model.Registration))
+                {
+                    ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, includeIgnoredUnits: false);
+                    ViewBag.Units = await UnitsController.GetDropDownList(db);
+
+                    ModelState.AddModelError(nameof(model.Registration), "Duplicate vehicle registration found, please check 'View All'");
                     return View("Edit", model);
                 }
 
