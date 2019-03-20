@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace BatteryCommander.Web.Models
 {
-    public class Database : DbContext
+    public class Database : DbContext, IDataProtectionKeyContext
     {
         public virtual DbSet<Soldier> Soldiers { get; set; }
 
@@ -19,6 +20,8 @@ namespace BatteryCommander.Web.Models
         public virtual DbSet<Weapon> Weapons { get; set; }
 
         public virtual DbSet<Embed> Embeds { get; set; }
+
+        public virtual DbSet<DataProtectionKey> DataProtectionKeys { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {

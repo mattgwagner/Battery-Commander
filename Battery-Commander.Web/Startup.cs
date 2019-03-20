@@ -5,6 +5,7 @@ using BatteryCommander.Web.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -228,6 +229,10 @@ namespace BatteryCommander.Web
                         }
                     };
                 });
+
+            services
+                .AddDataProtection()
+                .PersistKeysToDbContext<Database>();
 
             // Add framework services.
             services.AddMvc(options =>
