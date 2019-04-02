@@ -52,6 +52,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.3" />
     <PackageReference Include="epplus.core" Version="1.5.4" />
     <PackageReference Include="FluentEmail.Razor" Version="2.5.0" />
     <PackageReference Include="FluentEmail.SendGrid" Version="2.5.0" />
@@ -59,15 +61,7 @@
     <PackageReference Include="Humanizer.Core" Version="2.5.16" />
     <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.4.5" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.6.1" />
-    <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.DataProtection.EntityFrameworkCore" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="2.2.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.3" PrivateAssets="All" />
     <PackageReference Include="Serilog.Extensions.Logging.File" Version="1.1.0" />
     <PackageReference Include="Serilog.Sinks.Loggly" Version="5.3.0" />
     <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
