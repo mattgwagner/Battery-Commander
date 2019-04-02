@@ -230,6 +230,9 @@ namespace BatteryCommander.Web
                     };
                 });
 
+            services.ConfigureApplicationCookie(options => options.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.None);
+            services.ConfigureExternalCookie(options => options.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.None);
+
             services
                 .AddDataProtection()
                 .PersistKeysToDbContext<Database>();
