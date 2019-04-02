@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
     <AssemblyName>BatteryCommander.Web</AssemblyName>
     <RootNamespace>BatteryCommander.Web</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup>
-    <DocumentationFile>bin\$(Configuration)\netcoreapp2.0\BatteryCommander.Web.xml</DocumentationFile>
+    <DocumentationFile>bin\$(Configuration)\netcoreapp2.2\BatteryCommander.Web.xml</DocumentationFile>
     <ApplicationInsightsResourceId>/subscriptions/a9421f6a-e5c1-4c30-baf7-a483e4f301c2/resourcegroups/primary/providers/microsoft.insights/components/Battery-Commander</ApplicationInsightsResourceId>
     <ApplicationInsightsAnnotationResourceId>/subscriptions/a9421f6a-e5c1-4c30-baf7-a483e4f301c2/resourcegroups/primary/providers/microsoft.insights/components/Battery-Commander</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
