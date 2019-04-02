@@ -63,9 +63,10 @@ namespace BatteryCommander.Web
             Log.Logger =
                 new LoggerConfiguration()
                 .Enrich.FromLogContext()
-
                 .WriteTo.RollingFile(pathFormat: @"logs\{Date}.log")
+#if !DEBUG
                 .WriteTo.Loggly(restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Debug, logglyConfig: logglyConfig)
+#endif
                 .WriteTo.Email(new Serilog.Sinks.Email.EmailConnectionInfo
                 {
                     ToEmail = "Errors@RedLeg.app",
@@ -275,14 +276,7 @@ namespace BatteryCommander.Web
             loggerFactory.AddSerilog();
             loggerFactory.AddDebug();
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Error");
-            }
+            app.UseDeveloperExceptionPage();
 
             app.UseStatusCodePages();
 
