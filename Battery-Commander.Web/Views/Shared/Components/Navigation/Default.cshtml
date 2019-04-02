@@ -23,7 +23,7 @@
                     <li>@Html.ActionLink("My Vehicles", "Index", "Vehicles", new VehicleService.Query { Units = new[] { Model.Soldier.UnitId } }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("APFT", "Index", "APFT", new SoldierService.Query { Unit = Model.Soldier.UnitId }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("ABCP", "Index", "ABCP", new SoldierService.Query { Unit = Model.Soldier.UnitId }, new { @class = "nav-link" })</li>
-                    <li><a class="nav-link" asp-controller="Weapons" asp-route-unit=@Model.Soldier.UnitId>Weapons</a></li>
+                    <li><a class="nav-link" asp-controller="Weapons" asp-route-unit=@Model.Soldier.UnitId asp-action="Index">Weapons</a></li>
                     <li><a class="nav-link" asp-controller="SSD" asp-route-unit="@Model.Soldier.UnitId" asp-action="Index">SSD</a></li>
                 }
                 else
