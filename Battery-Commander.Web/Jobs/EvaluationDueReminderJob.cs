@@ -6,6 +6,7 @@ using Serilog;
 using System;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 
 namespace BatteryCommander.Web.Jobs
 {
@@ -56,7 +57,7 @@ namespace BatteryCommander.Web.Jobs
                         .BCC(recipients)
                         .To(emailAddress: "Evaluations@RedLeg.app")
                         .Subject($"{unit.UIC} | Past Due and Upcoming Evaluations")
-                        .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/Reports/EvaluationsDue.cshtml", evaluations_due_soon)
+                        .UsingTemplateFromEmbedded("BatteryCommander.Web.Views.Reports.EvaluationsDue.cshtml", evaluations_due_soon, Assembly.GetExecutingAssembly())
                         .SendWithErrorCheck();
                 }
             }

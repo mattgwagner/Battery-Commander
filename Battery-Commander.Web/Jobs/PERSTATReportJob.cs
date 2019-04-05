@@ -4,6 +4,7 @@ using FluentEmail.Core;
 using FluentScheduler;
 using Serilog;
 using System.IO;
+using System.Reflection;
 
 namespace BatteryCommander.Web.Jobs
 {
@@ -32,7 +33,7 @@ namespace BatteryCommander.Web.Jobs
                         .To(unit.PERSTAT.Recipients)
                         .SetFrom(unit.PERSTAT.From.EmailAddress, unit.PERSTAT.From.Name)
                         .Subject($"{unit.Name} | RED 1 PERSTAT")
-                        .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/Reports/Red1_Perstat.cshtml", unit)
+                        .UsingTemplateFromEmbedded("BatteryCommander.Web.Views.Reports.Red1_Perstat.cshtml", unit, Assembly.GetExecutingAssembly())
                         .SendWithErrorCheck();
                 }
             }

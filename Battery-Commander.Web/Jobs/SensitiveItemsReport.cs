@@ -4,6 +4,7 @@ using FluentEmail.Core;
 using FluentScheduler;
 using Serilog;
 using System.IO;
+using System.Reflection;
 
 namespace BatteryCommander.Web.Jobs
 {
@@ -32,7 +33,7 @@ namespace BatteryCommander.Web.Jobs
                         .To(unit.SensitiveItems.Recipients)
                         .SetFrom(unit.SensitiveItems.From.EmailAddress, unit.SensitiveItems.From.Name)
                         .Subject($"{unit.Name} | GREEN 3 Report | {unit.SensitiveItems.Status}")
-                        .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/Reports/Green3_SensitiveItems.cshtml", unit)
+                        .UsingTemplateFromEmbedded("BatteryCommander.Web.Views.Reports.Green3_SensitiveItems.cshtml", unit, Assembly.GetExecutingAssembly())
                         .SendWithErrorCheck();
                 }
             }

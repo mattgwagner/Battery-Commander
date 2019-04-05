@@ -7,8 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using Serilog;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
+using System.Reflection;
 
 namespace BatteryCommander.Web.Jobs
 {
@@ -55,7 +55,7 @@ namespace BatteryCommander.Web.Jobs
                     .Create()
                     .To(recipients)
                     .Subject($"Evaluation Updated | {evaluation.Ratee}")
-                    .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/Reports/EvaluationUpdated.cshtml", evaluation)
+                    .UsingTemplateFromEmbedded("BatteryCommander.Web.Views.Reports.EvaluationUpdated.cshtml", evaluation, Assembly.GetExecutingAssembly())
                     .SendWithErrorCheck();
             }
         }
