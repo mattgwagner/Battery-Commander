@@ -25,6 +25,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Jobs\EvaluationsDue.html" />
+    <None Remove="Jobs\EvaluationUpdated.html" />
+    <None Remove="Jobs\Green3_SensitiveItems.html" />
+    <None Remove="Jobs\Red1_Perstat.html" />
     <None Remove="Models\Data\ABCP.csv" />
     <None Remove="Models\Data\DA3749.pdf" />
     <None Remove="Models\Data\DA4856.pdf" />
@@ -35,6 +39,21 @@
     <None Remove="Models\Data\PushUps.csv" />
     <None Remove="Models\Data\Run.csv" />
     <None Remove="Models\Data\SitUps.csv" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Jobs\EvaluationsDue.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Jobs\EvaluationUpdated.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Jobs\Green3_SensitiveItems.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Jobs\Red1_Perstat.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
