@@ -1,0 +1,77 @@
+@model BatteryCommander.Web.Models.Unit
+
+<div>
+    <b>
+        PURPOSE:  To convey status of military equipment deemed sensitive by chain of command.
+    </b>
+</div>
+
+<div>
+    <b>
+        COMMUNICATION INSTRUCTIONS: Submit report IAW published Battle Rhythm, to confirm that all sensitive items are accounted for.  The report is rendered IAW current task organization.  Primary method of transmission is via e-mail, BFT Free Text message, or FM (Last Resort).  Priority Traffic unless something is missing then it becomes IMMEDIATE Traffic
+    </b>
+</div>
+
+<table border="1">
+
+    <thead>
+        <tr>
+            <th>LINE</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td>Line 1</td>
+            <td>(DTG)</td>
+            <td>@(Model.SensitiveItems.DateTimeGroup)</td>
+        </tr>
+        <tr>
+            <td>Line 2</td>
+            <td>(Unit)</td>
+            <td>@(Model.Name)</td>
+        </tr>
+        <tr>
+            <td>Line 3</td>
+            <td>(Status (Green: 100% with no discrepancy; if green skip to line 10.  When discrepency noted, report Red and continue report)</td>
+            <td>@(Model.SensitiveItems.Status)</td>
+        </tr>
+        <tr>
+            <td>Line 4</td>
+            <td>(Losing Unit (Unit making report loss))</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Line 5</td>
+            <td>(Item (item lost by serial number))</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Line 6</td>
+            <td>(DTG of Loss)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Line 7</td>
+            <td>(Details (Circumstances of Loss))</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Line 8</td>
+            <td>(Action Taken to Recover Item)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Line 9</td>
+            <td>(Narrative)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Line 10</td>
+            <td>(Authentication)</td>
+            <td>@(Model.SensitiveItems.Authentication)</td>
+        </tr>
+    </tbody>
+</table>
