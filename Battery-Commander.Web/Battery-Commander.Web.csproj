@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <MvcRazorExcludeRefAssembliesFromPublic>false</MvcRazorExcludeRefAssembliesFromPublic>
     <DocumentationFile>bin\$(Configuration)\netcoreapp2.2\BatteryCommander.Web.xml</DocumentationFile>
     <ApplicationInsightsResourceId>/subscriptions/a9421f6a-e5c1-4c30-baf7-a483e4f301c2/resourcegroups/primary/providers/microsoft.insights/components/Battery-Commander</ApplicationInsightsResourceId>
     <ApplicationInsightsAnnotationResourceId>/subscriptions/a9421f6a-e5c1-4c30-baf7-a483e4f301c2/resourcegroups/primary/providers/microsoft.insights/components/Battery-Commander</ApplicationInsightsAnnotationResourceId>
@@ -23,13 +22,6 @@
     <Compile Remove="Models\Reports\Education_Status.cs" />
     <Compile Remove="Models\Reports\SSD_Status.cs" />
     <Compile Remove="Models\UnitStatsViewModel.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="Views\Reports\EvaluationsDue.cshtml" />
-    <Content Remove="Views\Reports\EvaluationUpdated.cshtml" />
-    <Content Remove="Views\Reports\Green3_SensitiveItems.cshtml" />
-    <Content Remove="Views\Reports\Red1_Perstat.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -57,10 +49,6 @@
     <EmbeddedResource Include="Models\Data\PushUps.csv" />
     <EmbeddedResource Include="Models\Data\Run.csv" />
     <EmbeddedResource Include="Models\Data\SitUps.csv" />
-    <EmbeddedResource Include="Views\Reports\EvaluationsDue.cshtml" />
-    <EmbeddedResource Include="Views\Reports\EvaluationUpdated.cshtml" />
-    <EmbeddedResource Include="Views\Reports\Green3_SensitiveItems.cshtml" />
-    <EmbeddedResource Include="Views\Reports\Red1_Perstat.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
