@@ -32,7 +32,7 @@ namespace BatteryCommander.Web.Jobs
                         .To(unit.PERSTAT.Recipients)
                         .SetFrom(unit.PERSTAT.From.EmailAddress, unit.PERSTAT.From.Name)
                         .Subject($"{unit.Name} | RED 1 PERSTAT")
-                        .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/Reports/Red1_Perstat.cshtml", unit)
+                        .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Jobs/Red1_Perstat.cshtml", unit)
                         .SendWithErrorCheck();
                 }
             }

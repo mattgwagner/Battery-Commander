@@ -55,7 +55,7 @@ namespace BatteryCommander.Web.Jobs
                     .Create()
                     .To(recipients)
                     .Subject($"Evaluation Updated | {evaluation.Ratee}")
-                    .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/Reports/EvaluationUpdated.cshtml", evaluation)
+                    .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Jobs/EvaluationUpdated.cshtml", evaluation)
                     .SendWithErrorCheck();
             }
         }
