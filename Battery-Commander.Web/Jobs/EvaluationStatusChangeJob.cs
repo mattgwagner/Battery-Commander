@@ -62,8 +62,6 @@ namespace BatteryCommander.Web.Jobs
 
         public IEnumerable<Address> Get_Recipients(Evaluation evaluation)
         {
-            // TODO Remove after testing
-
             yield return new Address { EmailAddress = "Evaluations@RedLeg.app" };
 
             foreach (var email in evaluation.Rater.GetEmails()) yield return email;
