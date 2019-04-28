@@ -14,6 +14,7 @@ namespace BatteryCommander.Web
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
+                .UseSentry()
                 .UseSerilog((h, context) =>
                 {
                     context
