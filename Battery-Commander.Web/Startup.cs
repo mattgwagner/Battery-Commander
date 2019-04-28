@@ -55,30 +55,6 @@ namespace BatteryCommander.Web
                 .GetSection("SendGrid")
                 .GetValue<String>("ApiKey");
 
-            var logglyConfig =
-                Configuration
-                .GetSection("Loggly")
-                .Get<Serilog.Sinks.Loggly.LogglyConfiguration>();
-
-            Log.Logger =
-                new LoggerConfiguration()
-                .Enrich.FromLogContext()
-                .WriteTo.RollingFile(pathFormat: @"logs\{Date}.log")
-#if !DEBUG
-                .WriteTo.Loggly(restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Debug, logglyConfig: logglyConfig)
-#endif
-                .WriteTo.Email(new Serilog.Sinks.Email.EmailConnectionInfo
-                {
-                    ToEmail = "Errors@RedLeg.app",
-                    FromEmail = Email_Address,
-                    SendGridClient = new SendGrid.SendGridClient(SendGridAPIKey),
-                    IsBodyHtml = true,
-                },
-                restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Warning,
-                outputTemplate: "{Username} {Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level}] {Message}{NewLine}{Exception}")
-                .MinimumLevel.Information()
-                .CreateLogger();
-
             services.AddMemoryCache();
 
             // Add functionality to inject IOptions<T>
@@ -86,7 +62,6 @@ namespace BatteryCommander.Web
 
             // Add the Auth0 Settings object so it can be injected
             services.Configure<Auth0Settings>(Configuration.GetSection("Auth0"));
-            services.Configure<AirTableSettings>(Configuration.GetSection("AirTable"));
 
             // Register jobs as services for IoC
             services.AddTransient<SqliteBackupJob>();

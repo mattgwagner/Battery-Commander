@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Hosting;
+using Serilog;
 using System.IO;
 
 namespace BatteryCommander.Web
@@ -13,6 +14,12 @@ namespace BatteryCommander.Web
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
+                .UseSerilog((h, context) =>
+                {
+                    context
+                    .Enrich.FromLogContext()
+                    .WriteTo.Sentry();
+                })
                 .Build();
 
             host.Run();
