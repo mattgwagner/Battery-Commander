@@ -186,26 +186,13 @@ namespace BatteryCommander.Web.Models
 
         public static Boolean GetsEvaluation(this Rank rank)
         {
-            switch (rank)
+            return new[]
             {
-                case Rank.E5:
-                case Rank.E6:
-                case Rank.E7:
-                case Rank.E8:
-                case Rank.E8_MSG:
-                case Rank.E9:
-
-                case Rank.O1:
-                case Rank.O2:
-                case Rank.O3:
-                case Rank.O4:
-                case Rank.O5:
-                case Rank.O6:
-                    return true;
-
-                default:
-                    return false;
+                IsNCO(rank),
+                IsWarrantOfficer(rank),
+                IsOfficer(rank)
             }
+            .Any();
         }
 
         public static Boolean IsWarrantOfficer(this Rank rank)
