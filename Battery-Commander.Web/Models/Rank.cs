@@ -195,11 +195,11 @@ namespace BatteryCommander.Web.Models
                 case Rank.E8_MSG:	
                 case Rank.E9:	
                     
-                case Rank.WO_1:
-                case Rank.WO_2:
-                case Rank.WO_3:
-                case Rank.WO_4:
-                case Rank.WO_5:
+                case Rank.WO1:
+                case Rank.WO2:
+                case Rank.WO3:
+                case Rank.WO4:
+                case Rank.WO5:
 
                 case Rank.O1:	
                 case Rank.O2:	
