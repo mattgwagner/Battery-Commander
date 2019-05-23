@@ -24,7 +24,7 @@
             <td>@Html.DisplayNameFor(_ => Model.PERSTAT.Assigned)</td>
             <td>@Html.RouteLink($"{Model.PERSTAT.Assigned.Officer}", "Soldiers.List", new { Unit = Model.Id, Ranks = OfficersAndCadet })</td>
             <td>@Html.RouteLink($"{Model.PERSTAT.Assigned.Enlisted}", "Soldiers.List", new { Unit = Model.Id, OnlyEnlisted = true })</td>
-            <td>@Html.DisplayFor(_ => Model.PERSTAT.Assigned.Warrant)</td>
+            <td>@Html.RouteLink($"{Model.PERSTAT.Assigned.Warrant}", "Soldiers.List", new { Unit = Model.Id, Ranks = RankExtensions.Warrants })</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.Assigned.Total)</td>
         </tr>
         <tr>
@@ -40,7 +40,7 @@
             <td>@Html.DisplayNameFor(_ => Model.PERSTAT.Detached)</td>
             <td>@Html.RouteLink($"{Model.PERSTAT.Detached.Officer}", "Soldiers.List", new { Unit = Model.Id, Ranks = OfficersAndCadet, Status = Soldier.SoldierStatus.Detached })</td>
             <td>@Html.RouteLink($"{Model.PERSTAT.Detached.Enlisted}", "Soldiers.List", new { Unit = Model.Id, OnlyEnlisted = true, Status = Soldier.SoldierStatus.Detached })</td>
-            <td>@Html.DisplayFor(_ => Model.PERSTAT.Detached.Warrant)</td>
+            <td>>Html.RouteLink($"{Model.PERSTAT.Detached.Warrant}", "Soldiers.List", new { Unit = Model.Id, Ranks = RankExtensions.Warrants, Status = Soldier.SoldierStatus.Detached })</td>
             <td>@Html.RouteLink($"{Model.PERSTAT.Detached.Total}", "Soldiers.List", new { Unit = Model.Id, Status = Soldier.SoldierStatus.Detached })</td>
         </tr>
         <tr>
@@ -56,7 +56,7 @@
             <td>@Html.DisplayNameFor(_ => Model.PERSTAT.PresentForDuty)</td>
             <td>@Html.RouteLink($"{Model.PERSTAT.PresentForDuty.Officer}", "Soldiers.List", new { Unit = Model.Id, Ranks = OfficersAndCadet, Status = Soldier.SoldierStatus.PresentForDuty })</td>
             <td>@Html.RouteLink($"{Model.PERSTAT.PresentForDuty.Enlisted}", "Soldiers.List", new { Unit = Model.Id, OnlyEnlisted = true, Status = Soldier.SoldierStatus.PresentForDuty })</td>
-            <td>@Html.DisplayFor(_ => Model.PERSTAT.PresentForDuty.Warrant)</td>
+            <td>@Html.RouteLink($"{Model.PERSTAT.PresentForDuty.Warrant}", "Soldiers.List", new { Unit = Model.Id, Ranks = RankExtensions.Warrants, Status = Soldier.SoldierStatus.PresentForDuty })</td>
             <td>@Html.RouteLink($"{Model.PERSTAT.PresentForDuty.Total}", "Soldiers.List", new { Unit = Model.Id, Status = Soldier.SoldierStatus.PresentForDuty })</td>
         </tr>
         <tr>
@@ -70,7 +70,7 @@
         <tr>
             <td>Line 8</td>
             <td>@Html.DisplayNameFor(_ => Model.PERSTAT.KilledInAction)</td>
-            <td>@Html.DisplayFor(_ => Model.PERSTAT.KilledInAction.Enlisted)</td>
+            <td>@Html.DisplayFor(_ => Model.PERSTAT.KilledInAction.Officer)</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.KilledInAction.Enlisted)</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.KilledInAction.Warrant)</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.KilledInAction.Total)</td>
@@ -78,7 +78,7 @@
         <tr>
             <td>Line 9</td>
             <td>@Html.DisplayNameFor(_ => Model.PERSTAT.MissingInAction)</td>
-            <td>@Html.DisplayFor(_ => Model.PERSTAT.MissingInAction.Enlisted)</td>
+            <td>@Html.DisplayFor(_ => Model.PERSTAT.MissingInAction.Officer)</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.MissingInAction.Enlisted)</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.MissingInAction.Warrant)</td>
             <td>@Html.DisplayFor(_ => Model.PERSTAT.MissingInAction.Total)</td>
@@ -88,7 +88,7 @@
             <td>@Html.DisplayNameFor(_ => Model.PERSTAT.OnLeaveOrPass)</td>
             <td>@Html.RouteLink($"{Model.PERSTAT.OnLeaveOrPass.Officer}", "Soldiers.List", new { Unit = Model.Id, Ranks = OfficersAndCadet, Status = Soldier.SoldierStatus.OnPass })</td>
             <td>@Html.RouteLink($"{Model.PERSTAT.OnLeaveOrPass.Enlisted}", "Soldiers.List", new { Unit = Model.Id, OnlyEnlisted = true, Status = Soldier.SoldierStatus.OnPass })</td>
-            <td>@Html.DisplayFor(_ => Model.PERSTAT.OnLeaveOrPass.Warrant)</td>
+            <td>@Html.RouteLink($"{Model.PERSTAT.OnLeaveOrPass.Warrant}", "Soldiers.List", new { Unit = Model.Id, Ranks = RankExtensions.Warrants, Status = Soldier.SoldierStatus.OnPass })</td>
             <td>@Html.RouteLink($"{Model.PERSTAT.OnLeaveOrPass.Total}", "Soldiers.List", new { Unit = Model.Id, Status = Soldier.SoldierStatus.OnPass })</td>
         </tr>
         <tr>
@@ -96,7 +96,7 @@
             <td>@Html.DisplayNameFor(_ => Model.PERSTAT.TDY)</td>
             <td>@Html.RouteLink($"{Model.PERSTAT.TDY.Officer}", "Soldiers.List", new { Unit = Model.Id, Ranks = OfficersAndCadet, Status = Soldier.SoldierStatus.TDY })</td>
             <td>@Html.RouteLink($"{Model.PERSTAT.TDY.Enlisted}", "Soldiers.List", new { Unit = Model.Id, OnlyEnlisted = true, Status = Soldier.SoldierStatus.TDY })</td>
-            <td>@Html.DisplayFor(_ => Model.PERSTAT.TDY.Warrant)</td>
+            <td>@Html.RouteLink($"{Model.PERSTAT.TDY.Warrant}", "Soldiers.List", new { Unit = Model.Id, Ranks = RankExtensions.Warrants, Status = Soldier.SoldierStatus.TDY }))</td>
             <td>@Html.RouteLink($"{Model.PERSTAT.TDY.Total}", "Soldiers.List", new { Unit = Model.Id, Status = Soldier.SoldierStatus.TDY })</td>
         </tr>
         <tr>
@@ -104,7 +104,7 @@
             <td>@Html.DisplayNameFor(_ => Model.PERSTAT.AWOL)</td>
             <td>@Html.RouteLink($"{Model.PERSTAT.AWOL.Officer}", "Soldiers.List", new { Unit = Model.Id, Ranks = OfficersAndCadet, Status = Soldier.SoldierStatus.AWOL })</td>
             <td>@Html.RouteLink($"{Model.PERSTAT.AWOL.Enlisted}", "Soldiers.List", new { Unit = Model.Id, OnlyEnlisted = true, Status = Soldier.SoldierStatus.AWOL })</td>
-            <td>@Html.DisplayFor(_ => Model.PERSTAT.AWOL.Warrant)</td>
+            <td>@Html.RouteLink($"{Model.PERSTAT.AWOL.Warrant}", "Soldiers.List", new { Unit = Model.Id, Ranks = RankExtensions.Warrants, Status = Soldier.SoldierStatus.AWOL })</td>
             <td>@Html.RouteLink($"{Model.PERSTAT.AWOL.Total}", "Soldiers.List", new { Unit = Model.Id, Status = Soldier.SoldierStatus.AWOL })</td>
         </tr>
         <tr>
@@ -112,7 +112,7 @@
             <td>@Html.DisplayNameFor(_ => Model.PERSTAT.RearDetachment)</td>
             <td>@Html.RouteLink($"{Model.PERSTAT.RearDetachment.Officer}", "Soldiers.List", new { Unit = Model.Id, Ranks = OfficersAndCadet, Status = Soldier.SoldierStatus.RearDetachment })</td>
             <td>@Html.RouteLink($"{Model.PERSTAT.RearDetachment.Enlisted}", "Soldiers.List", new { Unit = Model.Id, OnlyEnlisted = true, Status = Soldier.SoldierStatus.RearDetachment })</td>
-            <td>@Html.DisplayFor(_ => Model.PERSTAT.RearDetachment.Warrant)</td>
+            <td>@Html.RouteLink($"{Model.PERSTAT.RearDetachment.Warrant}", "Soldiers.List", new { Unit = Model.Id, Ranks = RankExtensions.Warrants, Status = Soldier.SoldierStatus.RearDetachment })</td>
             <td>@Html.RouteLink($"{Model.PERSTAT.RearDetachment.Total}", "Soldiers.List", new { Unit = Model.Id, Status = Soldier.SoldierStatus.RearDetachment })</td>
         </tr>
         <tr>
