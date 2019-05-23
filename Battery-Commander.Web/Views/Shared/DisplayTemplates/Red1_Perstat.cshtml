@@ -96,7 +96,7 @@
             <td>@Html.DisplayNameFor(_ => Model.PERSTAT.TDY)</td>
             <td>@Html.RouteLink($"{Model.PERSTAT.TDY.Officer}", "Soldiers.List", new { Unit = Model.Id, Ranks = OfficersAndCadet, Status = Soldier.SoldierStatus.TDY })</td>
             <td>@Html.RouteLink($"{Model.PERSTAT.TDY.Enlisted}", "Soldiers.List", new { Unit = Model.Id, OnlyEnlisted = true, Status = Soldier.SoldierStatus.TDY })</td>
-            <td>@Html.RouteLink($"{Model.PERSTAT.TDY.Warrant}", "Soldiers.List", new { Unit = Model.Id, Ranks = RankExtensions.Warrants, Status = Soldier.SoldierStatus.TDY }))</td>
+            <td>@Html.RouteLink($"{Model.PERSTAT.TDY.Warrant}", "Soldiers.List", new { Unit = Model.Id, Ranks = RankExtensions.Warrants, Status = Soldier.SoldierStatus.TDY })</td>
             <td>@Html.RouteLink($"{Model.PERSTAT.TDY.Total}", "Soldiers.List", new { Unit = Model.Id, Status = Soldier.SoldierStatus.TDY })</td>
         </tr>
         <tr>
