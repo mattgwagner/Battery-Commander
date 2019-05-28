@@ -49,7 +49,7 @@ namespace BatteryCommander.Web.Jobs
             {
                 // If it's in a given window, fire off an email to the relevant people
 
-                var recipients = Get_Recipients(evaluation).ToList();
+                var recipients = Get_Recipients(evaluation).Distinct().ToList();
 
                 emailSvc
                     .Create()
