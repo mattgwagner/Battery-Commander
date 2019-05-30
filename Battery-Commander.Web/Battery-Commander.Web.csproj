@@ -40,6 +40,7 @@
     <None Remove="Models\Data\PushUps.csv" />
     <None Remove="Models\Data\Run.csv" />
     <None Remove="Models\Data\SitUps.csv" />
+    <None Remove="Views\Home\RequestAccessEmail.html" />
   </ItemGroup>
 
   <ItemGroup>
@@ -53,6 +54,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Jobs\Red1_Perstat.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Home\RequestAccessEmail.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -92,9 +96,5 @@
   <ItemGroup>
     <Folder Include="Migrations\" />
     <Folder Include="Properties\PublishProfiles\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services" />
   </ItemGroup>
 </Project>
