@@ -67,7 +67,7 @@ namespace BatteryCommander.Web.Models
         public DateTime StartDate { get; set; } = DateTime.Today;
 
         [Required, DataType(DataType.Date), Column(TypeName = "date"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}"), Display(Name = "Thru Date")]
-        public DateTime ThruDate { get; set; }
+        public DateTime ThruDate { get; set; } = DateTime.Today.AddDays(365);
 
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}"), Display(Name = "Sign On/After")]
         public DateTime CanBeSignedAfter => ThruDate.AddDays(-14);
