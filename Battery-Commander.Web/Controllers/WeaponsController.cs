@@ -60,6 +60,13 @@ namespace BatteryCommander.Web.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Save(Weapon model)
         {
+            if(!ModelState.IsValid)
+            {
+                ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, SoldierService.Query.ALL);
+                ViewBag.Units = await UnitsController.GetDropDownList(db);
+                return View(nameof(Edit), model);
+            }
+
             if (await db.Weapons.AnyAsync(weapon => weapon.Id == model.Id) == false)
             {
                 db.Weapons.Add(model);

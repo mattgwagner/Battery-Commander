@@ -1,11 +1,12 @@
 ﻿using BatteryCommander.Web.Services;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BatteryCommander.Web.Models
 {
-    public class Weapon
+    public class Weapon : IValidatableObject
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -15,10 +16,10 @@ namespace BatteryCommander.Web.Models
 
         public virtual Unit Unit { get; set; }
 
-        [Required, StringLength(10)]
+        [Required(AllowEmptyStrings = false), StringLength(10)]
         public String AdminNumber { get; set; }
 
-        [Required, StringLength(50)]
+        [Required(AllowEmptyStrings = false), StringLength(50)]
         public String Serial { get; set; }
 
         [Display(Name = "Optic Serial")]
@@ -86,6 +87,11 @@ namespace BatteryCommander.Web.Models
                 Description = Type.DisplayName(),
                 StockNumber = StockNumber
             });
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (String.IsNullOrWhiteSpace(AdminNumber)) yield return new ValidationResult("Admin Number must be populated", new[] { nameof(AdminNumber) });
         }
     }
 }
