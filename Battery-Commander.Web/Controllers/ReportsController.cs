@@ -53,21 +53,13 @@ namespace BatteryCommander.Web.Controllers
         {
             var unit = await UnitService.Get(db, unitId);
 
-            var settings =
-                unit
-                .ReportSettings
-                .SingleOrDefault(s => s.Type == type);
+            var new_list = unit.ReportSettings.ToList();
 
-            if (settings != null)
-            {
-                unit.ReportSettings =
-                    unit
-                    .ReportSettings
-                    .Except(new[] { settings })
-                    .ToList();
+            new_list.RemoveAll(settings => settings.Type == type);
 
-                await db.SaveChangesAsync();
-            }
+            unit.ReportSettings = new_list;
+
+            await db.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index), new { unitId });
         }
@@ -80,7 +72,11 @@ namespace BatteryCommander.Web.Controllers
 
             var unit = await UnitService.Get(db, unitId);
 
-            unit.ReportSettings.Add(settings);
+            unit.ReportSettings =
+                unit
+                .ReportSettings
+                .Union(new[] { settings })
+                .ToList();
 
             await db.SaveChangesAsync();
 
