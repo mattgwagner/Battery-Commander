@@ -32,6 +32,7 @@ namespace BatteryCommander.Web.Controllers
             return View();
         }
 
+        [HttpPost]
         public async Task<IActionResult> Delete(int unitId, Report.ReportType type)
         {
             var unit = await UnitService.Get(db, unitId);

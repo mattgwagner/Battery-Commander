@@ -1,0 +1,38 @@
+﻿@model Unit
+@{
+    ViewBag.Title = "Reports";
+}
+
+<h2>@ViewBag.Reports</h2>
+
+@Html.ActionLink("Add", "Add", new { ViewBag.UnitId })
+
+<div>
+    <table class="table table striped">
+        @foreach (var report in Model.ReportSettings)
+        {
+            <tr>
+                <td>@report.Type</td>
+                <td>@report.From</td>
+                <td>@report.Enabled</td>
+                <td>
+                    <ul>
+                        @foreach (var recipient in report.Recipients)
+                        {
+                            <li>@recipient</li>
+                        }
+                    </ul>
+                </td>
+                <td>
+                    @using (Html.BeginForm("Delete", "Reports", FormMethod.Post, new { report.Type, ViewBag.UnitId })
+                    {
+                        <button type="submit">Delete</button>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+
+
+</div>
+
