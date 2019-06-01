@@ -30,10 +30,14 @@ namespace BatteryCommander.Web.Controllers
         {
             ViewBag.UnitId = unitId;
 
-            return View(new ReportSettings
+            var settings = new ReportSettings
             {
                 Enabled = true
-            });
+            };
+
+            settings.Recipients.Add(new FluentEmail.Core.Models.Address { });
+
+            return View(settings);
         }
 
         [HttpPost]

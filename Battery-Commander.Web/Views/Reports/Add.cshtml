@@ -27,6 +27,8 @@
             @Html.EditorFor(model => model.Enabled)
         </div>
 
+        <h4>Recipients</h4>
+
         @for (int i = 0; i < Model.Recipients.Count; i++)
         {
             <div class="form-group form-group-lg">
