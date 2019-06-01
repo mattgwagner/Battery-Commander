@@ -23,6 +23,8 @@ namespace BatteryCommander.Web.Controllers
         [Route("~/Units/{unitId}/Reports", Name = "Unit.Reports")]
         public async Task<IActionResult> Index(int unitId)
         {
+            ViewBag.UnitId = unitId;
+
             return View(await UnitService.Get(db, unitId));
         }
 
