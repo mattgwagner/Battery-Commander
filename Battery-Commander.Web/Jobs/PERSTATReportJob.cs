@@ -1,9 +1,7 @@
 ﻿using BatteryCommander.Web.Models;
 using BatteryCommander.Web.Services;
-using FluentEmail.Core;
 using FluentScheduler;
 using Serilog;
-using System.IO;
 
 namespace BatteryCommander.Web.Jobs
 {
@@ -12,13 +10,12 @@ namespace BatteryCommander.Web.Jobs
         private static readonly ILogger Log = Serilog.Log.ForContext<PERSTATReportJob>();
 
         private readonly Database db;
+        private readonly ReportService reportService;
 
-        private readonly IFluentEmailFactory emailSvc;
-
-        public PERSTATReportJob(Database db, IFluentEmailFactory emailSvc)
+        public PERSTATReportJob(Database db, ReportService reportService)
         {
             this.db = db;
-            this.emailSvc = emailSvc;
+            this.reportService = reportService;
         }
 
         public virtual void Execute()
@@ -27,13 +24,8 @@ namespace BatteryCommander.Web.Jobs
             {
                 if (unit.PERSTAT.Enabled)
                 {
-                    emailSvc
-                        .Create()
-                        .To(unit.PERSTAT.Recipients)
-                        .SetFrom(unit.PERSTAT.From.EmailAddress, unit.PERSTAT.From.Name)
-                        .Subject($"{unit.Name} | RED 1 PERSTAT")
-                        .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Jobs/Red1_Perstat.html", unit)
-                        .SendWithErrorCheck()
+                    reportService
+                        .SendPerstatReport(unit.Id)
                         .Wait();
                 }
             }

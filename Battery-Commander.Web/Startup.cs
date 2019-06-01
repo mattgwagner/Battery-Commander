@@ -63,6 +63,8 @@ namespace BatteryCommander.Web
             // Add the Auth0 Settings object so it can be injected
             services.Configure<Auth0Settings>(Configuration.GetSection("Auth0"));
 
+            services.AddTransient<ReportService>();
+
             // Register jobs as services for IoC
             services.AddTransient<SqliteBackupJob>();
             services.AddTransient<EvaluationDueReminderJob>();
