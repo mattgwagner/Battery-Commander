@@ -30,7 +30,10 @@ namespace BatteryCommander.Web.Controllers
         {
             ViewBag.UnitId = unitId;
 
-            return View();
+            return View(new ReportSettings
+            {
+                Enabled = true
+            });
         }
 
         [HttpPost]

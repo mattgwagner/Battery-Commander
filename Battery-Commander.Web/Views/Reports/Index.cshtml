@@ -20,7 +20,7 @@
                     {
                         @Html.Hidden("Type", report.Type)
                         @Html.Hidden("UnitId", Model.Id)
-                        @Html.Hidden("Enabled", !report.Enabled)
+                        @Html.Hidden("Enable", !report.Enabled)
 
                         <button type="submit">@(report.Enabled ? "Disable" : "Enable")</button>
                     }
