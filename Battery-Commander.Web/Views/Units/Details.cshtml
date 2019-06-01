@@ -1,41 +1,45 @@
 ﻿@model Unit
-
 @{
 
     var sections = new[]
     {
-            "PERSTAT",
-            "ABCP",
-            "APFT",
-            "SSD",
-            "EDUCATION",
-            "DSCA",
-            "IWQ",
-            "CLS",
-            "OrgChart"
-    };
+    "PERSTAT",
+    "ABCP",
+    "APFT",
+    "SSD",
+    "EDUCATION",
+    "DSCA",
+    "IWQ",
+    "CLS",
+    "OrgChart"
+};
 }
-
 <div class="page-header">
     <h1>@Html.DisplayFor(_ => Model)</h1>
     <h4>@Html.ActionLink("Edit", "Edit", new { Model.Id }, new { @class = "btn btn-default btn-xs" })</h4>
     <div class="small"><a href="@ViewBag.CalendarUrl">Calendar Feed</a></div>
+    @if (Model.ReportSettings.Any(_ => _.Type == Report.ReportType.Sensitive_Items))
+    {
+        <div>
+            @using (Html.BeginForm("SendSensitiveItems", "Reports", new { UnitId = Model.Id }))
+            {
+                <button type="submit">Send Sensitive Items Report</button>
+            }
+        </div>
+    }
 </div>
-
 <div>
-
     <ul class="nav nav-pills nav-justified">
         @foreach (var section in sections)
         {
             <li role="presentation"><a href="#@(section)" data-toggle="tab">@Html.DisplayFor(_ => section)</a></li>
         }
     </ul>
-
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="PERSTAT">
             <h2>@Html.DisplayNameFor(model => model.PERSTAT) (@Html.ActionLink("Update", "Index", "Statuses", new SoldierService.Query { Unit = Model.Id }, null))</h2>
-                
-            @if(Model.ReportSettings.Where(_ => _.Type == Report.ReportType.Perstat).Any())
+
+            @if (Model.ReportSettings.Where(_ => _.Type == Report.ReportType.Perstat).Any())
             {
                 <h3>
                     @using (Html.BeginForm("SendPerstat", "Reports", new { UnitId = Model.Id }))
@@ -44,15 +48,11 @@
                     }
                 </h3>
             }
-
             @Html.DisplayFor(model => model, "Red1_Perstat")
         </div>
-
         <div role="tabpanel" class="tab-pane" id="ABCP">
             <h2>@Html.DisplayNameFor(_ => Model.ABCP)</h2>
-
             <div id="abcp_chart"></div>
-
             <table class="table table-bordered">
                 <tbody>
                     <tr>
@@ -78,12 +78,9 @@
                 </tbody>
             </table>
         </div>
-
         <div role="tabpanel" class="tab-pane" id="APFT">
             <h2>@Html.DisplayNameFor(_ => Model.APFT)</h2>
-
             <div id="apft_chart"></div>
-
             <table class="table table-bordered">
                 <tbody>
                     <tr>
@@ -109,12 +106,9 @@
                 </tbody>
             </table>
         </div>
-
         <div role="tabpanel" class="tab-pane" id="SSD">
             <h2>@Html.DisplayNameFor(_ => Model.SSD)</h2>
-
             <div id="ssd_chart"></div>
-
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -151,12 +145,9 @@
                 </tfoot>
             </table>
         </div>
-
         <div role="tabpanel" class="tab-pane" id="EDUCATION">
             <h2>@Html.DisplayNameFor(_ => Model.Education)</h2>
-
             <div id="education_chart"></div>
-
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -170,7 +161,7 @@
                 </thead>
                 <tbody>
                     @foreach (var row in Model.Education)
-            {
+                    {
                         <tr>
                             <td>@Html.ActionLink(row.Rank.DisplayName(), "Index", "Soldiers", new SoldierService.Query { Unit = Model.Id, Ranks = new[] { row.Rank } })</td>
                             <td>@EducationExtensions.RequiredEducation(row.Rank).ShortName()</td>
@@ -193,12 +184,9 @@
                 </tfoot>
             </table>
         </div>
-
         <div role="tabpanel" class="tab-pane" id="DSCA">
             <h2>@Html.DisplayNameFor(_ => Model.DSCA)</h2>
-
             <div id="dsca_chart"></div>
-
             <table class="table table-bordered">
                 <tbody>
                     <tr>
@@ -224,12 +212,9 @@
                 </tbody>
             </table>
         </div>
-
         <div role="tabpanel" class="tab-pane" id="CLS">
             <h2>@Html.DisplayNameFor(_ => Model.CLS) <span class="badge">@Model.CLS.Count()</span></h2>
-
             <a href="http://www.me.ngb.army.mil/units/rti/resources/IS0871_Edition_C_ALMS.pdf">Requirements</a>
-
             <table>
                 <tbody>
                     @foreach (var soldier in Model.CLS)
@@ -241,12 +226,9 @@
                 </tbody>
             </table>
         </div>
-
         <div role="tabpanel" class="tab-pane" id="IWQ">
             <h2>@Html.DisplayNameFor(_ => Model.IWQ)</h2>
-
             <div id="iwq_chart"></div>
-
             <table class="table table-bordered">
                 <tbody>
                     <tr>
@@ -272,12 +254,10 @@
                 </tbody>
             </table>
         </div>
-
         <div role="tabpanel" class="tab-pane" id="OrgChart">
         </div>
     </div>
 </div>
-
 @section Scripts
     {
     @{
@@ -316,8 +296,8 @@
         var ssd =
             new[]
             {
-                new { Status = "Incomplete", Total = Model.SSDTotal.Incomplete },
-                new { Status = "Complete", Total = Model.SSDTotal.Completed }
+        new { Status = "Incomplete", Total = Model.SSDTotal.Incomplete },
+        new { Status = "Complete", Total = Model.SSDTotal.Completed }
             };
 
         var education =
@@ -353,7 +333,6 @@
             })
             .ToList();
     }
-
     <!--Load the AJAX API-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">

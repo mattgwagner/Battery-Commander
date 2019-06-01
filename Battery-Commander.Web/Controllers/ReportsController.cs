@@ -53,6 +53,14 @@ namespace BatteryCommander.Web.Controllers
         }
 
         [HttpPost]
+        public async Task<IActionResult> SendSensitiveItems(int unitId)
+        {
+            await reportService.SendSensitiveItems(unitId);
+
+            return RedirectToRoute("Unit.Details", new { unitId });
+        }
+
+        [HttpPost]
         public async Task<IActionResult> Toggle(int unitId, Report.ReportType type, Boolean enable)
         {
             var unit = await UnitService.Get(db, unitId);
