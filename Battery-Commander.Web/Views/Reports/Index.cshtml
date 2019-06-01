@@ -34,8 +34,11 @@
                     </ul>
                 </td>
                 <td>
-                    @using (Html.BeginForm("Delete", "Reports", FormMethod.Post, new { report.Type, ViewBag.UnitId }))
+                    @using (Html.BeginForm("Delete", "Reports", FormMethod.Post))
                     {
+                        @Html.Hidden("UnitId", (int)ViewBag.Unitid)
+                        @Html.Hidden("Type", report.Type)
+
                         <button type="submit">Delete</button>
                     }
                 </td>
