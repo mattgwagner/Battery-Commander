@@ -14,10 +14,12 @@ namespace BatteryCommander.Web.Controllers
     public class ReportsController : Controller
     {
         private readonly Database db;
+        private readonly ReportService reportService;
 
-        public ReportsController(Database db)
+        public ReportsController(Database db, ReportService reportService)
         {
             this.db = db;
+            this.reportService = reportService;
         }
 
         [Route("~/Units/{unitId}/Reports", Name = "Unit.Reports")]
@@ -40,6 +42,14 @@ namespace BatteryCommander.Web.Controllers
             settings.Recipients.Add(new FluentEmail.Core.Models.Address { });
 
             return View(settings);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SendPerstat(int unitId)
+        {
+            await reportService.SendPerstatReport(unitId);
+
+            return RedirectToRoute("Unit.Details", new { unitId });
         }
 
         [HttpPost]

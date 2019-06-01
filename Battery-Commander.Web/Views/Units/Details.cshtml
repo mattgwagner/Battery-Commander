@@ -34,6 +34,17 @@
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="PERSTAT">
             <h2>@Html.DisplayNameFor(model => model.PERSTAT) (@Html.ActionLink("Update", "Index", "Statuses", new SoldierService.Query { Unit = Model.Id }, null))</h2>
+                
+            @if(Model.ReportSettings.Where(_ => _.Type == Report.ReportType.Perstat).Any())
+            {
+                <h3>
+                    @using (Html.BeginForm("SendPerstat", "Reports", new { UnitId = Model.Id }))
+                    {
+                        <button type="submit">Send Perstat</button>
+                    }
+                </h3>
+            }
+
             @Html.DisplayFor(model => model, "Red1_Perstat")
         </div>
 
