@@ -13,29 +13,23 @@
         {
             <tr>
                 <td>@report.Type</td>
-                <td>@report.From?.Name  @report.From?.EmailAddress</td>
+                <td><a href="mailto:@report.From.EmailAddress">@report.From.Name</a></td>
                 <td>
                 <td>
-                    @if (report.Enabled)
+                    @using (Html.BeginForm("Toggle", "Reports", FormMethod.Post))
                     {
-                        using (Html.BeginForm("Disable", "Reports", FormMethod.Post, new { report.Type, ViewBag.UnitId }))
-                        {
-                            <button type="submit">Disable</button>
-                        }
-                    }
-                    else
-                    {
-                        using (Html.BeginForm("Enable", "Reports", FormMethod.Post, new { report.Type, ViewBag.UnitId }))
-                        {
-                            <button type="submit">Enable</button>
-                        }
+                        @Html.Hidden("Type", report.Type)
+                        @Html.Hidden("UnitId", Model.Id)
+                        @Html.Hidden("Enabled", !report.Enabled)
+
+                        <button type="submit">@(report.Enabled ? "Disable" : "Enable")</button>
                     }
                 </td>
                 <td>
                     <ul>
                         @foreach (var recipient in report.Recipients)
                         {
-                            <li>@recipient.Name - @recipient.EmailAddress</li>
+                            <li><a href="mailto:@recipient.EmailAddress">@recipient.Name</a></li>
                         }
                     </ul>
                 </td>
@@ -48,7 +42,4 @@
             </tr>
         }
     </table>
-
-
 </div>
-

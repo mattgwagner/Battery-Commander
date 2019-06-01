@@ -4,6 +4,7 @@ using BatteryCommander.Web.Models.Settings;
 using BatteryCommander.Web.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -33,6 +34,21 @@ namespace BatteryCommander.Web.Controllers
         }
 
         [HttpPost]
+        public async Task<IActionResult> Toggle(int unitId, Report.ReportType type, Boolean enable)
+        {
+            var unit = await UnitService.Get(db, unitId);
+
+            var settings =
+                unit
+                .ReportSettings
+                .SingleOrDefault(s => s.Type == type);
+
+            settings.Enabled = enable;
+
+            return await Save(unitId, settings);
+        }
+
+        [HttpPost]
         public async Task<IActionResult> Delete(int unitId, Report.ReportType type)
         {
             var unit = await UnitService.Get(db, unitId);
@@ -44,7 +60,11 @@ namespace BatteryCommander.Web.Controllers
 
             if (settings != null)
             {
-                unit.ReportSettings.Remove(settings);
+                unit.ReportSettings =
+                    unit
+                    .ReportSettings
+                    .Except(new[] { settings })
+                    .ToList();
 
                 await db.SaveChangesAsync();
             }
