@@ -13,12 +13,12 @@ namespace BatteryCommander.Web.Jobs
 
         private readonly Database db;
 
-        private readonly IFluentEmailFactory emailSvc;
+        private readonly ReportService reportService;
 
-        public SensitiveItemsReport(Database db, IFluentEmailFactory emailSvc)
+        public SensitiveItemsReport(Database db, ReportService reportService)
         {
             this.db = db;
-            this.emailSvc = emailSvc;
+            this.reportService = reportService;
         }
 
         public virtual void Execute()
@@ -27,13 +27,8 @@ namespace BatteryCommander.Web.Jobs
             {
                 if (unit.SensitiveItems.Enabled)
                 {
-                    emailSvc
-                        .Create()
-                        .To(unit.SensitiveItems.Recipients)
-                        .SetFrom(unit.SensitiveItems.From.EmailAddress, unit.SensitiveItems.From.Name)
-                        .Subject($"{unit.Name} | GREEN 3 Report | {unit.SensitiveItems.Status}")
-                        .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Jobs/Green3_SensitiveItems.html", unit)
-                        .SendWithErrorCheck()
+                    reportService
+                        .SendPerstatReport(unit.Id)
                         .Wait();
                 }
             }

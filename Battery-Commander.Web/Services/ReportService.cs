@@ -28,5 +28,18 @@ namespace BatteryCommander.Web.Services
                 .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Jobs/Red1_Perstat.html", unit)
                 .SendWithErrorCheck();
         }
+
+        public async Task SendSensitiveItems(int unitId)
+        {
+            var unit = await UnitService.Get(db, unitId);
+
+            await emailSvc
+                .Create()
+                .To(unit.SensitiveItems.Recipients)
+                .SetFrom(unit.SensitiveItems.From.EmailAddress, unit.SensitiveItems.From.Name)
+                .Subject($"{unit.Name} | GREEN 3 Report | {unit.SensitiveItems.Status}")
+                .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Jobs/Green3_SensitiveItems.html", unit)
+                .SendWithErrorCheck();
+        }
     }
 }
