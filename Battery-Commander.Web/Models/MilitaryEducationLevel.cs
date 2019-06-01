@@ -33,7 +33,10 @@ namespace BatteryCommander.Web.Models
         BOLC = 10,
 
         [Display(Name = "(CCC) Captains Career Course", ShortName = "CCC")]
-        CCC = 11
+        CCC = 11,
+
+        [Display(Name = "(ILE) Intermediate Level Education", ShortName = "ILE")]
+        ILE = 11
     }
 
     public static class EducationExtensions
@@ -66,8 +69,10 @@ namespace BatteryCommander.Web.Models
                     return MilitaryEducationLevel.BOLC;
 
                 case Rank.O3:
-                case Rank.O4:
                     return MilitaryEducationLevel.CCC;
+
+                case Rank.O4:
+                    return MilitaryEducationLevel.ILE;
 
                 default:
                     return MilitaryEducationLevel.AIT;
