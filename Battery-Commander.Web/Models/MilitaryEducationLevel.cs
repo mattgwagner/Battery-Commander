@@ -36,7 +36,7 @@ namespace BatteryCommander.Web.Models
         CCC = 11,
 
         [Display(Name = "(ILE) Intermediate Level Education", ShortName = "ILE")]
-        ILE = 11
+        ILE = 12
     }
 
     public static class EducationExtensions
