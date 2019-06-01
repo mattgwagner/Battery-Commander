@@ -71,6 +71,7 @@ namespace BatteryCommander.Web.Controllers
             return RedirectToAction(nameof(Index), new { unitId });
         }
 
+        [HttpPost]
         public async Task<IActionResult> Save(int unitId, ReportSettings settings)
         {
             // Remove any if existing
