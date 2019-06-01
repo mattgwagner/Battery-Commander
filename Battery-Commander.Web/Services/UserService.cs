@@ -40,9 +40,9 @@ namespace BatteryCommander.Web.Services
             return soldier;
         }
 
-        public static void RequestAccess(IFluentEmailFactory emailSvc, RequestAccessModel model)
+        public static async Task RequestAccess(IFluentEmailFactory emailSvc, RequestAccessModel model)
         {
-            emailSvc
+            await emailSvc
                 .Create()
                 .To("Access@RedLeg.app")
                 .ReplyTo(model.Email)

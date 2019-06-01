@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Jobs
 {
@@ -49,14 +50,18 @@ namespace BatteryCommander.Web.Jobs
             {
                 // If it's in a given window, fire off an email to the relevant people
 
-                var recipients = Get_Recipients(evaluation).Distinct().ToList();
+                var recipients = 
+                    Get_Recipients(evaluation)
+                    .Distinct()
+                    .ToList();
 
                 emailSvc
                     .Create()
                     .To(recipients)
                     .Subject($"Evaluation Updated | {evaluation.Ratee}")
                     .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Jobs/EvaluationUpdated.html", evaluation)
-                    .SendWithErrorCheck();
+                    .SendWithErrorCheck()
+                    .Wait();
             }
         }
 

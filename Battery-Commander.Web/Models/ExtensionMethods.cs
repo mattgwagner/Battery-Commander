@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Models
 {
@@ -24,13 +25,13 @@ namespace BatteryCommander.Web.Models
             return default(DateTime?);
         }
 
-        public static void SendWithErrorCheck(this IFluentEmail email)
+        public static async Task SendWithErrorCheck(this IFluentEmail email)
         {
             var log = Serilog.Log.ForContext<IFluentEmail>();
 
             log.Information("Sending email via SendGrid, {@email}", email);
 
-            var response = email.Send();
+            var response = await email.SendAsync();
 
             if (!response.Successful)
             {

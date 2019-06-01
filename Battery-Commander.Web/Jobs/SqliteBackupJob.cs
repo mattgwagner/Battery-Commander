@@ -28,7 +28,8 @@ namespace BatteryCommander.Web.Jobs
                     Filename = "Data.db",
                     Data = System.IO.File.OpenRead("Data.db")
                 })
-                .SendWithErrorCheck();
+                .SendWithErrorCheck()
+                .Wait();
         }
     }
 }

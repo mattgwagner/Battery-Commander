@@ -33,7 +33,8 @@ namespace BatteryCommander.Web.Jobs
                         .SetFrom(unit.SensitiveItems.From.EmailAddress, unit.SensitiveItems.From.Name)
                         .Subject($"{unit.Name} | GREEN 3 Report | {unit.SensitiveItems.Status}")
                         .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Jobs/Green3_SensitiveItems.html", unit)
-                        .SendWithErrorCheck();
+                        .SendWithErrorCheck()
+                        .Wait();
                 }
             }
         }

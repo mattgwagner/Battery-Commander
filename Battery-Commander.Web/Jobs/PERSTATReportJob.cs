@@ -33,7 +33,8 @@ namespace BatteryCommander.Web.Jobs
                         .SetFrom(unit.PERSTAT.From.EmailAddress, unit.PERSTAT.From.Name)
                         .Subject($"{unit.Name} | RED 1 PERSTAT")
                         .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Jobs/Red1_Perstat.html", unit)
-                        .SendWithErrorCheck();
+                        .SendWithErrorCheck()
+                        .Wait();
                 }
             }
         }

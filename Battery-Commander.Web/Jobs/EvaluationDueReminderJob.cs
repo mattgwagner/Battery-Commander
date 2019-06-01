@@ -57,7 +57,8 @@ namespace BatteryCommander.Web.Jobs
                         .To(emailAddress: "Evaluations@RedLeg.app")
                         .Subject($"{unit.UIC} | Past Due and Upcoming Evaluations")
                         .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Jobs/EvaluationsDue.html", evaluations_due_soon)
-                        .SendWithErrorCheck();
+                        .SendWithErrorCheck()
+                        .Wait();
                 }
             }
         }

@@ -73,7 +73,7 @@ namespace BatteryCommander.Web.Controllers
         {
             // Process request, send email to admin with info
 
-            UserService.RequestAccess(emailSvc, model);
+            await UserService.RequestAccess(emailSvc, model);
 
             // Redirect to thank you etc. etc.
 
