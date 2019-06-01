@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace BatteryCommander.Web.Models.Reports
 {
@@ -11,7 +12,7 @@ namespace BatteryCommander.Web.Models.Reports
 
         // HACK: Make this configurable for a specific user
 
-        public String Authentication => "1LT MW";
+        public String Authentication => Unit.ReportSettings.SingleOrDefault(settings => settings.Type == Type)?.From.Name;
 
         // You damn well better have a Green status
 
