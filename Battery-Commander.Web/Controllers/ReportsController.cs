@@ -49,7 +49,7 @@ namespace BatteryCommander.Web.Controllers
         {
             await reportService.SendPerstatReport(unitId);
 
-            return RedirectToRoute("Unit.Details", new { unitId });
+            return RedirectToRoute("Unit.Details", new { id = unitId });
         }
 
         [HttpPost]
@@ -57,7 +57,7 @@ namespace BatteryCommander.Web.Controllers
         {
             await reportService.SendSensitiveItems(unitId);
 
-            return RedirectToRoute("Unit.Details", new { unitId });
+            return RedirectToRoute("Unit.Details", new { id = unitId });
         }
 
         [HttpPost]
