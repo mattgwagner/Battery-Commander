@@ -24,7 +24,11 @@ namespace BatteryCommander.Web.Services
                 .Create()
                 .To(unit.PERSTAT.Recipients)
                 .SetFrom(unit.PERSTAT.From.EmailAddress, unit.PERSTAT.From.Name)
-                .BCC(unit.PERSTAT.From.EmailAddress, unit.PERSTAT.From.Name)
+                .BCC(new[]
+                {
+                    unit.PERSTAT.From,
+                    new FluentEmail.Core.Models.Address(emailAddress: "Reports@redleg.app")
+                })
                 .Subject($"{unit.Name} | RED 1 PERSTAT")
                 .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Jobs/Red1_Perstat.html", unit)
                 .SendWithErrorCheck();
@@ -38,7 +42,11 @@ namespace BatteryCommander.Web.Services
                 .Create()
                 .To(unit.SensitiveItems.Recipients)
                 .SetFrom(unit.SensitiveItems.From.EmailAddress, unit.SensitiveItems.From.Name)
-                .BCC(unit.SensitiveItems.From.EmailAddress, unit.SensitiveItems.From.Name)
+                .BCC(new[]
+                {
+                    unit.SensitiveItems.From,
+                    new FluentEmail.Core.Models.Address(emailAddress: "Reports@redleg.app")
+                })
                 .Subject($"{unit.Name} | GREEN 3 Report | {unit.SensitiveItems.Status}")
                 .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Jobs/Green3_SensitiveItems.html", unit)
                 .SendWithErrorCheck();
