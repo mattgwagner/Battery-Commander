@@ -6,7 +6,7 @@
 <h2>@ViewBag.Reports</h2>
 
 <div>
-    @using (Html.BeginForm("Save", "Reports", FormMethod.Post, new { @class = "form-horizontal", role = "form" }, new { ViewBag.UnitId }))
+    @using (Html.BeginForm("Save", "Reports", new { ViewBag.UnitId }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary()
