@@ -72,6 +72,8 @@ namespace BatteryCommander.Web.Models
                     return MilitaryEducationLevel.CCC;
 
                 case Rank.O4:
+                case Rank.O5:
+                case Rank.O6:
                     return MilitaryEducationLevel.ILE;
 
                 default:
