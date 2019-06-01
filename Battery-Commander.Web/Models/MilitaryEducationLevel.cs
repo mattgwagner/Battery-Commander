@@ -58,8 +58,10 @@ namespace BatteryCommander.Web.Models
 
                 case Rank.E8:
                 case Rank.E8_MSG:
-                case Rank.E9:
                     return MilitaryEducationLevel.MLC;
+
+                case Rank.E9:
+                    return MilitaryEducationLevel.SMC;
 
                 case Rank.CDT:
                     return MilitaryEducationLevel.CST;
