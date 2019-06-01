@@ -6,11 +6,10 @@
 <h2>@ViewBag.Reports</h2>
 
 <div>
-    @using (Html.BeginForm("Save", "Reports", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    @using (Html.BeginForm("Save", "Reports", FormMethod.Post, new { @class = "form-horizontal", role = "form" }, new { ViewBag.UnitId }))
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary()
-        @Html.Hidden("UnitId", (int)ViewBag.UnitId)
 
         <div class="form-group form-group-lg">
             @Html.DisplayNameFor(model => model.Type)
