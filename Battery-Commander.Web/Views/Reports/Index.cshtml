@@ -13,18 +13,34 @@
         {
             <tr>
                 <td>@report.Type</td>
-                <td>@report.From</td>
-                <td>@report.Enabled</td>
+                <td>@report.From?.Name  @report.From?.EmailAddress</td>
+                <td>
+                <td>
+                    @if (report.Enabled)
+                    {
+                        using (Html.BeginForm("Disable", "Reports", FormMethod.Post, new { report.Type, ViewBag.UnitId }))
+                        {
+                            <button type="submit">Disable</button>
+                        }
+                    }
+                    else
+                    {
+                        using (Html.BeginForm("Enable", "Reports", FormMethod.Post, new { report.Type, ViewBag.UnitId }))
+                        {
+                            <button type="submit">Enable</button>
+                        }
+                    }
+                </td>
                 <td>
                     <ul>
                         @foreach (var recipient in report.Recipients)
                         {
-                            <li>@recipient</li>
+                            <li>@recipient.Name - @recipient.EmailAddress</li>
                         }
                     </ul>
                 </td>
                 <td>
-                    @using (Html.BeginForm("Delete", "Reports", FormMethod.Post, new { report.Type, ViewBag.UnitId })
+                    @using (Html.BeginForm("Delete", "Reports", FormMethod.Post, new { report.Type, ViewBag.UnitId }))
                     {
                         <button type="submit">Delete</button>
                     }
