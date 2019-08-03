@@ -23,7 +23,7 @@
                     @Html.ActionLink("Soldiers", "Index", "Soldiers", new { unit = unit.Id }, new { @class = "btn btn-default btn-xs" })
                     @Html.ActionLink("Vehicles", "Index", "Vehicles", new { Units = new int[] { unit.Id } }, new { @class = "btn btn-default btn-xs" })
                     @Html.ActionLink("Edit", "Edit", new { unit.Id }, new { @class = "btn btn-default btn-xs" })
-                    @Html.RouteLink("Reports", "Unit.Reports", new { unit.Id }, new { @class = "btn btn-default btn-xs" })
+                    @Html.RouteLink("Reports", "Unit.Reports", new { unitId = unit.Id }, new { @class = "btn btn-default btn-xs" })
                 </td>
             </tr>
         }
