@@ -11,6 +11,8 @@ namespace BatteryCommander.Web.Models
 
         public virtual DbSet<APFT> APFTs { get; set; }
 
+        public virtual DbSet<ACFT> ACFTs { get; set; }
+
         public virtual DbSet<ABCP> ABCPs { get; set; }
 
         public virtual DbSet<Unit> Units { get; set; }
