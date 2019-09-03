@@ -1,11 +1,11 @@
-﻿@model APFT
+﻿@model ACFT
 
-@Html.ActionLink("Back to APFT", "Index", "APFT")
+@Html.ActionLink("Back to ACFT", "Index", "ACFT")
 @Html.ActionLink("Edit", "Edit", new { Model.Id }, new { @class = "btn btn-default" })
 
 @if (!Model.IsPassing)
 {
-    @Html.ActionLink("Generate Counseling", "Counseling", "APFT", new { Model.Id }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Generate Counseling", "Counseling", "ACFT", new { Model.Id }, new { @class = "btn btn-default" })
 }
 
 @if (!Model.Soldier.HasDoB)
@@ -21,10 +21,6 @@
         <td>@Html.DisplayFor(model => model.Soldier)</td>
     </tr>
     <tr>
-        <td>@Html.DisplayNameFor(model => model.Age)</td>
-        <td>@Html.DisplayFor(model => model.Age)</td>
-    </tr>
-    <tr>
         <td>@Html.DisplayNameFor(model => model.IsPassing)</td>
         <td>@Html.DisplayFor(model => model)</td>
     </tr>
@@ -33,47 +29,43 @@
         <td>@Html.DisplayFor(model => model.Date)</td>
     </tr>
     <tr>
-        <td>@Html.DisplayNameFor(model => model.PushUps)</td>
-        <td>@Html.DisplayFor(model => model.PushUps)</td>
+        <td>@Html.DisplayNameFor(model => model.ForRecord)</td>
+        <td>@Html.DisplayFor(model => model.ForRecord)</td>
     </tr>
     <tr>
-        <td>@Html.DisplayNameFor(model => model.PushUpScore)</td>
-        <td>@Html.DisplayFor(model => model.PushUpScore)</td>
+        <td>@Html.DisplayNameFor(model => model.ThreeRepMaximumDeadlifts)</td>
+        <td>@Html.DisplayFor(model => model.ThreeRepMaximumDeadlifts)</td>
     </tr>
     <tr>
-        <td>@Html.DisplayNameFor(model => model.SitUps)</td>
-        <td>@Html.DisplayFor(model => model.SitUps)</td>
+        <td>@Html.DisplayNameFor(model => model.StandingPowerThrow)</td>
+        <td>@Html.DisplayFor(model => model.StandingPowerThrow)</td>
     </tr>
     <tr>
-        <td>@Html.DisplayNameFor(model => model.SitUpScore)</td>
-        <td>@Html.DisplayFor(model => model.SitUpScore)</td>
+        <td>@Html.DisplayNameFor(model => model.HandReleasePushups)</td>
+        <td>@Html.DisplayFor(model => model.HandReleasePushups)</td>
     </tr>
     <tr>
-        <td>@Html.DisplayNameFor(model => model.AerobicEvent)</td>
-        <td>@Html.DisplayFor(model => model.AerobicEvent)</td>
+        <td>@Html.DisplayNameFor(model => model.SprintDragCarry)</td>
+        <td>@Html.DisplayFor(model => model.SprintDragCarry)</td>
     </tr>
     <tr>
-        <td>@Html.DisplayNameFor(model => model.Run)</td>
-        <td>@Html.DisplayFor(model => model.Run)</td>
+        <td>@Html.DisplayNameFor(model => model.LegTucks)</td>
+        <td>@Html.DisplayFor(model => model.LegTucks)</td>
     </tr>
-    @if (!Model.IsAlternateAerobicEvent)
-    {
-        <tr>
-            <td>@Html.DisplayNameFor(model => model.RunScore)</td>
-            <td>@Html.DisplayFor(model => model.RunScore)</td>
-        </tr>
-    }
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.TwoMileRun)</td>
+        <td>@Html.DisplayFor(model => model.TwoMileRun)</td>
+    </tr>
     <tr>
         <td>@Html.DisplayNameFor(model => model.TotalScore)</td>
         <td>
             @Html.DisplayFor(model => model.TotalScore)
-            <span class="label">Alt. Aerobic</span>
         </td>
     </tr>
 </table>
 
 <div>
-    @using (Html.BeginForm("Delete", "APFT", new { Model.Id }, FormMethod.Post))
+    @using (Html.BeginForm("Delete", "ACFT", new { Model.Id }, FormMethod.Post))
     {
         @Html.AntiForgeryToken()
         <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this?')">Delete</button>
