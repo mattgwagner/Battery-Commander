@@ -23,7 +23,7 @@
 
         <div class="btn-group">
             @Html.ActionLink("Add New", "New", "Evaluations", null, new { @class = "btn btn-default" })
-            @Html.ActionLink("Show All", "All", "Evaluations", null, new { @class = "btn btn-default" })
+            @Html.ActionLink("Show All", "All", "Evaluations", new { Unit = ViewBag.UnitId }, new { @class = "btn btn-info" })
         </div>
     </div>
 

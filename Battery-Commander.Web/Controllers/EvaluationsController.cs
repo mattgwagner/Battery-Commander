@@ -39,11 +39,11 @@ namespace BatteryCommander.Web.Controllers
         }
 
         [Route("~/Evaluations")]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All(int? unitId)
         {
             return View("List", new EvaluationListViewModel
             {
-                Evaluations = EvaluationService.Filter(db, new EvaluationService.Query { }),
+                Evaluations = EvaluationService.Filter(db, new EvaluationService.Query { Unit = unitId }),
                 Soldiers = Enumerable.Empty<Soldier>()
             });
         }
