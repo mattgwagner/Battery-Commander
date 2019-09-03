@@ -111,30 +111,45 @@ namespace BatteryCommander.Web.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Save(Evaluation model)
         {
-            if (await db.Evaluations.AnyAsync(evaluation => evaluation.Id == model.Id) == false)
+            if (ModelState.IsValid)
             {
-                model.Events.Add(new Evaluation.Event
+                if (await db.Evaluations.AnyAsync(evaluation => evaluation.Id == model.Id) == false)
                 {
-                    Author = await GetDisplayName(),
-                    Message = "Added Evaluation"
-                });
+                    model.Events.Add(new Evaluation.Event
+                    {
+                        Author = await GetDisplayName(),
+                        Message = "Added Evaluation"
+                    });
 
-                db.Evaluations.Add(model);
+                    db.Evaluations.Add(model);
+                }
+                else
+                {
+                    model.Events.Add(new Evaluation.Event
+                    {
+                        Author = await GetDisplayName(),
+                        Message = "Evaluation Updated"
+                    });
+
+                    db.Evaluations.Update(model);
+                }
+
+                await db.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Details), new { model.Id });
             }
-            else
+
+            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, new SoldierService.Query
             {
-                model.Events.Add(new Evaluation.Event
-                {
-                    Author = await GetDisplayName(),
-                    Message = "Evaluation Updated"
-                });
+                Ranks = RankExtensions.All().Where(rank => rank.GetsEvaluation())
+            });
 
-                db.Evaluations.Update(model);
-            }
+            ViewBag.Reviewers = await SoldiersController.GetDropDownList(db, new SoldierService.Query
+            {
+                Ranks = new[] { Rank.O3, Rank.O4, Rank.O5, Rank.O6 }
+            });
 
-            await db.SaveChangesAsync();
-
-            return RedirectToAction(nameof(Details), new { model.Id });
+            return View(nameof(Edit), model);
         }
 
         [HttpPost, ValidateAntiForgeryToken]
