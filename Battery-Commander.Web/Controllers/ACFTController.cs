@@ -1,5 +1,7 @@
 ﻿using BatteryCommander.Web.Models;
+using BatteryCommander.Web.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +21,72 @@ namespace BatteryCommander.Web.Controllers
         public async Task<IActionResult> Index()
         {
             return Content("Coming soon!");
+        }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            return View(await Get(db, id));
+        }
+
+        public async Task<IActionResult> New(int soldier = 0)
+        {
+            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, SoldierService.Query.ALL);
+
+            return View(nameof(Edit), new APFT { SoldierId = soldier });
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, SoldierService.Query.ALL);
+
+            return View(await Get(db, id));
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> Save(ACFT model)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, SoldierService.Query.ALL);
+
+                return View("Edit", model);
+            }
+
+            if (await db.ACFTs.AnyAsync(apft => apft.Id == model.Id) == false)
+            {
+                db.ACFTs.Add(model);
+            }
+            else
+            {
+                db.ACFTs.Update(model);
+            }
+
+            await db.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Details), new { model.Id });
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var test = await Get(db, id);
+
+            db.ACFTs.Remove(test);
+
+            await db.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public static async Task<ACFT> Get(Database db, int id)
+        {
+            return
+                await db
+                .ACFTs
+                .Include(_ => _.Soldier)
+                .ThenInclude(_ => _.Unit)
+                .Where(_ => _.Id == id)
+                .SingleOrDefaultAsync();
         }
     }
 }
