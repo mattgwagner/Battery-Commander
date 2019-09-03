@@ -35,7 +35,7 @@ namespace BatteryCommander.Web.Controllers
         {
             ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, SoldierService.Query.ALL);
 
-            return View(nameof(Edit), new APFT { SoldierId = soldier });
+            return View(nameof(Edit), new ACFT { SoldierId = soldier });
         }
 
         public async Task<IActionResult> Edit(int id)
@@ -55,7 +55,7 @@ namespace BatteryCommander.Web.Controllers
                 return View("Edit", model);
             }
 
-            if (await db.ACFTs.AnyAsync(apft => apft.Id == model.Id) == false)
+            if (await db.ACFTs.AnyAsync(test => test.Id == model.Id) == false)
             {
                 db.ACFTs.Add(model);
             }
