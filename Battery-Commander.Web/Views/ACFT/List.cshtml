@@ -1,7 +1,7 @@
-﻿@model APFTListViewModel
+﻿@model ACFTListViewModel
 
 @{
-    ViewBag.Title = "APFT Tracker";
+    ViewBag.Title = "ACFT Tracker";
 }
 
 <div class="page-header">
@@ -16,7 +16,7 @@
 </div>
 
 <div class="btn-group">
-    @Html.ActionLink("Add New", "New", "APFT", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Add New", "New", "ACFT", null, new { @class = "btn btn-default" })
 </div>
 
 <table class="table table-striped display nowrap" id="dt" width="100%">
@@ -26,15 +26,9 @@
             <th data-priority="1">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastName)</th>
             <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().FirstName)</th>
             <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().Unit)</th>
-            <th data-priority="1">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastApft.IsPassing)</th>
-            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastApft.Date)</th>
-            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastApft.TotalScore)</th>
-            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastApft.PushUps)</th>
-            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastApft.PushUpScore)</th>
-            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastApft.SitUps)</th>
-            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastApft.SitUpScore)</th>
-            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastApft.Run)</th>
-            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastApft.RunScore)</th>
+            <th data-priority="1">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastAcft.IsPassing)</th>
+            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastAcft.Date)</th>
+            <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastAcft.TotalScore)</th>
             <th></th>
             <th></th>
         </tr>
@@ -42,44 +36,23 @@
 
     <tbody>
         @foreach (var soldier in Model.Soldiers)
-            {
+        {
             <tr>
                 <td>@soldier.Rank.ShortName()</td>
                 <td>@Html.RouteLink(soldier.LastName, "Soldier.Details", new { soldier.Id })</td>
                 <td>@Html.RouteLink(soldier.FirstName, "Soldier.Details", new { soldier.Id })</td>
                 <td>@Html.DisplayFor(_ => soldier.Unit)</td>
-                @if (soldier.LastApft != null)
+                @if (soldier.LastAcft != null)
                 {
-                    <td data-sort="@soldier.ConsecutiveApftFailures">
-                        @Html.DisplayFor(_ => soldier.LastApft, "APFT")
-                        @if (!soldier.LastApft.IsPassing)
-                        {
-                            <span class="badge">@(soldier.ConsecutiveApftFailures)x</span>
-                        }
+                    <td>
+                        @Html.DisplayFor(_ => soldier.LastAcft, "ACFT")
                     </td>
                     <td>
-                        <a href="@Url.Action("Details", new { soldier.LastApft?.Id })">
-                            @Html.DisplayFor(_ => soldier.LastApft.Date)
+                        <a href="@Url.Action("Details", new { soldier.LastAcft?.Id })">
+                            @Html.DisplayFor(_ => soldier.LastAcft.Date)
                         </a>
                     </td>
-                    <td data-sort="@soldier.LastApft.TotalScore">@Html.DisplayFor(_ => soldier.LastApft.TotalScore)</td>
-                    <td>@Html.DisplayFor(_ => soldier.LastApft.PushUps)</td>
-                    <td>@Html.DisplayFor(_ => soldier.LastApft.PushUpScore)</td>
-                    <td>@Html.DisplayFor(_ => soldier.LastApft.SitUps)</td>
-                    <td>@Html.DisplayFor(_ => soldier.LastApft.SitUpScore)</td>
-                    <td>
-                        @Html.DisplayFor(_ => soldier.LastApft.Run)
-                        @if (soldier.LastApft.IsAlternateAerobicEvent)
-                        {
-                            <span class="label label-info">Alt.</span>
-                        }
-                    </td>
-                    <td>
-                        @if (!soldier.LastApft.IsAlternateAerobicEvent)
-                        {
-                            @Html.DisplayFor(_ => soldier.LastApft.RunScore)
-                        }
-                    </td>
+                    <td data-sort="@soldier.LastAcft.TotalScore">@Html.DisplayFor(_ => soldier.LastAcft.TotalScore)</td>
                 }
                 else
                 {
@@ -93,7 +66,7 @@
                     <td></td>
                     <td></td>
                 }
-                <td>@Html.ActionLink("New", "New", "APFT", new { soldier = soldier.Id }, new { @class = "btn btn-default btn-xs" })</td>
+                <td>@Html.ActionLink("New", "New", "ACFT", new { soldier = soldier.Id }, new { @class = "btn btn-default btn-xs" })</td>
                 <td></td>
             </tr>
         }
