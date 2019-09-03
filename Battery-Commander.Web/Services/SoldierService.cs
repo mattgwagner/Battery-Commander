@@ -39,6 +39,7 @@ namespace BatteryCommander.Web.Services
                 .Include(s => s.Supervisor)
                 .Include(s => s.SSDSnapshots)
                 .Include(s => s.ABCPs)
+                .Include(s => s.ACFTs)
                 .Include(s => s.APFTs)
                 .Include(s => s.Unit)
                 .ToListAsync();
