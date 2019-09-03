@@ -1,0 +1,81 @@
+﻿@model APFT
+
+@Html.ActionLink("Back to APFT", "Index", "APFT")
+@Html.ActionLink("Edit", "Edit", new { Model.Id }, new { @class = "btn btn-default" })
+
+@if (!Model.IsPassing)
+{
+    @Html.ActionLink("Generate Counseling", "Counseling", "APFT", new { Model.Id }, new { @class = "btn btn-default" })
+}
+
+@if (!Model.Soldier.HasDoB)
+{
+    <div class="alert alert-danger">Soldier has invalid Date of Birth!</div>
+}
+
+<h3><a href="http://armypubs.army.mil/epubs/DR_pubs/DR_a/pdf/web/fm7_22.pdf">FM 7-22 Army Physical Readiness Training</a></h3>
+
+<table class="table table-bordered">
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Soldier)</td>
+        <td>@Html.DisplayFor(model => model.Soldier)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Age)</td>
+        <td>@Html.DisplayFor(model => model.Age)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.IsPassing)</td>
+        <td>@Html.DisplayFor(model => model)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Date)</td>
+        <td>@Html.DisplayFor(model => model.Date)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.PushUps)</td>
+        <td>@Html.DisplayFor(model => model.PushUps)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.PushUpScore)</td>
+        <td>@Html.DisplayFor(model => model.PushUpScore)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.SitUps)</td>
+        <td>@Html.DisplayFor(model => model.SitUps)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.SitUpScore)</td>
+        <td>@Html.DisplayFor(model => model.SitUpScore)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.AerobicEvent)</td>
+        <td>@Html.DisplayFor(model => model.AerobicEvent)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Run)</td>
+        <td>@Html.DisplayFor(model => model.Run)</td>
+    </tr>
+    @if (!Model.IsAlternateAerobicEvent)
+    {
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.RunScore)</td>
+            <td>@Html.DisplayFor(model => model.RunScore)</td>
+        </tr>
+    }
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.TotalScore)</td>
+        <td>
+            @Html.DisplayFor(model => model.TotalScore)
+            <span class="label">Alt. Aerobic</span>
+        </td>
+    </tr>
+</table>
+
+<div>
+    @using (Html.BeginForm("Delete", "APFT", new { Model.Id }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this?')">Delete</button>
+    }
+</div>
