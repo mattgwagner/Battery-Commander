@@ -24,8 +24,7 @@ namespace BatteryCommander.Web.Models
         [Required, DataType(DataType.Date), Column(TypeName = "date"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime Date { get; set; } = DateTime.Today;
 
-        [DataType(DataType.Date)]
-        public DateTime ValidThru => Date.AddDays(Soldier.DaysPerYear);
+
 
         [Display(Name = "For Record")]
         public Boolean ForRecord { get; set; }
@@ -69,11 +68,40 @@ namespace BatteryCommander.Web.Models
 
         // Event Scores
 
+        public int TotalScore => 0;
+
+        // Soldier Info
+
+        // TODO Phsyical Standards Category read off of the Soldier
+
+        // Summary
+
+        [DataType(DataType.Date)]
+        public DateTime ValidThru => Date.AddDays(Soldier.DaysPerYear);
+
+        public Boolean IsValid => ValidThru > DateTime.Today;
+
+        public Boolean IsPassing
+        {
+            get
+            {
+                // Look at the Soldier's physical standards category
+
+                // Compare that to the total score and min per event
+
+                // Return true or false
+
+                return false;
+            }
+        }
+
         // Generate Counseling?
     }
 
     public partial class Soldier
     {
+        // TODO Phsyical Standards Category? By MOS or unit?
+
         public virtual ICollection<ACFT> ACFTs { get; set; }
 
         public virtual ACFT LastAcft => ACFTs?.OrderByDescending(test => test.Date).FirstOrDefault();
