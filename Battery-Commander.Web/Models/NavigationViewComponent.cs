@@ -12,7 +12,7 @@ namespace BatteryCommander.Web.Models
 
         public Soldier Soldier { get; private set; }
 
-        public Boolean ShowNavigation => !String.Equals(nameof(HomeController.PrivacyAct), RouteData.Values["action"]);
+        public Boolean ShowNavigation => Soldier != null && !String.Equals(nameof(HomeController.PrivacyAct), RouteData.Values["action"]);
 
         public NavigationViewComponent(Database db)
         {
