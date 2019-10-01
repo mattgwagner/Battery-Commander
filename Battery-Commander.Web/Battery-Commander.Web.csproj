@@ -81,7 +81,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.6" />
     <PackageReference Include="epplus.core" Version="1.5.4" />
     <PackageReference Include="FluentEmail.Razor" Version="2.5.0" />
-    <PackageReference Include="FluentEmail.SendGrid" Version="2.5.0" />
+    <PackageReference Include="FluentEmail.SendGrid" Version="2.7.0" />
     <PackageReference Include="FluentScheduler" Version="5.3.0" />
     <PackageReference Include="Humanizer.Core" Version="2.7.9" />
     <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.6.1" />
