@@ -7,7 +7,7 @@ using System.IO;
 
 namespace BatteryCommander.Web.Controllers
 {
-    [Authorize, ApiExplorerSettings(IgnoreApi = true)]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class AdminController : Controller
     {
         // Admin Tasks:

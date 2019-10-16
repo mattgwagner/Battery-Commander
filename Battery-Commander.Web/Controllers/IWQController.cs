@@ -11,7 +11,7 @@ using BatteryCommander.Web.Services;
 
 namespace BatteryCommander.Web.Controllers
 {
-    [Authorize, ApiExplorerSettings(IgnoreApi = true)]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class IWQController : Controller
     {
         private readonly Database db;

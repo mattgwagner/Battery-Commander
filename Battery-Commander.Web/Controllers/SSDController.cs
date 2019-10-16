@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Controllers
 {
-    [Authorize, ApiExplorerSettings(IgnoreApi = true)]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class SSDController : Controller
     {
         private readonly Database db;

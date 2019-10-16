@@ -9,7 +9,7 @@ using static BatteryCommander.Web.Models.ABCP;
 
 namespace BatteryCommander.Web.Controllers
 {
-    [Authorize, ApiExplorerSettings(IgnoreApi = true)]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class ABCPController : Controller
     {
         private readonly Database db;

@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Controllers
 {
-    [Authorize, ApiExplorerSettings(IgnoreApi = true)]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class UnitsController : Controller
     {
         private readonly Database db;

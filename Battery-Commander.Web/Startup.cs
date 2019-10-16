@@ -4,11 +4,13 @@ using BatteryCommander.Web.Models;
 using BatteryCommander.Web.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -218,6 +220,13 @@ namespace BatteryCommander.Web
             // Add framework services.
             services.AddMvc(options =>
             {
+                var policy =
+                    new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+
+                options.Filters.Add(new AuthorizeFilter(policy));
+
                 if (!IsDevelopment)
                 {
                     options.Filters.Add(new RequireHttpsAttribute { });
@@ -269,7 +278,6 @@ namespace BatteryCommander.Web
             });
 
             app
-                .UseAuthentication()
                 .Use(async (context, next) =>
                 {
                     if (context.User.Identity.IsAuthenticated)
