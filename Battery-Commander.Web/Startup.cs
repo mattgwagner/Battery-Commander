@@ -294,6 +294,7 @@ namespace BatteryCommander.Web
                         await next.Invoke();
                     }
                 })
+                .UseAuthentication()
                 .Use(async (context, next) =>
                 {
                     // Are we already in the pipeline for our request access page? 'cuz it wouldn't make sense to redirect again
@@ -326,8 +327,6 @@ namespace BatteryCommander.Web
                 });
 
             app.UseCors("Policy");
-
-            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
