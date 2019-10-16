@@ -327,6 +327,8 @@ namespace BatteryCommander.Web
 
             app.UseCors("Policy");
 
+            app.UseAuthentication();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
