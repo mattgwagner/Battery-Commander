@@ -4,9 +4,14 @@ on: [push]
 
 jobs:
   build:
-    runs-on: windows-latest    
+    runs-on: ubuntu-latest    
     steps:
-      - uses: actions/setup-dotnet
-        with:
-          dotnet-version: 2.2.103
-      - run: dotnet build
+    - uses: actions@checkout@v1
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 2.2.108
+    - name: Build with dotnet
+      run: dotnet build --configuration Release
+    - name: Unit Tests
+      run: dotnet test
