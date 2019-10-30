@@ -1,4 +1,4 @@
-@model IEnumerable<BatteryCommander.Web.Models.Evaluation>
+@model BatteryCommander.Web.Jobs.EvaluationDueReminderJob.Model
 
 <h1>Past Due and Upcoming Evaluations</h1>
 
@@ -14,21 +14,21 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var eval in Model)
+        @foreach (var eval in Model.Evaluations)
         {
-            var last_update_style = eval.LastUpdated < DateTime.Now.AddDays(-30) ? "background-color:red" : "";
-            var thru_date_style = eval.ThruDate < DateTime.Now.AddDays(-60) ? "background-color:red" : "";
+        var last_update_style = eval.LastUpdated < DateTime.Now.AddDays(-30) ? "background-color:red" : "";
+        var thru_date_style = eval.ThruDate < DateTime.Now.AddDays(-60) ? "background-color:red" : "";
 
-            <tr>
-                <td>@eval.Ratee</td>
-                <td>@eval.Rater</td>
-                <td>@eval.SeniorRater</td>
-                <td style="@thru_date_style">@eval.ThruDate.ToString("yyyy-MM-dd")</td>
-                <td>@eval.Status</td>
-                <td style="@last_update_style">@eval.LastUpdatedHumanized</td>
-            </tr>
+        <tr>
+            <td>@eval.Ratee</td>
+            <td>@eval.Rater</td>
+            <td>@eval.SeniorRater</td>
+            <td style="@thru_date_style">@eval.ThruDate.ToString("yyyy-MM-dd")</td>
+            <td>@eval.Status</td>
+            <td style="@last_update_style">@eval.LastUpdatedHumanized</td>
+        </tr>
         }
     </tbody>
 </table>
 
-<a href="https://bc.redleg.app/Evaluations">Evaluation Tracker</a>
+<a href="https://bc.redleg.app/Units/@Model.Unit/Evaluations">Evaluation Tracker</a>

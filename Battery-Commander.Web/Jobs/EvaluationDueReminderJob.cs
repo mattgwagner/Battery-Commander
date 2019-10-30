@@ -4,6 +4,7 @@ using FluentEmail.Core;
 using FluentScheduler;
 using Serilog;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -16,6 +17,13 @@ namespace BatteryCommander.Web.Jobs
         private readonly Database db;
 
         private readonly IFluentEmailFactory emailSvc;
+
+        public class Model
+        {
+            public IEnumerable<Evaluation> Evaluations { get; set; }
+
+            public int Unit { get; set; }
+        }
 
         public EvaluationDueReminderJob(Database db, IFluentEmailFactory emailSvc)
         {
@@ -56,7 +64,11 @@ namespace BatteryCommander.Web.Jobs
                         .BCC(recipients)
                         .To(emailAddress: "Evaluations@RedLeg.app")
                         .Subject($"{unit.UIC} | Past Due and Upcoming Evaluations")
-                        .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Jobs/EvaluationsDue.html", evaluations_due_soon)
+                        .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Jobs/EvaluationsDue.html", new Model
+                        {
+                            Evaluations = evaluations_due_soon,
+                            Unit = unit.Id
+                        })
                         .SendWithErrorCheck()
                         .Wait();
                 }
