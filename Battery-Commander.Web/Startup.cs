@@ -2,6 +2,7 @@
 using BatteryCommander.Web.Jobs;
 using BatteryCommander.Web.Models;
 using BatteryCommander.Web.Services;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
@@ -57,26 +58,31 @@ namespace BatteryCommander.Web
                 .GetSection("SendGrid")
                 .GetValue<String>("ApiKey");
 
-            services.AddMemoryCache();
-
             // Add functionality to inject IOptions<T>
             services.AddOptions();
 
             // Add the Auth0 Settings object so it can be injected
             services.Configure<Auth0Settings>(Configuration.GetSection("Auth0"));
 
-            services.AddTransient<ReportService>();
-
-            // Register jobs as services for IoC
-            services.AddTransient<SqliteBackupJob>();
-            services.AddTransient<EvaluationDueReminderJob>();
-            services.AddTransient<PERSTATReportJob>();
-            services.AddTransient<SensitiveItemsReport>();
-            services.AddTransient<EvaluationStatusChangeJob>();
-
             var auth0Settings = new Auth0Settings { };
 
             Configuration.GetSection("Auth0").Bind(auth0Settings);
+
+            services.AddTransient<ReportService>();
+
+            // Register jobs as services for IoC
+            services
+                .AddTransient<SqliteBackupJob>()
+                .AddTransient<EvaluationDueReminderJob>()
+                .AddTransient<PERSTATReportJob>()
+                .AddTransient<SensitiveItemsReport>()
+                .AddTransient<EvaluationStatusChangeJob>();
+
+            services
+                .AddHttpContextAccessor()
+                .AddMemoryCache()
+                .AddMediatR(typeof(Startup))
+                .AddDbContext<Database>(optionsLifetime: ServiceLifetime.Transient, contextLifetime: ServiceLifetime.Transient);
 
             services
                 .AddFluentEmail(defaultFromEmail: Email_Address, defaultFromName: "Battery Commander App")
@@ -236,11 +242,6 @@ namespace BatteryCommander.Web
             {
                 options.SerializerSettings.Converters.Add(new StringEnumConverter { });
             });
-
-            // Add functionality to inject IOptions<T>
-            services.AddOptions();
-
-            services.AddDbContext<Database>(optionsLifetime: ServiceLifetime.Transient);
 
             // Register the Swagger generator, defining one or more Swagger documents
             services.AddSwaggerGen(c =>
