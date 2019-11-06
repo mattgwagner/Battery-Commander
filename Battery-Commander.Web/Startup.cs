@@ -16,7 +16,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Converters;
-using Serilog;
 using Serilog.Context;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
@@ -114,17 +113,6 @@ namespace BatteryCommander.Web
                     o.Authority = $"https://{auth0Settings.Domain}/";
                     o.Audience = auth0Settings.ApiIdentifier;
                     o.RequireHttpsMetadata = !IsDevelopment;
-
-                    //o.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-                    //{
-                    //    ValidateIssuer = true,
-                    //    ValidateAudience = true,
-                    //    ValidateLifetime = true,
-
-                    //    ValidateIssuerSigningKey = true,
-                    //    ValidIssuer = "",
-                    //    ValidAudience = auth0Settings.ApiIdentifier
-                    //};
                 })
                 .AddCookie(o =>
                 {
@@ -141,10 +129,6 @@ namespace BatteryCommander.Web
                     // Configure the Auth0 Client ID and Client Secret
                     options.ClientId = auth0Settings.ClientId;
                     options.ClientSecret = auth0Settings.ClientSecret;
-
-                    // Do not automatically authenticate and challenge
-                    //options.AutomaticAuthenticate = false;
-                    //options.AutomaticChallenge = false;
 
                     // Set response type to code
                     options.ResponseType = "code";
@@ -216,8 +200,8 @@ namespace BatteryCommander.Web
                     };
                 });
 
-            services.ConfigureApplicationCookie(options => options.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.None);
-            services.ConfigureExternalCookie(options => options.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.None);
+            services.ConfigureApplicationCookie(options => options.Cookie.SameSite = SameSiteMode.None);
+            services.ConfigureExternalCookie(options => options.Cookie.SameSite = SameSiteMode.None);
 
             services
                 .AddDataProtection()
@@ -257,12 +241,8 @@ namespace BatteryCommander.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, Database db)
+        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory, Database db)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddSerilog();
-            loggerFactory.AddDebug();
-
             app.UseDeveloperExceptionPage();
 
             app.UseStatusCodePages();
