@@ -1,9 +1,8 @@
 ﻿using BatteryCommander.Web.Models;
 using FluentScheduler;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Controllers
 {
@@ -38,10 +37,27 @@ namespace BatteryCommander.Web.Controllers
 
             return File(data, mimeType);
         }
-        
+
         public IActionResult Jobs()
         {
             return View(JobManager.AllSchedules);
+        }
+
+        public async Task<IActionResult> Users()
+        {
+            var soldiers_with_access =
+                await db
+                .Soldiers
+                .Where(soldier => soldier.CanLogin)
+                .Select(soldier => new
+                {
+                    soldier.FirstName,
+                    soldier.LastName,
+                    soldier.CivilianEmail
+                })
+                .ToListAsync();
+
+            return Json(soldiers_with_access);
         }
     }
 }
