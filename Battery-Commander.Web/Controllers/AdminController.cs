@@ -55,6 +55,7 @@ namespace BatteryCommander.Web.Controllers
                 .Where(soldier => !String.IsNullOrWhiteSpace(soldier.CivilianEmail))
                 .Select(soldier => new
                 {
+                    Uri = Url.RouteUrl("Soldier.Details", new { soldier.Id }),
                     Unit = soldier.Unit.Name,
                     soldier.FirstName,
                     soldier.LastName,
