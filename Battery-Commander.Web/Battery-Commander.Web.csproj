@@ -96,6 +96,8 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
+    <Folder Include="Commands\" />
+    <Folder Include="Queries\" />
     <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
 </Project>
