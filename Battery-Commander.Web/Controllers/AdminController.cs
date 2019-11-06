@@ -2,6 +2,7 @@
 using FluentScheduler;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -49,9 +50,12 @@ namespace BatteryCommander.Web.Controllers
             var soldiers_with_access =
                 await db
                 .Soldiers
+                .Include(soldier => soldier.Unit)
                 .Where(soldier => soldier.CanLogin)
+                .Where(soldier => !String.IsNullOrWhiteSpace(soldier.CivilianEmail))
                 .Select(soldier => new
                 {
+                    Unit = soldier.Unit.Name,
                     soldier.FirstName,
                     soldier.LastName,
                     soldier.CivilianEmail
