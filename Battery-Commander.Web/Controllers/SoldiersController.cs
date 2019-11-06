@@ -1,6 +1,5 @@
 ﻿using BatteryCommander.Web.Models;
 using BatteryCommander.Web.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -124,11 +123,19 @@ namespace BatteryCommander.Web.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            var soldier = await Get(db, id);
+            await db.Database.ExecuteSqlCommandAsync($@"
+delete from ABCPs where SoldierId = {id};
+delete from APFTs where SoldierId = {id};
+delete from ACFTs where SoldierId = {id};
+delete from Passengers where SoldierId = {id};
+delete from SSDSnapshot where SoldierId = {id};
 
-            db.Soldiers.Remove(soldier);
+update Vehicles set DriverId = null where DriverId = {id};
+update Vehicles set A_DriverId = null where DriverId = {id};
+update Weapons set AssignedId = null where AssignedId = {id};
 
-            await db.SaveChangesAsync();
+delete from Soldiers where Id = {id};
+");
 
             return RedirectToAction(nameof(Index));
         }

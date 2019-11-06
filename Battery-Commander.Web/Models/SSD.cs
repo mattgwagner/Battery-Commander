@@ -87,6 +87,11 @@ namespace BatteryCommander.Web.Models
             [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
             public int Id { get; set; }
 
+            [Required]
+            public int SoldierId { get; set; }
+
+            public virtual Soldier Soldier { get; set; }
+
             public DateTimeOffset AsOf { get; set; } = DateTimeOffset.UtcNow;
 
             public SSD SSD { get; set; } = SSD.SSD_1;
