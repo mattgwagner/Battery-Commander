@@ -163,7 +163,7 @@ delete from Soldiers where Id = {id};
 
             await db.SaveChangesAsync();
 
-            return Redirect(Request.Headers["Referer"]);
+            return Redirect($"{Request.GetTypedHeaders().Referer}");
         }
 
         public static async Task<Soldier> Get(Database db, int id)
