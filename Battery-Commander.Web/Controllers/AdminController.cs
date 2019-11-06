@@ -11,14 +11,6 @@ namespace BatteryCommander.Web.Controllers
     [ApiExplorerSettings(IgnoreApi = true)]
     public class AdminController : Controller
     {
-        // Admin Tasks:
-
-        // Add/Remove Users
-
-        // Backup SQLite Db
-
-        // Scrub Soldier Data
-
         private readonly Database db;
 
         public AdminController(Database db)
@@ -55,7 +47,7 @@ namespace BatteryCommander.Web.Controllers
                 .Where(soldier => !String.IsNullOrWhiteSpace(soldier.CivilianEmail))
                 .Select(soldier => new
                 {
-                    Uri = Url.RouteUrl("Soldier.Details", new { soldier.Id }),
+                    Uri = Url.RouteUrl("Soldier.Details", new { soldier.Id }, Request.Url.Scheme),
                     Unit = soldier.Unit.Name,
                     soldier.FirstName,
                     soldier.LastName,
