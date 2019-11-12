@@ -22,6 +22,7 @@
 <table class="table table-striped display nowrap" id="dt" width="100%">
     <thead>
         <tr>
+            <th></th>
             <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().Rank)</th>
             <th data-priority="1">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastName)</th>
             <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().FirstName)</th>
@@ -36,7 +37,6 @@
             <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastApft.Run)</th>
             <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastApft.RunScore)</th>
             <th></th>
-            <th></th>
         </tr>
     </thead>
 
@@ -44,6 +44,7 @@
         @foreach (var soldier in Model.Soldiers)
             {
             <tr>
+                <td>@Html.ActionLink("New", "New", "APFT", new { soldier = soldier.Id }, new { @class = "btn btn-default btn-xs" })</td>
                 <td>@soldier.Rank.ShortName()</td>
                 <td>@Html.RouteLink(soldier.LastName, "Soldier.Details", new { soldier.Id })</td>
                 <td>@Html.RouteLink(soldier.FirstName, "Soldier.Details", new { soldier.Id })</td>
@@ -92,8 +93,7 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                }
-                <td>@Html.ActionLink("New", "New", "APFT", new { soldier = soldier.Id }, new { @class = "btn btn-default btn-xs" })</td>
+                }                
                 <td></td>
             </tr>
         }
