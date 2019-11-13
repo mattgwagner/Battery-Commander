@@ -52,7 +52,7 @@ namespace BatteryCommander.Web.Jobs
 
                 var recipients = 
                     Get_Recipients(evaluation)
-                    .Distinct()
+                    .Distinct(new EmailComparer { })
                     .ToList();
 
                 emailSvc
@@ -63,6 +63,16 @@ namespace BatteryCommander.Web.Jobs
                     .SendWithErrorCheck()
                     .Wait();
             }
+        }
+
+        private class EmailComparer : IEqualityComparer<Address>
+        {
+            public bool Equals(Address x, Address y)
+            {
+                return String.Equals(x.EmailAddress, y.EmailAddress, StringComparison.CurrentCultureIgnoreCase);
+            }
+
+            public int GetHashCode(Address obj) => obj.GetHashCode();
         }
 
         public IEnumerable<Address> Get_Recipients(Evaluation evaluation)
