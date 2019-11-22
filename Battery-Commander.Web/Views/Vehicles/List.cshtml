@@ -8,7 +8,7 @@
     <h1>
         @ViewBag.Title
         @Html.ActionLink("Add New", "New", "Vehicles", null, new { @class = "btn btn-default" })
-        <a href="@Url.Action("Index", "Vehicles")?Available= class="btn btn-default" ?>Include NMC</a>
+        <a href="@Url.Action("Index", "Vehicles")?Available=" class="btn btn-default">Include NMC</a>
         <a href="@Url.Action("Index", "Vehicles")?Available=&IncludeIgnoredUnits=true" class="btn btn-default" ?>Show All</a>
     </h1>
     <h4>
@@ -31,6 +31,7 @@
         <thead>
             <tr>
                 <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Status)</th>
+                <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().LastUpdateHumanized)</th>
                 <th data-priority="10001">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Unit)</th>
                 <th data-priority="1">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Bumper)</th>
                 <th data-priority="4">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Type)</th>
@@ -70,6 +71,7 @@
                         <span class="label label-primary">TowBar</span>
                     }
                 </td>
+                <td>@Html.DisplayFor(_ => vehicle.LastUpdateHumanized)</td>
                 <td>@Html.DisplayFor(_ => vehicle.Unit)</td>
                 <td>@Html.DisplayFor(_ => vehicle)</td>
                 <td>@Html.DisplayFor(_ => vehicle.Type)</td>

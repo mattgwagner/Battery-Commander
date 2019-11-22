@@ -96,6 +96,8 @@ namespace BatteryCommander.Web.Controllers
                 db.Vehicles.Update(model);
             }
 
+            model.LastUpdate = DateTimeOffset.UtcNow;
+
             Reassign_Passengers(model.Id, model.DriverId, model.A_DriverId, passengers);
 
             await db.SaveChangesAsync();
@@ -133,6 +135,8 @@ namespace BatteryCommander.Web.Controllers
                 vehicle.DriverId = null;
                 vehicle.A_DriverId = null;
             }
+
+            vehicle.LastUpdate = DateTimeOffset.UtcNow;
 
             await db.SaveChangesAsync();
 

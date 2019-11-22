@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Humanizer;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -85,6 +86,11 @@ namespace BatteryCommander.Web.Models
         public String Notes { get; set; }
 
         public String GoogleSearchUrl => String.IsNullOrWhiteSpace(Nomenclature) ? String.Empty : $"https://www.google.com/search?q={Nomenclature}";
+
+        public DateTimeOffset LastUpdate { get; set; } = DateTimeOffset.UtcNow;
+
+        [NotMapped, Display(Name = "Last Updated")]
+        public String LastUpdateHumanized => (LastUpdate - DateTime.UtcNow).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Day);
 
         public class Passenger
         {
