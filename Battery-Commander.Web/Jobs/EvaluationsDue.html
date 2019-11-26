@@ -16,8 +16,8 @@
     <tbody>
         @foreach (var eval in Model.Evaluations)
         {
-        var last_update_style = eval.LastUpdated < DateTime.Now.AddDays(-30) ? "background-color:red" : "";
-        var thru_date_style = eval.ThruDate < DateTime.Now.AddDays(-60) ? "background-color:red" : "";
+        var last_update_style = eval.LastUpdated < System.DateTime.Now.AddDays(-30) ? "background-color:red" : "";
+        var thru_date_style = eval.ThruDate < System.DateTime.Now.AddDays(-60) ? "background-color:red" : "";
 
         <tr>
             <td>@eval.Ratee</td>
