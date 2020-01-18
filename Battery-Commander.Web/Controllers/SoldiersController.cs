@@ -63,12 +63,13 @@ namespace BatteryCommander.Web.Controllers
                 Soldier = await Get(db, id),
                 Subordinates = await SoldierService.Subordinates(db, id),
                 Evaluations =
-                    await db
+                    db
                     .Evaluations
                     .Include(eval => eval.Ratee)
                     .Include(eval => eval.Rater)
                     .Include(eval => eval.SeniorRater)
                     .Include(eval => eval.Reviewer)
+                    .AsEnumerable()
                     .Where(eval => new[] { eval.RateeId, eval.RaterId, eval.SeniorRaterId, eval.ReviewerId }.Any(sm => sm == id))
                     .OrderByDescending(eval => eval.ThruDate)
                     .Select(eval => new SoldierDetailsViewModel.EvaluationViewModel
@@ -76,7 +77,7 @@ namespace BatteryCommander.Web.Controllers
                         Evaluation = eval,
                         Role = eval.RateeId == id ? "Soldier" : (eval.RaterId == id ? "Rater" : (eval.SeniorRaterId == id ? "Senior Rater" : "Review"))
                     })
-                    .ToListAsync()
+                    .ToList()
             };
 
             return View(model);

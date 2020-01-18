@@ -9,9 +9,9 @@ namespace BatteryCommander.Web.Models
 {
     public class EvaluationService
     {
-        public static IQueryable<Evaluation> Filter(Database db, Query query)
+        public static IEnumerable<Evaluation> Filter(Database db, Query query)
         {
-            IQueryable<Evaluation> evaluations =
+            var evaluations =
                 db
                 .Evaluations
                 .Include(evaluation => evaluation.Ratee)
@@ -19,7 +19,7 @@ namespace BatteryCommander.Web.Models
                 .Include(evaluation => evaluation.SeniorRater)
                 .Include(evaluation => evaluation.Reviewer)
                 .Include(evaluation => evaluation.Events)
-                .AsQueryable();
+                .AsEnumerable();
 
             if (query.Delinquent.HasValue)
             {
