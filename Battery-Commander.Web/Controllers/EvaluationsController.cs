@@ -1,6 +1,5 @@
 ﻿using BatteryCommander.Web.Models;
 using BatteryCommander.Web.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -55,12 +54,12 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> New(int soldier = 0)
         {
-            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, new SoldierService.Query
+            ViewBag.Soldiers = await SoldierService.GetDropDownList(db, new SoldierService.Query
             {
                 Ranks = RankExtensions.All().Where(rank => rank.GetsEvaluation())
             });
 
-            ViewBag.Reviewers = await SoldiersController.GetDropDownList(db, new SoldierService.Query
+            ViewBag.Reviewers = await SoldierService.GetDropDownList(db, new SoldierService.Query
             {
                 Ranks = new[] { Rank.O3, Rank.O4, Rank.O5, Rank.O6 }
             });
@@ -95,12 +94,12 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, new SoldierService.Query
+            ViewBag.Soldiers = await SoldierService.GetDropDownList(db, new SoldierService.Query
             {
                 Ranks = RankExtensions.All().Where(rank => rank.GetsEvaluation())
             });
 
-            ViewBag.Reviewers = await SoldiersController.GetDropDownList(db, new SoldierService.Query
+            ViewBag.Reviewers = await SoldierService.GetDropDownList(db, new SoldierService.Query
             {
                 Ranks = new[] { Rank.O3, Rank.O4, Rank.O5, Rank.O6 }
             });
@@ -139,12 +138,12 @@ namespace BatteryCommander.Web.Controllers
                 return RedirectToAction(nameof(Details), new { model.Id });
             }
 
-            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, new SoldierService.Query
+            ViewBag.Soldiers = await SoldierService.GetDropDownList(db, new SoldierService.Query
             {
                 Ranks = RankExtensions.All().Where(rank => rank.GetsEvaluation())
             });
 
-            ViewBag.Reviewers = await SoldiersController.GetDropDownList(db, new SoldierService.Query
+            ViewBag.Reviewers = await SoldierService.GetDropDownList(db, new SoldierService.Query
             {
                 Ranks = new[] { Rank.O3, Rank.O4, Rank.O5, Rank.O6 }
             });

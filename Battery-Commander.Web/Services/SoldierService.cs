@@ -31,6 +31,17 @@ namespace BatteryCommander.Web.Services
             return subordinates;
         }
 
+        public static async Task<IEnumerable<SelectListItem>> GetDropDownList(Database db, Query query)
+        {
+            return
+                (await Filter(db, query))
+                .Select(soldier => new SelectListItem
+                {
+                    Text = $"{soldier}",
+                    Value = $"{soldier.Id}"
+                });
+        }
+
         public static async Task<IEnumerable<SelectListItem>> GetDropDownList(Database db)
         {
             return
