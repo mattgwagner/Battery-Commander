@@ -33,8 +33,8 @@ namespace BatteryCommander.Web.Services
 
         public static async Task<IEnumerable<Soldier>> Filter(Database db, Query query)
         {
-            IEnumerable<Soldier> soldiers =
-                await db
+            var soldiers =
+                db
                 .Soldiers
                 .Include(s => s.Supervisor)
                 .Include(s => s.SSDSnapshots)
@@ -42,7 +42,7 @@ namespace BatteryCommander.Web.Services
                 .Include(s => s.ACFTs)
                 .Include(s => s.APFTs)
                 .Include(s => s.Unit)
-                .ToListAsync();
+                .AsQueryable();
 
             if (query.Id.HasValue)
             {
@@ -123,7 +123,7 @@ namespace BatteryCommander.Web.Services
 
             if (!String.IsNullOrWhiteSpace(query.Email))
             {
-                soldiers = soldiers.Where(soldier => String.Equals(soldier.CivilianEmail, query.Email, StringComparison.CurrentCultureIgnoreCase) || String.Equals(soldier.MilitaryEmail, query.Email, StringComparison.CurrentCultureIgnoreCase));
+                soldiers = soldiers.Where(soldier => soldier.CivilianEmail.ToUpper() == query.Email.ToUpper() || soldier.MilitaryEmail.ToUpper() == query.Email.ToUpper());
             }
 
             return
