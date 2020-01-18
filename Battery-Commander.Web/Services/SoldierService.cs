@@ -66,7 +66,7 @@ namespace BatteryCommander.Web.Services
                 .Include(s => s.ACFTs)
                 .Include(s => s.APFTs)
                 .Include(s => s.Unit)
-                .AsQueryable();
+                .AsEnumerable();
 
             if (query.Id.HasValue)
             {
@@ -147,7 +147,7 @@ namespace BatteryCommander.Web.Services
 
             if (!String.IsNullOrWhiteSpace(query.Email))
             {
-                soldiers = soldiers.Where(soldier => soldier.CivilianEmail.ToUpper() == query.Email.ToUpper() || soldier.MilitaryEmail.ToUpper() == query.Email.ToUpper());
+                soldiers = soldiers.Where(soldier => soldier.CivilianEmail?.ToUpper() == query.Email.ToUpper() || soldier.MilitaryEmail?.ToUpper() == query.Email.ToUpper());
             }
 
             return
