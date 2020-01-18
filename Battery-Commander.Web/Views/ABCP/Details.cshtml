@@ -1,5 +1,11 @@
 ﻿@model ABCP
 
+@if (Model == null)
+{
+    <div>No data with that id found!</div>
+    return;
+}
+
 @Html.ActionLink("Back to ABCP", "Index", "ABCP")
 @Html.ActionLink("Edit", "Edit", "ABCP", new { Model.Id })
 
@@ -16,7 +22,7 @@
         @Html.ActionLink("Measurements", "Measurements", "ABCP", new { Model.Id }, new { @class = "btn btn-link" }) are outside of tolerance (i.e. greater than 1 inch difference!). Please revisit your taping measurements before continuing.
     </div>
 }
-else if(Model.Previous != null && Math.Abs(Model.Previous.Height - Model.Height) > ABCP.MAX_DIFFERNCE)
+else if (Model.Previous != null && Math.Abs(Model.Previous.Height - Model.Height) > ABCP.MAX_DIFFERNCE)
 {
     <div class="alert alert-danger">
         HEIGHT measurement differs from previous measurement by greater than @ABCP.MAX_DIFFERNCE inch! Previous @Model.Previous.Height Re-check this!
@@ -52,11 +58,11 @@ else if(Model.Previous != null && Math.Abs(Model.Previous.Height - Model.Height)
             <tr>
                 <td>@Html.DisplayNameFor(model => model.IsSatisfactory)</td>
                 <td>
-                    @if(Model.IsSatisfactory == true)
+                    @if (Model.IsSatisfactory == true)
                     {
                         <span class="alert alert-success">Satisfactory</span>
                     }
-                    else if(Model.IsSatisfactory == false)
+                    else if (Model.IsSatisfactory == false)
                     {
                         <span class="alert alert-warning">Unsatisfactory</span>
                     }

@@ -1,5 +1,11 @@
 ﻿@model ACFT
 
+@if (Model == null)
+{
+    <div>No data with that id found!</div>
+    return;
+}
+
 @Html.ActionLink("Back to ACFT", "Index", "ACFT")
 @Html.ActionLink("Edit", "Edit", new { Model.Id }, new { @class = "btn btn-default" })
 
