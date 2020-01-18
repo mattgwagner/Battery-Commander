@@ -86,7 +86,7 @@ namespace BatteryCommander.Web.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Save(ABCP model)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, SoldierService.Query.ALL);
 
@@ -111,6 +111,8 @@ namespace BatteryCommander.Web.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var abcp = await Get(db, id);
+
+            if (abcp == null) return NotFound();
 
             db.ABCPs.Remove(abcp);
 

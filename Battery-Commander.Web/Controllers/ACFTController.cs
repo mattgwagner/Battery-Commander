@@ -72,6 +72,8 @@ namespace BatteryCommander.Web.Controllers
         {
             var test = await Get(db, id);
 
+            if (test == null) return NotFound();
+
             db.ACFTs.Remove(test);
 
             await db.SaveChangesAsync();

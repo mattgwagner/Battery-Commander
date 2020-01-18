@@ -83,6 +83,8 @@ namespace BatteryCommander.Web.Controllers
         {
             var apft = await Get(db, id);
 
+            if (apft == null) return NotFound();
+
             db.APFTs.Remove(apft);
 
             await db.SaveChangesAsync();
