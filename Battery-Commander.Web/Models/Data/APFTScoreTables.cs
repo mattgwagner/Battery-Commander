@@ -15,7 +15,7 @@
         {
             get
             {
-                using (var stream = typeof(APFTScoreTables).GetTypeInfo().Assembly.GetManifestResourceStream($"BatteryCommander.Web.Models.Data.{nameof(PushUps)}.csv"))
+                using (var stream = typeof(APFTScoreTables).GetTypeInfo().Assembly.GetManifestResourceStream($"Battery-Commander.Web.Models.Data.{nameof(PushUps)}.csv"))
                 using (var reader = new StreamReader(stream))
                 {
                     string line = string.Empty;
@@ -50,7 +50,7 @@
         {
             get
             {
-                using (var stream = typeof(APFTScoreTables).GetTypeInfo().Assembly.GetManifestResourceStream($"BatteryCommander.Web.Models.Data.{nameof(SitUps)}.csv"))
+                using (var stream = typeof(APFTScoreTables).GetTypeInfo().Assembly.GetManifestResourceStream($"Battery-Commander.Web.Models.Data.{nameof(SitUps)}.csv"))
                 using (var reader = new StreamReader(stream))
                 {
                     string line = string.Empty;
@@ -87,7 +87,7 @@
         {
             get
             {
-                using (var stream = typeof(APFTScoreTables).GetTypeInfo().Assembly.GetManifestResourceStream($"BatteryCommander.Web.Models.Data.{nameof(Run)}.csv"))
+                using (var stream = typeof(APFTScoreTables).GetTypeInfo().Assembly.GetManifestResourceStream($"Battery-Commander.Web.Models.Data.{nameof(Run)}.csv"))
                 using (var reader = new StreamReader(stream))
                 {
                     string line = string.Empty;

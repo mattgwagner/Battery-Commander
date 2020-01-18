@@ -15,7 +15,7 @@ namespace BatteryCommander.Web.Models.Data
         {
             get
             {
-                using (var stream = typeof(ABCPScoreTables).GetTypeInfo().Assembly.GetManifestResourceStream($"BatteryCommander.Web.Models.Data.{nameof(ABCP)}.csv"))
+                using (var stream = typeof(ABCPScoreTables).GetTypeInfo().Assembly.GetManifestResourceStream($"Battery-Commander.Web.Models.Data.{nameof(ABCP)}.csv"))
                 using (var reader = new StreamReader(stream))
                 {
                     string line = string.Empty;
