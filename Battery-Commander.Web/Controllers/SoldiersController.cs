@@ -2,10 +2,8 @@
 using BatteryCommander.Web.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -173,21 +171,10 @@ delete from Soldiers where Id = {id};
             return soldiers.SingleOrDefault();
         }
 
-        public static async Task<IEnumerable<SelectListItem>> GetDropDownList(Database db, SoldierService.Query query)
-        {
-            var soldiers = await SoldierService.Filter(db, query);
-
-            return soldiers.Select(soldier => new SelectListItem
-            {
-                Text = $"{soldier}",
-                Value = $"{soldier.Id}"
-            });
-        }
-
         private async Task<IActionResult> Return_To_Edit(Soldier soldier)
         {
             ViewBag.Units = await UnitsController.GetDropDownList(db);
-            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, SoldierService.Query.ALL);
+            ViewBag.Soldiers = await SoldierService.GetDropDownList(db);
 
             return View("Edit", soldier);
         }

@@ -1,6 +1,5 @@
 ﻿using BatteryCommander.Web.Models;
 using BatteryCommander.Web.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -37,7 +36,7 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> New()
         {
-            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, SoldierService.Query.ALL);
+            ViewBag.Soldiers = await SoldierService.GetDropDownList(db);
             ViewBag.Units = await UnitsController.GetDropDownList(db);
 
             return View(nameof(Edit), new Weapon { });
@@ -45,7 +44,7 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, SoldierService.Query.ALL);
+            ViewBag.Soldiers = await SoldierService.GetDropDownList(db);
             ViewBag.Units = await UnitsController.GetDropDownList(db);
 
             var model =
@@ -60,9 +59,9 @@ namespace BatteryCommander.Web.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Save(Weapon model)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, SoldierService.Query.ALL);
+                ViewBag.Soldiers = await SoldierService.GetDropDownList(db);
                 ViewBag.Units = await UnitsController.GetDropDownList(db);
                 return View(nameof(Edit), model);
             }

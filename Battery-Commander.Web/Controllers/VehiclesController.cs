@@ -28,14 +28,14 @@ namespace BatteryCommander.Web.Controllers
             return View("List", new VehicleListViewModel
             {
                 Query = query,
-                Soldiers = await SoldiersController.GetDropDownList(db, SoldierService.Query.ALL),
+                Soldiers = await SoldierService.GetDropDownList(db),
                 Vehicles = await VehicleService.Filter(db, query)
             });
         }
 
         public async Task<IActionResult> New()
         {
-            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, SoldierService.Query.ALL);
+            ViewBag.Soldiers = await SoldierService.GetDropDownList(db);
             ViewBag.Units = await UnitsController.GetDropDownList(db);
 
             return View(nameof(Edit), new Vehicle { });
@@ -43,7 +43,7 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, SoldierService.Query.ALL);
+            ViewBag.Soldiers = await SoldierService.GetDropDownList(db);
             ViewBag.Units = await UnitsController.GetDropDownList(db);
 
             var model =
@@ -62,7 +62,7 @@ namespace BatteryCommander.Web.Controllers
         {
             Func<Task<IActionResult>> Return_To_View = async () =>
             {
-                ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, SoldierService.Query.ALL);
+                ViewBag.Soldiers = await SoldierService.GetDropDownList(db);
                 ViewBag.Units = await UnitsController.GetDropDownList(db);
 
                 ModelState.AddModelError(nameof(model.Bumper), "Vehicle exists for this unit and bumper, please check 'View All'");
