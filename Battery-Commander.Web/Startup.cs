@@ -4,17 +4,13 @@ using BatteryCommander.Web.Models;
 using BatteryCommander.Web.Services;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Serilog.Context;
 using System;
 using System.IO;
 using System.Net;
@@ -80,17 +76,6 @@ namespace BatteryCommander.Web
                 .AddRazorRenderer()
                 .AddSendGridSender(SendGridAPIKey);
 
-            services.AddCors(options =>
-            {
-                options.AddPolicy("Policy", builder =>
-                    builder
-                        .AllowAnyHeader()
-                        .AllowAnyMethod()
-                        .AllowAnyOrigin()
-                        .Build()
-                    );
-            });
-
             // Add authentication services
 
             services
@@ -100,12 +85,6 @@ namespace BatteryCommander.Web
                     options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                     options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 })
-                //.AddJwtBearer(o =>
-                //{
-                //    o.Authority = $"https://{auth0Settings.Domain}/";
-                //    o.Audience = auth0Settings.ApiIdentifier;
-                //    o.RequireHttpsMetadata = !IsDevelopment;
-                //})
                 .AddCookie(o =>
                 {
                     o.LoginPath = new PathString("/Home/Login");
