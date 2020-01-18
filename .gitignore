@@ -110,3 +110,4 @@ appsettings.*.json
 /output
 /Battery-Commander.Web/logs
 Battery-Commander.Web/Data.db
+/artifacts

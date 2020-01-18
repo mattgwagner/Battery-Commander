@@ -18,7 +18,7 @@ jobs:
       run: dotnet build --configuration Release
 
     - name: Publish
-      run: dotnet publish --configuration Release -o artifacts
+      run: dotnet publish Battery-Commander.Web/Battery-Commander.Web.csproj --configuration Release -o artifacts
 
     - name: Azure WebApp
       uses: Azure/webapps-deploy@v1
