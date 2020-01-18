@@ -18,7 +18,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceRoot}/bin/Debug/netcoreapp1.1/BatteryCommander.Web.dll",
+            "program": "${workspaceRoot}/bin/Debug/netcoreapp3.1/BatteryCommander.Web.dll",
             "args": [],
             "cwd": "${workspaceRoot}",
             "stopAtEntry": false,
