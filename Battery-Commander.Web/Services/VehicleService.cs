@@ -29,14 +29,15 @@ namespace BatteryCommander.Web.Services
 
         public static async Task<IEnumerable<Vehicle>> Filter(Database db, Query query)
         {
-            IQueryable<Vehicle> vehicles =
+            var vehicles =
                 db
                 .Vehicles
                 .Include(vehicle => vehicle.Unit)
                 .Include(vehicle => vehicle.Driver)
                 .Include(vehicle => vehicle.A_Driver)
                 .Include(vehicle => vehicle.Passengers)
-                .ThenInclude(passenger => passenger.Soldier);
+                .ThenInclude(passenger => passenger.Soldier)
+                .AsEnumerable();
 
             if (query.Units?.Any() == true)
             {
@@ -49,10 +50,9 @@ namespace BatteryCommander.Web.Services
             }
 
             return
-                await vehicles
+                vehicles
                 .OrderBy(vehicle => vehicle.Chalk)
-                .ThenBy(vehicle => vehicle.OrderOfMarch)
-                .ToListAsync();
+                .ThenBy(vehicle => vehicle.OrderOfMarch);
         }
 
         public class Query
