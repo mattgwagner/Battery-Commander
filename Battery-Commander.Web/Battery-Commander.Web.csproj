@@ -2,19 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <AssemblyName>BatteryCommander.Web</AssemblyName>
-    <RootNamespace>BatteryCommander.Web</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup>
     <MvcRazorCompileOnPublish>false</MvcRazorCompileOnPublish>
     <PreserveCompilationContext>true</PreserveCompilationContext>
     <MvcRazorExcludeRefAssembliesFromPublish>false</MvcRazorExcludeRefAssembliesFromPublish>
-    <DocumentationFile>bin\$(Configuration)\netcoreapp2.2\BatteryCommander.Web.xml</DocumentationFile>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <LangVersion>latest</LangVersion>
+    <DocumentationFile>BatteryCommander.Web.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -69,7 +63,6 @@
   <ItemGroup>
     <PackageReference Include="MediatR" Version="8.0.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.1" />
     <PackageReference Include="epplus.core" Version="1.5.4" />
@@ -87,10 +80,5 @@
     <PackageReference Include="Stateless" Version="4.3.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.6.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
 </Project>

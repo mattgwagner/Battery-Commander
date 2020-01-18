@@ -177,23 +177,7 @@ namespace BatteryCommander.Web
                 .AddDataProtection()
                 .PersistKeysToDbContext<Database>();
 
-            // Add framework services.
-            services.AddMvc(options =>
-            {
-                var policy =
-                    new AuthorizationPolicyBuilder()
-                    .RequireAuthenticatedUser()
-                    .Build();
-
-                options.Filters.Add(new AuthorizeFilter(policy));
-
-                if (!IsDevelopment)
-                {
-                    options.Filters.Add(new RequireHttpsAttribute { });
-                }
-
-                options.EnableEndpointRouting = true;
-            });
+            services.AddControllersWithViews();
 
             // Register the Swagger generator, defining one or more Swagger documents
             services.AddSwaggerGen(c =>
@@ -225,22 +209,6 @@ namespace BatteryCommander.Web
             });
 
             app
-                .Use(async (context, next) =>
-                {
-                    if (context.User.Identity.IsAuthenticated)
-                    {
-                        // Enrich log entries with the logged in user, if available
-
-                        using (LogContext.PushProperty("Username", UserService.Get_Email(context.User)))
-                        {
-                            await next.Invoke();
-                        }
-                    }
-                    else
-                    {
-                        await next.Invoke();
-                    }
-                })
                 .UseAuthentication()
                 .Use(async (context, next) =>
                 {
@@ -273,9 +241,16 @@ namespace BatteryCommander.Web
                     await next.Invoke();
                 });
 
-            app.UseCors("Policy");
+            app.UseRouting();
 
-            app.UseMvcWithDefaultRoute();
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapDefaultControllerRoute();
+            });
+
+            app.UseCors("Policy");
 
             app.UseJobScheduler(loggerFactory);
 
