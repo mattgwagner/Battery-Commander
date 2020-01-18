@@ -191,6 +191,8 @@ namespace BatteryCommander.Web
                 {
                     options.Filters.Add(new RequireHttpsAttribute { });
                 }
+
+                options.EnableEndpointRouting = true;
             });
 
             // Register the Swagger generator, defining one or more Swagger documents
@@ -273,18 +275,7 @@ namespace BatteryCommander.Web
 
             app.UseCors("Policy");
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-
-                routes.MapRoute(
-                    name: "catch-all",
-                    template: "{*url}",
-                    defaults: new { controller = "Home", action = "UnknownRoute" }
-                );
-            });
+            app.UseMvcWithDefaultRoute();
 
             app.UseJobScheduler(loggerFactory);
 
