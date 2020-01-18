@@ -76,7 +76,7 @@ namespace BatteryCommander.Web
                 .AddHttpContextAccessor()
                 .AddMemoryCache()
                 .AddMediatR(typeof(Startup))
-                .AddDbContext<Database>(optionsLifetime: ServiceLifetime.Transient, contextLifetime: ServiceLifetime.Transient);
+                .AddDbContext<Database>();
 
             services
                 .AddFluentEmail(defaultFromEmail: Email_Address, defaultFromName: "Battery Commander App")
@@ -167,28 +167,6 @@ namespace BatteryCommander.Web
                                     identity.AddClaim(new Claim(ClaimTypes.Name, name.Value));
                                 }
                             }
-
-                            return Task.CompletedTask;
-                        },
-
-                        OnRedirectToIdentityProviderForSignOut = (context) =>
-                        {
-                            var logoutUri = $"https://{auth0Settings.Domain}/v2/logout?client_id={auth0Settings.ClientId}";
-
-                            var postLogoutUri = context.Properties.RedirectUri;
-                            if (!string.IsNullOrEmpty(postLogoutUri))
-                            {
-                                if (postLogoutUri.StartsWith("/"))
-                                {
-                                    // transform to absolute
-                                    var request = context.Request;
-                                    postLogoutUri = request.Scheme + "://" + request.Host + request.PathBase + postLogoutUri;
-                                }
-                                logoutUri += $"&returnTo={ Uri.EscapeDataString(postLogoutUri) }";
-                            }
-
-                            context.Response.Redirect(logoutUri);
-                            context.HandleResponse();
 
                             return Task.CompletedTask;
                         }
