@@ -2,13 +2,15 @@
 
 @{
     ViewBag.Title = "Vehicle Tracker";
+
+    var units = String.Join(",", Model.Query.Units);
 }
 
 <div class="page-header">
     <h1>
         @ViewBag.Title
         @Html.ActionLink("Add New", "New", "Vehicles", null, new { @class = "btn btn-default" })
-        <a href="@Url.Action("Index", "Vehicles")?Available=" class="btn btn-default">Include NMC</a>
+        <a href="@Url.Action("Index", "Vehicles")?Available=&Units=@units" class="btn btn-default">Include NMC</a>
         <a href="@Url.Action("Index", "Vehicles")?Available=&IncludeIgnoredUnits=true" class="btn btn-default" ?>Show All</a>
     </h1>
     <h4>
