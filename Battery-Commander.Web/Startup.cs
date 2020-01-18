@@ -4,10 +4,12 @@ using BatteryCommander.Web.Models;
 using BatteryCommander.Web.Services;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -156,7 +158,17 @@ namespace BatteryCommander.Web
                 .AddDataProtection()
                 .PersistKeysToDbContext<Database>();
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(options =>
+            {
+                // Require auth on all pages unless explicitly anonymous
+
+                var p =
+                    new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+
+                options.Filters.Add(new AuthorizeFilter(p));
+            });
 
             // Register the Swagger generator, defining one or more Swagger documents
             services.AddSwaggerGen(c =>
