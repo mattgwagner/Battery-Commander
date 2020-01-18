@@ -129,8 +129,7 @@ namespace BatteryCommander.Web.Services
             return
                 soldiers
                 .OrderBy(soldier => soldier.LastName)
-                .ThenBy(soldier => soldier.FirstName)
-                .ToList();
+                .ThenBy(soldier => soldier.FirstName);
         }
 
         public class Query

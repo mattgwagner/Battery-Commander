@@ -184,16 +184,10 @@ delete from Soldiers where Id = {id};
             });
         }
 
-        [Obsolete]
-        public static async Task<IEnumerable<SelectListItem>> GetDropDownList(Database db, Boolean includeIgnoredUnits = true)
-        {
-            return await GetDropDownList(db, SoldierService.Query.ALL);
-        }
-
         private async Task<IActionResult> Return_To_Edit(Soldier soldier)
         {
             ViewBag.Units = await UnitsController.GetDropDownList(db);
-            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db);
+            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, SoldierService.Query.ALL);
 
             return View("Edit", soldier);
         }

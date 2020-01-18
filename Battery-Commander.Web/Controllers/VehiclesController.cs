@@ -28,14 +28,14 @@ namespace BatteryCommander.Web.Controllers
             return View("List", new VehicleListViewModel
             {
                 Query = query,
-                Soldiers = await SoldiersController.GetDropDownList(db, includeIgnoredUnits: false),
+                Soldiers = await SoldiersController.GetDropDownList(db, SoldierService.Query.ALL),
                 Vehicles = await VehicleService.Filter(db, query)
             });
         }
 
         public async Task<IActionResult> New()
         {
-            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, includeIgnoredUnits: false);
+            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, SoldierService.Query.ALL);
             ViewBag.Units = await UnitsController.GetDropDownList(db);
 
             return View(nameof(Edit), new Vehicle { });
@@ -43,7 +43,7 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, includeIgnoredUnits: false);
+            ViewBag.Soldiers = await SoldiersController.GetDropDownList(db, SoldierService.Query.ALL);
             ViewBag.Units = await UnitsController.GetDropDownList(db);
 
             var model =
