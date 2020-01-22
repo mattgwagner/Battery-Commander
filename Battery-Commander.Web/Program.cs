@@ -15,7 +15,7 @@ namespace BatteryCommander.Web
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder
-                        //.UseSentry(dsn: "https://78e464f7456f49a98e500e78b0bb4b13@sentry.io/1447369")
+                        .UseSentry(dsn: "https://78e464f7456f49a98e500e78b0bb4b13@sentry.io/1447369")
                         .UseStartup<Startup>();
                 });
     }
