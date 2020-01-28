@@ -57,7 +57,7 @@ namespace BatteryCommander.Web.Services
 
         public class Query
         {
-            public int[] Units { get; set; }
+            public int[] Units { get; set; } = new int[] { };
 
             public Boolean? Available { get; set; } = true;
         }
