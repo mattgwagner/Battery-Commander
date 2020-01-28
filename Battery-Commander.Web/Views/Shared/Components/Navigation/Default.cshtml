@@ -23,7 +23,6 @@
                     <li>@Html.ActionLink("ACFT", "Index", "ACFT", new SoldierService.Query { Unit = Model.Soldier.UnitId }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("ABCP", "Index", "ABCP", new SoldierService.Query { Unit = Model.Soldier.UnitId }, new { @class = "nav-link" })</li>
                     <li><a class="nav-link" asp-controller="Weapons" asp-route-unit=@Model.Soldier.UnitId asp-action="Index">Weapons</a></li>
-                    <li><a class="nav-link" asp-controller="SSD" asp-route-unit="@Model.Soldier.UnitId" asp-action="Index">SSD</a></li>
                     <li><a class="nav-link" asp-controller="Units" asp-action="Index">Units</a></li>
                     <li><a class="nav-link" href="https://docs.google.com/document/d/1l8zPeZ6fdzgo9_fAJvtvi1b1_9XoYQDUw-FCn3P_Ghw/edit?usp=sharing" target="_blank">About</a></li>
                 </ul>
