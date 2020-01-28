@@ -38,8 +38,6 @@
                 <th data-priority="1">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Bumper)</th>
                 <th data-priority="4">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Type)</th>
                 <th data-priority="5">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Seats)</th>
-                <th data-priority="2">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Chalk)</th>
-                <th data-priority="3">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().OrderOfMarch)</th>
                 <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().TotalCapacity)</th>
                 <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Nomenclature)</th>
                 <th>@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Registration)</th>
@@ -78,8 +76,6 @@
                 <td>@Html.DisplayFor(_ => vehicle)</td>
                 <td>@Html.DisplayFor(_ => vehicle.Type)</td>
                 <td>@Html.DisplayFor(_ => vehicle.Seats)</td>
-                <td>@Html.DisplayFor(_ => vehicle.Chalk)</td>
-                <td>@Html.DisplayFor(_ => vehicle.OrderOfMarch)</td>
                 <td>@Html.DisplayFor(_ => vehicle.TotalCapacity)</td>
                 <td>
                     @if (!String.IsNullOrWhiteSpace(vehicle.Nomenclature))
