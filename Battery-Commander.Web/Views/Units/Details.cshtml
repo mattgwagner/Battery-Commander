@@ -6,7 +6,6 @@
         "PERSTAT",
         "ABCP",
         "APFT",
-        "SSD",
         "EDUCATION",
         "DSCA",
         "IWQ",
@@ -104,45 +103,6 @@
                         <td>@Html.DisplayFor(_ => Model.APFT.PercentPass)</td>
                     </tr>
                 </tbody>
-            </table>
-        </div>
-        <div role="tabpanel" class="tab-pane" id="SSD">
-            <h2>@Html.DisplayNameFor(_ => Model.SSD)</h2>
-            <div id="ssd_chart"></div>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>@Html.DisplayNameFor(_ => Model.SSD.FirstOrDefault().Rank)</th>
-                        <th>Level</th>
-                        <th>@Html.DisplayNameFor(_ => Model.SSD.FirstOrDefault().Assigned)</th>
-                        <th>@Html.DisplayNameFor(_ => Model.SSD.FirstOrDefault().Incomplete)</th>
-                        <th>@Html.DisplayNameFor(_ => Model.SSD.FirstOrDefault().Completed)</th>
-                        <th>@Html.DisplayNameFor(_ => Model.SSD.FirstOrDefault().Percentage)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var row in Model.SSD)
-                    {
-                        <tr>
-                            <td>@Html.ActionLink(row.Rank.DisplayName(), "Index", "SSD", new SoldierService.Query { Unit = Model.Id, Ranks = new[] { row.Rank } })</td>
-                            <td>@SSDExtensions.RequiredSSD(row.Rank).DisplayName()</td>
-                            <td>@Html.ActionLink(row.Assigned.ToString(), "Index", "SSD", new SoldierService.Query { Unit = Model.Id, Ranks = new[] { row.Rank } })</td>
-                            <td>@Html.ActionLink(row.Incomplete.ToString(), "Index", "SSD", new SoldierService.Query { Unit = Model.Id, Ranks = new[] { row.Rank }, SSD = false })</td>
-                            <td>@Html.ActionLink(row.Completed.ToString(), "Index", "SSD", new SoldierService.Query { Unit = Model.Id, Ranks = new[] { row.Rank }, SSD = true })</td>
-                            <td>@Html.ActionLink(row.Percentage.ToString("P0"), "Index", "SSD", new SoldierService.Query { Unit = Model.Id, Ranks = new[] { row.Rank } })</td>
-                        </tr>
-                    }
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th></th>
-                        <th></th>
-                        <th>@Html.ActionLink(Model.SSDTotal.Assigned.ToString(), "Index", "SSD", new SoldierService.Query { Unit = Model.Id })</th>
-                        <th>@Html.ActionLink(Model.SSDTotal.Incomplete.ToString(), "Index", "SSD", new SoldierService.Query { Unit = Model.Id, SSD = false })</th>
-                        <th>@Html.ActionLink(Model.SSDTotal.Completed.ToString(), "Index", "SSD", new SoldierService.Query { Unit = Model.Id, SSD = true })</th>
-                        <th>@Html.ActionLink(Model.SSDTotal.Percentage.ToString("P0"), "Index", "SSD", new SoldierService.Query { Unit = Model.Id })</th>
-                    </tr>
-                </tfoot>
             </table>
         </div>
         <div role="tabpanel" class="tab-pane" id="EDUCATION">
@@ -293,13 +253,6 @@
             })
             .ToList();
 
-        var ssd =
-            new[]
-            {
-        new { Status = "Incomplete", Total = Model.SSDTotal.Incomplete },
-        new { Status = "Complete", Total = Model.SSDTotal.Completed }
-            };
-
         var education =
             Model
             .Soldiers
@@ -366,7 +319,6 @@
         function Draw_Pie_Charts() {
             Render_Pie_Chart('apft_chart', JSON.parse('@Json.Serialize(apft)'));
             Render_Pie_Chart('abcp_chart', JSON.parse('@Json.Serialize(abcp)'));
-            Render_Pie_Chart('ssd_chart', JSON.parse('@Json.Serialize(ssd)'));
             Render_Pie_Chart('education_chart', JSON.parse('@Json.Serialize(education)'));
             Render_Pie_Chart('iwq_chart', JSON.parse('@Json.Serialize(iwq)'));
             Render_Pie_Chart('dsca_chart', JSON.parse('@Json.Serialize(dsca)'));
