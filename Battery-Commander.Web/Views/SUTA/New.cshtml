@@ -1,5 +1,13 @@
 ﻿@model BatteryCommander.Web.Commands.AddSUTARequest
 
+<div class="alert alert-default">
+    Use this form to submit a Substitute Unit Training (SUTA) request to your chain of command.
+</div>
+
+<div class="alert alert-warning">
+    Note: All requests are subject to mission requirements and Commander's discretion!
+</div>
+
 @using (Html.BeginForm("Save", "SUTA", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
