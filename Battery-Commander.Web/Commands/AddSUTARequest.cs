@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using BatteryCommander.Web.Queries;
 using BatteryCommander.Web.Models;
 using MediatR;
 
@@ -21,14 +22,24 @@ namespace BatteryCommander.Web.Commands
         private class Handler : IRequestHandler<AddSUTARequest, int>
         {
             private readonly Database db;
+            private readonly IMediator dispatcher;
 
-            public Handler(Database db)
+            public Handler(Database db, IMediator dispatcher)
             {
                 this.db = db;
+                this.dispatcher = dispatcher;
             }
 
             public async Task<int> Handle(AddSUTARequest request, CancellationToken cancellationToken)
             {
+                var current_user = await dispatcher.Send(new GetCurrentUser { });
+
+                var soldier =
+                    await db
+                    .Soldiers
+                    .Where(s => s.Id == request.Soldier)
+                    .SingleOrDefaultAsync(cancellationToken);
+
                 var suta = new SUTA
                 {
                     SoldierId = request.Soldier,
@@ -40,7 +51,7 @@ namespace BatteryCommander.Web.Commands
 
                 suta.Events.Add(new SUTA.Event
                 {
-                    Author = "",
+                    Author = $"{current_user ?? soldier}", // User MAY not be logged in
                     Message = "Created"
                 });
 

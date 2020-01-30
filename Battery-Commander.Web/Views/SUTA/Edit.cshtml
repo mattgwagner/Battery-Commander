@@ -1,0 +1,56 @@
+﻿@model Evaluation
+
+@using (Html.BeginForm("Save", "Evaluations", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.Status)
+    @Html.ValidationSummary()
+
+    <div class="form-group form-group-lg">
+        @Html.DisplayNameFor(model => model.Ratee)
+        @Html.DropDownListFor(model => model.RateeId, (IEnumerable<SelectListItem>)ViewBag.Soldiers, "-- Select a Soldier --", new { @class = "select2" })
+        @Html.ActionLink("Add", "New", "Soldiers")
+    </div>
+
+    <div class="form-group form-group-lg">
+        @Html.DisplayNameFor(model => model.Rater)
+        @Html.DropDownListFor(model => model.RaterId, (IEnumerable<SelectListItem>)ViewBag.Soldiers, "-- Select a Rater --", new { @class = "select2" })
+        @Html.ActionLink("Add", "New", "Soldiers")
+    </div>
+
+    <div class="form-group form-group-lg">
+        @Html.DisplayNameFor(model => model.SeniorRater)
+        @Html.DropDownListFor(model => model.SeniorRaterId, (IEnumerable<SelectListItem>)ViewBag.Soldiers, "-- Select a Senior Rater --", new { @class = "select2" })
+        @Html.ActionLink("Add", "New", "Soldiers")
+    </div>
+
+    <div class="form-group form-group-lg">
+        @Html.DisplayNameFor(model => model.Reviewer)
+        @Html.DropDownListFor(model => model.ReviewerId, (IEnumerable<SelectListItem>)ViewBag.Reviewers, "-- Select a Reviewer --", new { @class = "select2" })
+        @Html.ActionLink("Add", "New", "Soldiers")
+    </div>
+
+    <div class="form-group form-group-lg">
+        @Html.DisplayNameFor(model => model.EvaluationId)
+        @Html.EditorFor(model => model.EvaluationId)
+    </div>
+
+    <div class="form-group form-group-lg">
+        @Html.DisplayNameFor(model => model.StartDate)
+        @Html.EditorFor(model => model.StartDate)
+    </div>
+
+    <div class="form-group form-group-lg">
+        @Html.DisplayNameFor(model => model.ThruDate)
+        @Html.EditorFor(model => model.ThruDate)
+    </div>
+
+    <div class="form-group form-group-lg">
+        @Html.DisplayNameFor(model => model.Type)
+        @Html.DropDownListFor(model => model.Type, Html.GetEnumSelectList<EvaluationType>())
+    </div>
+
+    <button type="submit">Save</button>
+}
+

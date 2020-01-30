@@ -1,0 +1,12 @@
+﻿@model SUTA
+
+@using (Html.BeginForm("Save", "SUTA", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+    @Html.ValidationSummary()
+
+
+    <button type="submit">Save</button>
+}
+

@@ -1,0 +1,135 @@
+﻿@model Evaluation
+
+<div class="container-fluid">
+
+    <!-- Workflow steps available -->
+
+    <div class="btn-toolbar" role="group">
+        <button class="btn btn-warning">@Html.ActionLink("Edit", "Edit", new { Model.Id })</button>
+        @using (Html.BeginForm("Transition", "Evaluations", new { Model.Id }))
+        {
+            @Html.AntiForgeryToken()
+
+            @foreach (var trigger in Model.Available_Transitions)
+            {
+                <button type="submit" name="trigger" value="@trigger" class="btn btn-info">@trigger.DisplayName()</button>
+            }
+        }
+    </div>
+
+    <hr />
+
+    <table class="table table-bordered">
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.LastUpdated)</td>
+            <td>@Html.DisplayFor(model => model.LastUpdatedHumanized)</td>
+        </tr>
+
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Type)</td>
+            <td>@Html.DisplayFor(model => model.Type)</td>
+        </tr>
+
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Status)</td>
+            <td>@Html.DisplayFor(model => model.Status)</td>
+        </tr>
+
+        @if (Model.EvaluationId.HasValue)
+        {
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.EvaluationId)</td>
+                <td>
+                    @Html.DisplayFor(model => model.EvaluationId)
+                    (<a href="@Model.EvaluationLink" target="_blank">View in EES</a>)
+                </td>
+            </tr>
+        }
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Ratee)</td>
+            <td>@Html.DisplayFor(model => model.Ratee)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Rater)</td>
+            <td>@Html.DisplayFor(model => model.Rater)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.SeniorRater)</td>
+            <td>@Html.DisplayFor(model => model.SeniorRater)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Reviewer)</td>
+            <td>@Html.DisplayFor(model => model.Reviewer)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.StartDate)</td>
+            <td>@Html.DisplayFor(model => model.StartDate)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.ThruDate)</td>
+            <td>@Html.DisplayFor(model => model.ThruDate)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.CanBeSignedAfter)</td>
+            <td>@Html.DisplayFor(model => model.CanBeSignedAfter)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Delinquency)</td>
+            <td>
+                @if (Model.Delinquency > TimeSpan.Zero)
+                {
+                    <span class="label label-default">Due in @Html.DisplayFor(_ => Model.DelinquencyHumanized)</span>
+                }
+                else
+                {
+                    <span class="label label-danger">Overdue @Html.DisplayFor(_ => Model.DelinquencyHumanized)</span>
+                }
+            </td>
+        </tr>
+    </table>
+
+    <hr />
+
+    @using (Html.BeginForm("Comment", "Evaluations", FormMethod.Post, new { @class = "form-horitzontal" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Id)
+
+        <td colspan="3">
+            <textarea rows="4" cols="100" name="message"></textarea>
+            <button type="submit">Comment</button>
+        </td>
+    }
+
+    <hr />
+
+    <h2>@Html.DisplayNameFor(_ => Model.Events)</h2>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Who</th>
+                <th>What</th>
+                <th>When</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var @event in Model.Events.OrderByDescending(_ => _.Timestamp))
+            {
+                <tr>
+                    <td>@Html.DisplayFor(_ => @event.Author)</td>
+                    <td>@Html.DisplayFor(_ => @event.Message)</td>
+                    <td>@Html.DisplayFor(_ => @event.TimestampHumanized)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div>
+        @using (Html.BeginForm("Delete", "Evaluations", new { Model.Id }, FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this?')">Delete</button>
+        }
+    </div>
+</div>

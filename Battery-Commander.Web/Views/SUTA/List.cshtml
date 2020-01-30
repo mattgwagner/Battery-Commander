@@ -1,0 +1,40 @@
+﻿@model IEnumerable<SUTA>
+
+@{
+    ViewBag.Title = "SUTA Tracker";
+}
+
+<div id="suta-list">
+    <div class="page-header">
+        <h1>@ViewBag.Title</h1>
+
+        <table class="table table-striped display nowrap" id="dt" width="100%">
+            <thead>
+                <tr>
+                    <th>Details</th>
+                    <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Status)</th>
+                    <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().StartDate)</th>
+                    <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Soldier.Rank)</th>
+                    <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Soldier.Rank)</th>
+                    <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Soldier.LastName)</th>
+                    <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Soldier.FirstName)</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var request in Model)
+                {
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
