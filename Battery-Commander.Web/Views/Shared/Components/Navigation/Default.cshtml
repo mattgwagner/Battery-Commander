@@ -15,7 +15,7 @@
                 <ul class="nav navbar-nav">
                     @if (Model.ShowNavigation)
                     {
-                        <li>@Html.RouteLink("Dashboard", "Unit.Details", new { id = Model.Soldier.UnitId }, new { @class = "nav-link" })</li>
+                        <li><a href="/" class="nav-link">Dashboard</a></li>
                         <li>@Html.RouteLink("Battle Roster", "Unit.Soldiers", new { Model.Soldier.UnitId }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("Evaluations", "Index", "Evaluations", new { unitId = Model.Soldier.UnitId }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("Vehicles", "Index", "Vehicles", new VehicleService.Query { Units = new[] { Model.Soldier.UnitId } }, new { @class = "nav-link" })</li>
