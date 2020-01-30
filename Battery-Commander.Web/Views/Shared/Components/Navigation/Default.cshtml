@@ -12,9 +12,10 @@
                 <a asp-controller="Home" asp-action="Index" class="navbar-brand">Battery Commander</a>
             </div>
             <div class="navbar-collapse collapse">
-                @if (Model.ShowNavigation)
-                {
-                    <ul class="nav navbar-nav">
+
+                <ul class="nav navbar-nav">
+                    @if (Model.ShowNavigation)
+                    {
                         <li>@Html.RouteLink("My Unit", "Unit.Details", new { id = Model.Soldier.UnitId }, new { @class = "nav-link" })</li>
                         <li>@Html.RouteLink("My Soldiers", "Unit.Soldiers", new { Model.Soldier.UnitId }, new { @class = "nav-link" })</li>
                         <li>@Html.RouteLink("My Profile", "Soldier.Details", new { id = Model.Soldier.Id }, new { @class = "nav-link" })</li>
@@ -25,10 +26,10 @@
                         <li>@Html.ActionLink("ABCP", "Index", "ABCP", new SoldierService.Query { Unit = Model.Soldier.UnitId }, new { @class = "nav-link" })</li>
                         <li><a class="nav-link" asp-controller="Weapons" asp-route-unit=@Model.Soldier.UnitId asp-action="Index">Weapons</a></li>
                         <li><a class="nav-link" asp-controller="Units" asp-action="Index">Units</a></li>
-                        <li><a class="nav-link" href="https://docs.google.com/document/d/1l8zPeZ6fdzgo9_fAJvtvi1b1_9XoYQDUw-FCn3P_Ghw/edit?usp=sharing" target="_blank">About</a></li>
-                        <li><a asp-controller="Home" asp-action="Logout">Logout</a></li>
-                    </ul>
-                }
+                    }
+                    <li><a class="nav-link" href="https://docs.google.com/document/d/1l8zPeZ6fdzgo9_fAJvtvi1b1_9XoYQDUw-FCn3P_Ghw/edit?usp=sharing" target="_blank">About</a></li>
+                    <li><a asp-controller="Home" asp-action="Logout">Logout</a></li>
+                </ul>
             </div>
         </div>
     </nav>
