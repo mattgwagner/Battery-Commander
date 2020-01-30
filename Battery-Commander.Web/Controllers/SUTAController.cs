@@ -64,7 +64,7 @@ namespace BatteryCommander.Web.Controllers
         [HttpPost("{Id}/[action]")]
         public async Task<IActionResult> Delete(int id)
         {
-            throw new NotImplementException();
+            throw new NotImplementedException();
         }
 
         [HttpPost("[action]"), ValidateAntiForgeryToken]
