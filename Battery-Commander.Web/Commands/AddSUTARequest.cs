@@ -5,6 +5,7 @@ using BatteryCommander.Web.Queries;
 using BatteryCommander.Web.Models;
 using MediatR;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace BatteryCommander.Web.Commands
 {
