@@ -79,5 +79,6 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.6.0" />
     <PackageReference Include="TimeZoneConverter" Version="3.2.0" />
+    <PackageReference Include="WebEssentials.AspNetCore.PWA" Version="1.0.59" />
   </ItemGroup>
 </Project>

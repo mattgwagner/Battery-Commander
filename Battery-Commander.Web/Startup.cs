@@ -179,6 +179,8 @@ namespace BatteryCommander.Web
 
                 c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "BatteryCommander.Web.xml"));
             });
+
+            services.AddProgressiveWebApp();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
