@@ -183,7 +183,8 @@ namespace BatteryCommander.Web
 
             services.AddProgressiveWebApp(new PwaOptions
             {
-                Strategy = ServiceWorkerStrategy.CacheFirst
+                Strategy = ServiceWorkerStrategy.CacheFirst,
+                RegisterWebmanifest = false
             });
         }
 
