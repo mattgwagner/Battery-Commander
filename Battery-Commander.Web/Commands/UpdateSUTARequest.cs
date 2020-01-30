@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using BatteryCommander.Web.Models;
+using BatteryCommander.Web.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -31,14 +32,18 @@ namespace BatteryCommander.Web.Commands
         private class Handler : AsyncRequestHandler<UpdateSUTARequest>
         {
             private readonly Database db;
+            private readonly IMediator dispatcher;
 
-            public Handler(Database db)
+            public Handler(Database db, IMediator dispatcher)
             {
                 this.db = db;
+                this.dispatcher = dispatcher;
             }
 
             protected override async Task Handle(UpdateSUTARequest request, CancellationToken cancellationToken)
             {
+                var current_user = await dispatcher.Send(new GetCurrentUser { });
+
                 var suta =
                     await db
                     .SUTAs
@@ -49,6 +54,12 @@ namespace BatteryCommander.Web.Commands
                 suta.EndDate = request.Body.EndDate;
                 suta.Reasoning = request.Body.Reasoning;
                 suta.MitigationPlan = request.Body.MitigationPlan;
+
+                suta.Events.Add(new SUTA.Event
+                {
+                    Author = $"{current_user}",
+                    Message = "Request Updated"
+                });
 
                 await db.SaveChangesAsync(cancellationToken);
             }
