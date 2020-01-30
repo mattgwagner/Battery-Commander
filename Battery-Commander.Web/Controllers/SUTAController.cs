@@ -61,6 +61,12 @@ namespace BatteryCommander.Web.Controllers
             return RedirectToAction(nameof(Details), new { request.Id });
         }
 
+        [HttpPost("{Id}/[action]")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            throw new NotImplementException();
+        }
+
         [HttpPost("[action]"), ValidateAntiForgeryToken]
         public async Task<IActionResult> Transition(int id, Evaluation.Trigger trigger)
         {
