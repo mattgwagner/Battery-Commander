@@ -1,10 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using BatteryCommander.Web.Commands;
 using BatteryCommander.Web.Models;
 using BatteryCommander.Web.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BatteryCommander.Web.Controllers
 {
@@ -21,7 +23,15 @@ namespace BatteryCommander.Web.Controllers
         [HttpGet(""), AllowAnonymous]
         public async Task<IActionResult> New()
         {
-            // TODO Populate dropdown lists
+            ViewBag.Soldiers = 
+                (await dispatcher.Send(new GetSoldiers { }))
+                .Select(soldier => new SelectListItem
+                {
+                    Text = $"{soldier.Rank} {soldier.LastName} {soldier.FirstName}",
+                    Value = $"{soldier.Id}"
+                })
+                .ToList()
+                .OrderBy(option => option.Text);
 
             return View();
         }
