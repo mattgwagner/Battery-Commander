@@ -1,13 +1,15 @@
-﻿using BatteryCommander.Web.Models;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using BatteryCommander.Web.Models;
+using BatteryCommander.Web.Queries;
 using BatteryCommander.Web.Services;
 using FluentEmail.Core;
+using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Controllers
 {
@@ -27,7 +29,7 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<ActionResult> Index()
         {
-            var user = await await dispatcher.Send(new GetCurrentUser { });
+            var user = await dispatcher.Send(new GetCurrentUser { });
 
             if (user?.UnitId > 0)
             {

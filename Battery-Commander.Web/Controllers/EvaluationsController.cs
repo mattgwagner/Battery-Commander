@@ -1,10 +1,12 @@
-﻿using BatteryCommander.Web.Models;
-using BatteryCommander.Web.Services;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using BatteryCommander.Web.Models;
+using BatteryCommander.Web.Queries;
+using BatteryCommander.Web.Services;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BatteryCommander.Web.Controllers
 {
@@ -12,17 +14,19 @@ namespace BatteryCommander.Web.Controllers
     public class EvaluationsController : Controller
     {
         private readonly Database db;
+        private readonly IMediator dispatcher;
 
         private async Task<String> GetDisplayName()
         {
-            var user = await UserService.FindAsync(db, User);
+            var user = await dispatcher.Send(new GetCurrentUser { });
 
             return user?.ToString() ?? User.Identity.Name;
         }
 
-        public EvaluationsController(Database db)
+        public EvaluationsController(Database db, IMediator dispatcher)
         {
             this.db = db;
+            this.dispatcher = dispatcher;
         }
 
         [Route("~/Units/{unitId}/Evaluations")]
