@@ -26,11 +26,6 @@
                         <li><a class="nav-link" asp-controller="Weapons" asp-route-unit=@Model.Soldier.UnitId asp-action="Index">Weapons</a></li>
                         <li><a class="nav-link" asp-controller="Units" asp-action="Index">Units</a></li>
                         <li><a class="nav-link" href="https://docs.google.com/document/d/1l8zPeZ6fdzgo9_fAJvtvi1b1_9XoYQDUw-FCn3P_Ghw/edit?usp=sharing" target="_blank">About</a></li>
-                    </ul>
-                }
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <ul class="nav navbar-nav navbar-right">
                         <li><a asp-controller="Home" asp-action="Logout">Logout</a></li>
                     </ul>
                 }
