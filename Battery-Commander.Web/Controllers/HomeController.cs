@@ -27,18 +27,6 @@ namespace BatteryCommander.Web.Controllers
 			this.dispatcher = dispatcher;
 		}
 
-        public async Task<ActionResult> Index()
-        {
-            var user = await dispatcher.Send(new GetCurrentUser { });
-
-            if (user?.UnitId > 0)
-            {
-                return RedirectToRoute("Unit.Details", new { id = user.UnitId });
-            }
-
-            return RedirectToRoute("Units.List");
-        }
-
         public ActionResult PrivacyAct()
         {
             return View();

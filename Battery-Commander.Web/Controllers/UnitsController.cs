@@ -1,5 +1,7 @@
 ﻿using BatteryCommander.Web.Models;
+using BatteryCommander.Web.Queries;
 using BatteryCommander.Web.Services;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -17,16 +19,31 @@ namespace BatteryCommander.Web.Controllers
     public class UnitsController : Controller
     {
         private readonly Database db;
+        private readonly IMediator dispatcher;
 
-        public UnitsController(Database db)
+        public UnitsController(Database db, IMediator dispatcher)
         {
             this.db = db;
+            this.dispatcher = dispatcher;
         }
 
         [Route("~/Units", Name = "Units.List")]
         public async Task<IActionResult> Index()
         {
             return View("List", await UnitService.List(db));
+        }
+
+        [Route("~/")]
+        public async Task<IActionResult> Home()
+        {
+            var user = await dispatcher.Send(new GetCurrentUser { });
+
+            if (user?.UnitId > 0)
+            {
+                return await Details(user.UnitId);
+            }
+
+            return RedirectToRoute("Units.List");
         }
 
         [Route("~/Units/{id}", Name = "Unit.Details")]
