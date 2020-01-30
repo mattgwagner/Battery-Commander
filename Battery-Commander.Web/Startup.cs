@@ -184,7 +184,7 @@ namespace BatteryCommander.Web
             services.AddProgressiveWebApp(new PwaOptions
             {
                 Strategy = ServiceWorkerStrategy.CacheFirst
-        });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
