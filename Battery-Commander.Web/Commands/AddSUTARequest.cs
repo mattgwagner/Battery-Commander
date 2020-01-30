@@ -29,7 +29,26 @@ namespace BatteryCommander.Web.Commands
 
             public async Task<int> Handle(AddSUTARequest request, CancellationToken cancellationToken)
             {
-                throw new NotImplementedException();
+                var suta = new SUTA
+                {
+                    SoldierId = request.Soldier,
+                    StartDate = request.StartDate,
+                    EndDate = request.EndDate,
+                    Reasoning = request.Reasoning,
+                    MitigationPlan = request.MitigationPlan
+                };
+
+                suta.Events.Add(new SUTA.Event
+                {
+                    Author = "",
+                    Message = "Created"
+                });
+
+                db.SUTAs.Add(suta);
+
+                await db.SaveChangesAsync(cancellationToken);
+
+                return suta.Id;
             }
         }
     }

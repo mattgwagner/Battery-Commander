@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using BatteryCommander.Web.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BatteryCommander.Web.Commands
 {
@@ -37,7 +39,18 @@ namespace BatteryCommander.Web.Commands
 
             protected override async Task Handle(UpdateSUTARequest request, CancellationToken cancellationToken)
             {
-                throw new NotImplementedException();
+                var suta =
+                    await db
+                    .SUTAs
+                    .Where(s => s.Id == request.Id)
+                    .SingleOrDefaultAsync(cancellationToken);
+
+                suta.StartDate = request.Body.StartDate;
+                suta.EndDate = request.Body.EndDate;
+                suta.Reasoning = request.Body.Reasoning;
+                suta.MitigationPlan = request.Body.MitigationPlan;
+
+                await db.SaveChangesAsync(cancellationToken);
             }
         }
     }
