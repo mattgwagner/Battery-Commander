@@ -8,7 +8,7 @@
     Note: All requests are subject to mission requirements and Commander's discretion!
 </div>
 
-@using (Html.BeginForm("Save", "SUTA", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("New", "SUTA", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()
@@ -20,7 +20,7 @@
 
     <div class="form-group form-group-lg">
         @Html.DisplayNameFor(model => model.StartDate)
-        @Html.EditorFor(model => model.EndDate)
+        @Html.EditorFor(model => model.StartDate)
     </div>
 
     <div class="form-group form-group-lg">

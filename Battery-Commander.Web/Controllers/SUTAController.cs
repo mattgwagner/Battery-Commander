@@ -37,7 +37,7 @@ namespace BatteryCommander.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Save([FromForm]AddSUTARequest request)
+        public async Task<IActionResult> New([FromForm]AddSUTARequest request)
         {
             var id = await dispatcher.Send(request);
 
