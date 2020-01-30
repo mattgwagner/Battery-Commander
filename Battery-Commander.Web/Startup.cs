@@ -18,6 +18,7 @@ using System.IO;
 using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using WebEssentials.AspNetCore.Pwa;
 
 namespace BatteryCommander.Web
 {
@@ -180,7 +181,10 @@ namespace BatteryCommander.Web
                 c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "BatteryCommander.Web.xml"));
             });
 
-            services.AddProgressiveWebApp();
+            services.AddProgressiveWebApp(new PwaOptions
+            {
+                Strategy = ServiceWorkerStrategy.CacheFirst
+        });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
