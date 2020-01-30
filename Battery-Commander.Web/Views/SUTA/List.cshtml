@@ -15,7 +15,6 @@
                     <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Status)</th>
                     <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().StartDate)</th>
                     <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Soldier.Rank)</th>
-                    <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Soldier.Rank)</th>
                     <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Soldier.LastName)</th>
                     <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Soldier.FirstName)</th>
                 </tr>
@@ -26,12 +25,11 @@
                 {
                     <tr>
                         <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>@Html.DisplayFor(_ => request.Status)</td>
+                        <td>@Html.DisplayFor(_ => request.StartDate)</td>
+                        <td>@Html.DisplayFor(_ => request.Soldier.RankHumanized)</td>
+                        <td>@Html.DisplayFor(_ => request.Soldier.LastName)</td>
+                        <td>@Html.DisplayFor(_ => request.Soldier.FirstName)</td>
                     </tr>
                 }
             </tbody>
