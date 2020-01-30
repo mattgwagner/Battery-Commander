@@ -27,8 +27,10 @@ namespace BatteryCommander.Web.Commands
             [DataType(DataType.Date)]
             public DateTime EndDate { get; set; }
 
+            [Display(Name = "The reason to request missing IDT:")]
             public String Reasoning { get; set; }
 
+            [Display(Name = "How are we mitigating the loss of this Soldier during the requested period?")]
             public String MitigationPlan { get; set; }
         }
 
