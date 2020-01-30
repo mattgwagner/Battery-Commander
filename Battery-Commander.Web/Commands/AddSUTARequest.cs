@@ -6,6 +6,7 @@ using BatteryCommander.Web.Models;
 using MediatR;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace BatteryCommander.Web.Commands
 {
@@ -13,8 +14,10 @@ namespace BatteryCommander.Web.Commands
     {
         public int Soldier { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime StartDate { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime EndDate { get; set; }
 
         public String Reasoning { get; set; }
