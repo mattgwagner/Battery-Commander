@@ -19,6 +19,7 @@
                         <li>@Html.RouteLink("Battle Roster", "Unit.Soldiers", new { Model.Soldier.UnitId }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("Evaluations", "Index", "Evaluations", new { unitId = Model.Soldier.UnitId }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("Vehicles", "Index", "Vehicles", new VehicleService.Query { Units = new[] { Model.Soldier.UnitId } }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("SUTA Requests", "ByUnit", "SUTA", new { Unit = Model.Soldier.UnitId }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("APFT", "Index", "APFT", new SoldierService.Query { Unit = Model.Soldier.UnitId }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("ACFT", "Index", "ACFT", new SoldierService.Query { Unit = Model.Soldier.UnitId }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("ABCP", "Index", "ABCP", new SoldierService.Query { Unit = Model.Soldier.UnitId }, new { @class = "nav-link" })</li>
