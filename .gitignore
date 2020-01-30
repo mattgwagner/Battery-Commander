@@ -112,3 +112,4 @@ appsettings.*.json
 /Battery-Commander.Web/BatteryCommander.Web.xml
 /Battery-Commander.Web/Data.db
 /artifacts
+Data.db
