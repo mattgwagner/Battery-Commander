@@ -28,7 +28,7 @@
                 @foreach (var request in Model)
                 {
                     <tr>
-                        <td></td>
+                        <td>@Html.ActionLink("Details", "Details", new { request.Id })</td>
                         <td>@Html.DisplayFor(_ => request.Status)</td>
                         <td>@Html.DisplayFor(_ => request.StartDate)</td>
                         <td>@Html.DisplayFor(_ => request.Soldier.RankHumanized)</td>

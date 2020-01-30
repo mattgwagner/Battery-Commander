@@ -23,8 +23,10 @@ namespace BatteryCommander.Web.Models
 
         public String MitigationPlan { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime StartDate { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime EndDate { get; set; }
 
         // TODO Type training and location(s) to be performed
