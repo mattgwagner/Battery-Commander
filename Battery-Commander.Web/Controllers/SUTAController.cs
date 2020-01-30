@@ -36,7 +36,7 @@ namespace BatteryCommander.Web.Controllers
             return View();
         }
 
-        [HttpPost(""), AllowAnonymous]
+        [HttpPost, AllowAnonymous]
         public async Task<IActionResult> New([FromForm]AddSUTARequest request)
         {
             var id = await dispatcher.Send(request);
@@ -61,7 +61,7 @@ namespace BatteryCommander.Web.Controllers
             return RedirectToAction(nameof(Details), new { request.Id });
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost("[action]"), ValidateAntiForgeryToken]
         public async Task<IActionResult> Transition(int id, Evaluation.Trigger trigger)
         {
             //var evaluation = await Evaluations.SingleOrDefaultAsync(_ => _.Id == id);
@@ -81,7 +81,7 @@ namespace BatteryCommander.Web.Controllers
             return RedirectToAction(nameof(Details), new { id });
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost("[action]"), ValidateAntiForgeryToken]
         public async Task<IActionResult> Comment(int id, string comment)
         {
             // TODO Add a comment, alert the people on the request
