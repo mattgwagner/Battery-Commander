@@ -55,7 +55,7 @@ namespace BatteryCommander.Web.Controllers
 
             ViewBag.CalendarUrl = CalendarService.GenerateUrl(User, Url, id);
 
-            return View(model);
+            return View("Details", model);
         }
 
         [Route("~/Units/New")]
