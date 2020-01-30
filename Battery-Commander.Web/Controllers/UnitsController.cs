@@ -13,6 +13,8 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
+using Unit = BatteryCommander.Web.Models.Unit;
+
 namespace BatteryCommander.Web.Controllers
 {
     [ApiExplorerSettings(IgnoreApi = true)]
