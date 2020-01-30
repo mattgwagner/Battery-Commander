@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using BatteryCommander.Web.Models;
+using BatteryCommander.Web.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,11 +11,11 @@ namespace BatteryCommander.Web.Controllers
     [ApiExplorerSettings(IgnoreApi = true)]
     public class SUTAController : Controller
     {
-        private readonly Database db;
+        private readonly IMediator dispatcher;
 
-        public SUTAController(Database db)
+        public SUTAController(IMediator dispatcher)
         {
-            this.db = db;
+            this.dispatcher = dispatcher;
         }
 
         [HttpGet(""), AllowAnonymous]
@@ -23,7 +25,7 @@ namespace BatteryCommander.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> New(SUTA model)
+        public async Task<IActionResult> Save(SUTA model)
         {
             // Validate
 
@@ -34,25 +36,14 @@ namespace BatteryCommander.Web.Controllers
             return RedirectToAction(nameof(Details), new { id = 1 });
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Details(int id)
-        {
-            throw new NotImplementedException();
-        }
+        [HttpGet("{Id}")]
+        public async Task<IActionResult> Details(GetSUTARequest request) => View(await dispatcher.Send(request));
 
-        [HttpGet("~/Units/{id}/SUTAs")]
-        public async Task<IActionResult> ByUnit(int id)
-        {
-            // Retrieve SUTA requests by unit
+        [HttpGet("~/Units/{Unit}/SUTA")]
+        public async Task<IActionResult> ByUnit(GetSUTARequests request) => View(await dispatcher.Send(request));
 
-            throw new NotImplementedException();
-        }        
-
-        [HttpGet("{id}/Edit")]
-        public async Task<IActionResult> Edit(int id)
-        {
-            throw new NotImplementedException();
-        }
+        [HttpGet("{Id}/Edit")]
+        public async Task<IActionResult> Edit(GetSUTARequest request) => View(await dispatcher.Send(request));
 
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Transition(int id, Evaluation.Trigger trigger)
