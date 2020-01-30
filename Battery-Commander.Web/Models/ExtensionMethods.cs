@@ -1,19 +1,18 @@
-﻿using BatteryCommander.Web.Jobs;
-using FluentEmail.Core;
-using FluentEmail.Core.Models;
-using FluentScheduler;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Reflection;
 using System.Threading.Tasks;
+using FluentEmail.Core;
+using FluentEmail.Core.Models;
+using FluentScheduler;
 
 namespace BatteryCommander.Web.Models
 {
     public static class ExtensionMethods
     {
-        public static TimeZoneInfo EASTERN_TIME => TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+        public static TimeZoneInfo EASTERN_TIME => TimeZoneConverter.TZConvert.GetTimeZoneInfo("Eastern Standard Time");
 
         public static DateTime? ToEst(this DateTimeOffset? dateTime)
         {
@@ -48,7 +47,10 @@ namespace BatteryCommander.Web.Models
                 yield return new Address { Name = soldier.ToString(), EmailAddress = soldier.CivilianEmail };
             }
 
-            // TODO Should we include military emails?
+            if (!String.IsNullOrWhiteSpace(soldier.MilitaryEmail))
+            {
+                yield return new Address { Name = soldier.ToString(), EmailAddress = soldier.MilitaryEmail };
+            }
         }
 
         public static IDayRestrictableUnit AtEst(this DayUnit schedule, int hours, int minutes = 0)
