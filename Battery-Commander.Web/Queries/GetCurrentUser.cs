@@ -30,6 +30,8 @@ namespace BatteryCommander.Web.Queries
                     .Identity?
                     .Name;
 
+                if (string.IsNullOrWhiteSpace(email)) return default(Soldier);
+
                 var soldier =
                     await db
                     .Soldiers
