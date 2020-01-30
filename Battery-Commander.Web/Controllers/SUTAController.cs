@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BatteryCommander.Web.Controllers
 {
-    [ApiExplorerSettings(IgnoreApi = true)]
+    [ApiExplorerSettings(IgnoreApi = true), Route("[controller]")]
     public class SUTAController : Controller
     {
         private readonly IMediator dispatcher;
