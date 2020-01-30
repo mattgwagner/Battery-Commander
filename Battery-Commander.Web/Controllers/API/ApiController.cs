@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BatteryCommander.Web.Controllers.API
 {
-    [Route("api/[controller]"), Authorize(AuthenticationSchemes = "Auth0,Bearer,Cookies")]
+    [Route("api/[controller]"), Authorize(AuthenticationSchemes = "Auth0,Cookies")]
     public class ApiController : Controller
     {
         protected readonly Database db;
