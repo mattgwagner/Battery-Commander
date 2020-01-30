@@ -1,4 +1,9 @@
-﻿using BatteryCommander.Web.Controllers;
+﻿using System;
+using System.IO;
+using System.Net;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using BatteryCommander.Web.Controllers;
 using BatteryCommander.Web.Jobs;
 using BatteryCommander.Web.Models;
 using BatteryCommander.Web.Services;
@@ -12,12 +17,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System;
-using System.IO;
-using System.Net;
-using System.Security.Claims;
-using System.Threading.Tasks;
 using WebEssentials.AspNetCore.Pwa;
 
 namespace BatteryCommander.Web
@@ -32,7 +33,7 @@ namespace BatteryCommander.Web
 
         private static Boolean IsDevelopment;
 
-        public Startup(IHostingEnvironment env, IConfiguration configuration)
+        public Startup(IWebHostEnvironment env, IConfiguration configuration)
         {
             IsDevelopment = env.IsDevelopment();
             Configuration = configuration;
