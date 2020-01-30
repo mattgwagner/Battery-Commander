@@ -19,7 +19,10 @@ namespace BatteryCommander.Web.Models
 
         // Oct 1 2019 - Sept 30 2020
 
-        FY2020
+        FY2020,
+
+        // Oct 1 2020 - Sept 30 2021
+        FY2021
     }
 
     public static class FiscalYearExtensions
@@ -57,6 +60,9 @@ namespace BatteryCommander.Web.Models
                 case FiscalYear.FY2020:
                     return new DateTime(2019, 10, 1);
 
+                case FiscalYear.FY2021:
+                    return new DateTime(2020, 10, 1);
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -77,6 +83,9 @@ namespace BatteryCommander.Web.Models
 
                 case FiscalYear.FY2020:
                     return new DateTime(2020, 9, 30);
+
+                case FiscalYear.FY2021:
+                    return new DateTime(2021, 9, 30);
 
                 default:
                     throw new ArgumentOutOfRangeException();

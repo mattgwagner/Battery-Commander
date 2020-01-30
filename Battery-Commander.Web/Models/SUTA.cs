@@ -12,8 +12,6 @@ namespace BatteryCommander.Web.Models
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        // Soldier -> Unit, Grade
-
         [Required]
         public int SoldierId { get; set; }
 
@@ -25,15 +23,15 @@ namespace BatteryCommander.Web.Models
 
         public String MitigationPlan { get; set; }
 
+        public DateTime StartDate { get; set; }
+
+        public DateTime EndDate { get; set; }
+
         // TODO Type training and location(s) to be performed
 
         // TODO Time/Date to be performed ILO scheduled established training assembly - hour(s), date(s), For Training Assembly - Date
 
         public SUTAStatus Status { get; set; } = SUTAStatus.Created;
-
-        // Track Status/Workflow, Who Approved and When
-
-        // Track Comments/Questions
 
         public enum SUTAStatus
         {
@@ -47,6 +45,10 @@ namespace BatteryCommander.Web.Models
         // 4. Soldier submits a SUTA request form through CoC
         // 5. CoC signs off and submits through Battery Commander/1SG and CC's the FTS
         // 6. The only approval authority is the Battery Commander
+
+        // Track Status/Workflow, Who Approved and When
+
+        // Track Comments/Questions
 
         [Display(Name = "History")]
         public virtual ICollection<Event> Events { get; set; } = new List<Event>();

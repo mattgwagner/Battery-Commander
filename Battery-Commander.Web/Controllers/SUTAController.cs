@@ -1,5 +1,5 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using BatteryCommander.Web.Commands;
 using BatteryCommander.Web.Models;
 using BatteryCommander.Web.Queries;
 using MediatR;
@@ -21,19 +21,17 @@ namespace BatteryCommander.Web.Controllers
         [HttpGet(""), AllowAnonymous]
         public async Task<IActionResult> New()
         {
-            throw new NotImplementedException();
+            // TODO Populate dropdown lists
+
+            return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Save(SUTA model)
+        public async Task<IActionResult> Save([FromForm]AddSUTARequest request)
         {
-            // Validate
+            var id = await dispatcher.Send(request);
 
-            // Persist
-
-            // Redirect with confirmation message
-
-            return RedirectToAction(nameof(Details), new { id = 1 });
+            return RedirectToAction(nameof(Details), new { id });
         }
 
         [HttpGet("{Id}")]
@@ -44,6 +42,14 @@ namespace BatteryCommander.Web.Controllers
 
         [HttpGet("{Id}/Edit")]
         public async Task<IActionResult> Edit(GetSUTARequest request) => View(await dispatcher.Send(request));
+
+        [HttpPost("{Id}")]
+        public async Task<IActionResult> Edit(UpdateSUTARequest request)
+        {
+            await dispatcher.Send(request);
+
+            return RedirectToAction(nameof(Details), new { request.Id });
+        }
 
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Transition(int id, Evaluation.Trigger trigger)
@@ -59,6 +65,16 @@ namespace BatteryCommander.Web.Controllers
             //});
 
             //await db.SaveChangesAsync();
+
+            // TODO Add an event, alert the people on the request
+
+            return RedirectToAction(nameof(Details), new { id });
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> Comment(int id, string comment)
+        {
+            // TODO Add a comment, alert the people on the request
 
             return RedirectToAction(nameof(Details), new { id });
         }
