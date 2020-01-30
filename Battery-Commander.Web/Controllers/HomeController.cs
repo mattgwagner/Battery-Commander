@@ -16,18 +16,18 @@ namespace BatteryCommander.Web.Controllers
     {
         private readonly Database db;
         private readonly IFluentEmailFactory emailSvc;
+		private readonly IMediator dispatcher;
 
-        private async Task<Soldier> CurrentUser() => await UserService.FindAsync(db, User);
-
-        public HomeController(Database db, IFluentEmailFactory emailSvc)
+        public HomeController(Database db, IFluentEmailFactory emailSvc, IMediator dispatcher)
         {
             this.db = db;
             this.emailSvc = emailSvc;
-        }
+			this.dispatcher = dispatcher;
+		}
 
         public async Task<ActionResult> Index()
         {
-            var user = await CurrentUser();
+            var user = await await dispatcher.Send(new GetCurrentUser { });
 
             if (user?.UnitId > 0)
             {
