@@ -4,6 +4,10 @@
     ViewBag.Title = "SUTA Tracker";
 }
 
+<div class="btn-group">
+    @Html.ActionLink("Add New", "New", "SUTA", null, new { @class = "btn btn-default" })
+</div>
+
 <div id="suta-list">
     <div class="page-header">
         <h1>@ViewBag.Title</h1>
