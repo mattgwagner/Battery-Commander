@@ -4,11 +4,11 @@
   "description": "Red Leg Dev's digital leader book",
   "icons": [
     {
-      "src": "/images/leader-book.jpg",
+      "src": "/images/leader-book.png",
       "sizes": "192x192"
     },
     {
-      "src": "/images/leader-book.jpg",
+      "src": "/images/leader-book.png",
       "sizes": "512x512"
     }
   ],
