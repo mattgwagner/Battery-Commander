@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BatteryCommander.Web.Controllers;
 using BatteryCommander.Web.Jobs;
 using BatteryCommander.Web.Models;
+using BatteryCommander.Web.Queries;
 using BatteryCommander.Web.Services;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -223,9 +224,11 @@ namespace BatteryCommander.Web
                             {
                                 // Get the user in the system, if they exist, by email address
 
-                                var database = scope.ServiceProvider.GetService<Database>();
-
-                                var user = await UserService.FindAsync(database, context.User);
+                                var user =
+                                    await scope
+                                    .ServiceProvider
+                                    .GetService<IMediator>()
+                                    .Send(new GetCurrentUser { });
 
                                 // Check if the user has been granted access to the system
 

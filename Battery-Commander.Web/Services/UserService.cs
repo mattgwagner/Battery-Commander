@@ -1,45 +1,17 @@
-﻿using BatteryCommander.Web.Models;
-using FluentEmail.Core;
-using Microsoft.IdentityModel.Tokens;
-using System;
+﻿using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.IO;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using BatteryCommander.Web.Models;
+using FluentEmail.Core;
+using Microsoft.IdentityModel.Tokens;
 
 namespace BatteryCommander.Web.Services
 {
     public class UserService
     {
-        internal static TimeSpan CacheDuration => TimeSpan.FromDays(1);
-
-        /// <summary>
-        /// Find the Soldier associated with the given user.
-        /// Will throw an exception if more than Soldier is found.
-        /// Will return null if none was found.
-        /// </summary>
-        public static async Task<Soldier> FindAsync(Database db, ClaimsPrincipal user)
-        {
-            var email = Get_Email(user);
-
-            if (String.IsNullOrWhiteSpace(email)) return null;
-
-            var soldiers = await SoldierService.Filter(db, new SoldierService.Query { Email = email });
-
-            if (soldiers.Count() > 1) throw new Exception($"Found multiple matching soldiers with the same email: {email}");
-
-            var soldier = soldiers.SingleOrDefault();
-
-            if(soldier != null)
-            {
-                db.Entry(soldier).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
-            }
-
-            return soldier;
-        }
-
         public static async Task RequestAccess(IFluentEmailFactory emailSvc, RequestAccessModel model)
         {
             await emailSvc
