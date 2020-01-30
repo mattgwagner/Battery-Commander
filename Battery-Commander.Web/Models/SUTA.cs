@@ -53,6 +53,7 @@ namespace BatteryCommander.Web.Models
         [Display(Name = "History")]
         public virtual ICollection<Event> Events { get; set; } = new List<Event>();
 
+        [Table(name: "SUTA_Events")]
         public class Event
         {
             // Could represent a state transition or a manual comment added, perhaps we need to flag that?
