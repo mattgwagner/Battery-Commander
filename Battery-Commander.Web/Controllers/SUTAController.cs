@@ -25,13 +25,13 @@ namespace BatteryCommander.Web.Controllers
         {
             ViewBag.Soldiers = 
                 (await dispatcher.Send(new GetSoldiers { }))
+                .OrderBy(soldier => soldier.LastName)
+                .ThenBy(soldier => soldier.FirstName)
                 .Select(soldier => new SelectListItem
                 {
-                    Text = $"{soldier.Rank} {soldier.LastName} {soldier.FirstName}",
+                    Text = $"{soldier.RankHumanized} {soldier.LastName} {soldier.FirstName}",
                     Value = $"{soldier.Id}"
-                })
-                .ToList()
-                .OrderBy(option => option.Text);
+                });
 
             return View();
         }
