@@ -60,7 +60,7 @@ namespace BatteryCommander.Web.Controllers
         {
             var model = new SoldierDetailsViewModel
             {
-                Soldier = await Get(db, id),
+                Soldier = await Get(db, id) ?? throw new ArgumentOutOfRangeException("Not found"),
                 Subordinates = await SoldierService.Subordinates(db, id),
                 Evaluations =
                     db

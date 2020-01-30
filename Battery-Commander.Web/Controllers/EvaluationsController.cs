@@ -49,7 +49,7 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> Details(int id)
         {
-            return View(await Evaluations.SingleOrDefaultAsync(_ => _.Id == id));
+            return View(await Evaluations.SingleOrDefaultAsync(_ => _.Id == id) ?? throw new ArgumentOutOfRangeException("Not found"));
         }
 
         public async Task<IActionResult> New(int soldier = 0)

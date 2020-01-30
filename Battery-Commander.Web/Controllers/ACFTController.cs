@@ -2,6 +2,7 @@
 using BatteryCommander.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -26,7 +27,7 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> Details(int id)
         {
-            return View(await Get(db, id));
+            return View(await Get(db, id) ?? throw new ArgumentOutOfRangeException("Not found"));
         }
 
         public async Task<IActionResult> New(int soldier = 0)
