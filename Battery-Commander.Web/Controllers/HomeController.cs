@@ -53,6 +53,7 @@ namespace BatteryCommander.Web.Controllers
             });
         }
 
+        [Route("~/RequestAccess")]
         public IActionResult RequestAccess()
         {
             return View(new RequestAccessModel
@@ -69,7 +70,7 @@ namespace BatteryCommander.Web.Controllers
             });
         }
 
-        [HttpPost]
+        [Route("~/RequestAccess"), HttpPost]
         public async Task<IActionResult> RequestAccess(RequestAccessModel model)
         {
             // Process request, send email to admin with info
