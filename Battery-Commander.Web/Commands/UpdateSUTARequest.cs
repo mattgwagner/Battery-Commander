@@ -13,6 +13,21 @@ namespace BatteryCommander.Web.Commands
 {
     public class UpdateSUTARequest : IRequest
     {
+        public static UpdateSUTARequest Build(SUTA model)
+        {
+            return new UpdateSUTARequest
+            {
+                Id = model.Id,
+                Body = new Detail
+                {
+                    StartDate = model.StartDate,
+                    EndDate = model.EndDate,
+                    Reasoning = model.Reasoning,
+                    MitigationPlan = model.MitigationPlan
+                }
+            };
+        }
+
         [FromRoute]
         public int Id { get; set; }
 

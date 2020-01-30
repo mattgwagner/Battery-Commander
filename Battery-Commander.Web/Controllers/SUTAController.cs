@@ -51,7 +51,7 @@ namespace BatteryCommander.Web.Controllers
         public async Task<IActionResult> ByUnit(GetSUTARequests request) => View("List", await dispatcher.Send(request));
 
         [HttpGet("{Id}/Edit")]
-        public async Task<IActionResult> Edit(GetSUTARequest request) => View(await dispatcher.Send(request));
+        public async Task<IActionResult> Edit(GetSUTARequest request) => View(UpdateSUTARequest.Build(await dispatcher.Send(request)));
 
         [HttpPost("{Id}")]
         public async Task<IActionResult> Edit(UpdateSUTARequest request)
