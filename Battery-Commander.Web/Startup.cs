@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -218,7 +219,7 @@ namespace BatteryCommander.Web
 
                     if (context.Request.Path.HasValue)
                     {
-                        if (!context.Request.Path.Value.Contains(nameof(HomeController.RequestAccess)))
+                        if (!new[] { "/RequestAccess", "/SUTA" }.Any(route => context.Request.Path.StartsWithSegments(route, StringComparison.CurrentCultureIgnoreCase)))
                         {
                             using (var scope = context.RequestServices.CreateScope())
                             {
@@ -236,7 +237,7 @@ namespace BatteryCommander.Web
                                 {
                                     // If not, redirect to request access page
 
-                                    context.Response.Redirect($"{context.Request.PathBase}/Home/RequestAccess");
+                                    context.Response.Redirect($"{context.Request.PathBase}/RequestAccess");
                                 }
                             }
                         }
