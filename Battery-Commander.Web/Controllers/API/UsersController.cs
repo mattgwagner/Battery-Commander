@@ -18,8 +18,6 @@ namespace BatteryCommander.Web.Controllers.API
 
         private readonly IOptions<Auth0Settings> auth0;
 
-        private async Task<Soldier> CurrentUser() => await UserService.FindAsync(db, User);
-
         public UsersController(Database db, IOptions<Auth0Settings> auth0) : base(db)
         {
             this.auth0 = auth0;
@@ -45,24 +43,6 @@ namespace BatteryCommander.Web.Controllers.API
             var model = JsonConvert.DeserializeAnonymousType(json, new { access_token = "", token_type = "", expires_in = 0 });
 
             return Json(model);
-        }
-
-        [HttpGet("me")]
-        public async Task<dynamic> Current()
-        {
-            // GET: api/users/me
-
-            var user = await CurrentUser();
-
-            if (user == null) return StatusCode((int)HttpStatusCode.BadRequest);
-
-            return new
-            {
-                user.Id,
-                user.FirstName,
-                user.LastName,
-                user.CivilianEmail
-            };
         }
     }
 }
