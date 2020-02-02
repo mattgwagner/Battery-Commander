@@ -7,7 +7,7 @@
 <div id="battle-roster">
 
     <div class="page-header">
-        <h1>@ViewBag.Title @Html.ActionLink("Add New", "New", "Soldiers", null, new { @class = "btn btn-default" }) @Html.ActionLink("Update PERSTAT", "Index", "Statuses", Model.Query, new { @class = "btn btn-primary" })</h1>
+        <h1>@ViewBag.Title @Html.ActionLink("Add New", "New", "Soldiers", null, new { @class = "btn btn-default" }) @Html.ActionLink("Update PERSTAT", "PERSTAT", "Reports", new { Unit = Model.Query.Unit }, new { @class = "btn btn-primary" })</h1>
         <h4>
             Assigned <span class="badge">@Model.Count</span>
             Present <span class="badge">@Model.Present</span>
