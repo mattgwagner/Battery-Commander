@@ -1,5 +1,12 @@
 ﻿@model BatteryCommander.Web.Commands.AddSUTARequest
 
+@if (ViewBag.Id != null)
+{
+    <div class="alert alert-success">
+        You SUTA request has been submitted, reference @Html.ActionLink("#" + (int)ViewBag.Id, "Details", "SUTA", new { ViewBag.Id })
+    </div>
+}
+
 <div class="alert alert-info">
     Use this form to submit a Substitute Unit Training (SUTA) request to your chain of command.
 </div>

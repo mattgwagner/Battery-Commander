@@ -42,7 +42,9 @@ namespace BatteryCommander.Web.Controllers
         {
             var id = await dispatcher.Send(request);
 
-            return RedirectToAction(nameof(Details), new { id });
+            ViewBag.Id = id;
+
+            return await New();
         }
 
         [HttpGet("{Id}")]
