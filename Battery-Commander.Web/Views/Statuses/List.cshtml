@@ -12,11 +12,9 @@
     <button id="reset-perstat">Reset PERSTAT</button>
 </div>
 
-@using (Html.BeginForm("Save", "Statuses", FormMethod.Post))
+@using (Html.BeginForm("Save", "Statuses", new { Model.Unit }, FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-
-    @Html.HiddenFor(model => model.RedirectUrl)
 
     <table class="table table-striped">
         <thead>
@@ -53,7 +51,7 @@
             $("#reset-perstat").click(function () {
                 if (confirm("Are you sure you wish to reset all Soldiers to UNKNOWN?")) {
                     $("select.status").val(@((int)Soldier.SoldierStatus.Unknown));
-                } 
+                }
             });
         });
     </script>

@@ -24,13 +24,17 @@ namespace BatteryCommander.Web.Controllers
 
         // Bulk update statuses
 
-        public async Task<IActionResult> Index(SoldierService.Query query, String redirectUrl)
+        [HttpGet("~/Units/{Unit}/PERSTAT")]
+        public async Task<IActionResult> Index(int Unit)
         {
             return View("List", new StatusListModel
             {
-                RedirectUrl = String.IsNullOrWhiteSpace(redirectUrl) ? $"{Request.Headers["Referrer"]}" : redirectUrl,
+                Unit = Unit,
                 Rows =
-                    (await SoldierService.Filter(db, query))
+                    (await SoldierService.Filter(db, new SoldierService.Query
+                    {
+                        Unit = Unit
+                    }))
                     .Select(soldier => new StatusListModel.Row
                     {
                         Soldier = soldier,
@@ -41,8 +45,8 @@ namespace BatteryCommander.Web.Controllers
             });
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> Save(StatusListModel model)
+        [HttpPost("~/Unis/{Unit}/PERSTAT"), ValidateAntiForgeryToken]
+        public async Task<IActionResult> Save(int Unit, StatusListModel model)
         {
             // For each DTO posted, update the soldier info
 
@@ -59,18 +63,14 @@ namespace BatteryCommander.Web.Controllers
 
             await db.SaveChangesAsync();
 
-            if(!String.IsNullOrWhiteSpace(model.RedirectUrl))
-            {
-                return Redirect(model.RedirectUrl);
-            }
-
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("ForUnit", "Soldiers", new { unitId = Unit });
         }
 
         public class StatusListModel
         {
             public IList<Row> Rows { get; set; }
-            public string RedirectUrl { get; internal set; }
+
+            public int Unit { get; set; }
 
             public class Row
             {
