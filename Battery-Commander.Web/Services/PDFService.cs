@@ -23,7 +23,7 @@ namespace BatteryCommander.Web.Services
         {
             const String prefix = "form1[0]";
 
-            using (var stream = typeof(Program).GetTypeInfo().Assembly.GetManifestResourceStream("BatteryCommander.Web.Models.Data.DA4856.pdf"))
+            using (var stream = typeof(Program).GetTypeInfo().Assembly.GetManifestResourceStream("Battery-Commander.Web.Models.Data.DA4856.pdf"))
             using (var output = new MemoryStream())
             {
                 var reader = new PdfReader(stream);
@@ -64,7 +64,7 @@ namespace BatteryCommander.Web.Services
         {
             const String prefix = "form1[0].Page1[0]";
 
-            using (var stream = typeof(Program).GetTypeInfo().Assembly.GetManifestResourceStream("BatteryCommander.Web.Models.Data.DA5500.pdf"))
+            using (var stream = typeof(Program).GetTypeInfo().Assembly.GetManifestResourceStream("Battery-Commander.Web.Models.Data.DA5500.pdf"))
             using (var output = new MemoryStream())
             {
                 var reader = new PdfReader(stream);
@@ -146,7 +146,7 @@ namespace BatteryCommander.Web.Services
         {
             const String prefix = "form1[0].Page1[0]";
 
-            using (var stream = typeof(Program).GetTypeInfo().Assembly.GetManifestResourceStream("BatteryCommander.Web.Models.Data.DA3749.pdf"))
+            using (var stream = typeof(Program).GetTypeInfo().Assembly.GetManifestResourceStream("Battery-Commander.Web.Models.Data.DA3749.pdf"))
             using (var output = new MemoryStream())
             {
                 var reader = new PdfReader(stream);
@@ -182,7 +182,7 @@ namespace BatteryCommander.Web.Services
         {
             const String prefix = "form1[0]";
 
-            using (var stream = typeof(Program).GetTypeInfo().Assembly.GetManifestResourceStream("BatteryCommander.Web.Models.Data.DA5501.pdf"))
+            using (var stream = typeof(Program).GetTypeInfo().Assembly.GetManifestResourceStream("Battery-Commander.Web.Models.Data.DA5501.pdf"))
             using (var output = new MemoryStream())
             {
                 var reader = new PdfReader(stream);
@@ -264,7 +264,7 @@ namespace BatteryCommander.Web.Services
 
         public static byte[] Generate_Vendor_Request_Form(PurchaseOrder order)
         {
-            using (var stream = typeof(Program).GetTypeInfo().Assembly.GetManifestResourceStream("BatteryCommander.Web.Models.Data.FLNG_FORM 49D_SAD_Vendor_Request_Form.pdf"))
+            using (var stream = typeof(Program).GetTypeInfo().Assembly.GetManifestResourceStream("Battery-Commander.Web.Models.Data.FLNG_FORM 49D_SAD_Vendor_Request_Form.pdf"))
             using (var output = new MemoryStream())
             {
                 var reader = new PdfReader(stream);
