@@ -35,9 +35,9 @@ namespace BatteryCommander.Web.Models
 
         public SUTAStatus Status { get; set; } = SUTAStatus.Created;
 
-        public enum SUTAStatus
+        public enum SUTAStatus 
         {
-            Created, Submitted, Approved, Scheduled, Completed
+            Created, Approved, Scheduled, Completed
         }
 
         // SUTA Request Process:

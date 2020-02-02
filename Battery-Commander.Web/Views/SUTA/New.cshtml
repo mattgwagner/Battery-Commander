@@ -4,10 +4,6 @@
     Use this form to submit a Substitute Unit Training (SUTA) request to your chain of command.
 </div>
 
-<div class="alert alert-warning">
-    Note: All requests are subject to mission requirements and Commander's discretion!
-</div>
-
 @using (Html.BeginForm("New", "SUTA", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
@@ -36,6 +32,10 @@
     <div class="form-group form-group-lg">
         @Html.DisplayNameFor(model => model.MitigationPlan)
         @Html.TextAreaFor(model => model.MitigationPlan)
+    </div>
+
+    <div class="alert alert-warning">
+        Disclaimer: ALL requests are subject to mission requirements and Commander's approval.
     </div>
 
     <button type="submit">Submit</button>
