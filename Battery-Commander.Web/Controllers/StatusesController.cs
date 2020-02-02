@@ -61,7 +61,7 @@ namespace BatteryCommander.Web.Controllers
 
             await db.SaveChangesAsync();
 
-            return RedirectToAction("ForUnit", "Soldiers", new { unitId = Unit });
+            return RedirectToAction(nameof(SoldiersController.ForUnit), "Soldiers", new { unitId = Unit });
         }
 
         public class StatusListModel
