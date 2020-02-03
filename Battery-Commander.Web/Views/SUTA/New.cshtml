@@ -1,5 +1,7 @@
 ﻿@model BatteryCommander.Web.Commands.AddSUTARequest
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 @if (ViewBag.Id != null)
 {
     <div class="alert alert-success">
@@ -16,35 +18,53 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()
 
-    <div class="form-group form-group-lg">
-        @Html.DisplayNameFor(model => model.Soldier)
-        @Html.DropDownListFor(model => model.Soldier, (IEnumerable<SelectListItem>)ViewBag.Soldiers, "-- Select a Soldier --", new { @class = "select2" })
-    </div>
 
-    <div class="form-group form-group-lg">
-        @Html.DisplayNameFor(model => model.StartDate)
-        @Html.EditorFor(model => model.StartDate)
-    </div>
-
-    <div class="form-group form-group-lg">
-        @Html.DisplayNameFor(model => model.EndDate)
-        @Html.EditorFor(model => model.EndDate)
-    </div>
-
-    <div class="form-group form-group-lg">
-        @Html.DisplayNameFor(model => model.Reasoning)
-        @Html.TextAreaFor(model => model.Reasoning)
-    </div>
-
-    <div class="form-group form-group-lg">
-        @Html.DisplayNameFor(model => model.MitigationPlan)
-        @Html.TextAreaFor(model => model.MitigationPlan)
-    </div>
-
+  <div class="form-group">
+    <label for="Soldier">Soldier</label> 
+      @Html.DropDownListFor(model => model.Soldier, (IEnumerable<SelectListItem>)ViewBag.Soldiers, "-- Select a Soldier --", new { @class = "select2 form-control" })
+  </div>
+  <div class="form-group">
+    <label for="StartDate">Start Date</label> 
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          <i class="fa fa-calendar"></i>
+        </div>
+      </div> 
+      <input id="StartDate" name="StartDate" placeholder="Select the First Excused Date(e.g. First Day of Drill)" type="text" aria-describedby="StartDateHelpBlock" required="required" class="form-control">
+    </div> 
+    <span id="StartDateHelpBlock" class="form-text text-muted">Select the First Date Requested for Excusal</span>
+  </div>
+  <div class="form-group">
+    <label for="EndDate">End Date</label> 
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          <i class="fa fa-calculator"></i>
+        </div>
+      </div> 
+      <input id="EndDate" name="EndDate" placeholder="Select the End Date (e.g. Last Date of Drill) or Arrival Day" type="text" class="form-control" aria-describedby="EndDateHelpBlock" required="required">
+    </div> 
+    <span id="EndDateHelpBlock" class="form-text text-muted">What is the Last Date Requested for Excusal</span>
+  </div>
+  <div class="form-group">
+    <label for="Reasoning">Reasoning</label> 
+    <textarea id="Reasoning" name="Reasoning" cols="40" rows="4" class="form-control" aria-describedby="ReasoningHelpBlock" required="required"></textarea> 
+    <span id="ReasoningHelpBlock" class="form-text text-muted">Explain the Reason for the SUTA Request</span>
+  </div>
+  <div class="form-group">
+    <label for="MitigationPlan">Mitigation</label> 
+    <textarea id="MitigationPlan" name="MitigationPlan" cols="40" rows="5" class="form-control" aria-describedby="MitigationPlanHelpBlock"></textarea> 
+    <span id="MitigationPlanHelpBlock" class="form-text text-muted">What is the impact to the Battery Mission? How are we mitigating any impact?</span>
+  </div> 
+      
+      
     <div class="alert alert-warning">
         Disclaimer: ALL requests are subject to mission requirements and Commander's approval.
     </div>
+  <div class="form-group">
+    <button name="submit" type="submit" class="btn btn-primary">Submit for Review</button>
+  </div>
 
-    <button type="submit">Submit for Review</button>
 }
 
