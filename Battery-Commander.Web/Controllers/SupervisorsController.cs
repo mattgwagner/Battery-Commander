@@ -32,6 +32,8 @@ namespace BatteryCommander.Web.Controllers
 
                 Rows =
                     (await SoldierService.Filter(db, query))
+                    .OrderByDescending(soldier => soldier.Rank)
+                    .ThenBy(soldier => soldier.LastName)
                     .Select(soldier => new SupervisorListModel.Row
                     {
                         Soldier = soldier,
