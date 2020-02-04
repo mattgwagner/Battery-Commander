@@ -71,8 +71,8 @@
                 <tr class="@(evaluation.IsDelinquent ? "alert alert-danger" : "")">
                     <td>@Html.ActionLink("Details", "Details", new { evaluation.Id })</td>
                     <td>@evaluation.Ratee.Rank.ShortName()</td>
-                    <td>@Html.RouteLink(evaluation.Ratee.LastName, "Soldier.Details", new { evaluation.Ratee.Id })</td>
-                    <td>@Html.RouteLink(evaluation.Ratee.FirstName, "Soldier.Details", new { evaluation.Ratee.Id })</td>
+                    <td>@Html.ActionLink(evaluation.Ratee.LastName, "Details", "Evaluations", new { evaluation.Id })</td>
+                    <td>@Html.ActionLink(evaluation.Ratee.FirstName, "Details", "Evaluations", new { evaluation.Id })</td>
                     <td>@Html.DisplayFor(_ => evaluation.ThruDate)</td>
                     <td>@evaluation.Status.DisplayName()</td>
                     <td data-sort="@evaluation.Delinquency.TotalDays" data-toggle="tooltip" title="@evaluation.LastEvent">
