@@ -24,12 +24,17 @@ namespace BatteryCommander.Web.Queries
 
             public async Task<SUTA> Handle(GetSUTARequest request, CancellationToken cancellationToken)
             {
-                return
-                    await GetSUTARequests
-                    .AsQueryable(db)
-                    .Where(suta => suta.Id == request.Id)
-                    .SingleOrDefaultAsync(cancellationToken);
+                return await ById(db, request.Id);
             }
+        }
+
+        public static async Task<SUTA> ById(Database db, int id)
+        {
+            return
+                await GetSUTARequests
+                .AsQueryable(db)
+                .Where(suta => suta.Id == id)
+                .SingleOrDefaultAsync()
         }
     }
 }

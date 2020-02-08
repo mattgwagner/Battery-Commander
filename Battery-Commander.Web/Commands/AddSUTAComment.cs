@@ -30,11 +30,7 @@ namespace BatteryCommander.Web.Commands
 
             protected override async Task Handle(AddSUTAComment request, CancellationToken cancellationToken)
             {
-                var suta =
-                    await db
-                    .SUTAs
-                    .Where(s => s.Id == request.Id)
-                    .SingleOrDefaultAsync(cancellationToken);
+                var suta = await GetSUTARequest.ById(db, request.Id);
 
                 var current_user = await dispatcher.Send(new GetCurrentUser { });
 

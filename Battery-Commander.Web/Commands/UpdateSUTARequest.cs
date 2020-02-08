@@ -66,11 +66,7 @@ namespace BatteryCommander.Web.Commands
             {
                 var current_user = await dispatcher.Send(new GetCurrentUser { });
 
-                var suta =
-                    await db
-                    .SUTAs
-                    .Where(s => s.Id == request.Id)
-                    .SingleOrDefaultAsync(cancellationToken);
+                var suta = await GetSUTARequest.ById(db, request.Id);
 
                 suta.SupervisorId = request.Body.Supervisor;
                 suta.StartDate = request.Body.StartDate;
