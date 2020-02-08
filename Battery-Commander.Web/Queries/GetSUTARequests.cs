@@ -41,8 +41,7 @@ namespace BatteryCommander.Web.Queries
                  .SUTAs
                  .Include(suta => suta.Soldier)
                  .ThenInclude(soldier => soldier.Unit)
-                 .Include(suta => suta.Soldier)
-                 .ThenInclude(soldier => soldier.Supervisor)
+                 .Include(suta => suta.Supervisor)
                  .Include(suta => suta.Events);
         }
     }
