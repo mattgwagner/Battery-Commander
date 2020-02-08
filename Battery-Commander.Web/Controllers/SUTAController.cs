@@ -70,7 +70,7 @@ namespace BatteryCommander.Web.Controllers
             return RedirectToAction(nameof(New));
         }
 
-        [HttpPost("[action]"), ValidateAntiForgeryToken]
+        [HttpPost("{Id}/[action]"), ValidateAntiForgeryToken]
         public async Task<IActionResult> Sign(SignSUTARequest request)
         {
             await dispatcher.Send(request);
@@ -78,7 +78,7 @@ namespace BatteryCommander.Web.Controllers
             return RedirectToAction(nameof(Details), new { request.Id });
         }
 
-        [HttpPost("[action]"), ValidateAntiForgeryToken]
+        [HttpPost("{Id}/[action]"), ValidateAntiForgeryToken]
         public async Task<IActionResult> Comment(AddSUTAComment request)
         {
             await dispatcher.Send(request);
