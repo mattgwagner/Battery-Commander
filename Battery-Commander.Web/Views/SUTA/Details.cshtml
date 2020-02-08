@@ -9,8 +9,28 @@
         </tr>
 
         <tr>
-            <td>@Html.DisplayNameFor(model => model.Status)</td>
-            <td>@Html.DisplayFor(model => model.Status)</td>
+            <td>@Html.DisplayNameFor(model => model.Supervisor)</td>
+            <td>
+                @Html.DisplayFor(model => model.Supervisor)
+                @Html.DisplayFor(model => model.SupervisorSignature)
+                @Html.DisplayFor(model => model.SupervisorSignedAt)
+            </td>
+        </tr>
+
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.FirstSergeantSignature)</td>
+            <td>
+                @Html.DisplayFor(model => model.FirstSergeantSignedAt)
+                @Html.DisplayFor(model => model.FirstSergeantSignedAt)
+            </td>
+        </tr>
+
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.CommanderSignature)</td>
+            <td>
+                @Html.DisplayFor(model => model.CommanderSignature)
+                @Html.DisplayFor(model => model.CommanderSignedAt)
+            </td>
         </tr>
 
         <tr>
