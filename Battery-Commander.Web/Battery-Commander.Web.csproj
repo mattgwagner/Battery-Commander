@@ -32,6 +32,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="Views\SUTA\Email.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Jobs\EvaluationsDue.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
