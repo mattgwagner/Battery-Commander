@@ -21,20 +21,26 @@
                     <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Soldier.Rank)</th>
                     <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Soldier.LastName)</th>
                     <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Soldier.FirstName)</th>
+                    <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().SupervisorSignature)</th>
+                    <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().FirstSergeantSignature)</th>
+                    <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().CommanderSignature)</th>
                 </tr>
             </thead>
 
             <tbody>
                 @foreach (var request in Model)
                 {
-                    <tr>
-                        <td>@Html.ActionLink("Details", "Details", new { request.Id })</td>
-                        <td>@Html.DisplayFor(_ => request.Status)</td>
-                        <td>@Html.DisplayFor(_ => request.StartDate)</td>
-                        <td>@Html.DisplayFor(_ => request.Soldier.RankHumanized)</td>
-                        <td>@Html.DisplayFor(_ => request.Soldier.LastName)</td>
-                        <td>@Html.DisplayFor(_ => request.Soldier.FirstName)</td>
-                    </tr>
+                <tr>
+                    <td>@Html.ActionLink("Details", "Details", new { request.Id })</td>
+                    <td>@Html.DisplayFor(_ => request.Status)</td>
+                    <td>@Html.DisplayFor(_ => request.StartDate)</td>
+                    <td>@Html.DisplayFor(_ => request.Soldier.RankHumanized)</td>
+                    <td>@Html.DisplayFor(_ => request.Soldier.LastName)</td>
+                    <td>@Html.DisplayFor(_ => request.Soldier.FirstName)</td>
+                    <td><input type="checkbox" @(string.IsNullOrWhiteSpace(request.SupervisorSignature) ? "" : "checked") disabled="disabled" /></td>
+                    <td><input type="checkbox" @(string.IsNullOrWhiteSpace(request.SupervisorSignature) ? "" : "checked") disabled="disabled" /></td>
+                    <td><input type="checkbox" @(string.IsNullOrWhiteSpace(request.SupervisorSignature) ? "" : "checked") disabled="disabled" /></td>
+                </tr>
                 }
             </tbody>
         </table>
