@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Humanizer;
-using Stateless;
 
 namespace BatteryCommander.Web.Models
 {
@@ -55,16 +54,7 @@ namespace BatteryCommander.Web.Models
 
         // TODO Time/Date to be performed ILO scheduled established training assembly - hour(s), date(s), For Training Assembly - Date
 
-        // TODO Maybe we make status flip based on the signatures?
-
-        public SUTAStatus Status { get; set; } = SUTAStatus.Created;
-
-        public enum SUTAStatus
-        {
-            Created, Approved, Scheduled, Completed
-        }
-
-        // SUTA Request Process:
+        // Prior SUTA Request Process:
         // 1. SM submits their concern/request through their chain-of-command
         // 2. Chain of command helps the Soldier think through mitigation processes -- try to find a work-around
         // 3. Soldier contacts the FTS to coordinate ILO dates
@@ -72,10 +62,9 @@ namespace BatteryCommander.Web.Models
         // 5. CoC signs off and submits through Battery Commander/1SG and CC's the FTS
         // 6. The only approval authority is the Battery Commander
 
-        // Track Status/Workflow, Who Approved and When
-
-        // Track Comments/Questions
-
+        /// <summary>
+        /// Tracks the event history including comments and approvals
+        /// </summary>
         [Display(Name = "History")]
         public virtual ICollection<Event> Events { get; set; } = new List<Event>();
 
