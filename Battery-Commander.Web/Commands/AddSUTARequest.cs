@@ -1,10 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using BatteryCommander.Web.Models;
 using BatteryCommander.Web.Queries;
+using FluentEmail.Core;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,17 +28,19 @@ namespace BatteryCommander.Web.Commands
         public String Reasoning { get; set; }
 
         [Display(Name = "How are we mitigating the loss of this Soldier during the requested period? Include anticipate arrival time if partial request to miss.")]
-        public String MitigationPlan { get; set; }        
+        public String MitigationPlan { get; set; }
 
         private class Handler : IRequestHandler<AddSUTARequest, int>
         {
             private readonly Database db;
             private readonly IMediator dispatcher;
+            private readonly IFluentEmailFactory emailSvc;
 
-            public Handler(Database db, IMediator dispatcher)
+            public Handler(Database db, IMediator dispatcher, IFluentEmailFactory emailSvc)
             {
                 this.db = db;
                 this.dispatcher = dispatcher;
+                this.emailSvc = emailSvc;
             }
 
             public async Task<int> Handle(AddSUTARequest request, CancellationToken cancellationToken)
@@ -69,7 +73,23 @@ namespace BatteryCommander.Web.Commands
 
                 await db.SaveChangesAsync(cancellationToken);
 
+                await Notify_Leadership_Of_Request(suta);
+
                 return suta.Id;
+            }
+
+            private async Task Notify_Leadership_Of_Request(SUTA suta)
+            {
+                await
+                    emailSvc
+                    .Create()
+                    .To(emailAddress: "SUTAs@RedLeg.app")
+                    .Subject($"SUTA Request Submitted")
+                    .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/SUTA/Email.cshtml", new
+                    {
+
+                    })
+                    .SendWithErrorCheck();
             }
         }
     }
