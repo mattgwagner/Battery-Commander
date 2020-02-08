@@ -36,6 +36,8 @@ namespace BatteryCommander.Web.Commands
 
         public class Detail
         {
+            public int Supervisor { get; set; }
+
             [DataType(DataType.Date)]
             public DateTime StartDate { get; set; }
 
@@ -70,6 +72,7 @@ namespace BatteryCommander.Web.Commands
                     .Where(s => s.Id == request.Id)
                     .SingleOrDefaultAsync(cancellationToken);
 
+                suta.Supervisor = request.Body.Supervisor;
                 suta.StartDate = request.Body.StartDate;
                 suta.EndDate = request.Body.EndDate;
                 suta.Reasoning = request.Body.Reasoning;

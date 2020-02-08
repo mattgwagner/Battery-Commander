@@ -6,6 +6,11 @@
     @Html.ValidationSummary()
 
     <div class="form-group form-group-lg">
+        @Html.DisplayNameFor(model => model.Body.Supervisor)
+        @Html.DropDownListFor(model => model.Body.Supervisor, (IEnumerable<SelectListItem>)ViewBag.Supervisors)
+    </div>
+
+    <div class="form-group form-group-lg">
         @Html.DisplayNameFor(model => model.Body.StartDate)
         @Html.EditorFor(model => model.Body.StartDate)
     </div>

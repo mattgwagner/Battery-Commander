@@ -1,18 +1,20 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using BatteryCommander.Web.Queries;
 using BatteryCommander.Web.Models;
+using BatteryCommander.Web.Queries;
 using MediatR;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
 
 namespace BatteryCommander.Web.Commands
 {
     public class AddSUTARequest : IRequest<int>
     {
         public int Soldier { get; set; }
+
+        public int Supervisor { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime StartDate { get; set; }
@@ -24,7 +26,7 @@ namespace BatteryCommander.Web.Commands
         public String Reasoning { get; set; }
 
         [Display(Name = "How are we mitigating the loss of this Soldier during the requested period?")]
-        public String MitigationPlan { get; set; }
+        public String MitigationPlan { get; set; }        
 
         private class Handler : IRequestHandler<AddSUTARequest, int>
         {
@@ -50,6 +52,7 @@ namespace BatteryCommander.Web.Commands
                 var suta = new SUTA
                 {
                     SoldierId = request.Soldier,
+                    SupervisorId = request.Supervisor,
                     StartDate = request.StartDate,
                     EndDate = request.EndDate,
                     Reasoning = request.Reasoning,
