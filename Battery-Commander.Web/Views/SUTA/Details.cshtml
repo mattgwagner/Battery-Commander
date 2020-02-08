@@ -95,7 +95,7 @@
     {
         <hr />
 
-        @using (Html.BeginForm("Comment", "SUTA", FormMethod.Post, new { @class = "form-horitzontal" }))
+        @using (Html.BeginForm("Comment", "SUTA", new { Model.Id },FormMethod.Post, new { @class = "form-horitzontal" }))
         {
             @Html.AntiForgeryToken()
             @Html.HiddenFor(model => model.Id)
