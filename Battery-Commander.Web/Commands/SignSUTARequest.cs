@@ -63,6 +63,12 @@ namespace BatteryCommander.Web.Commands
                     suta.CommanderSignedAt = DateTime.UtcNow;
                 }
 
+                suta.Events.Add(new SUTA.Event
+                {
+                    Author = $"{current_user}",
+                    Message = "Signature added"
+                });
+
                 await db.SaveChangesAsync(cancellationToken);
             }
         }
