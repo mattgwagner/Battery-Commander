@@ -16,11 +16,11 @@
             <thead>
                 <tr>
                     <th>Details</th>
-                    <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Status)</th>
-                    <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().StartDate)</th>
+                    <th data-priority="3">@Html.DisplayNameFor(_ => _.FirstOrDefault().Status)</th>
+                    <th data-priority="1">@Html.DisplayNameFor(_ => _.FirstOrDefault().StartDate)</th>
                     <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().EndDate)</th>
-                    <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Soldier.Rank)</th>
-                    <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Soldier.LastName)</th>
+                    <th data-priority="2">@Html.DisplayNameFor(_ => _.FirstOrDefault().Soldier.Rank)</th>
+                    <th data-priority="1">@Html.DisplayNameFor(_ => _.FirstOrDefault().Soldier.LastName)</th>
                     <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().Soldier.FirstName)</th>
                     <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().SupervisorSignature)</th>
                     <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().FirstSergeantSignature)</th>
@@ -37,8 +37,8 @@
                     <td>@Html.DisplayFor(_ => request.StartDate)</td>
                     <td>@Html.DisplayFor(_ => request.EndDate)</td>
                     <td>@Html.DisplayFor(_ => request.Soldier.RankHumanized)</td>
-                    <td>@Html.DisplayFor(_ => request.Soldier.LastName)</td>
-                    <td>@Html.DisplayFor(_ => request.Soldier.FirstName)</td>
+                    <td>@Html.ActionLink(request.Soldier.LastName, "Details", new { request.Id })</td>
+                    <td>@Html.ActionLink(request.Soldier.FirstName, "Details", new { request.Id })</td>
                     <td><input type="checkbox" @(string.IsNullOrWhiteSpace(request.SupervisorSignature) ? "" : "checked") disabled="disabled" /></td>
                     <td><input type="checkbox" @(string.IsNullOrWhiteSpace(request.FirstSergeantSignature) ? "" : "checked") disabled="disabled" /></td>
                     <td><input type="checkbox" @(string.IsNullOrWhiteSpace(request.CommanderSignature) ? "" : "checked") disabled="disabled" /></td>
