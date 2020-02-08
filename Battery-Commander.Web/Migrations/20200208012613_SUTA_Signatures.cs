@@ -48,13 +48,13 @@ namespace BatteryCommander.Web.Migrations
                 table: "SUTAs",
                 column: "SupervisorId");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_SUTAs_Soldiers_SupervisorId",
-                table: "SUTAs",
-                column: "SupervisorId",
-                principalTable: "Soldiers",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+            //migrationBuilder.AddForeignKey(
+            //    name: "FK_SUTAs_Soldiers_SupervisorId",
+            //    table: "SUTAs",
+            //    column: "SupervisorId",
+            //    principalTable: "Soldiers",
+            //    principalColumn: "Id",
+            //    onDelete: ReferentialAction.Cascade);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
