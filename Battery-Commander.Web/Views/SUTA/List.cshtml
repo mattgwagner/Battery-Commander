@@ -25,6 +25,7 @@
                     <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().SupervisorSignature)</th>
                     <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().FirstSergeantSignature)</th>
                     <th>@Html.DisplayNameFor(_ => _.FirstOrDefault().CommanderSignature)</th>
+                    <th></th>
                 </tr>
             </thead>
 
@@ -42,6 +43,7 @@
                     <td><input type="checkbox" @(string.IsNullOrWhiteSpace(request.SupervisorSignature) ? "" : "checked") disabled="disabled" /></td>
                     <td><input type="checkbox" @(string.IsNullOrWhiteSpace(request.FirstSergeantSignature) ? "" : "checked") disabled="disabled" /></td>
                     <td><input type="checkbox" @(string.IsNullOrWhiteSpace(request.CommanderSignature) ? "" : "checked") disabled="disabled" /></td>
+                    <td></td>
                 </tr>
                 }
             </tbody>
