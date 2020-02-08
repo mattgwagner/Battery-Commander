@@ -25,12 +25,8 @@ namespace BatteryCommander.Web.Queries
             public async Task<SUTA> Handle(GetSUTARequest request, CancellationToken cancellationToken)
             {
                 return
-                    await db
-                    .SUTAs
-                    .Include(suta => suta.Soldier)
-                    .ThenInclude(soldier => soldier.Unit)
-                    .Include(suta => suta.Supervisor)
-                    .ThenInclude(supervisor => supervisor.Unit)
+                    await GetSUTARequests
+                    .AsQueryable(db)
                     .Where(suta => suta.Id == request.Id)
                     .SingleOrDefaultAsync(cancellationToken);
             }

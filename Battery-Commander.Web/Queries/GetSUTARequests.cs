@@ -28,15 +28,21 @@ namespace BatteryCommander.Web.Queries
             public async Task<IEnumerable<SUTA>> Handle(GetSUTARequests request, CancellationToken cancellationToken)
             {
                 return
-                    await db
-                    .SUTAs
-                    .Include(suta => suta.Soldier)
-                    .ThenInclude(soldier => soldier.Unit)
-                    .Include(suta => suta.Soldier)
-                    .ThenInclude(soldier => soldier.Supervisor)
+                    await AsQueryable(db)
                     .Where(suta => suta.Soldier.UnitId == request.Unit)
                     .ToListAsync(cancellationToken);
             }
+        }
+
+        public static IQueryable<SUTA> AsQueryable(Database db)
+        {
+            return
+                 db
+                 .SUTAs
+                 .Include(suta => suta.Soldier)
+                 .ThenInclude(soldier => soldier.Unit)
+                 .Include(suta => suta.Soldier)
+                 .ThenInclude(soldier => soldier.Supervisor);
         }
     }
 }
