@@ -2,26 +2,6 @@
 
 <div class="container-fluid">
 
-    @if (User.Identity.IsAuthenticated)
-    {
-        <!-- Workflow steps available -->
-
-        <div class="btn-toolbar" role="group">
-            <button class="btn btn-warning">@Html.ActionLink("Edit", "Edit", new { Model.Id })</button>
-            @using (Html.BeginForm("Transition", "SUTA", new { Model.Id }))
-            {
-                @Html.AntiForgeryToken()
-
-                @foreach (var trigger in Model.Available_Transitions)
-                {
-                    <button type="submit" name="trigger" value="@trigger" class="btn btn-info">@trigger.DisplayName()</button>
-                }
-            }
-        </div>
-
-        <hr />
-    }
-
     <table class="table table-bordered">
         <tr>
             <td>@Html.DisplayNameFor(model => model.Soldier)</td>
@@ -62,11 +42,13 @@
             @Html.AntiForgeryToken()
             @Html.HiddenFor(model => model.Id)
 
-              <div class="form-group">
-                <label for="CommentPlan">Comments</label> 
+            <div class="form-group">
+                <label for="CommentPlan">Comments</label>
                 <span id="CommentPlanHelp" class="form-text text-muted">What is the impact to the Battery Mission? How are we mitigating any impact? Have we coordinated pick-up or make-up periods?</span>
-                <textarea id="comment" name="comment" cols="40" rows="5" class="form-control" aria-describedby="CommentPlanHelp"></textarea> 
-            </div> 
+                <textarea id="comment" name="comment" cols="40" rows="5" class="form-control" aria-describedby="CommentPlanHelp"></textarea>
+            </div>
+
+            <button type="submit">Add Comment</button>
         }
 
         <hr />

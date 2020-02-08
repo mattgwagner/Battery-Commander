@@ -32,13 +32,34 @@ namespace BatteryCommander.Web.Models
         [DataType(DataType.Date)]
         public DateTime EndDate { get; set; }
 
+        public int SupervisorId { get; set; }
+
+        public virtual Soldier Supervisor { get; set; }
+
+        [Display(Name = "Supervisor Signature")]
+        public String SupervisorSignature { get; set; }
+
+        public DateTime? SupervisorSignedAt { get; set; }
+
+        [Display(Name = "1SG Signature")]
+        public String FirstSergeantSignature { get; set; }
+
+        public DateTime? FirstSergeantSignedAt { get; set; }
+
+        [Display(Name = "CDR Signature")]
+        public String CommanderSignature { get; set; }
+
+        public DateTime? CommanderSignedAt { get; set; }
+
         // TODO Type training and location(s) to be performed
 
         // TODO Time/Date to be performed ILO scheduled established training assembly - hour(s), date(s), For Training Assembly - Date
 
+        // TODO Maybe we make status flip based on the signatures?
+
         public SUTAStatus Status { get; set; } = SUTAStatus.Created;
 
-        public enum SUTAStatus 
+        public enum SUTAStatus
         {
             Created, Approved, Scheduled, Completed
         }
@@ -80,79 +101,6 @@ namespace BatteryCommander.Web.Models
             public string Message { get; set; }
 
             public override string ToString() => $"{Author}: {Message}";
-        }
-
-        public enum Trigger : byte
-        {
-            [Display(Name = "Supervisor Approved")]
-            Supervisor_Approval,
-
-            [Display(Name = "PLT Leadership Approved")]
-            Platoon_Leadership_Approval,
-
-            [Display(Name = "1SG Approved")]
-            First_Sergeant_Approval,
-
-            [Display(Name = "CDR Approved")]
-            Commander_Approval,
-
-            [Display(Name = "Returned to SM")]
-            Returned_To_Solder,
-
-            [Display(Name = "Rejected")]
-            Reject
-        }
-
-        public virtual IEnumerable<Trigger> Available_Transitions => Machine.PermittedTriggers;
-
-        public virtual void Transition(Trigger trigger) => Machine.Fire(trigger);
-
-        protected virtual StateMachine<SUTAStatus, Trigger> Machine
-        {
-            get
-            {
-                var machine = new StateMachine<SUTAStatus, Trigger>(() => Status, value => Status = value);
-
-                //machine.Configure(SUTAStatus.At_Rater)
-                //    .Permit(Trigger.Rater_Completed, SUTAStatus.At_Senior_Rater);
-
-                //machine.Configure(SUTAStatus.At_Senior_Rater)
-                //    .Permit(Trigger.Return_to_Rater, SUTAStatus.At_Rater)
-                //    .PermitIf(Trigger.Senior_Rater_Completed, SUTAStatus.At_Reviewer, () => ReviewerId.HasValue)
-                //    .PermitIf(Trigger.Senior_Rater_Completed, SUTAStatus.At_1SG_Review, () => !ReviewerId.HasValue);
-
-                //machine.Configure(SUTAStatus.At_Reviewer)
-                //    .Permit(Trigger.Reviewer_Completed, SUTAStatus.At_1SG_Review)
-                //    .Permit(Trigger.Return_to_Rater, SUTAStatus.At_Rater);
-
-                //machine.Configure(SUTAStatus.At_1SG_Review)
-                //    .Permit(Trigger.Return_to_Rater, SUTAStatus.At_Rater)
-                //    .Permit(Trigger.Internal_Review_Completed, SUTAStatus.Ready_for_Signatures);
-
-                //machine.Configure(SUTAStatus.Ready_for_Signatures)
-                //    .Permit(Trigger.Return_to_Rater, SUTAStatus.At_Rater)
-                //    .Permit(Trigger.Rater_Signed, SUTAStatus.Pending_Senior_Rater_Signature);
-
-                //machine.Configure(SUTAStatus.Pending_Senior_Rater_Signature)
-                //    .PermitIf(Trigger.Senior_Rater_Signed, EvaluationStatus.Pending_SM_Signature);
-
-                //machine.Configure(SUTAStatus.Pending_SM_Signature)
-                //    .PermitIf(Trigger.Soldier_Signed, EvaluationStatus.Pending_Reviewer_Signature, () => ReviewerId.HasValue)
-                //    .PermitIf(Trigger.Soldier_Signed, EvaluationStatus.Pending_HQDA_Submission, () => !ReviewerId.HasValue);
-
-                //machine.Configure(SUTAStatus.Pending_Reviewer_Signature)
-                //    .PermitIf(Trigger.Reviewer_Signed, SUTAStatus.Pending_HQDA_Submission);
-
-                //machine.Configure(SUTAStatus.Pending_HQDA_Submission)
-                //    .Permit(Trigger.Submitted_to_Hqda, SUTAStatus.Submitted_to_HQDA)
-                //    .Permit(Trigger.Accepted_to_iPerms, SUTAStatus.Accepted_to_iPerms);
-
-                //machine.Configure(SUTAStatus.Submitted_to_HQDA)
-                //    .Permit(Trigger.Return_to_Rater, SUTAStatus.At_Rater)
-                //    .Permit(Trigger.Accepted_to_iPerms, SUTAStatus.Accepted_to_iPerms);
-
-                return machine;
-            }
         }
     }
 }
