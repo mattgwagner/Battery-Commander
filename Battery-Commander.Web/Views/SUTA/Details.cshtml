@@ -16,12 +16,12 @@
 
         <tr>
             <td>@Html.DisplayNameFor(model => model.StartDate)</td>
-            <td>@Html.DisplayFor(model => model.StartDate)</td>
+            <td>@Html.DisplayFor(model => model.StartDate) @Model.StartDate.DayOfWeek</td>
         </tr>
 
         <tr>
             <td>@Html.DisplayNameFor(model => model.EndDate)</td>
-            <td>@Html.DisplayFor(model => model.EndDate)</td>
+            <td>@Html.DisplayFor(model => model.EndDate) @Model.EndDate.DayOfWeek</td>
         </tr>
 
         <tr>
