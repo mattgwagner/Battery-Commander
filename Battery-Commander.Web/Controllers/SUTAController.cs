@@ -52,7 +52,20 @@ namespace BatteryCommander.Web.Controllers
         public async Task<IActionResult> ByUnit(GetSUTARequests request) => View("List", await dispatcher.Send(request));
 
         [HttpGet("{Id}/Edit")]
-        public async Task<IActionResult> Edit(GetSUTARequest request) => View(UpdateSUTARequest.Build(await dispatcher.Send(request)));
+        public async Task<IActionResult> Edit(GetSUTARequest request)
+        {
+            ViewBag.Soldiers =
+                (await dispatcher.Send(new GetSoldiers { }))
+                .OrderBy(soldier => soldier.LastName)
+                .ThenBy(soldier => soldier.FirstName)
+                .Select(soldier => new SelectListItem
+                {
+                    Text = $"{soldier.RankHumanized} {soldier.LastName} {soldier.FirstName}",
+                    Value = $"{soldier.Id}"
+                });
+
+            return View(UpdateSUTARequest.Build(await dispatcher.Send(request)));
+        }
 
         [HttpPost("{Id}")]
         public async Task<IActionResult> Edit(UpdateSUTARequest request)
