@@ -16,6 +16,9 @@
     <None Remove="Jobs\EvaluationUpdated.html" />
     <None Remove="Jobs\Green3_SensitiveItems.html" />
     <None Remove="Jobs\Red1_Perstat.html" />
+    <None Remove="Views\Home\RequestAccessEmail.html" />
+    <None Remove="Views\SUTA\Email.html" />
+
     <None Remove="Models\Data\ABCP.csv" />
     <None Remove="Models\Data\DA3749.pdf" />
     <None Remove="Models\Data\DA4856.pdf" />
@@ -26,7 +29,6 @@
     <None Remove="Models\Data\PushUps.csv" />
     <None Remove="Models\Data\Run.csv" />
     <None Remove="Models\Data\SitUps.csv" />
-    <None Remove="Views\Home\RequestAccessEmail.html" />
   </ItemGroup>
 
   <ItemGroup>
