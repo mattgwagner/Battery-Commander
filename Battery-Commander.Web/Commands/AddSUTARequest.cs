@@ -80,15 +80,14 @@ namespace BatteryCommander.Web.Commands
 
             private async Task Notify_Leadership_Of_Request(SUTA suta)
             {
+                // Might need to re-load the entity to get related data
+
                 await
                     emailSvc
                     .Create()
                     .To(emailAddress: "SUTAs@RedLeg.app")
                     .Subject($"SUTA Request Submitted")
-                    .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/SUTA/Email.html", new
-                    {
-
-                    })
+                    .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/SUTA/Email.html", suta)
                     .SendWithErrorCheck();
             }
         }
