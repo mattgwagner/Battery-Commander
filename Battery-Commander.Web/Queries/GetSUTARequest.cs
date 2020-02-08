@@ -34,7 +34,7 @@ namespace BatteryCommander.Web.Queries
                 await GetSUTARequests
                 .AsQueryable(db)
                 .Where(suta => suta.Id == id)
-                .SingleOrDefaultAsync()
+                .SingleOrDefaultAsync();
         }
     }
 }
