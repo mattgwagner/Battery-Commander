@@ -3,6 +3,12 @@
 <div class="container-fluid">
 
     <table class="table table-bordered">
+
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Status)</td>
+            <td>@Html.DisplayFor(model => model.Status)</td>
+        </tr>
+
         <tr>
             <td>@Html.DisplayNameFor(model => model.Soldier)</td>
             <td>@Html.DisplayFor(model => model.Soldier)</td>
@@ -17,10 +23,12 @@
             </td>
         </tr>
 
+        <!-- TODO There other people in the COC that need to approve before it gets to Top? -->
+
         <tr>
             <td>@Html.DisplayNameFor(model => model.FirstSergeantSignature)</td>
             <td>
-                @Html.DisplayFor(model => model.FirstSergeantSignedAt)
+                @Html.DisplayFor(model => model.FirstSergeantSignature)
                 @Html.DisplayFor(model => model.FirstSergeantSignedAt)
             </td>
         </tr>
