@@ -57,6 +57,8 @@ namespace BatteryCommander.Web.Commands
                 {
                     suta.CommanderSignature = $"{current_user}";
                     suta.CommanderSignedAt = DateTime.UtcNow;
+
+                    suta.Status = SUTA.SUTAStatus.Approved;
                 }
 
                 suta.Events.Add(new SUTA.Event
