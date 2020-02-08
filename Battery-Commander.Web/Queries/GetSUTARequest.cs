@@ -29,8 +29,8 @@ namespace BatteryCommander.Web.Queries
                     .SUTAs
                     .Include(suta => suta.Soldier)
                     .ThenInclude(soldier => soldier.Unit)
-                    .Include(suta => suta.Soldier)
-                    .ThenInclude(soldier => soldier.Supervisor)
+                    .Include(suta => suta.Supervisor)
+                    .ThenInclude(supervisor => supervisor.Unit)
                     .Where(suta => suta.Id == request.Id)
                     .SingleOrDefaultAsync(cancellationToken);
             }
