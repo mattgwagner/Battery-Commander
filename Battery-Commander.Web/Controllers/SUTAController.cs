@@ -1,8 +1,6 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using BatteryCommander.Web.Commands;
-using BatteryCommander.Web.Models;
 using BatteryCommander.Web.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -71,8 +69,6 @@ namespace BatteryCommander.Web.Controllers
 
             return RedirectToAction(nameof(New));
         }
-
-
 
         [HttpPost("[action]"), ValidateAntiForgeryToken]
         public async Task<IActionResult> Sign(SignSUTARequest request)

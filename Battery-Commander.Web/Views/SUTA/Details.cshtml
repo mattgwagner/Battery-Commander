@@ -20,6 +20,16 @@
                 @Html.DisplayFor(model => model.Supervisor)
                 @Html.DisplayFor(model => model.SupervisorSignature)
                 @Html.DisplayFor(model => model.SupervisorSignedAt)
+
+                @if (User.Identity.IsAuthenticated && String.IsNullOrWhiteSpace(Model.SupervisorSignature))
+                {
+                    using (Html.BeginForm("Sign", "SUTA", new { Model.Id }, FormMethod.Post))
+                    {
+                        @Html.Hidden("Supervisor", Boolean.TrueString)
+
+                        <button type="submit">SIGN</button>
+                    }
+                }
             </td>
         </tr>
 
@@ -30,6 +40,16 @@
             <td>
                 @Html.DisplayFor(model => model.FirstSergeantSignature)
                 @Html.DisplayFor(model => model.FirstSergeantSignedAt)
+
+                @if (User.Identity.IsAuthenticated && String.IsNullOrWhiteSpace(Model.FirstSergeantSignature))
+                {
+                    using (Html.BeginForm("Sign", "SUTA", new { Model.Id }, FormMethod.Post))
+                    {
+                        @Html.Hidden("FirstSergeant", Boolean.TrueString)
+
+                        <button type="submit">SIGN</button>
+                    }
+                }
             </td>
         </tr>
 
@@ -38,6 +58,16 @@
             <td>
                 @Html.DisplayFor(model => model.CommanderSignature)
                 @Html.DisplayFor(model => model.CommanderSignedAt)
+
+                @if (User.Identity.IsAuthenticated && String.IsNullOrWhiteSpace(Model.CommanderSignature))
+                {
+                    using (Html.BeginForm("Sign", "SUTA", new { Model.Id }, FormMethod.Post))
+                    {
+                        @Html.Hidden("Commander", Boolean.TrueString)
+
+                        <button type="submit">SIGN</button>
+                    }
+                }
             </td>
         </tr>
 
