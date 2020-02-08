@@ -27,7 +27,7 @@
                     {
                         @Html.Hidden("Supervisor", Boolean.TrueString)
 
-                        <button type="submit">SIGN</button>
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to sign?')">SIGN</button>
                     }
                 }
             </td>
@@ -47,7 +47,7 @@
                     {
                         @Html.Hidden("FirstSergeant", Boolean.TrueString)
 
-                        <button type="submit">SIGN</button>
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to sign?')">SIGN</button>
                     }
                 }
             </td>
@@ -65,7 +65,7 @@
                     {
                         @Html.Hidden("Commander", Boolean.TrueString)
 
-                        <button type="submit">SIGN</button>
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to sign?')">SIGN</button>
                     }
                 }
             </td>
@@ -106,7 +106,7 @@
                 <textarea id="comment" name="comment" cols="40" rows="5" class="form-control" aria-describedby="CommentPlanHelp"></textarea>
             </div>
 
-            <button type="submit">Add Comment</button>
+            <button type="submit" class="btn btn-default">Add Comment</button>
         }
 
         <hr />
