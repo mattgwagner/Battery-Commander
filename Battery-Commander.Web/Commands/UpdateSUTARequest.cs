@@ -72,7 +72,7 @@ namespace BatteryCommander.Web.Commands
                     .Where(s => s.Id == request.Id)
                     .SingleOrDefaultAsync(cancellationToken);
 
-                suta.Supervisor = request.Body.Supervisor;
+                suta.SupervisorId = request.Body.Supervisor;
                 suta.StartDate = request.Body.StartDate;
                 suta.EndDate = request.Body.EndDate;
                 suta.Reasoning = request.Body.Reasoning;

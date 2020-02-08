@@ -24,7 +24,7 @@ namespace BatteryCommander.Web.Controllers
         [HttpGet(""), AllowAnonymous]
         public async Task<IActionResult> New()
         {
-            ViewBag.Soldiers = 
+            ViewBag.Soldiers =
                 (await dispatcher.Send(new GetSoldiers { }))
                 .OrderBy(soldier => soldier.LastName)
                 .ThenBy(soldier => soldier.FirstName)
@@ -65,29 +65,21 @@ namespace BatteryCommander.Web.Controllers
         }
 
         [HttpPost("{Id}/[action]")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(DeleteSUTARequest request)
         {
-            throw new NotImplementedException();
+            await dispatcher.Send(request);
+
+            return RedirectToAction(nameof(New));
         }
 
+
+
         [HttpPost("[action]"), ValidateAntiForgeryToken]
-        public async Task<IActionResult> Transition(int id, Evaluation.Trigger trigger)
+        public async Task<IActionResult> Sign(SignSUTARequest request)
         {
-            //var evaluation = await Evaluations.SingleOrDefaultAsync(_ => _.Id == id);
+            await dispatcher.Send(request);
 
-            //evaluation.Transition(trigger);
-
-            //evaluation.Events.Add(new Evaluation.Event
-            //{
-            //    Author = await GetDisplayName(),
-            //    Message = trigger.DisplayName()
-            //});
-
-            //await db.SaveChangesAsync();
-
-            // TODO Add an event, alert the people on the request
-
-            return RedirectToAction(nameof(Details), new { id });
+            return RedirectToAction(nameof(Details), new { request.Id });
         }
 
         [HttpPost("[action]"), ValidateAntiForgeryToken]
