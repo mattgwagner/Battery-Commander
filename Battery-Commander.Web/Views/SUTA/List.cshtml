@@ -40,8 +40,8 @@
                     <td>@Html.DisplayFor(_ => request.Soldier.LastName)</td>
                     <td>@Html.DisplayFor(_ => request.Soldier.FirstName)</td>
                     <td><input type="checkbox" @(string.IsNullOrWhiteSpace(request.SupervisorSignature) ? "" : "checked") disabled="disabled" /></td>
-                    <td><input type="checkbox" @(string.IsNullOrWhiteSpace(request.SupervisorSignature) ? "" : "checked") disabled="disabled" /></td>
-                    <td><input type="checkbox" @(string.IsNullOrWhiteSpace(request.SupervisorSignature) ? "" : "checked") disabled="disabled" /></td>
+                    <td><input type="checkbox" @(string.IsNullOrWhiteSpace(request.FirstSergeantSignature) ? "" : "checked") disabled="disabled" /></td>
+                    <td><input type="checkbox" @(string.IsNullOrWhiteSpace(request.CommanderSignature) ? "" : "checked") disabled="disabled" /></td>
                 </tr>
                 }
             </tbody>
