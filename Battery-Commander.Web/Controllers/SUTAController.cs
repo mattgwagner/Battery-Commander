@@ -83,11 +83,11 @@ namespace BatteryCommander.Web.Controllers
         }
 
         [HttpPost("[action]"), ValidateAntiForgeryToken]
-        public async Task<IActionResult> Comment(int id, string comment)
+        public async Task<IActionResult> Comment(AddSUTAComment request)
         {
-            // TODO Add a comment, alert the people on the request
+            await dispatcher.Send(request);
 
-            return RedirectToAction(nameof(Details), new { id });
+            return RedirectToAction(nameof(Details), new { request.Id });
         }
     }
 }
