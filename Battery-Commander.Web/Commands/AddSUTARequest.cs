@@ -85,7 +85,7 @@ namespace BatteryCommander.Web.Commands
                     .Create()
                     .To(emailAddress: "SUTAs@RedLeg.app")
                     .Subject($"SUTA Request Submitted")
-                    .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/SUTA/Email.cshtml", new
+                    .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/SUTA/Email.html", new
                     {
 
                     })
