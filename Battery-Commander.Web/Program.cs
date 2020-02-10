@@ -25,17 +25,17 @@ namespace BatteryCommander.Web
                 })
                 .ConfigureLogging((context, builder) =>
                 {
-                    //Log.Logger =
-                    //       new LoggerConfiguration()
-                    //       .Enrich.FromLogContext()
-                    //       .Enrich.WithProperty("Application", context.HostingEnvironment.ApplicationName)
-                    //       .Enrich.WithProperty("Environment", context.HostingEnvironment.EnvironmentName)
-                    //       .Enrich.WithProperty("Version", $"{typeof(Startup).Assembly.GetName().Version}")
-                    //       .WriteTo.Seq(serverUrl: "http://redlegdev-logs.eastus.azurecontainer.io", apiKey: context.Configuration.GetValue<string>("Seq:ApiKey"), compact: true, controlLevelSwitch: LogLevel)
-                    //       .MinimumLevel.ControlledBy(LogLevel)
-                    //       .CreateLogger();
+                    Log.Logger =
+                           new LoggerConfiguration()
+                           .Enrich.FromLogContext()
+                           .Enrich.WithProperty("Application", context.HostingEnvironment.ApplicationName)
+                           .Enrich.WithProperty("Environment", context.HostingEnvironment.EnvironmentName)
+                           .Enrich.WithProperty("Version", $"{typeof(Startup).Assembly.GetName().Version}")
+                           .WriteTo.Seq(serverUrl: "http://redlegdev-logs.eastus.azurecontainer.io", apiKey: context.Configuration.GetValue<string>("Seq:ApiKey"), compact: true, controlLevelSwitch: LogLevel)
+                           .MinimumLevel.ControlledBy(LogLevel)
+                           .CreateLogger();
 
-                    //builder.AddSerilog();
+                    builder.AddSerilog();
                 });
     }
 }
