@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using BatteryCommander.Web.Controllers;
 using BatteryCommander.Web.Jobs;
 using BatteryCommander.Web.Models;
 using BatteryCommander.Web.Queries;
@@ -14,12 +13,10 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using WebEssentials.AspNetCore.Pwa;
 
@@ -33,11 +30,8 @@ namespace BatteryCommander.Web
 
         public static String Email_Address => "BatteryCommander@redleg.app";
 
-        private static Boolean IsDevelopment;
-
-        public Startup(IWebHostEnvironment env, IConfiguration configuration)
+        public Startup(IConfiguration configuration)
         {
-            IsDevelopment = env.IsDevelopment();
             Configuration = configuration;
         }
 
