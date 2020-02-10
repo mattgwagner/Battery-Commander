@@ -12,4 +12,3 @@ Another feature will be tracking the progress of a training event with multiple 
 Included tracking is Army Body Composition Program and Army Physical Fitness Tests, including calculations and counseling/worksheet generation.
 
 All development is done by [Red Leg Dev, LLC](https://red-leg-dev.com), which is available for implementation, hosting, and custom development of any Army tools.
-
