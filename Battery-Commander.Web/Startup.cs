@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using BatteryCommander.Web.Behaviors;
 using BatteryCommander.Web.Jobs;
 using BatteryCommander.Web.Models;
 using BatteryCommander.Web.Queries;
@@ -69,6 +70,7 @@ namespace BatteryCommander.Web
                 .AddHttpContextAccessor()
                 .AddMemoryCache()
                 .AddMediatR(typeof(Startup))
+                .AddTransient(typeof(IPipelineBehavior<,>), typeof(TracingBehavior<,>))
                 .AddDbContext<Database>();
 
             services
