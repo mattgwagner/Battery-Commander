@@ -87,7 +87,7 @@ namespace BatteryCommander.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [AllowAnonymous, Route("~/Units/{unitId}/Calendar"), ResponseCache(Duration = 0)]
+        [AllowAnonymous, Route("~/Calendar/{unitId}"), ResponseCache(Duration = 0)]
         public async Task<IActionResult> Calendar([FromRoute]int unitId, [FromQuery]String apiKey)
         {
             ClaimsPrincipal user;

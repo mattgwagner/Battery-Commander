@@ -214,7 +214,7 @@ namespace BatteryCommander.Web
 
                     if (context.Request.Path.HasValue)
                     {
-                        if (!new[] { "/RequestAccess", "/SUTA" }.Any(route => context.Request.Path.StartsWithSegments(route, StringComparison.CurrentCultureIgnoreCase)))
+                        if (!new[] { "/RequestAccess", "/SUTA", "/Calendar" }.Any(route => context.Request.Path.StartsWithSegments(route, StringComparison.CurrentCultureIgnoreCase)))
                         {
                             using (var scope = context.RequestServices.CreateScope())
                             {
