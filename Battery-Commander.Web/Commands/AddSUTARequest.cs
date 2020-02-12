@@ -93,7 +93,7 @@ namespace BatteryCommander.Web.Commands
                     {
                         foreach (var email in soldier.GetEmails())
                         {
-                            recipients.Add(new Address(email.EmailAddress, name: $"{soldier}");
+                            recipients.Add(new Address(email.EmailAddress, name: $"{soldier}"));
                         }
                     }                    
                 }
@@ -101,9 +101,9 @@ namespace BatteryCommander.Web.Commands
                 await
                     emailSvc
                     .Create()
-                    .To(emailAddress: "SUTAs@RedLeg.app")
-                    .CC()
-                    .Subject($"SUTA Request Submitted")
+                    .To(recipients)
+                    .BCC("SUTAs@RedLeg.app")
+                    .Subject($"{suta.Soldier.Unit} | SUTA Request Submitted")
                     .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/SUTA/Email.html", suta)
                     .SendWithErrorCheck();
             }
