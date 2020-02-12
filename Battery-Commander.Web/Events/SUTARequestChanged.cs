@@ -50,7 +50,7 @@ namespace BatteryCommander.Web.Events
                     .Create()
                     .To(recipients)
                     .BCC("SUTAs@RedLeg.app")
-                    .Subject($"{suta.Soldier.Unit.Name} | SUTA Request {suta.Soldier} - {notification.Event}")
+                    .Subject($"SUTA Request {suta.Soldier} - {notification.Event}")
                     .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/SUTA/Email.html", suta)
                     .SendWithErrorCheck();
             }
