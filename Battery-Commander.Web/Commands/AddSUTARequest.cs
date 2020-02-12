@@ -88,14 +88,13 @@ namespace BatteryCommander.Web.Commands
 
                 var recipients = new List<Address>();
 
+                foreach (var email in suta.Supervisor.GetEmails()) recipients.Add(email);
+
                 foreach (var soldier in await SoldierService.Filter(db, new SoldierService.Query { Ranks = new[] { Rank.E7, Rank.E8, Rank.E9, Rank.O1, Rank.O2, Rank.O3 }, Unit = suta.Soldier.UnitId }))
                 {
                     if(soldier.CanLogin)
                     {
-                        foreach (var email in soldier.GetEmails())
-                        {
-                            recipients.Add(new Address(email.EmailAddress, name: $"{soldier}"));
-                        }
+                        foreach (var email in soldier.GetEmails()) recipients.Add(email);
                     }                    
                 }
 
