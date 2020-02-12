@@ -37,6 +37,13 @@ namespace BatteryCommander.Web.Services
 
             var evaluations = EvaluationService.Filter(db, new EvaluationService.Query { Unit = unitId });
 
+            var sutas =
+                await db
+                .SUTAs
+                .Include(s => s.Soldier)
+                .Where(s => s.Soldier.UnitId == unitId)
+                .ToListAsync();
+
             // Build model
 
             var sb = new StringBuilder()
@@ -49,7 +56,8 @@ namespace BatteryCommander.Web.Services
             {
                 Generate_For_Birthdays(soldiers),
                 Generate_For_ETS_Dates(soldiers),
-                Generate_For_Evaluations(evaluations)
+                Generate_For_Evaluations(evaluations),
+                Generate_For_SUTA_Requests(sutas)
             }
             .SelectMany(_ => _)
             .Select(entry => To_Event(entry))
@@ -63,6 +71,20 @@ namespace BatteryCommander.Web.Services
             // return File(bytes, "text/calendar");
 
             return Encoding.UTF8.GetBytes(sb.ToString());
+        }
+
+        private static IEnumerable<Entry> Generate_For_SUTA_Requests(IEnumerable<SUTA> sutas)
+        {
+            foreach (var suta in sutas)
+            {
+                // TODO Include all dates
+
+                yield return new Entry
+                {
+                    Description = $"{suta.Soldier} SUTA - {suta.Status}",
+                    Date = suta.StartDate
+                };
+            }
         }
 
         private static IEnumerable<Entry> Generate_For_Evaluations(IEnumerable<Evaluation> evaluations)
