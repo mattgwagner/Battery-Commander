@@ -46,7 +46,7 @@ namespace BatteryCommander.Web.Commands
             [Display(Name = "The reason to request missing IDT:")]
             public String Reasoning { get; set; }
 
-            [Display(Name = "How are we mitigating the loss of this Soldier during the requested period? Include anticipate arrival time if partial request to miss.")]
+            [Display(Name = "If requesting late arrival, what is the expected ETA? How are we mitigating the loss of this Soldier during the requested period?")]
             public String MitigationPlan { get; set; }
         }
 
