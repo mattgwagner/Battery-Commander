@@ -53,6 +53,7 @@ namespace BatteryCommander.Web.Commands
                 var soldier =
                     await db
                     .Soldiers
+                    .Include(s => s.Unit)
                     .Where(s => s.Id == request.Soldier)
                     .SingleOrDefaultAsync(cancellationToken);
 
@@ -76,14 +77,14 @@ namespace BatteryCommander.Web.Commands
 
                 await db.SaveChangesAsync(cancellationToken);
 
-                await Notify_Leadership_Of_Request(suta);
+                await Notify_Leadership_Of_Request(suta.Id);
 
                 return suta.Id;
             }
 
-            private async Task Notify_Leadership_Of_Request(SUTA suta)
+            private async Task Notify_Leadership_Of_Request(int id)
             {
-                // Might need to re-load the entity to get related data
+                var suta = await dispatcher.Send(new GetSUTARequest { Id = id });
 
                 var recipients = new List<Address>();
 
