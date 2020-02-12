@@ -42,6 +42,10 @@ namespace BatteryCommander.Web.Models
         {
             if (soldier == null) yield break;
 
+            // Don't try and email soldiers who can't access the system
+
+            if (soldier.CanLogin == false) yield break;
+
             if (!String.IsNullOrWhiteSpace(soldier.CivilianEmail))
             {
                 yield return new Address { Name = soldier.ToString(), EmailAddress = soldier.CivilianEmail };
