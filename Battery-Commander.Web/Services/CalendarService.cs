@@ -81,7 +81,7 @@ namespace BatteryCommander.Web.Services
 
                 yield return new Entry
                 {
-                    Description = $"{suta.Soldier} SUTA - {suta.Status}",
+                    Description = $"[{suta.Status}] SUTA - {suta.Soldier}",
                     Date = suta.StartDate
                 };
             }
