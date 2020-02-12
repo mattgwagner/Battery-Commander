@@ -63,8 +63,7 @@ namespace BatteryCommander.Web
                 .AddTransient<SqliteBackupJob>()
                 .AddTransient<EvaluationDueReminderJob>()
                 .AddTransient<PERSTATReportJob>()
-                .AddTransient<SensitiveItemsReport>()
-                .AddTransient<EvaluationStatusChangeJob>();
+                .AddTransient<SensitiveItemsReport>();
 
             services
                 .AddHttpContextAccessor()
