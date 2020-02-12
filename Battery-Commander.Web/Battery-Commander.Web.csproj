@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <None Remove="Jobs\EvaluationsDue.html" />
-    <None Remove="Jobs\EvaluationUpdated.html" />
     <None Remove="Jobs\Green3_SensitiveItems.html" />
     <None Remove="Jobs\Red1_Perstat.html" />
     <None Remove="Views\Home\RequestAccessEmail.html" />
@@ -29,6 +28,7 @@
     <None Remove="Models\Data\PushUps.csv" />
     <None Remove="Models\Data\Run.csv" />
     <None Remove="Models\Data\SitUps.csv" />
+    <None Remove="Events\EvaluationUpdated.html" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,9 +36,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Jobs\EvaluationsDue.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Jobs\EvaluationUpdated.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Jobs\Green3_SensitiveItems.html">
@@ -51,6 +48,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\SUTA\Email.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Events\EvaluationUpdated.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

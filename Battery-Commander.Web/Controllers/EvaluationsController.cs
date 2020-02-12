@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using BatteryCommander.Web.Events;
 using BatteryCommander.Web.Models;
 using BatteryCommander.Web.Queries;
 using BatteryCommander.Web.Services;
@@ -114,45 +115,30 @@ namespace BatteryCommander.Web.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Save(Evaluation model)
         {
-            if (true) // ModelState.IsValid)
+            if (await db.Evaluations.AnyAsync(evaluation => evaluation.Id == model.Id) == false)
             {
-                if (await db.Evaluations.AnyAsync(evaluation => evaluation.Id == model.Id) == false)
+                model.Events.Add(new Evaluation.Event
                 {
-                    model.Events.Add(new Evaluation.Event
-                    {
-                        Author = await GetDisplayName(),
-                        Message = "Added Evaluation"
-                    });
+                    Author = await GetDisplayName(),
+                    Message = "Added Evaluation"
+                });
 
-                    db.Evaluations.Add(model);
-                }
-                else
+                db.Evaluations.Add(model);
+            }
+            else
+            {
+                model.Events.Add(new Evaluation.Event
                 {
-                    model.Events.Add(new Evaluation.Event
-                    {
-                        Author = await GetDisplayName(),
-                        Message = "Evaluation Updated"
-                    });
+                    Author = await GetDisplayName(),
+                    Message = "Evaluation Updated"
+                });
 
-                    db.Evaluations.Update(model);
-                }
-
-                await db.SaveChangesAsync();
-
-                return RedirectToAction(nameof(Details), new { model.Id });
+                db.Evaluations.Update(model);
             }
 
-            ViewBag.Soldiers = await SoldierService.GetDropDownList(db, new SoldierService.Query
-            {
-                Ranks = RankExtensions.All().Where(rank => rank.GetsEvaluation())
-            });
+            await db.SaveChangesAsync();
 
-            ViewBag.Reviewers = await SoldierService.GetDropDownList(db, new SoldierService.Query
-            {
-                Ranks = new[] { Rank.O3, Rank.O4, Rank.O5, Rank.O6 }
-            });
-
-            return View(nameof(Edit), model);
+            return RedirectToAction(nameof(Details), new { model.Id });
         }
 
         [HttpPost, ValidateAntiForgeryToken]
@@ -170,6 +156,11 @@ namespace BatteryCommander.Web.Controllers
 
             await db.SaveChangesAsync();
 
+            await dispatcher.Publish(new EvaluationChanged
+            {
+                Id = evaluation.Id
+            });
+
             return RedirectToAction(nameof(Details), new { id });
         }
 
@@ -185,6 +176,11 @@ namespace BatteryCommander.Web.Controllers
             });
 
             await db.SaveChangesAsync();
+
+            await dispatcher.Publish(new EvaluationChanged
+            {
+                Id = evaluation.Id
+            });
 
             return RedirectToAction(nameof(Details), new { id });
         }
