@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using BatteryCommander.Web.Events;
 using BatteryCommander.Web.Models;
 using BatteryCommander.Web.Queries;
-using BatteryCommander.Web.Services;
-using FluentEmail.Core;
-using FluentEmail.Core.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -37,13 +33,11 @@ namespace BatteryCommander.Web.Commands
         {
             private readonly Database db;
             private readonly IMediator dispatcher;
-            private readonly IFluentEmailFactory emailSvc;
 
-            public Handler(Database db, IMediator dispatcher, IFluentEmailFactory emailSvc)
+            public Handler(Database db, IMediator dispatcher)
             {
                 this.db = db;
                 this.dispatcher = dispatcher;
-                this.emailSvc = emailSvc;
             }
 
             public async Task<int> Handle(AddSUTARequest request, CancellationToken cancellationToken)
@@ -77,35 +71,13 @@ namespace BatteryCommander.Web.Commands
 
                 await db.SaveChangesAsync(cancellationToken);
 
-                await Notify_Leadership_Of_Request(suta.Id);
+                await dispatcher.Publish(new SUTARequestChanged
+                {
+                    Id = suta.Id,
+                    Event = "Submitted"
+                });
 
                 return suta.Id;
-            }
-
-            private async Task Notify_Leadership_Of_Request(int id)
-            {
-                var suta = await dispatcher.Send(new GetSUTARequest { Id = id });
-
-                var recipients = new List<Address>();
-
-                foreach (var email in suta.Supervisor.GetEmails()) recipients.Add(email);
-
-                foreach (var soldier in await SoldierService.Filter(db, new SoldierService.Query { Ranks = new[] { Rank.E7, Rank.E8, Rank.E9, Rank.O1, Rank.O2, Rank.O3 }, Unit = suta.Soldier.UnitId }))
-                {
-                    if(soldier.CanLogin)
-                    {
-                        foreach (var email in soldier.GetEmails()) recipients.Add(email);
-                    }                    
-                }
-
-                await
-                    emailSvc
-                    .Create()
-                    .To(recipients)
-                    .BCC("SUTAs@RedLeg.app")
-                    .Subject($"{suta.Soldier.Unit} | SUTA Request Submitted")
-                    .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/SUTA/Email.html", suta)
-                    .SendWithErrorCheck();
             }
         }
     }

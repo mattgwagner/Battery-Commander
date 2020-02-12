@@ -1,13 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using BatteryCommander.Web.Events;
 using BatteryCommander.Web.Models;
 using BatteryCommander.Web.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace BatteryCommander.Web.Commands
 {
@@ -81,6 +80,12 @@ namespace BatteryCommander.Web.Commands
                 });
 
                 await db.SaveChangesAsync(cancellationToken);
+
+                await dispatcher.Publish(new SUTARequestChanged
+                {
+                    Id = suta.Id,
+                    Event= "Updated"
+                });
             }
         }
     }
