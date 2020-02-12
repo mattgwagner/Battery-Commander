@@ -2,7 +2,31 @@
 
 <div class="container-fluid">
 
+    <h2>SUTA Request Submitted</h2>
+
     <table class="table table-bordered">
-        SUTA Request Submitted. Make this email nice.
-    </table>
+        <tr>
+            <td>Soldier</td>
+            <td>@Model.Soldier</td>
+        </tr>
+        <tr>
+            <td>Supervisor</td>
+            <td>@Model.Supervisor</td>
+        </tr>
+        <tr>
+            <td>Start Date</td>
+            <td>@Model.StartDate</td>
+        </tr>
+        <tr>
+            <td>End Date</td>
+            <td>@Model.EndDate</td>
+        </tr>
+        <tr>
+            <td>Reasoning</td>
+            <td>@Model.Reasoning</td>
+        </tr>
+        <tr>
+            <td colspan="2"> <a href="https://bc.redleg.app/SUTA/@Model.Id">Click here to view details or approve the request.</a></td>
+        </tr>
+    </table>   
 </div>
