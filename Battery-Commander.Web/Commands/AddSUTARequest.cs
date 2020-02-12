@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
@@ -6,7 +7,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using BatteryCommander.Web.Models;
 using BatteryCommander.Web.Queries;
+using BatteryCommander.Web.Services;
 using FluentEmail.Core;
+using FluentEmail.Core.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -82,10 +85,24 @@ namespace BatteryCommander.Web.Commands
             {
                 // Might need to re-load the entity to get related data
 
+                var recipients = new List<Address>();
+
+                foreach (var soldier in await SoldierService.Filter(db, new SoldierService.Query { Ranks = new[] { Rank.E8, Rank.E9, Rank.O3 }, Unit = suta.Soldier.UnitId }))
+                {
+                    if(soldier.CanLogin)
+                    {
+                        foreach (var email in soldier.GetEmails())
+                        {
+                            recipients.Add(new Address(email.EmailAddress, name: $"{soldier}");
+                        }
+                    }                    
+                }
+
                 await
                     emailSvc
                     .Create()
                     .To(emailAddress: "SUTAs@RedLeg.app")
+                    .CC()
                     .Subject($"SUTA Request Submitted")
                     .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Views/SUTA/Email.html", suta)
                     .SendWithErrorCheck();
