@@ -40,6 +40,8 @@ namespace BatteryCommander.Web.Events
 
                 foreach (var soldier in await SoldierService.Filter(db, new SoldierService.Query { Ranks = new[] { Rank.E7, Rank.E8, Rank.E9, Rank.O1, Rank.O2, Rank.O3 }, Unit = suta.Soldier.UnitId }))
                 {
+                    if (soldier.Id == suta.SupervisorId) continue;
+
                     if (soldier.CanLogin)
                     {
                         foreach (var email in soldier.GetEmails()) recipients.Add(email);
