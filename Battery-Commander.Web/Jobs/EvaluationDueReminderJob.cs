@@ -59,7 +59,9 @@ namespace BatteryCommander.Web.Jobs
                     .SelectMany(email => email)
                     .ToList();
 
-                    emailSvc
+                    if (recipients.Any())
+                    {
+                        emailSvc
                         .Create()
                         .BCC(recipients)
                         .To(emailAddress: "Evaluations@RedLeg.app")
@@ -71,6 +73,7 @@ namespace BatteryCommander.Web.Jobs
                         })
                         .SendWithErrorCheck()
                         .Wait();
+                    }                    
                 }
             }
         }
