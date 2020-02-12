@@ -19,6 +19,7 @@ namespace BatteryCommander.Web.Commands
                 Id = model.Id,
                 Body = new Detail
                 {
+                    Supervisor = model.SupervisorId,
                     StartDate = model.StartDate,
                     EndDate = model.EndDate,
                     Reasoning = model.Reasoning,
