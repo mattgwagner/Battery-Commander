@@ -26,7 +26,7 @@
 
     <div class="form-group">
         <label for="Soldier">Supervisor</label>
-        @Html.DropDownListFor(model => model.Supervisor, (IEnumerable<SelectListItem>)ViewBag.Soldiers, "-- Select their Supervisor --", new { @class = "select2 form-control" })
+        @Html.DropDownListFor(model => model.Supervisor, (IEnumerable<SelectListItem>)ViewBag.Supervisors, "-- Select their Supervisor --", new { @class = "select2 form-control" })
     </div>
 
     <div class="form-group">

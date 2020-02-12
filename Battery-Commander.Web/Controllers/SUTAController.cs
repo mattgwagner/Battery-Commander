@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using BatteryCommander.Web.Commands;
+using BatteryCommander.Web.Models;
 using BatteryCommander.Web.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -22,8 +23,21 @@ namespace BatteryCommander.Web.Controllers
         [HttpGet(""), AllowAnonymous]
         public async Task<IActionResult> New()
         {
+            var soldiers = await dispatcher.Send(new GetSoldiers { });
+
             ViewBag.Soldiers =
-                (await dispatcher.Send(new GetSoldiers { }))
+                soldiers
+                .OrderBy(soldier => soldier.LastName)
+                .ThenBy(soldier => soldier.FirstName)
+                .Select(soldier => new SelectListItem
+                {
+                    Text = $"{soldier.RankHumanized} {soldier.LastName} {soldier.FirstName}",
+                    Value = $"{soldier.Id}"
+                });
+
+            ViewBag.Supervisors =
+                soldiers
+                .Where(soldier => soldier.Rank.GetsEvaluation())
                 .OrderBy(soldier => soldier.LastName)
                 .ThenBy(soldier => soldier.FirstName)
                 .Select(soldier => new SelectListItem
@@ -54,8 +68,11 @@ namespace BatteryCommander.Web.Controllers
         [HttpGet("{Id}/Edit")]
         public async Task<IActionResult> Edit(GetSUTARequest request)
         {
-            ViewBag.Soldiers =
-                (await dispatcher.Send(new GetSoldiers { }))
+            var soldiers = await dispatcher.Send(new GetSoldiers { });
+
+            ViewBag.Supervisors =
+                soldiers
+                .Where(soldier => soldier.Rank.GetsEvaluation())
                 .OrderBy(soldier => soldier.LastName)
                 .ThenBy(soldier => soldier.FirstName)
                 .Select(soldier => new SelectListItem
