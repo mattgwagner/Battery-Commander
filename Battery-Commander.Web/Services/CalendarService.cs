@@ -138,7 +138,7 @@ namespace BatteryCommander.Web.Services
                 .AppendLine("BEGIN:VEVENT")
                 .AppendLine($"SUMMARY:{entry.Description}")
                 .AppendLine($"DTSTAMP:{DateTime.UtcNow.ToUniversalTime().ToString(DateFormat)}")
-                .AppendLine("UID:" + (entry.Description + entry.Date).GetHashCode())
+                .AppendLine("UID:" + (entry.Description + entry.Date + DateTime.UtcNow.Ticks).GetHashCode())
                 .AppendLine("DTSTART:" + entry.Date.ToString("yyyyMMdd"))
                 .AppendLine("LAST-MODIFIED:" + DateTime.UtcNow.ToUniversalTime().ToString(DateFormat))
                 .AppendLine("SEQUENCE:0")
