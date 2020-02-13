@@ -107,7 +107,7 @@ namespace BatteryCommander.Web.Services
                 {
                     yield return new Entry
                     {
-                        Description = $"{soldier.Rank.ShortName()} {soldier.LastName} ETS",
+                        Description = $"{soldier} ETS",
                         Date = soldier.ETSDate.Value
                     };
                 }
@@ -124,7 +124,7 @@ namespace BatteryCommander.Web.Services
                     {
                         yield return new Entry
                         {
-                            Description = $"{soldier.Rank.ShortName()} {soldier.LastName} Birthday",
+                            Description = $"{soldier} Birthday",
                             Date = new DateTime(year, soldier.DateOfBirth.Month, soldier.DateOfBirth.Day)
                         };
                     }
