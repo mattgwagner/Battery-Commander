@@ -94,7 +94,7 @@ namespace BatteryCommander.Web.Models
         [Display(Name = "Login Enabled")]
         public Boolean CanLogin { get; set; } = false;
 
-        public override string ToString() => $"{Rank.ShortName()} {LastName} {FirstName} {MiddleName.FirstOrDefault()}".Trim().ToUpper();
+        public override string ToString() => $"{Rank.ShortName()} {LastName} {FirstName} {MiddleName?.FirstOrDefault()}".Trim().ToUpper();
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
