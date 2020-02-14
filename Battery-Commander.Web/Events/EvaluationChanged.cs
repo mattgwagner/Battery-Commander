@@ -10,6 +10,7 @@ using FluentEmail.Core;
 using FluentEmail.Core.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace BatteryCommander.Web.Events
 {
@@ -21,11 +22,13 @@ namespace BatteryCommander.Web.Events
         {
             private readonly Database db;
             private readonly IFluentEmailFactory emailSvc;
+            private readonly ILogger<EvaluationChanged> logger;
 
-            public Handler(Database db, IFluentEmailFactory emailSvc)
+            public Handler(Database db, IFluentEmailFactory emailSvc, ILogger<EvaluationChanged> logger)
             {
                 this.db = db;
                 this.emailSvc = emailSvc;
+                this.logger = logger;
             }
 
             public async Task Handle(EvaluationChanged notification, CancellationToken cancellationToken)
@@ -40,6 +43,8 @@ namespace BatteryCommander.Web.Events
                     .Include(evaluation => evaluation.Reviewer)
                     .Where(evaluation => evaluation.Id == notification.Id)
                     .SingleOrDefaultAsync(cancellationToken);
+
+                logger.LogInformation("Sending state change email for {ratee} evaluation", eval.Ratee);
 
                 emailSvc
                     .Create()
@@ -81,6 +86,8 @@ namespace BatteryCommander.Web.Events
 
                     addresses.AddRange(soldier.GetEmails());
                 }
+
+                logger.LogInformation("Adding recipients: {addresses}", addresses);
 
                 return
                     addresses
