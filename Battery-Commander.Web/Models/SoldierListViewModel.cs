@@ -1,6 +1,7 @@
-﻿using BatteryCommander.Web.Services;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using BatteryCommander.Web.Services;
 
 namespace BatteryCommander.Web.Models
 {
@@ -13,5 +14,18 @@ namespace BatteryCommander.Web.Models
         public int Count => Soldiers.Count();
 
         public int Present => Soldiers.Where(_ => _.Status == Soldier.SoldierStatus.PresentForDuty).Count();
+
+        public IEnumerable<SUTA> Upcoming_SUTA_Requests
+        {
+            get
+            {
+                return
+                    Soldiers
+                    .SelectMany(soldier => soldier.SUTAs)
+                    .Where(suta => DateTime.Today <= suta.StartDate)
+                    .Where(suta => suta.EndDate <= DateTime.Today.AddDays(14))
+                    .ToList();
+            }
+        }
     }
 }

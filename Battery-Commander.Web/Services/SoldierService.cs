@@ -66,6 +66,7 @@ namespace BatteryCommander.Web.Services
                 .Include(s => s.ACFTs)
                 .Include(s => s.APFTs)
                 .Include(s => s.Unit)
+                .Include(s => s.SUTAs)
                 .AsEnumerable();
 
             if (query.Id.HasValue)
