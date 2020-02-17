@@ -4,123 +4,107 @@
     ViewBag.Title = "Battle Roster";
 }
 
-    <div id="battle-roster">
+<div id="battle-roster">
 
-        <div class="page-header">
-            <h1>@ViewBag.Title @Html.ActionLink("Add New", "New", "Soldiers", null, new { @class = "btn btn-default" }) @Html.ActionLink("Update PERSTAT", "PERSTAT", "Reports", new { Unit = Model.Query.Unit }, new { @class = "btn btn-primary" })</h1>
-            <h4>
-                Assigned <span class="badge">@Model.Count</span>
-                Present <span class="badge">@Model.Present</span>
-            </h4>
+    <div class="page-header">
+        <h1>@ViewBag.Title @Html.ActionLink("Add New", "New", "Soldiers", null, new { @class = "btn btn-default" }) @Html.ActionLink("Update PERSTAT", "PERSTAT", "Reports", new { Unit = Model.Query.Unit }, new { @class = "btn btn-primary" })</h1>
+        <h4>
+            Assigned <span class="badge">@Model.Count</span>
+            Present <span class="badge">@Model.Present</span>
+        </h4>
 
-            <div class="btn-group">
-                <select data-bind="value: selected_unit, options: units, optionsText: 'name', optionsValue: 'id', optionsCaption: '-- Filter by Unit --', event: { change: unit_changed }">
-                </select>
-            </div>
-
-            <div class="btn-group">
-                @Html.ActionLink("View All", "All", "Soldiers", null, new { @class = "btn btn-link" })
-                @Html.ActionLink("Get Sign-in Roster", "SignInRoster", "Soldiers", Model.Query, new { @class = "btn btn-link" })
-                @Html.ActionLink("Bulk Update Supervisors", "Index", "Supervisors", Model.Query, new { @class = "btn btn-link" })
-                @Html.ActionLink("Bulk Update DSCA", "Index", "DSCA", Model.Query, new { @class = "btn btn-link" })
-                @Html.ActionLink("Bulk Update IWQ", "Index", "IWQ", Model.Query, new { @class = "btn btn-link" })
-            </div>
+        <div class="btn-group">
+            <select data-bind="value: selected_unit, options: units, optionsText: 'name', optionsValue: 'id', optionsCaption: '-- Filter by Unit --', event: { change: unit_changed }">
+            </select>
         </div>
 
-        @if (Model.Upcoming_SUTA_Requests.Any())
-        {
-            <div class="alert alert-danger">
-                <h5>Upcoming SUTA Requests</h5>
-
-                <ul>
-                    @foreach (var suta in Model.Upcoming_SUTA_Requests)
-                    {
-                        var label = $"{suta.Soldier} - {suta.StartDate:d} - {suta.EndDate:d}";
-
-                        <li>@Html.ActionLink(label, "Details", "SUTA", new { suta.Id })</li>
-                    }
-                </ul>
-            </div>
-        }
-
-        <table class="table table-striped display nowrap" id="dt">
-            <thead>
-                <tr>
-                    <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().Status)</th>
-                    <th data-priority="2">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().Rank)</th>
-                    <th data-priority="1">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastName)</th>
-                    <th data-priority="3">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().FirstName)</th>
-                    <th data-priority="10001">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().Unit)</th>
-                    <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().TimeInGrade)</th>
-                    <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().TimeTillETS)</th>
-                    <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().APFTs)</th>
-                    <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().ABCPs)</th>
-                    <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().EducationLevel)</th>
-                    <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().IwqQualified)</th>
-                    <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().DscaQualified)</th>
-                    <th data-priority="10001"></th>
-                    <th></th>
-                </tr>
-            </thead>
-
-            <tbody>
-                @foreach (var soldier in Model.Soldiers)
-                {
-                    <tr>
-                        <td data-bind="click: update_status.bind($data, @soldier.Id, @((int)soldier.Status))">
-                            @Html.DisplayFor(s => soldier, "SoldierStatus")
-                        </td>
-                        <td>@Html.DisplayFor(s => soldier.RankHumanized)</td>
-                        <td>@Html.RouteLink(soldier.LastName, "Soldier.Details", new { soldier.Id })</td>
-                        <td>@Html.RouteLink(soldier.FirstName, "Soldier.Details", new { soldier.Id })</td>
-                        <td>@Html.DisplayFor(s => soldier.Unit)</td>
-                        <td data-sort="@soldier.TimeInGrade?.TotalDays">
-                            <span class="label label-default">@Html.DisplayFor(s => soldier.TimeInGradeHumanized)</span>
-                        </td>
-                        <td data-sort="@soldier.TimeTillETS?.TotalDays">@Html.DisplayFor(s => soldier, "ETS")</td>
-                        <td data-sort="@soldier.LastApft?.IsPassing">
-                            @Html.DisplayFor(s => soldier.LastApft)
-                            @if (soldier.LastApft?.IsAlternateAerobicEvent == true)
-                            {
-                                <span class="label">Alt. Aerobic</span>
-                            }
-                        </td>
-                        <td>@Html.DisplayFor(s => soldier.LastAbcp)</td>
-                        <td>@Html.DisplayFor(s => soldier, "MilitaryEducationLevel")</td>
-                        <td>@Html.DisplayFor(s => soldier, "IWQ")</td>
-                        <td>@Html.DisplayFor(s => soldier, "DSCA")</td>
-                        <td data-sort="@soldier.LastName">
-                            @Html.RouteLink("Details", "Soldier.Details", new { soldier.Id }, new { @class = "btn btn-default btn-xs" })
-                            @if (!soldier.HasDoB)
-                            {
-                                <span class="label label-warning">Needs Birthdate</span>
-                            }
-                            @if (soldier.CanLogin)
-                            {
-                                <span class="label label-success">Login Enabled</span>
-                            }
-                        </td>
-                        <td></td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-
-        <div style="display:none" id="set-status" title="Update Soldier Status">
-            @using (Html.BeginForm("SetStatus", "Soldiers", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                <input id="soldierId" name="soldierId" type="hidden" />
-
-                <div class="form-group form-group-lg">
-                    @Html.Label("Status")
-                    @Html.DropDownList("status", Html.GetEnumSelectList<Soldier.SoldierStatus>())
-                </div>
-
-                <button type="submit" id="save">Save</button>
-            }
+        <div class="btn-group">
+            @Html.ActionLink("View All", "All", "Soldiers", null, new { @class = "btn btn-link" })
+            @Html.ActionLink("Get Sign-in Roster", "SignInRoster", "Soldiers", Model.Query, new { @class = "btn btn-link" })
+            @Html.ActionLink("Bulk Update Supervisors", "Index", "Supervisors", Model.Query, new { @class = "btn btn-link" })
+            @Html.ActionLink("Bulk Update DSCA", "Index", "DSCA", Model.Query, new { @class = "btn btn-link" })
+            @Html.ActionLink("Bulk Update IWQ", "Index", "IWQ", Model.Query, new { @class = "btn btn-link" })
         </div>
-
     </div>
+
+    <table class="table table-striped display nowrap" id="dt">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().Status)</th>
+                <th data-priority="2">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().Rank)</th>
+                <th data-priority="1">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().LastName)</th>
+                <th data-priority="3">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().FirstName)</th>
+                <th data-priority="10001">@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().Unit)</th>
+                <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().TimeInGrade)</th>
+                <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().TimeTillETS)</th>
+                <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().APFTs)</th>
+                <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().ABCPs)</th>
+                <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().EducationLevel)</th>
+                <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().IwqQualified)</th>
+                <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().DscaQualified)</th>
+                <th data-priority="10001"></th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var soldier in Model.Soldiers)
+            {
+                <tr>
+                    <td data-bind="click: update_status.bind($data, @soldier.Id, @((int)soldier.Status))">
+                        @Html.DisplayFor(s => soldier, "SoldierStatus")
+                    </td>
+                    <td>@Html.DisplayFor(s => soldier.RankHumanized)</td>
+                    <td>@Html.RouteLink(soldier.LastName, "Soldier.Details", new { soldier.Id })</td>
+                    <td>@Html.RouteLink(soldier.FirstName, "Soldier.Details", new { soldier.Id })</td>
+                    <td>@Html.DisplayFor(s => soldier.Unit)</td>
+                    <td data-sort="@soldier.TimeInGrade?.TotalDays">
+                        <span class="label label-default">@Html.DisplayFor(s => soldier.TimeInGradeHumanized)</span>
+                    </td>
+                    <td data-sort="@soldier.TimeTillETS?.TotalDays">@Html.DisplayFor(s => soldier, "ETS")</td>
+                    <td data-sort="@soldier.LastApft?.IsPassing">
+                        @Html.DisplayFor(s => soldier.LastApft)
+                        @if (soldier.LastApft?.IsAlternateAerobicEvent == true)
+                        {
+                            <span class="label">Alt. Aerobic</span>
+                        }
+                    </td>
+                    <td>@Html.DisplayFor(s => soldier.LastAbcp)</td>
+                    <td>@Html.DisplayFor(s => soldier, "MilitaryEducationLevel")</td>
+                    <td>@Html.DisplayFor(s => soldier, "IWQ")</td>
+                    <td>@Html.DisplayFor(s => soldier, "DSCA")</td>
+                    <td data-sort="@soldier.LastName">
+                        @Html.RouteLink("Details", "Soldier.Details", new { soldier.Id }, new { @class = "btn btn-default btn-xs" })
+                        @if (!soldier.HasDoB)
+                        {
+                            <span class="label label-warning">Needs Birthdate</span>
+                        }
+                        @if (soldier.CanLogin)
+                        {
+                            <span class="label label-success">Login Enabled</span>
+                        }
+                    </td>
+                    <td></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div style="display:none" id="set-status" title="Update Soldier Status">
+        @using (Html.BeginForm("SetStatus", "Soldiers", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            <input id="soldierId" name="soldierId" type="hidden" />
+
+            <div class="form-group form-group-lg">
+                @Html.Label("Status")
+                @Html.DropDownList("status", Html.GetEnumSelectList<Soldier.SoldierStatus>())
+            </div>
+
+            <button type="submit" id="save">Save</button>
+        }
+    </div>
+
+</div>
 
 @section Scripts{
     <script type="text/javascript">

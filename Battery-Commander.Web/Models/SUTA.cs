@@ -6,11 +6,6 @@ using Humanizer;
 
 namespace BatteryCommander.Web.Models
 {
-    public partial class Soldier
-    {
-        public virtual ICollection<SUTA> SUTAs { get; set; }
-    }
-
     public class SUTA
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
