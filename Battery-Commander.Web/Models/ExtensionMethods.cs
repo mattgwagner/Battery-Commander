@@ -38,7 +38,7 @@ namespace BatteryCommander.Web.Models
             }
         }
 
-        public static IEnumerable<Address> GetEmails(this Soldier soldier)
+        public static IEnumerable<Address> GetEmails(this Soldier soldier, Boolean includeMilitary = false)
         {
             if (soldier == null) yield break;
 
@@ -51,7 +51,7 @@ namespace BatteryCommander.Web.Models
                 yield return new Address { Name = soldier.ToString(), EmailAddress = soldier.CivilianEmail };
             }
 
-            if (!String.IsNullOrWhiteSpace(soldier.MilitaryEmail))
+            if (!String.IsNullOrWhiteSpace(soldier.MilitaryEmail) && includeMilitary)
             {
                 yield return new Address { Name = soldier.ToString(), EmailAddress = soldier.MilitaryEmail };
             }
