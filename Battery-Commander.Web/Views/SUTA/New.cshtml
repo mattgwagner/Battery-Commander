@@ -9,6 +9,14 @@
     </div>
 }
 
+
+@if (!User.Identity.IsAuthenticated)
+{
+    <div>
+        <a href="/">Log in</a> to view and approve existing SUTA requests.
+    </div>
+}
+
 <div class="alert alert-info">
     Use this form to submit a Substitute Unit Training (SUTA) request to your chain of command.
 </div>
@@ -37,7 +45,7 @@
                     <i class="fa fa-calendar"></i>
                 </div>
             </div>
-            <input id="StartDate" name="StartDate" type="date" placeholder="mm/dd/yyyy"aria-describedby="StartDateHelpBlock" required="required" class="form-control" style="width:100%">
+            <input id="StartDate" name="StartDate" type="date" placeholder="mm/dd/yyyy" aria-describedby="StartDateHelpBlock" required="required" class="form-control" style="width:100%">
         </div>
         <span id="StartDateHelpBlock" class="form-text text-muted">Select the First Excused Date(e.g. First Day of Drill)</span>
     </div>
