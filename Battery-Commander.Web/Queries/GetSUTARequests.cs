@@ -30,6 +30,7 @@ namespace BatteryCommander.Web.Queries
                 return
                     await AsQueryable(db)
                     .Where(suta => suta.Soldier.UnitId == request.Unit)
+                    .OrderBy(suta => suta.StartDate)
                     .ToListAsync(cancellationToken);
             }
         }
