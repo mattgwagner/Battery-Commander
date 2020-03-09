@@ -37,8 +37,12 @@
 
         <tr>
             <td>@Html.DisplayNameFor(model => model.Supervisor)</td>
+            <td> @Html.DisplayFor(model => model.Supervisor)</td>
+        </tr>
+
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.SupervisorSignature)</td>
             <td>
-                @Html.DisplayFor(model => model.Supervisor)
                 @Html.DisplayFor(model => model.SupervisorSignature)
                 @Html.DisplayFor(model => model.SupervisorSignedAt)
 
