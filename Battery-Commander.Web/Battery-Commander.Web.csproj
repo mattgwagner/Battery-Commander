@@ -47,7 +47,7 @@
     <Content Include="Views\Home\RequestAccessEmail.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\SUTA\Email.html">
+    <Content Include="Events\SUTARequestChanged.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Events\EvaluationUpdated.html">
