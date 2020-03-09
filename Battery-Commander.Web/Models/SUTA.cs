@@ -58,6 +58,29 @@ namespace BatteryCommander.Web.Models
 
         public SUTAStatus Status { get; set; } = SUTAStatus.Created;
 
+        [NotMapped]
+        public string StatusClass
+        {
+            get
+            {
+                // Meh, kind of hacky, figure out what to label the status
+
+                switch(Status)
+                {
+                    case SUTAStatus.Approved:
+                        return "label-success";
+
+                    case SUTAStatus.Created:
+                        if (string.IsNullOrWhiteSpace(SupervisorSignature)) return "label-warning";
+
+                        return "label-primary";
+
+                    default:
+                        return "label-danger";
+                }
+            }
+        }
+
         public enum SUTAStatus
         {
             Created, Approved, Scheduled, Completed

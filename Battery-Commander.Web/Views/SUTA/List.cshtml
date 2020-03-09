@@ -34,7 +34,7 @@
                 {
                 <tr>
                     <td>@Html.ActionLink("Details", "Details", new { request.Id })</td>
-                    <td><div class="label label-danger">@Html.DisplayFor(_ => request.Status)</div></td>
+                    <td><div class="label @request.StatusClass">@Html.DisplayFor(_ => request.Status)</div></td>
                     <td>@Html.DisplayFor(_ => request.StartDate)</td>
                     <td>@Html.DisplayFor(_ => request.EndDate)</td>
                     <td>@Html.ActionLink(request.Soldier.RankHumanized, "Details", new { request.Id })</td>
