@@ -139,20 +139,6 @@
         <button class="btn btn-danger btn-xs">Reset Convoy</button>
     </form>
 
-    <div style="display:none" id="set-driver" title="Update Driver/A-Driver">
-        <div class="form-group form-group-lg">
-            @Html.Label("Driver")
-            <select data-bind="value: driverId, options: soldiers, optionsText: 'Text', optionsValue: 'Value', optionsCaption: 'Choose a Driver'" class="select2"></select>
-        </div>
-
-        <div class="form-group form-group-lg">
-            @Html.Label("A-Driver")
-            <select data-bind="value: adriverId, options: soldiers, optionsText: 'Text', optionsValue: 'Value', optionsCaption: 'Choose an A-Driver'" class="select2"></select>
-        </div>
-
-        <button data-bind="click: save_drivers" type="submit" id="save">Save</button>
-    </div>
-
     <div style="display:none" id="set-status" title="Update Vehicle Status">
         <div class="form-group form-group-lg">
             @Html.Label("Status")
@@ -184,17 +170,7 @@
                 notes: ko.observable(''),
                 location: ko.observable(),
                 locations: ko.mapping.fromJSON('@Html.Raw(JsonConvert.SerializeObject(Model.Locations))'),
-                statuses: ko.mapping.fromJSON('@Html.Raw(JsonConvert.SerializeObject(Model.Statuses))'),
-                soldiers: ko.mapping.fromJSON('@Html.Raw(JsonConvert.SerializeObject(Model.Soldiers))')
-            };
-
-            viewModel.save_drivers = function () {
-                $.post('@Url.Action("SetDriver")', {
-                    driverId: viewModel.driverId,
-                    adriverId: viewModel.adriverId,
-                    vehicleId: viewModel.vehicleId
-                });
-                location.reload();
+                statuses: ko.mapping.fromJSON('@Html.Raw(JsonConvert.SerializeObject(Model.Statuses))')
             };
 
             viewModel.save_vehicle = function () {
@@ -215,15 +191,6 @@
                 viewModel.location($(this).data('location'));
 
                 $("#set-status").dialog({ modal: true });
-            });
-
-            $("td .update-driver").click(function (e) {
-                e.preventDefault();
-                viewModel.vehicleId($(this).data('vehicle'));
-                viewModel.driverId($(this).data('driver'));
-                viewModel.adriverId($(this).data('adriver'));
-
-                $("#set-driver").dialog({ modal: true });
             });
 
             window.viewModel = viewModel;
