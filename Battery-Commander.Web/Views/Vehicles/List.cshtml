@@ -48,9 +48,7 @@
                 <th data-priority="3">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().HasJBCP)</th>
                 <th data-priority="6">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Location)</th>
                 <th data-priority="5">@Html.DisplayNameFor(_ => _.Vehicles.FirstOrDefault().Notes)</th>
-                <th></th>
-                <th>Passengers</th>
-                <th></th>
+                <th>Edit</th>
             </tr>
         </thead>
 
@@ -131,15 +129,6 @@
                     </span>
                 </td>
                 <td>@Html.ActionLink("Edit", "Edit", new { vehicle.Id })</td>
-                <td>
-                    <ul>
-                        @foreach (var passenger in vehicle.Passengers)
-                        {
-                            <li>@Html.DisplayFor(_ => passenger.Soldier, "Soldier")</li>
-                        }
-                    </ul>
-                </td>
-                <td></td>
             </tr>
             }
         </tbody>
