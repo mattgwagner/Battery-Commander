@@ -163,7 +163,7 @@ namespace BatteryCommander.Web.Controllers
             });
         }
 
-        [HttpPost("~/Unis/{Unit}/PERSTAT"), ValidateAntiForgeryToken]
+        [HttpPost("~/Units/{Unit}/PERSTAT"), ValidateAntiForgeryToken]
         public async Task<IActionResult> PERSTAT(int Unit, StatusListModel model)
         {
             // For each DTO posted, update the soldier info
