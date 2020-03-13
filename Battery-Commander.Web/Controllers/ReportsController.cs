@@ -145,7 +145,7 @@ namespace BatteryCommander.Web.Controllers
         [HttpGet("~/Units/{Unit}/PERSTAT")]
         public async Task<IActionResult> PERSTAT(int Unit)
         {
-            return View("List", new StatusListModel
+            return View(new StatusListModel
             {
                 Unit = Unit,
                 Rows =
