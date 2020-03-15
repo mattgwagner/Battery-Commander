@@ -1,17 +1,36 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
     "version": "2.0.0",
     "tasks": [
         {
             "label": "build",
             "command": "dotnet",
-            "type": "shell",
-            "group": "build",
-            "presentation": {
-                "reveal": "silent"
-            },
-            "problemMatcher": "$msCompile"
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Battery-Commander.Web/Battery-Commander.Web.csproj"
+            ],
+            "problemMatcher": "$tsc"
+        },
+        {
+            "label": "publish",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/Battery-Commander.Web/Battery-Commander.Web.csproj"
+            ],
+            "problemMatcher": "$tsc"
+        },
+        {
+            "label": "watch",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "${workspaceFolder}/Battery-Commander.Web/Battery-Commander.Web.csproj"
+            ],
+            "problemMatcher": "$tsc"
         }
     ]
 }
