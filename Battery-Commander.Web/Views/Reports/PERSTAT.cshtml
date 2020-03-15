@@ -12,7 +12,7 @@
     <button id="reset-perstat">Reset PERSTAT</button>
 </div>
 
-@using (Html.BeginForm("Save", "Statuses", new { Model.Unit }, FormMethod.Post))
+@using (Html.BeginForm("PERSTAT", "Reports", new { Model.Unit }, FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
