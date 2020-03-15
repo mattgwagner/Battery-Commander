@@ -369,7 +369,7 @@ Encourage and support
         {
             if (Date > DateTime.Today) yield return new ValidationResult("Cannot select a date after today", new[] { nameof(Date) });
 
-            if (Height < 60 || Height > 80) yield return new ValidationResult("Height seems out of tolerance", new[] { nameof(Height) });
+            if (Height < 58 || Height > 80) yield return new ValidationResult("Height seems out of tolerance", new[] { nameof(Height) });
 
             if (Weight < 100) yield return new ValidationResult("Weight under minimum, recheck", new[] { nameof(Weight) });
         }
