@@ -78,7 +78,7 @@
     <PackageReference Include="FluentEmail.SendGrid" Version="2.7.0" />
     <PackageReference Include="FluentScheduler" Version="5.3.0" />
     <PackageReference Include="Humanizer.Core" Version="2.7.9" />
-    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.6.2" />
+    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.6.3" />
     <PackageReference Include="Microsoft.AspNetCore.DataProtection.EntityFrameworkCore" Version="3.1.2" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="5.6.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="3.2.0" />
