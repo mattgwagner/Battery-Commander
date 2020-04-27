@@ -69,6 +69,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <OpenApiReference Include="OpenAPIs\RedLeg.Forms.json" Namespace="BatteryCommander.Web.Services.Forms">
+      <CodeGenerator>NSwagCSharp</CodeGenerator>
+      <SourceUri>https://forms.redleg.app/swagger/v1/swagger.json</SourceUri>
+    </OpenApiReference>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MediatR" Version="8.0.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.3" />
@@ -80,7 +87,16 @@
     <PackageReference Include="Humanizer.Core" Version="2.8.2" />
     <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.6.6" />
     <PackageReference Include="Microsoft.AspNetCore.DataProtection.EntityFrameworkCore" Version="3.1.3" />
+    <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.5.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="NSwag.ApiDescription.Client" Version="13.4.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Serilog.AspNetCore" Version="3.2.0" />
     <PackageReference Include="Sentry.AspNetCore" Version="2.1.1" />
     <PackageReference Include="Stateless" Version="5.1.1" />

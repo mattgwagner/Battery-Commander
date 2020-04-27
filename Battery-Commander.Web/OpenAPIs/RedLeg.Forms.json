@@ -1,0 +1,397 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "RedLeg.Forms",
+    "contact": {
+      "name": "Matt Wagner",
+      "url": "https://github.com/mattgwagner/RedLeg.Forms",
+      "email": "Matt@RedLeg.dev"
+    },
+    "version": "v1"
+  },
+  "paths": {
+    "/DA4856": {
+      "post": {
+        "tags": [
+          "Form"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Counseling"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Counseling"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Counseling"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "type": "file"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/DA5500": {
+      "post": {
+        "tags": [
+          "Form"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ABCP"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ABCP"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ABCP"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "type": "file"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/DA5501": {
+      "post": {
+        "tags": [
+          "Form"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ABCP"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ABCP"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ABCP"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "type": "file"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/DA705": {
+      "post": {
+        "tags": [
+          "Form"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/APFT"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/APFT"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/APFT"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "type": "file"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/DA3749": {
+      "post": {
+        "tags": [
+          "Form"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WeaponCard"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WeaponCard"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WeaponCard"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "type": "file"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Rank": {
+        "enum": [
+          "CDT",
+          "E1",
+          "E2",
+          "E3",
+          "E4",
+          "E5",
+          "E6",
+          "E7",
+          "E8",
+          "E9",
+          "O1",
+          "O2",
+          "O3",
+          "O4",
+          "O5",
+          "O6",
+          "E8_MSG",
+          "WO1",
+          "WO2",
+          "WO3",
+          "WO4",
+          "WO5",
+          "E4_CPL"
+        ],
+        "type": "string"
+      },
+      "Counseling": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "rank": {
+            "$ref": "#/components/schemas/Rank"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "organization": {
+            "type": "string",
+            "nullable": true
+          },
+          "counselor": {
+            "type": "string",
+            "nullable": true
+          },
+          "purpose": {
+            "type": "string",
+            "nullable": true
+          },
+          "keyPointsOfDiscussion": {
+            "type": "string",
+            "nullable": true
+          },
+          "planOfAction": {
+            "type": "string",
+            "nullable": true
+          },
+          "leadersResponsibilities": {
+            "type": "string",
+            "nullable": true
+          },
+          "assessment": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Gender": {
+        "enum": [
+          "Male",
+          "Female"
+        ],
+        "type": "string",
+        "description": "This of course does not take into account gender non-binary soldiers.\r\n            \r\nFor administative purposes (i.e. scoring an APFT) we require a gender."
+      },
+      "ABCP_Soldier": {
+        "required": [
+          "firstName",
+          "gender",
+          "lastName"
+        ],
+        "type": "object",
+        "properties": {
+          "rank": {
+            "$ref": "#/components/schemas/Rank"
+          },
+          "lastName": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "firstName": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "middleName": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "age": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "gender": {
+            "$ref": "#/components/schemas/Gender"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Measurement": {
+        "type": "object",
+        "properties": {
+          "waist": {
+            "maximum": 50,
+            "minimum": 0,
+            "type": "number",
+            "format": "double"
+          },
+          "neck": {
+            "maximum": 50,
+            "minimum": 0,
+            "type": "number",
+            "format": "double"
+          },
+          "hips": {
+            "maximum": 50,
+            "minimum": 0,
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ABCP": {
+        "required": [
+          "date",
+          "height",
+          "weight"
+        ],
+        "type": "object",
+        "properties": {
+          "soldier": {
+            "$ref": "#/components/schemas/ABCP_Soldier"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "height": {
+            "maximum": 90,
+            "minimum": 0,
+            "type": "number",
+            "description": "Recorded to nearest half inch when used for body fat percentage calculations",
+            "format": "double"
+          },
+          "weight": {
+            "maximum": 400,
+            "minimum": 0,
+            "type": "integer",
+            "description": "Recorded to the nearest pound for all usage",
+            "format": "int32"
+          },
+          "measurements": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Measurement"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "APFT": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "WeaponCard": {
+        "type": "object",
+        "additionalProperties": false
+      }
+    }
+  }
+}

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Models
 {
@@ -211,9 +212,9 @@ namespace BatteryCommander.Web.Models
             if (Run > TimeSpan.FromHours(1)) yield return new ValidationResult("Cannot enter run time greater than one hour", new[] { nameof(Run) });
         }
 
-        public byte[] GenerateCounseling()
+        public async Task<byte[]> GenerateCounseling()
         {
-            return PDFService.Generate_DA4856(new PDFService.Counseling
+            return await PDFService.Generate_DA4856Async(new PDFService.Counseling
             {
                 Name = $"{Soldier.LastName}, {Soldier.FirstName}",
                 Rank = Soldier.Rank,

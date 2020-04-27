@@ -5,13 +5,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Services
 {
     public class PDFService
     {
+        private static readonly HttpClient http = new HttpClient { };
+
         static PDFService()
         {
             // Who needs the owner password?
@@ -19,6 +23,33 @@ namespace BatteryCommander.Web.Services
             PdfReader.AllowOpenWithFullPermissions = true;
         }
 
+        public static async Task<byte[]> Generate_DA4856Async(Counseling model)
+        {
+            var result =
+                await (new Forms.RedLeg_FormsClient("https://forms.redleg.app", http))
+                .DA4856Async(new Forms.Counseling
+                {
+                    Name = model.Name,
+                    Counselor = model.Counselor,
+                    Assessment = model.Assessment,
+                    Date = model.Date,
+                    KeyPointsOfDiscussion = model.KeyPointsOfDiscussion,
+                    LeadersResponsibilities = model.LeadersResponsibilities,
+                    Organization = model.Organization,
+                    PlanOfAction = model.PlanOfAction,
+                    Purpose = model.Purpose,
+                    Rank = (Forms.Rank)model.Rank
+                });
+
+            using (var memory = new MemoryStream())
+            {
+                await result.Stream.CopyToAsync(memory);
+
+                return memory.ToArray();
+            }
+        }
+
+        [Obsolete("Migrate to using RedLeg.Forms")]
         public static byte[] Generate_DA4856(Counseling model)
         {
             const String prefix = "form1[0]";
