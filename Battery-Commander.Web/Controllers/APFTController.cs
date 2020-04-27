@@ -38,7 +38,7 @@ namespace BatteryCommander.Web.Controllers
 
             var filename = $"{apft.Soldier.Unit.Name}_DA4856_APFT_{apft.Soldier.LastName}_{apft.Date:yyyyMMdd}.pdf";
 
-            return File(apft.GenerateCounseling(), "application/pdf", filename);
+            return File(await apft.GenerateCounseling(), "application/pdf", filename);
         }
 
         public async Task<IActionResult> New(int soldier = 0)
