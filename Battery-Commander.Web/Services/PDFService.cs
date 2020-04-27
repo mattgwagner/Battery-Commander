@@ -1,5 +1,4 @@
 ﻿using BatteryCommander.Web.Models;
-using BatteryCommander.Web.Services.Forms;
 using iTextSharp.text.pdf;
 using System;
 using System.Collections;
