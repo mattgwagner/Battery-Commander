@@ -1,4 +1,5 @@
 ﻿using BatteryCommander.Web.Models;
+using BatteryCommander.Web.Services.Forms;
 using iTextSharp.text.pdf;
 using System;
 using System.Collections;
@@ -16,6 +17,8 @@ namespace BatteryCommander.Web.Services
     {
         private static readonly HttpClient http = new HttpClient { };
 
+        private static RedLeg_FormsClient forms_client => new RedLeg_FormsClient("https://forms.redleg.app", http);
+
         static PDFService()
         {
             // Who needs the owner password?
@@ -26,7 +29,7 @@ namespace BatteryCommander.Web.Services
         public static async Task<byte[]> Generate_DA4856Async(Counseling model)
         {
             var result =
-                await (new Forms.RedLeg_FormsClient("https://forms.redleg.app", http))
+                await forms_client
                 .DA4856Async(new Forms.Counseling
                 {
                     Name = model.Name,
@@ -41,12 +44,11 @@ namespace BatteryCommander.Web.Services
                     Rank = (Forms.Rank)model.Rank
                 });
 
-            using (var memory = new MemoryStream())
-            {
-                await result.Stream.CopyToAsync(memory);
+            using var memory = new MemoryStream();
 
-                return memory.ToArray();
-            }
+            await result.Stream.CopyToAsync(memory);
+
+            return memory.ToArray();
         }
 
         [Obsolete("Migrate to using RedLeg.Forms")]
