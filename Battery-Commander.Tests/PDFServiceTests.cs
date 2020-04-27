@@ -2,6 +2,7 @@
 using BatteryCommander.Web.Services;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 using Xunit;
 using static BatteryCommander.Web.Services.PDFService;
 
@@ -62,18 +63,18 @@ namespace BatteryCommander.Tests
         }
 
         [Fact]
-        public void Generate_Counseling()
+        public async Task Generate_Counseling()
         {
             using (var file = new FileStream("TestCounseling.pdf", FileMode.Create))
             {
-                var data = PDFService.Generate_DA4856(new PDFService.Counseling
+                var data = await PDFService.Generate_DA4856Async(new BatteryCommander.Web.Services.Forms.Counseling
                 {
                     Counselor = "LT Wagner, Matthew",
                     Date = DateTime.Today,
                     KeyPointsOfDiscussion = "Really, really important things go here.",
                     LeadersResponsibilities = "Lead Others.",
                     Name = "Snuffy, Joe",
-                    Rank = Rank.E2,
+                    Rank = (Web.Services.Forms.Rank)Rank.E2,
                     Purpose = "To tell you important things that you should know.",
                     Organization = "A/2/116 FA",
                     PlanOfAction = "Go forth and conquer."

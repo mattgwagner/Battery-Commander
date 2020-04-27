@@ -2,6 +2,7 @@ using BatteryCommander.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace BatteryCommander.Tests
@@ -127,7 +128,7 @@ namespace BatteryCommander.Tests
         }
 
         [Fact]
-        public void Generate_Counseling()
+        public async Task Generate_Counseling()
         {
             using (var file = new FileStream("TestCounseling_APFT.pdf", FileMode.Create))
             {
@@ -146,7 +147,7 @@ namespace BatteryCommander.Tests
                     Run = new TimeSpan(0, 14, 0)
                 };
 
-                var data = apft.GenerateCounseling();
+                var data = await apft.GenerateCounseling();
 
                 file.Write(data, 0, data.Length);
             }

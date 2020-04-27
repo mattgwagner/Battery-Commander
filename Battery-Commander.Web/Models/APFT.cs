@@ -214,10 +214,10 @@ namespace BatteryCommander.Web.Models
 
         public async Task<byte[]> GenerateCounseling()
         {
-            return await PDFService.Generate_DA4856Async(new PDFService.Counseling
+            return await PDFService.Generate_DA4856Async(new Services.Forms.Counseling
             {
                 Name = $"{Soldier.LastName}, {Soldier.FirstName}",
-                Rank = Soldier.Rank,
+                Rank = (Services.Forms.Rank)Soldier.Rank,
                 Organization = $"{Soldier.Unit.Name}",
                 Date = Date,
 

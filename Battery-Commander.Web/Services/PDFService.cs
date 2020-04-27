@@ -25,23 +25,9 @@ namespace BatteryCommander.Web.Services
             PdfReader.AllowOpenWithFullPermissions = true;
         }
 
-        public static async Task<byte[]> Generate_DA4856Async(Counseling model)
+        public static async Task<byte[]> Generate_DA4856Async(Forms.Counseling model)
         {
-            var result =
-                await forms_client
-                .DA4856Async(new Forms.Counseling
-                {
-                    Name = model.Name,
-                    Counselor = model.Counselor,
-                    Assessment = model.Assessment,
-                    Date = model.Date,
-                    KeyPointsOfDiscussion = model.KeyPointsOfDiscussion,
-                    LeadersResponsibilities = model.LeadersResponsibilities,
-                    Organization = model.Organization,
-                    PlanOfAction = model.PlanOfAction,
-                    Purpose = model.Purpose,
-                    Rank = (Forms.Rank)model.Rank
-                });
+            var result = await forms_client.DA4856Async(model);
 
             using var memory = new MemoryStream();
 
@@ -407,29 +393,6 @@ namespace BatteryCommander.Web.Services
             public String Name { get; set; }
 
             public Rank? Grade { get; set; }
-        }
-
-        public class Counseling
-        {
-            public String Name { get; set; }
-
-            public Rank Rank { get; set; }
-
-            public DateTime Date { get; set; } = DateTime.Today;
-
-            public String Organization { get; set; }
-
-            public String Counselor { get; set; }
-
-            public String Purpose { get; set; }
-
-            public String KeyPointsOfDiscussion { get; set; }
-
-            public String PlanOfAction { get; set; }
-
-            public String LeadersResponsibilities { get; set; }
-
-            public String Assessment { get; set; }
         }
     }
 }
