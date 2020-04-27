@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Models
 {
@@ -278,7 +279,7 @@ namespace BatteryCommander.Web.Models
             }
         }
 
-        public byte[] GenerateCounseling()
+        public async Task<byte[]> GenerateCounseling()
         {
             var consecutive_failures = 0;
 
@@ -289,7 +290,7 @@ namespace BatteryCommander.Web.Models
                 consecutive_failures++;
             }
 
-            return PDFService.Generate_DA4856(new PDFService.Counseling
+            return await PDFService.Generate_DA4856Async(new PDFService.Counseling
             {
                 Name = $"{Soldier.LastName}, {Soldier.FirstName}",
                 Rank = Soldier.Rank,

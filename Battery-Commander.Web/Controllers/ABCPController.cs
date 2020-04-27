@@ -50,7 +50,7 @@ namespace BatteryCommander.Web.Controllers
 
             var filename = $"{abcp.Soldier.Unit.Name}_DA4856_ABCP_{abcp.Soldier.LastName}_{abcp.Date:yyyyMMdd}.pdf";
 
-            return File(abcp.GenerateCounseling(), "application/pdf", filename);
+            return File(await abcp.GenerateCounseling(), "application/pdf", filename);
         }
 
         public async Task<IActionResult> Measurements(int id)
