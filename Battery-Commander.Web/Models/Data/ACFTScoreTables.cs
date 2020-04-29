@@ -8,7 +8,33 @@ namespace BatteryCommander.Web.Models.Data
 
         public static int MaximumDeadLift(int weight_in_lbs)
         {
-            throw new NotImplementedException();
+            if (weight_in_lbs >= 340) return 100;
+
+            if (weight_in_lbs >= 200)
+            {
+                // For every 10 #s between 200 and 340, add 2 points
+
+                double diff = weight_in_lbs - 200;
+
+                var rows = (int)Math.Ceiling(diff / 10);
+
+                return 70 + (rows * 2);
+            }
+
+            if (weight_in_lbs >= 190) return 68;
+            if (weight_in_lbs >= 180) return 65;
+            if (weight_in_lbs >= 170) return 64;
+            if (weight_in_lbs >= 160) return 63;
+            if (weight_in_lbs >= 150) return 62;
+
+            if (weight_in_lbs >= 140) return 60;
+            if (weight_in_lbs >= 130) return 50;
+            if (weight_in_lbs >= 120) return 40;
+            if (weight_in_lbs >= 110) return 30;
+            if (weight_in_lbs >= 100) return 20;
+            if (weight_in_lbs >= 90) return 10;
+
+            return 0;
         }
 
         public static int StandingPowerThrow(decimal distance_in_meters)
@@ -65,17 +91,38 @@ namespace BatteryCommander.Web.Models.Data
 
         public static int TwoMileRun(TimeSpan duration)
         {
+            if (duration >= new TimeSpan(0, 22, 48)) return 0;
+
             var top_score = new TimeSpan(0, minutes: 13, seconds: 30);
 
             // For every 9 seconds after the top time, we subtract 1 point
 
             if (duration < top_score) return 100;
 
-            var over_1330 = duration - top_score;
+            if (duration <= new TimeSpan(0, 18, 0))
+            {
+                var over_1330 = duration - top_score;
 
-            var rows = Math.Ceiling(over_1330.TotalSeconds / 9);
+                var rows = (int)Math.Ceiling(over_1330.TotalSeconds / 9);
 
-            return (int)Math.Max(0, 100 - rows);
+                return 100 - rows;
+            }
+
+            if (duration <= new TimeSpan(0, 18, 12)) return 69;
+            if (duration <= new TimeSpan(0, 18, 24)) return 68;
+            if (duration <= new TimeSpan(0, 18, 36)) return 67;
+            if (duration <= new TimeSpan(0, 18, 48)) return 66;
+            if (duration <= new TimeSpan(0, 19, 0)) return 65;
+
+            if (duration <= new TimeSpan(0, 19, 24)) return 64;
+            if (duration <= new TimeSpan(0, 19, 48)) return 63;
+            if (duration <= new TimeSpan(0, 20, 12)) return 62;
+            if (duration <= new TimeSpan(0, 20, 36)) return 61;
+            if (duration <= new TimeSpan(0, 21, 0)) return 60;
+
+            // TODO Implement 21:01 -> 22:48
+
+            return 0;
         }
     }
 }
