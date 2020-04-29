@@ -65,7 +65,17 @@ namespace BatteryCommander.Web.Models.Data
 
         public static int TwoMileRun(TimeSpan duration)
         {
-            throw new NotImplementedException();
+            var top_score = new TimeSpan(0, minutes: 13, seconds: 30);
+
+            // For every 9 seconds after the top time, we subtract 1 point
+
+            if (duration < top_score) return 100;
+
+            var over_1330 = duration - top_score;
+
+            var rows = Math.Ceiling(over_1330.TotalSeconds / 9);
+
+            return (int)Math.Max(0, 100 - rows);
         }
     }
 }
