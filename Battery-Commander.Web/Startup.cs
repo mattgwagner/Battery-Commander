@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -167,6 +168,8 @@ namespace BatteryCommander.Web
                     .Build();
 
                 options.Filters.Add(new AuthorizeFilter(p));
+
+                options.Conventions.Add(new ApiExplorerIgnores { });
             });
 
             // Register the Swagger generator, defining one or more Swagger documents
@@ -253,6 +256,15 @@ namespace BatteryCommander.Web
             app.UseJobScheduler(loggerFactory);
 
             Database.Init(db);
+        }
+    }
+
+    internal class ApiExplorerIgnores : IActionModelConvention
+    {
+        public void Apply(ActionModel action)
+        {
+            if (action.Controller.ControllerName.Equals("Pwa"))
+                action.ApiExplorer.IsVisible = false;
         }
     }
 }
