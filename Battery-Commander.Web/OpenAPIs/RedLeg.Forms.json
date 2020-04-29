@@ -15,6 +15,8 @@
         "tags": [
           "Form"
         ],
+        "summary": "Generates a DA 4856 Developmental Counseling Form as PDF",
+        "operationId": "GenerateDA4856",
         "requestBody": {
           "content": {
             "application/json": {
@@ -53,6 +55,8 @@
         "tags": [
           "Form"
         ],
+        "summary": "Generates a DA 5500 Body Composition Worksheet (Male) as PDF",
+        "operationId": "GenerateDA5500",
         "requestBody": {
           "content": {
             "application/json": {
@@ -91,6 +95,8 @@
         "tags": [
           "Form"
         ],
+        "summary": "Generates a DA 5501 Body Composition Worksheet (Female) as PDF",
+        "operationId": "GenerateDA5501",
         "requestBody": {
           "content": {
             "application/json": {
@@ -106,82 +112,6 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/ABCP"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/pdf": {
-                "schema": {
-                  "type": "file"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/DA705": {
-      "post": {
-        "tags": [
-          "Form"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/APFT"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/APFT"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/APFT"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/pdf": {
-                "schema": {
-                  "type": "file"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/DA3749": {
-      "post": {
-        "tags": [
-          "Form"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/WeaponCard"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/WeaponCard"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/WeaponCard"
               }
             }
           }
@@ -382,14 +312,6 @@
             "nullable": true
           }
         },
-        "additionalProperties": false
-      },
-      "APFT": {
-        "type": "object",
-        "additionalProperties": false
-      },
-      "WeaponCard": {
-        "type": "object",
         "additionalProperties": false
       }
     }

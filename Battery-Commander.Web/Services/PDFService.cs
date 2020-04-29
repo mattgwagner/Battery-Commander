@@ -25,7 +25,7 @@ namespace BatteryCommander.Web.Services
 
         public static async Task<byte[]> Generate_DA4856Async(Forms.Counseling model)
         {
-            var result = await forms_client.DA4856Async(model);
+            var result = await forms_client.GenerateDA4856Async(model);
 
             using var memory = new MemoryStream();
 
@@ -36,7 +36,7 @@ namespace BatteryCommander.Web.Services
 
         public static async Task<byte[]> Generate_DA5500(ABCP model)
         {
-            var result = await forms_client.DA5500Async(new Forms.ABCP
+            var result = await forms_client.GenerateDA5500Async(new Forms.ABCP
             {
                 Soldier = new Forms.ABCP_Soldier
                 {
@@ -106,7 +106,7 @@ namespace BatteryCommander.Web.Services
 
         public static async Task<byte[]> Generate_DA5501(ABCP model)
         {
-            var result = await forms_client.DA5501Async(new Forms.ABCP
+            var result = await forms_client.GenerateDA5501Async(new Forms.ABCP
             {
                 Soldier = new Forms.ABCP_Soldier
                 {
