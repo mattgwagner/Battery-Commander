@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Models.Data
 {
@@ -21,7 +18,15 @@ namespace BatteryCommander.Web.Models.Data
 
         public static int HandReleasePushUps(int reps)
         {
-            throw new NotImplementedException();
+            if (reps == 0) return 0;
+
+            if (reps >= 60) return 100;
+
+            if (reps >= 30) return 70 + (reps - 30);
+
+            if (reps >= 10) return 10 + (reps - 10) * 2;
+
+            return reps * 5 + 10;
         }
 
         public static int SprintDragCarry(TimeSpan duration)
@@ -31,9 +36,10 @@ namespace BatteryCommander.Web.Models.Data
 
         public static int LegTuck(int reps)
         {
+            if (reps == 0) return 0;
+
             return reps switch
             {
-                0 => 0,
                 1 => 60,
                 2 => 62,
                 3 => 65,

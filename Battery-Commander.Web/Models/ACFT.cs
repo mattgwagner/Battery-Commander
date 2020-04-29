@@ -65,10 +65,6 @@ namespace BatteryCommander.Web.Models
             if (Date > DateTime.Today) yield return new ValidationResult("Cannot select a date after today", new[] { nameof(Date) });
         }
 
-        // Raw Data by Event
-
-        // Event Scores
-
         [NotMapped, Display(Name = "Total Score")]
         public int TotalScore
         {
