@@ -129,6 +129,46 @@
           }
         }
       }
+    },
+    "/DA3749": {
+      "post": {
+        "tags": [
+          "Form"
+        ],
+        "summary": "Generate a DA 3749 Equipment Receipt as PDF",
+        "operationId": "GenerateDA3749",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EquipmentReceipt"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EquipmentReceipt"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EquipmentReceipt"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "type": "file"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -310,6 +350,43 @@
               "$ref": "#/components/schemas/Measurement"
             },
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EquipmentReceipt": {
+        "type": "object",
+        "properties": {
+          "unit": {
+            "type": "string",
+            "nullable": true
+          },
+          "receiptNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "stockNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "serialNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "from": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "grade": {
+            "$ref": "#/components/schemas/Rank"
           }
         },
         "additionalProperties": false
