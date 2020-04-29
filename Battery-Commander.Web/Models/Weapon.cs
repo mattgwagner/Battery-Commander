@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Models
 {
@@ -74,12 +75,12 @@ namespace BatteryCommander.Web.Models
             }
         }
 
-        public virtual byte[] GenerateReceipt()
+        public virtual Task<byte[]> GenerateReceipt()
         {
-            return PDFService.Generate_DA3749(new PDFService.EquipmentReceipt
+            return PDFService.Generate_DA3749(new Services.Forms.EquipmentReceipt
             {
                 Name = $"{Assigned?.LastName} {Assigned?.FirstName}",
-                Grade = Assigned?.Rank,
+                Grade = (Services.Forms.Rank)Assigned?.Rank,
                 From = "Arms Room",
                 ReceiptNumber = $"{Type}-{AdminNumber}",
                 SerialNumber = Serial,

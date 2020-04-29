@@ -1,11 +1,8 @@
-﻿using BatteryCommander.Web.Models;
+﻿using BatteryCommander.Web.Services.Forms;
 using iTextSharp.text.pdf;
-using System;
-using System.Collections;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Services
@@ -34,7 +31,7 @@ namespace BatteryCommander.Web.Services
             return memory.ToArray();
         }
 
-        public static async Task<byte[]> Generate_DA5500(ABCP model)
+        public static async Task<byte[]> Generate_DA5500(Models.ABCP model)
         {
             var result = await forms_client.GenerateDA5500Async(new Forms.ABCP
             {
@@ -68,12 +65,9 @@ namespace BatteryCommander.Web.Services
             return memory.ToArray();
         }
 
-        public static byte[] Generate_DA3749(EquipmentReceipt model)
+        public static async Task<byte[]> Generate_DA3749(EquipmentReceipt model)
         {
-            var result = await forms_client.GenerateDA3749Async(new EquipmentReceipt
-            {
-
-            });
+            var result = await forms_client.GenerateDA3749Async(model);
 
             using var memory = new MemoryStream();
 
@@ -82,7 +76,7 @@ namespace BatteryCommander.Web.Services
             return memory.ToArray();
         }
 
-        public static async Task<byte[]> Generate_DA5501(ABCP model)
+        public static async Task<byte[]> Generate_DA5501(Models.ABCP model)
         {
             var result = await forms_client.GenerateDA5501Async(new Forms.ABCP
             {
@@ -115,25 +109,6 @@ namespace BatteryCommander.Web.Services
             await result.Stream.CopyToAsync(memory);
 
             return memory.ToArray();
-        }
-
-        public class EquipmentReceipt
-        {
-            public String Unit { get; set; }
-
-            public String ReceiptNumber { get; set; }
-
-            public String StockNumber { get; set; }
-
-            public String SerialNumber { get; set; }
-
-            public String Description { get; set; }
-
-            public String From { get; set; }
-
-            public String Name { get; set; }
-
-            public Rank? Grade { get; set; }
         }
     }
 }

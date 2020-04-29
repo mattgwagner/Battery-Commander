@@ -103,7 +103,7 @@ namespace BatteryCommander.Web.Controllers
 
             var filename = $"{weapon.Unit.Name}_DA3749_{weapon.Assigned?.LastName}_{DateTime.Today:yyyyMMdd}.pdf";
 
-            return File(weapon.GenerateReceipt(), "application/pdf", filename);
+            return File(await weapon.GenerateReceipt(), "application/pdf", filename);
         }
     }
 }
