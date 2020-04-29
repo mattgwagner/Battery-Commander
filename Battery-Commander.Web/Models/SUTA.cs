@@ -6,7 +6,7 @@ using Humanizer;
 
 namespace BatteryCommander.Web.Models
 {
-    public class SUTA
+    public class SUTA : IValidatableObject
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -65,7 +65,7 @@ namespace BatteryCommander.Web.Models
             {
                 // Meh, kind of hacky, figure out what to label the status
 
-                switch(Status)
+                switch (Status)
                 {
                     case SUTAStatus.Approved:
                         return "label-success";
@@ -123,6 +123,13 @@ namespace BatteryCommander.Web.Models
             public string Message { get; set; }
 
             public override string ToString() => $"{Author}: {Message}";
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (StartDate > DateTime.Today.AddYears(1)) yield return new ValidationResult("Cannot create a SUTA request this far into the future", new[] { nameof(StartDate) });
+
+            if (StartDate < DateTime.Today.AddDays(-30)) yield return new ValidationResult("Cannot post-date a SUTA request this far in the past");
         }
     }
 }
