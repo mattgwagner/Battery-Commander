@@ -1,6 +1,7 @@
 ﻿using BatteryCommander.Web.Models;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 using Xunit;
 using static BatteryCommander.Web.Models.ABCP;
 
@@ -70,7 +71,7 @@ namespace BatteryCommander.Tests
         }
 
         [Fact]
-        public void Generate_Male_5500()
+        public async Task Generate_Male_5500()
         {
             using (var file = new FileStream("Test_DA5500_ABCP_Male.pdf", FileMode.Create))
             {
@@ -95,14 +96,14 @@ namespace BatteryCommander.Tests
                     }
                 };
 
-                var data = score.GenerateWorksheet();
+                var data = await score.GenerateWorksheet();
 
                 file.Write(data, 0, data.Length);
             }
         }
 
         [Fact]
-        public void Generate_Female_5501()
+        public async Task Generate_Female_5501()
         {
             using (var file = new FileStream("Test_DA5501_ABCP_Female.pdf", FileMode.Create))
             {
@@ -127,7 +128,7 @@ namespace BatteryCommander.Tests
                     }
                 };
 
-                var data = score.GenerateWorksheet();
+                var data = await score.GenerateWorksheet();
 
                 file.Write(data, 0, data.Length);
             }

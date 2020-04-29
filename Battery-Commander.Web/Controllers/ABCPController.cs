@@ -1,6 +1,5 @@
 ﻿using BatteryCommander.Web.Models;
 using BatteryCommander.Web.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -35,13 +34,16 @@ namespace BatteryCommander.Web.Controllers
 
         public async Task<IActionResult> Worksheet(int id)
         {
-            // TODO It's a 5501 for females, and that's just the worksheet, not the associated counseling
-
             var abcp = await Get(db, id);
 
-            var filename = $"{abcp.Soldier.Unit.Name}_DA5500_ABCP_{abcp.Soldier.LastName}_{abcp.Date:yyyyMMdd}.pdf";
+            var filename = abcp.Soldier.Gender switch
+            {
+                Gender.Female => $"{abcp.Soldier.Unit.Name}_DA5501_ABCP_{abcp.Soldier.LastName}_{abcp.Date:yyyyMMdd}.pdf",
 
-            return File(abcp.GenerateWorksheet(), "application/pdf", filename);
+                _ => $"{abcp.Soldier.Unit.Name}_DA5500_ABCP_{abcp.Soldier.LastName}_{abcp.Date:yyyyMMdd}.pdf"
+            };
+
+            return File(await abcp.GenerateWorksheet(), "application/pdf", filename);
         }
 
         public async Task<IActionResult> Counseling(int id)
