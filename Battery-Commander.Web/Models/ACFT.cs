@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BatteryCommander.Web.Models.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -24,35 +25,35 @@ namespace BatteryCommander.Web.Models
         [Required, DataType(DataType.Date), Column(TypeName = "date"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime Date { get; set; } = DateTime.Today;
 
-
-
         [Display(Name = "For Record")]
         public Boolean ForRecord { get; set; }
 
-        [Display(Name = "Three Rep Maximum Deadlifts")]
+        [Display(Name = "Three Rep Maximum Deadlifts (pounds)"), Range(0, 500)]
         public int ThreeRepMaximumDeadlifts { get; set; }
 
-        [Display(Name = "Standing Power Throw")]
-        public int StandingPowerThrow { get; set; }
+        [Display(Name = "Standing Power Throw (meters)")]
+        public decimal StandingPowerThrow { get; set; }
 
-        [Display(Name = "Hand-Release Push-Ups")]
+        [Display(Name = "Hand-Release Push-Ups (reps)"), Range(0, 150)]
         public int HandReleasePushups { get; set; }
 
+        [Range(0, double.MaxValue)]
         public int SprintDragCarrySeconds { get; set; }
 
-        [NotMapped]
+        [NotMapped, Display(Name = "Sprint-Drag-Carry (time)")]
         public TimeSpan SprintDragCarry
         {
             get { return TimeSpan.FromSeconds(SprintDragCarrySeconds); }
             set { SprintDragCarrySeconds = (int)value.TotalSeconds; }
         }
 
-        [Display(Name = "Leg Tucks")]
+        [Display(Name = "Leg Tucks (reps)"), Range(0, 50)]
         public int LegTucks { get; set; }
 
+        [Range(0, double.MaxValue)]
         public int TwoMileRunSeconds { get; set; }
 
-        [NotMapped, Display(Name = "Two-Mile Run")]
+        [NotMapped, Display(Name = "Two-Mile Run (time)")]
         public TimeSpan TwoMileRun
         {
             get { return TimeSpan.FromSeconds(TwoMileRunSeconds); }
@@ -68,7 +69,23 @@ namespace BatteryCommander.Web.Models
 
         // Event Scores
 
-        public int TotalScore => 0;
+        [NotMapped, Display(Name = "Total Score")]
+        public int TotalScore
+        {
+            get
+            {
+                return new[]
+                {
+                    ACFTScoreTables.MaximumDeadLift(ThreeRepMaximumDeadlifts),
+                    ACFTScoreTables.StandingPowerThrow(StandingPowerThrow),
+                    ACFTScoreTables.HandReleasePushUps(HandReleasePushups),
+                    ACFTScoreTables.SprintDragCarry(SprintDragCarry),
+                    ACFTScoreTables.LegTuck(LegTucks),
+                    ACFTScoreTables.TwoMileRun(TwoMileRun),
+                }
+                .Sum();
+            }
+        }
 
         // Soldier Info
 
