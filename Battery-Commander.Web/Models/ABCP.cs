@@ -266,7 +266,7 @@ namespace BatteryCommander.Web.Models
             }
         }
 
-        public byte[] GenerateWorksheet()
+        public Task<byte[]> GenerateWorksheet()
         {
             switch (Soldier?.Gender)
             {
