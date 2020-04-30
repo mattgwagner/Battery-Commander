@@ -31,7 +31,7 @@ namespace BatteryCommander.Web
                            .Enrich.WithProperty("Application", context.HostingEnvironment.ApplicationName)
                            .Enrich.WithProperty("Environment", context.HostingEnvironment.EnvironmentName)
                            .Enrich.WithProperty("Version", $"{typeof(Startup).Assembly.GetName().Version}")
-                           .WriteTo.Seq(serverUrl: "http://redlegdev-logs.eastus.azurecontainer.io", apiKey: context.Configuration.GetValue<string>("Seq:ApiKey"), compact: true, controlLevelSwitch: LogLevel)
+                           .WriteTo.Seq(serverUrl: "https://logs.redleg.app", apiKey: context.Configuration.GetValue<string>("Seq:ApiKey"), compact: true, controlLevelSwitch: LogLevel)
                            .MinimumLevel.ControlledBy(LogLevel)
                            .CreateLogger();
 
