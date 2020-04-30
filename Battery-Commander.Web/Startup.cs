@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Serilog.Context;
 using WebEssentials.AspNetCore.Pwa;
 
 namespace BatteryCommander.Web
@@ -209,6 +210,13 @@ namespace BatteryCommander.Web
 
             app
                 .UseAuthentication()
+                .Use(async (context, next) =>
+                {
+                    using (LogContext.PushProperty("Username", context.User?.FindFirstValue(ClaimTypes.Name)))
+                    {
+                        await next();
+                    }
+                })
                 .Use(async (context, next) =>
                 {
                     // Are we already in the pipeline for our request access page? 'cuz it wouldn't make sense to redirect again
