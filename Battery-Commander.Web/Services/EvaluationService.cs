@@ -90,7 +90,7 @@ namespace BatteryCommander.Web.Models
             [Display(Name = "Senior Rater Signature Completed")]
             Senior_Rater_Signed,
 
-            [Display(Name = "Rated Solider Signature Completed")]
+            [Display(Name = "Rated Soldier Signature Completed")]
             Soldier_Signed,
 
             [Display(Name = "Reviewer Signature Completed")]
