@@ -1,4 +1,4 @@
-Battery Commander
+Battery Commander App
 ======================
 
 Overview of functionality: [Google Doc](https://docs.google.com/document/d/1l8zPeZ6fdzgo9_fAJvtvi1b1_9XoYQDUw-FCn3P_Ghw/edit?usp=sharing)
