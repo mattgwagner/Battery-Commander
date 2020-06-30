@@ -39,7 +39,7 @@ namespace BatteryCommander.Web.Jobs
 
             foreach (var unit in UnitService.List(db).GetAwaiter().GetResult())
             {
-                if ("UNASSIGNED".Equals(unit.Name, StringComparison.OrdinalIgnoreCase)) continue;
+                if (string.IsNullOrWhiteSpace(unit.UIC)) continue;
 
                 var evaluations_due_soon =
                     EvaluationService.Filter(db, new EvaluationService.Query { Complete = false, Unit = unit.Id })
