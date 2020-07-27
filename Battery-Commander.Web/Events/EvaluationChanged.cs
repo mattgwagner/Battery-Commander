@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using BatteryCommander.Web.Models;
+﻿using BatteryCommander.Web.Models;
 using BatteryCommander.Web.Services;
 using FluentEmail.Core;
 using FluentEmail.Core.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Events
 {
@@ -46,14 +46,19 @@ namespace BatteryCommander.Web.Events
 
                 logger.LogInformation("Sending state change email for {ratee} evaluation", eval.Ratee);
 
-                emailSvc
-                    .Create()
-                    .To(await Get_Recipients(eval))
-                    .BCC("Evaluations@RedLeg.app")
-                    .Subject($"Evaluation Updated | {eval.Ratee}")
-                    .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Events/EvaluationUpdated.html", eval)
-                    .SendWithErrorCheck()
-                    .Wait();
+                var recipients = await Get_Recipients(eval);
+
+                if (recipients.Any())
+                {
+                    emailSvc
+                        .Create()
+                        .To(await Get_Recipients(eval))
+                        .BCC("Evaluations@RedLeg.app")
+                        .Subject($"Evaluation Updated | {eval.Ratee}")
+                        .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Events/EvaluationUpdated.html", eval)
+                        .SendWithErrorCheck()
+                        .Wait();
+                }
             }
 
             private class EmailComparer : IEqualityComparer<Address>
