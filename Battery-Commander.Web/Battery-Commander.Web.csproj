@@ -54,6 +54,7 @@
     <EmbeddedResource Include="Models\Data\PushUps.csv" />
     <EmbeddedResource Include="Models\Data\Run.csv" />
     <EmbeddedResource Include="Models\Data\SitUps.csv" />
+    <EmbeddedResource Include="Models\Data\ACFTScoreTables.csv" />
   </ItemGroup>
 
   <ItemGroup>

@@ -24,5 +24,15 @@ namespace BatteryCommander.Tests
         {
             Assert.Equal(expected, ACFTScoreTables.HandReleasePushUps(reps));
         }
+
+        [Theory]
+        [InlineData(1, 32, 100)]
+        [InlineData(2, 10, 70)]
+        [InlineData(1, 56, 84)]
+        [InlineData(2, 55, 61)]
+        public void Calculate_SprintDragCarry(int minutes, int seconds, int expected)
+        {
+            Assert.Equal(expected, ACFTScoreTables.SprintDragCarry(new TimeSpan(0, minutes, seconds)));
+        }
     }
 }

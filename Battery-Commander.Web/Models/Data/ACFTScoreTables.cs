@@ -1,10 +1,53 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 
 namespace BatteryCommander.Web.Models.Data
 {
     public static class ACFTScoreTables
     {
         // Current Scoring Tables as of HQDA EXORD 219-18 for FY20
+
+
+
+        public static IEnumerable<SprintDragCarryScoreRow> Data
+        {
+            get
+            {
+                using (var stream = typeof(ACFTScoreTables).GetTypeInfo().Assembly.GetManifestResourceStream($"Battery-Commander.Web.Models.Data.{nameof(ACFTScoreTables)}.csv"))
+                using (var reader = new StreamReader(stream))
+                {
+                    string line = string.Empty;
+
+                    while (!String.IsNullOrWhiteSpace(line = reader.ReadLine()))
+                    {
+                        if (line.Contains("3RM")) continue;
+
+                        var items = line.Split(',');
+
+                        // 9 time stored as -335 representing 3m 35s
+                        // 10 points
+
+                        yield return new SprintDragCarryScoreRow
+                        {
+                            // This is hacky AF
+
+                            Duration = new TimeSpan(hours: 0, minutes: int.Parse($"{items[9][1]}"), seconds: int.Parse(items[9].Substring(2))),
+                            Points = int.Parse(items[10])
+                        };
+                    }
+                }
+            }
+        }
+
+        public class SprintDragCarryScoreRow
+        {
+            public TimeSpan Duration { get; set; }
+
+            public int Points { get; set; }
+        }
 
         public static int MaximumDeadLift(int weight_in_lbs)
         {
@@ -40,7 +83,6 @@ namespace BatteryCommander.Web.Models.Data
         public static int StandingPowerThrow(decimal distance_in_meters)
         {
             if (distance_in_meters <= 3.3m) return 0;
-
 
             return distance_in_meters switch
             {
@@ -155,10 +197,12 @@ namespace BatteryCommander.Web.Models.Data
             return reps * 5 + 10;
         }
 
-        public static int SprintDragCarry(TimeSpan duration)
-        {
-            throw new NotImplementedException();
-        }
+        public static int SprintDragCarry(TimeSpan duration) =>
+            Data
+            .OrderByDescending(entry => entry.Duration)
+            .Where(entry => entry.Duration < duration)
+            .Select(entry => entry.Points)
+            .First();
 
         public static int LegTuck(int reps)
         {
