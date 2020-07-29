@@ -10,7 +10,7 @@ namespace BatteryCommander.Web.Models.Data
     {
         // Current Scoring Tables as of HQDA EXORD 219-18 for FY20
 
-        public static IEnumerable<ScoreDataRow> SprintDragCarryScoring
+        public static IEnumerable<TimedScoreDataRow> SprintDragCarryScoring
         {
             get
             {
@@ -30,7 +30,7 @@ namespace BatteryCommander.Web.Models.Data
                             // 9 time stored as -335 representing 3m 35s
                             // 10 points
 
-                            yield return new ScoreDataRow
+                            yield return new TimedScoreDataRow
                             {
                                 // This is hacky AF
 
@@ -43,7 +43,7 @@ namespace BatteryCommander.Web.Models.Data
             }
         }
 
-        public static IEnumerable<ScoreDataRow> TwoMileRunScoring
+        public static IEnumerable<TimedScoreDataRow> TwoMileRunScoring
         {
             get
             {
@@ -63,7 +63,7 @@ namespace BatteryCommander.Web.Models.Data
                             // 15 time stored as -1335 representing 13m 35s
                             // 16 points
 
-                            yield return new ScoreDataRow
+                            yield return new TimedScoreDataRow
                             {
                                 // This is hacky AF
 
@@ -76,7 +76,113 @@ namespace BatteryCommander.Web.Models.Data
             }
         }
 
+        public static IEnumerable<ScoreDataRow> DeadliftScoring
+        {
+            get
+            {
+                using (var stream = typeof(ACFTScoreTables).GetTypeInfo().Assembly.GetManifestResourceStream($"Battery-Commander.Web.Models.Data.{nameof(ACFTScoreTables)}.csv"))
+                using (var reader = new StreamReader(stream))
+                {
+                    string line = string.Empty;
+
+                    while (!String.IsNullOrWhiteSpace(line = reader.ReadLine()))
+                    {
+                        if (line.Contains("3RM")) continue;
+
+                        var items = line.Split(',');
+
+                        if (!string.IsNullOrWhiteSpace(items[0]))
+                        {
+                            // 0 weight stored as lbs
+                            // 1 score
+
+                            yield return new ScoreDataRow
+                            {
+                                // This is hacky AF
+
+                                Input = decimal.Parse(items[0]),
+                                Points = int.Parse(items[1])
+                            };
+                        }
+                    }
+                }
+            }
+        }
+
+        public static IEnumerable<ScoreDataRow> PowerThrowSCoring
+        {
+            get
+            {
+                using (var stream = typeof(ACFTScoreTables).GetTypeInfo().Assembly.GetManifestResourceStream($"Battery-Commander.Web.Models.Data.{nameof(ACFTScoreTables)}.csv"))
+                using (var reader = new StreamReader(stream))
+                {
+                    string line = string.Empty;
+
+                    while (!String.IsNullOrWhiteSpace(line = reader.ReadLine()))
+                    {
+                        if (line.Contains("3RM")) continue;
+
+                        var items = line.Split(',');
+
+                        if (!string.IsNullOrWhiteSpace(items[3]))
+                        {
+                            // 0 weight stored as lbs
+                            // 1 score
+
+                            yield return new ScoreDataRow
+                            {
+                                // This is hacky AF
+
+                                Input = decimal.Parse(items[3]),
+                                Points = int.Parse(items[4])
+                            };
+                        }
+                    }
+                }
+            }
+        }
+
+        public static IEnumerable<ScoreDataRow> PushupScoring
+        {
+            get
+            {
+                using (var stream = typeof(ACFTScoreTables).GetTypeInfo().Assembly.GetManifestResourceStream($"Battery-Commander.Web.Models.Data.{nameof(ACFTScoreTables)}.csv"))
+                using (var reader = new StreamReader(stream))
+                {
+                    string line = string.Empty;
+
+                    while (!String.IsNullOrWhiteSpace(line = reader.ReadLine()))
+                    {
+                        if (line.Contains("3RM")) continue;
+
+                        var items = line.Split(',');
+
+                        if (!string.IsNullOrWhiteSpace(items[6]))
+                        {
+                            // 0 weight stored as lbs
+                            // 1 score
+
+                            yield return new ScoreDataRow
+                            {
+                                // This is hacky AF
+
+                                Input = decimal.Parse(items[6]),
+                                Points = int.Parse(items[7])
+                            };
+                        }
+                    }
+                }
+            }
+        }
+
         public class ScoreDataRow
+        {
+            public decimal Input { get; set; }
+
+            public int Points { get; set; }
+        }
+
+        public class TimedScoreDataRow
         {
             public TimeSpan Duration { get; set; }
 
@@ -220,15 +326,12 @@ namespace BatteryCommander.Web.Models.Data
 
         public static int HandReleasePushUps(int reps)
         {
-            if (reps == 0) return 0;
-
-            if (reps >= 60) return 100;
-
-            if (reps >= 30) return 70 + (reps - 30);
-
-            if (reps >= 10) return 10 + (reps - 10) * 2;
-
-            return reps * 5 + 10;
+            return
+                PushupScoring
+                .OrderByDescending(entry => entry.Input)
+                .Where(entry => entry.Input <= reps)
+                .Select(entry => entry.Points)
+                .FirstOrDefault();
         }
 
         public static int SprintDragCarry(TimeSpan duration)

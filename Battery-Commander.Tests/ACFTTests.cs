@@ -21,6 +21,9 @@ namespace BatteryCommander.Tests
         [Theory]
         [InlineData(61, 100)]
         [InlineData(30, 70)]
+        [InlineData(20, 65)]
+        [InlineData(54, 94)]
+        [InlineData(13, 61)]
         public void Calculate_Pushups(int reps, int expected)
         {
             Assert.Equal(expected, ACFTScoreTables.HandReleasePushUps(reps));
