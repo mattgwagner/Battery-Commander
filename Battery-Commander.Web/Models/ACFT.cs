@@ -66,26 +66,23 @@ namespace BatteryCommander.Web.Models
         }
 
         [NotMapped, Display(Name = "Total Score")]
-        public int TotalScore
+        public int TotalScore => Scores.Sum();
+
+        private IEnumerable<int> Scores => new[]
         {
-            get
-            {
-                return new[]
-                {
-                    ACFTScoreTables.MaximumDeadLift(ThreeRepMaximumDeadlifts),
-                    ACFTScoreTables.StandingPowerThrow(StandingPowerThrow),
-                    ACFTScoreTables.HandReleasePushUps(HandReleasePushups),
-                    ACFTScoreTables.SprintDragCarry(SprintDragCarry),
-                    ACFTScoreTables.LegTuck(LegTucks),
-                    ACFTScoreTables.TwoMileRun(TwoMileRun),
-                }
-                .Sum();
-            }
-        }
+            ACFTScoreTables.MaximumDeadLift(ThreeRepMaximumDeadlifts),
+            ACFTScoreTables.StandingPowerThrow(StandingPowerThrow),
+            ACFTScoreTables.HandReleasePushUps(HandReleasePushups),
+            ACFTScoreTables.SprintDragCarry(SprintDragCarry),
+            ACFTScoreTables.LegTuck(LegTucks),
+            ACFTScoreTables.TwoMileRun(TwoMileRun),
+        };
 
-        // Soldier Info
 
-        // TODO Phsyical Standards Category read off of the Soldier
+        // TODO Consider denormalizing this to store on the test itself so when it changes
+
+        [NotMapped]
+        public ACFTGradingStandard GradingStandard => Soldier?.ACFT_Grading_Standard ?? ACFTGradingStandard.Gold;
 
         // Summary
 
@@ -98,22 +95,33 @@ namespace BatteryCommander.Web.Models
         {
             get
             {
-                // Look at the Soldier's physical standards category
-
-                // Compare that to the total score and min per event
-
-                // Return true or false
-
-                return false;
+                switch(GradingStandard)
+                {
+                    case ACFTGradingStandard.Black: return Scores.All(score => score >= 70);
+                    case ACFTGradingStandard.Grey: return Scores.All(score => score >= 65);
+                    case ACFTGradingStandard.Gold:
+                    default:
+                        return Scores.All(score => score >= 60);
+                }
             }
         }
 
         // Generate Counseling?
     }
 
+    public enum ACFTGradingStandard : byte
+    {
+        Gold,
+        Grey,
+        Black
+    }
+
     public partial class Soldier
     {
-        // TODO Phsyical Standards Category? By MOS or unit?
+        /// <summary>
+        /// The Soldier's physical demand standards based on MOS + Rank
+        /// </summary>
+        public ACFTGradingStandard ACFT_Grading_Standard { get; set; } = ACFTGradingStandard.Gold;
 
         public virtual ICollection<ACFT> ACFTs { get; set; }
 
