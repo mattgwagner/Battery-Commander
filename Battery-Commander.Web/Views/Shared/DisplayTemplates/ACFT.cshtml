@@ -1,0 +1,21 @@
+﻿@model ACFT
+
+@if (Model != null)
+{
+    <div>
+        <a href="@Url.Action("Details", "ACFT", new { Model.Id })">
+            @if (Model.IsValid && Model.IsPassing)
+            {
+                <span class="label label-success">GO</span>
+            }
+            else if (Model.IsPassing)
+            {
+                <span class="label label-warning">GO (Due)</span>
+            }
+            else
+            {
+                <span class="label label-danger">NOGO</span>
+            }
+        </a>
+    </div>
+}
