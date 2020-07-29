@@ -78,7 +78,6 @@ namespace BatteryCommander.Web.Models
             ACFTScoreTables.TwoMileRun(TwoMileRun),
         };
 
-
         // TODO Consider denormalizing this to store on the test itself so when it changes
 
         [NotMapped]
@@ -95,7 +94,7 @@ namespace BatteryCommander.Web.Models
         {
             get
             {
-                switch(GradingStandard)
+                switch (GradingStandard)
                 {
                     case ACFTGradingStandard.Black: return Scores.All(score => score >= 70);
                     case ACFTGradingStandard.Grey: return Scores.All(score => score >= 65);
@@ -121,6 +120,7 @@ namespace BatteryCommander.Web.Models
         /// <summary>
         /// The Soldier's physical demand standards based on MOS + Rank
         /// </summary>
+        [Display(Name = "ACFT Physical Demand Category")]
         public ACFTGradingStandard ACFT_Grading_Standard { get; set; } = ACFTGradingStandard.Gold;
 
         public virtual ICollection<ACFT> ACFTs { get; set; }

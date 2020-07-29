@@ -37,6 +37,11 @@
     </div>
 
     <div class="form-group form-group-lg">
+        @Html.DisplayNameFor(model => model.ACFT_Grading_Standard)
+        @Html.DropDownListFor(model => model.ACFT_Grading_Standard, Html.GetEnumSelectList<ACFTGradingStandard>())
+    </div>
+
+    <div class="form-group form-group-lg">
         @Html.DisplayNameFor(model => model.DateOfRank)
         @Html.EditorFor(model => model.DateOfRank)
     </div>
