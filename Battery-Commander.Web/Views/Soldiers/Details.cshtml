@@ -23,109 +23,113 @@
         <div class="alert alert-danger">Soldier has invalid Date of Birth!</div>
     }
 
-    <table class="table">
-        <tr>
-            <td>@Html.DisplayNameFor(model => model.Soldier.Unit)</td>
-            <td>@Html.DisplayFor(model => model.Soldier.Unit)</td>
-        </tr>
-        <tr>
-            <td>@Html.DisplayNameFor(model => model.Soldier.Status)</td>
-            <td>@Html.DisplayFor(model => model.Soldier, "SoldierStatus")</td>
-        </tr>
-        <tr>
-            <td>@Html.DisplayNameFor(model => model.Soldier.DoDId)</td>
-            <td>@Html.DisplayFor(model => model.Soldier.DoDId)</td>
-        </tr>
-        <tr>
-            <td>@Html.DisplayNameFor(model => model.Soldier.Age)</td>
-            <td>@Html.DisplayFor(model => model.Soldier.Age)</td>
-        </tr>
-        <tr>
-            <td>@Html.DisplayNameFor(model => model.Soldier.MilitaryEmail)</td>
-            <td>@Html.DisplayFor(model => model.Soldier.MilitaryEmail)</td>
-        </tr>
-        <tr>
-            <td>@Html.DisplayNameFor(model => model.Soldier.CivilianEmail)</td>
-            <td>@Html.DisplayFor(model => model.Soldier.CivilianEmail)</td>
-        </tr>
-        <tr>
-            <td>@Html.DisplayNameFor(model => model.Soldier.Gender)</td>
-            <td>@Html.DisplayFor(model => model.Soldier.Gender)</td>
-        </tr>
+<table class="table">
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Soldier.Unit)</td>
+        <td>@Html.DisplayFor(model => model.Soldier.Unit)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Soldier.Status)</td>
+        <td>@Html.DisplayFor(model => model.Soldier, "SoldierStatus")</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Soldier.DoDId)</td>
+        <td>@Html.DisplayFor(model => model.Soldier.DoDId)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Soldier.Age)</td>
+        <td>@Html.DisplayFor(model => model.Soldier.Age)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Soldier.MilitaryEmail)</td>
+        <td>@Html.DisplayFor(model => model.Soldier.MilitaryEmail)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Soldier.CivilianEmail)</td>
+        <td>@Html.DisplayFor(model => model.Soldier.CivilianEmail)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Soldier.Gender)</td>
+        <td>@Html.DisplayFor(model => model.Soldier.Gender)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Soldier.ACFT_Grading_Standard)</td>
+        <td>@Html.DisplayFor(model => model.Soldier.ACFT_Grading_Standard)</td>
+    </tr>
 
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Soldier.DscaQualified)</td>
+        <td>
+            @Html.DisplayFor(model => model.Soldier, "DSCA")
+            @if (Model.Soldier.DscaQualified)
+            {
+                <span>(@Html.DisplayFor(model => model.Soldier.DscaQualificationDate))</span>
+            }
+        </td>
+    </tr>
+
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Soldier.IwqQualified)</td>
+        <td>
+            @Html.DisplayFor(model => model.Soldier, "IWQ")
+            @if (Model.Soldier.IwqQualified)
+            {
+                <span>(@Html.DisplayFor(model => model.Soldier.IwqQualificationDate))</span>
+            }
+        </td>
+    </tr>
+
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Soldier.ClsQualified)</td>
+        <td>
+            @Html.DisplayFor(model => model.Soldier, "CLS")
+            @if (Model.Soldier.ClsQualified)
+            {
+                <span>(@Html.DisplayFor(model => model.Soldier.ClsQualificationDate))</span>
+            }
+        </td>
+    </tr>
+
+    @if (Model.Soldier.SupervisorId.HasValue)
+    {
         <tr>
-            <td>@Html.DisplayNameFor(model => model.Soldier.DscaQualified)</td>
+            <td>@Html.DisplayNameFor(model => model.Soldier.Supervisor)</td>
+            <td>@Html.DisplayFor(model => model.Soldier.Supervisor)</td>
+        </tr>
+    }
+
+    @if (Model.Soldier.DateOfRank.HasValue)
+    {
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Soldier.DateOfRank)</td>
+            <td>@Html.DisplayFor(model => model.Soldier.DateOfRank) (@Html.DisplayFor(model => model.Soldier.TimeInGradeHumanized))</td>
+        </tr>
+    }
+
+    @if (Model.Soldier.ETSDate.HasValue)
+    {
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Soldier.ETSDate)</td>
             <td>
-                @Html.DisplayFor(model => model.Soldier, "DSCA") 
-                @if (Model.Soldier.DscaQualified)
-                {
-                    <span>(@Html.DisplayFor(model => model.Soldier.DscaQualificationDate))</span>
-                }
+                @Html.DisplayFor(model => model.Soldier, "ETS")
+                (@Html.DisplayFor(model => model.Soldier.ETSDate))
             </td>
         </tr>
+    }
 
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Soldier.EducationLevel)</td>
+        <td>@Html.DisplayFor(model => model.Soldier, "MilitaryEducationLevel")</td>
+    </tr>
+
+    @if (!Model.Soldier.IsOfficer)
+    {
         <tr>
-            <td>@Html.DisplayNameFor(model => model.Soldier.IwqQualified)</td>
-            <td>
-                @Html.DisplayFor(model => model.Soldier, "IWQ") 
-                @if (Model.Soldier.IwqQualified)
-                {
-                    <span>(@Html.DisplayFor(model => model.Soldier.IwqQualificationDate))</span>
-                }
-            </td>
+            <td>@Html.DisplayNameFor(model => model.Soldier.SSDStatus)</td>
+            <td>@Html.DisplayFor(model => model.Soldier.SSDStatus)</td>
         </tr>
-
-        <tr>
-            <td>@Html.DisplayNameFor(model => model.Soldier.ClsQualified)</td>
-            <td>
-                @Html.DisplayFor(model => model.Soldier, "CLS") 
-                @if (Model.Soldier.ClsQualified)
-                {
-                    <span>(@Html.DisplayFor(model => model.Soldier.ClsQualificationDate))</span>
-                }
-            </td>
-        </tr>
-
-        @if (Model.Soldier.SupervisorId.HasValue)
-        {
-            <tr>
-                <td>@Html.DisplayNameFor(model => model.Soldier.Supervisor)</td>
-                <td>@Html.DisplayFor(model => model.Soldier.Supervisor)</td>
-            </tr>
-        }
-
-        @if (Model.Soldier.DateOfRank.HasValue)
-        {
-            <tr>
-                <td>@Html.DisplayNameFor(model => model.Soldier.DateOfRank)</td>
-                <td>@Html.DisplayFor(model => model.Soldier.DateOfRank) (@Html.DisplayFor(model => model.Soldier.TimeInGradeHumanized))</td>
-            </tr>
-        }
-
-        @if (Model.Soldier.ETSDate.HasValue)
-        {
-            <tr>
-                <td>@Html.DisplayNameFor(model => model.Soldier.ETSDate)</td>
-                <td>
-                    @Html.DisplayFor(model => model.Soldier, "ETS")
-                    (@Html.DisplayFor(model => model.Soldier.ETSDate))
-                </td>
-            </tr>
-        }
-
-        <tr>
-            <td>@Html.DisplayNameFor(model => model.Soldier.EducationLevel)</td>
-            <td>@Html.DisplayFor(model => model.Soldier, "MilitaryEducationLevel")</td>
-        </tr>
-
-        @if (!Model.Soldier.IsOfficer)
-        {
-            <tr>
-                <td>@Html.DisplayNameFor(model => model.Soldier.SSDStatus)</td>
-                <td>@Html.DisplayFor(model => model.Soldier.SSDStatus)</td>
-            </tr>
-        }
-    </table>
+    }
+</table>
 </div>
 
 @if (!Model.Soldier.IsOfficer)

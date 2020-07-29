@@ -12,12 +12,15 @@ namespace BatteryCommander.Web.Migrations
                 nullable: false,
                 defaultValue: (byte)0);
 
-            migrationBuilder.AlterColumn<decimal>(
+            migrationBuilder.DropColumn(
+                name: "StandingPowerThrow",
+                table: "ACFTs");
+
+            migrationBuilder.AddColumn<decimal>(
                 name: "StandingPowerThrow",
                 table: "ACFTs",
                 nullable: false,
-                oldClrType: typeof(int),
-                oldType: "INTEGER");
+                defaultValue: (decimal)0);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
