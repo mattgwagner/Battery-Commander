@@ -12,6 +12,7 @@ namespace BatteryCommander.Tests
         [InlineData(23, 01, 0)]
         [InlineData(19, 05, 64)]
         [InlineData(17, 42, 72)]
+        [InlineData(15, 58, 83)]
         public void Calculate_Run_Score(int minutes, int seconds, int expected)
         {
             Assert.Equal(expected, ACFTScoreTables.TwoMileRun(new TimeSpan(0, minutes, seconds)));

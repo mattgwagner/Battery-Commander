@@ -10,7 +10,7 @@ namespace BatteryCommander.Web.Models.Data
     {
         // Current Scoring Tables as of HQDA EXORD 219-18 for FY20
 
-        public static IEnumerable<SprintDragCarryScoreRow> Data
+        public static IEnumerable<ScoreDataRow> SprintDragCarryScoring
         {
             get
             {
@@ -30,11 +30,7 @@ namespace BatteryCommander.Web.Models.Data
                             // 9 time stored as -335 representing 3m 35s
                             // 10 points
 
-                            var m = int.Parse($"{items[9][1]}");
-                            var s = int.Parse(items[9].Substring(2));
-                            var p = int.Parse(items[10]);
-
-                            yield return new SprintDragCarryScoreRow
+                            yield return new ScoreDataRow
                             {
                                 // This is hacky AF
 
@@ -47,7 +43,40 @@ namespace BatteryCommander.Web.Models.Data
             }
         }
 
-        public class SprintDragCarryScoreRow
+        public static IEnumerable<ScoreDataRow> TwoMileRunScoring
+        {
+            get
+            {
+                using (var stream = typeof(ACFTScoreTables).GetTypeInfo().Assembly.GetManifestResourceStream($"Battery-Commander.Web.Models.Data.{nameof(ACFTScoreTables)}.csv"))
+                using (var reader = new StreamReader(stream))
+                {
+                    string line = string.Empty;
+
+                    while (!String.IsNullOrWhiteSpace(line = reader.ReadLine()))
+                    {
+                        if (line.Contains("3RM")) continue;
+
+                        var items = line.Split(',');
+
+                        if (!string.IsNullOrWhiteSpace(items[15]))
+                        {
+                            // 15 time stored as -1335 representing 13m 35s
+                            // 16 points
+
+                            yield return new ScoreDataRow
+                            {
+                                // This is hacky AF
+
+                                Duration = new TimeSpan(hours: 0, minutes: int.Parse($"{items[15].Substring(1, 2)}"), seconds: int.Parse(items[15].Substring(3, 2))),
+                                Points = int.Parse(items[16])
+                            };
+                        }
+                    }
+                }
+            }
+        }
+
+        public class ScoreDataRow
         {
             public TimeSpan Duration { get; set; }
 
@@ -204,13 +233,13 @@ namespace BatteryCommander.Web.Models.Data
 
         public static int SprintDragCarry(TimeSpan duration)
         {
-            return 
-                Data
+            return
+                SprintDragCarryScoring
                 .OrderBy(entry => entry.Duration)
                 .Where(entry => duration <= entry.Duration)
                 .Select(entry => entry.Points)
                 .FirstOrDefault();
-        }            
+        }
 
         public static int LegTuck(int reps)
         {
@@ -243,38 +272,12 @@ namespace BatteryCommander.Web.Models.Data
 
         public static int TwoMileRun(TimeSpan duration)
         {
-            if (duration >= new TimeSpan(0, 22, 48)) return 0;
-
-            var top_score = new TimeSpan(0, minutes: 13, seconds: 30);
-
-            // For every 9 seconds after the top time, we subtract 1 point
-
-            if (duration < top_score) return 100;
-
-            if (duration <= new TimeSpan(0, 18, 0))
-            {
-                var over_1330 = duration - top_score;
-
-                var rows = (int)Math.Ceiling(over_1330.TotalSeconds / 9);
-
-                return 100 - rows;
-            }
-
-            if (duration <= new TimeSpan(0, 18, 12)) return 69;
-            if (duration <= new TimeSpan(0, 18, 24)) return 68;
-            if (duration <= new TimeSpan(0, 18, 36)) return 67;
-            if (duration <= new TimeSpan(0, 18, 48)) return 66;
-            if (duration <= new TimeSpan(0, 19, 0)) return 65;
-
-            if (duration <= new TimeSpan(0, 19, 24)) return 64;
-            if (duration <= new TimeSpan(0, 19, 48)) return 63;
-            if (duration <= new TimeSpan(0, 20, 12)) return 62;
-            if (duration <= new TimeSpan(0, 20, 36)) return 61;
-            if (duration <= new TimeSpan(0, 21, 0)) return 60;
-
-            // TODO Implement 21:01 -> 22:48
-
-            return 0;
+            return
+                TwoMileRunScoring
+                .OrderBy(entry => entry.Duration)
+                .Where(entry => duration <= entry.Duration)
+                .Select(entry => entry.Points)
+                .FirstOrDefault();
         }
     }
 }
