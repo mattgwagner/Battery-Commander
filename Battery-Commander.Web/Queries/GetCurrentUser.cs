@@ -28,7 +28,8 @@ namespace BatteryCommander.Web.Queries
                     .HttpContext
                     .User?
                     .Identity?
-                    .Name;
+                    .Name?
+                    .ToLower();
 
                 if (string.IsNullOrWhiteSpace(email)) return default(Soldier);
 
@@ -41,7 +42,7 @@ namespace BatteryCommander.Web.Queries
                     .Include(s => s.ACFTs)
                     .Include(s => s.APFTs)
                     .Include(s => s.Unit)
-                    .Where(s => s.CivilianEmail == email)
+                    .Where(s => s.CivilianEmail.ToLower() == email)
                     .AsNoTracking()
                     .SingleOrDefaultAsync(cancellationToken);
 
