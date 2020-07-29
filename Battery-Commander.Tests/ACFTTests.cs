@@ -29,7 +29,9 @@ namespace BatteryCommander.Tests
         [InlineData(1, 32, 100)]
         [InlineData(2, 10, 70)]
         [InlineData(1, 56, 84)]
-        [InlineData(2, 55, 61)]
+        [InlineData(2, 55, 60)]
+        [InlineData(3, 16, 38)]
+        [InlineData(2, 18, 68)]
         public void Calculate_SprintDragCarry(int minutes, int seconds, int expected)
         {
             Assert.Equal(expected, ACFTScoreTables.SprintDragCarry(new TimeSpan(0, minutes, seconds)));

@@ -25,10 +25,14 @@ namespace BatteryCommander.Web.Models.Data
 
                         var items = line.Split(',');
 
-                        if (string.IsNullOrWhiteSpace(items[9]))
+                        if (!string.IsNullOrWhiteSpace(items[9]))
                         {
                             // 9 time stored as -335 representing 3m 35s
                             // 10 points
+
+                            var m = int.Parse($"{items[9][1]}");
+                            var s = int.Parse(items[9].Substring(2));
+                            var p = int.Parse(items[10]);
 
                             yield return new SprintDragCarryScoreRow
                             {
@@ -198,12 +202,15 @@ namespace BatteryCommander.Web.Models.Data
             return reps * 5 + 10;
         }
 
-        public static int SprintDragCarry(TimeSpan duration) =>
-            Data
-            .OrderByDescending(entry => entry.Duration)
-            .Where(entry => entry.Duration < duration)
-            .Select(entry => entry.Points)
-            .First();
+        public static int SprintDragCarry(TimeSpan duration)
+        {
+            return 
+                Data
+                .OrderBy(entry => entry.Duration)
+                .Where(entry => duration <= entry.Duration)
+                .Select(entry => entry.Points)
+                .FirstOrDefault();
+        }            
 
         public static int LegTuck(int reps)
         {
