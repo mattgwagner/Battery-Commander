@@ -10,8 +10,6 @@ namespace BatteryCommander.Web.Models.Data
     {
         // Current Scoring Tables as of HQDA EXORD 219-18 for FY20
 
-
-
         public static IEnumerable<SprintDragCarryScoreRow> Data
         {
             get
@@ -27,16 +25,19 @@ namespace BatteryCommander.Web.Models.Data
 
                         var items = line.Split(',');
 
-                        // 9 time stored as -335 representing 3m 35s
-                        // 10 points
-
-                        yield return new SprintDragCarryScoreRow
+                        if (string.IsNullOrWhiteSpace(items[9]))
                         {
-                            // This is hacky AF
+                            // 9 time stored as -335 representing 3m 35s
+                            // 10 points
 
-                            Duration = new TimeSpan(hours: 0, minutes: int.Parse($"{items[9][1]}"), seconds: int.Parse(items[9].Substring(2))),
-                            Points = int.Parse(items[10])
-                        };
+                            yield return new SprintDragCarryScoreRow
+                            {
+                                // This is hacky AF
+
+                                Duration = new TimeSpan(hours: 0, minutes: int.Parse($"{items[9][1]}"), seconds: int.Parse(items[9].Substring(2))),
+                                Points = int.Parse(items[10])
+                            };
+                        }
                     }
                 }
             }
