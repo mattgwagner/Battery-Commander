@@ -52,7 +52,7 @@ namespace BatteryCommander.Web.Events
                 {
                     emailSvc
                         .Create()
-                        .To(await Get_Recipients(eval))
+                        .To(recipients)
                         .BCC("Evaluations@RedLeg.app")
                         .Subject($"Evaluation Updated | {eval.Ratee}")
                         .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Events/EvaluationUpdated.html", eval)
