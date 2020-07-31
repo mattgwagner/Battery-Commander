@@ -1,5 +1,7 @@
 ﻿using BatteryCommander.Web.Models;
+using BatteryCommander.Web.Queries;
 using BatteryCommander.Web.Services;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,26 +15,28 @@ namespace BatteryCommander.Web.Controllers
     public class SoldiersController : Controller
     {
         private readonly Database db;
+        private readonly IMediator dispatcher;
 
-        public SoldiersController(Database db)
+        public SoldiersController(Database db, IMediator dispatcher)
         {
             this.db = db;
+            this.dispatcher = dispatcher;
         }
 
         [Route("~/Soldiers", Name = "Soldiers.List")]
-        public async Task<IActionResult> Index(SoldierService.Query query)
+        public async Task<IActionResult> Index(GetSoldiers query)
         {
             return View("List", new SoldierListViewModel
             {
                 Query = query,
-                Soldiers = await SoldierService.Filter(db, query)
+                Soldiers = await dispatcher.Send(query)
             });
         }
 
         [Route("~/Units/{unitId}/Soldiers", Name = "Unit.Soldiers")]
         public async Task<IActionResult> ForUnit(int unitId)
         {
-            return await Index(new SoldierService.Query { Unit = unitId });
+            return await Index(new GetSoldiers { Unit = unitId });
         }
 
         [Route("~/Soldiers/All")]
@@ -40,18 +44,17 @@ namespace BatteryCommander.Web.Controllers
         {
             return View("List", new SoldierListViewModel
             {
-                Query = SoldierService.Query.ALL,
-                Soldiers = await SoldierService.Filter(db, SoldierService.Query.ALL)
+                Soldiers = await dispatcher.Send(new GetSoldiers { })
             });
         }
 
         [Route("~/Soldiers/SignInRoster")]
-        public async Task<IActionResult> SignInRoster(SoldierService.Query query)
+        public async Task<IActionResult> SignInRoster(GetSoldiers query)
         {
             return View(new SoldierListViewModel
             {
                 Query = query,
-                Soldiers = await SoldierService.Filter(db, query)
+                Soldiers = await dispatcher.Send(query)
             });
         }
 
