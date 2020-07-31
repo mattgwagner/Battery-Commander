@@ -2,6 +2,7 @@
 using BatteryCommander.Web.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -36,7 +37,11 @@ namespace BatteryCommander.Web.Controllers
         {
             // Take the models and pull the updated data
 
-            var soldier = await SoldiersController.Get(db, soldierId);
+            var soldier =
+                await db
+                .Soldiers
+                .Where(s => s.Id == soldierId)
+                .SingleAsync();
 
             soldier
                 .SSDSnapshots

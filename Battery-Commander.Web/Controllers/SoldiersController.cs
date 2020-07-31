@@ -63,7 +63,7 @@ namespace BatteryCommander.Web.Controllers
         {
             var model = new SoldierDetailsViewModel
             {
-                Soldier = await Get(db, id) ?? throw new ArgumentOutOfRangeException("Not found"),
+                Soldier = await dispatcher.Send(new GetSoldier(id)),
                 Subordinates = await SoldierService.Subordinates(db, id),
                 Evaluations =
                     db
@@ -89,7 +89,12 @@ namespace BatteryCommander.Web.Controllers
         [Route("~/Soldiers/New", Name = "Soldiers.New")]
         public async Task<IActionResult> New() => await Return_To_Edit(new Soldier { });
 
-        public async Task<IActionResult> Edit(int id) => await Return_To_Edit(await Get(db, id));
+        public async Task<IActionResult> Edit(int id) => await Return_To_Edit(
+                await db
+                .Soldiers
+                .Where(s => s.Id == id)
+                .SingleAsync()
+        );
 
         [Route("~/Soldiers"), HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Save(Soldier model, Boolean force = false)
@@ -159,20 +164,17 @@ delete from Soldiers where Id = {id};
         [HttpPost, ValidateAntiForgeryToken, Route("~/Soldiers/SetStatus")]
         public async Task<IActionResult> SetStatus(int soldierId, Soldier.SoldierStatus status)
         {
-            var soldier = await Get(db, soldierId);
+            var soldier =
+                await db
+                .Soldiers
+                .Where(s => s.Id == soldierId)
+                .SingleAsync();
 
             soldier.Status = status;
 
             await db.SaveChangesAsync();
 
             return Redirect($"{Request.GetTypedHeaders().Referer}");
-        }
-
-        public static async Task<Soldier> Get(Database db, int id)
-        {
-            var soldiers = await SoldierService.Filter(db, new SoldierService.Query { Id = id });
-
-            return soldiers.SingleOrDefault();
         }
 
         private async Task<IActionResult> Return_To_Edit(Soldier soldier)

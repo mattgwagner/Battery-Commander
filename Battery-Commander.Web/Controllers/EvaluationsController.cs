@@ -71,7 +71,11 @@ namespace BatteryCommander.Web.Controllers
 
             if (soldier > 0)
             {
-                var soldierModel = await SoldiersController.Get(db, soldier);
+                var soldierModel =
+                    await db
+                    .Soldiers
+                    .Where(s => s.Id == soldier)
+                    .SingleAsync();
 
                 var lastEval =
                     await db
