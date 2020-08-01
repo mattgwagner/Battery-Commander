@@ -90,29 +90,29 @@ namespace BatteryCommander.Web.Queries
 
                 if (query.ABCP.HasValue)
                 {
-                    soldiers = soldiers.Where(_ => _.AbcpStatus == query.ABCP);
+                    soldiers = soldiers.AsEnumerable().Where(_ => _.AbcpStatus == query.ABCP).AsQueryable();
                 }
 
                 if (query.APFT.HasValue)
                 {
-                    soldiers = soldiers.Where(_ => _.ApftStatus == query.APFT);
+                    soldiers = soldiers.AsEnumerable().Where(_ => _.ApftStatus == query.APFT).AsQueryable();
                 }
 
                 if (query.SSD.HasValue)
                 {
                     if (query.SSD == true)
                     {
-                        soldiers = soldiers.Where(_ => _.SSDStatus.CurrentProgress >= Decimal.One);
+                        soldiers = soldiers.AsEnumerable().Where(_ => _.SSDStatus.CurrentProgress >= Decimal.One).AsQueryable();
                     }
                     else
                     {
-                        soldiers = soldiers.Where(_ => _.SSDStatus.CurrentProgress < Decimal.One);
+                        soldiers = soldiers.AsEnumerable().Where(_ => _.SSDStatus.CurrentProgress < Decimal.One).AsQueryable();
                     }
                 }
 
                 if (query.DSCA.HasValue)
                 {
-                    soldiers = soldiers.Where(_ => _.DscaQualified == query.DSCA);
+                    soldiers = soldiers.AsEnumerable().Where(_ => _.DscaQualified == query.DSCA).AsQueryable();
                 }
 
                 if (query.Gender.HasValue)
@@ -122,17 +122,17 @@ namespace BatteryCommander.Web.Queries
 
                 if (query.IWQ.HasValue)
                 {
-                    soldiers = soldiers.Where(_ => _.IwqQualified == query.IWQ);
+                    soldiers = soldiers.AsEnumerable().Where(_ => _.IwqQualified == query.IWQ).AsQueryable();
                 }
 
                 if (query.EducationComplete.HasValue)
                 {
-                    soldiers = soldiers.Where(_ => _.IsEducationComplete == query.EducationComplete);
+                    soldiers = soldiers.AsEnumerable().Where(_ => _.IsEducationComplete == query.EducationComplete).AsQueryable();
                 }
 
                 if (query.CLS.HasValue)
                 {
-                    soldiers = soldiers.Where(_ => _.ClsQualified == query.CLS);
+                    soldiers = soldiers.AsEnumerable().Where(_ => _.ClsQualified == query.CLS).AsQueryable();
                 }
 
                 if (query.Status.HasValue)
@@ -145,7 +145,7 @@ namespace BatteryCommander.Web.Queries
                     soldiers = soldiers.Where(soldier => soldier.CivilianEmail.ToUpper() == query.Email.ToUpper() || soldier.MilitaryEmail.ToUpper() == query.Email.ToUpper());
                 }
 
-                return soldiers;
+                return soldiers.ToList();
             }
         }
     }
