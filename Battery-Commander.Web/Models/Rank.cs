@@ -76,7 +76,22 @@ namespace BatteryCommander.Web.Models
         WO5 = 21,
 
         [Display(Name = "Corporal", ShortName = "CPL")]
-        E4_CPL = 22
+        E4_CPL = 22,
+        
+        [Display(Name = "Command Sergeant Major", ShortName = "CSM")]
+        E9_CSM = 23,
+        
+        [Display(Name = "Brigadier General", ShortName = "Brig Gen")]
+        O7 = 24,
+        
+        [Display(Name = "Major General", ShortName = "Maj Gen")]
+        O8 = 25,
+        
+        [Display(Name = "Lieutenant General", ShortName = "LT Gen")]
+        O9 = 26,
+        
+        [Display(Name = "General", ShortName = "Gen")]
+        O10 = 27
     }
 
     public partial class Soldier
@@ -143,10 +158,10 @@ namespace BatteryCommander.Web.Models
         {
             return new[]
             {
-                Rank.E1, Rank.E2, Rank.E3, Rank.E4, Rank.E4_CPL, Rank.E5, Rank.E6, Rank.E7, Rank.E8_MSG, Rank.E8, Rank.E9,
+                Rank.E1, Rank.E2, Rank.E3, Rank.E4, Rank.E4_CPL, Rank.E5, Rank.E6, Rank.E7, Rank.E8_MSG, Rank.E8, Rank.E9, Rank.E9_CSM,
                 Rank.WO1, Rank.WO2, Rank.WO3, Rank.WO4, Rank.WO5,
                 Rank.CDT,
-                Rank.O1, Rank.O2, Rank.O3,Rank.O4, Rank.O5, Rank.O6
+                Rank.O1, Rank.O2, Rank.O3,Rank.O4, Rank.O5, Rank.O6, Rank.O7, Rank.O8, Rank.O9, Rank.O10
             };
         }
 
@@ -177,6 +192,7 @@ namespace BatteryCommander.Web.Models
                 case Rank.E8:
                 case Rank.E8_MSG:
                 case Rank.E9:
+                case Rank.E9_CSM:
                     return true;
 
                 default:
@@ -207,6 +223,10 @@ namespace BatteryCommander.Web.Models
                 case Rank.O4:	
                 case Rank.O5:	
                 case Rank.O6:	
+                case Rank.O7:
+                case Rank.O8:
+                case Rank.O9:
+                case Rank.O10:
                     return true;	
 
                  default:	
@@ -241,6 +261,7 @@ namespace BatteryCommander.Web.Models
                 case Rank.E8:
                 case Rank.E8_MSG:
                 case Rank.E9:
+                case Rank.E9_CSM:
                     return true;
 
                 default:
@@ -258,6 +279,10 @@ namespace BatteryCommander.Web.Models
                 case Rank.O4:
                 case Rank.O5:
                 case Rank.O6:
+                case Rank.O7:
+                case Rank.O8:
+                case Rank.O9:
+                case Rank.O10:
                     return true;
 
                 default:
