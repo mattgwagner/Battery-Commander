@@ -83,7 +83,7 @@ namespace BatteryCommander.Web.Events
 
                 // Include the unit 1SG on event notifications
 
-                foreach (var soldier in await SoldierService.Filter(db, new SoldierService.Query { Ranks = new[] { Rank.E8, Rank.E9 }, Unit = evaluation.Ratee.UnitId }))
+                foreach (var soldier in await SoldierService.Filter(db, new SoldierService.Query { Ranks = new[] { Rank.E8, Rank.E9, Rank.E8_MSG, Rank.E9_CSM }, Unit = evaluation.Ratee.UnitId }))
                 {
                     if (soldier.Id == evaluation.RaterId) continue;
                     if (soldier.Id == evaluation.SeniorRaterId) continue;
