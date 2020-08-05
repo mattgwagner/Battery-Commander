@@ -53,7 +53,6 @@ namespace BatteryCommander.Web.Events
                     emailSvc
                         .Create()
                         .To(recipients)
-                        .BCC("Evaluations@RedLeg.app")
                         .Subject($"Evaluation Updated | {eval.Ratee}")
                         .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Events/EvaluationUpdated.html", eval)
                         .SendWithErrorCheck()
