@@ -1,11 +1,11 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using BatteryCommander.Web.Events;
+﻿using BatteryCommander.Web.Events;
 using BatteryCommander.Web.Models;
 using BatteryCommander.Web.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Commands
 {
@@ -68,12 +68,20 @@ namespace BatteryCommander.Web.Commands
 
                 await db.SaveChangesAsync(cancellationToken);
 
-                if (suta.Status == SUTA.SUTAStatus.Approved)
+                if(request.Supervisor)
                 {
                     await dispatcher.Publish(new SUTARequestChanged
                     {
                         Id = suta.Id,
-                        Event = "Approved"
+                        Event = SUTARequestChanged.EventType.SupervisorSigned
+                    });
+                }
+                else if (suta.Status == SUTA.SUTAStatus.Approved)
+                {
+                    await dispatcher.Publish(new SUTARequestChanged
+                    {
+                        Id = suta.Id,
+                        Event = SUTARequestChanged.EventType.Approved
                     });
                 }
             }

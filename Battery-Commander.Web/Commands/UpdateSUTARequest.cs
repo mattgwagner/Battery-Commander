@@ -85,7 +85,7 @@ namespace BatteryCommander.Web.Commands
                 await dispatcher.Publish(new SUTARequestChanged
                 {
                     Id = suta.Id,
-                    Event= "Updated"
+                    Event = SUTARequestChanged.EventType.Updated
                 });
             }
         }

@@ -1,13 +1,13 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using BatteryCommander.Web.Events;
+﻿using BatteryCommander.Web.Events;
 using BatteryCommander.Web.Models;
 using BatteryCommander.Web.Queries;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace BatteryCommander.Web.Commands
 {
@@ -74,7 +74,7 @@ namespace BatteryCommander.Web.Commands
                 await dispatcher.Publish(new SUTARequestChanged
                 {
                     Id = suta.Id,
-                    Event = "Submitted"
+                    Event = SUTARequestChanged.EventType.Created
                 });
 
                 return suta.Id;

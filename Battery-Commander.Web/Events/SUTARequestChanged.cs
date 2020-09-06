@@ -15,7 +15,16 @@ namespace BatteryCommander.Web.Events
     {
         public int Id { get; set; }
 
-        public string Event { get; set; }
+        public EventType Event { get; set; }
+
+        public enum EventType
+        {
+            Created,
+            Updated,
+            Commented,
+            SupervisorSigned,
+            Approved
+        }
 
         private class Handler : INotificationHandler<SUTARequestChanged>
         {
@@ -45,11 +54,20 @@ namespace BatteryCommander.Web.Events
                     recipients.AddRange(soldier.GetEmails());
                 }
 
+                var subject = notification.Event switch
+                {
+                    EventType.Created => $"[Action Required] SUTA Request {suta.Soldier}",
+                    EventType.Updated => $"SUTA Request {suta.Soldier} - Updated",
+                    EventType.Commented => $"SUTA Request {suta.Soldier} - Comment Added",
+                    EventType.Approved => $"[Approved] SUTA Request {suta.Soldier}",
+                    EventType.SupervisorSigned => $"[Approved] SUTA Request {suta.Soldier}"
+                };
+
                 await
                     emailSvc
                     .Create()
                     .To(recipients)
-                    .Subject($"SUTA Request {suta.Soldier} - {notification.Event}")
+                    .Subject(subject)
                     .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Events/SUTARequestChanged.html", suta)
                     .SendWithErrorCheck();
             }
