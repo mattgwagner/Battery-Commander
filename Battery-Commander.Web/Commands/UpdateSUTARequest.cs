@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BatteryCommander.Web.Events;
 using BatteryCommander.Web.Models;
 using BatteryCommander.Web.Queries;
+using iTextSharp.text;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,7 +24,8 @@ namespace BatteryCommander.Web.Commands
                     StartDate = model.StartDate,
                     EndDate = model.EndDate,
                     Reasoning = model.Reasoning,
-                    MitigationPlan = model.MitigationPlan
+                    MitigationPlan = model.MitigationPlan,
+                    Archived = model.Archived
                 }
             };
         }
@@ -49,6 +51,8 @@ namespace BatteryCommander.Web.Commands
 
             [Display(Name = "If requesting late arrival, what is the expected ETA? How are we mitigating the loss of this Soldier during the requested period?")]
             public String MitigationPlan { get; set; }
+
+            public Boolean Archived { get; set; }
         }
 
         private class Handler : AsyncRequestHandler<UpdateSUTARequest>
@@ -73,6 +77,7 @@ namespace BatteryCommander.Web.Commands
                 suta.EndDate = request.Body.EndDate;
                 suta.Reasoning = request.Body.Reasoning;
                 suta.MitigationPlan = request.Body.MitigationPlan;
+                suta.Archived = request.Body.Archived;
 
                 suta.Events.Add(new SUTA.Event
                 {
@@ -82,11 +87,14 @@ namespace BatteryCommander.Web.Commands
 
                 await db.SaveChangesAsync(cancellationToken);
 
-                await dispatcher.Publish(new SUTARequestChanged
+                if(!request.Body.Archived)
                 {
-                    Id = suta.Id,
-                    Event = SUTARequestChanged.EventType.Updated
-                });
+                    await dispatcher.Publish(new SUTARequestChanged
+                    {
+                        Id = suta.Id,
+                        Event = SUTARequestChanged.EventType.Updated
+                    });
+                }
             }
         }
     }

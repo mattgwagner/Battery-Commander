@@ -22,12 +22,17 @@
 
     <div class="form-group form-group-lg">
         @Html.DisplayNameFor(model => model.Body.Reasoning)
-        @Html.TextAreaFor(model => model.Body.Reasoning, new { cols="40", rows="5" })
+        @Html.TextAreaFor(model => model.Body.Reasoning, new { cols = "40", rows = "5" })
     </div>
 
     <div class="form-group form-group-lg">
         @Html.DisplayNameFor(model => model.Body.MitigationPlan)
-        @Html.TextAreaFor(model => model.Body.MitigationPlan, new { cols="40", rows="5" })
+        @Html.TextAreaFor(model => model.Body.MitigationPlan, new { cols = "40", rows = "5" })
+    </div>
+
+    <div class="form-group form-group-lg">
+        @Html.DisplayNameFor(model => model.Body.Archived)
+        @Html.EditorFor(model => model.Body.Archived, new { cols = "40", rows = "5" })
     </div>
 
     <button type="submit">Save</button>
