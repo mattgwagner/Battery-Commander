@@ -42,6 +42,7 @@ namespace BatteryCommander.Web.Services
                 .SUTAs
                 .Include(s => s.Soldier)
                 .Where(s => s.Soldier.UnitId == unitId)
+                .Where(s => s.Archived == false)
                 .ToListAsync();
 
             // Build model
