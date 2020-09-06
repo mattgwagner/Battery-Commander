@@ -24,11 +24,11 @@ namespace BatteryCommander.Web.Models
         public String MitigationPlan { get; set; }
 
         [Display(Name = "Start Date")]
-        [DataType(DataType.Date)]
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime StartDate { get; set; }
 
         [Display(Name = "End Date")]
-        [DataType(DataType.Date)]
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime EndDate { get; set; }
 
         public int SupervisorId { get; set; }
