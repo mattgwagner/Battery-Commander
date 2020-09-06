@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,6 +17,8 @@ namespace BatteryCommander.Web.Queries
 
         // Search by Soldier, Status, Dates
 
+        public Boolean IncludeArchived { get; set; }
+
         private class Handler : IRequestHandler<GetSUTARequests, IEnumerable<SUTA>>
         {
             private readonly Database db;
@@ -30,6 +33,7 @@ namespace BatteryCommander.Web.Queries
                 return
                     await AsQueryable(db)
                     .Where(suta => suta.Soldier.UnitId == request.Unit)
+                    .Where(suta => request.IncludeArchived || !suta.Archived)
                     .OrderBy(suta => suta.StartDate)
                     .ToListAsync(cancellationToken);
             }

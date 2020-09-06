@@ -98,6 +98,11 @@ namespace BatteryCommander.Web.Models
 
         // Track Comments/Questions
 
+        /// <summary>
+        /// If true, the request is archived and not visible on the list of requests but visible only on the Soldier page
+        /// </summary>
+        public Boolean Archived { get; set; }
+
         [Display(Name = "History")]
         public virtual ICollection<Event> Events { get; set; } = new List<Event>();
 
