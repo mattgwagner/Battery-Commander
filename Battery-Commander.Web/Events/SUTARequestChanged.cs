@@ -60,7 +60,7 @@ namespace BatteryCommander.Web.Events
                     EventType.Updated => $"SUTA Request {suta.Soldier} - Updated",
                     EventType.Commented => $"SUTA Request {suta.Soldier} - Comment Added",
                     EventType.Approved => $"[Approved] SUTA Request {suta.Soldier}",
-                    EventType.SupervisorSigned => $"[Approved] SUTA Request {suta.Soldier}"
+                    EventType.SupervisorSigned => $"[Pending Commander Signature] SUTA Request {suta.Soldier}"
                 };
 
                 await
