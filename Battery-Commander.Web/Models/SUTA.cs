@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using Humanizer;
 
 namespace BatteryCommander.Web.Models
@@ -105,6 +106,9 @@ namespace BatteryCommander.Web.Models
 
         [Display(Name = "History")]
         public virtual ICollection<Event> Events { get; set; } = new List<Event>();
+
+        [NotMapped]
+        public Event LatestEvent => Events.OrderByDescending(e => e.Timestamp).FirstOrDefault();
 
         [Table(name: "SUTA_Events")]
         public class Event
