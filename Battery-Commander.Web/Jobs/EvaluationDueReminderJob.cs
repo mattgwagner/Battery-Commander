@@ -64,6 +64,7 @@ namespace BatteryCommander.Web.Jobs
                     {
                         emailSvc
                         .Create()
+                        .To(emailAddress: "Evaluations@Redleg.app")
                         .BCC(recipients)
                         .Subject($"{unit.UIC} | Past Due and Upcoming Evaluations")
                         .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Jobs/EvaluationsDue.html", new Model
