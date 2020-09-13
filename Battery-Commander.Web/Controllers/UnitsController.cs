@@ -42,7 +42,7 @@ namespace BatteryCommander.Web.Controllers
 
             if (user?.UnitId > 0)
             {
-                return await Details(user.UnitId);
+                return RedirectToAction(nameof(Details), new { id = user.UnitId });
             }
 
             return RedirectToRoute("Units.List");
