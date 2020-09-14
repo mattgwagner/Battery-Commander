@@ -1,10 +1,8 @@
-﻿using System.Linq;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using BatteryCommander.Web.Models;
 using MediatR;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 
 namespace BatteryCommander.Web.Queries
 {
@@ -33,20 +31,7 @@ namespace BatteryCommander.Web.Queries
 
                 if (string.IsNullOrWhiteSpace(email)) return default(Soldier);
 
-                var soldier =
-                    await db
-                    .Soldiers
-                    .Include(s => s.Supervisor)
-                    .Include(s => s.SSDSnapshots)
-                    .Include(s => s.ABCPs)
-                    .Include(s => s.ACFTs)
-                    .Include(s => s.APFTs)
-                    .Include(s => s.Unit)
-                    .Where(s => s.CivilianEmail.ToLower() == email)
-                    .AsNoTracking()
-                    .SingleOrDefaultAsync(cancellationToken);
-
-                return soldier;
+                return await GetSoldier.GetAsync(db, soldier => soldier.CivilianEmail.ToLower() == email);
             }
         }
     }
