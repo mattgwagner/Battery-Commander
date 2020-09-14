@@ -33,11 +33,11 @@ namespace BatteryCommander.Web.Controllers
         }
 
         [AllowAnonymous]
-        public async Task Login(String ReturnUrl)
+        public async Task Login(String ReturnUrl = "/")
         {
             await HttpContext.ChallengeAsync("Auth0", new AuthenticationProperties
             {
-                RedirectUri = String.IsNullOrWhiteSpace(ReturnUrl) ? Url.Action(nameof(PrivacyAct)) : ReturnUrl
+                RedirectUri = ReturnUrl?.Equals("/") == true ? Url.Action(nameof(PrivacyAct)) : ReturnUrl
             });
         }
 
