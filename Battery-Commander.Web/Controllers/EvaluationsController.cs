@@ -94,7 +94,7 @@ namespace BatteryCommander.Web.Controllers
                     RaterId = soldierModel.SupervisorId ?? 0,
                     SeniorRaterId = soldierModel.Supervisor?.SupervisorId ?? 0,
                     StartDate = startDate,
-                    ThruDate = startDate.AddYears(1)
+                    ThruDate = startDate.AddDays(365)
                 });
             }
 
