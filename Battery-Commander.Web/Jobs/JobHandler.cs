@@ -1,6 +1,7 @@
 ﻿using BatteryCommander.Web.Models;
 using FluentScheduler;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 
@@ -47,7 +48,10 @@ namespace BatteryCommander.Web.Jobs
 
             public IJob GetJobInstance<T>() where T : IJob
             {
-                return serviceProvider.GetService(typeof(T)) as IJob;
+                using (var scope = serviceProvider.CreateScope())
+                {
+                    return scope.ServiceProvider.GetRequiredService<T>();
+                }
             }
         }
     }
