@@ -1,13 +1,12 @@
-﻿using System;
+﻿using BatteryCommander.Web.Events;
+using BatteryCommander.Web.Models;
+using BatteryCommander.Web.Queries;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
-using BatteryCommander.Web.Events;
-using BatteryCommander.Web.Models;
-using BatteryCommander.Web.Queries;
-using iTextSharp.text;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
 
 namespace BatteryCommander.Web.Commands
 {

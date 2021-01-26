@@ -1,5 +1,4 @@
 ﻿using BatteryCommander.Web.Services.Forms;
-using iTextSharp.text.pdf;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -12,13 +11,6 @@ namespace BatteryCommander.Web.Services
         private static readonly HttpClient http = new HttpClient { };
 
         private static Forms.RedLeg_FormsClient forms_client => new Forms.RedLeg_FormsClient("https://forms.redleg.app", http);
-
-        static PDFService()
-        {
-            // Who needs the owner password?
-
-            PdfReader.AllowOpenWithFullPermissions = true;
-        }
 
         public static async Task<byte[]> Generate_DA4856Async(Forms.Counseling model)
         {
