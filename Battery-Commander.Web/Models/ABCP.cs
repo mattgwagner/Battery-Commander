@@ -373,6 +373,8 @@ Encourage and support
             if (Height < 58 || Height > 80) yield return new ValidationResult("Height seems out of tolerance", new[] { nameof(Height) });
 
             if (Weight < 100) yield return new ValidationResult("Weight under minimum, recheck", new[] { nameof(Weight) });
+
+            if (AreMeasurementsValid == false) yield return new ValidationResult("Measurements out of tolerance, recheck", new[] { Measurements });
         }
     }
 
