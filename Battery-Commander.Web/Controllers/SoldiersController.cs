@@ -130,7 +130,7 @@ namespace BatteryCommander.Web.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            await db.Database.ExecuteSqlCommandAsync($@"
+            await db.Database.ExecuteSqlInterpolatedAsync($@"
 delete from ABCPs where SoldierId = {id};
 delete from APFTs where SoldierId = {id};
 delete from ACFTs where SoldierId = {id};
