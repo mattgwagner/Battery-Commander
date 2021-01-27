@@ -374,7 +374,7 @@ Encourage and support
 
             if (Weight < 100) yield return new ValidationResult("Weight under minimum, recheck", new[] { nameof(Weight) });
 
-            if (AreMeasurementsValid == false) yield return new ValidationResult("Measurements out of tolerance, recheck", new[] { Measurements });
+            if (AreMeasurementsValid == false) yield return new ValidationResult("Measurements out of tolerance, recheck", new[] { nameof(Measurements) });
         }
     }
 
