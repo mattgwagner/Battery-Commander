@@ -110,6 +110,7 @@ namespace BatteryCommander.Web
                     // Configure the scope
                     options.Scope.Clear();
                     options.Scope.Add("openid");
+                    options.Scope.Add("email");
 
                     // Set the callback path, so Auth0 will call back to http://localhost:5000/signin-auth0
                     // Also ensure that you have added the URL as an Allowed Callback URL in your Auth0 dashboard
@@ -139,7 +140,7 @@ namespace BatteryCommander.Web
 
                             if (identity != null)
                             {
-                                var name = identity.FindFirst("email");
+                                var name = identity.FindFirst(ClaimTypes.Email);
 
                                 if (name != null)
                                 {
