@@ -2,7 +2,7 @@
 
 @if(!User.Identity.IsAuthenticated)
 {
-    <a href="/Login?ReturnUrl=/SUTA/@Model.Id">Click to Login</a>
+    <a href="/Home/Login?ReturnUrl=/SUTA/@Model.Id">Click to Login</a>
 }
 
 @Html.ActionLink("Edit Request", "Edit", "SUTA", new { Model.Id })
