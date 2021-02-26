@@ -43,7 +43,7 @@ namespace BatteryCommander.Web.Services
                     var unit =
                         units
                         .Where(u => !String.IsNullOrWhiteSpace(u.UIC))
-                        .Where(u => u.UIC.Contains((String)sheet.Cells[row, 1].Value))
+                        .Where(u => u.UIC.Contains((String)sheet.Cells[row, 8].Value))
                         .SingleOrDefault();
 
                     if(unit == null)
