@@ -19,7 +19,18 @@ namespace BatteryCommander.Web.Services
 
             using (var excel = new ExcelPackage(stream))
             {
-                // Upc Rank Name Sex PMos Dob Dor Ets
+                // 0 LastName
+                // 1 MiddleName
+                // 2 FirstName
+                // 3 Rank
+                // 4 DateOfBirth
+                // 5 ETSDate
+                // 6 DateOfRank
+                // 7 Gender
+                // 8 Unit
+                // 9 DODID
+                // 10 MilitaryEmail
+                // 11 EducationLevel
 
                 // Process Excel upload
 
@@ -43,26 +54,18 @@ namespace BatteryCommander.Web.Services
 
                     // Parse into soldier
 
-                    var names = $"{sheet.Cells[row, 3].Value}".Split(' ');
-
-                    var middle = names.Count() > 2 ? names[2] : "";
-
-                    var ets = $"{sheet.Cells[row, 8].Value}" == "-" ? (DateTime?)null : Convert.ToDateTime(sheet.Cells[row, 8].Value);
-
-                    var dor = Convert.ToDateTime(sheet.Cells[row, 7].Value);
-
-                    var gender = $"{sheet.Cells[row, 4].Value}" == "M" ? Gender.Male : Gender.Female;
-
                     var parsed = new Soldier
                     {
-                        LastName = names[0],
-                        MiddleName = middle,
-                        FirstName = names[1],
-                        Rank = RankExtensions.Parse($"{sheet.Cells[row, 2].Value}"),
-                        DateOfBirth = Convert.ToDateTime(sheet.Cells[row, 6].Value),
-                        ETSDate = ets,
-                        DateOfRank = dor,
-                        Gender = gender,
+                        LastName = $"{sheet.Cells[row, 0].Value}",
+                        MiddleName = $"{sheet.Cells[row, 1].Value}",
+                        FirstName = $"{sheet.Cells[row, 2].Value}",
+                        Rank = RankExtensions.Parse($"{sheet.Cells[row, 3].Value}"),
+                        DateOfBirth = Convert.ToDateTime(sheet.Cells[row, 4].Value),
+                        ETSDate = Convert.ToDateTime(sheet.Cells[row, 5].Value),
+                        DateOfRank = Convert.ToDateTime(sheet.Cells[row, 6].Value),
+                        Gender = $"{sheet.Cells[row, 7].Value}" == "Male" ? Gender.Male : Gender.Female,
+                        DoDId = $"{sheet.Cells[row, 9]}",
+                        MilitaryEmail = $"{sheet.Cells[row, 10]}",
                         Unit = unit
                     };
 
