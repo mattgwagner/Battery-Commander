@@ -47,7 +47,7 @@ namespace BatteryCommander.Web.Controllers
             return View(new RequestAccessModel
             {
                 Name = User.FindFirst("name")?.Value,
-                Email = User.FindFirst("email")?.Value,
+                Email = User.Identity.Name,
                 Units = from unit in db.Units
                         orderby unit.Name
                         select new SelectListItem
