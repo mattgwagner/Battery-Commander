@@ -39,7 +39,10 @@ namespace BatteryCommander.Web.Models
         ILE = 12,
 
         [Display(Name = "(AOC) Advanced Operations Course", ShortName = "AOC")]
-        AOC = 13
+        AOC = 13,
+
+        [Display(Name = "(AWC) Army War College", ShortName = "AWC")]
+        AWC = 14
     }
 
     public static class EducationExtensions
@@ -77,9 +80,13 @@ namespace BatteryCommander.Web.Models
                     return MilitaryEducationLevel.CCC;
 
                 case Rank.O4:
-                case Rank.O5:
-                case Rank.O6:
                     return MilitaryEducationLevel.ILE;
+
+                case Rank.O5:
+                    return MilitaryEducationLevel.AOC;
+
+                case Rank.O6:
+                    return MilitaryEducationLevel.AWC;
 
                 default:
                     return MilitaryEducationLevel.AIT;
