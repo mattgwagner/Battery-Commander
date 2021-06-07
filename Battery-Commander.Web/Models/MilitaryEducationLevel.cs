@@ -36,7 +36,10 @@ namespace BatteryCommander.Web.Models
         CCC = 11,
 
         [Display(Name = "(ILE) Intermediate Level Education", ShortName = "ILE")]
-        ILE = 12
+        ILE = 12,
+
+        [Display(Name = "(AOC) Advanced Operations Course", ShortName = "AOC")]
+        AOC = 13
     }
 
     public static class EducationExtensions
