@@ -11,7 +11,7 @@ namespace BatteryCommander.Web.Services
 {
     public class BatchImportService
     {
-        public static async Task<IEnumerable<Soldier>> ImportSoldiers(Database db, Stream stream)
+        public static async Task<IEnumerable<Soldier>> ImportSoldiers(Database db, Stream stream, int unitId)
         {
             var changed = new List<Soldier>();
 
@@ -19,18 +19,7 @@ namespace BatteryCommander.Web.Services
 
             using (var excel = new ExcelPackage(stream))
             {
-                // 0 LastName
-                // 1 MiddleName
-                // 2 FirstName
-                // 3 Rank
-                // 4 DateOfBirth
-                // 5 ETSDate
-                // 6 DateOfRank
-                // 7 Gender
-                // 8 Unit
-                // 9 DODID
-                // 10 MilitaryEmail
-                // 11 EducationLevel
+                // Unit First Name Last Name Middle Initial EDIPI   Personnel Status    Rank Pay Grade Skill Level PMOS    SMOS BASD    PCS DOR ETS Height  Weight HW Pass Body Fat Percentage Body Fat Pass Weapon Type Weapon Assignment Primary Weapon Latest Qualification Date   Number of Hits / Points Weapon Qualification Rating Form Number Night Fire CBRN Fire With Optics
 
                 // Process Excel upload
 
@@ -40,63 +29,38 @@ namespace BatteryCommander.Web.Services
 
                 for (int row = 2; row <= sheet.Dimension.Rows; row++)
                 {
-                    var unit =
-                        units
-                        .Where(u => !String.IsNullOrWhiteSpace(u.Name))
-                        .Where(u => u.Name == (String)sheet.Cells[row, 8].Value)
-                        .SingleOrDefault();
-
-                    if(unit == null)
-                    {
-                        // Skipping
-                        continue;
-                    }
-
-                    // Parse into soldier
-
-                    var parsed = new Soldier
-                    {
-                        LastName = $"{sheet.Cells[row, 0].Value}",
-                        MiddleName = $"{sheet.Cells[row, 1].Value}",
-                        FirstName = $"{sheet.Cells[row, 2].Value}",
-                        Rank = RankExtensions.Parse($"{sheet.Cells[row, 3].Value}"),
-                        DateOfBirth = Convert.ToDateTime(sheet.Cells[row, 4].Value),
-                        ETSDate = Convert.ToDateTime(sheet.Cells[row, 5].Value),
-                        DateOfRank = Convert.ToDateTime(sheet.Cells[row, 6].Value),
-                        Gender = $"{sheet.Cells[row, 7].Value}" == "Male" ? Gender.Male : Gender.Female,
-                        DoDId = $"{sheet.Cells[row, 9]}",
-                        MilitaryEmail = $"{sheet.Cells[row, 10]}",
-                        Unit = unit
-                    };
-
-                    // Check for existing, create if not
-
-                    var existing =
+                    var soldier =
                         await db
                         .Soldiers
-                        .Where(_ => _.LastName.ToUpper() == parsed.LastName.ToUpper())
-                        .Where(_ => _.FirstName.ToUpper() == parsed.FirstName.ToUpper())
+                        .Where(_ => _.LastName.ToUpper() == $"{sheet.Cells[row, 3].Value}".ToUpper())
+                        .Where(_ => _.FirstName.ToUpper() == $"{sheet.Cells[row, 2].Value}".ToUpper())
+                        .Where(_ => _.UnitId == unitId)
                         .FirstOrDefaultAsync();
 
-                    if (existing == null)
+                    if (soldier == null)
                     {
-                        // Soldier does not exist, create
+                        soldier = new Soldier
+                        {
+                            UnitId = unitId,
 
-                        await db.Soldiers.AddAsync(parsed);
-                    }
-                    else
-                    {
-                        // Update existing entries
+                            FirstName = $"{sheet.Cells[row, 2].Value}",
+                            LastName = $"{sheet.Cells[row, 3].Value}"
+                        };
 
-                        if (string.IsNullOrWhiteSpace(existing.MiddleName)) existing.MiddleName = parsed.MiddleName;
-
-                        existing.ETSDate = parsed.ETSDate;
-                        existing.DateOfBirth = parsed.DateOfBirth;
-                        existing.DateOfRank = parsed.DateOfRank;
-                        existing.Rank = parsed.Rank;
+                        db.Soldiers.Add(soldier);
                     }
 
-                    changed.Add(parsed);
+                    soldier.MiddleName = $"{sheet.Cells[row, 4].Value}";
+
+                    soldier.DoDId = $"{sheet.Cells[row, 5]}";
+
+                    soldier.Rank = RankExtensions.Parse($"{sheet.Cells[row, 6].Value}");
+
+                    soldier.DateOfRank = Convert.ToDateTime(sheet.Cells[row, 13].Value);
+
+                    soldier.ETSDate = Convert.ToDateTime(sheet.Cells[row, 14].Value);
+
+                    // TODO Load MOS, Weapons Qual, Latest HT/WT
                 }
             }
 

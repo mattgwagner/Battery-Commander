@@ -147,18 +147,20 @@ delete from Soldiers where Id = {id};
             return RedirectToAction(nameof(Index));
         }
 
-        [Route("~/Soldiers/Import")]
-        public IActionResult Import()
+        [Route("~/Unit/{unitId}/Soldiers/Import")]
+        public IActionResult Import(int unitId)
         {
+            ViewBag.UnitId = unitId;
+
             return View();
         }
 
-        [Route("~/Soldiers/Import"), HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> Import(IFormFile file)
+        [Route("~/Unit/{unitId}/Soldiers/Import"), HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> Import(int unitId, IFormFile file)
         {
-            await BatchImportService.ImportSoldiers(db, file.OpenReadStream());
+            await BatchImportService.ImportSoldiers(db, file.OpenReadStream(), unitId);
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToRoute("Unit.Soldiers", new { unitId });
         }
 
         [HttpPost, ValidateAntiForgeryToken, Route("~/Soldiers/SetStatus")]

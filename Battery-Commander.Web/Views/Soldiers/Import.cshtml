@@ -1,9 +1,13 @@
 ﻿<form method="post" enctype="multipart/form-data" asp-controller="Soldiers" asp-action="Import">
-    @Html.AntiForgeryToken()    
+    @Html.AntiForgeryToken()
+    @Html.Hidden("unitId", ViewBag.UnitId)
     <div class="form-group">
         <div class="col-md-10">
-            <p>In DTMS, go to Soldier Manager -> Unit -> {Your Unit}. Hit the download to Excel button (top right).</p>
-
+            <p>
+                In DTMS, go to Reporting -> Soldier -> Soldier Roster.
+                Go to "Column Selection" and "Select All".
+                Click "Excel Export".
+            </p>
             <p>Upload the DTMS Soldier Roster Report here (Must be XLSX Format!):</p>
             <input type="file" name="file" />
         </div>
