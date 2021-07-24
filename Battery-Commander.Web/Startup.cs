@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using BatteryCommander.Web.Behaviors;
 using BatteryCommander.Web.Jobs;
@@ -43,6 +44,8 @@ namespace BatteryCommander.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
             String SendGridAPIKey =
                 Configuration
                 .GetSection("SendGrid")

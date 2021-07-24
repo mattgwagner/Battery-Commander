@@ -1,6 +1,6 @@
 ﻿using BatteryCommander.Web.Models;
+using ExcelDataReader;
 using Microsoft.EntityFrameworkCore;
-using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,51 +17,58 @@ namespace BatteryCommander.Web.Services
 
             var units = db.Units.ToList();
 
-            using (var excel = new ExcelPackage(stream))
+            using (var excel = ExcelReaderFactory.CreateBinaryReader(stream))
             {
                 // Unit First Name Last Name Middle Initial EDIPI   Personnel Status    Rank Pay Grade Skill Level PMOS    SMOS BASD    PCS DOR ETS Height  Weight HW Pass Body Fat Percentage Body Fat Pass Weapon Type Weapon Assignment Primary Weapon Latest Qualification Date   Number of Hits / Points Weapon Qualification Rating Form Number Night Fire CBRN Fire With Optics
 
                 // Process Excel upload
 
-                var sheet = excel.Workbook.Worksheets.First();
-
-                // Skip header row
-
-                for (int row = 2; row <= sheet.Dimension.Rows; row++)
+                do
                 {
-                    var soldier =
-                        await db
-                        .Soldiers
-                        .Where(_ => _.LastName.ToUpper() == $"{sheet.Cells[row, 3].Value}".ToUpper())
-                        .Where(_ => _.FirstName.ToUpper() == $"{sheet.Cells[row, 2].Value}".ToUpper())
-                        .Where(_ => _.UnitId == unitId)
-                        .FirstOrDefaultAsync();
-
-                    if (soldier == null)
+                    while (excel.Read())
                     {
-                        soldier = new Soldier
+                        // Skip header row
+
+                        if (excel.GetString(0) != "Unit" && excel[4] != null)
                         {
-                            UnitId = unitId,
+                            var dodId = excel.GetString(4);
 
-                            FirstName = $"{sheet.Cells[row, 2].Value}",
-                            LastName = $"{sheet.Cells[row, 3].Value}"
-                        };
+                            var soldier =
+                                await db
+                                .Soldiers
+                                .Where(_ => _.DoDId == dodId || (_.LastName.ToUpper() == excel.GetString(2).ToUpper() && _.FirstName.ToUpper() == excel.GetString(1).ToUpper()))
+                                .FirstOrDefaultAsync();
 
-                        db.Soldiers.Add(soldier);
+                            if (soldier == null)
+                            {
+                                soldier = new Soldier
+                                {
+                                    UnitId = unitId,
+
+                                    FirstName = excel.GetString(1),
+                                    LastName = excel.GetString(2)
+                                };
+
+                                db.Soldiers.Add(soldier);
+                            }
+
+                            soldier.MiddleName = excel.GetString(3);
+
+                            soldier.DoDId = dodId;
+
+                            soldier.Rank = RankExtensions.Parse(excel.GetString(6));
+
+                            if (excel[13] != null)
+                                soldier.DateOfRank = excel.GetDateTime(13);
+
+                            if (excel[14] != null)
+                                soldier.ETSDate = excel.GetDateTime(14);
+
+                            // TODO Load MOS, Weapons Qual, Latest HT/WT
+                        }
                     }
-
-                    soldier.MiddleName = $"{sheet.Cells[row, 4].Value}";
-
-                    soldier.DoDId = $"{sheet.Cells[row, 5]}";
-
-                    soldier.Rank = RankExtensions.Parse($"{sheet.Cells[row, 6].Value}");
-
-                    soldier.DateOfRank = Convert.ToDateTime(sheet.Cells[row, 13].Value);
-
-                    soldier.ETSDate = Convert.ToDateTime(sheet.Cells[row, 14].Value);
-
-                    // TODO Load MOS, Weapons Qual, Latest HT/WT
                 }
+                while (excel.NextResult());
             }
 
             await db.SaveChangesAsync();

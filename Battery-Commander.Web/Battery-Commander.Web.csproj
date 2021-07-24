@@ -65,6 +65,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="ExcelDataReader" Version="3.6.0" />
     <PackageReference Include="MediatR" Version="9.*" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.*" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="5.*" />
@@ -74,6 +75,7 @@
     <PackageReference Include="FluentEmail.SendGrid" Version="2.8.0" />
     <PackageReference Include="FluentScheduler" Version="5.*" />
     <PackageReference Include="Humanizer.Core" Version="2.*" />
+    <PackageReference Include="System.Text.Encoding.CodePages" />
     <PackageReference Include="Microsoft.AspNetCore.DataProtection.EntityFrameworkCore" Version="5.*" />
     <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="5.*">
       <PrivateAssets>all</PrivateAssets>
