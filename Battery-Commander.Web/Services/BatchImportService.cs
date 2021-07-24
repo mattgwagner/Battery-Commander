@@ -36,6 +36,7 @@ namespace BatteryCommander.Web.Services
                             var soldier =
                                 await db
                                 .Soldiers
+                                .Where(_ => _.UnitId == unitId)
                                 .Where(_ => _.DoDId == dodId || (_.LastName.ToUpper() == excel.GetString(2).ToUpper() && _.FirstName.ToUpper() == excel.GetString(1).ToUpper()))
                                 .FirstOrDefaultAsync();
 
