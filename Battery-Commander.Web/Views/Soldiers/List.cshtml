@@ -19,6 +19,7 @@
         </div>
 
         <div class="btn-group">
+            @Html.ActionLink("Import from DTMS", "Import", "Soldiers", new { UnitId = Model.Query.Unit }, new { @class = "btn btn-link" })
             @Html.ActionLink("View All", "All", "Soldiers", null, new { @class = "btn btn-link" })
             @Html.ActionLink("Get Sign-in Roster", "SignInRoster", "Soldiers", Model.Query, new { @class = "btn btn-link" })
             @Html.ActionLink("Bulk Update Supervisors", "Index", "Supervisors", Model.Query, new { @class = "btn btn-link" })
@@ -103,7 +104,6 @@
             <button type="submit" id="save">Save</button>
         }
     </div>
-
 </div>
 
 @section Scripts{
