@@ -147,7 +147,7 @@ delete from Soldiers where Id = {id};
             return RedirectToAction(nameof(Index));
         }
 
-        [Route("~/Unit/{unitId}/Soldiers/Import")]
+        [Route("~/Units/{unitId}/Soldiers/Import")]
         public IActionResult Import(int unitId)
         {
             ViewBag.UnitId = unitId;
@@ -155,7 +155,7 @@ delete from Soldiers where Id = {id};
             return View();
         }
 
-        [Route("~/Unit/{unitId}/Soldiers/Import"), HttpPost, ValidateAntiForgeryToken]
+        [Route("~/Units/{unitId}/Soldiers/Import"), HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Import(int unitId, IFormFile file)
         {
             await BatchImportService.ImportSoldiers(db, file.OpenReadStream(), unitId);
