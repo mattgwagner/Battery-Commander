@@ -1,6 +1,7 @@
 ﻿using BatteryCommander.Web.Models;
 using ExcelDataReader;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -71,7 +72,7 @@ namespace BatteryCommander.Web.Services
                             }
                             catch (Exception ex)
                             {
-                                throw new System.Exception("Error importing DODID " + dodId, ex);
+                                throw new Exception("Error importing DODID " + dodId, ex);
                             }
                         }
                     }
