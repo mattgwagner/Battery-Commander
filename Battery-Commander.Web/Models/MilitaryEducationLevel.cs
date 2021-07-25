@@ -23,7 +23,7 @@ namespace BatteryCommander.Web.Models
         [Display(Name = "(MLC) Master Leader Course", ShortName = "MLC")]
         MLC = 5,
 
-        [Display(Name = "(SMC) Sergeants Major Course", ShortName = "SMC")]
+        [Display(Name = "(SMA) Sergeants Major Academy", ShortName = "SMA")]
         SMC = 6,
 
         [Display(Name = "(CST) Cadet Summer Training", ShortName = "CST")]
@@ -42,7 +42,19 @@ namespace BatteryCommander.Web.Models
         AOC = 13,
 
         [Display(Name = "(AWC) Army War College", ShortName = "AWC")]
-        AWC = 14
+        AWC = 14,
+
+        [Display(Name = "(WOBC) Warrant Officer Basic Course", ShortName = "WOCS")]
+        WOCS = 20,
+
+        [Display(Name = "(WOAC) Warrant Officer Advanced Course", ShortName = "WOAC")]
+        WOAC = 21,
+
+        [Display(Name = "(WOILE) Warrant Intermediate Level Education", ShortName = "WOILE")]
+        WOILE= 22,
+
+        [Display(Name = "(WOSSE) Warrant Senior Service Education Course", ShortName = "WOSSE")]
+        WOSSE = 23
     }
 
     public static class EducationExtensions
@@ -51,7 +63,20 @@ namespace BatteryCommander.Web.Models
         {
             switch (rank)
             {
-                // Do Warrant Officers have requirements?
+                // Do Warrant Officers have requirements? Yes, https://usacac.army.mil/organizations/cace/wocc/courses and https://mil.wa.gov/asset/5ba421df6ca19
+
+                case Rank.WO1:
+                    return MilitaryEducationLevel.WOCS;
+
+                case Rank.WO2:
+                    return MilitaryEducationLevel.WOAC;
+
+                case Rank.WO3:
+                    return MilitaryEducationLevel.WOILE;
+
+                case Rank.WO4:
+                case Rank.WO5:
+                    return MilitaryEducationLevel.WOSSE;
 
                 case Rank.E5:
                     return MilitaryEducationLevel.BLC;

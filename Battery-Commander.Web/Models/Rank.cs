@@ -63,16 +63,16 @@ namespace BatteryCommander.Web.Models
         [Display(Name = "Warrant Officer", ShortName = "WO1")]
         WO1 = 17,
 
-        [Display(Name = "Chief Warrant Officer", ShortName = "WO2")]
+        [Display(Name = "Chief Warrant Officer", ShortName = "CW2")]
         WO2 = 18,
 
-        [Display(Name = "Chief Warrant Officer", ShortName = "WO3")]
+        [Display(Name = "Chief Warrant Officer", ShortName = "CW3")]
         WO3 = 19,
 
-        [Display(Name = "Chief Warrant Officer", ShortName = "WO4")]
+        [Display(Name = "Chief Warrant Officer", ShortName = "CW4")]
         WO4 = 20,
 
-        [Display(Name = "Chief Warrant Officer", ShortName = "WO5")]
+        [Display(Name = "Chief Warrant Officer", ShortName = "CW5")]
         WO5 = 21,
 
         [Display(Name = "Corporal", ShortName = "CPL")]
@@ -81,17 +81,20 @@ namespace BatteryCommander.Web.Models
         [Display(Name = "Command Sergeant Major", ShortName = "CSM")]
         E9_CSM = 23,
         
-        [Display(Name = "Brigadier General", ShortName = "Brig Gen")]
+        [Display(Name = "Brigadier General", ShortName = "BG")]
         O7 = 24,
         
-        [Display(Name = "Major General", ShortName = "Maj Gen")]
+        [Display(Name = "Major General", ShortName = "MG")]
         O8 = 25,
         
-        [Display(Name = "Lieutenant General", ShortName = "LT Gen")]
+        [Display(Name = "Lieutenant General", ShortName = "LTG")]
         O9 = 26,
         
-        [Display(Name = "General", ShortName = "Gen")]
-        O10 = 27
+        [Display(Name = "General", ShortName = "GEN")]
+        O10 = 27,
+
+        [Display(Name = "Warrant Officer Candidate", ShortName = "WOC")]
+        WOC = 28
     }
 
     public partial class Soldier
@@ -159,7 +162,7 @@ namespace BatteryCommander.Web.Models
             return new[]
             {
                 Rank.E1, Rank.E2, Rank.E3, Rank.E4, Rank.E4_CPL, Rank.E5, Rank.E6, Rank.E7, Rank.E8_MSG, Rank.E8, Rank.E9, Rank.E9_CSM,
-                Rank.WO1, Rank.WO2, Rank.WO3, Rank.WO4, Rank.WO5,
+                Rank.WOC, Rank.WO1, Rank.WO2, Rank.WO3, Rank.WO4, Rank.WO5,
                 Rank.CDT,
                 Rank.O1, Rank.O2, Rank.O3,Rank.O4, Rank.O5, Rank.O6, Rank.O7, Rank.O8, Rank.O9, Rank.O10
             };
@@ -211,6 +214,7 @@ namespace BatteryCommander.Web.Models
                 case Rank.E8_MSG:	
                 case Rank.E9:	
                     
+                case Rank.WOC:
                 case Rank.WO1:
                 case Rank.WO2:
                 case Rank.WO3:
