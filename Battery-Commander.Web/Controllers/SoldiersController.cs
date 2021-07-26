@@ -61,9 +61,13 @@ namespace BatteryCommander.Web.Controllers
         [Route("~/Soldiers/{id}", Name = "Soldier.Details")]
         public async Task<IActionResult> Details(int id)
         {
+            var soldier = await dispatcher.Send(new GetSoldier(id));
+
+            if (soldier == null) return NotFound();
+
             var model = new SoldierDetailsViewModel
             {
-                Soldier = await dispatcher.Send(new GetSoldier(id)),
+                Soldier = soldier,
                 Subordinates = await SoldierService.Subordinates(db, id),
                 Evaluations =
                     db
