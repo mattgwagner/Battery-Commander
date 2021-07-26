@@ -67,6 +67,22 @@ namespace BatteryCommander.Web.Services
 
                             // TODO Load MOS, Weapons Qual, Latest HT/WT
 
+                            // height 15
+                            // weight 16
+                            // pass/fail 17
+                            // bf percent 18
+                            // bf pass 19
+
+                            // weapon type 20
+                            // weapon assignment 21
+                            // primary weapon 22
+                            // last qual date 23
+                            // hits 24
+                            // qual 25
+
+                            if (excel[23] != null)
+                                soldier.IwqQualificationDate = excel.GetDateTime(23);
+
                             try
                             {
                                 await db.SaveChangesAsync();
