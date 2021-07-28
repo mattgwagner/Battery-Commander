@@ -49,10 +49,10 @@
         <thead>
             <tr>
                 <th>Details</th>
+                <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().Unit)</th>
                 <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Ratee.Rank)</th>
                 <th data-priority="1">@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Ratee.LastName)</th>
                 <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Ratee.FirstName)</th>
-                <th>@Html.DisplayNameFor(_ => _.Soldiers.FirstOrDefault().Unit)</th>
                 <th>@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().ThruDate)</th>
                 <th data-priority="3">@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Status)</th>
                 <th data-priority="2">@Html.DisplayNameFor(_ => _.Evaluations.FirstOrDefault().Delinquency)</th>
@@ -69,41 +69,42 @@
         <tbody>
             @foreach (var evaluation in Model.Evaluations)
             {
-                <tr class="@(evaluation.IsDelinquent ? "alert alert-danger" : "")">
-                    <td>@Html.ActionLink("Details", "Details", new { evaluation.Id })</td>
-                    <td>@evaluation.Ratee.Rank.ShortName()</td>
-                    <td>@Html.ActionLink(evaluation.Ratee.LastName, "Details", "Evaluations", new { evaluation.Id })</td>
-                    <td>@Html.ActionLink(evaluation.Ratee.FirstName, "Details", "Evaluations", new { evaluation.Id })</td>
-                    <td>@Html.DisplayFor(_ => evaluation.ThruDate)</td>
-                    <td>@evaluation.Status.DisplayName()</td>
-                    <td data-sort="@evaluation.Delinquency.TotalDays" data-toggle="tooltip" title="@evaluation.LastEvent">
-                        @if (evaluation.Delinquency > TimeSpan.Zero)
+            <tr class="@(evaluation.IsDelinquent ? "alert alert-danger" : "")">
+                <td>@Html.DisplayFor(_ => soldier.Unit)</td>
+                <td>@Html.ActionLink("Details", "Details", new { evaluation.Id })</td>
+                <td>@evaluation.Ratee.Rank.ShortName()</td>
+                <td>@Html.ActionLink(evaluation.Ratee.LastName, "Details", "Evaluations", new { evaluation.Id })</td>
+                <td>@Html.ActionLink(evaluation.Ratee.FirstName, "Details", "Evaluations", new { evaluation.Id })</td>
+                <td>@Html.DisplayFor(_ => evaluation.ThruDate)</td>
+                <td>@evaluation.Status.DisplayName()</td>
+                <td data-sort="@evaluation.Delinquency.TotalDays" data-toggle="tooltip" title="@evaluation.LastEvent">
+                    @if (evaluation.Delinquency > TimeSpan.Zero)
                         {
-                            <span class="label label-default">Due in @Html.DisplayFor(_ => evaluation.DelinquencyHumanized)</span>
+                    <span class="label label-default">Due in @Html.DisplayFor(_ => evaluation.DelinquencyHumanized)</span>
                         }
                         else if (evaluation.IsCompleted)
                         {
-                            <span class="label label-success">Completed</span>
+                    <span class="label label-success">Completed</span>
                         }
                         else
                         {
-                            <span class="label label-danger">Overdue @Html.DisplayFor(_ => evaluation.DelinquencyHumanized)</span>
+                    <span class="label label-danger">Overdue @Html.DisplayFor(_ => evaluation.DelinquencyHumanized)</span>
                         }
-                    </td>
-                    <td data-sort="@evaluation.LastUpdated?.UtcTicks" data-toggle="tooltip" title="@evaluation.LastEvent">
-                        @Html.DisplayFor(_ => evaluation.LastUpdatedHumanized)
-                    </td>
-                    <td>@Html.DisplayFor(_ => evaluation.Type)</td>
-                    <td class="@(evaluation.Ratee.SupervisorId != evaluation.RaterId ? "warning" : "")">
-                        @Html.DisplayFor(_ => evaluation.Rater)
-                    </td>
-                    <td class="@(evaluation.Rater.SupervisorId != evaluation.SeniorRaterId ? "warning" : "")">
-                        @Html.DisplayFor(_ => evaluation.SeniorRater)
-                    </td>
-                    <td>@Html.DisplayFor(_ => evaluation.Reviewer)</td>
-                    <td>@Html.DisplayFor(_ => evaluation.EvaluationId)</td>
-                    <td></td>
-                </tr>
+                </td>
+                <td data-sort="@evaluation.LastUpdated?.UtcTicks" data-toggle="tooltip" title="@evaluation.LastEvent">
+                    @Html.DisplayFor(_ => evaluation.LastUpdatedHumanized)
+                </td>
+                <td>@Html.DisplayFor(_ => evaluation.Type)</td>
+                <td class="@(evaluation.Ratee.SupervisorId != evaluation.RaterId ? "warning" : "")">
+                    @Html.DisplayFor(_ => evaluation.Rater)
+                </td>
+                <td class="@(evaluation.Rater.SupervisorId != evaluation.SeniorRaterId ? "warning" : "")">
+                    @Html.DisplayFor(_ => evaluation.SeniorRater)
+                </td>
+                <td>@Html.DisplayFor(_ => evaluation.Reviewer)</td>
+                <td>@Html.DisplayFor(_ => evaluation.EvaluationId)</td>
+                <td></td>
+            </tr>
             }
         </tbody>
     </table>
