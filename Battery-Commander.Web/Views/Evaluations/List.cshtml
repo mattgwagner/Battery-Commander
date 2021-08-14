@@ -70,8 +70,8 @@
             @foreach (var evaluation in Model.Evaluations)
             {
             <tr class="@(evaluation.IsDelinquent ? "alert alert-danger" : "")">
-                <td>@Html.DisplayFor(_ => evaluation.Ratee.Unit)</td>
                 <td>@Html.ActionLink("Details", "Details", new { evaluation.Id })</td>
+                <td>@Html.DisplayFor(_ => evaluation.Ratee.Unit)</td>               
                 <td>@evaluation.Ratee.Rank.ShortName()</td>
                 <td>@Html.ActionLink(evaluation.Ratee.LastName, "Details", "Evaluations", new { evaluation.Id })</td>
                 <td>@Html.ActionLink(evaluation.Ratee.FirstName, "Details", "Evaluations", new { evaluation.Id })</td>
