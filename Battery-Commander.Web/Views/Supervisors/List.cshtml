@@ -11,7 +11,7 @@
 @using (Html.BeginForm("Save", "Supervisors", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    @Html.HideenFor(_ => _.Unit)
+    @Html.HiddenFor(_ => _.Unit)
 
     <table class="table table-striped">
         <thead>
