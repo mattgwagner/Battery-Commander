@@ -65,8 +65,6 @@ namespace BatteryCommander.Web.Controllers
             await db.SaveChangesAsync();
 
             return RedirectToRoute("Unit.Soldiers", new { unitId = model.Unit });
-
-            return RedirectToAction(nameof(Index));
         }
 
         public class SupervisorListModel
