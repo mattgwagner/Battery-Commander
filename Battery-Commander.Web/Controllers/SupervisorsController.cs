@@ -28,6 +28,8 @@ namespace BatteryCommander.Web.Controllers
         {
             return View("List", new SupervisorListModel
             {
+                Unit = query.Unit,
+
                 Soldiers = await SoldierService.GetDropDownList(db),
 
                 Rows =
@@ -62,11 +64,15 @@ namespace BatteryCommander.Web.Controllers
 
             await db.SaveChangesAsync();
 
+            return RedirectToRoute("Unit.Soldiers", new { unitId = model.Unit });
+
             return RedirectToAction(nameof(Index));
         }
 
         public class SupervisorListModel
         {
+            public int? Unit { get; set; }
+
             public IList<Row> Rows { get; set; }
 
             public IEnumerable<SelectListItem> Soldiers { get; set; } = Enumerable.Empty<SelectListItem>();
