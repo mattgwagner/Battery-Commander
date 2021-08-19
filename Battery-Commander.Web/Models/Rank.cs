@@ -215,7 +215,6 @@ namespace BatteryCommander.Web.Models
                 case Rank.E9:	
                 case Rank.E9_CSM:
                     
-                case Rank.WOC:
                 case Rank.WO1:
                 case Rank.WO2:
                 case Rank.WO3:
