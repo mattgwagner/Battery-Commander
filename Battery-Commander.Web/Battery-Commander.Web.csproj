@@ -70,7 +70,6 @@
     <PackageReference Include="ExcelDataReader" Version="3.6.0" />
     <PackageReference Include="MediatR" Version="9.*" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.*" />
-    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.18.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="5.*" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.*" />
     <PackageReference Include="epplus.core" Version="1.*" />
@@ -90,8 +89,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Serilog.AspNetCore" Version="4.*" />
-    <PackageReference Include="Sentry.AspNetCore" Version="3.*" />
     <PackageReference Include="Stateless" Version="5.*" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.*" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.*" />
@@ -101,5 +98,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    
+    <PackageReference Include="Sentry.AspNetCore" Version="3.*" />
+    <PackageReference Include="Serilog.AspNetCore" Version="4.*" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.*" />
+    <PackageReference Include="Microsoft.Extensions.Logging.ApplicationInsights" Version="2.*" />
   </ItemGroup>
 </Project>
