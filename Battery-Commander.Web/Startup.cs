@@ -192,6 +192,7 @@ namespace BatteryCommander.Web
                 Strategy = ServiceWorkerStrategy.NetworkFirst,
                 RegisterWebmanifest = false
             });
+            services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_CONNECTIONSTRING"]);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

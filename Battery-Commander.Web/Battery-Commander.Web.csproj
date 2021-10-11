@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -9,6 +9,8 @@
     <PreserveCompilationContext>true</PreserveCompilationContext>
     <MvcRazorExcludeRefAssembliesFromPublish>false</MvcRazorExcludeRefAssembliesFromPublish>
     <DocumentationFile>BatteryCommander.Web.xml</DocumentationFile>
+    <ApplicationInsightsResourceId>/subscriptions/2079ddb2-a1a4-4bb6-9aa9-8226b71d8ddc/resourceGroups/redlegdev/providers/microsoft.insights/components/redleglogs</ApplicationInsightsResourceId>
+    <UserSecretsId>c9ad865f-5016-42df-81ff-1f688c20b33a</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -68,6 +70,7 @@
     <PackageReference Include="ExcelDataReader" Version="3.6.0" />
     <PackageReference Include="MediatR" Version="9.*" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.*" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.15.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="5.*" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.*" />
     <PackageReference Include="epplus.core" Version="1.*" />
