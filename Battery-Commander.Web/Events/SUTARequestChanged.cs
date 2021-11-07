@@ -47,7 +47,7 @@ namespace BatteryCommander.Web.Events
 
                 recipients.AddRange(suta.Supervisor.GetEmails());
 
-                foreach (var soldier in await SoldierService.Filter(db, new SoldierService.Query { Ranks = new[] { Rank.E7, Rank.E8, Rank.E9, Rank.O1, Rank.O2, Rank.O3 }, Unit = suta.Soldier.UnitId }))
+                foreach (var soldier in await SoldierService.Filter(db, new SoldierService.Query { Ranks = new[] { Rank.E6, Rank.E7, Rank.E8, Rank.E9, Rank.O1, Rank.O2, Rank.O3 }, Unit = suta.Soldier.UnitId }))
                 {
                     if (soldier.Id == suta.SupervisorId) continue;
 
