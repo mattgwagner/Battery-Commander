@@ -79,7 +79,7 @@
     <PackageReference Include="Humanizer.Core" Version="2.*" />
     <PackageReference Include="System.Text.Encoding.CodePages" />
     <PackageReference Include="Microsoft.AspNetCore.DataProtection.EntityFrameworkCore" Version="5.*" />
-    <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="5.*">
+    <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="6.*">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
