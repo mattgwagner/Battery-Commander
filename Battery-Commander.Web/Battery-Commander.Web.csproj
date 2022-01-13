@@ -92,7 +92,7 @@
     <PackageReference Include="Stateless" Version="5.*" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.*" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.*" />
-    <PackageReference Include="TimeZoneConverter" Version="3.*" />
+    <PackageReference Include="TimeZoneConverter" Version="5.*" />
     <PackageReference Include="WebEssentials.AspNetCore.PWA" Version="1.*" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.*">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
