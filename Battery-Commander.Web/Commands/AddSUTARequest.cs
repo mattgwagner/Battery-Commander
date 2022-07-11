@@ -61,6 +61,12 @@ namespace BatteryCommander.Web.Commands
                     MitigationPlan = request.MitigationPlan
                 };
 
+                if (await db.SUTAs.AnyAsync(s => s.SoldierId == suta.SoldierId && s.StartDate == suta.StartDate && s.EndDate == suta.EndDate))
+                {
+                    // Already exists
+                    return suta.Id;
+                }
+
                 suta.Events.Add(new SUTA.Event
                 {
                     Author = $"{current_user ?? soldier}", // User MAY not be logged in
