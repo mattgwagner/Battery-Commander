@@ -26,12 +26,12 @@ namespace BatteryCommander.Web.Jobs
 
             registry.Schedule<SqliteBackupJob>().ToRunEvery(1).Days().AtEst(hours: 6);
 
-            registry.Schedule<EvaluationDueReminderJob>().ToRunEvery(0).Weeks().On(DayOfWeek.Tuesday).At(hours: 13, minutes: 0);
+            // registry.Schedule<EvaluationDueReminderJob>().ToRunEvery(0).Weeks().On(DayOfWeek.Tuesday).At(hours: 13, minutes: 0);
 
-            registry.Schedule<PERSTATReportJob>().ToRunEvery(1).Days().AtEst(hours: 6, minutes: 30);
+            // registry.Schedule<PERSTATReportJob>().ToRunEvery(1).Days().AtEst(hours: 6, minutes: 30);
 
-            registry.Schedule<SensitiveItemsReport>().WithName("Green3_AM").ToRunEvery(1).Days().AtEst(hours: 7, minutes: 30);
-            registry.Schedule<SensitiveItemsReport>().WithName("Green3_PM").ToRunEvery(1).Days().AtEst(hours: 21, minutes: 30);
+            // registry.Schedule<SensitiveItemsReport>().WithName("Green3_AM").ToRunEvery(1).Days().AtEst(hours: 7, minutes: 30);
+            // registry.Schedule<SensitiveItemsReport>().WithName("Green3_PM").ToRunEvery(1).Days().AtEst(hours: 21, minutes: 30);
 
             JobManager.Initialize(registry);
         }
