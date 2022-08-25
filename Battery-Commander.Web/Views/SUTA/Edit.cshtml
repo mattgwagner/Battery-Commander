@@ -1,5 +1,9 @@
 ﻿@model BatteryCommander.Web.Commands.UpdateSUTARequest
 
+<div class="alert alert-warning">
+    ATTENTION! Requests for HHB, 3-116 should be submitted at <a href="https://redleg.app/SUTA">https://redleg.app/SUTA</a>, NOT HERE. The form is being migrated there.
+</div>
+
 @using (Html.BeginForm("Edit", "SUTA", new { Model.Id }, FormMethod.Post, true, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
