@@ -7,7 +7,7 @@ namespace BatteryCommander.Web.Jobs
 {
     public class SqliteBackupJob : IJob
     {
-        private const String Recipient = "Backups@RedLeg.app";
+        private const String Recipient = "ardhive@RedLeg.dev";
 
         private readonly IFluentEmail emailSvc;
 
